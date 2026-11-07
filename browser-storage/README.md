@@ -1,4 +1,4 @@
-# Browser storage
+# Client browser database manager
 
 Shows and deletes what the browser has stored for this site: localStorage, IndexedDB databases (stores and
 record counts) and Cache Storage (downloaded model and library files, with sizes). Copy report, delete per

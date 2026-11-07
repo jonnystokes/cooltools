@@ -1,4 +1,4 @@
-# Relay Files (file manager)
+# Cloud File Manager
 
 The file manager for `Relay Files`, the shared folder on Jon's PC, through PC Relay. Browse, search, open and
 download from any device; signed in with the PC's password: upload (drag and drop, whole folders), move, copy,
