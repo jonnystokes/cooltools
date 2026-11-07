@@ -1,19 +1,19 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
-     and stamps the version and build time where Book reader V1.0.628 and 2026-11-07 2:32 AM appear. -->
+     and stamps the version and build time where Book reader V1.0.631 and 2026-11-07 11:48 AM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Book reader V1.0.628</title>
+<title>Book reader V1.0.631</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
 <script>
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.628";
-  window.APP_BUILT = "2026-11-07 2:32 AM";
-  window.APP_NOTE = "Open \u2192 From the file manager: the file manager opens in a floating window; a book .zip or a folder chosen there comes in exactly as from the device; offline, not opening, closed without a pick, not a book: each said plainly";
+  window.APP_VERSION = "Book reader V1.0.631";
+  window.APP_BUILT = "2026-11-07 11:48 AM";
+  window.APP_NOTE = "From my PC: Add as a book says which files the PC left out of the folder (open in another program, moved or changed), from the PC's zip headers (files 2.1: no note inside the zip any more)";
   window.APP_KEY = "br1";
 </script>
 <style>
@@ -5367,7 +5367,8 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 // service: Projects\pc-relay\services\files) inside the Open window: folders with their sizes and dates,
 // search, sort, live updates while it is open, and the Private folder (🔒, the PC's password once per device;
 // the relay keeps the pass). "Add" brings a file in through the normal import (library.js: the same preview as
-// Add files); "Add as a book" brings a whole folder in as one zip (one book). Nothing is sent to the PC until
+// Add files); "Add as a book" brings a whole folder in as one zip (one book), and says which files the PC had to leave
+// out (open in another program, moved or changed: its zip headers, files 2.1). Nothing is sent to the PC until
 // From my PC is opened; closing it ends the live-updates stream. The PC's address: SETTINGS pcAddress (blank =
 // Jon's PC), set in Settings → Cloud. Uses PCRELAY (cloud.js's shared RelayClient).
 (function () {
@@ -5453,6 +5454,18 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   }
   function stop() { if (st.ev) { st.ev.abort(); st.ev = null; } st.body = null; clearTimeout(st.qTimer); }
 
+  // What the PC left out of a folder's zip (files 2.1): its headers say how many and name up to 20 (X-Zip-Skipped,
+  // X-Zip-Skipped-Names: "|" between percent-encoded paths); a zip holding fewer files than X-Zip-Files says lost
+  // some while it was sent. The reasons are in the PC's log (files.log). "" when nothing was left out.
+  async function leftOut(r, file, folder) {
+    const num = (k) => { const v = r.headers.get(k); return v == null || v === "" ? null : Number(v); };
+    const names = String(r.headers.get("x-zip-skipped-names") || "").split("|").filter(Boolean).map((s) => { try { return decodeURIComponent(s); } catch (e) { return s; } });
+    let n = num("x-zip-skipped") || 0;
+    const promised = num("x-zip-files");
+    if (promised != null) { try { n += Math.max(0, promised - (await ZIP.entries(file)).filter((e) => !e.dir).length); } catch (e) { /* the import says what is wrong with the zip */ } }
+    return n && globalThis.FMPICK ? FMPICK.leftOutNote(n, names, folder) : "";
+  }
+
   // ---- bringing a file or folder in: download with progress in the Open window, then the normal import ----
   async function bring(it) {
     const path = it.dir ? `zip/${it.id}` : `file/${it.id}`;
@@ -5473,10 +5486,11 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
         parts.push(value); got += value.length;
         if (performance.now() - last > 120) { last = performance.now(); LIBRARY.download(`Downloading ${name} from the PC: ${MB(got)}${len ? ` of ${it.dir ? "about " : ""}${MB(len)}` : ""}`, len ? Math.min(1, got / len) : 0); }
       }
-      log("book", `From my PC: ${name} downloaded (${MB(got)})`);
       LIBRARY.download(null);
       const file = new File(parts, name, { type: it.dir ? "application/zip" : (r.headers.get("content-type") || ""), lastModified: it.mtime || Date.now() });
-      await LIBRARY.pick([file]);
+      const note = it.dir ? await leftOut(r, file, it.name) : "";
+      log("book", `From my PC: ${name} downloaded (${MB(got)})${note ? "; " + note : ""}`);
+      await LIBRARY.pick([file], note ? { note } : undefined);        // the note: said in the preview and the done line
     } catch (e) {
       LIBRARY.download(null);
       log("book", `From my PC: ${name} could not be brought in: ${e.message}`);
@@ -5877,7 +5891,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 // the same preview, the same plain reason for a file that is not a book). Everything else is said in the Open
 // window and the log: offline; the file manager not opening (the kit gives up after 30 s); the window closed
 // before the file manager started, before it reached the PC, or without a pick; an empty folder; files the PC
-// left out. A private folder asks for the PC's password inside the file manager's window (the reader never sees
+// left out (the kit's `missing`: leftOut). A private folder asks for the PC's password inside the file manager's window (the reader never sees
 // the password). Nothing is loaded or sent until the button is pressed. BR1_TEST.fileManager: another address
 // (the tests' local copy).
 (function () {
@@ -5891,14 +5905,24 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     LIBRARY.say(text, bad);
     log("book", `file manager: ${text}`);
   }
-  // The PC's note on a folder it could not zip whole (__relay-missing-files.txt: "PC Relay could not add N file(s)
-  // …:", then a path per line) as one line for the preview and the done line.
+  // Files the PC left out of a folder's zip, as one line for the preview and the done line. n = how many, names =
+  // the paths it named (it names up to 20; the reasons are in its log, files.log). Also used by From my PC.
+  function leftOutNote(n, names, folder) {
+    names = (names || []).filter(Boolean);
+    n = Math.max(Number(n) || 0, names.length);
+    if (!n) return "";
+    const shown = names.slice(0, 3), more = n - shown.length;
+    return `The PC left out ${n} file${n === 1 ? "" : "s"} of "${folder}" (moved, changed or open in another program on the PC; its log says why)`
+      + (shown.length ? `: ${shown.map((p) => p.split(/[\\/]/).pop()).join(", ")}${more > 0 ? `, and ${more} more` : ""}` : "");
+  }
+  // The window kit's `missing` text from the file manager ("PC Relay could not add N file(s) …:", then a path per
+  // line; since files 2.1 the file manager writes it from the PC's headers, the PC no longer puts a note in the zip).
   function leftOut(text, folder) {
     const lines = String(text || "").split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
     if (!lines.length) return "";
-    const names = /could not add/i.test(lines[0]) ? lines.slice(1) : lines, n = names.length;
-    return `The PC left out ${n || "some"} file${n === 1 ? "" : "s"} of "${folder}" (removed or changed since the folder was listed)`
-      + (n ? `: ${names.slice(0, 3).map((p) => p.split(/[\\/]/).pop()).join(", ")}${n > 3 ? `, and ${n - 3} more` : ""}` : "");
+    const head = /could not add (\d+)/i.exec(lines[0]);
+    const names = /could not add/i.test(lines[0]) ? lines.slice(1) : lines;
+    return leftOutNote(head ? Number(head[1]) : names.length || 1, names, folder);
   }
 
   async function start() {
@@ -5936,7 +5960,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     await LIBRARY.pick(files, note ? { note } : undefined);        // exactly as a pick from the device (Add files / Add a folder)
   }
 
-  globalThis.FMPICK = { start, get busy() { return !!busy; } };
+  globalThis.FMPICK = { start, leftOut, leftOutNote, get busy() { return !!busy; } };
 })();
 </script>
 <script>
