@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f6f7fb" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0c0f17" media="(prefers-color-scheme: dark)">
@@ -38,7 +38,7 @@
   }
 }
 * { box-sizing: border-box; }
-html, body { height: 100%; }
+html, body { height: 100%; touch-action: manipulation; }  /* no double-tap zoom: a quick second tap is never taken as a zoom */
 body { margin: 0; background: var(--bg); color: var(--text); font: 14.5px/1.45 var(--font); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; overflow: hidden; }
 .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
 svg { width: 20px; height: 20px; fill: currentColor; flex: none; }
@@ -142,7 +142,7 @@ kbd { font: 600 11px/1 var(--font); padding: 3px 6px; border-radius: 5px; border
 .list-head .col:hover { background: var(--line-2); color: var(--text); }
 .list-head .col.sorted { color: var(--text); }
 .list-head .col .arrow { font-size: 10px; }
-.row { height: var(--row); border-bottom: 1px solid var(--line-2); cursor: default; user-select: none; -webkit-user-select: none; position: relative; }
+.row { height: var(--row); border-bottom: 1px solid var(--line-2); cursor: pointer; user-select: none; -webkit-user-select: none; position: relative; }
 .row:hover { background: var(--surface-2); }
 .row.sel { background: var(--accent-soft); }
 .row.sel:hover { background: var(--accent-soft-2); }
@@ -154,6 +154,8 @@ kbd { font: 600 11px/1 var(--font); padding: 3px 6px; border-radius: 5px; border
 .row.flash { animation: flash 1.4s ease-out; }
 @keyframes flash { from { background: var(--ok-soft); } }
 .row .check, .list-head .check { width: 22px; height: 22px; border-radius: 6px; border: 1.6px solid var(--line); background: var(--surface); display: grid; place-items: center; margin: auto; padding: 0; color: transparent; transition: border-color .12s; }
+.row .check { position: relative; }
+.row .check::before { content: ""; position: absolute; inset: -9px; }  /* the box takes a click a little around it, so a near miss ticks instead of opening */
 .row:hover .check { border-color: var(--faint); }
 .row.sel .check, .list-head .check[aria-checked=true] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .list-head .check:hover { border-color: var(--faint); }
@@ -268,8 +270,8 @@ kbd { font: 600 11px/1 var(--font); padding: 3px 6px; border-radius: 5px; border
 
 /* ---- phone.css ---- */
 /* phone.css: narrow screens (a phone, or the floating window's full-screen sheet). Two-line rows with big
-   targets, the path on its own row, search behind a button, actions in a bar that appears with a selection,
-   an add button for upload / new folder. Same features, laid out for a thumb. */
+   targets (the box, the row, ⋯), the path on its own row, search behind a button, actions in a bar that appears
+   when a row is ticked, an add button for upload / new folder. Same features, laid out for a thumb. */
 @media (max-width: 720px) {
   body { font-size: 15.5px; }
   :root { --row: 60px; }
@@ -297,16 +299,13 @@ kbd { font: 600 11px/1 var(--font); padding: 3px 6px; border-radius: 5px; border
   .toolbar { display: none; }
   .toolbar.phone-keep { display: flex; padding: 6px 8px; min-height: 0; }
   .list-head { display: none; }
-  .row, .list.trash-view .row, .list.search-view .row { grid-template-columns: 34px minmax(0, 1fr) 44px; grid-template-rows: auto auto; column-gap: 10px; row-gap: 0; padding: 0 2px 0 12px; height: var(--row); align-content: center; }
-  .row .check { display: none; }
-  .row .ico { grid-row: 1 / 3; grid-column: 1; width: 28px; height: 28px; }
-  .row .name { grid-column: 2; grid-row: 1; }
-  .row .sub { display: block; grid-column: 2; grid-row: 2; color: var(--muted); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .row, .list.trash-view .row, .list.search-view .row { grid-template-columns: 36px 28px minmax(0, 1fr) 44px; grid-template-rows: auto auto; column-gap: 8px; row-gap: 0; padding: 0 2px 0 4px; height: var(--row); align-content: center; }
+  .row .check { grid-row: 1 / 3; grid-column: 1; width: 26px; height: 26px; }
+  .row .ico { grid-row: 1 / 3; grid-column: 2; width: 28px; height: 28px; }
+  .row .name { grid-column: 3; grid-row: 1; }
+  .row .sub { display: block; grid-column: 3; grid-row: 2; color: var(--muted); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .row .size, .row .when, .row .from { display: none; }
-  .row .more { grid-column: 3; grid-row: 1 / 3; opacity: 1; width: 44px; height: 44px; }
-  .row.dir .more.chev { color: var(--faint); }
-  .app.selecting .row .check { display: grid; grid-row: 1 / 3; grid-column: 1; width: 26px; height: 26px; border-radius: 13px; }
-  .app.selecting .row .ico { display: none; }
+  .row .more { grid-column: 4; grid-row: 1 / 3; opacity: 1; width: 44px; height: 44px; }
   .row.sel { background: var(--accent-soft); }
   .row.focus { box-shadow: none; }
   .status { padding: 4px 12px; padding-bottom: calc(4px + env(safe-area-inset-bottom)); }
@@ -370,7 +369,7 @@ kbd { font: 600 11px/1 var(--font); padding: 3px 6px; border-radius: 5px; border
   <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="2.75" y="6.75" width="18.5" height="10.5" rx="2.25" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 10.5h1M10 10.5h1M13.5 10.5h1M17 10.5h.5M7.5 14h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
   <symbol id="i-signal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.2"/><path d="M8.3 15.7a5.2 5.2 0 0 1 0-7.4M15.7 8.3a5.2 5.2 0 0 1 0 7.4M5.5 18.5a9.2 9.2 0 0 1 0-13M18.5 5.5a9.2 9.2 0 0 1 0 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
 </svg>
-<div id="app" class="app" data-build="V1.0.18">
+<div id="app" class="app" data-build="V1.0.22">
   <header class="top">
     <div class="top-row">
       <button class="iconbtn up-btn" type="button" data-act="up" aria-label="Up one folder" title="Up one folder (Backspace)"><svg><use href="#i-back"/></svg></button>
@@ -392,7 +391,7 @@ kbd { font: 600 11px/1 var(--font); padding: 3px 6px; border-radius: 5px; border
   </main>
   <footer class="status">
     <span class="status-left"></span>
-    <span class="status-right"><span class="conn"></span><span class="build" title="Built 2026-11-07 12:07 PM">V1.0.18</span></span>
+    <span class="status-right"><span class="conn"></span><span class="build" title="Built 2026-11-07 12:49 PM">V1.0.22</span></span>
   </footer>
   <div class="selbar" hidden></div>
   <button class="fab" type="button" data-act="fab" aria-label="Add: upload or new folder" hidden><svg><use href="#i-plus"/></svg></button>
@@ -401,7 +400,7 @@ kbd { font: 600 11px/1 var(--font); padding: 3px 6px; border-radius: 5px; border
 </div>
 <input type="file" id="pick-files" multiple hidden>
 <input type="file" id="pick-folder" webkitdirectory multiple hidden>
-<script>window.FM_BUILD = { version: "V1.0.18", built: "2026-11-07 12:07 PM", note: "Cloud File Manager: in a narrow window (721-860 px) the heading gives its room to the path" };</script>
+<script>window.FM_BUILD = { version: "V1.0.22", built: "2026-11-07 12:49 PM", note: "Clicks simplified: one click or tap opens (a folder goes in, a file opens in a new tab), the row's box ticks (Shift+click a range, Ctrl+click one), a double-click or double-tap is one open, no zoom on phones; built with the published PC Relay client" };</script>
 <script>
 // ---- relay-client.js ----
 /* relay-client.js: the PC Relay client (ONE source: Projects\pc-relay\client\relay-client.js; each page's build
@@ -1399,8 +1398,11 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
 "use strict";
 (function () {
   const { h, icon } = FM;
-  let menuEl = null, menuBack = null;
+  let menuEl = null, menuBack = null, menuAt = 0;
   const dialogs = [];
+  // A tap or click outside closes a menu or a dialog, but not in its first 400 ms: a row opens on one click (app.js),
+  // and the second half of a double-click or double-tap must not close the sign-in box or menu that click opened.
+  const GRACE = 400;
 
   function closeMenu() {
     if (!menuEl) return false;
@@ -1410,7 +1412,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     menuBack = null;
     return true;
   }
-  function outside(e) { if (menuEl && !menuEl.contains(e.target)) closeMenu(); }
+  function outside(e) { if (menuEl && !menuEl.contains(e.target) && performance.now() - menuAt > GRACE) closeMenu(); }
   // items: [{ icon, text, key, act, danger, disabled, title }, "-" (a line), { head: "text" }]
   function menu(items, at) {
     closeMenu();
@@ -1431,7 +1433,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     if (at.anchor) { const a = at.anchor.getBoundingClientRect(); x = at.alignRight ? a.right - r.width : a.left; y = a.bottom + 4; if (y + r.height > innerHeight - 8) y = a.top - r.height - 4; }
     el.style.left = Math.max(8, Math.min(x, innerWidth - r.width - 8)) + "px";
     el.style.top = Math.max(8, Math.min(y, innerHeight - r.height - 8)) + "px";
-    menuEl = el;
+    menuEl = el; menuAt = performance.now();
     setTimeout(() => document.addEventListener("pointerdown", outside, true), 0);
     const first = el.querySelector(".mi:not(:disabled)");
     if (first) first.focus({ preventScroll: true });
@@ -1498,7 +1500,8 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       }
       box.append(acts);
       scrim.append(box);
-      scrim.addEventListener("pointerdown", (e) => { if (e.target === scrim) finish(null); });
+      const born = performance.now();
+      scrim.addEventListener("pointerdown", (e) => { if (e.target === scrim && performance.now() - born > GRACE) finish(null); });
       box.addEventListener("keydown", (e) => {
         if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); finish(null); }
         else if (e.key === "Enter" && !e.isComposing && (e.target === inp || e.target.tagName !== "BUTTON")) {
@@ -1715,11 +1718,13 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     view: "folder",          // folder | search | trash
     folder: null, crumbs: [], items: [], q: "",
     sort: FM.store.get("sort", { key: "name", dir: 1 }),
-    sel: new Set(), focus: null, anchor: null,
+    sel: new Set(),          // the ticked rows (only a person ticks: the row's box, Shift/Ctrl+click, Space, Shift+arrows, Ctrl+A)
+    focus: null,             // the keyboard's cursor (arrows move it; Enter opens it; Space ticks it)
+    anchor: null,            // the last row ticked or unticked: Shift+click ticks from there
     clip: null,              // { mode: "cut" | "copy", items, from }
     signed: false, writable: false, version: "",
     conn: { state: "wait", why: "Connecting to the PC…" },
-    pick: null, picking: null, selecting: false, loading: false, error: null, notice: null,
+    pick: null, picking: null, loading: false, error: null, notice: null,
     cache: new Map(), trashBytes: 0, renaming: null,
   });
   const $ = (s) => document.querySelector(s);
@@ -1793,8 +1798,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     if (S.view === "search") el.append(h("span.from", { text: parentPath(it), title: parentPath(it) }));
     el.append(h("span.size", { text: it.locked ? "" : it.dir ? `${FM.plural(it.files || 0, "file")} · ${FM.size(it.size)}` : FM.size(it.size) }));
     el.append(h("span.when", { text: it.locked ? "" : FM.when(it.mtime) }));
-    const phoneDir = FM.isPhone() && it.dir && !S.selecting;
-    el.append(h("button.more" + (phoneDir ? ".chev" : ""), { type: "button", "aria-label": phoneDir ? `Open ${it.name}` : `Actions for ${it.name}`, title: phoneDir ? "Open" : "Actions", tabindex: "-1", data: { act: phoneDir ? "open" : "more" } }, icon(phoneDir ? "chev" : "more")));
+    el.append(h("button.more", { type: "button", "aria-label": `Actions for ${it.name}`, title: "Actions", tabindex: "-1", data: { act: "more" } }, icon("more")));
     return el;
   }
 
@@ -1936,7 +1940,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
   function renderSelbar() {
     const bar = $(".selbar"), app = $(".app");
     const sel = FM.selected();
-    const on = FM.isPhone() && (S.selecting || sel.length > 0) && S.view !== "trash";
+    const on = FM.isPhone() && sel.length > 0 && S.view !== "trash";
     app.classList.toggle("selecting", on);
     bar.hidden = !on;
     const fab = $(".fab");
@@ -1944,7 +1948,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     if (!on) { if (S.clip && FM.isPhone() && S.view === "folder") renderClipbar(bar); return; }
     const n = sel.length, locked = sel.some((i) => i.locked), prot = sel.some((i) => i.protected);
     const b = (act, ic, label, dis, danger) => h("button.iconbtn" + (danger ? ".danger" : ""), { type: "button", data: { act }, disabled: !!dis, title: label, "aria-label": label }, icon(ic));
-    const kids = [b("unselect", "close", "Stop selecting"), h("span.sb-count", { text: n ? `${n} selected` : "Tap to select" }), b("download", "download", "Download", !n || locked)];
+    const kids = [b("unselect", "close", "Untick all"), h("span.sb-count", { text: `${n} selected` }), b("download", "download", "Download", !n || locked)];
     if (S.writable) kids.push(b("cut", "move", "Move", !n || locked || prot), b("copy", "copy", "Copy", !n || locked), b("delete", "trash", "Delete", !n || locked || prot, true));
     kids.push(b("selmore", "more", "More", !n));
     bar.replaceChildren(...kids);
@@ -2515,42 +2519,50 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
 })();
 
 // ---- keys.js ----
-// keys.js: keyboard shortcuts (desktop). Arrows move, Shift extends, Ctrl moves without selecting, Space
-// toggles, Enter opens, Backspace goes up; Ctrl+A / C / X / V; Delete; F2; N, U, D, /, ?. Escape closes the top
-// thing (a menu, a dialog, the search, the selection, what was picked up); with nothing left, a page that opened
-// this one in a window may close it.
+// keys.js: keyboard shortcuts (desktop). Arrows move the cursor (nothing is ticked), Shift+arrows tick the rows they
+// pass, Space ticks or unticks the cursor's row, Enter opens it, Backspace goes up; Ctrl+A / C / X / V; Delete; F2;
+// N, U, D, /, ?. Delete, F2, D, Ctrl+C / X act on the ticked rows, or with none ticked on the cursor's row. Escape
+// closes the top thing (a menu, a dialog, the search, the ticks, what was picked up); with nothing left, a page that
+// opened this one in a window may close it.
 "use strict";
 (function () {
   const S = FM.S;
   const KEYS = [
-    ["↑ ↓, Home, End, Page Up/Down", "Move through the list"], ["Shift + those", "Select a range"], ["Ctrl + ↑ ↓, then Space", "Pick items here and there"],
-    ["Click, Ctrl+click, Shift+click", "Select one, add one, select a range"], ["Enter, double-click", "Open a folder; open a file in a new tab"],
-    ["Backspace, Alt+↑", "Up one folder"], ["Ctrl+A", "Select everything here"], ["Ctrl+C, Ctrl+X, Ctrl+V", "Copy, move (cut), paste here"],
+    ["Click or tap a row, Enter", "Open: a folder goes in, a file opens in a new tab"], ["The box on a row, Ctrl+click", "Tick or untick that row"],
+    ["Shift+click", "Tick the rows from the last one ticked"], ["↑ ↓, Home, End, Page Up/Down", "Move through the list (nothing is ticked)"],
+    ["Space", "Tick or untick the row you are on"], ["Shift + ↑ ↓ (Home, End, Page Up/Down)", "Tick the rows you move over"],
+    ["Backspace, Alt+↑", "Up one folder"], ["Ctrl+A", "Tick everything here"], ["Ctrl+C, Ctrl+X, Ctrl+V", "Copy, move (cut), paste here"],
     ["Delete", "Move to the trash (Undo in the message)"], ["F2", "Rename"], ["N", "New folder"], ["U, Shift+U", "Upload files, upload a folder"],
     ["D", "Download"], ["/ or Ctrl+F", "Search all of Relay Files"], ["Drag rows onto a folder", "Move there (hold Ctrl to copy)"],
-    ["Drop files from the computer", "Upload (onto a folder row: into it)"], ["Right-click", "Actions for the item"], ["Escape", "Close, clear the selection, put picked-up items down"], ["?", "This list"],
+    ["Drop files from the computer", "Upload (onto a folder row: into it)"], ["Right-click, ⋯", "Actions for the item"], ["Escape", "Close, untick everything, put picked-up items down"], ["?", "This list"],
   ];
   function help() {
     const t = FM.h("table.keys");
     for (const [k, v] of KEYS) t.append(FM.h("tr", null, FM.h("td", null, FM.h("b", { text: k })), FM.h("td", { text: v })));
-    FM.ui.dialog({ title: "Keyboard and mouse", body: [t], actions: [{ text: "Close", value: true, primary: true }] });
+    FM.ui.dialog({ title: "Keyboard and mouse", body: [t, "Delete, F2, D and Ctrl+C / X act on the ticked rows; with none ticked, on the row you are on."], actions: [{ text: "Close", value: true, primary: true }] });
   }
-  function move(delta, extend, keepSel) {
-    const items = FM.sorted();
-    if (!items.length) return;
-    const ids = items.map((i) => i.id || i.tid);
-    let i = ids.indexOf(S.focus);
+  // Shift+moves tick like text is selected: the rows from where the cursor was when Shift began to where it is now
+  // (going back unticks them again); rows ticked before stay ticked. A run goes on while nothing else changed the ticks.
+  let run = null;
+  function move(delta, extend) {
+    const ids = FM.sorted().map((i) => i.id || i.tid);
+    if (!ids.length) return;
+    const from = ids.indexOf(S.focus);
+    let i;
     if (delta === "home") i = 0; else if (delta === "end") i = ids.length - 1;
-    else i = i < 0 ? (delta > 0 ? 0 : ids.length - 1) : Math.max(0, Math.min(ids.length - 1, i + delta));
-    const id = ids[i];
-    S.focus = id;
+    else i = from < 0 ? (delta > 0 ? 0 : ids.length - 1) : Math.max(0, Math.min(ids.length - 1, from + delta));
     if (extend) {
-      if (!S.anchor) S.anchor = ids[Math.max(0, ids.indexOf(S.focus))];
-      const a = ids.indexOf(S.anchor), b = i;
-      S.sel = new Set(ids.slice(Math.min(a, b), Math.max(a, b) + 1));
-    } else if (!keepSel) { S.sel = new Set([id]); S.anchor = id; }
+      const goesOn = run && run.at === S.focus && run.sel === S.sel && run.size === S.sel.size && ids.includes(run.start);
+      const start = goesOn ? run.start : ids[from < 0 ? i : from];
+      const a = ids.indexOf(start), was = from < 0 ? a : from;
+      const inside = (k, end) => k >= Math.min(a, end) && k <= Math.max(a, end);
+      ids.forEach((id, k) => { if (inside(k, i)) S.sel.add(id); else if (inside(k, was)) S.sel.delete(id); });
+      run = { start, at: ids[i], sel: S.sel, size: S.sel.size };
+      S.anchor = ids[i];
+    }
+    S.focus = ids[i];
     FM.view.sel();
-    FM.view.focusRow(id);
+    FM.view.focusRow(ids[i]);
   }
   function onKey(e) {
     if (e.defaultPrevented) return;
@@ -2560,7 +2572,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       if (FM.ui.closeTop()) { e.preventDefault(); return; }
       if (typing && e.target.id === "q") { e.preventDefault(); FM.app.closeSearch(); return; }
       if (S.picking) { e.preventDefault(); FM.pick.stop(); return; }
-      if (S.sel.size || S.selecting) { e.preventDefault(); S.sel.clear(); S.selecting = false; FM.view.render(); return; }
+      if (S.sel.size) { e.preventDefault(); S.sel.clear(); FM.view.render(); return; }
       if (S.clip) { e.preventDefault(); S.clip = null; FM.view.render(); return; }
       if (S.view === "search") { e.preventDefault(); FM.app.closeSearch(); return; }
       if (S.view === "trash") { e.preventDefault(); FM.app.go(S.folder ? S.folder.id : "root"); return; }
@@ -2572,18 +2584,19 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       if (k === "ArrowDown" && e.target.id === "q") { e.preventDefault(); document.querySelector(".list").focus(); move(1); }
       return;
     }
-    const sel = FM.selected(), one = sel.length === 1 ? sel[0] : null;
+    const here = FM.byId(S.focus), ticked = FM.selected();
+    const sel = ticked.length ? ticked : here ? [here] : [], one = sel.length === 1 ? sel[0] : null; // the ticked rows, or the cursor's
     const pageRows = Math.max(1, Math.floor(document.querySelector(".list").clientHeight / 42) - 1);
     let used = true;
-    if (k === "ArrowDown") move(1, e.shiftKey, ctrl);
+    if (k === "ArrowDown") move(1, e.shiftKey);
     else if (k === "ArrowUp" && e.altKey) FM.app.up();
-    else if (k === "ArrowUp") move(-1, e.shiftKey, ctrl);
-    else if (k === "PageDown") move(pageRows, e.shiftKey, ctrl);
-    else if (k === "PageUp") move(-pageRows, e.shiftKey, ctrl);
-    else if (k === "Home") move("home", e.shiftKey, ctrl);
-    else if (k === "End") move("end", e.shiftKey, ctrl);
-    else if (k === " ") { if (S.focus) { S.sel.has(S.focus) ? S.sel.delete(S.focus) : S.sel.add(S.focus); S.anchor = S.focus; FM.view.sel(); } }
-    else if (k === "Enter") { const it = FM.byId(S.focus) || one; if (it) FM.app.activate(it); }
+    else if (k === "ArrowUp") move(-1, e.shiftKey);
+    else if (k === "PageDown") move(pageRows, e.shiftKey);
+    else if (k === "PageUp") move(-pageRows, e.shiftKey);
+    else if (k === "Home") move("home", e.shiftKey);
+    else if (k === "End") move("end", e.shiftKey);
+    else if (k === " ") { if (here) { S.sel.has(S.focus) ? S.sel.delete(S.focus) : S.sel.add(S.focus); S.anchor = S.focus; FM.view.sel(); } }
+    else if (k === "Enter") { const it = here || (ticked.length === 1 ? ticked[0] : null); if (it && !e.repeat) FM.app.activate(it); } // a held key opens once
     else if (k === "Backspace") FM.app.up();
     else if (ctrl && (k === "a" || k === "A")) { S.sel = new Set(S.items.map((i) => i.id || i.tid)); FM.view.sel(); }
     else if (ctrl && (k === "c" || k === "C") && S.view !== "trash") FM.ops.pickUp(sel, "copy");
@@ -2609,10 +2622,11 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
 
 // ---- pick.js ----
 // pick.js: when a page that opened this one in a window (window-kit.js) asks for files. A bar says who asks and
-// for what; files that do not fit are dimmed; Choose (or a double-click) fetches the choice from the PC with
-// progress and hands it over as real File objects on the request's own MessagePort: one or more files, a folder
-// as its files (fetched as ONE zip and unpacked here, so each file keeps its path), or a folder as one zip made
-// by the PC. Requests are taken only from the parent frame and from allowed origins (window-kit.js checks).
+// for what; files that do not fit are dimmed; a click on a file that fits, or Choose for the ticked rows, fetches
+// the choice from the PC with progress and hands it over as real File objects on the request's own MessagePort:
+// one or more files, a folder as its files (fetched as ONE zip and unpacked here, so each file keeps its path), or
+// a folder as one zip made by the PC. Requests are taken only from the parent frame and from allowed origins
+// (window-kit.js checks).
 "use strict";
 (function () {
   const S = FM.S;
@@ -2624,15 +2638,15 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     return p.folder ? (f ? `${f} or a folder` : "a folder") : f;
   };
   FM.pickHint = () => {
-    const p = S.pick;
+    const p = S.pick, tap = FM.isPhone() ? "Tap" : "Click";
     if (S.view !== "folder") return "Go back to the folders to choose.";
-    if (p.folder && p.files) return "Select it, then Choose (or double-click a file). For a folder: select it, or open it and Choose with nothing selected.";
-    if (p.folder) return "Select a folder, or open it and Choose with nothing selected.";
-    return p.multiple ? "Select them, then Choose (or double-click one)." : "Select it, then Choose (or double-click it).";
+    if (p.folder && p.files) return `${tap} a file to choose it. For a folder: tick its box and Choose, or open it and Choose with nothing ticked.`;
+    if (p.folder) return "Tick a folder's box and Choose, or open the folder and Choose with nothing ticked.";
+    return p.multiple ? `${tap} a file to choose it, or tick several and Choose.` : `${tap} it to choose it.`;
   };
-  // What Choose would hand over right now.
-  FM.pickChoice = () => {
-    const p = S.pick, sel = FM.selected();
+  // What Choose would hand over right now: the ticked rows, or `list` (a row's menu, a click on a file).
+  FM.pickChoice = (list) => {
+    const p = S.pick, sel = list || FM.selected();
     const no = (why) => ({ ok: false, label: "Choose", why });
     if (!p || S.view === "trash") return no("Go back to the folders to choose.");
     if (sel.some((i) => i.locked)) return no("That is private: sign in first.");
@@ -2640,7 +2654,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     if (p.folder && !sel.length && S.view === "folder" && S.folder) return { ok: true, label: `Choose this folder (“${S.folder.name}”)`, folder: S.folder };
     if (!p.files) return no("Choose a folder.");
     const files = sel.filter((i) => !i.dir);
-    if (!files.length || files.length !== sel.length) return no(p.folder ? "Select a file or one folder." : "Select a file.");
+    if (!files.length || files.length !== sel.length) return no(p.folder ? "Tick a file or one folder." : "Tick a file, or click it.");
     if (!files.every(FM.fits)) return no(`Only ${FM.pickWhat(p)} can be chosen.`);
     if (!p.multiple && files.length > 1) return no("Choose one file.");
     return { ok: true, label: files.length > 1 ? `Choose ${files.length} files` : `Choose “${files[0].name}”`, items: files };
@@ -2667,8 +2681,8 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     FM.view.renderPick();
     send({ type: "progress", loaded, total, name });
   }
-  async function choose() {
-    const ch = FM.pickChoice();
+  async function choose(list) {
+    const ch = FM.pickChoice(list);
     if (!ch.ok || S.picking) return;
     const total = ch.folder ? ch.folder.size || 0 : ch.items.reduce((a, i) => a + (i.size || 0), 0);
     if (total > 1.5e9 && !(await FM.ui.confirm("This is big", [`${FM.size(total)} must be held in this page's memory to hand it over. A phone may run out of memory.`], "Go ahead"))) return;
@@ -2721,10 +2735,10 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
 })();
 
 // ---- app.js ----
-// app.js: start-up, going from folder to folder, the live updates, and the pointer: click, Ctrl/Shift-click,
-// double-click, right-click, long-press (phone), and dragging rows onto a folder. Opened on its own, the
-// browser's Back and Forward go through the folders (the address keeps the folder: #f=<id>); inside another
-// page's window it keeps its history to itself.
+// app.js: start-up, going from folder to folder, the live updates, and the pointer: a click or tap opens, the
+// row's box ticks (Shift and Ctrl too), right-click or ⋯ for the actions, and dragging rows onto a folder.
+// Opened on its own, the browser's Back and Forward go through the folders (the address keeps the folder:
+// #f=<id>); inside another page's window it keeps its history to itself.
 "use strict";
 (function () {
   const S = FM.S;
@@ -2776,10 +2790,13 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       const ids = new Set(S.items.map((i) => i.id));
       if (changedFolder) { S.sel.clear(); S.focus = null; S.anchor = null; }
       else for (const k of [...S.sel]) if (!ids.has(k)) S.sel.delete(k);
-      if (o.select && o.select.filter(Boolean).length) { S.sel = new Set(o.select.filter((x) => ids.has(x))); S.focus = [...S.sel][0] || S.focus; }
+      // what an action just made, moved or found here: it flashes and the keyboard's cursor goes to it (never ticked:
+      // only a person ticks rows)
+      const shown = (o.select || []).filter((x) => x && ids.has(x));
+      if (shown.length) S.focus = shown[0];
       setConn("on", "Connected");
       FM.view.render();
-      if (o.select) { FM.view.flash(o.select.filter(Boolean)); if (S.focus) FM.view.focusRow(S.focus); }
+      if (shown.length) { FM.view.flash(shown); FM.view.focusRow(S.focus); }
       if (changedFolder && !o.quiet && !FM.isPhone()) $(".list").focus({ preventScroll: true });
       if (FM.embedded) WindowKit.child.title(`${r.folder.id === "root" ? "Cloud File Manager" : r.folder.name + " · Cloud File Manager"}`);
       return r;
@@ -2909,26 +2926,29 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     } catch (e) { S.loading = false; FM.view.render(); FM.ops.fail(e, "The trash could not be opened", { action: "trash-list" }); }
   }
 
-  // ---- what an item does when opened -----------------------------------------------------------------------------------
+  // ---- what an item does when opened (a click or tap, Enter) ---------------------------------------------------------------
   function activate(it) {
     if (!it) return;
     if (S.view === "trash") return FM.ops.restore([it]);
     if (it.locked) return go(it.id); // asks for the password
     if (it.dir) return go(it.id);
-    if (S.pick && FM.fits(it) && S.pick.files) { S.sel = new Set([it.id]); FM.view.sel(); return FM.pick.choose(); }
+    if (S.pick && FM.fits(it) && S.pick.files) return FM.pick.choose([it]); // a page asked for a file: this one
     FM.ops.open(it);
   }
 
   // ---- menus -------------------------------------------------------------------------------------------------------------
-  function itemMenu(at) {
-    const sel = FM.selected(), one = sel.length === 1 ? sel[0] : null, n = sel.length;
+  // What a row's menu (⋯, right-click) or a drag acts on: every ticked row when this one is ticked, else this row alone
+  // (it is not ticked for it).
+  const forRow = (id) => (S.sel.has(id) ? FM.selected() : [FM.byId(id)].filter(Boolean));
+  function itemMenu(at, list) {
+    const sel = list || FM.selected(), one = sel.length === 1 ? sel[0] : null, n = sel.length;
     if (!n) return;
     if (S.view === "trash") return FM.ui.menu([{ head: one ? one.name : `${n} items` }, { icon: "restore", text: n > 1 ? `Restore ${n}` : "Restore", act: () => FM.ops.restore(sel) }, { icon: "trash", text: "Delete forever", danger: true, act: () => FM.ops.purge(sel) }], at);
     const locked = sel.some((i) => i.locked), prot = sel.some((i) => i.protected);
     const items = [{ head: one ? one.name : `${n} items selected` }];
     if (one && one.dir) items.push({ icon: "folder", text: "Open", key: "Enter", act: () => activate(one) });
     if (one && !one.dir && !one.locked) items.push({ icon: "open", text: "Open in a new tab", key: "Enter", act: () => FM.ops.open(one) });
-    if (S.pick && FM.pickChoice().ok) items.push({ icon: "check", text: FM.pickChoice().label, act: () => FM.pick.choose() });
+    if (S.pick && FM.pickChoice(sel).ok) items.push({ icon: "check", text: FM.pickChoice(sel).label, act: () => FM.pick.choose(sel) });
     if (!locked) items.push({ icon: "download", text: n > 1 || (one && one.dir) ? "Download as a zip" : "Download", key: "D", act: () => FM.ops.download(sel) });
     if (S.view === "search" && one) items.push({ icon: "folder", text: "Show in its folder", act: () => reveal(one) });
     if (S.writable && !locked) {
@@ -2942,7 +2962,6 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       }
       if (!prot) items.push("-", { icon: "trash", text: "Delete", key: "Delete", danger: true, act: () => FM.ops.del(sel) });
     }
-    if (FM.isPhone() && !S.selecting) items.push("-", { icon: "select", text: "Select more", act: () => { S.selecting = true; FM.view.render(); } });
     FM.ui.menu(items, at);
   }
   function spaceMenu(at) {
@@ -2976,92 +2995,72 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     purge: () => FM.ops.purge(FM.selected()), empty: FM.ops.emptyTrash, reveal: () => reveal(FM.selected()[0]),
     closesearch: () => closeSearch(), search: openSearch, account: (b) => accountMenu(b),
     selectall: () => { const all = S.items.every((i) => S.sel.has(i.id || i.tid)); S.sel = all ? new Set() : new Set(S.items.map((i) => i.id || i.tid)); FM.view.sel(); },
-    unselect: () => { S.sel.clear(); S.selecting = false; FM.view.render(); }, selmore: (b) => itemMenu({ anchor: b }),
+    unselect: () => { S.sel.clear(); FM.view.render(); }, selmore: (b) => itemMenu({ anchor: b }),
     fab: (b) => FM.ui.menu([{ icon: "upload", text: "Upload files", act: () => FM.upload.choose(false) }, { icon: "folder", text: "Upload a folder", act: () => FM.upload.choose(true) }, { icon: "newfolder", text: "New folder", act: FM.ops.newFolder }], { anchor: b }),
     pickchoose: () => FM.pick.choose(), pickcancel: () => FM.pick.cancel(), pickstop: () => FM.pick.stop(),
   };
 
   // ---- the pointer on the list ----------------------------------------------------------------------------------------------
+  // One click or tap on a row opens it: a folder goes in, a file opens in a new tab (a page that asked for a file gets
+  // it; in the trash: the row's actions). The row's box ticks it: a click on the box ticks or unticks that row,
+  // Shift+click ticks the rows from the last one ticked to it, Ctrl+click is that row alone; Shift or Ctrl on the row
+  // itself ticks instead of opening. Nothing else ticks a row: not a click, not ⋯ or right-click, not a drag.
+  // A double-click or double-tap is one open: after an open the list takes no click for QUIET ms (and never the second
+  // click of a mouse double-click), which would else open whatever is now under the pointer in the new folder, or the
+  // file a second time. A long press on a phone (LONG ms or more) is not a tap: its lift opens nothing; where the browser
+  // makes it a right-click (Chrome on Android) it shows the row's actions.
+  const QUIET = 400, LONG = 500;
   function wireList() {
     const list = $(".list");
-    let press = null;
+    let openedAt = -1e9, touchAt = 0, menuAt = 0;
     const rowOf = (e) => e.target.closest && e.target.closest(".row");
-    const itemOf = (r) => r && FM.byId(r.dataset.id);
+    function tick(id, range) { // range (Shift): tick from the last row ticked or unticked to this one; never unticks
+      const ids = FM.sorted().map((i) => i.id || i.tid), a = ids.indexOf(S.anchor), b = ids.indexOf(id);
+      if (range) for (const k of a >= 0 && b >= 0 ? ids.slice(Math.min(a, b), Math.max(a, b) + 1) : [id]) S.sel.add(k);
+      else if (S.sel.has(id)) S.sel.delete(id);
+      else S.sel.add(id);
+      S.anchor = id;
+      FM.view.sel();
+    }
     list.addEventListener("click", (e) => {
       const sortBtn = e.target.closest("[data-sort]");
       if (sortBtn) { const k = sortBtn.dataset.sort; S.sort = { key: k, dir: S.sort.key === k ? -S.sort.dir : 1 }; FM.store.set("sort", S.sort); FM.view.render(); return; }
       const actBtn = e.target.closest("[data-act]");
       const r = rowOf(e);
-      if (!r) { if (actBtn) ACTS[actBtn.dataset.act] && ACTS[actBtn.dataset.act](actBtn); else if (!FM.isPhone() && S.sel.size) { S.sel.clear(); FM.view.sel(); } return; }
-      if (press && press.long) { press = null; return; } // the long-press already selected it
-      const it = itemOf(r), id = r.dataset.id;
+      if (!r) { if (actBtn && ACTS[actBtn.dataset.act]) ACTS[actBtn.dataset.act](actBtn); return; }
+      if (performance.now() - openedAt < QUIET || (e.pointerType === "mouse" && e.detail > 1)) return;
+      if (e.pointerType === "touch" && touchAt && (menuAt > touchAt || performance.now() - touchAt >= LONG)) return; // the lift of a long press
+      const id = r.dataset.id, it = FM.byId(id);
       if (!it) return;
-      if (actBtn && actBtn.dataset.act === "open") return activate(it);
-      if (actBtn && actBtn.dataset.act === "more") {
-        if (!S.sel.has(id)) { S.sel = new Set([id]); S.anchor = id; }
-        S.focus = id; FM.view.sel();
-        return itemMenu({ anchor: actBtn, alignRight: true });
+      if (actBtn && actBtn.dataset.act === "more") return itemMenu({ anchor: actBtn, alignRight: true }, forRow(id));
+      if (e.target.closest(".check") || e.shiftKey || e.ctrlKey || e.metaKey) {
+        tick(id, e.shiftKey);
+        if (document.activeElement !== list && list.contains(document.activeElement)) list.focus({ preventScroll: true }); // keys stay the list's
+        return;
       }
-      const phone = FM.isPhone();
-      if (e.target.closest(".check") || (phone && (S.selecting || S.sel.size)) || ((e.ctrlKey || e.metaKey) && !phone)) {
-        S.sel.has(id) ? S.sel.delete(id) : S.sel.add(id);
-        S.anchor = id; S.focus = id;
-        if (phone && !S.sel.size) S.selecting = false;
-        return FM.view.sel();
-      }
-      if (e.shiftKey && S.anchor && !phone) {
-        const ids = FM.sorted().map((i) => i.id || i.tid), a = ids.indexOf(S.anchor), b = ids.indexOf(id);
-        S.sel = new Set(ids.slice(Math.min(a, b), Math.max(a, b) + 1)); S.focus = id;
-        return FM.view.sel();
-      }
-      if (phone) {
-        if (S.view === "trash" || (S.pick && !it.dir && FM.fits(it))) { S.sel = new Set([id]); S.focus = id; FM.view.sel(); if (S.view === "trash") itemMenu({ anchor: r }); return; }
-        if (it.dir || it.locked) return activate(it);
-        S.sel = new Set([id]); S.focus = id; FM.view.sel();
-        return itemMenu({ x: e.clientX, y: e.clientY });
-      }
-      S.sel = new Set([id]); S.anchor = id; S.focus = id;
-      FM.view.sel();
+      openedAt = performance.now();
+      if (S.view === "trash") return itemMenu({ x: e.clientX, y: e.clientY }, forRow(id));
+      activate(it);
     });
-    list.addEventListener("dblclick", (e) => { const r = rowOf(e); if (r && !FM.isPhone() && !e.target.closest("button")) activate(itemOf(r)); });
+    list.addEventListener("pointerdown", (e) => { touchAt = e.pointerType === "touch" ? performance.now() : 0; });
     list.addEventListener("contextmenu", (e) => {
       const r = rowOf(e);
       e.preventDefault();
+      menuAt = performance.now();
       if (!r) return spaceMenu({ x: e.clientX, y: e.clientY });
-      const id = r.dataset.id;
-      if (!S.sel.has(id)) { S.sel = new Set([id]); S.anchor = id; }
-      S.focus = id; FM.view.sel();
-      itemMenu({ x: e.clientX, y: e.clientY });
+      itemMenu({ x: e.clientX, y: e.clientY }, forRow(r.dataset.id));
     });
-    // long-press on a phone: select (and start selecting)
-    list.addEventListener("pointerdown", (e) => {
-      if (e.pointerType !== "touch") return;
-      const r = rowOf(e);
-      if (!r || e.target.closest("button")) return;
-      press = { x: e.clientX, y: e.clientY, long: false, timer: setTimeout(() => {
-        press.long = true;
-        const id = r.dataset.id;
-        S.selecting = true; S.sel.add(id); S.anchor = id; S.focus = id;
-        if (navigator.vibrate) try { navigator.vibrate(15); } catch (x) {}
-        FM.view.render();
-      }, 480) };
-    });
-    const cancelPress = (e) => { if (press && !press.long && (!e || e.type !== "pointermove" || Math.hypot(e.clientX - press.x, e.clientY - press.y) > 10)) { clearTimeout(press.timer); press = null; } };
-    list.addEventListener("pointermove", cancelPress);
-    list.addEventListener("pointerup", () => { if (press && !press.long) { clearTimeout(press.timer); press = null; } });
-    list.addEventListener("pointercancel", cancelPress);
-    list.addEventListener("scroll", () => cancelPress());
-    // dragging rows onto a folder (or a step of the path): move; with Ctrl: copy
+    // dragging rows onto a folder (or a step of the path): move; with Ctrl: copy (the ticked rows, when the row is ticked)
     const MIME = "application/x-relay-files";
     let dragIds = null;
     list.addEventListener("dragstart", (e) => {
       const r = rowOf(e);
       if (!r || !S.writable || S.view !== "folder") return e.preventDefault();
-      const id = r.dataset.id;
-      if (!S.sel.has(id)) { S.sel = new Set([id]); S.anchor = id; FM.view.sel(); }
-      dragIds = FM.selected().filter((i) => !i.locked).map((i) => i.id);
+      const items = forRow(r.dataset.id).filter((i) => !i.locked);
+      if (!items.length) return e.preventDefault();
+      dragIds = items.map((i) => i.id);
       e.dataTransfer.setData(MIME, JSON.stringify(dragIds));
-      e.dataTransfer.setData("text/plain", FM.selected().map((i) => i.name).join("\n"));
+      e.dataTransfer.setData("text/plain", items.map((i) => i.name).join("\n"));
       e.dataTransfer.effectAllowed = "copyMove";
     });
     list.addEventListener("dragend", () => { dragIds = null; for (const x of document.querySelectorAll(".drop-on")) x.classList.remove("drop-on"); });
@@ -3110,7 +3109,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     addEventListener("online", () => { if (S.error) { retryWait = 2000; reload(); } });
     document.addEventListener("visibilitychange", () => { if (!document.hidden) { if (S.error) reload(); else if (events) events.restart(); } });
     let wasPhone = FM.isPhone();
-    addEventListener("resize", () => { const p = FM.isPhone(); if (p !== wasPhone) { wasPhone = p; S.selecting = false; FM.view.render(); } });
+    addEventListener("resize", () => { const p = FM.isPhone(); if (p !== wasPhone) { wasPhone = p; FM.view.render(); } });
   }
   function listen() {
     events = FM.api.events((m) => {
