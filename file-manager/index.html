@@ -368,7 +368,7 @@ kbd { font: 600 11px/1 var(--font); padding: 3px 6px; border-radius: 5px; border
   <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="2.75" y="6.75" width="18.5" height="10.5" rx="2.25" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 10.5h1M10 10.5h1M13.5 10.5h1M17 10.5h.5M7.5 14h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
   <symbol id="i-signal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.2"/><path d="M8.3 15.7a5.2 5.2 0 0 1 0-7.4M15.7 8.3a5.2 5.2 0 0 1 0 7.4M5.5 18.5a9.2 9.2 0 0 1 0-13M18.5 5.5a9.2 9.2 0 0 1 0 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
 </svg>
-<div id="app" class="app" data-build="V1.0.10">
+<div id="app" class="app" data-build="V1.0.13">
   <header class="top">
     <div class="top-row">
       <button class="iconbtn up-btn" type="button" data-act="up" aria-label="Up one folder" title="Up one folder (Backspace)"><svg><use href="#i-back"/></svg></button>
@@ -390,7 +390,7 @@ kbd { font: 600 11px/1 var(--font); padding: 3px 6px; border-radius: 5px; border
   </main>
   <footer class="status">
     <span class="status-left"></span>
-    <span class="status-right"><span class="conn"></span><span class="build" title="Built 2026-11-07 2:05 AM">V1.0.10</span></span>
+    <span class="status-right"><span class="conn"></span><span class="build" title="Built 2026-11-07 10:57 AM">V1.0.13</span></span>
   </footer>
   <div class="selbar" hidden></div>
   <button class="fab" type="button" data-act="fab" aria-label="Add: upload or new folder" hidden><svg><use href="#i-plus"/></svg></button>
@@ -399,7 +399,7 @@ kbd { font: 600 11px/1 var(--font); padding: 3px 6px; border-radius: 5px; border
 </div>
 <input type="file" id="pick-files" multiple hidden>
 <input type="file" id="pick-folder" webkitdirectory multiple hidden>
-<script>window.FM_BUILD = { version: "V1.0.10", built: "2026-11-07 2:05 AM", note: "first release: browse, upload, move, copy, rename, delete into a trash, private folders; the window kit" };</script>
+<script>window.FM_BUILD = { version: "V1.0.13", built: "2026-11-07 10:57 AM", note: "Open: every file by its own link in a new tab (the PC now sends Markdown and text as text/plain); no blank tab left on a download" };</script>
 <script>
 // ---- relay-client.js ----
 /* relay-client.js: the PC Relay client (ONE source: Projects\pc-relay\client\relay-client.js; each page's build
@@ -2110,14 +2110,21 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       onError: (t, e) => { if (e.signin) FM.app.signedOut(e.signin); },
     });
   }
+  // Open = the file's own link in a new tab: the browser shows what it can (text, Markdown, code, pages, pictures,
+  // PDF, sound, video; the PC sends each with a type a tab shows) and downloads the rest, closing the tab.
+  // A public file's link is known at once; a private one gets a 10-minute ticket link first (a link cannot carry
+  // the pass). Never a blank tab filled in later: a download then left it stuck on "Opening…" (2026-11-07).
+  function tab(url, name) {
+    const w = window.open(url, "_blank");
+    if (w) { try { w.opener = null; } catch (e) {} return; }
+    toast(`The browser blocked the new tab for “${name}”.`, { bad: true, action: () => tab(url, name), actionText: "Open it" });
+  }
   async function open(it) {
     if (!it || it.locked) return;
     if (it.dir) return FM.app.go(it.id);
-    const w = window.open("", "_blank");
-    if (!w) { toast("The browser blocked the new tab: allow pop-ups for this page, or use Download.", { bad: true }); return; }
-    try { w.opener = null; w.document.title = it.name; w.document.body.textContent = "Opening " + it.name + "…"; } catch (e) {}
-    try { w.location.replace(await FM.api.link([it], { inline: true })); }
-    catch (e) { w.close(); fail(e, `“${it.name}” could not be opened`); }
+    if (!it.private) return tab(FM.api.client.url("files", FM.api.filePath(it)), it.name);
+    try { tab(await FM.api.link([it], { inline: true }), it.name); }
+    catch (e) { fail(e, `“${it.name}” could not be opened`); }
   }
 
   // ---- the trash -------------------------------------------------------------------------------------------------
