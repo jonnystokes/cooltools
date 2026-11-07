@@ -368,7 +368,7 @@ kbd { font: 600 11px/1 var(--font); padding: 3px 6px; border-radius: 5px; border
   <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="2.75" y="6.75" width="18.5" height="10.5" rx="2.25" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 10.5h1M10 10.5h1M13.5 10.5h1M17 10.5h.5M7.5 14h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
   <symbol id="i-signal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.2"/><path d="M8.3 15.7a5.2 5.2 0 0 1 0-7.4M15.7 8.3a5.2 5.2 0 0 1 0 7.4M5.5 18.5a9.2 9.2 0 0 1 0-13M18.5 5.5a9.2 9.2 0 0 1 0 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
 </svg>
-<div id="app" class="app" data-build="V1.0.13">
+<div id="app" class="app" data-build="V1.0.16">
   <header class="top">
     <div class="top-row">
       <button class="iconbtn up-btn" type="button" data-act="up" aria-label="Up one folder" title="Up one folder (Backspace)"><svg><use href="#i-back"/></svg></button>
@@ -390,7 +390,7 @@ kbd { font: 600 11px/1 var(--font); padding: 3px 6px; border-radius: 5px; border
   </main>
   <footer class="status">
     <span class="status-left"></span>
-    <span class="status-right"><span class="conn"></span><span class="build" title="Built 2026-11-07 10:57 AM">V1.0.13</span></span>
+    <span class="status-right"><span class="conn"></span><span class="build" title="Built 2026-11-07 11:48 AM">V1.0.16</span></span>
   </footer>
   <div class="selbar" hidden></div>
   <button class="fab" type="button" data-act="fab" aria-label="Add: upload or new folder" hidden><svg><use href="#i-plus"/></svg></button>
@@ -399,7 +399,7 @@ kbd { font: 600 11px/1 var(--font); padding: 3px 6px; border-radius: 5px; border
 </div>
 <input type="file" id="pick-files" multiple hidden>
 <input type="file" id="pick-folder" webkitdirectory multiple hidden>
-<script>window.FM_BUILD = { version: "V1.0.13", built: "2026-11-07 10:57 AM", note: "Open: every file by its own link in a new tab (the PC now sends Markdown and text as text/plain); no blank tab left on a download" };</script>
+<script>window.FM_BUILD = { version: "V1.0.16", built: "2026-11-07 11:48 AM", note: "HTML programs run (files 2.1); a zip's left-out files are said from its headers, no note in the zip; the page's own failures go to the PC's log" };</script>
 <script>
 // ---- relay-client.js ----
 /* relay-client.js: the PC Relay client (ONE source: Projects\pc-relay\client\relay-client.js; each page's build
@@ -1037,7 +1037,8 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     return data;
   }
 
-  // A download into memory with progress; a stall of 60 s without a byte ends it with the reason.
+  // A download into memory with progress; a stall of 60 s without a byte ends it with the reason. opts.onHeaders(h)
+  // gets the answer's headers (a zip's X-Zip-Files / X-Zip-Skipped: FM.zipInfo).
   async function blob(path, opts = {}) {
     const ac = new AbortController();
     const stop = () => ac.abort();
@@ -1048,6 +1049,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     try {
       const r = await raw("GET", path, { signal: ac.signal });
       if (!r.ok) throw errOf(r, await r.json().catch(() => ({})));
+      if (opts.onHeaders) opts.onHeaders(r.headers);
       const total = Number(r.headers.get("content-length")) || Number(r.headers.get("x-zip-bytes")) || opts.expect || 0;
       const rd = r.body.getReader(), parts = [];
       let got = 0;
@@ -1189,11 +1191,120 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
   };
 })();
 
+// ---- report.js ----
+// report.js: the page's own failures go to the PC's log (Relay Files' files.log, through PC Relay: POST log), so a
+// failure Jon saw can be looked up later: what was being done, on what, the message he saw, the PC's answer (its
+// status and error), the transfer's tries, the page's version. Script errors too. Sent in the background, a few at
+// a time; kept in this browser (up to 100, localStorage "fm-reports") while the PC cannot be reached, and sent when
+// it answers again. Never a password, a pass or a download ticket (a ticket link is blanked; the PC blanks again).
+//   FM.report(action, error, extra)   error: an FM.ApiError, an Error or a plain message; extra: { what, items,
+//                                     name, path, folder, transfer, detail, ... } (anything JSON)
+"use strict";
+(function () {
+  const KEY = "reports", MAX = 100, BATCH = 20;
+  let queue = FM.store.get(KEY, []);
+  if (!Array.isArray(queue)) queue = [];
+  let timer = 0, sending = false, wait = 3000, sent = 0;
+  const save = () => FM.store.set(KEY, queue);
+  const clean = (s, n) => String(s == null ? "" : s).replace(/\/t\/[A-Za-z0-9_-]{16,}/g, "/t/[ticket]").slice(0, n || 2000);
+  // a value as plain data: strings blanked of tickets and cut, lists cut, at most 4 levels deep
+  function plain(v, depth) {
+    if (v == null || typeof v === "number" || typeof v === "boolean") return v;
+    if (typeof v === "string") return clean(v);
+    if (depth > 3) return "[cut]";
+    if (Array.isArray(v)) return v.slice(0, 50).map((x) => plain(x, depth + 1));
+    if (typeof v === "object") {
+      const out = {};
+      for (const [k, x] of Object.entries(v).slice(0, 40)) if (typeof x !== "function") out[k] = plain(x, depth + 1);
+      return out;
+    }
+    return clean(String(v));
+  }
+  function itemOf(it) {
+    if (!it) return null;
+    if (typeof it === "string") return { name: it };
+    return { id: it.id || it.tid || undefined, name: it.name, path: it.path || undefined, dir: it.dir || undefined, size: it.size || undefined, private: it.private || undefined };
+  }
+
+  function report(action, e, extra) {
+    try {
+      if (e && e.aborted) return; // the person stopped it
+      const S = FM.S || {};
+      const r = { at: new Date().toISOString(), action: String(action || "page"), page: (window.FM_BUILD && FM_BUILD.version) || "" };
+      if (e != null) {
+        if (typeof e === "string") r.error = clean(e);
+        else {
+          r.error = clean(e.message || String(e));
+          if (e.status != null) r.status = e.status;
+          if (e.code) r.code = clean(e.code, 100);
+          if (e.net) r.net = true;
+          if (e.signin) r.signin = clean(e.signin, 60);
+          if (e.data && typeof e.data === "object" && Object.keys(e.data).length) r.answer = plain(e.data, 1); // the PC's own answer
+          if (e.stack && !(e instanceof FM.ApiError)) r.detail = clean(e.stack, 6000);
+        }
+      }
+      const x = Object.assign({}, extra || {});
+      if (x.items) x.items = [].concat(x.items).slice(0, 50).map(itemOf);
+      for (const [k, v] of Object.entries(x)) if (v !== undefined) r[k] = plain(v, 1);
+      if (!r.folder && S.folder) r.folder = { id: S.folder.id, name: S.folder.name };
+      if (S.view && S.view !== "folder") r.view = S.view;
+      r.signed = !!S.signed;
+      if (FM.embedded) r.embedded = (S.pick && clean(S.pick.host, 80)) || true; // inside another page's window
+      r.online = navigator.onLine;
+      if (navigator.connection && navigator.connection.effectiveType) r.network = navigator.connection.effectiveType;
+      r.where = location.origin + location.pathname;
+      if (FM.api && FM.api.custom) r.pc = FM.api.base; // only when it is not the usual PC
+      queue.push(r);
+      if (queue.length > MAX) queue.splice(0, queue.length - MAX);
+      save();
+      soon(600);
+    } catch (x) { /* a report must never break the page */ }
+  }
+  function soon(ms) { clearTimeout(timer); timer = setTimeout(flush, ms); }
+
+  // Send what is waiting, BATCH at a time. A failure keeps them (and waits longer); a refusal of the report
+  // itself (400: the PC cannot read it) drops that batch, so it is not sent for ever.
+  async function flush() {
+    clearTimeout(timer);
+    if (sending || !queue.length || !FM.api) return;
+    sending = true;
+    try {
+      while (queue.length) {
+        const batch = queue.slice(0, BATCH);
+        let r;
+        try { r = await FM.api.raw("POST", "log", { json: { reports: batch }, timeout: 15000 }); }
+        catch (e) { break; }
+        if (r.ok || r.status === 400 || r.status === 413) { queue.splice(0, batch.length); save(); sent += batch.length; wait = 3000; continue; }
+        break; // the PC is busy, switched off or not reachable: later
+      }
+    } finally { sending = false; }
+    if (queue.length) { soon(wait); wait = Math.min(300000, wait * 2); }
+  }
+
+  // Script errors: the page's own bugs, with where they were (browser extensions' errors left out).
+  addEventListener("error", (ev) => {
+    const src = ev.filename || "";
+    if (/^(chrome|moz|safari)-extension:/.test(src) || /ResizeObserver loop/.test(ev.message || "")) return;
+    report("page-error", ev.error || ev.message || "a script error", { source: src ? `${src}:${ev.lineno}:${ev.colno}` : undefined });
+  });
+  addEventListener("unhandledrejection", (ev) => {
+    const e = ev.reason;
+    if (e && (e.aborted || e.name === "AbortError")) return;
+    report("page-error", e instanceof Error ? e : String(e), { what: "a promise failed with nothing to catch it" });
+  });
+  addEventListener("online", () => { wait = 3000; soon(500); });
+  if (queue.length) soon(4000); // the ones kept from an earlier visit
+
+  FM.report = report;
+  FM.reports = { flush, get waiting() { return queue.slice(); }, get sent() { return sent; } };
+})();
+
 // ---- unzip.js ----
 // unzip.js: a zip into File objects, with the browser's own decompressor (stored and deflated entries; zip64).
 // Used when a page asks for a folder "as its files": the PC sends the folder as ONE zip (one request instead of
 // thousands), and the files come out here with their paths. Modelled on the book reader's zip.js (read the
-// directory at the end, slice each entry; a stored entry is a slice of the zip, no copy).
+// directory at the end, slice each entry; a stored entry is a slice of the zip, no copy). What the PC had to leave
+// out of a zip is in its headers since files 2.1 (FM.zipInfo), never inside the zip.
 "use strict";
 (function () {
   const EOCD = 0x06054b50, EOCD64 = 0x06064b50, LOC64 = 0x07064b50, CEN = 0x02014b50, LOC = 0x04034b50, MAX = 0xffffffff;
@@ -1242,8 +1353,27 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
   }
   const dosTime = (e) => new Date(1980 + (e.date >> 9), ((e.date >> 5) & 15) - 1, e.date & 31, e.time >> 11, (e.time >> 5) & 63, (e.time & 31) * 2).getTime();
   const MIME = { txt: "text/plain", md: "text/markdown", html: "text/html", htm: "text/html", json: "application/json", epub: "application/epub+zip", zip: "application/zip", pdf: "application/pdf", jpg: "image/jpeg", jpeg: "image/jpeg", png: "image/png", mp3: "audio/mpeg" };
+  // count(blob): the files in a zip (not its folders), from its directory only.
+  const count = async (blob) => (await entries(blob)).filter((e) => !e.name.endsWith("/") && e.name !== "__relay-missing-files.txt").length;
+
+  // What a zip from the PC left out (files 2.1): its headers. files = X-Zip-Files (the files it holds; null when
+  // the PC did not say), skipped = X-Zip-Skipped, names = X-Zip-Skipped-Names (up to 20 paths, "|" between them).
+  FM.zipInfo = (h) => {
+    const num = (k) => { const v = h && h.get(k); return v == null || v === "" ? null : Number(v); };
+    const names = String((h && h.get("x-zip-skipped-names")) || "").split("|").filter(Boolean).map((s) => { try { return decodeURIComponent(s); } catch (e) { return s; } });
+    return { files: num("x-zip-files"), skipped: num("x-zip-skipped") || 0, names };
+  };
+  // The window kit's `missing` text for a page that asked (the same words as the PC's note in files 2.0.1, which
+  // the book reader reads: the number on the first line, then a path per line): "" when nothing was left out.
+  FM.zipMissing = (info, inZip, legacy) => {
+    const late = inZip != null && info.files != null ? Math.max(0, info.files - inZip) : 0;
+    const n = info.skipped + late;
+    if (!n) return legacy || "";
+    return `PC Relay could not add ${n} file(s) to this zip (they were removed, changed, or refused since the folder was listed):\r\n\r\n${info.names.join("\r\n")}\r\n`;
+  };
+
   // files(blob, prefix): every file in the zip as { file, path } (path = prefix/name), plus the text of
-  // __relay-missing-files.txt when the PC had to leave files out (it is never handed on as a file).
+  // __relay-missing-files.txt when an older PC (files 2.0.1) put that note in (it is never handed on as a file).
   async function files(blob, prefix, onProgress) {
     const list = (await entries(blob)).filter((e) => !e.name.endsWith("/"));
     const out = [];
@@ -1257,7 +1387,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     }
     return { files: out, missing };
   }
-  FM.unzip = { entries, files };
+  FM.unzip = { entries, files, count };
 })();
 
 // ---- ui.js ----
@@ -1477,7 +1607,11 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     } catch (e) {
       t.state = t.ac.signal.aborted || e.aborted ? "cancelled" : "error";
       t.error = t.state === "error" ? (e && e.message) || String(e) : "";
-      if (t.state === "error" && t.onError) try { t.onError(t, e); } catch (x) {}
+      if (t.state === "error") { // to the PC's log too: what, how far it got, the tries on the way (report.js)
+        FM.report(t.kind === "up" ? "upload" : t.kind === "down" ? "download" : "copy", e, { name: t.name, where: t.where,
+          transfer: { total: t.total, loaded: t.loaded, seconds: Math.round((performance.now() - t.started) / 100) / 10, tries: (t.trail || []).slice(-10) } });
+        if (t.onError) try { t.onError(t, e); } catch (x) {}
+      }
     }
     if (t.state !== "handed") t.note = ""; // a hand-over keeps its note (where it went)
     t.resolve(t);
@@ -1887,8 +2021,10 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
   const toast = (t, o) => FM.ui.toast(t, o);
   const reload = (o) => FM.app.reload(o);
 
-  function fail(e, what) {
+  // A failure: said in a toast that stays, and sent to the PC's log (report.js) with what was being done.
+  function fail(e, what, ctx) {
     if (e && e.aborted) return;
+    FM.report((ctx && ctx.action) || "action", e, Object.assign({ what }, ctx || {}, { action: undefined }));
     if (e && e.signin) {
       FM.app.signedOut(e.signin);
       toast(`${what}: the PC wants the password.`, { bad: true, action: () => signIn(), actionText: "Sign in" });
@@ -1935,6 +2071,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
   function sayResults(results, verbDone, where) {
     const ok = results.filter((r) => r.ok && !r.skipped), skipped = results.filter((r) => r.skipped), bad = results.filter((r) => !r.ok);
     for (const r of bad) toast(`“${r.name || "An item"}” was not ${verbDone}: ${r.error}`, { bad: true });
+    if (bad.length) FM.report(verbDone, `${bad.length} of ${results.length} not ${verbDone}`, { what: `the PC refused ${bad.length === 1 ? "one item" : bad.length + " items"}`, where, results: bad.slice(0, 50) });
     return { ok, skipped, bad };
   }
 
@@ -1950,6 +2087,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
         if (!pw) return "Type the password.";
         dlg.msg("Checking…", true);
         const res = await FM.api.signIn(pw);
+        if (!res.ok) FM.report("sign-in", res.why, { what: "the sign-in was refused" }); // the reason only, never what was typed
         return res.ok ? "" : res.why;
       },
       actions: [{ text: "Cancel", value: false }, { text: "Sign in", value: true, primary: true }],
@@ -1978,7 +2116,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       const r = await FM.api.post("mkdir", { parent: S.folder.id, name: v.trim() });
       await reload({ select: [r.item && r.item.id] });
       toast(`Made the folder “${v.trim()}”.`);
-    } catch (e) { fail(e, "The folder could not be made"); }
+    } catch (e) { fail(e, "The folder could not be made", { action: "mkdir", name: v.trim(), parent: S.folder && S.folder.name }); }
   }
   async function rename(it) {
     if (!it || it.locked || it.protected || !S.writable) return;
@@ -1991,8 +2129,8 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       if (!r) return;
       await reload({ select: [r.item && r.item.id] });
       const back = { id: r.item && r.item.id, name: it.name };
-      toast(`Renamed to “${r.item ? r.item.name : v.trim()}”.`, { action: async () => { try { await FM.api.post("rename", back); await reload({ select: [it.id] }); } catch (e) { fail(e, "It could not be renamed back"); } } });
-    } catch (e) { fail(e, `“${it.name}” could not be renamed`); }
+      toast(`Renamed to “${r.item ? r.item.name : v.trim()}”.`, { action: async () => { try { await FM.api.post("rename", back); await reload({ select: [it.id] }); } catch (e) { fail(e, "It could not be renamed back", { action: "rename", items: [back], name: it.name }); } } });
+    } catch (e) { fail(e, `“${it.name}” could not be renamed`, { action: "rename", items: [it], name: v.trim() }); }
   }
 
   // ---- delete (to the trash) ---------------------------------------------------------------------------------
@@ -2007,7 +2145,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
         const tids = r.trash;
         toast(`${ok.length === 1 ? `“${ok[0].name}”` : FM.plural(ok.length, "item")} moved to the trash.`, { action: () => restore(tids.map((tid) => ({ tid }))), actionText: "Undo" });
       }
-    } catch (e) { fail(e, "Nothing was deleted"); }
+    } catch (e) { fail(e, "Nothing was deleted", { action: "delete", items }); }
   }
 
   // ---- move and copy -----------------------------------------------------------------------------------------
@@ -2042,11 +2180,11 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
         if (ok.length) {
           const from = FM.S.clip ? FM.S.clip.from : null;
           toast(`Moved ${ok.length === 1 ? `“${ok[0].new_name || ok[0].name}”` : FM.plural(ok.length, "item")} to “${where}”.`, from ? { action: async () => {
-            try { const b = await asking((x) => FM.api.post("move", x), { ids: ok.map((x) => x.new_id), to: from }, "where they were"); if (b) await reload(); } catch (e) { fail(e, "They could not be moved back"); }
+            try { const b = await asking((x) => FM.api.post("move", x), { ids: ok.map((x) => x.new_id), to: from }, "where they were"); if (b) await reload(); } catch (e) { fail(e, "They could not be moved back", { action: "move", items: ok.map((x) => ({ id: x.new_id, name: x.new_name || x.name })), to: from }); }
           } } : {});
         }
         return true;
-      } catch (e) { fail(e, "Nothing was moved"); return false; }
+      } catch (e) { fail(e, "Nothing was moved", { action: "move", items, to: { id: to.id, name: to.name } }); return false; }
     }
     // A copy runs on the PC with progress, shown with the transfers. The PC answers its questions (409: a name
     // in the way, something private going public) before it starts copying, so they are asked here first.
@@ -2080,7 +2218,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       const r = await FM.api.post("private", { id: it.id, private: on });
       await reload({ select: [r.item && r.item.id] });
       toast(on ? `“${it.name}” is private: it needs the PC's password from now on.` : `“${it.name}” is public now.`);
-    } catch (e) { fail(e, on ? "It is not private" : "It is still private"); }
+    } catch (e) { fail(e, on ? "It is not private" : "It is still private", { action: "private", items: [it], private: on }); }
   }
 
   // ---- download and open ---------------------------------------------------------------------------------------
@@ -2101,15 +2239,30 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
           if (!head.ok) throw new FM.ApiError(head.status === 404 ? "It is no longer on the PC, or the download link expired: try again." : head.status === 401 || head.status === 403 ? "The PC wants the password for it: sign in, then try again." : FM.sentence(RelayClient.httpWhy(head.status)), { status: head.status });
           FM.navigateDownload(url);
           t.say(`Large (${FM.size(total)}): it goes straight to your browser's downloads, which show its progress.`);
+          if (zip) leftOut(name, FM.zipInfo(head.headers), null);
           return { handed: true };
         }
-        const b = await FM.api.blob(zip ? FM.api.zipPath(items, name) : FM.api.filePath(one), { onProgress: t.progress, signal: t.ac.signal, expect: total, type: zip ? "application/zip" : "" });
+        let hdr = null;
+        const b = await FM.api.blob(zip ? FM.api.zipPath(items, name) : FM.api.filePath(one) + "?dl=1", { onProgress: t.progress, signal: t.ac.signal, expect: total, type: zip ? "application/zip" : "", onHeaders: (h) => { hdr = h; } });
         FM.saveBlob(b, name);
+        if (zip) leftOut(name, FM.zipInfo(hdr), await FM.unzip.count(b).catch(() => null));
         return {};
       },
       onError: (t, e) => { if (e.signin) FM.app.signedOut(e.signin); },
     });
   }
+  // A zip the PC made without some files (open in another program, moved or changed while it was packed): said in
+  // a toast that stays (the PC's headers name them; its log, files.log, says why). files = the files really in the
+  // zip (null = not counted): fewer than the PC said means some failed while it was being sent.
+  function leftOut(name, info, files) {
+    const late = files != null && info.files != null ? Math.max(0, info.files - files) : 0;
+    const n = info.skipped + late;
+    if (!n) return;
+    const shown = info.names.slice(0, 3), more = n - shown.length;
+    const names = shown.map((p) => `“${p.split("/").pop()}”`).join(", ");
+    toast(`“${name}” ${files == null ? "will be saved" : "was saved"} without ${FM.plural(n, "file")} the PC could not read (open in another program, moved or changed)${names ? ": " + names + (more > 0 ? ` and ${more} more` : "") : ""}. The PC's log (files.log) says why.`, { bad: true });
+  }
+
   // Open = the file's own link in a new tab: the browser shows what it can (text, Markdown, code, pages, pictures,
   // PDF, sound, video; the PC sends each with a type a tab shows) and downloads the rest, closing the tab.
   // A public file's link is known at once; a private one gets a 10-minute ticket link first (a link cannot carry
@@ -2117,6 +2270,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
   function tab(url, name) {
     const w = window.open(url, "_blank");
     if (w) { try { w.opener = null; } catch (e) {} return; }
+    FM.report("open", "the browser blocked the new tab", { name });
     toast(`The browser blocked the new tab for “${name}”.`, { bad: true, action: () => tab(url, name), actionText: "Open it" });
   }
   async function open(it) {
@@ -2124,7 +2278,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     if (it.dir) return FM.app.go(it.id);
     if (!it.private) return tab(FM.api.client.url("files", FM.api.filePath(it)), it.name);
     try { tab(await FM.api.link([it], { inline: true }), it.name); }
-    catch (e) { fail(e, `“${it.name}” could not be opened`); }
+    catch (e) { fail(e, `“${it.name}” could not be opened`, { action: "open", items: [it] }); }
   }
 
   // ---- the trash -------------------------------------------------------------------------------------------------
@@ -2141,7 +2295,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
         const folder = first.path && first.path.includes("/") ? first.path.slice(0, first.path.lastIndexOf("/")) : "";
         toast(`Restored ${ok.length === 1 ? `“${first.new_name || first.name}”` : FM.plural(ok.length, "item")}${folder ? ` to “${folder}”` : ""}.`, S.view === "trash" ? { action: () => FM.app.goPath(folder, first.new_id), actionText: "Show" } : {});
       }
-    } catch (e) { fail(e, "Nothing was restored"); }
+    } catch (e) { fail(e, "Nothing was restored", { action: "restore", items }); }
   }
   async function purge(items) {
     if (!items.length) return;
@@ -2152,7 +2306,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       const { ok } = sayResults(r.results, "deleted");
       await reload();
       if (ok.length) toast(`Deleted ${FM.plural(ok.length, "item")} for good (${FM.size(r.freed)} freed).`);
-    } catch (e) { fail(e, "Nothing was deleted"); }
+    } catch (e) { fail(e, "Nothing was deleted", { action: "delete-forever", items }); }
   }
   async function emptyTrash() {
     const n = S.items.length, size = S.items.reduce((a, i) => a + (i.size || 0), 0);
@@ -2163,7 +2317,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       sayResults(r.results, "deleted");
       await reload();
       toast(`The trash is empty (${FM.size(r.freed)} freed).`);
-    } catch (e) { fail(e, "The trash was not emptied"); }
+    } catch (e) { fail(e, "The trash was not emptied", { action: "empty-trash" }); }
   }
 
   FM.ops = { fail, signIn, signOut, newFolder, rename, del, pickUp, paste, moveTo, setPrivate, download, open, restore, purge, emptyTrash, askConflicts, asking };
@@ -2215,7 +2369,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       for (const d of dirs) paths.push({ path: d, dir: true });
       for (const top of new Set(files.filter((f) => f.path.includes("/")).map((f) => f.path.split("/")[0]))) paths.push({ path: top, dir: true });
       check = await FM.api.post("check", { to: to.id, paths });
-    } catch (e) { return FM.ops.fail(e, "Nothing was uploaded"); }
+    } catch (e) { return FM.ops.fail(e, "Nothing was uploaded", { action: "upload-check", to: { id: to.id, name: to.name }, files: files.length, first: files.slice(0, 5).map((f) => f.path) }); }
     if (check.problems.length) {
       const bad = new Set(check.problems.map((p) => p.path));
       const go = await FM.ui.dialog({ title: `${FM.plural(check.problems.length, "name")} cannot go to the PC`,
@@ -2227,7 +2381,10 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       dirs = dirs.filter((d) => !bad.has(d));
     }
     const need = files.reduce((a, f) => a + f.file.size, 0);
-    if (check.free >= 0 && need > check.free - 256e6) return FM.ui.toast(`The PC's disk has ${FM.size(check.free)} free; these files need ${FM.size(need)}. Nothing was uploaded.`, { bad: true });
+    if (check.free >= 0 && need > check.free - 256e6) {
+      FM.report("upload", "not enough space on the PC", { free: check.free, need, files: files.length, to: { id: to.id, name: to.name } });
+      return FM.ui.toast(`The PC's disk has ${FM.size(check.free)} free; these files need ${FM.size(need)}. Nothing was uploaded.`, { bad: true });
+    }
     let policy = "ask";
     const clash = new Set();
     if (check.conflicts.length) {
@@ -2237,7 +2394,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     }
     for (const d of dirs) {
       try { await FM.api.post("mkdir", { parent: to.id, path: d }); }
-      catch (e) { FM.ops.fail(e, `The folder “${d}” was not made`); }
+      catch (e) { FM.ops.fail(e, `The folder “${d}” was not made`, { action: "mkdir", path: d, to: { id: to.id, name: to.name } }); }
     }
     const ts = files.map((f) => FM.transfers.add({
       kind: "up", name: f.path, total: f.file.size, where: to.name,
@@ -2257,6 +2414,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     const total = file.size;
     const q = (off) => "upload?" + new URLSearchParams({ uid, to: to.id, path, offset: off, total, mtime: file.lastModified || 0, conflict: policy });
     const wait = async (why) => {
+      t.trail = (t.trail || []).concat({ at: FM.clock(), offset, why }).slice(-10); // goes with a failure's report (transfers.js)
       if (++tries > 5) throw new FM.ApiError(`The upload stopped: ${why} (tried 6 times).`);
       for (let s = Math.min(16, 2 ** (tries - 1)); s > 0; s--) {
         t.say(`${why}: trying again in ${s} s (try ${tries + 1} of 6)`);
@@ -2337,7 +2495,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       const r = target(e); mark(null);
       const to = r ? FM.byId(r.dataset.id) : S.folder;
       let batch;
-      try { batch = await fromDrop(e.dataTransfer); } catch (x) { return FM.ui.toast("The dropped files could not be read: " + (x.message || x), { bad: true }); }
+      try { batch = await fromDrop(e.dataTransfer); } catch (x) { FM.report("upload", x, { what: "the dropped files could not be read" }); return FM.ui.toast("The dropped files could not be read: " + (x.message || x), { bad: true }); }
       start(batch, to);
     });
     addEventListener("dragover", (e) => { if (isFiles(e)) e.preventDefault(); }); // a drop outside the list never opens the file in the tab
@@ -2497,7 +2655,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     const now = performance.now();
     if (!force && msg.type === "progress" && now - lastSent < 100) return;
     lastSent = now;
-    try { port.postMessage(msg); } catch (e) { FM.ui.toast("The page that asked could not take the files: " + (e.message || e), { bad: true }); }
+    try { port.postMessage(msg); } catch (e) { FM.report("pick", e, { what: "the page that asked could not take the files", type: msg.type }); FM.ui.toast("The page that asked could not take the files: " + (e.message || e), { bad: true }); }
   }
   function progress(text, loaded, total, name) {
     S.picking = { text, frac: total ? Math.min(1, loaded / total) : 0 };
@@ -2516,14 +2674,19 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       if (ch.folder) {
         const f = ch.folder;
         progress(`Getting “${f.name}” from the PC…`, 0, total);
-        const zip = await FM.api.blob(FM.api.zipPath([f]), { signal: ac.signal, expect: total, type: "application/zip", onProgress: (n, t) => progress(`Getting “${f.name}” from the PC: ${FM.size(n)}${t ? " of about " + FM.size(t) : ""}`, n, t, f.name) });
-        if (S.pick.folder === "zip") out = { kind: "zip", folder: f.name, files: [new File([zip], f.name + ".zip", { type: "application/zip", lastModified: f.mtime || Date.now() })], paths: [f.name + ".zip"] };
-        else {
+        let hdr = null;
+        const zip = await FM.api.blob(FM.api.zipPath([f]), { signal: ac.signal, expect: total, type: "application/zip", onHeaders: (h) => { hdr = h; }, onProgress: (n, t) => progress(`Getting “${f.name}” from the PC: ${FM.size(n)}${t ? " of about " + FM.size(t) : ""}`, n, t, f.name) });
+        const info = FM.zipInfo(hdr);
+        if (S.pick.folder === "zip") {
+          const missing = FM.zipMissing(info, await FM.unzip.count(zip).catch(() => null));
+          out = { kind: "zip", folder: f.name, files: [new File([zip], f.name + ".zip", { type: "application/zip", lastModified: f.mtime || Date.now() })], paths: [f.name + ".zip"], missing };
+        } else {
           progress(`Unpacking “${f.name}”…`, total, total);
           const r = await FM.unzip.files(zip, f.name, (n, of) => progress(`Unpacking “${f.name}”: ${n} of ${of} files`, n, of));
-          out = { kind: "folder", folder: f.name, files: r.files.map((x) => x.file), paths: r.files.map((x) => x.path), missing: r.missing };
-          if (r.missing) FM.ui.toast(`The PC could not include some files of “${f.name}” (moved or changed while it was packed): the page was told which.`, { bad: true });
+          out = { kind: "folder", folder: f.name, files: r.files.map((x) => x.file), paths: r.files.map((x) => x.path), missing: FM.zipMissing(info, r.files.length, r.missing) };
         }
+        // what the PC left out (its headers name them; its log says why): said here, and told to the page that asked
+        if (out.missing) FM.ui.toast(`The PC could not include ${FM.plural(Number((/could not add (\d+)/.exec(out.missing) || [])[1]) || 1, "file")} of “${f.name}” (open in another program, moved or changed while it was packed): ${host} was told which. The PC's log (files.log) says why.`, { bad: true });
       } else {
         const files = [], paths = [];
         let done = 0;
@@ -2543,6 +2706,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       FM.view.render();
       if (e.aborted) return;
       if (e.signin) { FM.app.signedOut(e.signin); FM.ops.signIn("That is private: the PC's password, then Choose again."); return; }
+      FM.report("pick", e, { what: "the choice could not be fetched from the PC", host, items: ch.folder ? [ch.folder] : ch.items });
       FM.ui.toast(`It could not be fetched from the PC: ${e.message}`, { bad: true });
     } finally { ac = null; }
   }
@@ -2582,6 +2746,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     // the PC says whether the pass this device holds is good (r.private): a pass it no longer knows is forgotten
     if (FM.api.hasPass() && !r.private) {
       FM.api.forgetPass();
+      FM.report("signed-out", "this device's pass is no longer known on the PC (a new password, or Sign out every browser)");
       FM.ui.toast("This device was signed out on the PC (a new password, or Sign out every browser): sign in again for private folders and changes.", { bad: true, action: () => FM.ops.signIn(), actionText: "Sign in" });
     }
     S.signed = !!r.private;
@@ -2598,6 +2763,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       const r = await FM.api.list(id);
       if (my !== seq) return;
       retryWait = 2000; clearTimeout(retryTimer);
+      if (FM.reports.waiting.length) FM.reports.flush(); // failures kept while the PC could not be reached go now
       adopt(r);
       const changedFolder = !S.folder || S.folder.id !== r.folder.id || S.view !== "folder";
       S.view = "folder"; S.folder = r.folder; S.crumbs = r.crumbs; S.items = r.items; S.error = null; S.loading = false;
@@ -2623,6 +2789,8 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
         FM.view.render();
         return;
       }
+      // to the PC's log: the first failure of a run of them (it tries again by itself; each try is not a new one)
+      if (!S.error || S.error.why !== e.message) FM.report("list", e, { items: [{ id, name: (S.items.find((i) => i.id === id) || S.folder || {}).name }] });
       if (e.status === 404 && id !== "root") { FM.ui.toast(e.message, { bad: true }); return load("root"); }
       S.error = { why: e.message, signin: e.signin, title: e.signin ? "Relay Files needs the password" : e.net ? "The PC cannot be reached" : "The PC's files could not be listed" };
       setConn(e.net ? "off" : "wait", e.net ? e.message.replace(/\.$/, "") : "The PC answered with an error");
@@ -2714,6 +2882,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     } catch (e) {
       if (e.aborted || my !== seq) return;
       S.loading = false;
+      FM.report("search", e, { q });
       FM.ui.toast(`The search failed: ${e.message}`, { bad: true });
       FM.view.render();
     }
@@ -2732,7 +2901,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       const ids = new Set(S.items.map((i) => i.tid));
       for (const k of [...S.sel]) if (!ids.has(k)) S.sel.delete(k);
       FM.view.render();
-    } catch (e) { S.loading = false; FM.view.render(); FM.ops.fail(e, "The trash could not be opened"); }
+    } catch (e) { S.loading = false; FM.view.render(); FM.ops.fail(e, "The trash could not be opened", { action: "trash-list" }); }
   }
 
   // ---- what an item does when opened -----------------------------------------------------------------------------------
