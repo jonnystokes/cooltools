@@ -82,7 +82,11 @@ kbd { font: 600 11px/1 var(--font); padding: 3px 6px; border-radius: 5px; border
 /* buttons */
 .iconbtn { display: inline-grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: 9px; background: none; color: var(--muted); flex: none; }
 .iconbtn:hover { background: var(--line-2); color: var(--text); }
-.top .search-btn, .top .up-btn { display: none; }
+.iconbtn:disabled { opacity: .35; cursor: default; }
+.iconbtn:disabled:hover { background: none; color: var(--muted); }
+.busy svg { animation: spin .9s linear infinite; }  /* Refresh while it works */
+@keyframes spin { to { transform: rotate(360deg); } }
+.top .search-btn, .top .up-btn, .top .refresh-btn { display: none; }  /* a phone's (phone.css); a computer has the toolbar's */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; height: 36px; padding: 0 14px; border-radius: 9px; border: 1px solid var(--line); background: var(--surface); color: var(--text); font-weight: 550; white-space: nowrap; }
 .btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
 .btn svg { width: 18px; height: 18px; }
@@ -277,10 +281,9 @@ kbd { font: 600 11px/1 var(--font); padding: 3px 6px; border-radius: 5px; border
   :root { --row: 60px; }
   .top { padding: 0 6px 0 4px; padding-top: env(safe-area-inset-top); }
   .top-row { height: 52px; gap: 4px; }
-  .top .up-btn { display: inline-grid; }
+  .top .up-btn, .top .refresh-btn { display: inline-grid; }  /* Back (greyed when there is nowhere to go) and Refresh */
   .brand-name { display: block; }
   .app.at-root .crumbs-row { display: none; }
-  .app.at-root .up-btn { visibility: hidden; }
   .brand { flex: 1; min-width: 0; font-size: 17px; }
   .brand-mark { display: none; }
   .brand-name { overflow: hidden; text-overflow: ellipsis; }
@@ -369,13 +372,14 @@ kbd { font: 600 11px/1 var(--font); padding: 3px 6px; border-radius: 5px; border
   <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="2.75" y="6.75" width="18.5" height="10.5" rx="2.25" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 10.5h1M10 10.5h1M13.5 10.5h1M17 10.5h.5M7.5 14h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
   <symbol id="i-signal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.2"/><path d="M8.3 15.7a5.2 5.2 0 0 1 0-7.4M15.7 8.3a5.2 5.2 0 0 1 0 7.4M5.5 18.5a9.2 9.2 0 0 1 0-13M18.5 5.5a9.2 9.2 0 0 1 0 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
 </svg>
-<div id="app" class="app" data-build="V1.0.24">
+<div id="app" class="app" data-build="V1.0.26">
   <header class="top">
     <div class="top-row">
-      <button class="iconbtn up-btn" type="button" data-act="up" aria-label="Up one folder" title="Up one folder (Backspace)"><svg><use href="#i-back"/></svg></button>
+      <button class="iconbtn up-btn" type="button" data-act="prev" aria-label="Back" title="Back"><svg><use href="#i-back"/></svg></button>
       <div class="brand"><svg class="brand-mark"><use href="#i-signal"/></svg><span class="brand-name">Cloud File Manager</span></div>
       <nav class="crumbs" aria-label="Folder path"></nav>
       <div class="search"><svg><use href="#i-search"/></svg><input type="search" id="q" placeholder="Search all of Relay Files" aria-label="Search all of Relay Files" autocomplete="off" spellcheck="false"><kbd class="hint-key">/</kbd></div>
+      <button class="iconbtn refresh-btn" type="button" data-act="refresh" aria-label="Refresh" title="Refresh: this folder again from the PC"><svg><use href="#i-refresh"/></svg></button>
       <button class="iconbtn search-btn" type="button" data-act="search" aria-label="Search" title="Search"><svg><use href="#i-search"/></svg></button>
       <button class="account" type="button" data-act="account" aria-haspopup="menu"></button>
     </div>
@@ -391,7 +395,7 @@ kbd { font: 600 11px/1 var(--font); padding: 3px 6px; border-radius: 5px; border
   </main>
   <footer class="status">
     <span class="status-left"></span>
-    <span class="status-right"><span class="conn"></span><span class="build" title="Built 2026-11-07 1:50 PM">V1.0.24</span></span>
+    <span class="status-right"><span class="conn"></span><span class="build" title="Built 2026-11-07 2:44 PM">V1.0.26</span></span>
   </footer>
   <div class="selbar" hidden></div>
   <button class="fab" type="button" data-act="fab" aria-label="Add: upload or new folder" hidden><svg><use href="#i-plus"/></svg></button>
@@ -400,7 +404,7 @@ kbd { font: 600 11px/1 var(--font); padding: 3px 6px; border-radius: 5px; border
 </div>
 <input type="file" id="pick-files" multiple hidden>
 <input type="file" id="pick-folder" webkitdirectory multiple hidden>
-<script>window.FM_BUILD = { version: "V1.0.24", built: "2026-11-07 1:50 PM", note: "PC Relay 2: one sign-in (one pass per browser, shared with the other Cool tools pages); a report waits for a sign-in; signed out, big downloads use the plain zip link" };</script>
+<script>window.FM_BUILD = { version: "V1.0.26", built: "2026-11-07 2:44 PM", note: "Back and Refresh: Back (just left of New folder; the header's arrow on a phone) goes to the folder before, or up from a folder opened from a link, greyed at the top; the browser's Back does the same; Refresh lists the folder again and keeps the place and ticks; Alt+Left and R" };</script>
 <script>
 // ---- relay-client.js ----
 /* relay-client.js 2: the PC Relay client (ONE source: Projects\pc-relay\client\relay-client.js; each page's build
@@ -1800,7 +1804,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     clip: null,              // { mode: "cut" | "copy", items, from }
     signed: false, writable: false, version: "",
     conn: { state: "wait", why: "Connecting to the PC…" },
-    pick: null, picking: null, loading: false, error: null, notice: null,
+    pick: null, picking: null, loading: false, refreshing: false, error: null, notice: null,
     cache: new Map(), trashBytes: 0, renaming: null,
   });
   const $ = (s) => document.querySelector(s);
@@ -1948,6 +1952,12 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     $(".brand-name").textContent = FM.isPhone() && !atRoot ? cur : "Cloud File Manager";
     document.title = S.view === "folder" && S.folder && S.folder.id !== "root" ? `${S.folder.name} · Cloud File Manager` : "Cloud File Manager";
     $(".app").classList.toggle("at-root", atRoot);
+    // a phone's Back and Refresh (the toolbar's are hidden there): Back greyed when there is nowhere to go
+    const bt = backTarget(), bb = $(".up-btn"), rb = $(".refresh-btn");
+    bb.disabled = !bt;
+    bb.title = bt ? bt.text : "Back: nowhere to go from the top folder";
+    bb.setAttribute("aria-label", bb.title);
+    rb.classList.toggle("busy", !!S.refreshing);
     const acc = $(".account");
     acc.className = "account" + (S.signed ? " signed" : "");
     acc.replaceChildren(icon(S.signed ? "lock" : "key"), h("span.acc-text", { text: S.signed ? "Signed in" : "Sign in" }));
@@ -1956,8 +1966,14 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
   }
 
   function tb(act, ic, label, opts = {}) {
-    return h("button.btn" + (opts.primary ? ".primary" : "") + (opts.danger ? ".danger" : ""), { type: "button", data: { act }, disabled: !!opts.disabled, title: opts.title || label + (opts.key ? ` (${opts.key})` : "") }, icon(ic), label);
+    return h("button.btn" + (opts.primary ? ".primary" : "") + (opts.danger ? ".danger" : "") + (opts.busy ? ".busy" : ""), { type: "button", data: { act }, disabled: !!opts.disabled, title: opts.title || label + (opts.key ? ` (${opts.key})` : "") }, icon(ic), label);
   }
+  // Back (the folder before, or up when there is none; app.js) and Refresh (this folder again from the PC; it turns
+  // while it works)
+  const backTarget = () => (FM.app && FM.app.backTarget ? FM.app.backTarget() : null);
+  function backBtn() { const t = backTarget(); return tb("prev", "back", "Back", { disabled: !t, title: t ? `${t.text} (Alt+←)` : "Back: nowhere to go from the top folder" }); }
+  const refreshBtn = () => tb("refresh", "refresh", "", { busy: S.refreshing, // the icon alone, as on a phone: the toolbar is full
+    title: S.view === "trash" ? "Refresh: the trash again from the PC (R)" : S.view === "search" ? "Refresh: search again (R)" : "Refresh: this folder again from the PC (R)" });
   function renderToolbar() {
     const bar = $(".toolbar");
     const sel = FM.selected(), n = sel.length, one = n === 1 ? sel[0] : null;
@@ -1965,11 +1981,13 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     bar.classList.remove("phone-keep");
     if (S.view === "trash") {
       kids.push(tb("back", "back", "Back to files"), h("span.sep"), tb("restore", "restore", n > 1 ? `Restore ${n}` : "Restore", { disabled: !n, primary: n > 0 }), tb("purge", "trash", "Delete forever", { disabled: !n, danger: true }), h("span.grow"),
-        tb("empty", "trash", "Empty trash", { disabled: !S.items.length, danger: true }));
+        refreshBtn(), tb("empty", "trash", "Empty trash", { disabled: !S.items.length, danger: true }));
       if (FM.isPhone()) bar.classList.add("phone-keep");
     } else {
       const locked = sel.some((i) => i.locked);
-      if (S.writable && S.view === "folder") kids.push(tb("newfolder", "newfolder", "New folder", { key: "N" }), tb("upload", "upload", "Upload", { key: "U", title: "Upload files (U), or a folder (Shift+U); or drop them here" }), h("span.sep"));
+      kids.push(backBtn()); // just left of New folder (Jon, 2026-11-07)
+      if (S.writable && S.view === "folder") kids.push(tb("newfolder", "newfolder", "New folder", { key: "N" }), tb("upload", "upload", "Upload", { key: "U", title: "Upload files (U), or a folder (Shift+U); or drop them here" }));
+      kids.push(h("span.sep"));
       kids.push(tb("download", "download", n > 1 ? `Download ${n}` : "Download", { disabled: !n || locked, key: "D" }));
       kids.push(tb("open", "open", "Open", { disabled: !one || one.dir || one.locked, title: "Open in a new tab (Enter)" }));
       if (S.writable) {
@@ -1984,11 +2002,12 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
             : tb("private", "lock", "Make private", { title: "Only with the PC's password from then on" }));
         }
       }
-      if (S.view === "search") kids.push(h("span.sep"), tb("reveal", "folder", "Show in folder", { disabled: !one }), h("span.grow"), tb("closesearch", "close", "Close search"));
+      if (S.view === "search") kids.push(h("span.sep"), tb("reveal", "folder", "Show in folder", { disabled: !one }), h("span.grow"), refreshBtn(), tb("closesearch", "close", "Close search"));
       else {
         kids.push(h("span.grow"));
         if (S.clip && S.writable) kids.push(tb("paste", "paste", `Paste ${S.clip.items.length} here`, { primary: true, title: `${S.clip.mode === "cut" ? "Move" : "Copy"} ${FM.plural(S.clip.items.length, "item")} into this folder (Ctrl+V)` }), tb("clipcancel", "close", "", { title: "Put them down (Escape)" }));
         if (!S.signed) kids.push(h("span.hint", null, icon("lock"), "Read-only: sign in to change files"));
+        kids.push(refreshBtn());
         if (S.writable) kids.push(tb("trash", "trash", "Trash", { title: S.trashBytes ? `The trash: ${FM.size(S.trashBytes)}` : "The trash" }));
       }
     }
@@ -2065,7 +2084,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
 
   function render() {
     renderHeader(); renderPick(); renderNotice(); renderToolbar(); renderList(); renderStatus(); renderSelbar();
-    $(".loadbar").hidden = !S.loading;
+    $(".loadbar").hidden = !(S.loading || S.refreshing);
   }
   function sel() {
     for (const r of document.querySelectorAll(".list .row")) {
@@ -2596,10 +2615,10 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
 
 // ---- keys.js ----
 // keys.js: keyboard shortcuts (desktop). Arrows move the cursor (nothing is ticked), Shift+arrows tick the rows they
-// pass, Space ticks or unticks the cursor's row, Enter opens it, Backspace goes up; Ctrl+A / C / X / V; Delete; F2;
-// N, U, D, /, ?. Delete, F2, D, Ctrl+C / X act on the ticked rows, or with none ticked on the cursor's row. Escape
-// closes the top thing (a menu, a dialog, the search, the ticks, what was picked up); with nothing left, a page that
-// opened this one in a window may close it.
+// pass, Space ticks or unticks the cursor's row, Enter opens it, Alt+← goes back, Backspace goes up, R refreshes;
+// Ctrl+A / C / X / V; Delete; F2; N, U, D, /, ?. Delete, F2, D, Ctrl+C / X act on the ticked rows, or with none
+// ticked on the cursor's row. Escape closes the top thing (a menu, a dialog, the search, the ticks, what was picked
+// up); with nothing left, a page that opened this one in a window may close it.
 "use strict";
 (function () {
   const S = FM.S;
@@ -2607,7 +2626,8 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     ["Click or tap a row, Enter", "Open: a folder goes in, a file opens in a new tab"], ["The box on a row, Ctrl+click", "Tick or untick that row"],
     ["Shift+click", "Tick the rows from the last one ticked"], ["↑ ↓, Home, End, Page Up/Down", "Move through the list (nothing is ticked)"],
     ["Space", "Tick or untick the row you are on"], ["Shift + ↑ ↓ (Home, End, Page Up/Down)", "Tick the rows you move over"],
-    ["Backspace, Alt+↑", "Up one folder"], ["Ctrl+A", "Tick everything here"], ["Ctrl+C, Ctrl+X, Ctrl+V", "Copy, move (cut), paste here"],
+    ["Alt+←, Back", "Back to the folder you were in before (up, if you came straight here)"], ["Backspace, Alt+↑", "Up one folder"],
+    ["R, Refresh", "List this folder again from the PC"], ["Ctrl+A", "Tick everything here"], ["Ctrl+C, Ctrl+X, Ctrl+V", "Copy, move (cut), paste here"],
     ["Delete", "Move to the trash (Undo in the message)"], ["F2", "Rename"], ["N", "New folder"], ["U, Shift+U", "Upload files, upload a folder"],
     ["D", "Download"], ["/ or Ctrl+F", "Search all of Relay Files"], ["Drag rows onto a folder", "Move there (hold Ctrl to copy)"],
     ["Drop files from the computer", "Upload (onto a folder row: into it)"], ["Right-click, ⋯", "Actions for the item"], ["Escape", "Close, untick everything, put picked-up items down"], ["?", "This list"],
@@ -2666,6 +2686,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     let used = true;
     if (k === "ArrowDown") move(1, e.shiftKey);
     else if (k === "ArrowUp" && e.altKey) FM.app.up();
+    else if (k === "ArrowLeft" && e.altKey && !ctrl && FM.app.backTarget()) FM.app.back(); // with nowhere to go, the browser's own Back
     else if (k === "ArrowUp") move(-1, e.shiftKey);
     else if (k === "PageDown") move(pageRows, e.shiftKey);
     else if (k === "PageUp") move(-pageRows, e.shiftKey);
@@ -2688,6 +2709,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     else if (k === "u" && S.writable && S.view === "folder") FM.upload.choose(false);
     else if (k === "U" && S.writable && S.view === "folder") FM.upload.choose(true);
     else if ((k === "d" || k === "D") && S.view !== "trash") FM.ops.download(sel);
+    else if (k === "r" || k === "R") FM.app.refreshList();
     else if (k === "/") FM.app.openSearch();
     else if (k === "?") help();
     else used = false;
@@ -2811,10 +2833,10 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
 })();
 
 // ---- app.js ----
-// app.js: start-up, going from folder to folder, the live updates, and the pointer: a click or tap opens, the
-// row's box ticks (Shift and Ctrl too), right-click or ⋯ for the actions, and dragging rows onto a folder.
+// app.js: start-up, going from folder to folder (Back, Refresh), the live updates, and the pointer: a click or tap
+// opens, the row's box ticks (Shift and Ctrl too), right-click or ⋯ for the actions, and dragging rows onto a folder.
 // Opened on its own, the browser's Back and Forward go through the folders (the address keeps the folder:
-// #f=<id>); inside another page's window it keeps its history to itself.
+// #f=<id>), the same steps as the page's Back; inside another page's window it keeps its trail to itself.
 "use strict";
 (function () {
   const S = FM.S;
@@ -2897,9 +2919,11 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
 
   function go(id, o = {}) {
     if (S.view === "search") closeSearch(true);
-    if (!FM.embedded && !o.noHistory) {
-      const st = { fm: id };
-      if (!history.state || history.state.fm !== id) history.pushState(st, "", "#f=" + encodeURIComponent(id));
+    const from = S.folder;
+    if (FM.embedded) { if (!o.noTrail && from && from.id !== id) trail.push({ id: from.id, name: from.name }); }
+    else if (!o.noHistory) {
+      const cur = history.state || {};
+      if (cur.fm !== id) history.pushState({ fm: id, n: (cur.n || 0) + 1, from: from ? from.name : "" }, "", "#f=" + encodeURIComponent(id));
     }
     const cached = S.cache.get(id);
     if (cached && !o.noCache) { // shown at once, then refreshed
@@ -2913,6 +2937,34 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     if (S.view !== "folder") { if (S.view === "search") closeSearch(); else go(S.folder ? S.folder.id : "root"); return; }
     if (S.crumbs.length > 1) go(S.crumbs[S.crumbs.length - 2].id);
   }
+
+  // ---- Back: the folder you were in before ---------------------------------------------------------------------------
+  // On its own page the browser's history is the trail: each folder change is a step (#f=<id>, state { fm, n, from }:
+  // n = this page's steps before it, from = the folder before), so the page's Back, the browser's Back and a phone's
+  // Back are the same step. A folder opened straight from a link gets its parents as the steps before it (boot), so
+  // Back goes up from there; with no step before (an old step), Back goes up in its place. At the top folder with no
+  // step before, Back is greyed. Inside another page's window the trail is kept here instead.
+  const trail = []; // in a window: the folders before this one, { id, name }
+  const stepsBefore = () => (history.state && history.state.n) || 0;
+  function backTarget() { // { text: the button's tooltip, up: the parent's id when Back goes up } or null (nowhere to go)
+    if (S.view === "search") return { text: "Back to the folder (closes the search)" };
+    if (S.view === "trash") return { text: "Back to the files" };
+    if (FM.embedded ? trail.length : stepsBefore() > 0) return { text: `Back to “${(FM.embedded ? trail[trail.length - 1].name : history.state.from) || "the folder before"}”` };
+    if (S.folder && S.folder.id !== "root" && S.crumbs.length > 1) { const p = S.crumbs[S.crumbs.length - 2]; return { text: `Up to “${p.name}”`, up: p.id }; }
+    return null;
+  }
+  function back() {
+    const t = backTarget();
+    if (!t) return;
+    if (S.view === "search") return closeSearch();
+    if (S.view === "trash") return go(S.folder ? S.folder.id : "root");
+    if (t.up) { // no step before this one: up, in place of this step (so Back again goes on up, not down)
+      if (!FM.embedded) history.replaceState({ fm: t.up, n: 0, from: "" }, "", "#f=" + encodeURIComponent(t.up));
+      return go(t.up, { noHistory: true, noTrail: true });
+    }
+    if (FM.embedded) return go(trail.pop().id, { noTrail: true });
+    history.back(); // the step before: popstate goes there
+  }
   async function goPath(path, selectId) { const id = await FM.idFor(path); await go(id, { select: selectId ? [selectId] : undefined }); }
 
   async function reload(o = {}) {
@@ -2920,6 +2972,17 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     if (S.view === "search") return runSearch(S.q);
     if (o.wait) await FM.sleep(450); // uploads join the PC's list at its next scan (about 300 ms)
     return load(S.folder ? S.folder.id : "root", Object.assign({ quiet: true }, o));
+  }
+  // Refresh (its button, R): this folder's listing again from the PC, not the page. The place in the list, the cursor
+  // and the ticks stay wherever their items still are; the button turns and the bar runs while it works (at least
+  // 400 ms, so a quick answer is still seen). The live updates are reconnected too, in case they had stopped.
+  async function refreshList() {
+    if (S.refreshing) return;
+    S.refreshing = true;
+    const done = reload();
+    FM.view.render();
+    try { await Promise.all([done, FM.sleep(400)]); info(); if (events) events.restart(); }
+    finally { S.refreshing = false; FM.view.render(); }
   }
   // The files program's own state: its version (2.x makes changes), the trash's size, a damaged private-folder list.
   async function info() {
@@ -3052,7 +3115,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     const items = [];
     if (S.writable) items.push({ icon: "newfolder", text: "New folder", key: "N", act: FM.ops.newFolder }, { icon: "upload", text: "Upload files…", key: "U", act: () => FM.upload.choose(false) }, { icon: "upload", text: "Upload a folder…", key: "Shift+U", act: () => FM.upload.choose(true) });
     if (S.clip && S.writable) items.push({ icon: "paste", text: `Paste ${S.clip.items.length} here`, key: "Ctrl+V", act: FM.ops.paste });
-    items.push("-", { icon: "select", text: "Select everything", key: "Ctrl+A", act: () => { S.sel = new Set(S.items.map((i) => i.id)); FM.view.sel(); } }, { icon: "refresh", text: "Refresh", act: () => reload() });
+    items.push("-", { icon: "select", text: "Select everything", key: "Ctrl+A", act: () => { S.sel = new Set(S.items.map((i) => i.id)); FM.view.sel(); } }, { icon: "refresh", text: "Refresh", key: "R", act: refreshList });
     if (!FM.isPhone()) items.push({ icon: "keyboard", text: "Keyboard shortcuts", key: "?", act: FM.keys.help });
     FM.ui.menu(items, at);
   }
@@ -3068,7 +3131,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
 
   // ---- actions by name (toolbar, selection bar, pick bar, empty states) -------------------------------------------------
   const ACTS = {
-    up, root: () => go("root"), retry: () => reload(), signin: () => FM.ops.signIn(),
+    up, prev: back, refresh: refreshList, root: () => go("root"), retry: () => reload(), signin: () => FM.ops.signIn(),
     newfolder: FM.ops.newFolder, upload: (b) => { if (FM.isPhone()) return FM.upload.choose(false); FM.ui.menu([{ icon: "upload", text: "Files…", key: "U", act: () => FM.upload.choose(false) }, { icon: "folder", text: "A whole folder…", key: "Shift+U", act: () => FM.upload.choose(true) }], { anchor: b }); },
     download: () => FM.ops.download(FM.selected()), open: () => FM.ops.open(FM.selected()[0]), rename: () => FM.ops.rename(FM.selected()[0]),
     cut: () => FM.ops.pickUp(FM.selected(), "cut"), copy: () => FM.ops.pickUp(FM.selected(), "copy"), paste: FM.ops.paste,
@@ -3222,12 +3285,19 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     FM.api.ping(8000).then((r) => { if (!r.ok && !S.items.length) setConn("off", FM.capital(r.why)); }).catch(() => {});
     const m = /#f=([^&]+)/.exec(location.hash);
     const start = !FM.embedded && m ? decodeURIComponent(m[1]) : "root";
-    if (!FM.embedded) history.replaceState({ fm: start }, "", location.hash || "");
-    await load(start);
+    const st = history.state, again = !FM.embedded && !!st && st.fm === start && typeof st.n === "number"; // a reload: its steps are there
+    if (!FM.embedded && !again) history.replaceState({ fm: start, n: 0, from: "" }, "", location.hash || "");
+    const r = await load(start);
+    // opened straight at a folder below the top (a link, a bookmark): its parents become the steps before it, so Back
+    // (the page's, the browser's, a phone's) goes up from it, one folder at a time
+    if (!FM.embedded && !again && r && r.folder && r.folder.id === start && r.crumbs.length > 1 && history.state && history.state.fm === start && !history.state.n) {
+      r.crumbs.forEach((c, i) => history[i ? "pushState" : "replaceState"]({ fm: c.id, n: i, from: i ? r.crumbs[i - 1].name : "" }, "", "#f=" + encodeURIComponent(c.id)));
+      FM.view.render();
+    }
     info();
     listen();
   }
-  FM.app = { go, up, goPath, load, reload, refresh, signedOut, activate, openSearch, closeSearch, runSearch, showTrash, get events() { return events; } };
+  FM.app = { go, up, back, backTarget, goPath, load, reload, refresh, refreshList, signedOut, activate, openSearch, closeSearch, runSearch, showTrash, get events() { return events; } };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
 })();
 
