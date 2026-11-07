@@ -2,7 +2,7 @@
 <html lang="en" data-build="built">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="mobile-web-app-capable" content="yes">
 <title>Plan Cutter</title>
@@ -41,6 +41,9 @@
 }
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; }
+/* No page zoom on phones (Jon, 2026-11-07): the viewport tag fixes the scale; touch-action: manipulation makes a
+   quick second tap a tap, never a double-tap zoom. The drawing canvases keep touch-action: none: their own pinch. */
+html { touch-action: manipulation; }
 body {
   font: 14px/1.4 var(--font); color: var(--fg); background: var(--bg);
   overflow: hidden; -webkit-text-size-adjust: 100%; overscroll-behavior: none;
@@ -545,7 +548,7 @@ textarea.script { font: 12.5px/1.4 var(--mono); min-height: 90px; }
 (function () {
   "use strict";
   var PC = window.PC || (window.PC = {});
-  PC.VERSION = "0.1.0";
+  PC.VERSION = "0.1.1";
   PC.APP = "plancutter";
 
   // ---- log ---------------------------------------------------------------------------

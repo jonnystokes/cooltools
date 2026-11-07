@@ -1,19 +1,19 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
-     and stamps the version and build time where Book reader V1.0.631 and 2026-11-07 11:48 AM appear. -->
+     and stamps the version and build time where Book reader V1.0.632 and 2026-11-07 12:45 PM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Book reader V1.0.631</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Book reader V1.0.632</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
 <script>
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.631";
-  window.APP_BUILT = "2026-11-07 11:48 AM";
-  window.APP_NOTE = "From my PC: Add as a book says which files the PC left out of the folder (open in another program, moved or changed), from the PC's zip headers (files 2.1: no note inside the zip any more)";
+  window.APP_VERSION = "Book reader V1.0.632";
+  window.APP_BUILT = "2026-11-07 12:45 PM";
+  window.APP_NOTE = "No zooming on phones: pinch and double-tap no longer zoom the page, and quick taps on \u203a and every other button each count (viewport scale fixed; touch-action: manipulation)";
   window.APP_KEY = "br1";
 </script>
 <style>
@@ -47,6 +47,10 @@
 /* The page's scroll bar: always there (Jon, 2026-10-19), never hidden; coloured to the theme. Overlay scroll
    bars (touch screens, some Windows setups) still fade: scrollrail.js adds its own rail for those. */
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-y: scroll; scrollbar-gutter: stable; scrollbar-color: var(--muted) var(--bar); }
+/* No page zoom on phones (Jon, 2026-11-07: quick taps on › zoomed the page in). The viewport tag in page.html fixes
+   the scale; touch-action: manipulation makes a quick second tap a tap of its own, never a double-tap zoom, even
+   where the phone forces zoom on. The scroll rail and the windows' title bars keep touch-action: none. */
+html { touch-action: manipulation; }
 body {
   margin: 0;
   min-height: 100vh;

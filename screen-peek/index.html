@@ -29,6 +29,7 @@
   .grid select { width: 100%; min-width: 0; max-width: 100%; text-overflow: ellipsis; }   /* long option text stays inside its column */
   label.chk { display: flex; align-items: center; gap: 10px; min-height: 48px; color: var(--text); }
   label.chk input { width: 26px; height: 26px; }
+  html.zoomlock { touch-action: manipulation; }   /* Lock zoom on: a quick second tap is a tap, never a double-tap zoom */
   .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 6px 0; }
   #log { max-height: 45vh; overflow: auto; margin: 6px 0 0; padding: 8px; background: #000; border-radius: 8px; font: 12px ui-monospace, Consolas, monospace; white-space: pre-wrap; }
   .err { color: #f77; }
@@ -93,6 +94,7 @@
   <label class="chk"><input type="checkbox" id="force"> Send unchanged frames too (for measuring)</label>
   <label class="chk"><input type="checkbox" id="verify"> Verify every frame (CRC32 check, counts mismatches)</label>
   <label class="chk"><input type="checkbox" id="wake" checked> Keep the screen on (Wake Lock): <span id="wakestate">…</span></label>
+  <label class="chk"><input type="checkbox" id="zoomlock"> Lock zoom: the page keeps its size (pinch and double-tap don't zoom it)</label>
   <div class="row"><button id="out">Sign out</button></div>
 </details>
 <details id="logbox" open>
@@ -356,8 +358,8 @@ $("save").onclick = () => {
 $("clear").onclick = () => { LOG.length = 0; logEl.textContent = ""; };
 
 // ---- Settings (remembered in this browser) ------------------------------------------------------------
-const KEYS = ["transport", "mode", "target", "w", "q", "fmt", "fps", "win", "refresh", "life"], CHECKS = ["partial", "force", "verify"];
-const PAGE_ONLY = ["verify"];                                       // used only here: no new data path needed
+const KEYS = ["transport", "mode", "target", "w", "q", "fmt", "fps", "win", "refresh", "life"], CHECKS = ["partial", "force", "verify", "zoomlock"];
+const PAGE_ONLY = ["verify", "zoomlock"];                           // used only here: no new data path needed
 const S = {};
 function readSettings() {
   for (const k of KEYS) S[k] = $(k).value;
@@ -382,6 +384,16 @@ for (const k of [...KEYS, ...CHECKS]) $(k).addEventListener("change", () => {
   // and the new one starts with a full frame (round 5: a changed setting never rides on an old, possibly stuck path).
   if (!PAGE_ONLY.includes(k) && conn.want) dataStart(`settings changed (${k})`);
 });
+// Lock zoom (off by default; Jon, 2026-11-07). Off: pinch zooms the page as usual, to see the PC screen up close.
+// On: the page keeps its size: the viewport tag fixes the scale, and touch-action: manipulation (html.zoomlock)
+// makes a quick second tap a tap, never a double-tap zoom. Applied and removed at once; remembered with the rest.
+const VIEWPORT = document.querySelector('meta[name="viewport"]'), VIEW_FREE = VIEWPORT.content;
+function zoomLock() {
+  VIEWPORT.content = S.zoomlock ? VIEW_FREE + ", maximum-scale=1, user-scalable=no" : VIEW_FREE;
+  document.documentElement.classList.toggle("zoomlock", S.zoomlock);
+}
+zoomLock();
+$("zoomlock").addEventListener("change", () => { zoomLock(); log(`lock zoom ${S.zoomlock ? "on: the page keeps its size" : "off: pinch zooms the page"}`); });
 
 // ---- Clock sync with the PC (NTP-style, over the control connection) ---------------------------------
 // The sample with the smallest error bound wins: half its round trip, plus 0.1 ms per second of age (the two clocks

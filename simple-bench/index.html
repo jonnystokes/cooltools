@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Simple Bench</title>
 <style>
 :root {
@@ -17,6 +17,8 @@
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+/* No page zoom on phones (Jon, 2026-11-07): the viewport tag fixes the scale; a quick second tap is a tap, never a zoom. */
+html { touch-action: manipulation; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
 main { max-width: 980px; margin: 0 auto; padding: 16px; }
 h1 { font-size: 1.55rem; margin: 2px 0 2px; }

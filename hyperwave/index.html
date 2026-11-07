@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en" data-build="2.0.0 built October 23, 2026 6:53 PM">
+<html lang="en" data-build="2.0.1 built November 7, 2026 12:45 PM">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="color-scheme" content="dark">
 <title>HYPERWAVE Studio</title>
 <style>
@@ -40,6 +40,9 @@
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; background: var(--bg); overflow: hidden; color: var(--ink); font-family: var(--sans); font-size: 1rem; }
+/* No page zoom on phones (Jon, 2026-11-07): the viewport tag fixes the scale; touch-action: manipulation makes a
+   quick second tap a tap, never a double-tap zoom. The visuals keep touch-action: none: their own pinch zoom. */
+html { touch-action: manipulation; }
 button, input, select { font: inherit; color: inherit; }
 button { cursor: pointer; }
 button:disabled { cursor: default; opacity: .4; }
@@ -585,7 +588,7 @@ kbd { font-family: var(--mono); font-size: .8rem; padding: .05rem .35rem; border
 // HYPERWAVE Studio: the shared namespace and small helpers. Every other file adds to HW.
 "use strict";
 var HW = (window.HW = {
-  VERSION: "2.0.0",
+  VERSION: "2.0.1",
   BUILD: document.documentElement.getAttribute("data-build") || "dev",
 });
 

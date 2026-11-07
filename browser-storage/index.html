@@ -2,13 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Client browser database manager</title>
 <style>
   :root { color-scheme: light dark; --bg: light-dark(#fafafa, #15171a); --fg: light-dark(#1b1d20, #e6e6e6);
     --line: light-dark(#d9d9d9, #33373d); --dim: light-dark(#666, #9aa0a6); --box: light-dark(#fff, #1d2024);
     --red: #c0392b; --accent: light-dark(#1b6fd1, #6fb0ff); }
   * { box-sizing: border-box; }
+  /* No page zoom on phones (Jon, 2026-11-07): the viewport tag fixes the scale; a quick second tap (Delete
+     everything is tapped twice) is a tap, never a zoom. */
+  html { touch-action: manipulation; }
   body { margin: 0; padding: 12px 16px 48px; font: 15px/1.45 system-ui, sans-serif; background: var(--bg); color: var(--fg); }
   h1 { font-size: 20px; margin: 4px 0 2px; }
   h2 { font-size: 16px; margin: 22px 0 6px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }

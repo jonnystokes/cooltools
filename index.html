@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="color-scheme" content="dark">
 <title>Cool tools</title>
 <style>
+  /* No page zoom on phones (Jon, 2026-11-07): the viewport tag fixes the scale; a quick second tap is a tap, never a zoom. */
+  html { touch-action: manipulation; }
   body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #05060c; color: #eaf1ff; font-family: "Segoe UI", system-ui, sans-serif; }
   main { width: min(40rem, calc(100vw - 2rem)); padding: 1.6rem 0 2rem; }
   h1 { font-size: 2.4rem; margin: 0 0 1.2rem; background: linear-gradient(90deg, #ff3df2, #ffd23d, #3dfcff); -webkit-background-clip: text; background-clip: text; color: transparent; }
