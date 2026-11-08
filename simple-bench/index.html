@@ -11,7 +11,7 @@
 <!-- icons:end -->
 <script id="sb-apps">
 // apps:begin (the Apps button and the window kit it needs: copied from Projects\app-kit\dist\apps.js by publish.py; edit it there)
-/* apps.js 1.11 (built 2026-11-07 5:52 PM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
+/* apps.js 1.12 (built 2026-11-07 10:40 PM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
    app-kit\apps-button.js and file-manager\kit\window-kit.js (one source each; never edit this file). The window kit
    runs only when the page has none of its own. */
 if (!window.WindowKit) {
@@ -300,7 +300,7 @@ if (!window.WindowKit) {
   root.WindowKit = { VERSION, open, pick, child, get windows() { return wins.slice(); } };
 })(typeof window !== "undefined" ? window : globalThis);
 }
-/* apps-button.js 1.11: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.12: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
    https://jonnystokes.github.io/Cool-tools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
@@ -332,7 +332,7 @@ if (!window.WindowKit) {
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.11";
+  const VERSION = "1.12";
   const LAUNCHER = "https://jonnystokes.github.io/Cool-tools/apps/";
   const W = 460, H = 780;        // the menu window's first size (less on a short screen); the window kit remembers
                                  // what the person makes it
@@ -592,7 +592,7 @@ ul.facts b { font-weight: 600; }
     <div id="reader"></div>
     <p class="foot">Scores: Jon's PC (Ryzen 7 2700X, GTX 1050 Ti, Chrome 155) = 1000; higher is faster. The suggestion uses the Book reader's own rules (its rules.js, copied in by build.py), so it matches the reader's first-run check. "Runs well" = 1.3x real time after the model's margin; "barely" = keeps up with little to spare; phones, tablets and laptops on battery count 0.8 of their speed for warming up. The reader's full check also measures memory, which this short test does not.</p>
   </div>
-  <p class="ver" id="sb-ver">Simple Bench V1.0.2 · built 2026-11-07 6:02 PM</p>
+  <p class="ver" id="sb-ver">Simple Bench V1.0.3 · built 2026-11-07 10:52 PM</p>
 </main>
 
 <script>
@@ -703,7 +703,7 @@ self.onmessage = function (ev) {
 </script>
 
 <script id="sb-rules">
-// Copied by build.py from the Book reader (Walker of Worlds/src/rules.js), reader version 552. Do not edit here: change the reader's file and run python build.py.
+// Copied by build.py from the Book reader (Walker of Worlds/src/rules.js), reader version 646. Do not edit here: change the reader's file and run python build.py.
 // rules.js: the benchmark's rules, pure (no page, no device: test/rules.mjs runs this file in Node).
 // RULES.predict(input) turns the light benchmark's scores into a prediction for every voice setup, in
 // the PLAN.md voice order (best-sounding first), each marked "runs well" / "barely" / "too slow" /
@@ -851,6 +851,17 @@ self.onmessage = function (ev) {
   // No model voice above it: the browser's voices; none listed: the best model voice that keeps up.
   function suggest(list, input) {
     const inp = input || {};
+    // Use my PC on (2026-10-26, external-input.md §5): the PC makes the voice, so this device's speed is beside the
+    // point; the best-sounding voice the PC runs is Kokoro fp32 on its graphics card (about 6× real time through
+    // CUDA, 3.6× through WebGPU). The device's own benchmark only ever decided browser voice against model voice.
+    if (inp.useMyPC) {
+      const k = list.find((p) => p.id === "kokoro-gpu-fp32") || {};
+      const setup = { id: "pc-kokoro-fp32", engine: "kokoro", runOn: "gpu", precision: "fp32", voice: null, label: "Kokoro on your PC's graphics card, fp32 (Use my PC is on)", status: "runs well", level: "runs well",
+        x: 0, keep: 0, margin: 0, warm: 1, suggest: true, timing: true, guess: false, steps: null, copies: null, note: "", pc: true, why: "the PC makes the voice; this device's speed does not matter" };
+      const here = k.status ? ` (on this device itself Kokoro would ${{ "runs well": "run well", barely: "barely keep up", "too slow": "be too slow" }[k.status] || "be unable to run"})` : "";
+      return { id: setup.id, setup, level: "runs well", settings: { voice: "kokoro:af_heart", runOn: "gpu", precision: "fp32", numbersToWords: false },
+        reason: `Use my PC is on: your PC makes the voice, so this device's own speed does not matter${here}. Kokoro fp32 on the PC's graphics card is the best-sounding voice the PC runs.` };
+    }
     let pick = null;
     for (const e of ENGINES) {
       const c = list.filter((p) => p.engine === e && p.suggest && p.status !== "can't run here" && p.keep >= C.aboveBar);
