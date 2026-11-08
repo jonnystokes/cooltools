@@ -1,12 +1,12 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
      pastes the Apps kit's tab icons at the ICONS marker, and stamps the version and build time where
-     Book reader V1.0.644 and 2026-11-07 5:37 PM appear. -->
+     Book reader V1.0.646 and 2026-11-07 6:05 PM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Book reader V1.0.644</title>
+<title>Book reader V1.0.646</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
 <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlUlEQVR42p2SzytEURzFz33evBlNtsyCYtRkmrLASqwoKTtlYf4FyQabKSkrZWeNjdmxUrJUlkp+ZNj4tbAgUoyI7/lazLvPw0PN2dzX7X7ePefcrwGA9cn3UVILFLYJ1YgohISIQoQgNfgWqorwRETnptbqi8aHVxkAf8LBysqad0ktVAWLQqgF17ddDQwRtrk2c9+4h7srwcXeO65P5QesUDRmXaQ7PTSkY1iZvoWIGtfenMo4SGUc5PpjeC0ncLn/hs3FJ4gQg2N1aOnwkEgaWFnOsbbDiicNMt1e4CDbG0ciafDYMvP5A59zrVUAGGreCg5sXAwEmaMkoiAVri3MQmHZwqJEvxvXth3pwG872kFEhO8O7Av8FqFSYvC+v99iVXc+60fTUImV2TZLE/dId8bQ2hVHU9aDU/N5i4XODl5wtFPG/nbZxlOzMHJ7LNRseMJitUBzu4cD/2Cupxanu894epDQtCpIlsz88M0oydXQeH4Za0bs+TBIzTtTa/VFoeaFWhKh/gtTlWSJ1PzyYa74AfvjIbDIJi4vAAAAAElFTkSuQmCC">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVR42r2Xe0yVZRzHP+8573u4KxzkvoAkoELkGHkpsGJsbpa0uTabq5htrY3W3Np0mn+53LQ/yjZy+UelXci2LHKzRWtt2Sbr4g0DnRw1EUjwAgocOcA5PL/+OBfe876IOo3vX+/O7z3P53l+1/fRMKl5YzBHRNaLUCciJaLEUAIighJBlPlZiNqUIJbnqXcEEQKixKtEDorQuGF/Rl+EqUUevt8YfFlEdishWayAe4NbbT5R0rCpOaspuoEw/AslaP8zPGITEeq3HMhu0po3BnMQ8c7CyWNtSnxKpEQPx3y24SiRZBHWO8IJN9vwiK1OD2f77MOVICIljvtYancLRwRDt8KT3FBQqXOjX3HpTJDxm/cGj0vUyF/gwp3npOM3P4N9wQgcpQTdevLaN+NJyQy1B1FxXL0wSe+pID0dQS6fD94WjibkFusUVrgoXOgit8RAc4R6TUVtAo2vXY7xgm51ewQOoDkgs8hJZpGTx56PY8Iv9J4O0tMe4EJbgKErk4gIKekOCjwGBQsN8he4iEvUmE7uXD0GrkTQrTGfSa4EjfmVBvMrDaoDwof1gyglrPsgFacxBR1/pwXnUw+hP1NsW8MMF8EcglDCRXS+Y5jBK+OUL3UTn+S0LeQ0tKjbzXCAib1/YIyMoboGQxtftzRqM8OVioZgKtsj2rPDy8nWAXTDwcOL5lJRnY6nKp1Sz1wcznCOhPPhVgrsPx7awCuLw7t22CpBt5ZaRJt3VXD00FXaDg/Q1jpAx87rfLXzHElzdLbuqeSRx1NtYZPhMbQ58baN+F//GoCET1+yliG6tc4jSkkzqFmdS83qXAC6vT7aWgfoPDFESpoRrhKJekD1XOdmTSMJH71oj3v/sC0HYsvQVOcR/fB5N91nfXiq0il/wk1+STL5JcnwqmlhMW16ZBwmFTI8NmMiizUE1iYTUc85Hy37evmxqQeHU6OobA6LngrlQfkyN5pGtMPdjWLLEBxyixA0bHuUfcdreHu3hxVr8hi5McE3u/5hy9ojtLb020Iwk7TURLTUREsZhv6vW1uoWSmpBlUrs6hamQVAf7cf78khKp+eZw/BDEr4eK2lDKc2r1v7d0TbG9roPHGDRdXzqKhy46lOJzs/gez8BJs7b+uBRJcpb8yDSdCtvT2i5c9lM3RtgkMHLvHLt/+iaVBQmoKnOp01bzzIHLcr6k4ArSAN4wUPzsoHomvoiwvsOWCCi8LciGLduXxVNstXZTM2Osnfvw9G+8GBT7pYsCSNZSsyoxkNoCXFEf/e6hhY3NZn7SVpgqupRjRVCX1ng+QU69E/xCc6WVKbwZLaDABGfUESk/UZQ6DNS0bLTLH93tUxFgOfmoamSvhu+xClT4ZGaX65fbJF4OaMtir58FtghOaH36fwHvNz5s9Rjv48EgNXCnQRAiJiRJLR71Oc+MnPsZZRNA1yig0KPS7mV7jIK3VFZ7t5sMS4eFK46A3SeWSEzr9G6To1RjAotpOr0BQO6OEbS9l0HxpqUug+Pc7FU+P8+qXgStQoXOiiyBOHO0+Pvnf22BjXegN4j/jxHvfjH5m0Zfs0cETEq72/5uoOETbf4TecbZ5Pb7sjOCK86xChMXxdmlW4Enwi0ujYsD+jT5Q0hK9LswUXEWnY217W5wDY1JzVJEJ9+Lo0Gyev/6y9rCnmdgywre5SjgjrlUidKCkRwbhP8ICIeEU4KCKNe9vLotfz/wCKU53CYXSQUAAAAABJRU5ErkJggg==">
@@ -15,9 +15,9 @@
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.644";
-  window.APP_BUILT = "2026-11-07 5:37 PM";
-  window.APP_NOTE = "The Apps button: first in the top bar, just left of the Index button, at the Apps kit's largest size (a stand-in in the contents panel keeps its Index button in place); the reader's family tab icon; version.json for the Cool tools page. Open: From my PC removed (the Cloud File Manager does it better); From the file manager is now From Cloud File Manager, with its icon";
+  window.APP_VERSION = "Book reader V1.0.646";
+  window.APP_BUILT = "2026-11-07 6:05 PM";
+  window.APP_NOTE = "the Apps kit 1.11: the Apps button's divider follows the light and dark theme; closing the Apps menu leaves the keyboard on the reader (Space and Enter no longer open it again)";
   window.APP_KEY = "br1";
 </script>
 <style>
@@ -85,9 +85,9 @@ button:disabled { opacity: 0.4; cursor: default; }
 /* The Apps button (Projects\app-kit, 2026-11-07): the way out to Jon's other programs, first in the bar, just left of
    ☰ Index. Its look is the kit's alone (in a shadow root: bars beside the word, never stacked); the reader only gives
    it the kit's largest size, the play bar's big control height (it follows the UI size). Its divider keeps the kit's
-   own colour, the bar's text colour faint: --line is a light-dark() pair, which inside the button's shadow root (its
-   colour scheme reset) would give the light line on the dark theme. The contents panel's top row has a stand-in in
-   the same place (contents.css), like its ☰ Index. */
+   own colour, the bar's text colour faint, in the light and the dark theme alike (the button takes the page's colour
+   scheme since the Apps kit 1.11). The contents panel's top row has a stand-in in the same place (contents.css),
+   like its ☰ Index. */
 .top apps-button, .ctop apps-button { --apps-h: var(--tap-big); }
 .top .icon { min-width: var(--tap); padding: 0; font-size: 1.1em; }
 .top .icon.idx { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; line-height: 1; }
@@ -5720,7 +5720,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 })(typeof window !== "undefined" ? window : globalThis);
 </script>
 <script>
-/* apps-button.js 1.10: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.11: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
    https://jonnystokes.github.io/Cool-tools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
@@ -5742,14 +5742,17 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
                         program chosen from the menu would take that page's whole tab
    Size: CSS --apps-h on the element is the button's height (default 36px; the bars, the word and the divider scale
    with it):  apps-button { --apps-h: 40px; }
-   The divider takes the bar's text colour by itself; --apps-sep sets it to the app's own line colour instead:
+   The divider takes the bar's text colour by itself; --apps-sep sets it to the app's own line colour instead (a
+   light-dark() pair works: the button takes the page's light or dark color-scheme):
      apps-button { --apps-sep: var(--line); }
+   Focus: when the menu closes, the focus goes back to the page, not to the button, so the page's own keys work at
+   once (Space would press the button again); the button stays in the Tab order.
    Script: AppsKit.open({ app }), AppsKit.close(), AppsKit.window (the open menu's window, or null),
    AppsKit.launcher (the menu's address), AppsKit.VERSION. */
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.10";
+  const VERSION = "1.11";
   const LAUNCHER = "https://jonnystokes.github.io/Cool-tools/apps/";
   const W = 460, H = 780;        // the menu window's first size (less on a short screen); the window kit remembers
                                  // what the person makes it
@@ -5758,7 +5761,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 
   const BARS = ["#ff3df2", "#ffd23d", "#3dfcff"];
   const CSS = `
-:host{all:initial;color:inherit;display:inline-flex;align-items:center;flex:none;vertical-align:middle;--h:var(--apps-h,36px)}
+:host{all:initial;color:inherit;color-scheme:inherit;display:inline-flex;align-items:center;flex:none;vertical-align:middle;--h:var(--apps-h,36px)}
 .b{all:unset;box-sizing:border-box;position:relative;display:inline-flex;flex-direction:row;align-items:center;justify-content:center;
   gap:calc(var(--h)*.2);height:var(--h);padding:0 calc(var(--h)*.3) 0 calc(var(--h)*.26);border:2px solid transparent;border-radius:calc(var(--h)*.28);
   background:linear-gradient(#0b0816,#0b0816) padding-box,linear-gradient(120deg,${BARS[0]},${BARS[1]} 52%,${BARS[2]}) border-box;
@@ -5818,7 +5821,10 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     const btn = o.anchor || null;
     const win = root.WindowKit.open(href, {
       title: "Apps", name: NAME, width: W, height: H,
-      onClose: () => { if (current && current.win === win) { current.stop(); current = null; } if (btn) btn.setAttribute("aria-expanded", "false"); },
+      onClose: () => {
+        if (current && current.win === win) { current.stop(); current = null; }
+        if (btn) { btn.setAttribute("aria-expanded", "false"); letGo(btn); }
+      },
     });
     if (btn) btn.setAttribute("aria-expanded", "true");
     current = watch(win, href);
@@ -5826,6 +5832,13 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     return win;
   }
   function close() { if (current) current.win.close(); }
+  // The window kit gives the focus back to what had it when the menu opened, which is this button (the click put it
+  // there). Left there, the page's own keys would press it: Space or Enter opens the menu again (HYPERWAVE's Space).
+  // So the focus goes back to the page. The button stays in the Tab order: the keyboard still reaches it with Tab.
+  function letGo(btn) {
+    const sr = btn.getRootNode();
+    if (sr && sr.activeElement === btn) btn.blur();
+  }
 
   // ---- when the menu cannot load ------------------------------------------------------------------------------------
   // The menu page says "ready" (the window kit's protocol) as soon as it runs. Offline when the window opens, or its

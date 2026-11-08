@@ -126,6 +126,11 @@ h3:first-child { margin-top: 2px; }
 .app { height: 100%; display: grid; grid-template-rows: auto 1fr auto; grid-template-columns: minmax(0, 1fr); }
 .topbar, .toolbar, .side, .status, .tabs, .snapbar, .viewbar, .windows, .ctxmenu, .toasts, .tutorial { zoom: var(--ui); }
 .topbar { display: flex; align-items: center; gap: 6px; padding: 4px 8px; background: var(--panel); border-bottom: 1px solid var(--line); min-height: 44px; }
+/* Too narrow for one row (on a computer about 1170 px at the normal UI size): the bar wraps. The menus and undo, redo,
+   settings are one group (.top-tools), so they move to the second row together, the menus at its left, undo, redo
+   and settings at its right; nothing is hidden at any width or UI size. */
+.topbar { flex-wrap: wrap; row-gap: 4px; }
+.top-tools { flex: 1 1 auto; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 .brand { display: flex; align-items: center; gap: 6px; font-weight: 700; letter-spacing: 0.01em; padding-right: 8px; white-space: nowrap; }
 .brand-mark { color: var(--accent); font-size: 18px; }
 .menubar { display: flex; gap: 2px; }
@@ -244,7 +249,8 @@ h3:first-child { margin-top: 2px; }
 .modes .ml-short { display: none; }
 @media (max-width: 759px) {
   .brand { display: none; }
-  .topbar { gap: 2px; padding: 4px 4px; }
+  .topbar, .top-tools { gap: 2px; }
+  .topbar { padding: 4px 4px; }
   .modes { margin: 0 4px 0 0; gap: 2px; }
   .modes button { padding: 4px 8px; gap: 5px; font-size: 13px; }
   .top-right .icon-btn { min-width: 32px; padding: 0 4px; }
@@ -504,13 +510,17 @@ textarea.script { font: 12.5px/1.4 var(--mono); min-height: 90px; }
       <button type="button" data-mode="cutsheet" title="Measure the cut pieces for marking the real board (Enter on a selected piece)"><span class="mi"></span><span class="ml">Measure pieces</span><span class="ml-short">Measure</span></button>
       <button type="button" data-mode="designer" title="The library of boards and furniture (Ctrl+B)"><span class="mi"></span><span class="ml">Library</span></button>
     </nav>
-    <nav id="menubar" class="menubar" aria-label="Menus"></nav>
-    <div class="top-right">
-      <span id="ws-name" class="ws-name" title="Workspace"></span>
-      <button type="button" class="icon-btn" data-cmd="undo" title="Undo (Ctrl+Z)" aria-label="Undo">↶</button>
-      <button type="button" class="icon-btn" data-cmd="redo" title="Redo (Ctrl+Y)" aria-label="Redo">↷</button>
-      <button type="button" class="icon-btn" data-act="settings" title="Settings" aria-label="Settings">⚙</button>
-      <button type="button" class="icon-btn only-narrow" data-act="menu" title="Menu" aria-label="Menu">☰</button>
+    <!-- The menus and undo, redo, settings are one group: when the bar has no room for one row, the whole group moves
+         to a second row, so nothing is hidden at any width (layout.css) -->
+    <div class="top-tools">
+      <nav id="menubar" class="menubar" aria-label="Menus"></nav>
+      <div class="top-right">
+        <span id="ws-name" class="ws-name" title="Workspace"></span>
+        <button type="button" class="icon-btn" data-cmd="undo" title="Undo (Ctrl+Z)" aria-label="Undo">↶</button>
+        <button type="button" class="icon-btn" data-cmd="redo" title="Redo (Ctrl+Y)" aria-label="Redo">↷</button>
+        <button type="button" class="icon-btn" data-act="settings" title="Settings" aria-label="Settings">⚙</button>
+        <button type="button" class="icon-btn only-narrow" data-act="menu" title="Menu" aria-label="Menu">☰</button>
+      </div>
     </div>
   </header>
 
@@ -560,7 +570,7 @@ textarea.script { font: 12.5px/1.4 var(--mono); min-height: 90px; }
 </div>
 <script>
 // ---- app-kit/dist/apps.js ----
-/* apps.js 1.10 (built 2026-11-07 5:22 PM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
+/* apps.js 1.11 (built 2026-11-07 5:52 PM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
    app-kit\apps-button.js and file-manager\kit\window-kit.js (one source each; never edit this file). The window kit
    runs only when the page has none of its own. */
 if (!window.WindowKit) {
@@ -849,7 +859,7 @@ if (!window.WindowKit) {
   root.WindowKit = { VERSION, open, pick, child, get windows() { return wins.slice(); } };
 })(typeof window !== "undefined" ? window : globalThis);
 }
-/* apps-button.js 1.10: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.11: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
    https://jonnystokes.github.io/Cool-tools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
@@ -871,14 +881,17 @@ if (!window.WindowKit) {
                         program chosen from the menu would take that page's whole tab
    Size: CSS --apps-h on the element is the button's height (default 36px; the bars, the word and the divider scale
    with it):  apps-button { --apps-h: 40px; }
-   The divider takes the bar's text colour by itself; --apps-sep sets it to the app's own line colour instead:
+   The divider takes the bar's text colour by itself; --apps-sep sets it to the app's own line colour instead (a
+   light-dark() pair works: the button takes the page's light or dark color-scheme):
      apps-button { --apps-sep: var(--line); }
+   Focus: when the menu closes, the focus goes back to the page, not to the button, so the page's own keys work at
+   once (Space would press the button again); the button stays in the Tab order.
    Script: AppsKit.open({ app }), AppsKit.close(), AppsKit.window (the open menu's window, or null),
    AppsKit.launcher (the menu's address), AppsKit.VERSION. */
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.10";
+  const VERSION = "1.11";
   const LAUNCHER = "https://jonnystokes.github.io/Cool-tools/apps/";
   const W = 460, H = 780;        // the menu window's first size (less on a short screen); the window kit remembers
                                  // what the person makes it
@@ -887,7 +900,7 @@ if (!window.WindowKit) {
 
   const BARS = ["#ff3df2", "#ffd23d", "#3dfcff"];
   const CSS = `
-:host{all:initial;color:inherit;display:inline-flex;align-items:center;flex:none;vertical-align:middle;--h:var(--apps-h,36px)}
+:host{all:initial;color:inherit;color-scheme:inherit;display:inline-flex;align-items:center;flex:none;vertical-align:middle;--h:var(--apps-h,36px)}
 .b{all:unset;box-sizing:border-box;position:relative;display:inline-flex;flex-direction:row;align-items:center;justify-content:center;
   gap:calc(var(--h)*.2);height:var(--h);padding:0 calc(var(--h)*.3) 0 calc(var(--h)*.26);border:2px solid transparent;border-radius:calc(var(--h)*.28);
   background:linear-gradient(#0b0816,#0b0816) padding-box,linear-gradient(120deg,${BARS[0]},${BARS[1]} 52%,${BARS[2]}) border-box;
@@ -947,7 +960,10 @@ if (!window.WindowKit) {
     const btn = o.anchor || null;
     const win = root.WindowKit.open(href, {
       title: "Apps", name: NAME, width: W, height: H,
-      onClose: () => { if (current && current.win === win) { current.stop(); current = null; } if (btn) btn.setAttribute("aria-expanded", "false"); },
+      onClose: () => {
+        if (current && current.win === win) { current.stop(); current = null; }
+        if (btn) { btn.setAttribute("aria-expanded", "false"); letGo(btn); }
+      },
     });
     if (btn) btn.setAttribute("aria-expanded", "true");
     current = watch(win, href);
@@ -955,6 +971,13 @@ if (!window.WindowKit) {
     return win;
   }
   function close() { if (current) current.win.close(); }
+  // The window kit gives the focus back to what had it when the menu opened, which is this button (the click put it
+  // there). Left there, the page's own keys would press it: Space or Enter opens the menu again (HYPERWAVE's Space).
+  // So the focus goes back to the page. The button stays in the Tab order: the keyboard still reaches it with Tab.
+  function letGo(btn) {
+    const sr = btn.getRootNode();
+    if (sr && sr.activeElement === btn) btn.blur();
+  }
 
   // ---- when the menu cannot load ------------------------------------------------------------------------------------
   // The menu page says "ready" (the window kit's protocol) as soon as it runs. Offline when the window opens, or its
@@ -1057,7 +1080,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 (function () {
   "use strict";
   var PC = window.PC || (window.PC = {});
-  PC.VERSION = "0.1.2";
+  PC.VERSION = "0.1.3";
   PC.APP = "plancutter";
 
   // ---- log ---------------------------------------------------------------------------
