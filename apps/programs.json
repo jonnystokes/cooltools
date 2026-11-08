@@ -1,0 +1,52 @@
+{
+  "_": "THE list of Jon's programs: the Apps menu (cool-tools/apps/) and the Cool tools front page are both built from this file by build.py. A new program = one entry here, its drawing in icons/make_icons.py, then python build.py --publish. 'path' is the program's folder in cool-tools; 'about' is the front page's line, 'short' the Apps menu's.",
+  "groups": [
+    { "id": "now", "name": "Current Projects", "accent": "255, 210, 61" },
+    { "id": "fun", "name": "Fun Projects", "accent": "255, 61, 242" },
+    { "id": "test", "name": "Testing", "accent": "61, 252, 255" }
+  ],
+  "programs": [
+    {
+      "id": "reader", "group": "now", "name": "Book reader", "path": "reader/",
+      "short": "Reads books aloud with AI voices",
+      "about": "Reads books and documents aloud with AI voices that run in your browser. Open a folder, files or a zip; several books, each with its own place.",
+      "source": "Projects\\Walker of Worlds"
+    },
+    {
+      "id": "file-manager", "group": "now", "name": "Cloud File Manager", "path": "file-manager/",
+      "short": "The shared folder on Jon's PC, from anywhere",
+      "about": "The file manager for the shared folder on Jon's PC: browse and download anywhere; with the PC's password, upload, move, copy, rename, delete (into a trash) and make folders private.",
+      "source": "Projects\\file-manager"
+    },
+    {
+      "id": "hyperwave", "group": "fun", "name": "HYPERWAVE Studio", "path": "hyperwave/",
+      "short": "Sound-reactive visuals: 79 shapes",
+      "about": "Sound-reactive visuals: 79 shapes, fractals and 4D forms that react to your microphone, PC audio, a song file or 18 built-in demo tracks.",
+      "source": "Projects\\hyperwave"
+    },
+    {
+      "id": "plan-cutter", "group": "fun", "name": "Plan Cutter", "path": "plan-cutter/",
+      "short": "Lay and cut sheets in a crooked room",
+      "about": "Draw a crooked room, lay sheet material on a ceiling or wall, cut it along the walls and get the numbers to mark on the real board.",
+      "source": "Projects\\plan-cutter"
+    },
+    {
+      "id": "screen-peek", "group": "test", "name": "Screen Peek (test)", "path": "screen-peek/",
+      "short": "A live look at Jon's PC screen",
+      "about": "Shows a live screenshot of Jon's PC, single or continuous. Password protected; works only while sharing is on at the PC.",
+      "source": "Projects\\screen-peek"
+    },
+    {
+      "id": "simple-bench", "group": "test", "name": "Simple Bench", "path": "simple-bench/",
+      "short": "A 10-second test of this device",
+      "about": "A 10-second device test: processor and graphics card scores, and which voice and settings the Book reader would suggest on this device.",
+      "source": "Projects\\simple-bench"
+    },
+    {
+      "id": "browser-storage", "group": "test", "name": "Client browser database manager", "path": "browser-storage/",
+      "short": "See and delete what these tools stored",
+      "about": "See and delete what these tools have stored in your browser: books, settings, downloaded voice files.",
+      "source": "Projects\\browser-storage"
+    }
+  ]
+}

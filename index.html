@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="color-scheme" content="dark">
 <title>Cool tools</title>
+<link rel="icon" type="image/png" sizes="16x16" href="apps/icons/apps-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="apps/icons/apps-32.png">
+<link rel="apple-touch-icon" href="apps/icons/apps-180.png">
 <style>
   /* No page zoom on phones (Jon, 2026-11-07): the viewport tag fixes the scale; a quick second tap is a tap, never a zoom. */
   html { touch-action: manipulation; }
@@ -16,36 +19,59 @@
   .group.now { --accent: 255, 210, 61; }
   .group.fun { --accent: 255, 61, 242; }
   .group h2 { margin: 0 0 .8rem .2rem; font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgb(var(--accent)); }
-  a.tool { display: block; margin-top: .7rem; padding: 1rem 1.2rem; border-radius: .8rem; border: 1px solid rgba(255,255,255,.16); background: rgba(22,26,46,.9); color: inherit; text-decoration: none; }
+  /* A program: its icon (Projects\app-kit\icons), its name, its line, and its version once its version.json is read. */
+  a.tool { display: flex; align-items: center; gap: 1rem; margin-top: .7rem; padding: 1rem 1.2rem; border-radius: .8rem; border: 1px solid rgba(255,255,255,.16); background: rgba(22,26,46,.9); color: inherit; text-decoration: none; }
   .group h2 + a.tool { margin-top: 0; }
   a.tool:hover, a.tool:focus-visible { border-color: rgb(var(--accent)); }
+  a.tool .ico { flex: none; width: 48px; height: 48px; border-radius: 11px; }
+  a.tool .txt { display: block; flex: 1; min-width: 0; }
   a.tool b { font-size: 1.2rem; }
-  a.tool span { display: block; margin-top: .3rem; color: #9aa8c4; line-height: 1.45; }
+  a.tool .txt > span { display: block; margin-top: .3rem; color: #9aa8c4; line-height: 1.45; }
+  a.tool .txt > .ver { margin-top: .35rem; color: #6f7c98; font-size: .85rem; letter-spacing: .02em; line-height: 1.3; }
   @media (max-width: 30rem) {
     .group { padding: .8rem; }
-    a.tool { padding: .9rem 1rem; }
+    a.tool { gap: .8rem; padding: .9rem 1rem; }
   }
 </style>
 </head>
 <body>
 <main>
   <h1>Cool tools</h1>
+  <!-- programs: written by Projects\app-kit\build.py from app-kit\programs.json (python build.py --publish); change that list, never these lines -->
   <section class="group now" aria-labelledby="group-now">
     <h2 id="group-now">Current Projects</h2>
-    <a class="tool" href="reader/"><b>Book reader</b><span>Reads books and documents aloud with AI voices that run in your browser. Open a folder, files or a zip; several books, each with its own place.</span></a>
-    <a class="tool" href="file-manager/"><b>Cloud File Manager</b><span>The file manager for the shared folder on Jon's PC: browse and download anywhere; with the PC's password, upload, move, copy, rename, delete (into a trash) and make folders private.</span></a>
+    <a class="tool" href="reader/"><img class="ico" src="apps/icons/reader-48.png" srcset="apps/icons/reader-96.png 2x, apps/icons/reader-144.png 3x" width="48" height="48" alt=""><span class="txt"><b>Book reader</b><span>Reads books and documents aloud with AI voices that run in your browser. Open a folder, files or a zip; several books, each with its own place.</span></span></a>
+    <a class="tool" href="file-manager/"><img class="ico" src="apps/icons/file-manager-48.png" srcset="apps/icons/file-manager-96.png 2x, apps/icons/file-manager-144.png 3x" width="48" height="48" alt=""><span class="txt"><b>Cloud File Manager</b><span>The file manager for the shared folder on Jon's PC: browse and download anywhere; with the PC's password, upload, move, copy, rename, delete (into a trash) and make folders private.</span></span></a>
   </section>
   <section class="group fun" aria-labelledby="group-fun">
     <h2 id="group-fun">Fun Projects</h2>
-    <a class="tool" href="hyperwave/"><b>HYPERWAVE Studio</b><span>Sound-reactive visuals: 79 shapes, fractals and 4D forms that react to your microphone, PC audio, a song file or 18 built-in demo tracks.</span></a>
-    <a class="tool" href="plan-cutter/"><b>Plan Cutter</b><span>Draw a crooked room, lay sheet material on a ceiling or wall, cut it along the walls and get the numbers to mark on the real board.</span></a>
+    <a class="tool" href="hyperwave/"><img class="ico" src="apps/icons/hyperwave-48.png" srcset="apps/icons/hyperwave-96.png 2x, apps/icons/hyperwave-144.png 3x" width="48" height="48" alt=""><span class="txt"><b>HYPERWAVE Studio</b><span>Sound-reactive visuals: 79 shapes, fractals and 4D forms that react to your microphone, PC audio, a song file or 18 built-in demo tracks.</span></span></a>
+    <a class="tool" href="plan-cutter/"><img class="ico" src="apps/icons/plan-cutter-48.png" srcset="apps/icons/plan-cutter-96.png 2x, apps/icons/plan-cutter-144.png 3x" width="48" height="48" alt=""><span class="txt"><b>Plan Cutter</b><span>Draw a crooked room, lay sheet material on a ceiling or wall, cut it along the walls and get the numbers to mark on the real board.</span></span></a>
   </section>
   <section class="group test" aria-labelledby="group-test">
     <h2 id="group-test">Testing</h2>
-    <a class="tool" href="screen-peek/"><b>Screen Peek (test)</b><span>Shows a live screenshot of Jon's PC, single or continuous. Password protected; works only while sharing is on at the PC.</span></a>
-    <a class="tool" href="simple-bench/"><b>Simple Bench</b><span>A 10-second device test: processor and graphics card scores, and which voice and settings the Book reader would suggest on this device.</span></a>
-    <a class="tool" href="browser-storage/"><b>Client browser database manager</b><span>See and delete what these tools have stored in your browser: books, settings, downloaded voice files.</span></a>
+    <a class="tool" href="screen-peek/"><img class="ico" src="apps/icons/screen-peek-48.png" srcset="apps/icons/screen-peek-96.png 2x, apps/icons/screen-peek-144.png 3x" width="48" height="48" alt=""><span class="txt"><b>Screen Peek (test)</b><span>Shows a live screenshot of Jon's PC, single or continuous. Password protected; works only while sharing is on at the PC.</span></span></a>
+    <a class="tool" href="simple-bench/"><img class="ico" src="apps/icons/simple-bench-48.png" srcset="apps/icons/simple-bench-96.png 2x, apps/icons/simple-bench-144.png 3x" width="48" height="48" alt=""><span class="txt"><b>Simple Bench</b><span>A 10-second device test: processor and graphics card scores, and which voice and settings the Book reader would suggest on this device.</span></span></a>
+    <a class="tool" href="browser-storage/"><img class="ico" src="apps/icons/browser-storage-48.png" srcset="apps/icons/browser-storage-96.png 2x, apps/icons/browser-storage-144.png 3x" width="48" height="48" alt=""><span class="txt"><b>Client browser database manager</b><span>See and delete what these tools have stored in your browser: books, settings, downloaded voice files.</span></span></a>
   </section>
+  <!-- /programs -->
 </main>
+<script>
+  // Each program's version: its build writes version.json beside its page ({ "version", "built" }); "Version X" goes
+  // under its line. A program without one (or one that cannot be read) shows nothing.
+  for (const a of document.querySelectorAll("a.tool")) {
+    let url;
+    try { url = new URL("version.json", a.href); } catch (e) { continue; }
+    fetch(url, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).then((j) => {
+      const v = j && typeof j.version === "string" ? j.version.trim().replace(/^v(?=\d)/i, "").slice(0, 40) : "";
+      if (!v) return;
+      const s = document.createElement("span");
+      s.className = "ver";
+      s.textContent = "Version " + v;
+      if (typeof j.built === "string" && j.built) s.title = "Built " + j.built.slice(0, 60);
+      a.querySelector(".txt").append(s);
+    }).catch(() => {});
+  }
+</script>
 </body>
 </html>

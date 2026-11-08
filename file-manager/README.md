@@ -12,4 +12,5 @@ ask it for files; the protocol and a five-line example are in `Projects\file-man
     <script src="https://jonnystokes.github.io/Cool-tools/file-manager/window-kit.js"></script>
     const got = await WindowKit.pick("https://jonnystokes.github.io/Cool-tools/file-manager/", { accept: [".zip"] });
 
-The source lives in Jon's `Projects\file-manager` folder (`python build.py --publish` writes both files here).
+The source lives in Jon's `Projects\file-manager` folder (`python build.py --publish` writes the page, the kit and
+`version.json` here; the front page and the Apps menu read the version from it).

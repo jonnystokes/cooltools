@@ -12,9 +12,15 @@ Browser tools by Jon Stokes. Each one is a single web page: open it and it runs,
 | Screen Peek (test) | https://jonnystokes.github.io/Cool-tools/screen-peek/ | Hello-world test of PC to phone over Tailscale Funnel: a live screenshot of Jon's PC, single or continuous. Password protected; runs through PC Relay on the PC (tray icon: PC Relay, program "Screen Peek" allowed). |
 | Plan Cutter | https://jonnystokes.github.io/Cool-tools/plan-cutter/ | Draw a crooked room, place sheet material on a ceiling or wall, cut it along the walls and cabinets, and print the numbers to mark on the real board. |
 | Client browser database manager | https://jonnystokes.github.io/Cool-tools/browser-storage/ | Shows and deletes what these tools have stored in the browser (local storage, databases, downloaded files), with sizes. |
+| Apps (menu) | https://jonnystokes.github.io/Cool-tools/apps/ | Not on the front page: the menu every program's Apps button opens in a floating window (every program with its icon, grouped as on the front page). `apps/apps.js` is the button itself, `apps/icons/` the program icons, `apps/programs.json` the list. Built by `Projects\app-kit` (`python build.py --publish` writes `apps/` and the front page's program list). |
+
+**The front page's list of programs is written from one list**, `Projects\app-kit\programs.json`, by that kit's
+build; never edit the lines between `<!-- programs:` and `<!-- /programs -->` in `index.html` by hand. Each program
+publishes a `version.json` beside its page (`{"app", "version", "built"}`); the front page and the Apps menu show it
+as "Version X". The rules every program follows: `Projects\WEB-APP-CONVENTIONS.md`.
 
 The sound is analyzed only inside the page; nothing is sent anywhere.
 
 The source of HYPERWAVE Studio lives in Jon's `Projects\hyperwave` folder (built with `python build.py`);
-the Book reader's lives in `Projects\Walker of Worlds` (its `python build.py` writes `reader/index.html` here); Simple Bench's lives in `Projects\simple-bench`; the Cloud File Manager's lives in `Projects\file-manager` (`python build.py --publish` writes `file-manager/index.html` and `file-manager/window-kit.js` here).
+the Book reader's lives in `Projects\Walker of Worlds` (its `python build.py` writes `reader/index.html` here); Simple Bench's lives in `Projects\simple-bench`; the Cloud File Manager's lives in `Projects\file-manager` (`python build.py --publish` writes `file-manager/index.html`, `file-manager/window-kit.js` and `file-manager/version.json` here); the Apps menu, the icons and the front page's list come from `Projects\app-kit`.
 This repository holds the finished pages.

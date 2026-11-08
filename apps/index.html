@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#05060c">
+<title>Apps</title>
+<link rel="icon" type="image/png" sizes="16x16" href="icons/apps-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/apps-32.png">
+<link rel="apple-touch-icon" href="icons/apps-180.png">
+<!-- The Apps menu (1.6, built 2026-11-07 5:03 PM). Written by Projects\app-kit\build.py from launcher.html and
+     programs.json: edit those, never this file. Each program's Apps button opens this page in a floating window
+     (?app=<id> marks the program it came from). A tap goes to a program in the same tab (the whole tab, not this
+     window); Ctrl+click, a middle click or a long press open it in a new tab, as links do. -->
+<style>
+  /* No page zoom on phones (as every Cool tools page): a quick second tap is a tap, never a zoom. */
+  html { touch-action: manipulation; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; background: #05060c; color: #eaf1ff; font: 15px/1.4 "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
+  main { width: min(34rem, 100%); margin: 0 auto; padding: 12px 12px 16px; }
+  .alone main { padding-top: 24px; }
+  h1 { display: none; margin: 0 0 14px 4px; font-size: 2rem; background: linear-gradient(90deg, #ff3df2, #ffd23d, #3dfcff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .alone h1 { display: block; }
+  /* a group per box of the front page, in its colour (--accent is r, g, b) */
+  .group { --accent: 61, 252, 255; margin: 0 0 12px; }
+  .group.now { --accent: 255, 210, 61; }
+  .group.fun { --accent: 255, 61, 242; }
+  .group h2 { margin: 0 0 6px 6px; font-size: 11.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgb(var(--accent)); }
+  a.app { display: flex; align-items: center; gap: 12px; min-height: 64px; margin: 0 0 6px; padding: 8px 10px; border: 1px solid rgba(255, 255, 255, .13); border-radius: 13px; background: rgba(22, 26, 46, .92); color: inherit; text-decoration: none; outline: none; }
+  a.app:hover { border-color: rgba(var(--accent), .85); background: rgba(var(--accent), .07); }
+  a.app:focus-visible { border-color: rgb(var(--accent)); box-shadow: 0 0 0 2px rgb(var(--accent)); }
+  a.app:active { transform: scale(.985); }
+  a.app img { flex: none; width: 48px; height: 48px; border-radius: 11px; }
+  a.app .t { flex: 1; min-width: 0; }
+  a.app b { display: block; font-size: 15.5px; font-weight: 650; line-height: 1.25; }
+  a.app .d { display: block; margin-top: 2px; color: #9aa8c4; font-size: 13px; line-height: 1.35; }
+  a.app .ver { display: block; margin-top: 1px; color: #6f7c98; font-size: 11.5px; letter-spacing: .02em; }
+  /* the program the menu was opened from */
+  a.app.current { border-color: rgba(var(--accent), .9); background: rgba(var(--accent), .1); }
+  a.app .here { flex: none; padding: 4px 9px; border-radius: 99px; background: rgb(var(--accent)); color: #05060c; font-size: 11px; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; white-space: nowrap; }
+  .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 14px; margin: 10px 6px 0; color: #6f7c98; font-size: 12.5px; }
+  .foot a { color: #b8c6e6; }
+  @media (max-width: 380px) { main { padding: 10px 8px 14px; } a.app { gap: 10px; padding: 8px; } a.app .here { padding: 3px 7px; font-size: 10px; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Apps</h1>
+  <section class="group now" aria-labelledby="g-now">
+    <h2 id="g-now">Current Projects</h2>
+    <a class="app" data-id="reader" href="../reader/" target="_top"><img src="icons/reader-48.png" srcset="icons/reader-96.png 2x, icons/reader-144.png 3x" width="48" height="48" alt=""><span class="t"><b>Book reader</b><span class="d">Reads books aloud with AI voices</span></span></a>
+    <a class="app" data-id="file-manager" href="../file-manager/" target="_top"><img src="icons/file-manager-48.png" srcset="icons/file-manager-96.png 2x, icons/file-manager-144.png 3x" width="48" height="48" alt=""><span class="t"><b>Cloud File Manager</b><span class="d">The shared folder on Jon's PC, from anywhere</span></span></a>
+  </section>
+  <section class="group fun" aria-labelledby="g-fun">
+    <h2 id="g-fun">Fun Projects</h2>
+    <a class="app" data-id="hyperwave" href="../hyperwave/" target="_top"><img src="icons/hyperwave-48.png" srcset="icons/hyperwave-96.png 2x, icons/hyperwave-144.png 3x" width="48" height="48" alt=""><span class="t"><b>HYPERWAVE Studio</b><span class="d">Sound-reactive visuals: 79 shapes</span></span></a>
+    <a class="app" data-id="plan-cutter" href="../plan-cutter/" target="_top"><img src="icons/plan-cutter-48.png" srcset="icons/plan-cutter-96.png 2x, icons/plan-cutter-144.png 3x" width="48" height="48" alt=""><span class="t"><b>Plan Cutter</b><span class="d">Lay and cut sheets in a crooked room</span></span></a>
+  </section>
+  <section class="group test" aria-labelledby="g-test">
+    <h2 id="g-test">Testing</h2>
+    <a class="app" data-id="screen-peek" href="../screen-peek/" target="_top"><img src="icons/screen-peek-48.png" srcset="icons/screen-peek-96.png 2x, icons/screen-peek-144.png 3x" width="48" height="48" alt=""><span class="t"><b>Screen Peek (test)</b><span class="d">A live look at Jon's PC screen</span></span></a>
+    <a class="app" data-id="simple-bench" href="../simple-bench/" target="_top"><img src="icons/simple-bench-48.png" srcset="icons/simple-bench-96.png 2x, icons/simple-bench-144.png 3x" width="48" height="48" alt=""><span class="t"><b>Simple Bench</b><span class="d">A 10-second test of this device</span></span></a>
+    <a class="app" data-id="browser-storage" href="../browser-storage/" target="_top"><img src="icons/browser-storage-48.png" srcset="icons/browser-storage-96.png 2x, icons/browser-storage-144.png 3x" width="48" height="48" alt=""><span class="t"><b>Client browser database manager</b><span class="d">See and delete what these tools stored</span></span></a>
+  </section>
+  <p class="foot"><a href="../" target="_top">The Cool tools front page</a><span>Apps 1.6</span></p>
+</main>
+<script>
+(function () {
+  "use strict";
+  // In a window (another program's Apps button): talk to it by the window kit's protocol (Projects\file-manager\kit\
+  // README.md): "ready" as soon as this runs (the button shows a plain message instead when it never comes),
+  // "escape" for an Escape nothing here used, "close" to close the window. This page has no powers (a list of links),
+  // so it answers whichever page framed it.
+  const framed = (() => { try { return window.self !== window.top; } catch (e) { return true; } })();
+  const post = (m) => { if (framed) window.parent.postMessage(Object.assign({ wk: 1 }, m), "*"); };
+  document.documentElement.classList.add(framed ? "framed" : "alone");
+  const links = Array.from(document.querySelectorAll("a.app"));
+  // The program this menu was opened from (?app=<id>): marked "You are here"; a plain click on it closes the menu
+  // instead of loading the same program again (Ctrl+click still opens it in a new tab).
+  const here = new URLSearchParams(location.search).get("app") || "";
+  for (const a of links) {
+    if (!here || a.dataset.id !== here) continue;
+    a.classList.add("current");
+    a.setAttribute("aria-current", "page");
+    const tag = document.createElement("span");
+    tag.className = "here";
+    tag.textContent = "You are here";
+    a.append(tag);
+  }
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest && e.target.closest("a.app.current");
+    if (!a || !framed || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    post({ type: "close" });
+  });
+  // Keys: up and down (Home, End) move between the programs, Enter goes, Escape closes the window.
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") { if (!e.defaultPrevented) post({ type: "escape" }); return; }
+    const i = links.indexOf(document.activeElement);
+    let j = -1;
+    if (e.key === "ArrowDown") j = i < 0 ? 0 : Math.min(links.length - 1, i + 1);
+    else if (e.key === "ArrowUp") j = i < 0 ? links.length - 1 : Math.max(0, i - 1);
+    else if (e.key === "Home") j = 0;
+    else if (e.key === "End") j = links.length - 1;
+    if (j >= 0) { e.preventDefault(); links[j].focus(); }
+  });
+  // Each program's version: its build writes version.json beside its page ({ version, built }); "Version X" goes
+  // under its line. A program without one (or a file that cannot be read) shows nothing.
+  for (const a of links) {
+    let url;
+    try { url = new URL("version.json", a.href); } catch (e) { continue; }
+    fetch(url, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).then((j) => {
+      const v = j && typeof j.version === "string" ? j.version.trim().replace(/^v(?=\d)/i, "").slice(0, 40) : "";
+      if (!v) return;
+      const s = document.createElement("span");
+      s.className = "ver";
+      s.textContent = "Version " + v;
+      if (typeof j.built === "string" && j.built) s.title = "Built " + j.built.slice(0, 60);
+      a.querySelector(".t").append(s);
+    }).catch(() => {});
+  }
+  if (framed) {
+    post({ type: "ready", version: 1, app: "apps" });
+    // The keys start on the first other program: now, and again when the window kit focuses this frame (which
+    // happens just after it opens and would leave nothing focused here).
+    const first = links.find((a) => !a.classList.contains("current")) || links[0];
+    const start = () => { if (first && (!document.activeElement || document.activeElement === document.body)) try { first.focus({ preventScroll: true }); } catch (e) {} };
+    start();
+    window.addEventListener("focus", () => setTimeout(start, 0), { once: true });
+  }
+  window.APPS_MENU = { version: "1.6", here, framed };
+})();
+</script>
+</body>
+</html>
