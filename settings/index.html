@@ -1,0 +1,2010 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="color-scheme" content="light dark">
+<title>Settings</title>
+<link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACS0lEQVR42o1TXUiTYRR+vjkqnVmziH4sJAbpRexmCaYzw4ukm4oGjQn2I4l0UeJVFyMCvaguXRRIRGGZQa2sqJiFiGaisZmWrbIMFAsKA8O5zfd5vy7m9+7HLjrwwjmH85yf57xHA4BmX8AjpfSSLCKFRhKJJ5DUl2xBnRRhki3tlxs7tGZfwCN1eZskKJKALBNgK9wAKSXef5zCQjQKimWJa0xLldPApMDWzVbUuStw0lOJbVvy/wUGSa95qW2QBCBVQP4aCwxZb81VYEBPTVRkNmYuLFiHo65SvBmdxHwkhr27i1UC94EyrM3LQXb2CpSXFOOi7x5Gx7+CpKadveDXSeL08SoUbLLif+TLt+9oOtcGCgGz0c7j7hBqXWWw5KwEAATHJjHU1wkpiRKnGw67DQAw9yeCm3dfKM5Mxszjn6fRfr9fVRnq60SD8xlO7QlgoOeW8vuudSH49pMi0pS6ZympAtN1maanbstsGDu2b0Stq0IFljjdaH0pIKVEaWWN8p+pP4T5yAKGgx9AMsnBwWoHci2rVKDDboPDfn4ZgXmrc3DCU43B4XcpHAiis+sVFqJxdPeOwP/0NWLxRQWKxRZxx9+DR88HEIlEceX6QzWGVtd0VZLUjE8Sjy+CFKgqt6Ph2H4AQGvbAzwJDIIU0ADE4nGDA92UOIzEJgwwScz8+KU6mJ75qfwKnFhjOGvnrn2/SR7O/Oezs3MIT0yhpz+EkbGJlKrJu5G6bNQA4Ej9JQ9JLymKSGqZh5Vx0jrJsJSyJdR7o+MvICAMdyskq7wAAAAASUVORK5CYII=">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,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">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<style>
+/* ---- settings.css ---- */
+/* settings.css: the Settings page. Light and dark follow the device. No page zoom on phones (the viewport and
+   touch-action), nothing wider than the screen. The Apps button's look is the kit's own (never styled here). */
+:root {
+  --bg: #f3f5fa; --card: #ffffff; --ink: #161b26; --muted: #596377; --line: #dde2ec; --bar: #ffffff;
+  --accent: #3655c9; --accent-ink: #ffffff; --accent-soft: #e8edff;
+  --ok: #1b7a43; --bad: #c22d28; --bad-soft: #fdeceb; --warn-bg: #fff5dc; --warn-ink: #6e4600;
+  --yellow: #ffd23d; --chart: #3655c9; --grid: #c9d0dd;
+  --tap: 40px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1117; --card: #161b22; --ink: #e6edf3; --muted: #9ba5b4; --line: #2b3340; --bar: #12161d;
+    --accent: #7f97ff; --accent-ink: #0b0f19; --accent-soft: #1d2645;
+    --ok: #4cc38a; --bad: #ff6f66; --bad-soft: #3a1715; --warn-bg: #3a2c0d; --warn-ink: #ffd58a;
+    --chart: #7f97ff; --grid: #333c4a;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html { touch-action: manipulation; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.45 "Segoe UI", system-ui, -apple-system, Roboto, sans-serif; overflow-x: hidden; }
+a { color: var(--accent); }
+code { font: 0.93em/1.3 ui-monospace, "Cascadia Mono", Consolas, monospace; word-break: break-all; background: var(--accent-soft); padding: 1px 5px; border-radius: 5px; }
+b { font-weight: 650; }
+
+/* the top bar: the Apps button first, then the title, the connection chip at the right */
+header.bar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 16px; background: var(--bar); border-bottom: 1px solid var(--line); }
+header.bar apps-button { --apps-h: 36px; --apps-sep: var(--line); flex: none; }
+header.bar h1 { margin: 0; font-size: 18px; font-weight: 650; white-space: nowrap; }
+.chip { margin-left: auto; padding: 4px 10px; border-radius: 999px; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 55vw; border: 1px solid var(--line); }
+.chip.on { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 40%, transparent); }
+.chip.off { color: var(--bad); border-color: color-mix(in srgb, var(--bad) 40%, transparent); }
+.chip.wait { color: var(--muted); }
+
+/* the tabs */
+nav.tabs { position: sticky; top: 56px; z-index: 4; display: flex; gap: 4px; padding: 6px 16px; background: var(--bg); border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
+nav.tabs::-webkit-scrollbar { display: none; }
+nav.tabs button { flex: 1 1 0; min-width: 0; min-height: var(--tap); padding: 0 12px; border: 1px solid transparent; border-radius: 10px; background: transparent; color: var(--muted); font: inherit; font-weight: 600; cursor: pointer; white-space: nowrap; }
+nav.tabs button:hover { color: var(--ink); background: var(--card); }
+nav.tabs button[aria-selected="true"] { color: var(--accent); background: var(--card); border-color: var(--line); }
+
+main { max-width: 880px; margin: 0 auto; padding: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin: 0 0 16px; min-width: 0; scroll-margin-top: 120px; }
+.card h2 { margin: 0 0 10px; font-size: 16px; font-weight: 650; }
+.card p { margin: 8px 0; }
+.help { color: var(--muted); font-size: 13.5px; }
+p.help { margin: 6px 0; }
+.warn { background: var(--warn-bg); color: var(--warn-ink); padding: 8px 10px; border-radius: 8px; }
+.okmark { color: var(--ok); font-weight: 700; }
+.say { min-height: 1.2em; margin: 6px 0 0; font-size: 13.5px; color: var(--muted); }
+.say.ok { color: var(--ok); }
+.say.bad { color: var(--bad); }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 8px 0; }
+.row > .help { flex: 1 1 200px; }
+footer { text-align: center; color: var(--muted); font-size: 12.5px; padding: 8px 16px 28px; }
+
+/* buttons, fields, switches */
+button, .button, input, select { font: inherit; color: inherit; }
+button, a.button { display: inline-flex; align-items: center; justify-content: center; min-height: var(--tap); padding: 0 14px; border-radius: 9px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; text-decoration: none; font-weight: 600; }
+button:hover:not(:disabled), a.button:hover { border-color: var(--accent); }
+button:disabled { opacity: 0.5; cursor: default; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+button.danger { background: var(--bad); color: #fff; border-color: var(--bad); }
+button.small { min-height: 32px; padding: 0 10px; font-size: 13.5px; }
+input[type="text"], input[type="password"], select { min-height: var(--tap); padding: 0 10px; border-radius: 9px; border: 1px solid var(--line); background: var(--bg); min-width: 0; }
+.signform input { flex: 1 1 220px; }
+label.check { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.switch { position: relative; width: 46px; min-height: 26px; height: 26px; padding: 0; border-radius: 999px; background: var(--grid); border: none; flex: none; }
+.switch .knob { position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / 0.35); transition: left 0.15s; }
+.switch[aria-checked="true"] { background: var(--accent); }
+.switch[aria-checked="true"] .knob { left: 23px; }
+.switchlabel { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; }
+.tag { display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; background: var(--accent-soft); color: var(--accent); vertical-align: 1px; }
+.tag.new { background: var(--yellow); color: #3a2c00; }
+.tag.priv { background: var(--bad-soft); color: var(--bad); }
+
+/* Connection */
+.addr { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+ul.plain { margin: 6px 0; padding-left: 20px; }
+ul.plain li { margin: 4px 0; }
+
+/* Pinger */
+.pingtop { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 14px; }
+.big { font-size: 40px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -0.5px; }
+.big.ok { color: var(--ok); }
+.big.bad { color: var(--bad); font-size: 30px; }
+.pingwhat { color: var(--muted); }
+.chart { position: relative; height: 140px; margin: 8px 0; padding-top: 14px; border-radius: 8px; background: var(--bg); overflow: hidden; }
+.chart svg { width: 100%; height: 100%; display: block; }
+.chart .bar { fill: var(--chart); }
+.chart .bar.lost { fill: var(--bad); opacity: 0.75; }
+.chart .grid { stroke: var(--grid); stroke-width: 1; stroke-dasharray: 3 4; vector-effect: non-scaling-stroke; }
+.chart .lab { position: absolute; left: 6px; font-size: 11px; line-height: 1; color: var(--muted); }
+.chart .lab.top { top: 2px; }
+.chart .lab.mid { top: calc(14px + (100% - 14px) / 2 - 13px); }
+#restartbanner { display: block; width: 100%; min-height: 36px; border: none; border-radius: 0; background: var(--bad); color: #fff; font-weight: 600; text-align: center; cursor: pointer; padding: 6px 12px; }
+#restartbanner.back { background: var(--ok); }
+#restartbanner[hidden] { display: none; }
+ul.devices .say:empty, ul.programs .say:empty, .watch .say:empty { display: none; }
+.stats { font-size: 13.5px; font-variant-numeric: tabular-nums; }
+ul.pinglog, ul.events { list-style: none; margin: 8px 0; padding: 0; max-height: 280px; overflow-y: auto; border-top: 1px solid var(--line); }
+ul.pinglog li { display: flex; gap: 12px; padding: 4px 2px; border-bottom: 1px solid var(--line); font-size: 13.5px; font-variant-numeric: tabular-nums; }
+ul.pinglog .t, ul.events .t { color: var(--muted); white-space: nowrap; }
+ul.pinglog li.bad .v { color: var(--bad); }
+.confirm { border: 1px solid var(--bad); background: var(--bad-soft); border-radius: 10px; padding: 8px 14px; }
+.confirm ul { margin: 6px 0; padding-left: 20px; }
+.confirm li { margin: 5px 0; }
+.confirm select { min-height: 32px; }
+.countdown { font-size: 17px; }
+.result { font-size: 16px; font-weight: 600; }
+.result.ok { color: var(--ok); }
+ul.events { max-height: 420px; }
+ul.events li { padding: 7px 2px; border-bottom: 1px solid var(--line); }
+ul.events li.bad .what { color: var(--bad); }
+ul.events li.ok .what { color: var(--ok); }
+.evhead { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+.what { font-weight: 600; }
+
+/* Devices, Programs */
+ul.devices, ul.programs { list-style: none; margin: 0; padding: 0; }
+ul.devices > li, ul.programs > li { padding: 10px 0; border-bottom: 1px solid var(--line); }
+ul.devices > li.this .devname { color: var(--accent); }
+.devhead, .proghead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px; }
+form.inline { margin: 0; }
+form.inline input { flex: 1 1 180px; }
+.state { font-size: 13.5px; margin-top: 2px; }
+.state.bad { color: var(--bad); }
+.progctl { gap: 10px 14px; }
+.switchrow { gap: 12px; }
+
+/* a phone */
+@media (max-width: 560px) {
+  header.bar { height: 52px; gap: 8px; padding: 0 8px; }
+  header.bar apps-button { --apps-h: 40px; }
+  header.bar h1 { font-size: 17px; }
+  .chip { font-size: 12px; padding: 3px 8px; max-width: 44vw; }
+  nav.tabs { top: 52px; padding: 6px 8px; gap: 2px; }
+  nav.tabs button { padding: 0 6px; font-size: 14px; }
+  main { padding: 12px 12px; }
+  .card { padding: 14px; border-radius: 12px; }
+  .big { font-size: 34px; }
+}
+
+</style>
+</head>
+<body>
+<header class="bar">
+  <apps-button app="settings" stack="560"></apps-button>
+  <h1>Settings</h1>
+  <span class="chip wait" id="conn" role="status" aria-live="polite">Checking…</span>
+</header>
+<nav class="tabs" role="tablist" aria-label="Settings">
+  <button type="button" role="tab" data-tab="connection" aria-controls="tab-connection" aria-selected="false">Connection</button>
+  <button type="button" role="tab" data-tab="pinger" aria-controls="tab-pinger" aria-selected="false">Pinger</button>
+  <button type="button" role="tab" data-tab="devices" aria-controls="tab-devices" aria-selected="false">Devices</button>
+  <button type="button" role="tab" data-tab="programs" aria-controls="tab-programs" aria-selected="false">Programs</button>
+</nav>
+<button type="button" id="restartbanner" hidden></button>
+<main>
+  <section class="panel" id="tab-connection" role="tabpanel" hidden></section>
+  <section class="panel" id="tab-pinger" role="tabpanel" hidden></section>
+  <section class="panel" id="tab-devices" role="tabpanel" hidden></section>
+  <section class="panel" id="tab-programs" role="tabpanel" hidden></section>
+</main>
+<footer><span id="ver"></span> · <a href="https://jonnystokes.github.io/Cool-tools/">Cool tools</a></footer>
+<script>
+// ---- relay-client.js ----
+/* relay-client.js 2: the PC Relay client (ONE source: Projects\pc-relay\client\relay-client.js; each page's build
+   copies it in, so never edit a copy). Talks to PC Relay 2 on Jon's PC (Tailscale Funnel). SECURITY.md beside the
+   relay says what the PC allows; this file only carries the pass and says plainly what the PC answered.
+   - Nothing happens until the page calls something: no background traffic of its own.
+   - The PC's address (2026-11-08, after the PC was renamed DESKTOP-KRQ9TI2 -> DESKTOP-42): unless the page names
+     one (opts.base: a setting, a test, the relay's own origin for a page it serves), it is read from the address
+     file on Jon's Cool tools site, ADDRESS_FILE ({"address": "https://..."}), fresh (never a cached copy) before the
+     first connection, and again when a connection fails (at most once a minute), so an open page follows a rename.
+     After a rename only that file changes; no page is rebuilt. If the file cannot be loaded (no network, a page
+     opened from a file while offline, the site down), the address this copy was built with (BUILT_PC) is used and
+     the page is told so: R.where is { from: "built-in", why }, and the page's log function (opts.log) and the
+     browser's console get the same words. Never silently. (Tried again before a request, at most once a minute.)
+   - ONE pass per browser (localStorage "relay-pass", shared by every page of the same site), from signIn(password).
+     It is sent in the X-Relay-Pass header (HTTP) or as the WebSocket subprotocol "pass.<p>" (a browser cannot set
+     WebSocket headers); never in a URL, never in cookies. Signed in = everything; signed out = view and download
+     public things. The PC decides every request; a page's buttons are only buttons.
+   - A 401 from the PC means "sign in": the pass (if one was sent) is no longer valid, so it is forgotten, the status
+     becomes "signin", and call() answers { ok: false, signin: true, status: 401, why }.
+   - Status events: checking / connected / starting / ready / offline / off / signin / reload, each with a plain `why`.
+   - Version-checked: a relay that needs a newer client says so (426), and the status becomes "reload".
+
+   const R = RelayClient.create({ app: "reader", log });  // app names the page in the PC's logs; log(text) hears
+                                                           // relay-client's notes (which address, and why)
+   await R.address();                                      // { url, from: "file" | "built-in" | "page", why }
+   await R.ping();                                         // { ok, info, latency } ; info.signed_in, info.services
+   R.signedIn();                                           // this browser holds a pass (the last ping says if it is valid)
+   await R.signIn(password);                               // { ok, why, device, name }
+   await R.signOut();                                      // { ok }
+   await R.call("files", "list?folder=root");              // { ok, status, data, why, signin } (JSON in and out)
+   await R.call("files", "mkdir", { method: "POST", json: { parent, name } });
+   const r = await R.fetch("files", "file/ID/name");       // a Response (a 401 forgets the pass, as above)
+   const ws = R.ws("voice", "ws");                         // a WebSocket carrying the pass
+   await R.open("voice", (p) => ..., 60000);               // start a program, with progress
+   R.url("files", "file/ID/name?dl=1");                    // a plain link (public things only: a link carries no pass)
+   R.url, R.wsUrl and R.ws answer at once, with the address the last call used: call one of the others first.
+*/
+(function (root) {
+  "use strict";
+  const VERSION = 2;
+  // The address this copy was built with: used only when the address file cannot be loaded, and then said.
+  const BUILT_PC = "https://desktop-42.tail46434.ts.net";
+  // Where the PC's address is published (WEB-APP-CONVENTIONS.md 5): after a rename, edit only that file.
+  const ADDRESS_FILE = "https://jonnystokes.github.io/Cool-tools/relay.json";
+  const RECHECK_MS = 60000;  // the address file is read again after a failed connection at most once a minute
+  const ADDRESS_MS = 6000;   // the address file's own time limit
+  const trim = (u) => String(u || "").trim().replace(/\/+$/, "");
+  const goodAddress = (a) => /^https:\/\/[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+(:\d{1,5})?$/i.test(a);
+  const KEY = "relay-pass";
+  const store = {
+    get(k) { try { return root.localStorage.getItem(k) || ""; } catch (e) { return ""; } },
+    set(k, v) { try { if (v) root.localStorage.setItem(k, v); else root.localStorage.removeItem(k); } catch (e) {} },
+    keys() { try { return Object.keys(root.localStorage); } catch (e) { return []; } },
+  };
+  // relay-client 1 kept a device id and one pass per scope; relay 2 does not accept them: tidied away.
+  for (const k of store.keys()) if (k === "relay-device" || k.startsWith("relay-pass:")) store.set(k, "");
+  let memPass = null; // when localStorage is not available (a sandboxed page): this page only
+
+  function httpWhy(status) {
+    return ({ 400: "the PC refused that address", 401: "sign-in needed", 403: "the PC refused this page",
+      404: "the PC has no such program", 410: "this page is out of date: reload it", 426: "this page is out of date: reload it",
+      429: "too many requests: wait a minute", 502: "the PC is reachable but the relay is not running (502)",
+      503: "the PC said it is busy or switched off (503)" })[status] || `the PC answered ${status}`;
+  }
+  function netWhy(err, ms) {
+    if (err && err.name === "AbortError") return `no answer from the PC within ${Math.round(ms / 1000)} s`;
+    if (typeof navigator !== "undefined" && navigator.onLine === false) return "this device is offline";
+    return "could not reach the PC (no network, or the PC is off or asleep)";
+  }
+  // What kind of failure, so a page can say which it was and decide whether trying again can help: "offline" (this
+  // device has no network), "timeout", "network" (no connection to the PC), "http" (the PC answered with an error
+  // status), "off" (the relay is switched off), "reload", "signin", "start" (a program failed while it started).
+  function netKind(err) {
+    if (err && err.name === "AbortError") return "timeout";
+    if (typeof navigator !== "undefined" && navigator.onLine === false) return "offline";
+    return "network";
+  }
+  async function readError(r) {
+    try { const j = await r.clone().json(); if (j && j.error) return j.error; } catch (e) {}
+    return httpWhy(r.status);
+  }
+  const kindOf = (status) => status === 401 ? "signin" : status === 426 || status === 410 ? "reload" : "http";
+
+  class Relay {
+    constructor(opts) {
+      this.app = (opts.app || "page").replace(/[^A-Za-z0-9_.-]/g, "");
+      this.log = typeof opts.log === "function" ? opts.log : null;
+      this.status = { state: "idle", why: "", at: Date.now() };
+      this.info = null;          // the last /relay/ping answer
+      this.latency = 0;          // ms, the last ping's round trip
+      this.bytes = 0;            // bytes this client has fetched through call() (approximate)
+      this.subs = new Set();
+      this._job = null;          // the address file being read (one read at a time)
+      this._readAt = 0;          // when it was last asked for
+      this._name(opts.base);
+      if (typeof opts.onStatus === "function") this.subs.add(opts.onStatus);
+    }
+    // ---- the PC's address -------------------------------------------------------------------------------------
+    // given: the page's own address (opts.base, setBase(url)), or "" = Jon's PC, from the address file.
+    // where: { url, from, why }: from "page" (given), "file" (read from the address file in this page's life),
+    // "built-in" (the file could not be loaded: why says so, plainly), "unread" (nothing asked yet).
+    _name(url) {
+      this.given = trim(url);
+      this.base = this.given || BUILT_PC;
+      this.where = this.given ? { url: this.given, from: "page", why: "" } : { url: BUILT_PC, from: "unread", why: "" };
+      this._readAt = 0;
+    }
+    setBase(url) { if (trim(url) !== this.given) this._name(url); }
+    async address() { await this._ready(); return this.where; }
+    // before a request: the address file read once per page load (and again at most once a minute while it fails)
+    async _ready() {
+      if (this.given) return;
+      const w = this.where.from;
+      if (w === "unread" || (w === "built-in" && Date.now() - this._readAt >= RECHECK_MS)) await this._read();
+    }
+    _read() {
+      if (!this._job) this._job = this._readNow().finally(() => { this._job = null; });
+      return this._job;
+    }
+    // after a connection failed: has the PC moved? Read the file again (at most once a minute); true = a new address
+    async _recheck() {
+      if (this.given || this._job || Date.now() - this._readAt < RECHECK_MS) return false;
+      const was = this.base;
+      await this._read();
+      return this.base !== was;
+    }
+    async _readNow() {
+      this._readAt = Date.now();
+      const was = this.where;
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), ADDRESS_MS);
+      let why = "";
+      try {
+        const r = await fetch(`${ADDRESS_FILE}?t=${Date.now()}`, { cache: "no-store", credentials: "omit", signal: ac.signal });
+        if (!r.ok) throw new Error(`the site answered ${r.status}`);
+        const j = await r.json().catch(() => null);
+        const a = trim(j && j.address);
+        if (!goodAddress(a)) throw new Error(j ? "it holds no https address" : "it is not JSON");
+        if (this.given) return;                    // the page named its own address meanwhile
+        this.base = a;
+        this.where = { url: a, from: "file", why: "" };
+        if (was.from !== "file") this._note(`the PC's address: ${a} (from ${ADDRESS_FILE})`, false);
+        else if (was.url !== a) this._note(`the PC's address changed to ${a} (it was ${was.url}; from ${ADDRESS_FILE})`, false);
+        return;
+      } catch (e) {
+        why = e && e.name === "AbortError" ? `no answer within ${ADDRESS_MS / 1000} s`
+          : typeof navigator !== "undefined" && navigator.onLine === false ? "this device is offline"
+          : e && e.name === "TypeError" ? "the Cool tools site could not be reached"
+          : String((e && e.message) || e);
+      } finally { clearTimeout(timer); }
+      if (this.given || was.from === "file") return;  // read fine earlier in this page's life: that address stays
+      const text = `the PC's address file (${ADDRESS_FILE}) could not be loaded (${why}): using the address this page was built with, ${BUILT_PC}`;
+      this.base = BUILT_PC;
+      this.where = { url: BUILT_PC, from: "built-in", why: text };
+      if (was.why !== text) this._note(text, true);
+    }
+    _note(text, warn) {
+      if (this.log) { try { this.log(text); } catch (e) {} }
+      try { if (typeof console !== "undefined") (warn ? console.warn : console.info)("relay-client: " + text); } catch (e) {}
+    }
+    on(fn) { this.subs.add(fn); return () => this.subs.delete(fn); }
+    _set(state, extra) {
+      this.status = Object.assign({ state, why: "", at: Date.now() }, extra || {});
+      for (const f of this.subs) { try { f(this.status); } catch (e) {} }
+    }
+    // ---- the pass: one per browser --------------------------------------------------------------------------
+    _rec() {
+      if (memPass) return memPass;
+      try { const j = JSON.parse(store.get(KEY) || "null"); return j && typeof j.pass === "string" && j.pass ? j : null; } catch (e) { return null; }
+    }
+    _pass() { const r = this._rec(); return r ? r.pass : ""; }
+    _keep(rec) {
+      store.set(KEY, rec ? JSON.stringify(rec) : "");
+      memPass = rec && !store.get(KEY) ? rec : null; // storage refused: keep it for this page's life only
+    }
+    // the PC no longer knows the pass this browser sent: forget it, and say "sign in" (why = what the PC said)
+    _lost(why) {
+      if (!this._pass()) return;
+      this._keep(null);
+      this._set("signin", { why: why || "signed out on the PC: sign in again" });
+    }
+    signedIn() { return !!this._pass(); }
+    device() { const r = this._rec(); return r ? { device: r.device || "", name: r.name || "", since: r.at || 0 } : null; }
+    headers(extra) {
+      const h = { "X-Relay-Client": this.app + "/" + VERSION };
+      const p = this._pass();
+      if (p) h["X-Relay-Pass"] = p;
+      return Object.assign(h, extra || {});
+    }
+    // ---- addresses ----
+    url(service, path) { return `${this.base}/svc/${service}/${String(path || "").replace(/^\/+/, "")}`; }
+    wsUrl(service, path) { return this.url(service, path).replace(/^http/, "ws"); }
+    wsProtocols() { const p = this._pass(); return p ? ["relay", "pass." + p] : ["relay"]; }
+    ws(service, path) { return new WebSocket(this.wsUrl(service, path), this.wsProtocols()); }
+    // fetch through the relay: a Response. opts.timeout (ms) aborts a request that has not started answering. A 401
+    // forgets this browser's pass (it is not valid any more) and sets the status "signin". A request that could not
+    // reach the PC has the address file read again (in the background: the next request goes to a new address).
+    async fetch(service, path, opts) {
+      opts = Object.assign({}, opts || {});
+      const timeout = opts.timeout || 0; delete opts.timeout;
+      await this._ready();
+      opts.headers = this.headers(opts.headers);
+      const sent = !!opts.headers["X-Relay-Pass"];
+      let timer = 0, ac = null;
+      if (timeout && !opts.signal) { ac = new AbortController(); opts.signal = ac.signal; timer = setTimeout(() => ac.abort(), timeout); }
+      try {
+        const r = await fetch(this.url(service, path), opts);
+        if (r.status === 401) { const why = await readError(r); if (sent) this._lost(why); else this._set("signin", { service, why }); }
+        return r;
+      } catch (err) {
+        if (ac || !(opts.signal && opts.signal.aborted)) this._recheck().catch(() => {});   // (not when the page stopped it)
+        throw err;
+      } finally { clearTimeout(timer); }
+    }
+    // call: a request with a JSON answer, as one plain result: { ok, status, data, why, kind, signin }. opts.json
+    // sends a JSON body (Content-Type set); opts.method, opts.headers, opts.body, opts.signal, opts.timeout as fetch.
+    async call(service, path, opts) {
+      opts = Object.assign({ cache: "no-store" }, opts || {});
+      if (opts.json !== undefined) {
+        opts.body = JSON.stringify(opts.json);
+        opts.headers = Object.assign({ "Content-Type": "application/json" }, opts.headers || {});
+        delete opts.json;
+      }
+      const ms = opts.timeout || 0;
+      let r;
+      try { r = await this.fetch(service, path, opts); }
+      catch (err) { return { ok: false, status: 0, data: null, why: netWhy(err, ms), kind: netKind(err), signin: false }; }
+      const text = await r.text().catch(() => "");
+      this.bytes += text.length;
+      let data = null;
+      try { data = text ? JSON.parse(text) : null; } catch (e) { data = null; }
+      if (r.ok) return { ok: true, status: r.status, data, why: "", kind: "", signin: false };
+      const why = (data && data.error) || httpWhy(r.status);
+      if (r.status === 426) this._set("reload", { why });
+      return { ok: false, status: r.status, data, why, kind: kindOf(r.status), signin: r.status === 401 };
+    }
+    // ---- the light check: the PC, its programs, and whether this browser's pass is still valid ----
+    // (no answer: the address file is read again, at most once a minute; a new address there is tried at once)
+    async ping(timeoutMs) {
+      timeoutMs = timeoutMs || 8000;
+      this._set("checking", { why: "checking the connection…" });
+      await this._ready();
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), timeoutMs), t0 = performance.now();
+      try {
+        const r = await fetch(`${this.base}/relay/ping?t=${Date.now()}`, { headers: this.headers(), cache: "no-store", signal: ac.signal });
+        if (!r.ok) { const why = await readError(r); this._set(r.status === 426 ? "reload" : "offline", { why }); return { ok: false, why, kind: kindOf(r.status), status: r.status }; }
+        const info = await r.json();
+        this.latency = Math.round(performance.now() - t0);
+        this.info = info;
+        if ((info.min_client || 0) > VERSION) { const why = "this page is out of date: reload it"; this._set("reload", { why }); return { ok: false, why, info, kind: "reload" }; }
+        if (info.pass === "unknown") this._lost("signed out on the PC (or the sign-in ended): sign in again");
+        if (!info.on) { const why = "the PC relay is switched off (tray icon on the PC)"; this._set("off", { why, info }); return { ok: false, why, info, kind: "off" }; }
+        this._set("connected", { why: `connected (${this.latency} ms)`, info, latency: this.latency, signedIn: !!info.signed_in });
+        return { ok: true, info, latency: this.latency, signedIn: !!info.signed_in };
+      } catch (err) {
+        clearTimeout(timer);
+        if (await this._recheck()) return this.ping(timeoutMs);   // the PC has a new address: try it now (once)
+        const why = netWhy(err, timeoutMs);
+        this._set("offline", { why });
+        return { ok: false, why, kind: netKind(err) };
+      } finally { clearTimeout(timer); }
+    }
+    service(id) { return ((this.info && this.info.services) || []).find((s) => s.id === id) || null; }
+    // ---- sign-in: the password -> this browser's one pass (the old one, if any, is replaced on the PC) ----
+    async signIn(password) {
+      await this._ready();
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), 15000);
+      try {
+        const r = await fetch(`${this.base}/relay/login`, { method: "POST", headers: this.headers({ "Content-Type": "application/json" }),
+          body: JSON.stringify({ password }), cache: "no-store", signal: ac.signal });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) return { ok: false, why: j.error || httpWhy(r.status), status: r.status, kind: r.status === 401 ? "wrong" : kindOf(r.status) };
+        this._keep({ pass: j.pass, device: j.device || "", name: j.name || "", at: Date.now() });
+        this._set("connected", { why: "signed in", signedIn: true });
+        return { ok: true, device: j.device || "", name: j.name || "", expiresDays: j.expires_days || 0 };
+      } catch (err) { this._recheck().catch(() => {}); return { ok: false, why: netWhy(err, 15000), kind: netKind(err) }; }
+      finally { clearTimeout(timer); }
+    }
+    // sign-out: forgotten here at once; the PC ends the pass (and the connections it opened) when it hears it
+    async signOut() {
+      const p = this._pass();
+      this._keep(null);
+      if (!p) return { ok: true };
+      await this._ready();
+      try {
+        const r = await fetch(`${this.base}/relay/logout`, { method: "POST", headers: { "X-Relay-Pass": p, "X-Relay-Client": this.app + "/" + VERSION }, cache: "no-store" });
+        const j = await r.json().catch(() => ({}));
+        return { ok: true, onPC: !!j.signed_out };
+      } catch (e) { return { ok: true, onPC: false, why: "signed out here; the PC could not be told (" + netWhy(e, 0) + ")" }; }
+    }
+    // ---- start a program, with progress ("starting the voice engine…") ----
+    async open(service, onProgress, timeoutMs) {
+      timeoutMs = timeoutMs || 60000;
+      this._set("starting", { service, why: `starting ${service} on the PC…` });
+      await this._ready();
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), timeoutMs);
+      try {
+        const h = this.headers();
+        const r = await fetch(`${this.base}/relay/open/${service}`, { headers: h, cache: "no-store", signal: ac.signal });
+        if (r.status === 401) { const why = await readError(r); if (h["X-Relay-Pass"]) this._keep(null); this._set("signin", { service, why }); return { ok: false, signin: true, why, kind: "signin", status: 401 }; }
+        if (!r.ok) { const why = await readError(r); this._set(r.status === 426 ? "reload" : "offline", { service, why }); return { ok: false, why, kind: kindOf(r.status), status: r.status }; }
+        const rd = r.body.getReader(), dec = new TextDecoder();
+        let buf = "", last = null;
+        for (;;) {
+          const { value, done } = await rd.read();
+          if (done) break;
+          buf += dec.decode(value, { stream: true });
+          let i;
+          while ((i = buf.indexOf("\n")) >= 0) {
+            const line = buf.slice(0, i); buf = buf.slice(i + 1);
+            if (!line.trim()) continue;
+            try { last = JSON.parse(line); } catch (e) { continue; }
+            if (onProgress) { try { onProgress(last); } catch (e) {} }
+            if (last.state === "starting") this._set("starting", { service, why: last.text || "starting…", seconds: last.seconds || 0 });
+          }
+        }
+        if (last && last.state === "ready") { this._set("ready", { service, why: last.warm ? "ready" : `ready (started in ${(last.ms / 1000).toFixed(1)} s)` }); return { ok: true, warm: !!last.warm, ms: last.ms || 0 }; }
+        const why = (last && last.error) || "the PC stopped answering while it was starting";
+        this._set("offline", { service, why });
+        return { ok: false, why, kind: "start" };
+      } catch (err) {
+        this._recheck().catch(() => {});
+        const why = netWhy(err, timeoutMs);
+        this._set("offline", { service, why });
+        return { ok: false, why, kind: netKind(err) };
+      } finally { clearTimeout(timer); }
+    }
+    // ---- keep checking (only while the page wants it): backoff 1 s, 2 s, 4 s ... 30 s while it fails ----
+    watch(everyMs) {
+      everyMs = everyMs || 15000;
+      let stopped = false, timer = 0, fails = 0;
+      const tick = async () => {
+        if (stopped) return;
+        const r = await this.ping();
+        fails = r.ok ? 0 : fails + 1;
+        const wait = r.ok ? everyMs : Math.min(30000, 1000 * 2 ** Math.min(fails - 1, 5));
+        if (!stopped) timer = setTimeout(tick, wait * (0.9 + Math.random() * 0.2));
+      };
+      const online = () => { clearTimeout(timer); tick(); };
+      if (typeof addEventListener === "function") addEventListener("online", online);
+      tick();
+      return () => { stopped = true; clearTimeout(timer); if (typeof removeEventListener === "function") removeEventListener("online", online); };
+    }
+  }
+
+  // DEFAULT_PC: relay-client 2's old name for BUILT_PC (kept for code that still reads it)
+  root.RelayClient = { VERSION, BUILT_PC, DEFAULT_PC: BUILT_PC, ADDRESS_FILE, create: (opts) => new Relay(opts || {}), httpWhy };
+})(typeof window !== "undefined" ? window : globalThis);
+
+// ---- apps.js ----
+/* apps.js 1.14 (built 2026-11-08 1:50 AM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
+   app-kit\apps-button.js and file-manager\kit\window-kit.js (one source each; never edit this file). The window kit
+   runs only when the page has none of its own. */
+if (!window.WindowKit) {
+/* window-kit.js: open one of Jon's pages in a floating window inside another page, and pick files from the file
+   manager through it. ONE source: Projects\file-manager\kit\window-kit.js (pages copy it in at build time, or load
+   https://jonnystokes.github.io/Cool-tools/file-manager/window-kit.js). The protocol and an example: kit\README.md.
+
+   Host side (the page that opens the window):
+     const win = WindowKit.open(url, { title, name, width, height, onClose });   // a floating window with the page
+     const got = await WindowKit.pick(fileManagerUrl, { accept: [".zip"], folder: "files" });  // null = cancelled
+   The window: drag by its title bar, resize from every edge and corner, maximise (button or double-click the
+   title), close (button or Escape); its size and place are remembered per name. On a phone it is a full-screen
+   sheet, and the phone's Back button closes it. Every message is checked: it must come from the window's own
+   frame and from the origin of the address it opened.
+   Child side (the page inside): WindowKit.child.ready(), .title(text), .close(), .busy(why), .onPick(handler); it accepts
+   requests only from its parent frame, from an allowed origin (Jon's pages on jonnystokes.github.io, its own
+   origin, local file pages), and refuses to run inside any other site (location.ancestorOrigins). */
+(function (root) {
+  "use strict";
+  const VERSION = 1;
+  const MIN_W = 320, MIN_H = 220, MARGIN = 8, HEAD = 40;
+  const SHEET = "(max-width: 640px), (max-height: 480px) and (pointer: coarse)";
+  const KEY = "wk-win:";
+  const wins = [];
+  let z = 2147482000, styled = false, seq = 0;
+
+  function css() {
+    if (styled) return;
+    styled = true;
+    const s = document.createElement("style");
+    s.textContent = `
+.wk-win{position:fixed;z-index:2147482000;display:flex;flex-direction:column;box-sizing:border-box;background:#fff;color:#171c28;border:1px solid rgba(15,23,42,.14);border-radius:12px;box-shadow:0 18px 50px rgba(15,23,42,.3),0 2px 8px rgba(15,23,42,.16);overflow:visible;font:14px/1.3 "Segoe UI",system-ui,-apple-system,sans-serif;margin:0;padding:0}
+@media (prefers-color-scheme:dark){.wk-win{background:#131826;color:#e8ecf6;border-color:rgba(255,255,255,.14);box-shadow:0 18px 50px rgba(0,0,0,.6)}}
+.wk-head{flex:none;height:${HEAD}px;display:flex;align-items:center;gap:2px;padding:0 4px 0 14px;background:rgba(127,127,127,.09);border-bottom:1px solid rgba(127,127,127,.2);border-radius:11px 11px 0 0;cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none;box-sizing:border-box}
+.wk-win.wk-dragging .wk-head{cursor:grabbing}
+.wk-title{flex:1;min-width:0;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}
+.wk-btn{all:unset;box-sizing:border-box;width:36px;height:30px;border-radius:7px;display:grid;place-items:center;cursor:pointer;color:inherit}
+.wk-btn:hover{background:rgba(127,127,127,.2)}.wk-btn:focus-visible{outline:2px solid #2563eb;outline-offset:1px}
+.wk-btn.wk-x:hover{background:#e5484d;color:#fff}
+.wk-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.wk-frame{flex:1;display:block;width:100%;min-height:0;border:0;margin:0;padding:0;background:transparent;border-radius:0 0 11px 11px}
+.wk-win.wk-sheet .wk-head,.wk-win.wk-sheet .wk-frame{border-radius:0}
+.wk-shield{position:absolute;left:0;right:0;bottom:0;top:${HEAD}px;display:none;z-index:3}
+.wk-win.wk-dragging .wk-shield{display:block}
+.wk-grip{position:absolute;z-index:4}
+.wk-g-n{top:-4px;left:12px;right:12px;height:8px;cursor:ns-resize}.wk-g-s{bottom:-4px;left:12px;right:12px;height:8px;cursor:ns-resize}
+.wk-g-e{right:-4px;top:12px;bottom:12px;width:8px;cursor:ew-resize}.wk-g-w{left:-4px;top:12px;bottom:12px;width:8px;cursor:ew-resize}
+.wk-g-ne{right:-4px;top:-4px;width:16px;height:16px;cursor:nesw-resize}.wk-g-sw{left:-4px;bottom:-4px;width:16px;height:16px;cursor:nesw-resize}
+.wk-g-nw{left:-4px;top:-4px;width:16px;height:16px;cursor:nwse-resize}.wk-g-se{right:-4px;bottom:-4px;width:16px;height:16px;cursor:nwse-resize}
+.wk-win.wk-maxed .wk-grip{display:none}.wk-win.wk-maxed .wk-head{cursor:default}
+.wk-win.wk-sheet{left:0!important;top:0!important;width:100%!important;height:100%!important;border:0;border-radius:0;animation:wk-rise .2s ease-out}
+.wk-win.wk-sheet .wk-grip,.wk-win.wk-sheet .wk-max{display:none}
+.wk-win.wk-sheet .wk-head{height:calc(48px + env(safe-area-inset-top));padding-top:env(safe-area-inset-top);cursor:default}
+.wk-win.wk-sheet .wk-btn{width:44px;height:40px}.wk-win.wk-sheet .wk-shield{top:48px}
+@keyframes wk-rise{from{transform:translateY(24px);opacity:.5}}`;
+    document.head.appendChild(s);
+  }
+  const svg = (d) => `<svg viewBox="0 0 16 16" aria-hidden="true">${d}</svg>`;
+  const ICON = { max: svg('<rect x="3" y="3" width="10" height="10" rx="1.5"/>'), restore: svg('<rect x="3" y="5.5" width="7.5" height="7.5" rx="1.3"/><path d="M5.5 5.5V4.3c0-.7.6-1.3 1.3-1.3h4.9c.7 0 1.3.6 1.3 1.3v4.9c0 .7-.6 1.3-1.3 1.3h-1.2"/>'), close: svg('<path d="M4 4l8 8M12 4l-8 8"/>') };
+
+  function load(name) { try { const g = JSON.parse(localStorage.getItem(KEY + name)); return g && typeof g.w === "number" ? g : null; } catch (e) { return null; } }
+  function save(name, g) { try { localStorage.setItem(KEY + name, JSON.stringify(g)); } catch (e) {} }
+  function fit(g) {
+    const W = innerWidth, H = innerHeight;
+    const w = Math.round(Math.min(Math.max(g.w, MIN_W), W - 2 * MARGIN)), h = Math.round(Math.min(Math.max(g.h, MIN_H), H - 2 * MARGIN));
+    return { x: Math.round(Math.max(MARGIN, Math.min(g.x, W - w - MARGIN))), y: Math.round(Math.max(MARGIN, Math.min(g.y, H - h - MARGIN))), w, h };
+  }
+  const isSheet = () => root.matchMedia(SHEET).matches;
+  const top = () => (wins.length ? wins.reduce((a, b) => (+a.el.style.zIndex > +b.el.style.zIndex ? a : b)) : null);
+
+  // open(url, opts) -> the window: { el, frame, url, origin, name, ready, closed, close, maximize, restore, toggleMax,
+  // front, focus, post(msg, transfer), on(type, fn), title(text) }
+  function open(url, opts) {
+    opts = opts || {};
+    css();
+    const abs = new URL(url, location.href).href;
+    const origin = new URL(abs).origin; // "null" for a file: address (then postMessage needs "*", and the reply's origin is "null")
+    const name = opts.name || new URL(abs).pathname;
+    const id = ++seq;
+    const back = document.activeElement;
+    const el = document.createElement("div");
+    el.className = "wk-win";
+    el.setAttribute("role", "dialog");
+    el.setAttribute("aria-label", opts.title || "Window");
+    el.innerHTML = `<div class="wk-head"><span class="wk-title"></span><button class="wk-btn wk-max" type="button" aria-label="Maximise" title="Maximise">${ICON.max}</button><button class="wk-btn wk-x" type="button" aria-label="Close" title="Close (Escape)">${ICON.close}</button></div><iframe class="wk-frame" allow="clipboard-read; clipboard-write; fullscreen"></iframe><div class="wk-shield"></div>`
+      + ["n", "s", "e", "w", "ne", "nw", "se", "sw"].map((d) => `<div class="wk-grip wk-g-${d}" data-dir="${d}"></div>`).join("");
+    const head = el.querySelector(".wk-head"), titleEl = el.querySelector(".wk-title"), maxBtn = el.querySelector(".wk-max"), frame = el.querySelector(".wk-frame");
+    titleEl.textContent = opts.title || "";
+    const handlers = {};
+    let readyRes, closedRes, closedNow = false;
+    const saved = load(name);
+    const w0 = opts.width || Math.min(980, Math.round(innerWidth * 0.8)), h0 = opts.height || Math.min(700, Math.round(innerHeight * 0.8));
+    let g = fit(saved || { x: (innerWidth - w0) / 2, y: Math.max(MARGIN, (innerHeight - h0) / 3), w: w0, h: h0 });
+    let maxed = !!(saved && saved.max), before = null;
+    const win = {
+      id, el, frame, url: abs, origin, name, pushed: false,
+      ready: new Promise((r) => { readyRes = r; }), closed: new Promise((r) => { closedRes = r; }),
+      on(type, fn) { (handlers[type] = handlers[type] || []).push(fn); return win; },
+      title(t) { titleEl.textContent = t; el.setAttribute("aria-label", t); },
+      post(msg, transfer) { if (frame.contentWindow) frame.contentWindow.postMessage(msg, origin === "null" ? "*" : origin, transfer || []); },
+      front() { el.style.zIndex = String(++z); },
+      focus() { try { frame.focus(); } catch (e) {} },
+      maximize() { if (maxed) return; before = g; maxed = true; layout(); remember(); },
+      restore() { if (!maxed) return; maxed = false; if (before) g = before; layout(); remember(); },
+      toggleMax() { maxed ? win.restore() : win.maximize(); },
+      busy: "", // what the page inside says is still running (uploads): a person closing the window is asked first
+      ask() { return !win.busy || root.confirm(`${win.busy} in this window. Close it anyway (they stop)?`); },
+      close(fromPop) {
+        if (closedNow) return;
+        closedNow = true;
+        wins.splice(wins.indexOf(win), 1);
+        el.remove();
+        if (win.pushed && !fromPop && history.state && history.state.wkSheet === id) history.back();
+        if (back && back.focus && document.contains(back)) try { back.focus({ preventScroll: true }); } catch (e) {}
+        closedRes();
+        if (opts.onClose) try { opts.onClose(); } catch (e) {}
+      },
+      _emit(type, m) { for (const fn of handlers[type] || []) try { fn(m); } catch (e) {} },
+      _ready(m) { readyRes(m); },
+    };
+    function layout() {
+      const sheet = isSheet();
+      el.classList.toggle("wk-sheet", sheet);
+      el.classList.toggle("wk-maxed", maxed && !sheet);
+      maxBtn.innerHTML = maxed ? ICON.restore : ICON.max;
+      maxBtn.title = maxed ? "Restore" : "Maximise";
+      maxBtn.setAttribute("aria-label", maxBtn.title);
+      if (sheet) {
+        if (!win.pushed && opts.back !== false) { try { history.pushState(Object.assign({}, history.state, { wkSheet: id }), ""); win.pushed = true; } catch (e) {} }
+        return;
+      }
+      const r = maxed ? { x: MARGIN, y: MARGIN, w: innerWidth - 2 * MARGIN, h: innerHeight - 2 * MARGIN } : (g = fit(g));
+      el.style.left = r.x + "px"; el.style.top = r.y + "px"; el.style.width = r.w + "px"; el.style.height = r.h + "px";
+    }
+    function remember() { save(name, Object.assign({}, maxed && before ? before : g, { max: maxed })); }
+    win._layout = layout;
+
+    // Drag by the title bar; resize from the edges and corners. A shield over the frame keeps the pointer's moves
+    // coming while it passes over the page inside.
+    function grab(handle, apply) {
+      handle.addEventListener("pointerdown", (e) => {
+        if (e.button !== 0 || e.target.closest(".wk-btn") || isSheet() || maxed) return;
+        e.preventDefault();
+        win.front();
+        const start = { x: e.clientX, y: e.clientY, g: Object.assign({}, g) };
+        el.classList.add("wk-dragging");
+        try { handle.setPointerCapture(e.pointerId); } catch (x) {}
+        const move = (ev) => { g = fit(apply(start, ev.clientX - start.x, ev.clientY - start.y)); layout(); };
+        const end = () => { handle.removeEventListener("pointermove", move); handle.removeEventListener("pointerup", end); handle.removeEventListener("pointercancel", end); el.classList.remove("wk-dragging"); remember(); };
+        handle.addEventListener("pointermove", move);
+        handle.addEventListener("pointerup", end);
+        handle.addEventListener("pointercancel", end);
+      });
+    }
+    grab(head, (s, dx, dy) => ({ x: s.g.x + dx, y: s.g.y + dy, w: s.g.w, h: s.g.h }));
+    for (const grip of el.querySelectorAll(".wk-grip")) {
+      const d = grip.dataset.dir;
+      grab(grip, (s, dx, dy) => {
+        let { x, y, w, h } = s.g;
+        if (d.includes("e")) w = Math.max(MIN_W, s.g.w + dx);
+        if (d.includes("s")) h = Math.max(MIN_H, s.g.h + dy);
+        if (d.includes("w")) { w = Math.max(MIN_W, s.g.w - dx); x = s.g.x + s.g.w - w; }
+        if (d.includes("n")) { h = Math.max(MIN_H, s.g.h - dy); y = s.g.y + s.g.h - h; }
+        return { x, y, w, h };
+      });
+    }
+    head.addEventListener("dblclick", (e) => { if (!e.target.closest(".wk-btn") && !isSheet()) win.toggleMax(); });
+    maxBtn.addEventListener("click", () => win.toggleMax());
+    el.querySelector(".wk-x").addEventListener("click", () => { if (win.ask()) win.close(); });
+    el.addEventListener("pointerdown", () => win.front(), true);
+    // A same-origin page inside: its own Escape, when it did not use it, closes the window too.
+    frame.addEventListener("load", () => {
+      try {
+        frame.contentWindow.addEventListener("keydown", (e) => { if (e.key === "Escape" && !e.defaultPrevented && win.ask()) win.close(); });
+      } catch (e) { /* another origin: it says "escape" by message (WindowKit.child) */ }
+    });
+    wins.push(win);
+    document.body.appendChild(el);
+    win.front();
+    layout();
+    frame.src = abs;
+    setTimeout(() => win.focus(), 50);
+    return win;
+  }
+
+  // Messages from the pages inside: only from a window's own frame and from the origin it was opened at.
+  root.addEventListener("message", (e) => {
+    const win = wins.find((w) => w.frame.contentWindow === e.source);
+    if (!win) return;
+    if (win.origin === "null" ? e.origin !== "null" : e.origin !== win.origin) return;
+    const m = e.data;
+    if (!m || m.wk !== 1 || typeof m.type !== "string") return;
+    if (m.type === "ready") win._ready(m);
+    else if (m.type === "escape") { if (win.ask()) win.close(); }
+    else if (m.type === "close") win.close();
+    else if (m.type === "title" && typeof m.text === "string") win.title(m.text.slice(0, 200));
+    else if (m.type === "busy") win.busy = typeof m.why === "string" ? m.why.slice(0, 200) : "";
+    win._emit(m.type, m);
+  });
+  // Escape on the page itself closes the top window (it sits above everything, so it goes first).
+  root.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape" || e.defaultPrevented || !wins.length) return;
+    e.preventDefault();
+    const w = top();
+    if (w.ask()) w.close();
+  }, true);
+  root.addEventListener("resize", () => { for (const w of wins) w._layout(); });
+  root.addEventListener("popstate", () => {
+    for (const w of wins.slice()) if (w.pushed && !(history.state && history.state.wkSheet === w.id)) w.close(true);
+  });
+
+  // pick(url, opts): open the file manager, ask it for files, give back { kind, files, paths, folder, missing } or
+  // null when the person cancels or closes the window. opts: accept [".zip"], multiple, files (default true),
+  // folder (false | "files" | "zip"), host (the name shown: "Book reader"), title, name, onProgress, signal.
+  function pick(url, o) {
+    o = o || {};
+    return new Promise((resolve, reject) => {
+      let done = false, port = null, win = null;
+      const end = (fn, v) => { if (done) return; done = true; clearTimeout(timer); if (port) port.close(); if (win) win.close(); fn(v); };
+      const timer = setTimeout(() => end(reject, new Error("The file manager did not open within 30 s (no network, or its page could not load).")), 30000);
+      win = open(url, { name: o.name || "file-manager-pick", title: o.title || "Choose " + what(o), width: o.width, height: o.height, onClose: () => end(resolve, null) });
+      win.on("ready", () => {
+        clearTimeout(timer);
+        if (port) port.close();
+        const ch = new MessageChannel();
+        port = ch.port1;
+        port.onmessage = (e) => {
+          const d = e.data || {};
+          if (d.type === "progress") { if (o.onProgress) try { o.onProgress(d); } catch (x) {} }
+          else if (d.type === "picked") end(resolve, result(d));
+          else if (d.type === "cancel") end(resolve, null);
+          else if (d.type === "error") end(reject, new Error(d.why || "The file manager could not give the files."));
+        };
+        win.post({ wk: 1, type: "pick", version: VERSION, accept: accepts(o.accept), multiple: !!o.multiple, files: o.files !== false, folder: o.folder || false,
+          host: String(o.host || document.title || location.host).slice(0, 80) }, [ch.port2]);
+      });
+      if (o.signal) o.signal.addEventListener("abort", () => end(resolve, null), { once: true });
+    });
+  }
+  const accepts = (a) => [].concat(a || []).map((x) => String(x).trim().toLowerCase()).filter(Boolean).map((x) => (x === "*" || x.startsWith(".") ? x : "." + x));
+  function what(o) {
+    const a = accepts(o.accept).filter((x) => x !== "*");
+    const f = o.files === false ? "" : a.length ? a.join(" or ") + (o.multiple ? " files" : " file") : o.multiple ? "files" : "a file";
+    return o.folder ? (f ? f + " or a folder" : "a folder") : f;
+  }
+  function result(d) {
+    const files = Array.isArray(d.files) ? d.files : [];
+    const paths = Array.isArray(d.paths) ? d.paths : files.map((f) => f.name);
+    files.forEach((f, i) => { try { Object.defineProperty(f, "webkitRelativePath", { value: paths[i] || f.name, configurable: true }); } catch (e) {} });
+    return { kind: d.kind || "files", files, paths, folder: d.folder || "", missing: d.missing || "" };
+  }
+
+  // ---- the child side: a page inside a window --------------------------------------------------------------------
+  const ALLOW = ["https://jonnystokes.github.io", "null", "file://"];
+  const inWindow = root.parent !== root;
+  let pickHandler = null, autoEscape = false, refused = "";
+  function allowed(o) { return o === location.origin || ALLOW.includes(o) || child.allow.includes(o); }
+  // Inside a frame: every frame above must be one of the allowed origins (Chrome and Safari list them), so a
+  // stranger's site cannot wrap this page (clickjacking) or ask it for files.
+  function ancestors() {
+    if (!inWindow) return "";
+    const list = location.ancestorOrigins ? Array.from(location.ancestorOrigins) : [];
+    for (const o of list) if (!allowed(o)) return o;
+    return "";
+  }
+  const child = {
+    inWindow, allow: [],
+    get refusedBy() { return ancestors(); },
+    ready(info) { autoEscape = true; if (inWindow && !ancestors()) root.parent.postMessage(Object.assign({ wk: 1, type: "ready", version: VERSION }, info || {}), "*"); },
+    title(text) { if (inWindow) root.parent.postMessage({ wk: 1, type: "title", text: String(text) }, "*"); },
+    close() { if (inWindow) root.parent.postMessage({ wk: 1, type: "close" }, "*"); },
+    escape() { if (inWindow) root.parent.postMessage({ wk: 1, type: "escape" }, "*"); },
+    busy(why) { if (inWindow) root.parent.postMessage({ wk: 1, type: "busy", why: why || "" }, "*"); }, // "" = nothing running
+    onPick(fn) { pickHandler = fn; },
+  };
+  root.addEventListener("message", (e) => {
+    if (!inWindow || e.source !== root.parent || !allowed(e.origin) || ancestors()) return;
+    const m = e.data;
+    if (!m || m.wk !== 1 || m.type !== "pick" || !e.ports || !e.ports[0]) return;
+    if (pickHandler) pickHandler(m, e.ports[0], e.origin);
+    else e.ports[0].postMessage({ type: "error", why: "This page does not pick files." });
+  });
+  // Escape the page inside did not use: the window closes (the page's own listeners run first, on document).
+  root.addEventListener("keydown", (e) => { if (e.key === "Escape" && !e.defaultPrevented && autoEscape && inWindow) child.escape(); });
+
+  root.WindowKit = { VERSION, open, pick, child, get windows() { return wins.slice(); } };
+})(typeof window !== "undefined" ? window : globalThis);
+}
+/* apps-button.js 1.14: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+   Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
+   page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
+   https://jonnystokes.github.io/Cool-tools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
+
+     <apps-button app="file-manager"></apps-button>     the first thing in the page's top bar, top left
+
+   Three thick bars (magenta, yellow, cyan) and the word "Apps" on black with a neon edge: one look in every program,
+   made to clash with any page, because it is the way out of this program into another. Then a plain divider (Jon,
+   2026-11-07: only the button stands out): 1 px in the bar's own text colour, faint, so it blends with each app's bar.
+   A click opens the Apps menu (the launcher, cool-tools/apps/) in a floating window (the window kit; a full-screen
+   sheet on a phone); a second click closes it. The menu marks the program named by app="...". When the menu cannot
+   load (this device offline, the site down), the window says so in plain words, with Try again.
+
+   Attributes:
+     app="<id>"         this program's id in app-kit\programs.json: the menu marks it "You are here"
+     stack              bars above the word (for a tight bar); stack="720": only while the page is 720 px wide or less
+     launcher="<url>"   another menu address (tests)
+     in-frame           show the button inside a frame too. Hidden there by default: inside another page's window a
+                        program chosen from the menu would take that page's whole tab
+   Size: CSS --apps-h on the element is the button's height (default 36px; the bars, the word and the divider scale
+   with it):  apps-button { --apps-h: 40px; }
+   The divider takes the bar's text colour by itself; --apps-sep sets it to the app's own line colour instead (a
+   light-dark() pair works: the button takes the page's light or dark color-scheme):
+     apps-button { --apps-sep: var(--line); }
+   Focus: when the menu closes, the focus goes back to the page, not to the button, so the page's own keys work at
+   once (Space would press the button again); the button stays in the Tab order.
+   Script: AppsKit.open({ app }), AppsKit.close(), AppsKit.window (the open menu's window, or null),
+   AppsKit.launcher (the menu's address), AppsKit.VERSION. */
+(function (root) {
+  "use strict";
+  if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
+  const VERSION = "1.14";
+  const LAUNCHER = "https://jonnystokes.github.io/Cool-tools/apps/";
+  const W = 460, H = 780;        // the menu window's first size (less on a short screen); the window kit remembers
+                                 // what the person makes it
+  const NAME = "apps";           // its key in the window kit (localStorage wk-win:apps); the same in every program
+  let current = null;            // { win, href } while the menu is open
+
+  const BARS = ["#ff3df2", "#ffd23d", "#3dfcff"];
+  const CSS = `
+:host{all:initial;color:inherit;color-scheme:inherit;display:inline-flex;align-items:center;flex:none;vertical-align:middle;--h:var(--apps-h,36px)}
+.b{all:unset;box-sizing:border-box;position:relative;display:inline-flex;flex-direction:row;align-items:center;justify-content:center;
+  gap:calc(var(--h)*.2);height:var(--h);padding:0 calc(var(--h)*.3) 0 calc(var(--h)*.26);border:2px solid transparent;border-radius:calc(var(--h)*.28);
+  background:linear-gradient(#0b0816,#0b0816) padding-box,linear-gradient(120deg,${BARS[0]},${BARS[1]} 52%,${BARS[2]}) border-box;
+  color:#fff;font:800 calc(var(--h)*.42)/1 "Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;letter-spacing:.015em;
+  white-space:nowrap;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;touch-action:manipulation;
+  box-shadow:0 0 0 1px rgba(0,0,0,.65),0 0 calc(var(--h)*.3) rgba(255,61,242,.55),0 0 calc(var(--h)*.55) rgba(61,252,255,.3);
+  transition:box-shadow .15s,filter .15s,transform .08s}
+.b:hover{filter:brightness(1.15) saturate(1.1);box-shadow:0 0 0 1px rgba(0,0,0,.65),0 0 calc(var(--h)*.42) rgba(255,61,242,.85),0 0 calc(var(--h)*.8) rgba(61,252,255,.5)}
+.b:active{transform:translateY(1px) scale(.97)}
+.b:focus-visible{outline:2px solid #000;outline-offset:2px;box-shadow:0 0 0 6px #fff,0 0 calc(var(--h)*.5) rgba(255,61,242,.9)}
+.b[aria-expanded=true]{box-shadow:0 0 0 1px rgba(0,0,0,.65),0 0 0 calc(var(--h)*.09) rgba(255,210,61,.55),0 0 calc(var(--h)*.5) rgba(255,61,242,.8)}
+.bars{display:flex;flex-direction:column;justify-content:center;gap:calc(var(--h)*.085);width:calc(var(--h)*.5);flex:none}
+.bars i{display:block;height:calc(var(--h)*.12);height:round(calc(var(--h)*.12),1px);border-radius:99px}
+.bars i:nth-child(1){background:${BARS[0]};box-shadow:0 0 calc(var(--h)*.14) rgba(255,61,242,.8)}
+.bars i:nth-child(2){background:${BARS[1]};box-shadow:0 0 calc(var(--h)*.14) rgba(255,210,61,.7)}
+.bars i:nth-child(3){background:${BARS[2]};box-shadow:0 0 calc(var(--h)*.14) rgba(61,252,255,.7)}
+.w{display:block;text-shadow:0 0 calc(var(--h)*.22) rgba(255,255,255,.4)}
+.sep{display:block;flex:none;width:1px;height:calc(var(--h)*.72);margin:0 calc(var(--h)*.2) 0 calc(var(--h)*.3);background:var(--apps-sep,rgba(127,127,127,.4))}
+@supports (color:color-mix(in srgb,red,blue)){.sep{background:var(--apps-sep,color-mix(in srgb,currentColor 22%,transparent))}}`;
+  // The stacked form (bars above the word), for a tight bar: the same parts, arranged in a column.
+  const STACK = `
+.b{flex-direction:column;gap:calc(var(--h)*.07);padding:0 calc(var(--h)*.17);border-radius:calc(var(--h)*.24);font-size:calc(var(--h)*.27);letter-spacing:.04em}
+.bars{width:calc(var(--h)*.52);gap:calc(var(--h)*.075)}
+.bars i{height:calc(var(--h)*.1);height:round(calc(var(--h)*.1),1px)}
+.sep{margin:0 calc(var(--h)*.16) 0 calc(var(--h)*.22)}`;
+  function stackCss(v) {
+    if (v === null) return "";
+    const px = parseInt(v, 10);
+    return px > 0 ? `@media (max-width:${px}px){${STACK}}` : STACK;
+  }
+  const inFrame = () => { try { return root.self !== root.top; } catch (e) { return true; } };
+
+  // ---- the menu window --------------------------------------------------------------------------------------------
+  // Its first place is just under the button (the window kit has no place option, so its remembered place is set
+  // before it opens); once the person moves or resizes it, the window kit keeps their place and this leaves it be.
+  function place(anchor) {
+    try {
+      const key = "wk-win:" + NAME, seeded = localStorage.getItem("apps-place");
+      const saved = localStorage.getItem(key);
+      if (saved && saved !== seeded) return;   // the person's own place
+      const r = anchor && anchor.getBoundingClientRect ? anchor.getBoundingClientRect() : { left: 8, bottom: 8 };
+      const y = Math.round(r.bottom + 8);
+      const g = JSON.stringify({ x: Math.max(8, Math.round(r.left)), y, w: Math.min(W, innerWidth - 16), h: Math.max(320, Math.min(H, innerHeight - y - 8)), max: false });
+      localStorage.setItem(key, g);
+      localStorage.setItem("apps-place", g);
+    } catch (e) { /* no storage: the window kit centres it */ }
+  }
+
+  function open(o) {
+    o = o || {};
+    if (current) { current.win.front(); current.win.focus(); return current.win; }
+    const u = new URL(o.launcher || api.launcher, location.href);
+    if (o.app) u.searchParams.set("app", String(o.app).slice(0, 60));
+    const href = u.href;
+    if (!root.WindowKit) { location.href = href; return null; } // no window kit on this page: the menu as a page
+    place(o.anchor);
+    const btn = o.anchor || null;
+    const win = root.WindowKit.open(href, {
+      title: "Apps", name: NAME, width: W, height: H,
+      onClose: () => {
+        if (current && current.win === win) { current.stop(); current = null; }
+        if (btn) { btn.setAttribute("aria-expanded", "false"); letGo(btn); }
+      },
+    });
+    if (btn) btn.setAttribute("aria-expanded", "true");
+    current = watch(win, href);
+    current.arm();
+    return win;
+  }
+  function close() { if (current) current.win.close(); }
+  // The window kit gives the focus back to what had it when the menu opened, which is this button (the click put it
+  // there). Left there, the page's own keys would press it: Space or Enter opens the menu again (HYPERWAVE's Space).
+  // So the focus goes back to the page. The button stays in the Tab order: the keyboard still reaches it with Tab.
+  function letGo(btn) {
+    const sr = btn.getRootNode();
+    if (sr && sr.activeElement === btn) btn.blur();
+  }
+
+  // ---- when the menu cannot load ------------------------------------------------------------------------------------
+  // The menu page says "ready" (the window kit's protocol) as soon as it runs. Offline when the window opens, or its
+  // frame loaded something that never said ready (the browser's own error page), or nothing at all within 20 s:
+  // the window shows a plain message instead, with Try again (and tries again by itself when the device is back
+  // online). A late "ready" still wins: the message goes and the menu shows.
+  function watch(win, href) {
+    let ok = false, loadT = 0, slowT = 0, box = null;
+    const st = { win, href };
+    const why = () => (navigator.onLine === false ? "offline" : "noload");
+    const fail = (kind) => { if (!ok && current === st) show(kind); };
+    const arm = () => {
+      clearTimeout(slowT);
+      slowT = setTimeout(() => fail(why()), 20000);
+      if (navigator.onLine === false) fail("offline");
+    };
+    const onLoad = () => { clearTimeout(loadT); loadT = setTimeout(() => fail(why()), 2500); };
+    const onOnline = () => { if (box && box.isConnected && !ok) retry(); };
+    function show(kind) {
+      if (!box) {
+        box = document.createElement("div");
+        box.className = "apps-fail";
+        box.style.cssText = "flex:1 1 auto;min-height:0;overflow:auto;display:block;margin:0;padding:0;border:0";
+        const sr = box.attachShadow({ mode: "open" });
+        sr.innerHTML = `<style>${FAIL_CSS}</style><div class="m" role="alert"><div class="bars" aria-hidden="true"><i></i><i></i><i></i></div><h2></h2><p class="t"></p><p class="f"></p><button type="button">Try again</button></div>`;
+        sr.querySelector("button").addEventListener("click", retry);
+        win.frame.after(box);
+      }
+      const sr = box.shadowRoot;
+      sr.querySelector("h2").textContent = kind === "offline" ? "No internet" : "The Apps menu did not load";
+      sr.querySelector(".t").textContent = kind === "offline"
+        ? "The Apps menu comes from the Cool tools site, and this device is offline. Connect it to the internet, then try again."
+        : "The Cool tools site (jonnystokes.github.io) could not be reached: no internet here, or the site is down.";
+      sr.querySelector(".f").textContent = location.protocol === "file:"
+        ? "This page is a file on this device; the menu of programs still comes from the web."
+        : "";
+      box.hidden = false;
+      box.style.display = "block";
+      win.frame.style.display = "none";
+    }
+    function hide() { if (box) box.style.display = "none"; win.frame.style.display = ""; }
+    function retry() { hide(); win.frame.src = href; arm(); }
+    win.frame.addEventListener("load", onLoad);
+    root.addEventListener("online", onOnline);
+    win.ready.then(() => { ok = true; clearTimeout(loadT); clearTimeout(slowT); hide(); });
+    st.stop = () => { clearTimeout(loadT); clearTimeout(slowT); root.removeEventListener("online", onOnline); };
+    st.retry = retry;
+    st.arm = arm;   // open() calls it once this is the current menu
+    return st;
+  }
+  const FAIL_CSS = `
+:host{all:initial;display:block}
+.m{box-sizing:border-box;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:28px 24px;text-align:center;
+  background:#05060c;color:#eaf1ff;font:15px/1.45 "Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif}
+.bars{display:flex;flex-direction:column;gap:5px;width:34px;margin-bottom:6px;opacity:.55}
+.bars i{display:block;height:6px;border-radius:9px}.bars i:nth-child(1){background:${BARS[0]}}.bars i:nth-child(2){background:${BARS[1]}}.bars i:nth-child(3){background:${BARS[2]}}
+h2{margin:0;font-size:19px;font-weight:700}
+p{margin:0;max-width:30em;color:#b8c4dc}p:empty{display:none}.f{font-size:13.5px;color:#8d9ab6}
+button{all:unset;box-sizing:border-box;margin-top:8px;padding:10px 20px;border-radius:10px;background:#ffd23d;color:#05060c;font-weight:700;cursor:pointer}
+button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff;outline-offset:2px}`;
+
+  // ---- the element ------------------------------------------------------------------------------------------------
+  class AppsButton extends HTMLElement {
+    static get observedAttributes() { return ["stack"]; }
+    constructor() {
+      super();
+      const sr = this.attachShadow({ mode: "open" });
+      sr.innerHTML = `<style></style><button class="b" type="button" aria-haspopup="dialog" aria-expanded="false" title="Apps: open another of Jon's programs"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span class="w">Apps</span></button><span class="sep" aria-hidden="true"></span>`;
+      this._style = sr.querySelector("style");
+      this._btn = sr.querySelector("button");
+      this._btn.addEventListener("click", () => {
+        if (current) close();
+        else open({ app: this.getAttribute("app") || "", launcher: this.getAttribute("launcher") || "", anchor: this._btn });
+      });
+      // Enter and Space belong to the button. A page's own shortcuts on document see this element (not the button
+      // inside it), so a page that presses focused buttons itself, or opens its list's row on Enter, would take them.
+      for (const t of ["keydown", "keypress", "keyup"]) this._btn.addEventListener(t, (e) => { if (e.key === "Enter" || e.key === " ") e.stopPropagation(); });
+      this._paint();
+    }
+    connectedCallback() { if (inFrame() && !this.hasAttribute("in-frame")) this.style.display = "none"; }
+    attributeChangedCallback() { this._paint(); }
+    _paint() { this._style.textContent = CSS + stackCss(this.getAttribute("stack")); }
+    focus(o) { this._btn.focus(o); }
+    click() { this._btn.click(); }
+  }
+
+  const api = {
+    VERSION, launcher: LAUNCHER, open, close,
+    get window() { return current ? current.win : null; },
+  };
+  root.AppsKit = api;
+  if (root.customElements && !root.customElements.get("apps-button")) root.customElements.define("apps-button", AppsButton);
+})(typeof window !== "undefined" ? window : globalThis);
+
+// ---- util.js ----
+// util.js: small helpers for the Settings page. Everything shown from the PC (device names, addresses, log lines) goes
+// into the page as text, never as HTML.
+"use strict";
+const S = (globalThis.S = {});
+
+// h("div.card#x", {text, title, on: {click}, attrs}, ...children): an element
+S.h = function h(spec, props, ...kids) {
+  const m = /^([a-z0-9-]+)((?:[.#][\w-]+)*)$/i.exec(spec);
+  const el = document.createElement(m ? m[1] : "div");
+  if (m) for (const part of m[2].match(/[.#][\w-]+/g) || []) part[0] === "." ? el.classList.add(part.slice(1)) : (el.id = part.slice(1));
+  if (props && (typeof props !== "object" || props instanceof Node || Array.isArray(props))) { kids.unshift(props); props = null; }
+  for (const [k, v] of Object.entries(props || {})) {
+    if (v === undefined || v === null || v === false) continue;
+    if (k === "text") el.textContent = v;
+    else if (k === "on") for (const [ev, fn] of Object.entries(v)) el.addEventListener(ev, fn);
+    else if (k === "class") el.className = v;
+    else if (k === "data") for (const [dk, dv] of Object.entries(v)) el.dataset[dk] = dv;
+    else if (["value", "checked", "disabled", "selected", "hidden"].includes(k)) el[k] = v;
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  for (const kid of kids.flat()) if (kid !== null && kid !== undefined && kid !== false) el.append(kid instanceof Node ? kid : String(kid));
+  return el;
+};
+S.$ = (sel, root) => (root || document).querySelector(sel);
+S.$$ = (sel, root) => [...(root || document).querySelectorAll(sel)];
+S.clear = (el, ...kids) => { el.replaceChildren(...kids.flat().filter((k) => k !== null && k !== undefined && k !== false)); return el; };
+
+// This page's own settings (localStorage "settings-<name>"; the browser's other keys belong to other programs)
+S.store = {
+  get(k, d) { try { const v = localStorage.getItem("settings-" + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { if (v === undefined || v === null) localStorage.removeItem("settings-" + k); else localStorage.setItem("settings-" + k, JSON.stringify(v)); } catch (e) {} },
+};
+// another program's key in this browser's storage (the same site: read only, to show what it uses)
+S.peek = (key) => { try { return localStorage.getItem(key); } catch (e) { return null; } };
+
+// ---- times: always 12-hour with AM/PM ----
+const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+S.clock = (t, secs) => {
+  const d = new Date(t);
+  let hh = d.getHours();
+  const ap = hh < 12 ? "AM" : "PM";
+  hh = hh % 12 || 12;
+  const mm = String(d.getMinutes()).padStart(2, "0"), ss = String(d.getSeconds()).padStart(2, "0");
+  return `${hh}:${mm}${secs ? ":" + ss : ""} ${ap}`;
+};
+S.sameDay = (a, b) => { const x = new Date(a), y = new Date(b); return x.getFullYear() === y.getFullYear() && x.getMonth() === y.getMonth() && x.getDate() === y.getDate(); };
+// "3:04 PM" today, "yesterday 3:04 PM", "Nov 5, 3:04 PM", "Nov 5, 2025, 3:04 PM"
+S.when = (t, secs) => {
+  if (!t) return "";
+  const now = Date.now(), d = new Date(t);
+  if (S.sameDay(t, now)) return S.clock(t, secs);
+  if (S.sameDay(t + 864e5, now)) return "yesterday " + S.clock(t, secs);
+  const day = `${MON[d.getMonth()]} ${d.getDate()}`;
+  return d.getFullYear() === new Date(now).getFullYear() ? `${day}, ${S.clock(t, secs)}` : `${day}, ${d.getFullYear()}, ${S.clock(t, secs)}`;
+};
+S.plural = (n, w, ws) => `${n} ${n === 1 ? w : ws || w + "s"}`;
+// a length of time in plain words, the two biggest units, the second rounded and left out at zero (as the Apps
+// kit's "ago"): "2 minutes 31 seconds", "45 seconds", "1 hour 5 minutes", "3 days"
+S.span = (ms) => {
+  const s = Math.max(0, Math.round(ms / 1000));
+  const units = [[86400, "day"], [3600, "hour"], [60, "minute"], [1, "second"]];
+  for (let i = 0; i < units.length; i++) {
+    const [n, w] = units[i];
+    if (s < n && n > 1) continue;
+    let k = Math.floor(s / n);
+    if (n === 1) return S.plural(k, w);
+    const [n2, w2] = units[i + 1];
+    let r = Math.round((s - k * n) / n2);
+    if (r * n2 >= n) { k++; r = 0; }
+    return S.plural(k, w) + (r ? " " + S.plural(r, w2) : "");
+  }
+  return "0 seconds";
+};
+S.mmss = (ms) => { const s = Math.max(0, Math.ceil(ms / 1000)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; };
+S.sentence = (s) => { s = String(s || "").trim(); if (!s) return ""; s = s[0].toUpperCase() + s.slice(1); return /[.!?)]$/.test(s) ? s : s + "."; };
+
+// a version "2.1.0" at least "2.1"?
+S.atLeast = (v, want) => {
+  const a = String(v || "").split(".").map((x) => parseInt(x, 10) || 0), b = String(want).split(".").map((x) => parseInt(x, 10) || 0);
+  for (let i = 0; i < Math.max(a.length, b.length); i++) { if ((a[i] || 0) !== (b[i] || 0)) return (a[i] || 0) > (b[i] || 0); }
+  return true;
+};
+
+// copy text; true when it worked (navigator.clipboard needs a secure page, else the old way)
+S.copy = async (text) => {
+  try { await navigator.clipboard.writeText(text); return true; } catch (e) {}
+  try {
+    const t = S.h("textarea", { value: text, style: "position:fixed;left:-9999px;top:0" });
+    document.body.append(t); t.select();
+    const ok = document.execCommand("copy");
+    t.remove();
+    return ok;
+  } catch (e) { return false; }
+};
+
+// a small message under a button: S.say(el, "Saved.", "ok" | "bad" | "")
+S.say = (el, text, kind) => { if (!el) return; el.textContent = text || ""; el.className = "say" + (kind ? " " + kind : ""); };
+
+// a switch (role="switch"): S.toggle(label, on, onChange(newValue) -> Promise)
+S.toggle = (label, on, change, opts = {}) => {
+  const b = S.h("button.switch", { type: "button", role: "switch", "aria-checked": String(!!on), "aria-label": label, title: opts.title || label, disabled: !!opts.disabled });
+  b.append(S.h("span.knob"));
+  b.addEventListener("click", async () => {
+    if (b.disabled) return;
+    const want = b.getAttribute("aria-checked") !== "true";
+    b.disabled = true;
+    try { await change(want); } finally { b.disabled = !!opts.disabled; }
+  });
+  return b;
+};
+S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
+
+// ---- pc.js ----
+// pc.js: the PC, through PC Relay (relay-client.js 2, copied in at build time from pc-relay\client: one source, never
+// edited here). The address: the Cool tools address file's (relay-client reads it), unless this page has its own in
+// localStorage "settings-pc-address" (tests, another PC; the Connection tab shows it whenever it is set). The PC
+// decides every request (pc-relay\SECURITY.md): a page only shows buttons. The relay's own requests for this page
+// (/relay/pc, /relay/devices, /relay/log, /relay/programs, /relay/restart: relay 2.1, signed-in devices only) go
+// through S.pc.api, which sends this browser's one pass the way relay-client does (R.headers()) and, on a 401, lets
+// relay-client find out whether the pass is still good (a ping: it forgets a pass the PC no longer knows).
+"use strict";
+(function () {
+  const subs = {};
+  S.on = (name, fn) => { (subs[name] = subs[name] || new Set()).add(fn); return () => subs[name].delete(fn); };
+  S.emit = (name, data) => { for (const fn of subs[name] || []) { try { fn(data); } catch (e) { console.error(e); } } };
+
+  const own = () => { const v = S.store.get("pc-address", ""); return typeof v === "string" ? v.trim().replace(/\/+$/, "") : ""; };
+  const notes = [];
+  const R = RelayClient.create({ app: "settings", base: own(), log: (text) => { notes.push({ at: Date.now(), text }); S.emit("note", text); } });
+  let held = R.signedIn();
+  R.on((st) => { if (R.signedIn() !== held) { held = R.signedIn(); S.emit("auth"); } });
+  // another page of the site signed in or out (the one pass is shared by every Cool tools page in this browser)
+  addEventListener("storage", (e) => { if (e.key === "relay-pass" || e.key === null) { held = R.signedIn(); S.emit("auth"); } });
+
+  const P = (S.pc = {
+    R, own, notes,
+    info: null,        // the last good ping's answer (/relay/ping)
+    last: null,        // the last ping: { ok, at, ms, why, kind, status }
+    offset: 0,         // the PC's clock minus this device's (from the quickest ping), ms
+    best: Infinity,
+    signedIn: () => R.signedIn(),
+    device: () => R.device(),
+    version: () => (P.info && P.info.version) || "",
+    // relay 2.1 or newer answers the Settings page's own requests
+    has21: () => !!(P.info && S.atLeast(P.info.version, "2.1")),
+    async ping(timeout) {
+      const t0 = Date.now();
+      const r = await R.ping(timeout || 8000);
+      const at = Date.now();
+      P.last = { ok: !!r.ok, at, ms: r.ok ? r.latency : at - t0, why: r.why || "", kind: r.kind || "", status: r.status || 0 };
+      if (r.ok && r.info) {
+        P.info = r.info;
+        if (r.latency <= P.best + 5 && r.info.time) { P.best = Math.min(P.best, r.latency); P.offset = r.info.time - (at - r.latency / 2); }
+      } else if (r.info) P.info = r.info;   // (the relay switched off still answers, with its state)
+      S.emit("ping", P.last);
+      return r;
+    },
+    pcNow: () => Date.now() + P.offset,
+    // Does anything answer at the PC's address, PC Relay or not? A browser hides Tailscale's own answer when PC Relay
+    // is not running (a 502 without the headers a page may read), so this asks in "no-cors" mode, where any answer
+    // counts and only no answer at all fails: true = Windows and Tailscale are up on the PC.
+    async knock(ms) {
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), ms || 5000);
+      try { await fetch(`${R.base}/relay/ping?knock=1&t=${Date.now()}`, { mode: "no-cors", cache: "no-store", credentials: "omit", signal: ac.signal }); return true; }
+      catch (e) { return false; }
+      finally { clearTimeout(timer); }
+    },
+    // the relay's own requests: { ok, status, data, why, signin }
+    async api(path, opts = {}) {
+      await R.address();
+      const json = opts.json;
+      const headers = R.headers(json !== undefined ? { "Content-Type": "application/json" } : {});
+      const sent = !!headers["X-Relay-Pass"];
+      const ac = new AbortController(), ms = opts.timeout || 15000, timer = setTimeout(() => ac.abort(), ms);
+      let r;
+      try {
+        r = await fetch(`${R.base}/relay/${path}`, { method: opts.method || (json !== undefined ? "POST" : "GET"), headers,
+          body: json !== undefined ? JSON.stringify(json) : undefined, cache: "no-store", signal: ac.signal });
+      } catch (e) {
+        const why = e && e.name === "AbortError" ? `no answer from the PC within ${Math.round(ms / 1000)} s`
+          : navigator.onLine === false ? "this device is offline" : "could not reach the PC (no network, or the PC is off or asleep)";
+        return { ok: false, status: 0, data: null, why, signin: false };
+      } finally { clearTimeout(timer); }
+      let data = null;
+      try { data = await r.json(); } catch (e) {}
+      if (r.ok) return { ok: true, status: r.status, data, why: "", signin: false };
+      let why = (data && data.error) || RelayClient.httpWhy(r.status);
+      if (r.status === 404 && !P.has21()) why = `the PC runs PC Relay ${P.version() || "older than 2.1"}, which does not know this yet (it needs 2.1)`;
+      if (r.status === 401 && sent) await P.ping().catch(() => {});   // relay-client forgets a pass the PC no longer knows
+      return { ok: false, status: r.status, data, why, signin: r.status === 401 };
+    },
+    async signIn(password, name) {
+      const r = await R.signIn(password);
+      if (!r.ok) return r;   // (nothing changed: the page says why)
+      if (name && name.trim()) {
+        const n = await P.api("devices", { json: { rename: r.device, name: name.trim() } });
+        if (n.ok) r.name = n.data.name;
+        else r.nameWhy = n.why;
+      }
+      held = R.signedIn();
+      await P.ping().catch(() => {});
+      S.emit("auth");
+      return r;
+    },
+    async signOut() {
+      const r = await R.signOut();
+      held = R.signedIn();
+      S.emit("auth");
+      P.ping().catch(() => {});
+      return r;
+    },
+  });
+})();
+
+// ---- connection.js ----
+// connection.js: the Connection tab: this browser's one sign-in (shared by every Cool tools page), the PC's address
+// (where it comes from, what the PC itself says, the programs here with an address of their own), and a link to the
+// Browser app cache manager for what this browser keeps.
+"use strict";
+(function () {
+  const { h, $, clear } = S;
+  const panel = () => $("#tab-connection");
+  // the sign-in card's last message outlives a redraw (a ping can redraw the card a moment after a sign-in or out)
+  let said = { text: "", kind: "", at: 0 };
+  const sayIn = (el, text, kind) => { said = { text, kind, at: Date.now() }; S.say(el, text, kind); };
+
+  function signCard() {
+    const card = h("section.card#signcard", h("h2", { text: "Sign in" }));
+    const R = S.pc.R, info = S.pc.info || {}, dev = S.pc.device();
+    const status = h("p.status");
+    if (S.pc.signedIn()) {
+      const name = (info.device && info.device.name) || (dev && dev.name) || "this browser";
+      const since = (info.device && info.device.since) || (dev && dev.since) || 0;
+      status.append(h("span.okmark", { text: "✓ " }), `Signed in on this device. The PC calls it `, h("b", { text: name }),
+        since ? ` (signed in ${S.when(since)}).` : ".");
+    } else if (info.pass === "unknown" || (R.status && R.status.state === "signin" && /ended|signed out on the PC/.test(R.status.why || ""))) {
+      status.textContent = "The PC ended this device's sign-in (signed out on the PC, a new password, or not used for a long time). Sign in again below.";
+      status.classList.add("warn");
+    } else status.textContent = "Not signed in on this device.";
+    card.append(status);
+    card.append(h("p.help", { text: "One sign-in for this whole browser: signing in or out here signs every Cool tools page in this browser in or out " +
+      "(the Book reader, the Cloud File Manager, Screen Peek and the rest), because they are one site and share one pass. Signed in: everything on the PC, " +
+      "this page's devices, log, switches and Restart included. Signed out: public things only. A sign-in not used for " +
+      ((info.expires_days || 30) + " days ends by itself.") }));
+    const say = h("p.say");
+    if (said.text && Date.now() - said.at < 60000) S.say(say, said.text, said.kind);
+    if (!S.pc.signedIn()) {
+      const pw = h("input#pw", { type: "password", autocomplete: "current-password", placeholder: "The PC's password", "aria-label": "The PC's password" });
+      const nm = h("input#devname", { type: "text", autocomplete: "off", maxlength: "60", placeholder: "Name this device (optional), e.g. Jon's phone", "aria-label": "A name for this device (optional)" });
+      const go = h("button.primary#signin", { type: "submit", text: "Sign in" });
+      const form = h("form.row.signform", { on: { submit: async (e) => {
+        e.preventDefault();
+        if (!pw.value) { S.say(say, "Type the PC's password first.", "bad"); pw.focus(); return; }
+        go.disabled = true; S.say(say, "Signing in…");
+        const r = await S.pc.signIn(pw.value, nm.value);
+        go.disabled = false;
+        if (r.ok) { pw.value = ""; sayIn(say, r.nameWhy ? `Signed in. The name could not be set: ${r.nameWhy}` : "Signed in.", r.nameWhy ? "bad" : "ok"); render(); }
+        else { sayIn(say, S.sentence(r.why || "the sign-in did not work"), "bad"); pw.select(); }
+      } } }, pw, nm, go);
+      card.append(form);
+    } else {
+      const out = h("button#signout", { type: "button", text: "Sign out", on: { click: async () => {
+        out.disabled = true; S.say(say, "Signing out…");
+        const r = await S.pc.signOut();
+        sayIn(say, r.onPC ? "Signed out here and on the PC: every Cool tools page in this browser is signed out." :
+          "Signed out here (every Cool tools page in this browser)." + (r.why ? " " + S.sentence(r.why) : ""), "ok");
+        render();
+      } } });
+      card.append(h("div.row", out, h("span.help", { text: "Signs this browser out of every Cool tools page, here and on the PC." })));
+    }
+    card.append(say);
+    return card;
+  }
+
+  // the programs in this browser that have their own address for the PC (a test, another PC, an old setting)
+  function ownAddresses() {
+    const out = [];
+    const reader = (() => { try { const j = JSON.parse(S.peek("br1-settings") || "null"); return j && typeof j.pcAddress === "string" ? j.pcAddress.trim() : ""; } catch (e) { return ""; } })();
+    if (reader) out.push(["Book reader", reader, "its Settings → Cloud → PC address (blank = the usual address)"]);
+    const fm = (() => { const v = S.peek("fm-pc-address"); if (!v) return ""; try { const j = JSON.parse(v); return typeof j === "string" ? j.trim() : ""; } catch (e) { return v.trim(); } })();
+    if (fm) out.push(["Cloud File Manager", fm, "localStorage fm-pc-address (a test or another PC)"]);
+    if (S.pc.own()) out.push(["Settings (this page)", S.pc.own(), "localStorage settings-pc-address (a test or another PC)"]);
+    return out;
+  }
+
+  function addrCard() {
+    const card = h("section.card#addrcard", h("h2", { text: "The PC's address" }));
+    const R = S.pc.R, w = R.where || {}, url = R.base;
+    const from = w.from === "file" ? "from the Cool tools address file (relay.json), as every page reads it" : w.from === "page" ? "this page's own address (localStorage settings-pc-address: a test or another PC)"
+      : w.from === "built-in" ? "built into this page, because the Cool tools address file could not be loaded" : "not looked up yet";
+    const copyBtn = h("button.small#copyaddr", { type: "button", text: "Copy", on: { click: async () => {
+      const ok = await S.copy(url);
+      S.say($("#addrcard .say"), ok ? "Copied: " + url : "This browser did not let the page copy it: select the address and copy it by hand.", ok ? "ok" : "bad");
+    } } });
+    card.append(h("p.addr", h("span", { text: "This browser reaches the PC at " }), h("code#addrnow", { text: url }), " ", copyBtn));
+    card.append(h("p.help#addrfrom", { text: S.sentence(from) }));
+    if (w.from === "built-in" && w.why) card.append(h("p.warn", { text: S.sentence(w.why) }));
+    const info = S.pc.info;
+    const pcSays = h("p#pcsays");
+    if (!info) pcSays.textContent = "The PC has not answered yet, so it could not be asked for its own address.";
+    else if (!("address" in info)) pcSays.textContent = `The PC runs PC Relay ${info.version}, which does not say its own address (2.1 does).`;
+    else if (!info.address) pcSays.textContent = "The PC does not know its public address right now (Tailscale has not given it its name, or this is a test relay).";
+    else if (info.address === url) { pcSays.append(h("span.okmark", { text: "✓ " }), "The PC says the same: it answers at that address (its Tailscale name)."); }
+    else {
+      pcSays.classList.add("warn");
+      pcSays.textContent = `The PC says its public address is ${info.address}, but this page uses ${url}. ` +
+        (w.from === "file" ? "The Cool tools address file is out of date: edit cool-tools\\relay.json to " + info.address + " and push it (WEB-APP-CONVENTIONS.md 5); every page follows within a minute." : "This page's own address is not the PC's.");
+    }
+    card.append(pcSays);
+    card.append(h("p.help", { text: `If the address file cannot be loaded, pages use the address built into them (this page: ${RelayClient.BUILT_PC}) and say so. ` +
+      "The address file is the one place to change after the PC is renamed." }));
+    const list = ownAddresses();
+    if (!list.length) card.append(h("p.help#ownaddr", { text: "No program in this browser has an address of its own: they all use the one above." }));
+    else {
+      card.append(h("p#ownaddr", { text: "Programs in this browser with an address of their own (theirs wins over the one above):" }));
+      card.append(h("ul.plain#ownlist", list.map(([who, a, where]) => h("li", h("b", { text: who + ": " }), h("code", { text: a }), h("span.help", { text: " · set in " + where })))));
+    }
+    card.append(h("p.say"));
+    return card;
+  }
+
+  function browserCard() {
+    return h("section.card#browsercard", h("h2", { text: "This browser" }),
+      h("p", { text: "Every Cool tools page keeps what it saves in this browser's storage for jonnystokes.github.io: the sign-in above, each program's settings, the Book reader's books and voices. " }),
+      h("p", h("a.button#cachelink", { href: "../browser-storage/", text: "Browser app cache manager" }), h("span.help", { text: " · see and delete what these pages keep in this browser" })));
+  }
+
+  function render() {
+    const p = panel();
+    if (!p) return;
+    clear(p, signCard(), addrCard(), browserCard());
+  }
+  function refreshAddr() { const old = $("#addrcard"); if (old) old.replaceWith(addrCard()); }
+  function refreshStatus() {   // the sign-in line follows the PC's word without clearing a password being typed
+    const card = $("#signcard");
+    if (!card) return;
+    const typing = $("#pw") && ($("#pw").value || document.activeElement === $("#pw") || document.activeElement === $("#devname"));
+    if (!typing) card.replaceWith(signCard());
+  }
+  let lastAddr = "", lastSigned = null;
+  S.on("ping", () => {
+    const key = [S.pc.R.base, S.pc.R.where && S.pc.R.where.from, S.pc.info && S.pc.info.address, S.pc.info && S.pc.info.version].join("|");
+    if (key !== lastAddr) { lastAddr = key; refreshAddr(); }
+    const sig = S.pc.signedIn() + "|" + (S.pc.info && S.pc.info.signed_in) + "|" + (S.pc.info && S.pc.info.device && S.pc.info.device.name);
+    if (sig !== lastSigned) { lastSigned = sig; refreshStatus(); }
+  });
+  S.on("auth", render);
+  S.connection = { render };
+})();
+
+// ---- pinger.js ----
+// pinger.js: the Pinger tab: each ping's round trip to PC Relay on the PC (GET /relay/ping through the PC's public
+// address), live, at a rate the person picks (kept on this device); the PC's own details (signed in); and Restart this
+// PC (signed in, relay 2.1): a countdown with Cancel, run by Windows on the PC (shutdown /g /t), refused unless the PC
+// allows it. While a restart is under way the pinger keeps going (whatever tab is open) and says how far it got:
+// Windows going away, Windows back without PC Relay yet (a 502 from Tailscale), and the PC back (with how long).
+"use strict";
+(function () {
+  const { h, $, clear } = S;
+  const RATES = [[500, "Every 0.5 s"], [1000, "Every second"], [2000, "Every 2 s"], [5000, "Every 5 s"], [10000, "Every 10 s"], [30000, "Every 30 s"], [60000, "Every minute"]];
+  const rate = () => { const v = Number(S.store.get("ping-every", 1000)); return RATES.some(([n]) => n === v) ? v : 1000; };
+  const pings = [];             // { at, ok, ms, why, kind, status, knock }
+  let paused = false, gen = 0, running = 0;   // running: the generation of the one loop now pinging (0 = none)
+  let pcInfo = null, pcAt = 0, pcWhy = "";
+
+  // ---- the restart watch: kept on this device, so a reload goes on watching ----
+  let watch = S.store.get("restart-watch", null);
+  if (watch && Date.now() - (watch.asked || 0) > 60 * 60 * 1000) watch = null;   // an hour old: over
+  const saveWatch = () => S.store.set("restart-watch", watch);
+  const watching = () => !!(watch && !watch.done);
+
+  const want = () => document.visibilityState === "visible" && !paused && (S.app.tab === "pinger" || watching());
+
+  // One loop at a time: each start makes a new generation; a loop from an older one stops at its next step and never
+  // records what it was waiting for. A ping is not started before the last one answered.
+  const nap = (ms, my) => new Promise((res) => { const t = setTimeout(res, ms); wake.add(() => { clearTimeout(t); res(); }); });
+  const wake = new Set();
+  function start() {
+    if (!want() || (running && running === gen)) return;
+    const my = ++gen;
+    running = my;
+    (async () => {
+      while (my === gen && want()) {
+        const every = watching() ? Math.min(rate(), 2000) : rate();
+        const t0 = Date.now();
+        const r = await S.pc.ping(Math.max(4000, Math.min(every * 2, 8000)));
+        if (my !== gen) break;
+        const p = S.pc.last;
+        if (!r.ok && !p.status && r.kind !== "offline") p.knock = await S.pc.knock(4000);   // PC Relay silent: is Tailscale up?
+        if (my !== gen) break;
+        pings.push(p);
+        if (pings.length > 600) pings.splice(0, pings.length - 600);
+        await onPing(r, p);
+        drawPings();
+        if (my !== gen) break;
+        await nap(Math.max(0, every - (Date.now() - t0)), my);
+      }
+      if (running === my) running = 0;
+    })();
+  }
+  function stop() { gen++; running = 0; for (const f of wake) f(); wake.clear(); }
+  function restartLoop() { stop(); start(); }
+  document.addEventListener("visibilitychange", () => (document.visibilityState === "visible" ? start() : stop()));
+
+  // ---- what each ping says about the PC and a restart ----
+  async function onPing(r, p) {
+    const info = r.info || S.pc.info;
+    const pending = r.ok && info && info.restart_at;
+    if (pending && (!watch || watch.at !== info.restart_at)) { await loadPC(); beginWatch(); }
+    if (watching()) await follow(r, p);
+    if (S.pc.signedIn() && S.pc.has21() && Date.now() - pcAt > 30000) loadPC().then(drawPC);
+  }
+
+  async function loadPC() {
+    if (!S.pc.signedIn()) { pcInfo = null; pcWhy = "signin"; return; }
+    if (!S.pc.has21()) { pcInfo = null; pcWhy = "old"; return; }
+    const r = await S.pc.api("pc");
+    pcAt = Date.now();
+    if (r.ok) { pcInfo = r.data; pcWhy = ""; }
+    else { pcWhy = r.signin ? "signin" : r.why; }
+    drawPC(); drawRestart();
+  }
+
+  function beginWatch() {
+    const rs = pcInfo && pcInfo.restart;
+    if (!rs || !rs.pending) return;
+    watch = { asked: rs.asked, at: rs.at, name: rs.name, relay: pcInfo.relay_started, windows: pcInfo.windows_started, phase: "set", events: [] };
+    saveWatch();
+    restartLoop();
+  }
+  const note = (text) => { watch.events.push({ at: Date.now(), text }); saveWatch(); };
+  async function follow(r, p) {
+    const w = watch;
+    if (r.ok) {
+      if (w.phase === "set" || w.phase === "due") {
+        // still the same run of PC Relay: is the restart still set?
+        const at = r.info && r.info.restart_at;
+        if (!at) {
+          await loadPC();
+          const last = pcInfo && pcInfo.restart && pcInfo.restart.last;
+          if (pcInfo && pcInfo.relay_started === w.relay) {
+            w.done = true;
+            w.result = last && last.asked === w.asked && last.result === "cancelled" ? "cancelled" : last && last.result === "did-not-happen" ? "not" : "gone";
+            w.detail = last ? last.detail || "" : "";
+            w.by = last ? (last.by_name || last.by || "") : "";
+            saveWatch(); drawRestart(); restartLoop();
+            return;
+          }
+        }
+        if (S.pc.pcNow() >= w.at && w.phase === "set") { w.phase = "due"; note("The countdown is over: Windows is restarting."); }
+        drawRestart();
+        return;
+      }
+      // it answers again after it went away
+      await loadPC();
+      const rs = (pcInfo && pcInfo.restart) || {};
+      const winNew = pcInfo && pcInfo.windows_started && pcInfo.windows_started > w.asked;
+      if (!winNew && rs.pending && rs.asked === w.asked) {   // only PC Relay restarted: Windows' countdown goes on
+        w.phase = S.pc.pcNow() >= w.at ? "due" : "set"; w.relay = pcInfo.relay_started; w.awayAt = 0;
+        note("PC Relay answers again (it was restarted); Windows' restart is still set.");
+        saveWatch(); drawRestart();
+        return;
+      }
+      w.backAt = p.at;
+      w.phase = "back"; w.done = true;
+      w.result = winNew ? "restarted" : "relay-only";
+      w.windowsAt = pcInfo ? pcInfo.windows_started : 0;
+      w.relayAt = pcInfo ? pcInfo.relay_started : 0;
+      w.detail = rs.last && rs.last.asked === w.asked ? rs.last.detail || "" : "";
+      note(winNew ? "The PC is back." : "PC Relay answers again, but Windows did not restart.");
+      saveWatch(); drawRestart(); restartLoop();
+      return;
+    }
+    // no answer, or only Tailscale's (Windows is up, PC Relay is not): a 502, or a knock answered
+    if (p.status === 502 || p.knock) {
+      if (w.phase !== "windows") { w.phase = "windows"; w.windowsSeen = p.at; if (!w.awayAt) w.awayAt = p.at; note("Windows answers again (Tailscale is up), but PC Relay is not running yet."); }
+    } else if (w.phase === "set" || w.phase === "due") {
+      w.phase = "away"; w.awayAt = p.at; note("No answer: Windows is restarting.");
+    }
+    drawRestart();
+  }
+
+  // ---- drawing ----
+  function card(id, title, ...kids) { return h("section.card#" + id, h("h2", { text: title }), ...kids); }
+
+  function pingCard() {
+    const sel = h("select#pingrate", { "aria-label": "How often to ping", on: { change: () => { S.store.set("ping-every", Number(sel.value)); restartLoop(); drawPings(); } } },
+      RATES.map(([n, l]) => h("option", { value: String(n), text: l, selected: n === rate() })));
+    const pause = h("button#pingpause", { type: "button", text: paused ? "Resume" : "Pause", on: { click: () => { paused = !paused; pause.textContent = paused ? "Resume" : "Pause"; paused ? stop() : start(); drawPings(); } } });
+    const clr = h("button#pingclear", { type: "button", text: "Clear", on: { click: () => { pings.length = 0; drawPings(); } } });
+    return card("pingcard", "Pinger",
+      h("div.pingtop", h("div.big#pingbig", { text: "…" }), h("div.pingwhat#pingstate", { text: "Pinging PC Relay…" })),
+      h("div.row.controls", sel, pause, clr),
+      h("div.chart#pingchart", { role: "img", "aria-label": "The last 60 pings' round trips" }),
+      h("p.stats#pingstats"),
+      h("ul.pinglog#pinglog"),
+      h("p.help", { text: "Each ping is one request to PC Relay on the PC (/relay/ping) and its answer, through the PC's public address, timed in this browser. " +
+        "It runs while this tab is open (and while a restart is watched), and pauses while the page is hidden. The rate is kept on this device." }));
+  }
+
+  function drawPings() {
+    const big = $("#pingbig"), st = $("#pingstate"), chart = $("#pingchart"), stats = $("#pingstats"), log = $("#pinglog");
+    if (!big) return;
+    const last = pings[pings.length - 1];
+    if (!last) { big.textContent = "…"; st.textContent = paused ? "Paused." : "Pinging PC Relay…"; }
+    else if (last.ok) { big.textContent = last.ms + " ms"; big.className = "big ok"; st.textContent = `PC Relay answered at ${S.clock(last.at, true)}` + (paused ? " · paused" : ""); }
+    else { big.textContent = last.status === 502 || last.knock ? "No PC Relay" : "No answer"; big.className = "big bad"; st.textContent = S.sentence(whyText(last)) + (paused ? " Paused." : ""); }
+    // the chart: the last 60, newest on the right; a lost one is a full red bar. The scale fits the slowest one shown
+    // (a round number of ms); its two lines are labelled in HTML, so the labels never stretch with the chart.
+    const N = 60, view = pings.slice(-N), good = view.filter((p) => p.ok).map((p) => p.ms);
+    const top = [10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000].find((n) => n >= Math.max(0, ...good) * 1.15) || 20000;
+    const W = 600, H = 120, bw = W / N;
+    const ns = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    svg.setAttribute("preserveAspectRatio", "none");
+    for (const y of [H / 2, 0.5]) {
+      const l = document.createElementNS(ns, "line");
+      Object.entries({ x1: 0, x2: W, y1: y, y2: y, class: "grid" }).forEach(([k, v]) => l.setAttribute(k, v));
+      svg.append(l);
+    }
+    view.forEach((p, i) => {
+      const r = document.createElementNS(ns, "rect");
+      const hh = p.ok ? Math.max(2, (H * Math.min(p.ms, top)) / top) : H;
+      Object.entries({ x: (N - view.length + i) * bw + 1, y: H - hh, width: Math.max(1, bw - 2), height: hh, class: p.ok ? "bar" : "bar lost" }).forEach(([k, v]) => r.setAttribute(k, v));
+      const tt = document.createElementNS(ns, "title");
+      tt.textContent = `${S.clock(p.at, true)}: ${p.ok ? p.ms + " ms" : whyText(p)}`;
+      r.append(tt);
+      svg.append(r);
+    });
+    chart.replaceChildren(svg, h("span.lab.top", { text: top + " ms" }), h("span.lab.mid", { text: top / 2 + " ms" }));
+    // the numbers
+    const all = pings.filter((p) => p.ok).map((p) => p.ms), lost = pings.length - all.length;
+    if (!pings.length) stats.textContent = "";
+    else {
+      const avg = all.length ? Math.round(all.reduce((a, b) => a + b, 0) / all.length) : 0;
+      let jit = 0;
+      for (let i = 1; i < all.length; i++) jit += Math.abs(all[i] - all[i - 1]);
+      jit = all.length > 1 ? Math.round(jit / (all.length - 1)) : 0;
+      stats.textContent = (all.length ? `Fastest ${Math.min(...all)} ms · average ${avg} ms · slowest ${Math.max(...all)} ms · jitter ${jit} ms · ` : "") +
+        `${lost} of ${S.plural(pings.length, "ping")} lost (${Math.round((100 * lost) / pings.length)}%) since ${S.clock(pings[0].at, true)} · ${RATES.find(([n]) => n === rate())[1].toLowerCase()}` +
+        (watching() && rate() > 2000 ? " (every 2 s while a restart is watched)" : "");
+    }
+    clear(log, pings.slice(-30).reverse().map((p) => h("li" + (p.ok ? "" : ".bad"), h("span.t", { text: S.clock(p.at, true) }), h("span.v", { text: p.ok ? p.ms + " ms" : whyText(p) }))));
+  }
+  function whyText(p) {
+    if (p.status === 502) return "502 from Tailscale: Windows is up, but PC Relay is not running";
+    if (p.knock) return "PC Relay did not answer, but the PC's address does (Tailscale on the PC is up: Windows is running)";
+    if (p.kind === "timeout") return p.why || "no answer in time";
+    return p.why || "no answer";
+  }
+
+  function pcCard() {
+    const c = card("pccard", "The PC");
+    c.append(h("div#pcbody"));
+    return c;
+  }
+  function drawPC() {
+    const body = $("#pcbody");
+    if (!body) return;
+    const info = S.pc.info, rows = [];
+    if (!info) { clear(body, h("p.help", { text: "Waiting for the first answer from the PC…" })); return; }
+    rows.push(h("p", h("b", { text: info.pc || "The PC" }), ` · PC Relay ${info.version}` + (info.on === false ? " · switched off in the tray" : "") + (info.game ? " · Game mode on" : "")));
+    if (!S.pc.signedIn()) rows.push(h("p.help", { text: "Sign in (Connection tab) to see when Windows and PC Relay started and whether the public address answers." }));
+    else if (!S.pc.has21()) rows.push(h("p.help", { text: `PC Relay ${info.version} does not tell more: this needs 2.1.` }));
+    else if (!pcInfo) rows.push(h("p.help", { text: pcWhy && pcWhy !== "signin" ? S.sentence(pcWhy) : "Asking the PC…" }));
+    else {
+      const now = S.pc.pcNow();
+      if (pcInfo.windows_started) rows.push(h("p", { text: `Windows started ${S.when(pcInfo.windows_started)} (running for ${S.span(now - pcInfo.windows_started)}).` }));
+      if (pcInfo.relay_started) rows.push(h("p", { text: `PC Relay started ${S.when(pcInfo.relay_started)}.` }));
+      const d = pcInfo.door || {};
+      if (!d.managed) rows.push(h("p.help", { text: "The public address is not looked after by this relay (a test relay)." }));
+      else if (d.answering) rows.push(h("p", h("span.okmark", { text: "✓ " }), `The public address answers from the internet` + (d.checked ? ` (tested ${S.when(d.checked)}).` : ".")));
+      else rows.push(h("p.warn", { text: "The public address is not answering from the internet" + (d.problem || d.why ? ": " + (d.problem || d.why) : "") + "." }));
+      rows.push(h("p.help", { text: `${S.plural(pcInfo.devices, "device")} signed in · a sign-in not used for ${pcInfo.expires_days} days ends.` }));
+    }
+    clear(body, rows);
+  }
+
+  // ---- Restart this PC ----
+  function restartCard() { return card("restartcard", "Restart this PC", h("div#restartbody")); }
+
+  function afterWords() {
+    const a = (pcInfo && pcInfo.after_restart) || {};
+    if (a.auto_sign_in === "on") return "Windows signs in by itself on this PC (automatic sign-in is on), so PC Relay starts again with nobody at the PC, usually a minute or two after Windows starts: the PC should answer here again a few minutes after the countdown ends (longer if Windows installs updates while it restarts). The PC's own screen is then signed in, as after any restart there.";
+    if (a.auto_sign_in === "off") return "This PC does not sign in by itself (automatic sign-in is off). PC Relay starts only when someone signs in to Windows at the PC, so after the restart this page cannot reach the PC until then. (If Windows' own \"Use my sign-in info to automatically finish setting up after an update or restart\" is on, Windows may sign in and lock the screen by itself: this restart asks for that, and then PC Relay starts.)";
+    return "The PC could not tell whether Windows signs in by itself after a restart" + (a.detail ? ` (${a.detail})` : "") + ". If it does not, PC Relay starts only when someone signs in to Windows at the PC, and this page cannot reach the PC until then.";
+  }
+
+  let confirming = false;
+  function drawRestart() {
+    drawBanner();
+    const body = $("#restartbody");
+    if (!body) return;
+    const say = h("p.say#restartsay");
+    if (watch && (watching() || watch.done)) { clear(body, watchView(), say); return; }
+    if (!S.pc.signedIn()) { clear(body, h("p", { text: "Only a signed-in device can restart the PC: sign in first (Connection tab). The PC refuses everyone else, whatever a page shows." }), h("button.danger", { type: "button", text: "Restart this PC…", disabled: true })); return; }
+    if (S.pc.info && !S.pc.has21()) { clear(body, h("p", { text: `The PC runs PC Relay ${S.pc.version()}, which cannot restart it: this needs PC Relay 2.1.` })); return; }
+    if (!pcInfo) { clear(body, h("p.help", { text: pcWhy && pcWhy !== "signin" ? S.sentence(pcWhy) : "Asking the PC…" })); return; }
+    const rs = pcInfo.restart || {};
+    if (rs.pending) { beginWatch(); clear(body, watchView(), say); return; }
+    const last = rs.last ? h("p.help#lastrestart", { text: lastWords(rs.last) }) : null;
+    if (!rs.allowed || rs.why) { clear(body, h("p.warn#restartwhy", { text: S.sentence(rs.why || "Restarts from pages are switched off on the PC.") }), last); return; }
+    if (!confirming) {
+      clear(body, h("p", { text: "Restarts Windows on the PC after a countdown that can be cancelled. Windows does it, and warns whoever is at the PC." }),
+        h("button.danger#restartopen", { type: "button", text: "Restart this PC…", on: { click: () => { confirming = true; drawRestart(); } } }), last);
+      return;
+    }
+    const opts = [[30, "in 30 seconds"], [60, "in 1 minute"], [120, "in 2 minutes"], [300, "in 5 minutes"]].filter(([s]) => s >= (rs.min || 30) && s <= (rs.max || 600));
+    const sel = h("select#restartwhen", { "aria-label": "When", on: { change: () => { go.textContent = "Restart the PC " + sel.selectedOptions[0].textContent; } } },
+      opts.map(([s, l]) => h("option", { value: String(s), text: l, selected: s === (rs.default || 60) })));
+    const go = h("button.danger#restartgo", { type: "button", text: "Restart the PC " + (opts.find(([s]) => s === (rs.default || 60)) || opts[0])[1] });
+    const no = h("button#restartno", { type: "button", text: "Not now", on: { click: () => { confirming = false; drawRestart(); } } });
+    go.addEventListener("click", async () => {
+      go.disabled = no.disabled = sel.disabled = true;
+      S.say(say, "Asking the PC…");
+      const r = await S.pc.api("restart", { json: { seconds: Number(sel.value) } });
+      if (!r.ok) { go.disabled = no.disabled = sel.disabled = false; S.say(say, S.sentence(r.why), "bad"); if (r.signin) S.emit("auth"); return; }
+      confirming = false;
+      pcInfo.restart = r.data.restart;
+      beginWatch();
+      drawRestart();
+    });
+    clear(body,
+      h("div.confirm#restartconfirm",
+        h("p", h("b", { text: "What happens:" })),
+        h("ul",
+          h("li", "Windows restarts ", sel, ". It shows its own warning on the PC's screen; until then it can be cancelled here or at the PC (PC Relay's tray icon, the restart line)."),
+          h("li", { text: "Programs on the PC are closed without asking to save: anything unsaved on the PC is lost." }),
+          h("li", { text: "Everything through PC Relay stops until the PC is back: Screen Peek, the PC voice, file transfers, and this page's own connection." }),
+          h("li#afterwords", { text: "After the restart: " + afterWords() }),
+          h("li", { text: "This page keeps pinging and says when the PC is back." })),
+        h("div.row", go, no)),
+      say, last);
+  }
+
+  function lastWords(l) {
+    const when = l.ended ? S.when(Date.parse(l.ended)) : "";
+    if (l.result === "done") return `The last restart asked from a page (${l.name || "a device"}, ${S.when(Date.parse(l.asked))}) happened: ${l.detail || "Windows started again"}.`;
+    if (l.result === "cancelled") return `The last restart asked from a page was cancelled ${l.by === "tray" ? "at the PC (the tray)" : "from a page" + (l.by_name ? ` (${l.by_name})` : "")}${when ? ", " + when : ""}.`;
+    return `The last restart asked from a page (${S.when(Date.parse(l.asked))}) did not happen: ${l.detail || "its time passed"}.`;
+  }
+
+  function watchView() {
+    const w = watch, out = h("div.watch#watch");
+    const rs = (pcInfo && pcInfo.restart) || {};
+    const now = S.pc.pcNow();
+    if (!w.done && (w.phase === "set" || w.phase === "due")) {
+      const left = w.at - now;
+      out.append(h("p.countdown#countdown", left > 0 ? [h("b", { text: `Windows restarts at ${S.clock(w.at, true)}` }), ` · in ${S.mmss(left)}`] : [h("b", { text: "The countdown is over: Windows is restarting…" })]));
+      out.append(h("p.help", { text: `Asked from ${w.name || "a signed-in device"} at ${S.clock(w.asked, true)}. ` + (left > 0 ? "It can be cancelled until then, here or at the PC (PC Relay's tray icon, the restart line)." : "") }));
+      if (left > 0) {
+        const say = h("p.say");
+        const cancel = h("button.primary#restartcancel", { type: "button", text: "Cancel the restart", on: { click: async () => {
+          cancel.disabled = true; S.say(say, "Cancelling…");
+          const r = await S.pc.api("restart", { json: { cancel: true } });
+          if (!r.ok) { cancel.disabled = false; S.say(say, S.sentence(r.why), "bad"); return; }
+          watch = { ...w, done: true, result: "cancelled", by: "this page", detail: r.data.note };
+          saveWatch();
+          pcInfo.restart = r.data.restart;
+          drawRestart(); restartLoop();
+        } } });
+        out.append(h("div.row", cancel), say);
+      }
+    }
+    if (!w.done && w.phase === "away") out.append(h("p.countdown", h("b", { text: "The PC is restarting" }), ` · no answer since ${S.clock(w.awayAt, true)} (${S.span(Date.now() - w.awayAt)})`));
+    if (!w.done && w.phase === "windows") out.append(h("p.countdown", h("b", { text: "Windows is back, PC Relay not yet" }), ` · Tailscale answers (since ${S.clock(w.windowsSeen, true)}), but PC Relay is not running: it starts once Windows has signed in.`));
+    if (!w.done && (w.phase === "away" || w.phase === "windows")) out.append(h("p.help", { text: "After the restart: " + afterWords() }));
+    if (w.done) {
+      let text = "";
+      if (w.result === "restarted") text = `✓ The PC is back (${S.clock(w.backAt, true)}). Windows restarted: it started at ${S.clock(w.windowsAt, true)}` +
+        (w.relayAt ? `, and PC Relay ${S.span(w.relayAt - w.windowsAt)} after that` : "") + (w.awayAt ? `. The PC could not be reached for ${S.span(w.backAt - w.awayAt)}.` : ".");
+      else if (w.result === "relay-only") text = `PC Relay answers again (${S.clock(w.backAt, true)}), but Windows did not restart (it has run since ${S.when(w.windowsAt)}).` + (w.detail ? " " + S.sentence(w.detail) : "");
+      else if (w.result === "cancelled") text = "The restart was cancelled" + (w.by && w.by !== "this page" ? ` (${w.by === "tray" ? "at the PC, from the tray" : w.by})` : " from this page") + ".";
+      else if (w.result === "not") text = "The restart did not happen: " + (w.detail || "its time passed with PC Relay still running") + ".";
+      else text = "The restart is no longer set on the PC" + (w.detail ? `: ${w.detail}` : ".");
+      out.append(h("p.result#restartresult" + (w.result === "restarted" ? ".ok" : ""), { text }));
+      out.append(h("button#restartdone", { type: "button", text: "OK", on: { click: () => { watch = null; saveWatch(); loadPC(); drawRestart(); } } }));
+    }
+    if (w.events && w.events.length) out.append(h("ul.events", w.events.map((e) => h("li", h("span.t", { text: S.clock(e.at, true) }), " ", e.text))));
+    return out;
+  }
+
+  // the bar under the tabs while a restart is set or under way, on every tab: a press goes to it
+  function drawBanner() {
+    const b = $("#restartbanner");
+    if (!b) return;
+    let text = "", back = false;
+    if (watching()) {
+      const left = watch.at - S.pc.pcNow();
+      text = watch.phase === "away" ? `The PC is restarting · no answer since ${S.clock(watch.awayAt, true)}`
+        : watch.phase === "windows" ? "Windows is back, PC Relay not yet"
+        : left > 0 ? `Windows restarts at ${S.clock(watch.at, true)} · in ${S.mmss(left)} · Cancel on the Pinger tab` : "Windows is restarting…";
+    } else if (watch && watch.done && watch.result === "restarted") { text = "✓ The PC is back after its restart"; back = true; }
+    b.hidden = !text;
+    b.classList.toggle("back", back);
+    if (b.textContent !== text) b.textContent = text;
+  }
+  function render() {
+    const p = $("#tab-pinger");
+    if (!p) return;
+    clear(p, pingCard(), restartCard(), pcCard());
+    drawPings(); drawPC(); drawRestart();
+    if (S.pc.signedIn() && (!pcInfo || Date.now() - pcAt > 5000)) loadPC();
+  }
+  setInterval(() => { if ($("#countdown") || (watching() && document.visibilityState === "visible")) drawRestart(); drawBanner(); }, 500);
+  document.addEventListener("click", (e) => {
+    if (e.target.id !== "restartbanner") return;
+    location.hash = "#pinger";
+    setTimeout(() => { const c = $("#restartcard"); if (c) c.scrollIntoView({ block: "start", behavior: "smooth" }); }, 50);
+  });
+  S.on("auth", () => { pcInfo = null; pcAt = 0; confirming = false; render(); });
+  S.on("tab", (t) => { if (t === "pinger") { render(); start(); } else if (!watching()) stop(); });
+  S.pinger = { render, start, stop, get pings() { return pings; }, get watch() { return watch; } };
+  if (watching()) setTimeout(start, 0);
+})();
+
+// ---- devices.js ----
+// devices.js: the Devices tab (signed in, relay 2.1): the devices signed in to the PC, with Rename and Sign out (one,
+// or every device), and the recent sign-ins from the PC's security log (right and wrong passwords, sign-outs, ended
+// sign-ins; optionally every refusal and change too), each with where its address is: this PC, a device on the
+// tailnet, the home's own internet address, or the internet (with the address's name when it has one), and a mark on
+// the first sign-in from an address. (2026-11-07: an unfamiliar address signed in, and Jon learned of it only from
+// the log file.)
+"use strict";
+(function () {
+  const { h, $, clear } = S;
+  let devs = null, devWhy = "", log = null, logWhy = "", all = S.store.get("log-all", false), loading = false;
+
+  async function load() {
+    if (loading) return;
+    loading = true;
+    const [d, l] = await Promise.all([S.pc.api("devices"), S.pc.api("log?kinds=" + (all ? "all" : "sign-ins") + "&limit=" + (all ? 300 : 150))]);
+    loading = false;
+    devs = d.ok ? d.data : null; devWhy = d.ok ? "" : d.why;
+    log = l.ok ? l.data : null; logWhy = l.ok ? "" : l.why;
+    if (d.signin || l.signin) S.emit("auth");
+    draw();
+  }
+
+  function needs() {
+    if (!S.pc.signedIn()) return "Sign in (Connection tab) to see the devices signed in to the PC and the recent sign-ins. The PC shows them to signed-in devices only.";
+    if (S.pc.info && !S.pc.has21()) return `The PC runs PC Relay ${S.pc.version()}: the devices and the log need PC Relay 2.1 (until then they are in the tray on the PC).`;
+    return "";
+  }
+
+  function devCard() {
+    const c = h("section.card#devcard", h("h2", { text: "Signed in to the PC" }));
+    if (!devs) { c.append(h("p.help", { text: devWhy ? S.sentence(devWhy) : "Asking the PC…" })); return c; }
+    const list = h("ul.devices#devlist");
+    for (const d of devs.devices) {
+      const say = h("p.say");
+      const name = h("b.devname", { text: d.name });
+      const rename = h("button.small", { type: "button", text: "Rename", on: { click: () => {
+        const inp = h("input", { type: "text", value: d.name, maxlength: "60", "aria-label": "A new name for this device" });
+        const save = h("button.small.primary", { type: "submit", text: "Save" });
+        const form = h("form.row.inline", { on: { submit: async (e) => {
+          e.preventDefault();
+          save.disabled = true;
+          const r = await S.pc.api("devices", { json: { rename: d.device, name: inp.value } });
+          if (r.ok) { d.name = r.data.name; draw(); } else { save.disabled = false; S.say(say, S.sentence(r.why), "bad"); }
+        } } }, inp, save, h("button.small", { type: "button", text: "Cancel", on: { click: draw } }));
+        name.replaceWith(form); rename.remove(); inp.focus(); inp.select();
+      } } });
+      const out = h("button.small", { type: "button", text: d.this ? "Sign out (this device)" : "Sign out", on: { click: async () => {
+        out.disabled = true;
+        if (d.this) { await S.pc.signOut(); return; }
+        const r = await S.pc.api("devices", { json: { sign_out: d.device } });
+        if (r.ok) load(); else { out.disabled = false; S.say(say, S.sentence(r.why), "bad"); }
+      } } });
+      list.append(h("li" + (d.this ? ".this" : ""), { data: { device: d.device } },
+        h("div.devhead", name, d.this ? h("span.tag", { text: "this device" }) : null),
+        h("div.help", { text: `Signed in ${S.when(d.created)} · last used ${S.when(d.last_used)} from ${d.ip || "an unknown address"} (${d.where ? d.where.text : ""})` }),
+        h("div.row", rename, out), say));
+    }
+    if (!devs.devices.length) list.append(h("li", { text: "No device is signed in." }));
+    c.append(list);
+    const say = h("p.say");
+    const allBtn = h("button.danger#signoutall", { type: "button", text: "Sign out every device…", on: { click: async () => {
+      if (allBtn.dataset.sure !== "1") { allBtn.dataset.sure = "1"; allBtn.textContent = "Sign out every device, this one too"; S.say(say, "Every device must sign in again with the PC's password, this browser too (every Cool tools page in it). Press again to do it."); return; }
+      allBtn.disabled = true;
+      const r = await S.pc.api("devices", { json: { sign_out_all: true } });
+      if (!r.ok) { allBtn.disabled = false; S.say(say, S.sentence(r.why), "bad"); return; }
+      await S.pc.signOut();   // this browser's pass ended with the rest: forget it here too
+    } } });
+    c.append(h("div.row", allBtn), say,
+      h("p.help", { text: `The same list is in the tray on the PC (Signed in: N devices). A sign-in not used for ${devs.expires_days} days ends by itself; a new password signs every device out.` }));
+    return c;
+  }
+
+  function what(e) {
+    switch (e.event) {
+      case "sign-in": return e.ok ? ["ok", "Signed in"] : ["bad", "Refused: " + (e.error || "the sign-in did not work")];
+      case "sign-out": return ["", "Signed out" + (e.action === "every device" ? " (every device" + (e.count ? `: ${e.count}` : "") + ")" : e.action === "one device" ? ` by ${e.by === "page" ? "a page" : e.by === "tray" ? "the tray" : e.by}` : "")];
+      case "expired": return ["", "Sign-in ended (not used)"];
+      case "refused": return ["bad", `Refused (${e.status}): ${e.error || ""}`];
+      case "admin": return [e.ok ? "" : "bad", `Changed: ${e.action}${e.detail ? " · " + e.detail : ""}` + (e.by ? ` (by ${e.by})` : "")];
+    }
+    return ["", e.event];
+  }
+
+  function logCard() {
+    const c = h("section.card#logcard", h("h2", { text: "Recent sign-ins" }));
+    const box = h("input#logall", { type: "checkbox", checked: all, on: { change: () => { all = box.checked; S.store.set("log-all", all); log = null; draw(); load(); } } });
+    const refresh = h("button.small#logrefresh", { type: "button", text: "Refresh", on: { click: () => { log = null; devs = null; draw(); load(); } } });
+    c.append(h("div.row", h("label.check", box, " Show refusals and changes too"), refresh));
+    if (!log) { c.append(h("p.help", { text: logWhy ? S.sentence(logWhy) : "Reading the PC's security log…" })); return c; }
+    const ul = h("ul.events#loglist");
+    for (const e of log.events) {
+      const [kind, text] = what(e);
+      const who = e.who || {}, where = e.where;
+      const t = Date.parse(e.ts) || 0;
+      const name = e.device_name || who.device_name || "";
+      const bits = [name || who.browser, who.page ? `page ${who.page}` : "", (who.browser && name && !name.includes(who.browser)) ? who.browser : ""].filter(Boolean);
+      ul.append(h("li" + (kind ? "." + kind : ""),
+        h("div.evhead", h("span.t", { text: S.when(t, true) }), h("span.what", { text: text }), e.new_address ? h("span.tag.new", { text: "new address" }) : null),
+        bits.length ? h("div.help", { text: bits.join(" · ") }) : null,
+        who.ip ? h("div.help", { text: `from ${who.ip}${where ? " · " + where.text : ""}` }) : null));
+    }
+    if (!log.events.length) ul.append(h("li", { text: "Nothing yet." }));
+    c.append(ul, h("p.help", { text: `From the PC's security.log (newest first; ${S.plural(log.total, "event")} ${all ? "in all" : "about sign-ins"}). "New address": the first sign-in from that address in the log.` +
+      (log.home_ip ? ` Your home's internet address is ${log.home_ip} (as the PC's own test of its public address sees it).` : "") }));
+    return c;
+  }
+
+  function draw() {
+    const p = $("#tab-devices");
+    if (!p) return;
+    const n = needs();
+    if (n) { clear(p, h("section.card", h("h2", { text: "Devices" }), h("p", { text: n }))); return; }
+    clear(p, devCard(), logCard());
+  }
+  function render() { draw(); if (!needs() && (!devs || !log)) load(); }
+  S.on("auth", () => { devs = null; log = null; if (S.app && S.app.tab === "devices") render(); });
+  S.on("tab", (t) => { if (t === "devices") { devs = null; log = null; render(); } });
+  S.devices = { render, load };
+})();
+
+// ---- programs.js ----
+// programs.js: the Programs tab: the PC's programs (from the ping: state, connected devices, public or private,
+// allowed), and, signed in with relay 2.1, the tray's own switches from here: Start now, Stop now (restarting one
+// program is often enough, before restarting the PC), Private (sign-in needed), Allowed, Game mode, Make everything
+// private. Each is the tray's own code on the PC, logged there with this device's name.
+"use strict";
+(function () {
+  const { h, $, clear } = S;
+  let busy = false, say = "", sayKind = "";
+
+  const can = () => S.pc.signedIn() && S.pc.has21();
+  async function change(json) {
+    busy = true;
+    const r = await S.pc.api("programs", { json });
+    busy = false;
+    if (r.ok) { if (S.pc.info) Object.assign(S.pc.info, { services: r.data.services, game: r.data.game, on: r.data.on }); say = ""; }
+    else { say = S.sentence(r.why); sayKind = "bad"; if (r.signin) S.emit("auth"); }
+    draw();
+    return r;
+  }
+
+  function stateText(s) {
+    if (s.blocked) return "switched off (Allowed is off)";
+    let t = s.state || "stopped";
+    if (t === "running" && s.clients) t += ` · ${S.plural(s.clients, "connection")}`;
+    if (s.unavailable) t += " · " + s.unavailable;
+    if (s.reason && s.state === "failed") t += ": " + s.reason;
+    return t;
+  }
+
+  function draw() {
+    const p = $("#tab-programs");
+    if (!p) return;
+    const info = S.pc.info;
+    if (!info) { clear(p, h("section.card", h("h2", { text: "Programs" }), h("p.help", { text: "Waiting for the PC to answer…" }))); return; }
+    const note = !S.pc.signedIn() ? "Sign in (Connection tab) to change these. Signed out, this is what the PC tells every page."
+      : !S.pc.has21() ? `The PC runs PC Relay ${info.version}: switching from here needs 2.1 (until then: the tray on the PC).` : "";
+    const game = h("section.card#gamecard", h("h2", { text: "Game mode" }),
+      h("div.row.switchrow", S.toggle("Game mode", info.game, (on) => change({ action: "game", on }), { disabled: !can() || busy }),
+        h("span", { text: info.game ? "On: heavy programs (the PC voice) are stopped and refused." : "Off: every program can start." })),
+      h("p.help", { text: "For gaming on the PC: stops heavy programs and refuses them until it is off." }));
+    const list = h("ul.programs#proglist");
+    for (const s of info.services || []) {
+      const row = h("li", { data: { id: s.id } },
+        h("div.proghead", h("b", { text: s.name || s.id }), h("span.tag" + (s.private ? ".priv" : ".pub"), { text: s.private ? "private" : "public" })),
+        h("div.help", { text: s.description || "" }),
+        h("div.state" + (s.state === "failed" ? ".bad" : ""), { text: stateText(s) }));
+      if (can()) {
+        row.append(h("div.row.progctl",
+          h("button.small", { type: "button", text: "Start now", disabled: busy || s.blocked || s.state === "running", on: { click: () => change({ action: "start", id: s.id }) } }),
+          h("button.small", { type: "button", text: "Stop now", disabled: busy || s.state === "stopped", on: { click: () => change({ action: "stop", id: s.id }) } }),
+          h("label.switchlabel", S.toggle("Private: " + (s.name || s.id), s.private, (on) => change({ action: "private", id: s.id, on }), { disabled: busy }), " Private (sign-in needed)"),
+          h("label.switchlabel", S.toggle("Allowed: " + (s.name || s.id), !s.blocked, (on) => change({ action: "allowed", id: s.id, on }), { disabled: busy }), " Allowed")));
+      }
+      list.append(row);
+    }
+    const progs = h("section.card#progcard", h("h2", { text: "Programs on the PC" }), note ? h("p.help", { text: note }) : null, list,
+      can() ? h("div.row", h("button#allprivate", { type: "button", text: "Make everything private", disabled: busy, on: { click: () => change({ action: "everything-private" }) } }),
+        h("span.help", { text: "Every program needs the sign-in (each can be made public again)." })) : null,
+      h("p.say" + (sayKind ? "." + sayKind : ""), { text: say }),
+      h("p.help", { text: "Private: only signed-in devices can use it. Public: anyone may view and download; changes always need the sign-in. Allowed off: pages hear it is switched off on the PC. " +
+        "These are the tray's own switches (Programs) and are logged on the PC with this device's name. Stop now and Start now restart one program, which is often enough before restarting the PC." }));
+    clear(p, game, progs);
+  }
+
+  let poll = 0;
+  S.on("tab", (t) => {
+    clearInterval(poll);
+    if (t !== "programs") return;
+    draw();
+    S.pc.ping().then(draw);
+    poll = setInterval(() => { if (document.visibilityState === "visible" && !busy) S.pc.ping().then(draw); }, 5000);
+  });
+  S.on("auth", () => { if (S.app && S.app.tab === "programs") draw(); });
+  S.programs = { render: draw };
+})();
+
+// ---- app.js ----
+// app.js: the page: four tabs (Connection, Pinger, Devices, Programs; the address's #hash names one, so another
+// program can link to a tab: ../settings/#pinger), the header's connection chip, the footer's version.
+"use strict";
+(function () {
+  const { h, $, $$ } = S;
+  const TABS = ["connection", "pinger", "devices", "programs"];
+  S.app = { tab: "" };
+
+  function show(tab, push) {
+    if (!TABS.includes(tab)) tab = "connection";
+    if (S.app.tab === tab) return;
+    S.app.tab = tab;
+    for (const b of $$(".tabs button")) { const on = b.dataset.tab === tab; b.setAttribute("aria-selected", String(on)); b.tabIndex = on ? 0 : -1; }
+    for (const p of $$("main > section.panel")) p.hidden = p.id !== "tab-" + tab;
+    S.store.set("tab", tab);
+    if (push && location.hash !== "#" + tab) history.replaceState(null, "", "#" + tab);
+    if (tab === "connection") S.connection.render();
+    S.emit("tab", tab);
+  }
+
+  function chip() {
+    const c = $("#conn"), R = S.pc.R, st = R.status || {}, last = S.pc.last;
+    let text = "Checking…", kind = "wait", title = st.why || "";
+    if (last && last.ok) { text = `${last.ms} ms`; kind = "on"; title = `PC Relay ${S.pc.version()} answered in ${last.ms} ms at ${S.clock(last.at, true)}`; }
+    else if (st.state === "off") { text = "Switched off"; kind = "off"; }
+    else if (st.state === "reload") { text = "Reload the page"; kind = "off"; }
+    else if (last && !last.ok) { text = last.status === 502 ? "PC Relay not running" : "Can't reach the PC"; kind = "off"; title = last.why || title; }
+    c.className = "chip " + kind;
+    c.textContent = text + (S.pc.signedIn() ? " · signed in" : "");
+    c.title = title + (S.pc.signedIn() ? " · this device is signed in" : " · not signed in");
+  }
+
+  function start() {
+    const bar = $(".tabs");
+    bar.addEventListener("click", (e) => { const b = e.target.closest("button[data-tab]"); if (b) show(b.dataset.tab, true); });
+    bar.addEventListener("keydown", (e) => {
+      const i = TABS.indexOf(S.app.tab);
+      const to = e.key === "ArrowRight" ? TABS[(i + 1) % TABS.length] : e.key === "ArrowLeft" ? TABS[(i + TABS.length - 1) % TABS.length] : e.key === "Home" ? TABS[0] : e.key === "End" ? TABS[TABS.length - 1] : "";
+      if (to) { e.preventDefault(); show(to, true); $(`.tabs button[data-tab="${to}"]`).focus(); }
+    });
+    addEventListener("hashchange", () => show(location.hash.slice(1), false));
+    S.on("ping", chip);
+    S.on("auth", chip);
+    S.pc.R.on(chip);
+    const v = $("#ver");
+    if (v) v.textContent = `Settings ${S.VERSION} · built ${S.BUILT}`;
+    chip();
+    const want = location.hash.slice(1);
+    show(TABS.includes(want) ? want : S.store.get("tab", "connection"), false);
+    // one ping at the start whatever the tab (the Connection tab shows the PC's word on its address; the chip)
+    if (S.app.tab !== "pinger") S.pc.ping().catch(() => {});
+  }
+  S.start = start;
+})();
+
+</script>
+<script>
+S.VERSION = "1.0.10"; S.BUILT = "2026-11-08 1:50 AM";
+S.start();
+</script>
+</body>
+</html>

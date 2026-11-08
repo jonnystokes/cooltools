@@ -19,6 +19,12 @@
       "source": "Projects\\file-manager"
     },
     {
+      "id": "settings", "group": "now", "name": "Settings", "path": "settings/",
+      "short": "Sign-in, PC address, pinger and restart",
+      "about": "What all these programs share: the PC's sign-in for every page, the PC's address, a live pinger to the PC with Restart this PC, the devices signed in with recent sign-ins, and the PC's programs.",
+      "source": "Projects\\settings"
+    },
+    {
       "id": "hyperwave", "group": "fun", "name": "HYPERWAVE Studio", "path": "hyperwave/",
       "short": "Sound-reactive visuals: 79 shapes",
       "about": "Sound-reactive visuals: 79 shapes, fractals and 4D forms that react to your microphone, PC audio, a song file or 18 built-in demo tracks.",

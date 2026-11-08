@@ -1,4 +1,4 @@
-/* versions.js 1.12: each program's version, the date it was last built and how long ago that was, under its line
+/* versions.js 1.14: each program's version, the date it was last built and how long ago that was, under its line
    on the Cool tools front page and in the Apps menu. ONE source: Projects\app-kit\versions.js (built into the menu;
    published as https://jonnystokes.github.io/Cool-tools/apps/versions.js, which the front page loads).
 
