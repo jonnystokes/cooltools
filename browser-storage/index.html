@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Client browser database manager</title>
+<title>Browser app cache manager</title>
 <!-- app-kit icon: written by build.py from ..\app-kit\favicons\browser-storage.html (the family icon); do not edit -->
 <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACPklEQVR42o2SS0iUURiGn//3Zxw0L0OWpimIlAU2LYToKrSRom1EOLXosmjRwkVBgUGLBIkuIK6CFi2UCHQXmNBGMMyEQDF12njPiUmd0fHy6/m+FjP/MEZm3+o7h/Oc873veywA987zBlVtEiNHxKilIogRxCiS7tNrFSNjYvRJRU9Lh5WC270Du8DpXo0gIiEn9XJyM8smqy5Idu1h7PL92AW5AMjSCpsTEdY+jbDyYRB13dRl2mSt3X4qYtRy3U3896/iP17FvyrxZZwf915hYyFG1PY0T0xG+PziHWbd3RE26y6DbV3MR5eSUkQsx9NcXlrEspNFV/AmJXVBCqsryN6bD8DGrzhL41PM9w5Rci7IvoI8TwJW/FqzegYF3j5idTZKpG+Y2PdZ3MVlAHyBPAoOlVF85hg5ZUWETzcmTTWC48GRn4skugc4eOEElVfO7yhjpnuAhXiCfL8fMYLtRWNh0d/YxkhrJ7HwNGokDakRYuFpRlo76W9swwLPA6zo5cfqxehrvsH46/dEeodIzEXx5SdjdOMJckuLKK4LUn3rErPXn6U9cDI/SaCmkpMv7yazd7dwYytJDwr2YPuc9ETTKXibB5IxMoDtc/DvK/yrDx6skvQgLcEdm2a3Wh2eSMNiVK2Ziw+/idGjagR1ssitryXnbA2+qgM4gTwAthbirIXniH38SrSrD7O64U0xak3VP2hQI+2SoWtb/8daM3vVkF3R09IhIiExOipG9D9gFSOjqho6Nfmm4zfqn/gX0soXzwAAAABJRU5ErkJggg==">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEQElEQVR42r2XS2xUVRjH//fOnUffpQ+GDpaK1hGkSkiNMaMogaCJSUl8YDSp1Y2JddGFujDEaIhWS4gbEqMuXFQmsjBq0kZjaSCwqWioLbVYKNOCpe8ObTNM53Fn5vxdzHSY3jlD0vbSs7mT803u79xz/t/5/p+CjBFr/rKKRAvJBgq6SVpJggIAieTv1DM1T+N8Oo7M/8YoOEyyk4InqrvappaZSga8kcTXJAuNkHXCjfNBks013ce86QWk4N+TVO4xHCQBQZJsuv/sca+S2vbhDfjyZfhyPEjCraXOfNVwOGxQbNbkCyM6uBRZDRwULCTRoqUElxsOQH3oPmh126E+6IKlqhxqeTFgUbFiJBJI+AOIj89BvzqOaJ8P0cv/gULI4MmFkQ1K5O3julTtBLS9j8J26Cmom0uxlhGfmkfgh7MI/n4xvZAMOCgY02TwcFiH7eVn4Hh1H9YztKoylL3/ChLlRVj4rgtWi5oJB0mrKtv2vgEf/jx5GmaN/p/O49rNKSMcJKHKBLeptAgzPYPob/UiEdHXDE5EdPS3ejHTM4iifIdE1ISy9FYbjQGRIK44S+E7eRqOylJsP/wsXAfqUfH4w7AW5t0VGguG4b94FZNnenH9x/OIzC2i9o3nUNE7ChBZQlSCb35BWaqVnvoIMz2DuPJNBya7e5HQY4CiIN9VjoKtFbCXFUPLsyfFFo4iOh/A0oQfoclbAAmLzQrXwXrseOcQnJ46+J5+T5YF0GTwSERHeHYBTk8dnJ46xEMRzF4YwvwlHwK+CYSn5xGa8CMejibFlmeHvbwYW/Y+huLarSjbXYvNT+6Elu8AAIRnF6DH4tAsqjELoAQaW2m8ZP7qG4bqrsbBzs9NEWF3wxFELo3C7XJmCVGVXa+bigtNF2Ghw56dBYJQFl//jMbrUwhipLrCVBGW9AwDQFb9UBZe+5SywlL581FTRTj0RIu0eGkyeDQauzciVNWsIqXcOnyUxlX9PTgCy45tpoow3DeCByorsiqkKiudJUX5pouwwG6TegZl7qVPaAwIQYzVbjFVhAXn/pUaFmX2xY8pC7h+bTVVhAO735UaFi2XjQJgmghXpF8mI/sqvqMFCAGoSdej5Tvg2r8Hrv171qSFtBkxwCmQEqFEiLc7LpjmB/ynzknhqSNgjCLlijKOY+GrDujXJlDSeABaVdmawPq4H9Pf/ob5X3qkcJIxZeKFI4Mkd+V0r1Bgf2QbHPVuOHZWw1rjhFZZAkWzrNzmeAKxmUVEb0wj9M8N3P5jCEt9IxAJkQsOCl7WSHaS2JXDOic94sB1hPpHV6ZPgQOKzZpM27COeCB0194A8p6iU7n5/IfpxiSHdZa8EKtqTHLAgyTcanVX2xTJ5lS7tFFwkmj2jLVPqQBQ033MS7KJZHCDvrzJM9buXdEdA8Dovg+qKChpz9cNv9OeEyc8Y+3p9vx/qXl1yB4AwOkAAAAASUVORK5CYII=">
@@ -42,7 +42,7 @@
 </head>
 <body>
 <header class="top"><apps-button app="browser-storage"></apps-button></header>
-<h1>Client browser database manager</h1>
+<h1>Browser app cache manager</h1>
 <div class="sub" id="origin"></div>
 <div class="bar">
   <button id="refresh">Refresh</button>
@@ -75,7 +75,7 @@
 // Browsers keep no "modified" time for stored keys or databases; cached downloads carry the server's date,
 // so caches can be sorted by when they were downloaded.
 
-const VERSION = "1.0.3", BUILT = "2026-11-07 6:02 PM";   // written by build.py (version.txt); shown at the bottom of the page
+const VERSION = "1.0.4", BUILT = "2026-11-07 10:40 PM";   // written by build.py (version.txt); shown at the bottom of the page
 
 const $ = (id) => document.getElementById(id);
 $("ver").textContent = `Version ${VERSION}` + (BUILT ? `, built ${BUILT}` : "");

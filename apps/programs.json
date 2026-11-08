@@ -43,7 +43,7 @@
       "source": "Projects\\simple-bench"
     },
     {
-      "id": "browser-storage", "group": "test", "name": "Client browser database manager", "path": "browser-storage/",
+      "id": "browser-storage", "group": "test", "name": "Browser app cache manager", "path": "browser-storage/",
       "short": "See and delete what these tools stored",
       "about": "See and delete what these tools have stored in your browser: books, settings, downloaded voice files.",
       "source": "Projects\\browser-storage"
