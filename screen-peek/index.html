@@ -987,7 +987,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 "use strict";
 // The version (WEB-APP-CONVENTIONS.md 3): stamped here by build_page.py on every build (version.txt, CHANGES.md); shown
 // at the bottom of Settings and in the first log line; version.json beside the published page says the same.
-const APP_VERSION = "V1.0.4", APP_BUILT = "2026-11-08 12:29 AM";
+const APP_VERSION = "V1.0.5", APP_BUILT = "2026-11-08 12:35 AM";
 // Jon's PC (Tailscale Funnel) through PC Relay: Screen Peek is the relay's "screen" program, under /svc/screen/.
 // The relay starts it on demand and signs browsers in (PC Relay 2, 2026-11-07: one pass per browser, kept by
 // relay-client and shared with Jon's other Cool tools pages; Screen Peek is private, so every request needs it).
@@ -1290,10 +1290,13 @@ const conn = { want: false, live: null, gen: 0, attempt: 0, retries: 0, down: 0,
                upAt: 0, pathAt: 0, firstOnPath: null };
 const C = { ws: null, ready: false, sid: "", boot: "", attempt: 0, timer: 0, down: 0, why: "", unanswered: 0, lastPing: 0, lastRx: 0,
             openedAt: 0, connectTimer: 0, mute: false, rtts: [] };
+const BUILT_NOTE = " (PC address built in: the address file could not be loaded)";
 function setState(kind, text) {
   $("dot").className = kind;
-  $("conntext").textContent = text + (R.where.from === "built-in" ? " (PC address built in: the address file could not be loaded)" : "");
+  $("conntext").textContent = text + (R.where.from === "built-in" ? BUILT_NOTE : "");
 }
+// The sign-in box hides the connection line, so it says the same itself: why the address is the built-in one.
+const addrNote = () => (R.where.from === "built-in" ? R.where.why.charAt(0).toUpperCase() + R.where.why.slice(1) + "." : "");
 const backoff = (n) => Math.round(Math.min(2500, 250 * 2 ** (n - 1)) * (0.8 + Math.random() * 0.4));
 function httpWhy(status) {
   if (status === 502) return "the PC is reachable but sharing is off (502)";
@@ -1779,7 +1782,7 @@ $("out").onclick = () => {                           // signs this browser out (
 
 // ---- Sign-in: the password box; Continuous stays as it was ------------------------------------------
 function signIn(msg) {
-  $("lerr").textContent = msg || "";
+  $("lerr").textContent = [msg, addrNote()].filter(Boolean).join(" ");
   $("login").classList.add("show");
   $("pw").value = ""; setTimeout(() => $("pw").focus(), 50);
 }
@@ -1788,7 +1791,7 @@ $("lf").onsubmit = async (e) => {                    // (always handled here: th
   const ac = new AbortController(), timer = setTimeout(() => ac.abort(), 15000);
   try {
     const res = await R.signIn($("pw").value);
-    if (!res.ok) { $("lerr").textContent = res.why.charAt(0).toUpperCase() + res.why.slice(1); return; }
+    if (!res.ok) { $("lerr").textContent = [res.why.charAt(0).toUpperCase() + res.why.slice(1) + ".", addrNote()].filter(Boolean).join(" ").replace(/\.\./g, "."); return; }
     $("login").classList.remove("show"); log(`signed in${res.name ? " (the PC calls this device " + res.name + ")" : ""}`);
     C.attempt = 0; C.down = 0; conn.attempt = 0; conn.down = 0;
     ctlOpen("signed in");                            // a fresh control connection with the new pass
@@ -1874,7 +1877,12 @@ window.PEEK = { S, sync, conn, C, log: LOG, cont: setCont,
 
 $("ver").textContent = `Screen Peek ${APP_VERSION}${APP_BUILT ? " · built " + APP_BUILT : ""}`;
 log(`Screen Peek ${APP_VERSION}${APP_BUILT ? " (built " + APP_BUILT + ")" : ""}: page loaded (${own ? "served by the PC" : "Cool tools"}); ${settingsText()}`);
-ADDR.then(() => log(`talks to ${BASE}${own ? " (the relay that served this page)" : R.where.from === "file" ? " (the address from the Cool tools address file)" : " (built in)"}`));
+ADDR.then(() => {
+  log(`talks to ${BASE}${own ? " (the relay that served this page)" : R.where.from === "file" ? " (the address from the Cool tools address file)" : " (built in)"}`);
+  if (R.where.from !== "built-in") return;                    // said where it shows: the connection line, the sign-in box
+  if (!$("conntext").textContent.endsWith(BUILT_NOTE)) $("conntext").textContent += BUILT_NOTE;
+  if ($("login").classList.contains("show") && !$("lerr").textContent.includes(addrNote())) $("lerr").textContent = [$("lerr").textContent, addrNote()].filter(Boolean).join(" ");
+});
 wake("page loaded");
 if (!signedIn()) signIn();
 else ctlOpen("page loaded");                       // the control connection stays open, so Continuous starts warm
