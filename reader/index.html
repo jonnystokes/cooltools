@@ -1,19 +1,23 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
-     and stamps the version and build time where Book reader V1.0.637 and 2026-11-07 1:50 PM appear. -->
+     pastes the Apps kit's tab icons at the ICONS marker, and stamps the version and build time where
+     Book reader V1.0.644 and 2026-11-07 5:37 PM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Book reader V1.0.637</title>
+<title>Book reader V1.0.644</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
+<link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlUlEQVR42p2SzytEURzFz33evBlNtsyCYtRkmrLASqwoKTtlYf4FyQabKSkrZWeNjdmxUrJUlkp+ZNj4tbAgUoyI7/lazLvPw0PN2dzX7X7ePefcrwGA9cn3UVILFLYJ1YgohISIQoQgNfgWqorwRETnptbqi8aHVxkAf8LBysqad0ktVAWLQqgF17ddDQwRtrk2c9+4h7srwcXeO65P5QesUDRmXaQ7PTSkY1iZvoWIGtfenMo4SGUc5PpjeC0ncLn/hs3FJ4gQg2N1aOnwkEgaWFnOsbbDiicNMt1e4CDbG0ciafDYMvP5A59zrVUAGGreCg5sXAwEmaMkoiAVri3MQmHZwqJEvxvXth3pwG872kFEhO8O7Av8FqFSYvC+v99iVXc+60fTUImV2TZLE/dId8bQ2hVHU9aDU/N5i4XODl5wtFPG/nbZxlOzMHJ7LNRseMJitUBzu4cD/2Cupxanu894epDQtCpIlsz88M0oydXQeH4Za0bs+TBIzTtTa/VFoeaFWhKh/gtTlWSJ1PzyYa74AfvjIbDIJi4vAAAAAElFTkSuQmCC">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVR42r2Xe0yVZRzHP+8573u4KxzkvoAkoELkGHkpsGJsbpa0uTabq5htrY3W3Np0mn+53LQ/yjZy+UelXci2LHKzRWtt2Sbr4g0DnRw1EUjwAgocOcA5PL/+OBfe876IOo3vX+/O7z3P53l+1/fRMKl5YzBHRNaLUCciJaLEUAIighJBlPlZiNqUIJbnqXcEEQKixKtEDorQuGF/Rl+EqUUevt8YfFlEdishWayAe4NbbT5R0rCpOaspuoEw/AslaP8zPGITEeq3HMhu0po3BnMQ8c7CyWNtSnxKpEQPx3y24SiRZBHWO8IJN9vwiK1OD2f77MOVICIljvtYancLRwRDt8KT3FBQqXOjX3HpTJDxm/cGj0vUyF/gwp3npOM3P4N9wQgcpQTdevLaN+NJyQy1B1FxXL0wSe+pID0dQS6fD94WjibkFusUVrgoXOgit8RAc4R6TUVtAo2vXY7xgm51ewQOoDkgs8hJZpGTx56PY8Iv9J4O0tMe4EJbgKErk4gIKekOCjwGBQsN8he4iEvUmE7uXD0GrkTQrTGfSa4EjfmVBvMrDaoDwof1gyglrPsgFacxBR1/pwXnUw+hP1NsW8MMF8EcglDCRXS+Y5jBK+OUL3UTn+S0LeQ0tKjbzXCAib1/YIyMoboGQxtftzRqM8OVioZgKtsj2rPDy8nWAXTDwcOL5lJRnY6nKp1Sz1wcznCOhPPhVgrsPx7awCuLw7t22CpBt5ZaRJt3VXD00FXaDg/Q1jpAx87rfLXzHElzdLbuqeSRx1NtYZPhMbQ58baN+F//GoCET1+yliG6tc4jSkkzqFmdS83qXAC6vT7aWgfoPDFESpoRrhKJekD1XOdmTSMJH71oj3v/sC0HYsvQVOcR/fB5N91nfXiq0il/wk1+STL5JcnwqmlhMW16ZBwmFTI8NmMiizUE1iYTUc85Hy37evmxqQeHU6OobA6LngrlQfkyN5pGtMPdjWLLEBxyixA0bHuUfcdreHu3hxVr8hi5McE3u/5hy9ojtLb020Iwk7TURLTUREsZhv6vW1uoWSmpBlUrs6hamQVAf7cf78khKp+eZw/BDEr4eK2lDKc2r1v7d0TbG9roPHGDRdXzqKhy46lOJzs/gez8BJs7b+uBRJcpb8yDSdCtvT2i5c9lM3RtgkMHLvHLt/+iaVBQmoKnOp01bzzIHLcr6k4ArSAN4wUPzsoHomvoiwvsOWCCi8LciGLduXxVNstXZTM2Osnfvw9G+8GBT7pYsCSNZSsyoxkNoCXFEf/e6hhY3NZn7SVpgqupRjRVCX1ng+QU69E/xCc6WVKbwZLaDABGfUESk/UZQ6DNS0bLTLH93tUxFgOfmoamSvhu+xClT4ZGaX65fbJF4OaMtir58FtghOaH36fwHvNz5s9Rjv48EgNXCnQRAiJiRJLR71Oc+MnPsZZRNA1yig0KPS7mV7jIK3VFZ7t5sMS4eFK46A3SeWSEzr9G6To1RjAotpOr0BQO6OEbS9l0HxpqUug+Pc7FU+P8+qXgStQoXOiiyBOHO0+Pvnf22BjXegN4j/jxHvfjH5m0Zfs0cETEq72/5uoOETbf4TecbZ5Pb7sjOCK86xChMXxdmlW4Enwi0ujYsD+jT5Q0hK9LswUXEWnY217W5wDY1JzVJEJ9+Lo0Gyev/6y9rCnmdgywre5SjgjrlUidKCkRwbhP8ICIeEU4KCKNe9vLotfz/wCKU53CYXSQUAAAAABJRU5ErkJggg==">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
 <script>
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.637";
-  window.APP_BUILT = "2026-11-07 1:50 PM";
-  window.APP_NOTE = "PC Relay 2: one sign-in per browser for the PC (Cloud tab, From my PC), shared with the file manager and Screen Peek; Use my PC says when this device is not signed in (the PC voice is private)";
+  window.APP_VERSION = "Book reader V1.0.644";
+  window.APP_BUILT = "2026-11-07 5:37 PM";
+  window.APP_NOTE = "The Apps button: first in the top bar, just left of the Index button, at the Apps kit's largest size (a stand-in in the contents panel keeps its Index button in place); the reader's family tab icon; version.json for the Cool tools page. Open: From my PC removed (the Cloud File Manager does it better); From the file manager is now From Cloud File Manager, with its icon";
   window.APP_KEY = "br1";
 </script>
 <style>
@@ -78,6 +82,13 @@ button:disabled { opacity: 0.4; cursor: default; }
   background: var(--bg); cursor: pointer; line-height: 1;
 }
 .top button:not(:disabled):hover { border-color: var(--accent); }
+/* The Apps button (Projects\app-kit, 2026-11-07): the way out to Jon's other programs, first in the bar, just left of
+   ☰ Index. Its look is the kit's alone (in a shadow root: bars beside the word, never stacked); the reader only gives
+   it the kit's largest size, the play bar's big control height (it follows the UI size). Its divider keeps the kit's
+   own colour, the bar's text colour faint: --line is a light-dark() pair, which inside the button's shadow root (its
+   colour scheme reset) would give the light line on the dark theme. The contents panel's top row has a stand-in in
+   the same place (contents.css), like its ☰ Index. */
+.top apps-button, .ctop apps-button { --apps-h: var(--tap-big); }
 .top .icon { min-width: var(--tap); padding: 0; font-size: 1.1em; }
 .top .icon.idx { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; line-height: 1; }
 .top .icon.idx .idxt { font-size: 0.62em; margin-top: 2px; }
@@ -172,6 +183,9 @@ button:disabled { opacity: 0.4; cursor: default; }
 .libbtn { min-height: var(--tap); padding: 0 1em; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); cursor: pointer; }
 .libbtn:not(:disabled):hover { border-color: var(--accent); }
 .libbtn.libadd { border-color: var(--accent); font-weight: 600; }
+/* Open → From Cloud File Manager (fmpick.js): the Cloud File Manager's icon from the Apps kit before the words */
+.libbtn.libfm { display: inline-flex; align-items: center; gap: 0.5em; padding-left: 0.6em; }
+.libfm img { width: 1.6em; height: 1.6em; flex: none; }
 .libmsg { padding: 0.4em 0.6em; border-radius: 8px; background: var(--bar); white-space: pre-line; }
 .libmsg.bad, .libfit.bad, .libleft { color: var(--err); font-weight: 600; }
 /* The file manager's floating window (window-kit.js, fmpick.js) in the reader's theme: the kit colours its frame by
@@ -211,16 +225,6 @@ html .wk-win { background: var(--bg); color: var(--fg); border-color: var(--line
 .libon { padding: 0.6em 0.8em; }
 .librow.update { border-color: var(--accent); }
 .libact.libget { border-color: var(--accent); font-weight: 600; }
-/* Open → From my PC (pcfiles.js) */
-.pccrumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
-.pccrumb { min-height: var(--tap); padding: 0 0.6em; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: inherit; cursor: pointer; }
-.pchere { font-weight: 600; padding: 0 0.3em; }
-.pcsep { color: var(--muted); }
-.pcbar { display: flex; gap: 8px; }
-.pcbar .pcq { flex: 1; margin: 0; width: auto; }
-.pcsort { min-height: var(--tap); border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: inherit; padding: 0 0.4em; }
-.librow.pclocked .libopen { background: var(--bar); }
-.pcpw { display: flex; flex-direction: column; gap: 8px; }
 
 /* The chapter list lives in the contents panel (contents.css) since 2026-10-21. */
 .libopts { display: flex; flex-direction: column; gap: 4px; padding: 6px 10px; border-top: 1px solid var(--line); background: var(--bar); font-size: 0.95em; }
@@ -322,6 +326,10 @@ html.cdock .contents { width: var(--cw); box-shadow: none; }
 .ctop .idx { flex: none; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; }
 .ctop .idx .idxt { font-size: 0.62em; margin-top: 2px; }
 html.cdock .ctop .idx { display: none; }
+/* The Apps button's stand-in (2026-11-07): the bar's Apps button comes before its ☰, so the panel's top row starts with
+   one too (the same kit button, the same size: base.css), keeping the panel's ☰ in the bar's ☰ place; docked, the bar's
+   own shows beside the panel and this one is hidden. */
+html.cdock .ctop apps-button { display: none; }
 .idx[aria-pressed="true"] { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 22%, var(--bg)); }
 .chead { padding: 0.4em calc(var(--gutter) / 2 + 4px); color: var(--muted); font-size: 0.9em; border-bottom: 1px solid var(--line); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .ctree { flex: 1 1 0; min-height: 0; overflow: auto; overscroll-behavior: contain; padding-bottom: 2em; }
@@ -809,6 +817,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 </head>
 <body>
 <header class="top" id="top">
+  <apps-button id="apps" app="reader"></apps-button>
   <button class="icon idx" id="toc" type="button" title="Index: sections, chapters and headings" aria-label="Index" aria-pressed="false"><span class="idxi">&#9776;</span><span class="idxt">Index</span></button>
   <button id="open" type="button" title="Open: your books; add files, a zip or a folder" aria-label="Open a book">Open</button>
   <span class="chname" id="chname" role="button" tabindex="0" title="Tap to show the full chapter name"></span>
@@ -827,6 +836,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 <div class="cback" id="cback" hidden></div>
 <aside class="contents" id="contents" aria-label="Contents" aria-hidden="true" hidden>
   <div class="ctop">
+    <apps-button id="capps" app="reader"></apps-button>
     <button class="icon idx" id="ctoc" type="button" title="Index: tap to close" aria-label="Index" aria-pressed="true"><span class="idxi">&#9776;</span><span class="idxt">Index</span></button>
     <input type="search" id="csearch" placeholder="Search sections, chapters, headings" aria-label="Search the contents" autocomplete="off">
   </div>
@@ -1118,7 +1128,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     capsAsWords: true,             // "YOU DID WHAT" said normally; VIP, OK, Roman numerals, "9 AM" kept
     numbersToWords: false,         // 2080 -> "two thousand and eighty"; off by default, the benchmark turns it on for Supertonic (Jon, 2026-10-23)
     joinShort: true,               // a piece of five words or fewer joins its neighbour
-    // Cloud (Jon's PC through PC Relay: cloud.js, pcfiles.js, engines/cloud.js)
+    // Cloud (Jon's PC through PC Relay: cloud.js, cloudtab.js, engines/cloud.js)
     pcCard: "cuda",                // Use my PC, the PC's graphics card: "cuda" (the Go CUDA worker: Kokoro ~6x, Supertonic ~4x, Piper ~26x real time) or "webgpu" (Kokoro ~3.6x, Supertonic ~2.7x; Piper on the processor)
     useMyPC: false,                // Use my PC for the voice: the chosen voice is made on the PC (engines/cloud.js); Apply
     pcAddress: "",                 // the relay's address; "" = Jon's PC (https://desktop-krq9ti2.tail46434.ts.net)
@@ -4564,8 +4574,9 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 // progress, when last read; the open one marked), a tap on the row opens it (the window closes),
 // Rename (the title becomes a box in place), Delete (two taps, no pop-up). Two buttons bring books in:
 // Add files or a zip (one picker: .txt, .text, .md, .zip, .gz, several at once) and Add a folder (the
-// folder picker, on every device); From my PC (pcfiles.js) and From the file manager (fmpick.js) bring one in
-// from Jon's PC through the same pick(). After a pick, a PREVIEW replaces the list until Add or Cancel:
+// folder picker, on every device); From Cloud File Manager (fmpick.js) brings one in from Jon's PC through the
+// same pick() (it replaced From my PC on 2026-11-07, Jon: "the Cloud File Manager does the same thing better").
+// After a pick, a PREVIEW replaces the list until Add or Cancel:
 // what the files would become (BOOK.plan: one book per top folder, one per zip, loose files one book
 // or, with the switch, a document each), each with its title in a box, its kind, what it replaces,
 // "Join wrapped lines" (on when the file looks hard-wrapped; plain documents only) and "Split into parts
@@ -4608,10 +4619,15 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     const bar = h("div", "libbtns");
     const addFiles = btn("libbtn", "Add files, a zip or an EPUB", () => inputs.files.click(), "Text files (.txt, .text, .md), a .gz, a zip of them, or an .epub");
     const addFolder = btn("libbtn", "Add a folder", () => inputs.folder.click(), "A folder of text files, or a folder holding several books");
-    const fromPC = btn("libbtn", "From my PC", () => { st.mode = "pc"; render(); }, "Browse Relay Files on your PC (PC Relay) and add a file or a whole folder");
-    bar.append(addFiles, addFolder, fromPC);
-    // fmpick.js (2026-11-07): the file manager in a floating window; what is chosen there comes back to pick().
-    if (globalThis.FMPICK) bar.append(btn("libbtn", "From the file manager", () => FMPICK.start(), "Open the file manager (Relay Files on your PC) in a window and choose a book there: a .zip or a folder"));
+    bar.append(addFiles, addFolder);
+    // fmpick.js (2026-11-07): the Cloud File Manager in a floating window; what is chosen there comes back to pick().
+    // Its icon is the Apps kit's (app-kit\icons\file-manager-64.png, stamped in by build.py).
+    if (globalThis.FMPICK) {
+      const fm = btn("libbtn libfm", "", () => FMPICK.start(), "Open the Cloud File Manager (Relay Files on your PC) in a window and choose a book there: a .zip or a folder");
+      const icon = h("img"); icon.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAO5klEQVR42s2bbYxdxXnHf3POuXu9L14DNtSYQAJZQ8Ab4uxCXoyBUIFf0ipxLaHIqmkTQoVoqdoqaRtpJT5YcZtISET9gFSJpAg78gerFlAQ2Dg4Lg4Ggh3jLDjIG4cEbBAxpF7w2nfvPfP0w3mbmTPn3rMJVRnpesdzzpmZ5+0/zzzzjKJGuevRzs0irBaRlSKMaGGRaEELiIDWkvwVEBG0TttFELMuYH4n6fP8WfpczOfW3+IbnDaSvycFphD2icjOFzadv7sXbarqwd2PdSJgowgTIoxkA2khn7RZLzHCwyDz+4wobRHtY0Q1Q3DaKDGEKUQ2i7D1xX+5oFObAXc/Fo+CbAGWm51qIZVuuZ4zRZcJ9TEied8gwNEi8z2b6DJDzDYc5iAgyCGE21781z+adGkN3Ia/fixeJ8h+YLlKOaSQ5KGk/0i5LlndeZ5NJqkYk03r2bPik6ItG7bo0yY0H9sYwyKefF7LRdg//s9vrevKgLv+K16HyHaEIS8RCDiTtyZtzDWfjFlPCTUZIg4BOaPNNnFm7WGEGO+lo1hmgcgQsH3sn2wm5CZw56OdUQX7FQyZkpc5moCNCZ7nDlBKFThWAGJdE3CIz5mNyPsifP5n9144mWvAXz3SiUTYIsKQS7ALRL3tzVBLQ3vEUWMc6VmaUdKGsgmI+PsT8WgQ1nyHELZ8+hsnosIEhI2S2ElKbCHhDO21w5TcbmsidcYEcUxLpIwpVn+ZQpvvuWpfNV6Z+Gyc5SJszBmQLnXW0qQNVNc6VVFdrRGWzWEsSYgDVMZkDW0RCxxdyZtN4vRVZkQ+Bz/xWdsEgLp9R+dm4CmF5ICgPIDnSlh7li5tru+Vy6HfORLxYwJ1HSIXbKUr8Rltt0QirM7gUwCV2SM4dlf+W0Wcvb7jxQ+psGtxMMFHvKkqgmel8WiQh3gQWR1pkZXKS7yknaV/dYYNJmHdmGH+VIFHYnZvL5W+SZfaRCrVvhKU/cQjwspIhJGcg9m6mBOuEa3RcYzotJ4zA79GmFKH1LAChCBZWCX5uTYsuEyTAgQ9WlN2e6tWpEriQRiJRFgkSGr3FBIXjcQxEre55uKQkUURUWAwx1mpML/PCBdoa3jul7P8/I1ZCKKUGRkjqqVrOUi4RLtOkA2wUIt4EFkUmdzKHB+0IDombs9y7cUBV5wPotvE7ZQ5mF6X6wqbDFGEKuC6j0dIHPPSGy1U0AAVIgReiVMhZcH0JTzEGVIQqUU8AkRaZ+6gASJaozsJA0YW9qM7bUTHyc+yLcO9tdxgw9FUAaiA60YaaK156fUWKuwDwlQTPGpvrRZ+L09K67/xHg5GVBCPQJTZmWkCooU4jul02oSqD93pIHEnwQGRAn1LEpdKBigRVi7tQ/RZDr1+FlSqCdk8NWUnqGIFqHS0DAYkhCsLdPHsRyLbnpNFXafAl0heIzpG6wQIcxMwJV5ihhjbDA0qQEQSJlzeZF7U4oVjZ2nHQYoJzNH3Lz+3iEQloKuCfFdja0PxXaTFcXzSfbvWmjjWKQMy5Nc2BymDYG5KeYOykEu0MP6xBuOXNosJOsyzQdW2ryrNM6XejuHQsRZPH55BS4RKx8k1wmBaJAZyZm5dZgaJymf+eNUExNylWlwRUzXQSAxKJQCbmYbJJD9xNsD6tU5yyQNEKuDakQaim+x+KTO3wHK9swlHosXuzA15WTu6uRJvemmJqonoXCJFqEXZEvYSKj3GMHFHgQr51KV9PHVgGkIFQSN9T1meYyRuZCf37e0gQxnlxaP+LiPEM0kpXN0MJ3pJ3cPgMuC6wCs0AoWO2wQqQhGCCi1TR4RIW9Gcwv3NPbqcELHDXnMh3onU2NL2S9+HLVVSLwGvEggUSjSik9ULJYmf4+BAVAp3aTuAWV7b/ZzvTbxPtcXbn7hUephTAsisQSnbH0/28sbqpcogaO2uRKzoLcD8/gajH13IBef0EwaKD3OJtfDmyRkOvvou0zOpS59qtuXw+UBQrA1KggVD/RFfWHYeUfjhJjwrYaD4yAWDLF7YzxP737bCY+IJrAZ5BMgMdBiOxugl82sT/+yRNnsOt4n1/4VkYc/hNs8eadd6PwoDxq44Jw/xuXvx7L+RdmP2WqwAx/nDjVoDfuvB0+x4dhaA9Sv6+M5XBz9QBkw8NPf+Fy9sWnipPGH+wPa9jWUwxZA6Nv/kgdl8cgCPPDf7gWuA2eeOZ2d58sBsLXOgFD+0/Yqg2HmJdxfWq8y0hE3bzlhtV14c1iRLfAu5t7h9btp2hplW728tEzA4kDEiMDcgWpfjfr3Kg7tbnJwujL7ZUHz3a4l6Tv46ZuKhGe5//GyKC5koNEjs/HT+PNZw/+NnmXhohslfxwB892uDNBuFNp6c1jy4u1Vbg8RdPlP6otLxlXairj2AaeseexJfX9Vk6ZKQY2/FbLz3vVxKZ1qab/zZPCAuGIAuTuhUmEbpQ7738Bn+/cmk38d/OsuOifksXRLy9VVN7n/8bD7W1j0t7lw7jzCop2SSOUuGcAP7WCoLetbTgD2H25b0hwcUt98yD4B7fjiTE6+U8PJv2iBt0C2IT0P8HnROJb/4vaRNt0DavPybNioNUMy0hHt+OAPA7bfMY3jA1oI9h9u1TMAOnBZLvxcExQ0uVJRnXrYHXz3Wx/CA4sBUhxde7ZDvzJVw63VhQXznf2B6Et7YkfymJ5O2lAm3XhcSpK4rwAuvdjgw1WF4QLF6rK/rHLpqgRswyU3APc2ReiD44lE752DNeLJkbttbmIVScMOygLVjQHwG2u/CkfvgzV12Zxeugiv/ARrnsXZskIefC9g7Wcxh294W4yMRa8YbbN/XqpyDl/iMYCX5bjDTiCBXEW2rSy8TiDUcPRFbbeMjUeoQdQwGCHesaoCeTSTsIx6StiP3pVowyx2rGrkZmH1mY2Tl6Im4q+OV04Pt7mfmEJSDkM5pTkV563f2qIvPDRhoKk5O6xwXFDDYhLHLgsT+T//KT7zJhNO/AmkzdlnAYLMIrGX9DjQVi88Nus6lygTcXATB8AMQVwO6m8Dv3rcfLhpOpvrbU/bG/aKFijDQIB049Upvez31CkiHMNBctFBZfkLWdzZW1Vyq7N/NSEmiwlWbIQ21PKEPeSlOqI3doBEYDcqnsjYjqsq5Q7YUTk4nL5+/QFnRmePvCLEOQEWw4KreM15wFaiIWAccf0esPK6s72ysqrmUVMDJvDEDIkE5/l7PBHx2ONMSFg0HLBoO8gFPt+DgMZ0EJgcvTdC+qly4KnlHNTh4THO6VRhA1u9MS7z409sE7PU9oy3Am2dHz1UgDGDpEts/PzCVIPWKKyNDBRUP7GpD0AfhYLLU+ZiQLYPhIAR9PLCrnRyipiXrMxsjK0uXhF09QXEzU5zTo0ics3M3vaRbuWZpZC2FTx5oc/2yBhtubPLo87P5BP77Zc0TB2Htp/uhcR4s+xZ87CsFKC64KpF8OAhBP08cTL4xGbDhxmY+hjuHnkuAJyDi+AGeo+kaGHj9MjtWsPPgLNMzwvhIxGeuiPJTYi2K7T+JIWgmREbnwPAofGR98hseTdrCQQiabP9JjJYiZ+Uzl0eMj0RMzwg7D852nUP1XqAQv3luGPgzvqilBTdd3cjtHWB6RvjBU8lmZdOfDzDQVLkZLLukkeBAxoRwPkQLkl84Pyce1WDZJY1c+gNNxaaNAwD84KmzTM+IsfQG3HR1bwZYR2rYR+mRe1hY2jx0DTjAxpuafO+RIh7w/V0t/uTaPpYuCdn6zfls29viooUBd66dl4ZkomQwFdnHZ9mBBvD36wbobwYcf0ez4cYmly0OOXoi5vu77J3nxpua3XeCqaor8wjfOR1SK779rhRMSI/D4jbx7Bni1nscvG95z4DIzRPT1q5w9KMhOyaGawZEuuZs52X95uk8NpBJf/fm4VzLqsqlX96LigZRwTyUitIslcK+jb1AEQ+s4wdkZaCpuGdDv9V25PW4ppuiahHv6/OeDf09ibfzBMSKDkm6JwisRutkKKm32r1DvGvG+1i/otimfvlzfR+4R2f2uX5FH2vGe4/RmtUVPkAR/o5IT4BzbmlT9Irnf3GKGz55bs/BvvPVQb702T5abbhhtPGBM2DzXwyyeqyPZgNWXFmv/32H3jFz3UsZ6+nJkHhTThMUDrj3P1/jmsuHGWj2DnTWndjvd+BBb8Q3yukzHTY/8Is0BKasTCpzRxiI1ifR2RGSLtSf5Ij5tbfbfOXbB/jxS7+tZQ7/36U1G/Oj59/kT//2GX55vJXGGpXl6udZcCInI9F6Clhk5+BlDIhQYR+vvX2Gv/m3yTRlpmPhhRVxFSkdofvvGriZIFJKXPDdK6B0D8HNG1BAiAoaqKCJCppAaKi/xrnjMBWJ6H0In7NybbItsgpQQR8qEgIVooIsW0zsyArOhQVPmrrplLgXK/I0vS79KYNJynFvVd5norWoEKUaSVKECtMwmFhpdukWYF8kWu9E+KbpCxQTTTpUYcpJ1UjP3LUnFa2cltaNyJ4EGwxUFd8jSXabfbweGGH2hHg7qUvMUPlOBTD2j8eOAiPlXFsjMUonGIGWPMBgJShKteS99W6MKplFnbGwdqAQGBkoytf/1OtPfDbZSonWm0H+ozyI+YFCESAq5XoasFSZ9FSW62HmfSTfK+Wpp4eVeT/d+kzrFhgow46UL2nIxAsp3WECNhs3RvRW0fpQng2a/5IcQYwVonz9xVxbnbobhe1qNlLO9/Xc+uilOUV2e6qxkmW4WvVDIrLVcsI/9XevjCKyH2HIN5k5q3sPLHDVXSqu2nlXDd+NtKp6uf/3QX3+jV3XT5Z2IVff/fN1iGwXkciL2m697gowR2bMzfbnJIQOwq3Hd3/h4cqbo5+862frRGQLMFTNxW4MqKHiFhJXSb/e973MyKi/D+q247v/+OGeV2dH73xxVLRsSW9X1eTyHCTTs/77mUWXvg6Buu34j26ZrH15+qo7nosQ2SgiE0i6RMLcpMgfoEEer6+rOXrqCFOSoP3WE0+v6czp9rhZPvGXz9yMyGpgpYiMIKnrzB+irva12GqCeuOC0fdJsuvzqJ0nnv5iz+vz/wtGiz1GoDNXkwAAAABJRU5ErkJggg=="; icon.alt = ""; icon.width = icon.height = 64; icon.draggable = false;
+      fm.append(icon, "From Cloud File Manager");
+      bar.append(fm);
+    }
     box.appendChild(bar);
     const msg = h("div", "libmsg", st.status); msg.setAttribute("aria-live", "polite"); msg.hidden = !st.status;
     box.appendChild(msg);
@@ -4972,13 +4988,11 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     const body = st.win.body;
     if (st.mode === "preview" && st.plan) renderPreview(body);
     else if (st.mode === "progress") renderProgress(body);
-    else if (st.mode === "pc" && globalThis.PCFILES) PCFILES.render(body);    // Open → From my PC (pcfiles.js)
     else renderList(body);
   }
-  function showList() { if (globalThis.PCFILES) PCFILES.stop(); st.mode = "list"; render(); }
   function open() {
     if (st.win) { FLOAT.open("library"); return st.win; }
-    st.win = FLOAT.open("library", { title: "Open", width: 440, height: 560, onClose: () => { st.win = null; st.renaming = ""; st.armed = ""; if (st.mode === "pc" && globalThis.PCFILES) { PCFILES.stop(); st.mode = "list"; } if (st.mode === "preview") { st.plan = null; st.mode = "list"; } } });
+    st.win = FLOAT.open("library", { title: "Open", width: 440, height: 560, onClose: () => { st.win = null; st.renaming = ""; st.armed = ""; if (st.mode === "preview") { st.plan = null; st.mode = "list"; } } });
     render();
     log("page", `the Open window (${BOOK.books.length} book${BOOK.books.length === 1 ? "" : "s"})`);
     return st.win;
@@ -4989,7 +5003,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   READER.onChange((what) => { if ((what === "book" || what === "chapter" || what === "order") && st.win && st.mode === "list") render(); });
 
   globalThis.LIBRARY = {
-    open, pick, add, render, download, showList,
+    open, pick, add, render, download,
     get isOpen() { return !!st.win; },
     get busy() { return st.busy; },
     get mode() { return st.mode; },
@@ -5404,8 +5418,9 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 <script>
 // cloud.js: the reader's link to Jon's PC through PC Relay (Projects\pc-relay; the client library
 // relay-client.js is copied in by build.py from pc-relay\client, never edited here). One shared RelayClient
-// (PCRELAY.client()), made on first use: nothing talks to the PC until Settings → Cloud, Open → From my PC
-// or "Use my PC for the voice" asks. The address: SETTINGS pcAddress (blank = Jon's PC).
+// (PCRELAY.client()), made on first use: nothing talks to the PC until Settings → Cloud or "Use my PC for the
+// voice" asks. The address: SETTINGS pcAddress (blank = Jon's PC). (Open → From my PC used it too, until
+// 2026-11-07: Open → From Cloud File Manager replaced it, and the file manager keeps its own address.)
 (function () {
   let client = null;
   const base = () => String(SETTINGS.get("pcAddress") || "").trim().replace(/\/+$/, "") || RelayClient.DEFAULT_PC;
@@ -5416,240 +5431,6 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     return client;
   }
   globalThis.PCRELAY = { client: get, get base() { return base(); } };
-})();
-</script>
-<script>
-// pcfiles.js: Open → From my PC (2026-10-25). Browses "Relay Files" on Jon's PC through PC Relay (the files
-// service: Projects\pc-relay\services\files) inside the Open window: folders with their sizes and dates,
-// search, sort, live updates while it is open, and the Private folder (🔒, the PC's password once per device;
-// the relay keeps the pass). "Add" brings a file in through the normal import (library.js: the same preview as
-// Add files); "Add as a book" brings a whole folder in as one zip (one book), and says which files the PC had to leave
-// out (open in another program, moved or changed: its zip headers, files 2.1). Nothing is sent to the PC until
-// From my PC is opened; closing it ends the live-updates stream. The PC's address: SETTINGS pcAddress (blank =
-// Jon's PC), set in Settings → Cloud. Uses PCRELAY (cloud.js's shared RelayClient).
-(function () {
-  const h = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
-  const btn = (cls, text, fn, title) => { const b = h("button", cls, text); b.type = "button"; if (title) b.title = title; b.addEventListener("click", fn); return b; };
-  const fmt = (n) => Number(n || 0).toLocaleString("en-US");
-  const MB = (n) => (n < 1e3 ? `${n || 0} bytes` : n < 1e6 ? `${Math.max(1, Math.round(n / 1e3))} KB` : `${(n / 1e6).toFixed(n < 1e7 ? 1 : 0)} MB`);
-  const when = (ms) => (ms ? new Date(ms).toLocaleString("en-US", { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit" }) : "");
-  const st = { body: null, folder: "root", data: null, results: null, q: "", sort: "name", msg: "", bad: false, loading: false, pw: false, pwMsg: "", ev: null, evFails: 0, seq: 0, qTimer: 0 };
-
-  const R = () => PCRELAY.client();
-  async function getJSON(path) {
-    let r;
-    try { r = await R().fetch("files", path, { timeout: 30000, cache: "no-store" }); }
-    catch (e) { const err = new Error(e.name === "AbortError" ? "no answer from the PC within 30 s" : "could not reach the PC (no network, or the PC is off or asleep)"); err.net = true; throw err; }
-    const j = await r.json().catch(() => ({}));
-    if (r.status === 401) { const err = new Error(j.error || "the PC wants the password"); err.signin = true; throw err; }   // PC Relay 2: one sign-in, no scopes
-    if (!r.ok) throw new Error(j.error || RelayClient.httpWhy(r.status));
-    return j;
-  }
-  function say(text, bad) { st.msg = text || ""; st.bad = !!bad; const m = st.body && st.body.querySelector(".pcmsg"); if (m) { m.textContent = st.msg; m.hidden = !st.msg; m.classList.toggle("bad", st.bad); } }
-
-  async function load(folder, quiet) {
-    const seq = ++st.seq;
-    st.loading = true;
-    if (!quiet) { say(st.data ? "Loading…" : "Opening Relay Files on the PC…"); }
-    try {
-      const j = await getJSON("list?folder=" + encodeURIComponent(folder));
-      if (seq !== st.seq) return;
-      st.folder = folder; st.data = j; st.pw = false; st.loading = false;
-      say("");
-      draw();
-    } catch (e) {
-      if (seq !== st.seq) return;
-      st.loading = false;
-      if (e.signin) { st.pw = { folder }; st.pwMsg = ""; say(""); draw(); return; }
-      log("book", `From my PC: ${e.message}`);
-      say(`The PC's files could not be listed: ${e.message}.`, true);
-      if (!st.data) draw();
-    }
-  }
-  async function search(q) {
-    st.q = q;
-    if (!q.trim()) { st.results = null; draw(); return; }
-    const seq = ++st.seq;
-    try {
-      const j = await getJSON("search?q=" + encodeURIComponent(q));
-      if (seq !== st.seq) return;
-      st.results = j; say(j.more ? "More than 300 found: showing the first 300." : ""); draw();
-    } catch (e) { if (seq === st.seq) say(`Search failed: ${e.message}.`, true); }
-  }
-
-  // ---- live updates: the files service's event stream, only while From my PC is open ------------------------
-  async function events() {
-    if (st.ev || !st.body) return;
-    const ac = new AbortController();
-    st.ev = ac;
-    try {
-      const r = await R().fetch("files", "events", { signal: ac.signal, cache: "no-store" });
-      if (!r.ok || !r.body) throw new Error(RelayClient.httpWhy(r.status));
-      st.evFails = 0;
-      const rd = r.body.getReader(), dec = new TextDecoder();
-      let buf = "";
-      for (;;) {
-        const { value, done } = await rd.read();
-        if (done) break;
-        buf += dec.decode(value, { stream: true });
-        let i;
-        while ((i = buf.indexOf("\n\n")) >= 0) {
-          const block = buf.slice(0, i); buf = buf.slice(i + 2);
-          const line = block.split("\n").find((l) => l.startsWith("data: "));
-          if (!line) continue;
-          let m; try { m = JSON.parse(line.slice(6)); } catch (e) { continue; }
-          if (m.type === "changed" && st.body) {
-            if (st.results && st.q) search(st.q);
-            else if ((m.folders || []).includes(st.folder) || (st.data && (m.folders || []).some((f) => (st.data.items || []).some((it) => it.id === f)))) load(st.folder, true);
-          }
-        }
-      }
-    } catch (e) { if (ac.signal.aborted) return; }
-    finally { if (st.ev === ac) st.ev = null; }
-    if (st.body && !ac.signal.aborted) { st.evFails++; setTimeout(events, Math.min(30000, 1000 * 2 ** Math.min(st.evFails, 5))); }
-  }
-  function stop() { if (st.ev) { st.ev.abort(); st.ev = null; } st.body = null; clearTimeout(st.qTimer); }
-
-  // What the PC left out of a folder's zip (files 2.1): its headers say how many and name up to 20 (X-Zip-Skipped,
-  // X-Zip-Skipped-Names: "|" between percent-encoded paths); a zip holding fewer files than X-Zip-Files says lost
-  // some while it was sent. The reasons are in the PC's log (files.log). "" when nothing was left out.
-  async function leftOut(r, file, folder) {
-    const num = (k) => { const v = r.headers.get(k); return v == null || v === "" ? null : Number(v); };
-    const names = String(r.headers.get("x-zip-skipped-names") || "").split("|").filter(Boolean).map((s) => { try { return decodeURIComponent(s); } catch (e) { return s; } });
-    let n = num("x-zip-skipped") || 0;
-    const promised = num("x-zip-files");
-    if (promised != null) { try { n += Math.max(0, promised - (await ZIP.entries(file)).filter((e) => !e.dir).length); } catch (e) { /* the import says what is wrong with the zip */ } }
-    return n && globalThis.FMPICK ? FMPICK.leftOutNote(n, names, folder) : "";
-  }
-
-  // ---- bringing a file or folder in: download with progress in the Open window, then the normal import ----
-  async function bring(it) {
-    const path = it.dir ? `zip/${it.id}` : `file/${it.id}`;
-    const name = it.dir ? `${it.name}.zip` : it.name;
-    const total = it.size || 0;
-    stop();
-    LIBRARY.download(`Downloading ${name} from the PC…`, 0);
-    try {
-      const r = await R().fetch("files", path, { cache: "no-store" });
-      if (r.status === 401) throw new Error("the PC wants the password: this device is not signed in there any more (open the folder again to sign in)");
-      if (!r.ok) { const j = await r.json().catch(() => ({})); throw new Error(j.error || RelayClient.httpWhy(r.status)); }
-      const len = Number(r.headers.get("content-length")) || total;
-      const parts = []; let got = 0, last = 0;
-      const rd = r.body.getReader();
-      for (;;) {
-        const { done, value } = await rd.read();
-        if (done) break;
-        parts.push(value); got += value.length;
-        if (performance.now() - last > 120) { last = performance.now(); LIBRARY.download(`Downloading ${name} from the PC: ${MB(got)}${len ? ` of ${it.dir ? "about " : ""}${MB(len)}` : ""}`, len ? Math.min(1, got / len) : 0); }
-      }
-      LIBRARY.download(null);
-      const file = new File(parts, name, { type: it.dir ? "application/zip" : (r.headers.get("content-type") || ""), lastModified: it.mtime || Date.now() });
-      const note = it.dir ? await leftOut(r, file, it.name) : "";
-      log("book", `From my PC: ${name} downloaded (${MB(got)})${note ? "; " + note : ""}`);
-      await LIBRARY.pick([file], note ? { note } : undefined);        // the note: said in the preview and the done line
-    } catch (e) {
-      LIBRARY.download(null);
-      log("book", `From my PC: ${name} could not be brought in: ${e.message}`);
-      LIBRARY.say(`${name} could not be brought in from the PC: ${e.message}.`, true);
-    }
-  }
-
-  // ---- drawing --------------------------------------------------------------------------------------------
-  function sorted(items) {
-    const k = st.sort;
-    return [...items].sort((a, b) => (b.dir - a.dir) || (k === "date" ? (b.mtime || 0) - (a.mtime || 0) : k === "size" ? (b.size || 0) - (a.size || 0) : a.name.localeCompare(b.name, "en", { numeric: true, sensitivity: "base" })));
-  }
-  function item(it, showPath) {
-    const r = h("div", "librow pcrow" + (it.locked ? " pclocked" : ""));
-    r.dataset.id = it.id;
-    const icon = it.locked ? "🔒 " : it.dir ? "📁 " : "📄 ";
-    const top = btn("libopen", "", () => { if (it.dir) { st.results = null; st.q = ""; load(it.id); } else bring(it); }, it.dir ? `Open the folder "${it.name}"` : `Add "${it.name}" (the import preview comes first)`);
-    const head = h("div", "libhead"); head.append(h("span", "libtitle", icon + it.name));
-    top.appendChild(head);
-    const sub = it.locked ? "needs the PC's password" : it.dir ? `${fmt(it.files || 0)} file${it.files === 1 ? "" : "s"} · ${MB(it.size)}${it.mtime ? " · " + when(it.mtime) : ""}` : `${MB(it.size)} · ${when(it.mtime)}`;
-    top.appendChild(h("div", "libsub", sub));
-    if (showPath) top.appendChild(h("div", "libsub", it.path));
-    r.appendChild(top);
-    if (!it.locked) {
-      const acts = h("div", "libacts");
-      if (it.dir) { acts.append(btn("libact", "Open", () => { st.results = null; st.q = ""; load(it.id); })); if (it.files) acts.append(btn("libact libget", "Add as a book", () => bring(it), `The whole folder as one book (one zip, ${MB(it.size)})`)); }
-      else acts.appendChild(btn("libact libget", "Add", () => bring(it), `Add "${it.name}" (the import preview comes first)`));
-      r.appendChild(acts);
-    }
-    return r;
-  }
-  function pwForm() {
-    const box = h("form", "libspec pcpw");
-    box.appendChild(h("div", "libh", "🔒 Private: the PC's password"));
-    box.appendChild(h("div", "libsub", "The same password as Screen Peek (tray icon on the PC → Set password). This device remembers the sign-in."));
-    const inp = h("input", "libname"); inp.type = "password"; inp.autocomplete = "current-password"; inp.placeholder = "Password"; inp.setAttribute("aria-label", "The PC's password");
-    const m = h("div", "libmsg bad", st.pwMsg); m.hidden = !st.pwMsg;
-    const go = btn("libbtn libadd", "Sign in", () => {}, "");
-    go.type = "submit";
-    const back = btn("libbtn", "Back", () => { st.pw = false; draw(); });
-    const row = h("div", "libbtns"); row.append(go, back);
-    box.append(inp, m, row);
-    box.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      go.disabled = true; m.hidden = false; m.classList.remove("bad"); m.textContent = "Signing in…";
-      const res = await R().signIn(inp.value);
-      go.disabled = false;
-      if (!res.ok) { st.pwMsg = res.why.charAt(0).toUpperCase() + res.why.slice(1).replace(/\.$/, "") + "."; m.textContent = st.pwMsg; m.classList.add("bad"); inp.select(); log("book", `From my PC: sign-in refused: ${res.why}`); return; }
-      log("book", "From my PC: signed in on this device");
-      const f = st.pw.folder; st.pw = false; load(f);
-    });
-    setTimeout(() => { try { inp.focus(); } catch (e) {} }, 0);
-    return box;
-  }
-  function draw() {
-    const body = st.body;
-    if (!body) return;
-    const box = h("div", "lib pcfiles");
-    const top = h("div", "libbtns");
-    top.append(btn("libbtn", "◀ Books", () => { stop(); LIBRARY.showList(); }, "Back to the books stored here"));
-    box.appendChild(top);
-    box.appendChild(h("div", "libh", "From my PC"));
-    const m = h("div", "libmsg pcmsg", st.msg); m.hidden = !st.msg; m.classList.toggle("bad", st.bad); m.setAttribute("aria-live", "polite");
-    box.appendChild(m);
-    if (st.pw) { box.appendChild(pwForm()); body.replaceChildren(box); return; }
-    const d = st.data;
-    if (d) {
-      const crumbs = h("div", "pccrumbs");
-      d.crumbs.forEach((c, i) => {
-        if (i) crumbs.appendChild(h("span", "pcsep", "›"));
-        crumbs.appendChild(i === d.crumbs.length - 1 && !st.results ? h("span", "pchere", c.name) : btn("pccrumb", c.name, () => { st.results = null; st.q = ""; load(c.id); }));
-      });
-      box.appendChild(crumbs);
-      const bar = h("div", "pcbar");
-      const q = h("input", "libname pcq"); q.type = "search"; q.placeholder = "Search all of Relay Files"; q.value = st.q; q.setAttribute("aria-label", "Search by name");
-      q.addEventListener("input", () => { clearTimeout(st.qTimer); st.qTimer = setTimeout(() => search(q.value), 250); });
-      const sort = h("select", "pcsort"); sort.setAttribute("aria-label", "Sort");
-      for (const [v, t] of [["name", "Name"], ["date", "Newest"], ["size", "Largest"]]) { const o = h("option", "", t); o.value = v; o.selected = st.sort === v; sort.appendChild(o); }
-      sort.addEventListener("change", () => { st.sort = sort.value; draw(); });
-      bar.append(q, sort);
-      box.appendChild(bar);
-      const list = h("div", "liblist");
-      const items = st.results ? st.results.items : d.items;
-      for (const it of sorted(items)) list.appendChild(item(it, !!st.results));
-      if (!items.length) list.appendChild(h("div", "libempty", st.results ? "Nothing on the PC matches." : "This folder is empty."));
-      box.appendChild(list);
-      const f = d.folder;
-      box.appendChild(h("div", "libfoot", `${st.results ? `${fmt(items.length)} found · ` : ""}${fmt(f.files || 0)} file${f.files === 1 ? "" : "s"} · ${MB(f.size)} in ${f.name} · kept up to date while this is open`));
-    }
-    const hadFocus = document.activeElement && document.activeElement.classList.contains("pcq");
-    body.replaceChildren(box);
-    if (hadFocus) { const q = box.querySelector(".pcq"); if (q) { q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
-  }
-
-  // Called by library.js when the Open window shows "From my PC" (render) or leaves it (stop).
-  function render(body) {
-    const fresh = !st.body;
-    st.body = body;
-    draw();
-    if (fresh) { log("book", `From my PC: opened (${PCRELAY.client().base})`); load(st.data ? st.folder : "root", !!st.data); events(); }
-  }
-
-  globalThis.PCFILES = { render, stop, load, search, get state() { return { folder: st.folder, data: st.data, results: st.results, pw: !!st.pw, msg: st.msg, bad: st.bad, events: !!st.ev }; } };
 })();
 </script>
 <script>
@@ -5939,7 +5720,209 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 })(typeof window !== "undefined" ? window : globalThis);
 </script>
 <script>
-// fmpick.js: Open → From the file manager (2026-11-07). Opens Jon's file manager (Relay Files on his PC through PC
+/* apps-button.js 1.10: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+   Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
+   page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
+   https://jonnystokes.github.io/Cool-tools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
+
+     <apps-button app="file-manager"></apps-button>     the first thing in the page's top bar, top left
+
+   Three thick bars (magenta, yellow, cyan) and the word "Apps" on black with a neon edge: one look in every program,
+   made to clash with any page, because it is the way out of this program into another. Then a plain divider (Jon,
+   2026-11-07: only the button stands out): 1 px in the bar's own text colour, faint, so it blends with each app's bar.
+   A click opens the Apps menu (the launcher, cool-tools/apps/) in a floating window (the window kit; a full-screen
+   sheet on a phone); a second click closes it. The menu marks the program named by app="...". When the menu cannot
+   load (this device offline, the site down), the window says so in plain words, with Try again.
+
+   Attributes:
+     app="<id>"         this program's id in app-kit\programs.json: the menu marks it "You are here"
+     stack              bars above the word (for a tight bar); stack="720": only while the page is 720 px wide or less
+     launcher="<url>"   another menu address (tests)
+     in-frame           show the button inside a frame too. Hidden there by default: inside another page's window a
+                        program chosen from the menu would take that page's whole tab
+   Size: CSS --apps-h on the element is the button's height (default 36px; the bars, the word and the divider scale
+   with it):  apps-button { --apps-h: 40px; }
+   The divider takes the bar's text colour by itself; --apps-sep sets it to the app's own line colour instead:
+     apps-button { --apps-sep: var(--line); }
+   Script: AppsKit.open({ app }), AppsKit.close(), AppsKit.window (the open menu's window, or null),
+   AppsKit.launcher (the menu's address), AppsKit.VERSION. */
+(function (root) {
+  "use strict";
+  if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
+  const VERSION = "1.10";
+  const LAUNCHER = "https://jonnystokes.github.io/Cool-tools/apps/";
+  const W = 460, H = 780;        // the menu window's first size (less on a short screen); the window kit remembers
+                                 // what the person makes it
+  const NAME = "apps";           // its key in the window kit (localStorage wk-win:apps); the same in every program
+  let current = null;            // { win, href } while the menu is open
+
+  const BARS = ["#ff3df2", "#ffd23d", "#3dfcff"];
+  const CSS = `
+:host{all:initial;color:inherit;display:inline-flex;align-items:center;flex:none;vertical-align:middle;--h:var(--apps-h,36px)}
+.b{all:unset;box-sizing:border-box;position:relative;display:inline-flex;flex-direction:row;align-items:center;justify-content:center;
+  gap:calc(var(--h)*.2);height:var(--h);padding:0 calc(var(--h)*.3) 0 calc(var(--h)*.26);border:2px solid transparent;border-radius:calc(var(--h)*.28);
+  background:linear-gradient(#0b0816,#0b0816) padding-box,linear-gradient(120deg,${BARS[0]},${BARS[1]} 52%,${BARS[2]}) border-box;
+  color:#fff;font:800 calc(var(--h)*.42)/1 "Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;letter-spacing:.015em;
+  white-space:nowrap;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;touch-action:manipulation;
+  box-shadow:0 0 0 1px rgba(0,0,0,.65),0 0 calc(var(--h)*.3) rgba(255,61,242,.55),0 0 calc(var(--h)*.55) rgba(61,252,255,.3);
+  transition:box-shadow .15s,filter .15s,transform .08s}
+.b:hover{filter:brightness(1.15) saturate(1.1);box-shadow:0 0 0 1px rgba(0,0,0,.65),0 0 calc(var(--h)*.42) rgba(255,61,242,.85),0 0 calc(var(--h)*.8) rgba(61,252,255,.5)}
+.b:active{transform:translateY(1px) scale(.97)}
+.b:focus-visible{outline:2px solid #000;outline-offset:2px;box-shadow:0 0 0 6px #fff,0 0 calc(var(--h)*.5) rgba(255,61,242,.9)}
+.b[aria-expanded=true]{box-shadow:0 0 0 1px rgba(0,0,0,.65),0 0 0 calc(var(--h)*.09) rgba(255,210,61,.55),0 0 calc(var(--h)*.5) rgba(255,61,242,.8)}
+.bars{display:flex;flex-direction:column;justify-content:center;gap:calc(var(--h)*.085);width:calc(var(--h)*.5);flex:none}
+.bars i{display:block;height:calc(var(--h)*.12);height:round(calc(var(--h)*.12),1px);border-radius:99px}
+.bars i:nth-child(1){background:${BARS[0]};box-shadow:0 0 calc(var(--h)*.14) rgba(255,61,242,.8)}
+.bars i:nth-child(2){background:${BARS[1]};box-shadow:0 0 calc(var(--h)*.14) rgba(255,210,61,.7)}
+.bars i:nth-child(3){background:${BARS[2]};box-shadow:0 0 calc(var(--h)*.14) rgba(61,252,255,.7)}
+.w{display:block;text-shadow:0 0 calc(var(--h)*.22) rgba(255,255,255,.4)}
+.sep{display:block;flex:none;width:1px;height:calc(var(--h)*.72);margin:0 calc(var(--h)*.2) 0 calc(var(--h)*.3);background:var(--apps-sep,rgba(127,127,127,.4))}
+@supports (color:color-mix(in srgb,red,blue)){.sep{background:var(--apps-sep,color-mix(in srgb,currentColor 22%,transparent))}}`;
+  // The stacked form (bars above the word), for a tight bar: the same parts, arranged in a column.
+  const STACK = `
+.b{flex-direction:column;gap:calc(var(--h)*.07);padding:0 calc(var(--h)*.17);border-radius:calc(var(--h)*.24);font-size:calc(var(--h)*.27);letter-spacing:.04em}
+.bars{width:calc(var(--h)*.52);gap:calc(var(--h)*.075)}
+.bars i{height:calc(var(--h)*.1);height:round(calc(var(--h)*.1),1px)}
+.sep{margin:0 calc(var(--h)*.16) 0 calc(var(--h)*.22)}`;
+  function stackCss(v) {
+    if (v === null) return "";
+    const px = parseInt(v, 10);
+    return px > 0 ? `@media (max-width:${px}px){${STACK}}` : STACK;
+  }
+  const inFrame = () => { try { return root.self !== root.top; } catch (e) { return true; } };
+
+  // ---- the menu window --------------------------------------------------------------------------------------------
+  // Its first place is just under the button (the window kit has no place option, so its remembered place is set
+  // before it opens); once the person moves or resizes it, the window kit keeps their place and this leaves it be.
+  function place(anchor) {
+    try {
+      const key = "wk-win:" + NAME, seeded = localStorage.getItem("apps-place");
+      const saved = localStorage.getItem(key);
+      if (saved && saved !== seeded) return;   // the person's own place
+      const r = anchor && anchor.getBoundingClientRect ? anchor.getBoundingClientRect() : { left: 8, bottom: 8 };
+      const y = Math.round(r.bottom + 8);
+      const g = JSON.stringify({ x: Math.max(8, Math.round(r.left)), y, w: Math.min(W, innerWidth - 16), h: Math.max(320, Math.min(H, innerHeight - y - 8)), max: false });
+      localStorage.setItem(key, g);
+      localStorage.setItem("apps-place", g);
+    } catch (e) { /* no storage: the window kit centres it */ }
+  }
+
+  function open(o) {
+    o = o || {};
+    if (current) { current.win.front(); current.win.focus(); return current.win; }
+    const u = new URL(o.launcher || api.launcher, location.href);
+    if (o.app) u.searchParams.set("app", String(o.app).slice(0, 60));
+    const href = u.href;
+    if (!root.WindowKit) { location.href = href; return null; } // no window kit on this page: the menu as a page
+    place(o.anchor);
+    const btn = o.anchor || null;
+    const win = root.WindowKit.open(href, {
+      title: "Apps", name: NAME, width: W, height: H,
+      onClose: () => { if (current && current.win === win) { current.stop(); current = null; } if (btn) btn.setAttribute("aria-expanded", "false"); },
+    });
+    if (btn) btn.setAttribute("aria-expanded", "true");
+    current = watch(win, href);
+    current.arm();
+    return win;
+  }
+  function close() { if (current) current.win.close(); }
+
+  // ---- when the menu cannot load ------------------------------------------------------------------------------------
+  // The menu page says "ready" (the window kit's protocol) as soon as it runs. Offline when the window opens, or its
+  // frame loaded something that never said ready (the browser's own error page), or nothing at all within 20 s:
+  // the window shows a plain message instead, with Try again (and tries again by itself when the device is back
+  // online). A late "ready" still wins: the message goes and the menu shows.
+  function watch(win, href) {
+    let ok = false, loadT = 0, slowT = 0, box = null;
+    const st = { win, href };
+    const why = () => (navigator.onLine === false ? "offline" : "noload");
+    const fail = (kind) => { if (!ok && current === st) show(kind); };
+    const arm = () => {
+      clearTimeout(slowT);
+      slowT = setTimeout(() => fail(why()), 20000);
+      if (navigator.onLine === false) fail("offline");
+    };
+    const onLoad = () => { clearTimeout(loadT); loadT = setTimeout(() => fail(why()), 2500); };
+    const onOnline = () => { if (box && box.isConnected && !ok) retry(); };
+    function show(kind) {
+      if (!box) {
+        box = document.createElement("div");
+        box.className = "apps-fail";
+        box.style.cssText = "flex:1 1 auto;min-height:0;overflow:auto;display:block;margin:0;padding:0;border:0";
+        const sr = box.attachShadow({ mode: "open" });
+        sr.innerHTML = `<style>${FAIL_CSS}</style><div class="m" role="alert"><div class="bars" aria-hidden="true"><i></i><i></i><i></i></div><h2></h2><p class="t"></p><p class="f"></p><button type="button">Try again</button></div>`;
+        sr.querySelector("button").addEventListener("click", retry);
+        win.frame.after(box);
+      }
+      const sr = box.shadowRoot;
+      sr.querySelector("h2").textContent = kind === "offline" ? "No internet" : "The Apps menu did not load";
+      sr.querySelector(".t").textContent = kind === "offline"
+        ? "The Apps menu comes from the Cool tools site, and this device is offline. Connect it to the internet, then try again."
+        : "The Cool tools site (jonnystokes.github.io) could not be reached: no internet here, or the site is down.";
+      sr.querySelector(".f").textContent = location.protocol === "file:"
+        ? "This page is a file on this device; the menu of programs still comes from the web."
+        : "";
+      box.hidden = false;
+      box.style.display = "block";
+      win.frame.style.display = "none";
+    }
+    function hide() { if (box) box.style.display = "none"; win.frame.style.display = ""; }
+    function retry() { hide(); win.frame.src = href; arm(); }
+    win.frame.addEventListener("load", onLoad);
+    root.addEventListener("online", onOnline);
+    win.ready.then(() => { ok = true; clearTimeout(loadT); clearTimeout(slowT); hide(); });
+    st.stop = () => { clearTimeout(loadT); clearTimeout(slowT); root.removeEventListener("online", onOnline); };
+    st.retry = retry;
+    st.arm = arm;   // open() calls it once this is the current menu
+    return st;
+  }
+  const FAIL_CSS = `
+:host{all:initial;display:block}
+.m{box-sizing:border-box;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:28px 24px;text-align:center;
+  background:#05060c;color:#eaf1ff;font:15px/1.45 "Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif}
+.bars{display:flex;flex-direction:column;gap:5px;width:34px;margin-bottom:6px;opacity:.55}
+.bars i{display:block;height:6px;border-radius:9px}.bars i:nth-child(1){background:${BARS[0]}}.bars i:nth-child(2){background:${BARS[1]}}.bars i:nth-child(3){background:${BARS[2]}}
+h2{margin:0;font-size:19px;font-weight:700}
+p{margin:0;max-width:30em;color:#b8c4dc}p:empty{display:none}.f{font-size:13.5px;color:#8d9ab6}
+button{all:unset;box-sizing:border-box;margin-top:8px;padding:10px 20px;border-radius:10px;background:#ffd23d;color:#05060c;font-weight:700;cursor:pointer}
+button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff;outline-offset:2px}`;
+
+  // ---- the element ------------------------------------------------------------------------------------------------
+  class AppsButton extends HTMLElement {
+    static get observedAttributes() { return ["stack"]; }
+    constructor() {
+      super();
+      const sr = this.attachShadow({ mode: "open" });
+      sr.innerHTML = `<style></style><button class="b" type="button" aria-haspopup="dialog" aria-expanded="false" title="Apps: open another of Jon's programs"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span class="w">Apps</span></button><span class="sep" aria-hidden="true"></span>`;
+      this._style = sr.querySelector("style");
+      this._btn = sr.querySelector("button");
+      this._btn.addEventListener("click", () => {
+        if (current) close();
+        else open({ app: this.getAttribute("app") || "", launcher: this.getAttribute("launcher") || "", anchor: this._btn });
+      });
+      // Enter and Space belong to the button. A page's own shortcuts on document see this element (not the button
+      // inside it), so a page that presses focused buttons itself, or opens its list's row on Enter, would take them.
+      for (const t of ["keydown", "keypress", "keyup"]) this._btn.addEventListener(t, (e) => { if (e.key === "Enter" || e.key === " ") e.stopPropagation(); });
+      this._paint();
+    }
+    connectedCallback() { if (inFrame() && !this.hasAttribute("in-frame")) this.style.display = "none"; }
+    attributeChangedCallback() { this._paint(); }
+    _paint() { this._style.textContent = CSS + stackCss(this.getAttribute("stack")); }
+    focus(o) { this._btn.focus(o); }
+    click() { this._btn.click(); }
+  }
+
+  const api = {
+    VERSION, launcher: LAUNCHER, open, close,
+    get window() { return current ? current.win : null; },
+  };
+  root.AppsKit = api;
+  if (root.customElements && !root.customElements.get("apps-button")) root.customElements.define("apps-button", AppsButton);
+})(typeof window !== "undefined" ? window : globalThis);
+</script>
+<script>
+// fmpick.js: Open → From Cloud File Manager (2026-11-07; the button was "From the file manager" until the Apps
+// button came, and From my PC, pcfiles.js, went then: this does the same). Opens Jon's file manager (Relay Files on his PC through PC
 // Relay: Projects\file-manager, published beside the reader at https://jonnystokes.github.io/Cool-tools/file-manager/)
 // in the window kit's floating window (window-kit.js, copied in by build.py from file-manager\kit; a full-screen
 // sheet on a phone) and asks it for a book: one .zip, or a folder, which comes back as its files with their paths
@@ -5962,7 +5945,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     log("book", `file manager: ${text}`);
   }
   // Files the PC left out of a folder's zip, as one line for the preview and the done line. n = how many, names =
-  // the paths it named (it names up to 20; the reasons are in its log, files.log). Also used by From my PC.
+  // the paths it named (it names up to 20; the reasons are in its log, files.log).
   function leftOutNote(n, names, folder) {
     names = (names || []).filter(Boolean);
     n = Math.max(Number(n) || 0, names.length);
@@ -6016,7 +5999,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     await LIBRARY.pick(files, note ? { note } : undefined);        // exactly as a pick from the device (Add files / Add a folder)
   }
 
-  globalThis.FMPICK = { start, leftOut, leftOutNote, get busy() { return !!busy; } };
+  globalThis.FMPICK = { start, leftOut, get busy() { return !!busy; } };
 })();
 </script>
 <script>
@@ -14236,7 +14219,8 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 </script>
 <script>
 // cloudtab.js: Settings → Sound → Cloud (2026-10-25): Jon's PC through PC Relay. Opening the tab is one of the
-// three things that may contact the PC (with Open → From my PC and Use my PC): it checks the link at once
+// two things in the reader that may contact the PC (with Use my PC; Open → From Cloud File Manager is the file
+// manager's own page in a window, which talks to the PC itself): it checks the link at once
 // ("Checking connection…", then the address, round trip, relay version, the PC's programs and their state,
 // signed in or not). Use my PC for the voice (Apply): the voice chosen in the Voice tab is made on the PC
 // (engines/cloud.js). PC address (live). Test: one short sentence made on the PC and played here, with its

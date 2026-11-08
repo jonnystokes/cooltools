@@ -10,4 +10,4 @@ Everything runs on your device. Books, edits and voice files are stored in your 
 models are downloaded once from public CDNs. Nothing you read is sent anywhere.
 
 The source lives in Jon's `Projects\Walker of Worlds` folder (built with `python build.py`, which
-also writes this page); this folder holds only the finished page.
+also writes this page and its `version.json`); this folder holds only the finished page.

@@ -9,4 +9,5 @@ Open it: https://jonnystokes.github.io/Cool-tools/simple-bench/
 Everything runs on your device. It downloads nothing, speaks nothing aloud and sends nothing anywhere.
 
 The source lives in Jon's `Projects\simple-bench` folder (its `python build.py` copies the Book
-reader's rules into the page); this folder holds only the finished page.
+reader's rules into the page; its `python publish.py` writes this page and `version.json` here); this folder
+holds only the finished page.
