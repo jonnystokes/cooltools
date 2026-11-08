@@ -176,7 +176,7 @@ form.inline input { flex: 1 1 180px; }
   <section class="panel" id="tab-devices" role="tabpanel" hidden></section>
   <section class="panel" id="tab-programs" role="tabpanel" hidden></section>
 </main>
-<footer><span id="ver"></span> · <a href="https://jonnystokes.github.io/Cool-tools/">Cool tools</a></footer>
+<footer><span id="ver"></span> · <a href="https://jonnystokes.github.io/cooltools/">Cool tools</a></footer>
 <script>
 // ---- relay-client.js ----
 /* relay-client.js 2: the PC Relay client (ONE source: Projects\pc-relay\client\relay-client.js; each page's build
@@ -221,7 +221,7 @@ form.inline input { flex: 1 1 180px; }
   // The address this copy was built with: used only when the address file cannot be loaded, and then said.
   const BUILT_PC = "https://desktop-42.tail46434.ts.net";
   // Where the PC's address is published (WEB-APP-CONVENTIONS.md 5): after a rename, edit only that file.
-  const ADDRESS_FILE = "https://jonnystokes.github.io/Cool-tools/relay.json";
+  const ADDRESS_FILE = "https://jonnystokes.github.io/cooltools/relay.json";
   const RECHECK_MS = 60000;  // the address file is read again after a failed connection at most once a minute
   const ADDRESS_MS = 6000;   // the address file's own time limit
   const trim = (u) => String(u || "").trim().replace(/\/+$/, "");
@@ -527,13 +527,13 @@ form.inline input { flex: 1 1 180px; }
 })(typeof window !== "undefined" ? window : globalThis);
 
 // ---- apps.js ----
-/* apps.js 1.14 (built 2026-11-08 1:50 AM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
+/* apps.js 1.15 (built 2026-11-08 2:45 PM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
    app-kit\apps-button.js and file-manager\kit\window-kit.js (one source each; never edit this file). The window kit
    runs only when the page has none of its own. */
 if (!window.WindowKit) {
 /* window-kit.js: open one of Jon's pages in a floating window inside another page, and pick files from the file
    manager through it. ONE source: Projects\file-manager\kit\window-kit.js (pages copy it in at build time, or load
-   https://jonnystokes.github.io/Cool-tools/file-manager/window-kit.js). The protocol and an example: kit\README.md.
+   https://jonnystokes.github.io/cooltools/file-manager/window-kit.js). The protocol and an example: kit\README.md.
 
    Host side (the page that opens the window):
      const win = WindowKit.open(url, { title, name, width, height, onClose });   // a floating window with the page
@@ -816,10 +816,10 @@ if (!window.WindowKit) {
   root.WindowKit = { VERSION, open, pick, child, get windows() { return wins.slice(); } };
 })(typeof window !== "undefined" ? window : globalThis);
 }
-/* apps-button.js 1.14: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.15: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
-   https://jonnystokes.github.io/Cool-tools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
+   https://jonnystokes.github.io/cooltools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
 
      <apps-button app="file-manager"></apps-button>     the first thing in the page's top bar, top left
 
@@ -848,8 +848,8 @@ if (!window.WindowKit) {
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.14";
-  const LAUNCHER = "https://jonnystokes.github.io/Cool-tools/apps/";
+  const VERSION = "1.15";
+  const LAUNCHER = "https://jonnystokes.github.io/cooltools/apps/";
   const W = 460, H = 780;        // the menu window's first size (less on a short screen); the window kit remembers
                                  // what the person makes it
   const NAME = "apps";           // its key in the window kit (localStorage wk-win:apps); the same in every program
@@ -2003,7 +2003,7 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
 
 </script>
 <script>
-S.VERSION = "1.0.10"; S.BUILT = "2026-11-08 1:50 AM";
+S.VERSION = "1.0.11"; S.BUILT = "2026-11-08 2:45 PM";
 S.start();
 </script>
 </body>

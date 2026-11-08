@@ -8,7 +8,7 @@ has a newer version, the reader replaces the stored copy and keeps your place. T
 also has an **Online library** section listing the same books with Add / Open / Update buttons.
 **Open the empty reader** is the reader as before, with no book chosen (add your own).
 
-Open it: https://jonnystokes.github.io/Cool-tools/books/
+Open it: https://jonnystokes.github.io/cooltools/books/
 
 | Book | What it is |
 |---|---|

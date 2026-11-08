@@ -1,6 +1,6 @@
 /* window-kit.js: open one of Jon's pages in a floating window inside another page, and pick files from the file
    manager through it. ONE source: Projects\file-manager\kit\window-kit.js (pages copy it in at build time, or load
-   https://jonnystokes.github.io/Cool-tools/file-manager/window-kit.js). The protocol and an example: kit\README.md.
+   https://jonnystokes.github.io/cooltools/file-manager/window-kit.js). The protocol and an example: kit\README.md.
 
    Host side (the page that opens the window):
      const win = WindowKit.open(url, { title, name, width, height, onClose });   // a floating window with the page

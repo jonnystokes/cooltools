@@ -1,12 +1,12 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
      pastes the Apps kit's tab icons at the ICONS marker, and stamps the version and build time where
-     Book reader V1.0.654 and 2026-11-08 1:55 PM appear. -->
+     Book reader V1.0.656 and 2026-11-08 2:56 PM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Book reader V1.0.654</title>
+<title>Book reader V1.0.656</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
 <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlUlEQVR42p2SzytEURzFz33evBlNtsyCYtRkmrLASqwoKTtlYf4FyQabKSkrZWeNjdmxUrJUlkp+ZNj4tbAgUoyI7/lazLvPw0PN2dzX7X7ePefcrwGA9cn3UVILFLYJ1YgohISIQoQgNfgWqorwRETnptbqi8aHVxkAf8LBysqad0ktVAWLQqgF17ddDQwRtrk2c9+4h7srwcXeO65P5QesUDRmXaQ7PTSkY1iZvoWIGtfenMo4SGUc5PpjeC0ncLn/hs3FJ4gQg2N1aOnwkEgaWFnOsbbDiicNMt1e4CDbG0ciafDYMvP5A59zrVUAGGreCg5sXAwEmaMkoiAVri3MQmHZwqJEvxvXth3pwG872kFEhO8O7Av8FqFSYvC+v99iVXc+60fTUImV2TZLE/dId8bQ2hVHU9aDU/N5i4XODl5wtFPG/nbZxlOzMHJ7LNRseMJitUBzu4cD/2Cupxanu894epDQtCpIlsz88M0oydXQeH4Za0bs+TBIzTtTa/VFoeaFWhKh/gtTlWSJ1PzyYa74AfvjIbDIJi4vAAAAAElFTkSuQmCC">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVR42r2Xe0yVZRzHP+8573u4KxzkvoAkoELkGHkpsGJsbpa0uTabq5htrY3W3Np0mn+53LQ/yjZy+UelXci2LHKzRWtt2Sbr4g0DnRw1EUjwAgocOcA5PL/+OBfe876IOo3vX+/O7z3P53l+1/fRMKl5YzBHRNaLUCciJaLEUAIighJBlPlZiNqUIJbnqXcEEQKixKtEDorQuGF/Rl+EqUUevt8YfFlEdishWayAe4NbbT5R0rCpOaspuoEw/AslaP8zPGITEeq3HMhu0po3BnMQ8c7CyWNtSnxKpEQPx3y24SiRZBHWO8IJN9vwiK1OD2f77MOVICIljvtYancLRwRDt8KT3FBQqXOjX3HpTJDxm/cGj0vUyF/gwp3npOM3P4N9wQgcpQTdevLaN+NJyQy1B1FxXL0wSe+pID0dQS6fD94WjibkFusUVrgoXOgit8RAc4R6TUVtAo2vXY7xgm51ewQOoDkgs8hJZpGTx56PY8Iv9J4O0tMe4EJbgKErk4gIKekOCjwGBQsN8he4iEvUmE7uXD0GrkTQrTGfSa4EjfmVBvMrDaoDwof1gyglrPsgFacxBR1/pwXnUw+hP1NsW8MMF8EcglDCRXS+Y5jBK+OUL3UTn+S0LeQ0tKjbzXCAib1/YIyMoboGQxtftzRqM8OVioZgKtsj2rPDy8nWAXTDwcOL5lJRnY6nKp1Sz1wcznCOhPPhVgrsPx7awCuLw7t22CpBt5ZaRJt3VXD00FXaDg/Q1jpAx87rfLXzHElzdLbuqeSRx1NtYZPhMbQ58baN+F//GoCET1+yliG6tc4jSkkzqFmdS83qXAC6vT7aWgfoPDFESpoRrhKJekD1XOdmTSMJH71oj3v/sC0HYsvQVOcR/fB5N91nfXiq0il/wk1+STL5JcnwqmlhMW16ZBwmFTI8NmMiizUE1iYTUc85Hy37evmxqQeHU6OobA6LngrlQfkyN5pGtMPdjWLLEBxyixA0bHuUfcdreHu3hxVr8hi5McE3u/5hy9ojtLb020Iwk7TURLTUREsZhv6vW1uoWSmpBlUrs6hamQVAf7cf78khKp+eZw/BDEr4eK2lDKc2r1v7d0TbG9roPHGDRdXzqKhy46lOJzs/gez8BJs7b+uBRJcpb8yDSdCtvT2i5c9lM3RtgkMHLvHLt/+iaVBQmoKnOp01bzzIHLcr6k4ArSAN4wUPzsoHomvoiwvsOWCCi8LciGLduXxVNstXZTM2Osnfvw9G+8GBT7pYsCSNZSsyoxkNoCXFEf/e6hhY3NZn7SVpgqupRjRVCX1ng+QU69E/xCc6WVKbwZLaDABGfUESk/UZQ6DNS0bLTLH93tUxFgOfmoamSvhu+xClT4ZGaX65fbJF4OaMtir58FtghOaH36fwHvNz5s9Rjv48EgNXCnQRAiJiRJLR71Oc+MnPsZZRNA1yig0KPS7mV7jIK3VFZ7t5sMS4eFK46A3SeWSEzr9G6To1RjAotpOr0BQO6OEbS9l0HxpqUug+Pc7FU+P8+qXgStQoXOiiyBOHO0+Pvnf22BjXegN4j/jxHvfjH5m0Zfs0cETEq72/5uoOETbf4TecbZ5Pb7sjOCK86xChMXxdmlW4Enwi0ujYsD+jT5Q0hK9LswUXEWnY217W5wDY1JzVJEJ9+Lo0Gyev/6y9rCnmdgywre5SjgjrlUidKCkRwbhP8ICIeEU4KCKNe9vLotfz/wCKU53CYXSQUAAAAABJRU5ErkJggg==">
@@ -15,9 +15,9 @@
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.654";
-  window.APP_BUILT = "2026-11-08 1:55 PM";
-  window.APP_NOTE = "Chapter arrows under the text: under every chapter's last paragraph, big Previous and Next buttons in the accent colour (brown on the light theme, amber on the dark), each naming the chapter it goes to, sized to the text column; greyed at the first and last chapter; the same rules as the top bar's arrows. The top bar's previous and next chapter buttons tinted and edged in the accent with a thick arrow so they stand out";
+  window.APP_VERSION = "Book reader V1.0.656";
+  window.APP_BUILT = "2026-11-08 2:56 PM";
+  window.APP_NOTE = "the site moved to https://jonnystokes.github.io/cooltools/ (it was /Cool-tools/): the Apps menu, the PC's address file (relay.json) and the Cloud File Manager it picks from at the new address";
   window.APP_KEY = "br1";
 </script>
 <style>
@@ -5117,7 +5117,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   const MB = (n) => (n < 1e6 ? `${Math.max(1, Math.round(n / 1e3))} KB` : `${(n / 1e6).toFixed(1)} MB`);
   const q = new URLSearchParams(location.search);
   const wanted = q.get("book") || "", zipPath = q.get("zip") || "";
-  const SITE = "https://jonnystokes.github.io/Cool-tools/reader/";
+  const SITE = "https://jonnystokes.github.io/cooltools/reader/";
 
   function fail(text, e) {
     st.state = "failed"; st.message = text;
@@ -5287,7 +5287,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   // The address this copy was built with: used only when the address file cannot be loaded, and then said.
   const BUILT_PC = "https://desktop-42.tail46434.ts.net";
   // Where the PC's address is published (WEB-APP-CONVENTIONS.md 5): after a rename, edit only that file.
-  const ADDRESS_FILE = "https://jonnystokes.github.io/Cool-tools/relay.json";
+  const ADDRESS_FILE = "https://jonnystokes.github.io/cooltools/relay.json";
   const RECHECK_MS = 60000;  // the address file is read again after a failed connection at most once a minute
   const ADDRESS_MS = 6000;   // the address file's own time limit
   const trim = (u) => String(u || "").trim().replace(/\/+$/, "");
@@ -5616,7 +5616,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 <script>
 /* window-kit.js: open one of Jon's pages in a floating window inside another page, and pick files from the file
    manager through it. ONE source: Projects\file-manager\kit\window-kit.js (pages copy it in at build time, or load
-   https://jonnystokes.github.io/Cool-tools/file-manager/window-kit.js). The protocol and an example: kit\README.md.
+   https://jonnystokes.github.io/cooltools/file-manager/window-kit.js). The protocol and an example: kit\README.md.
 
    Host side (the page that opens the window):
      const win = WindowKit.open(url, { title, name, width, height, onClose });   // a floating window with the page
@@ -5900,10 +5900,10 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 })(typeof window !== "undefined" ? window : globalThis);
 </script>
 <script>
-/* apps-button.js 1.14: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.15: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
-   https://jonnystokes.github.io/Cool-tools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
+   https://jonnystokes.github.io/cooltools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
 
      <apps-button app="file-manager"></apps-button>     the first thing in the page's top bar, top left
 
@@ -5932,8 +5932,8 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.14";
-  const LAUNCHER = "https://jonnystokes.github.io/Cool-tools/apps/";
+  const VERSION = "1.15";
+  const LAUNCHER = "https://jonnystokes.github.io/cooltools/apps/";
   const W = 460, H = 780;        // the menu window's first size (less on a short screen); the window kit remembers
                                  // what the person makes it
   const NAME = "apps";           // its key in the window kit (localStorage wk-win:apps); the same in every program
@@ -6116,7 +6116,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 <script>
 // fmpick.js: Open → From Cloud File Manager (2026-11-07; the button was "From the file manager" until the Apps
 // button came, and From my PC, pcfiles.js, went then: this does the same). Opens Jon's file manager (Relay Files on his PC through PC
-// Relay: Projects\file-manager, published beside the reader at https://jonnystokes.github.io/Cool-tools/file-manager/)
+// Relay: Projects\file-manager, published beside the reader at https://jonnystokes.github.io/cooltools/file-manager/)
 // in the window kit's floating window (window-kit.js, copied in by build.py from file-manager\kit; a full-screen
 // sheet on a phone) and asks it for a book: one .zip, or a folder, which comes back as its files with their paths
 // (webkitRelativePath), as Add a folder gives them. What comes back goes through the normal import (LIBRARY.pick:
@@ -6127,7 +6127,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 // the password). Nothing is loaded or sent until the button is pressed. BR1_TEST.fileManager: another address
 // (the tests' local copy).
 (function () {
-  const ADDRESS = "https://jonnystokes.github.io/Cool-tools/file-manager/";
+  const ADDRESS = "https://jonnystokes.github.io/cooltools/file-manager/";
   const NAME = "file-manager-pick";      // the kit's window name: its size and place are remembered under it
   const MB = (n) => (n < 1e6 ? `${Math.max(1, Math.round((n || 0) / 1e3))} KB` : `${(n / 1e6).toFixed(n < 1e7 ? 1 : 0)} MB`);
   let busy = null;                       // the pick in flight: { win } (a second tap fronts its window)

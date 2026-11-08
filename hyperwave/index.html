@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-build="2.0.3 built November 7, 2026 6:05 PM">
+<html lang="en" data-build="2.0.4 built November 8, 2026 2:45 PM">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -593,13 +593,13 @@ kbd { font-family: var(--mono); font-size: .8rem; padding: .05rem .35rem; border
 </div>
 <script>
 // ---- app-kit/dist/apps.js ----
-/* apps.js 1.11 (built 2026-11-07 5:52 PM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
+/* apps.js 1.15 (built 2026-11-08 2:45 PM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
    app-kit\apps-button.js and file-manager\kit\window-kit.js (one source each; never edit this file). The window kit
    runs only when the page has none of its own. */
 if (!window.WindowKit) {
 /* window-kit.js: open one of Jon's pages in a floating window inside another page, and pick files from the file
    manager through it. ONE source: Projects\file-manager\kit\window-kit.js (pages copy it in at build time, or load
-   https://jonnystokes.github.io/Cool-tools/file-manager/window-kit.js). The protocol and an example: kit\README.md.
+   https://jonnystokes.github.io/cooltools/file-manager/window-kit.js). The protocol and an example: kit\README.md.
 
    Host side (the page that opens the window):
      const win = WindowKit.open(url, { title, name, width, height, onClose });   // a floating window with the page
@@ -882,10 +882,10 @@ if (!window.WindowKit) {
   root.WindowKit = { VERSION, open, pick, child, get windows() { return wins.slice(); } };
 })(typeof window !== "undefined" ? window : globalThis);
 }
-/* apps-button.js 1.11: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.15: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
-   https://jonnystokes.github.io/Cool-tools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
+   https://jonnystokes.github.io/cooltools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
 
      <apps-button app="file-manager"></apps-button>     the first thing in the page's top bar, top left
 
@@ -914,8 +914,8 @@ if (!window.WindowKit) {
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.11";
-  const LAUNCHER = "https://jonnystokes.github.io/Cool-tools/apps/";
+  const VERSION = "1.15";
+  const LAUNCHER = "https://jonnystokes.github.io/cooltools/apps/";
   const W = 460, H = 780;        // the menu window's first size (less on a short screen); the window kit remembers
                                  // what the person makes it
   const NAME = "apps";           // its key in the window kit (localStorage wk-win:apps); the same in every program
@@ -1101,7 +1101,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 // HYPERWAVE Studio: the shared namespace and small helpers. Every other file adds to HW.
 "use strict";
 var HW = (window.HW = {
-  VERSION: "2.0.3",
+  VERSION: "2.0.4",
   BUILD: document.documentElement.getAttribute("data-build") || "dev",
 });
 

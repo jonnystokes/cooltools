@@ -1,6 +1,6 @@
-/* versions.js 1.14: each program's version, the date it was last built and how long ago that was, under its line
+/* versions.js 1.15: each program's version, the date it was last built and how long ago that was, under its line
    on the Cool tools front page and in the Apps menu. ONE source: Projects\app-kit\versions.js (built into the menu;
-   published as https://jonnystokes.github.io/Cool-tools/apps/versions.js, which the front page loads).
+   published as https://jonnystokes.github.io/cooltools/apps/versions.js, which the front page loads).
 
    Every program's build writes version.json beside its page: {"app", "version", "built"}, built = "2026-11-07 5:03 PM"
    (Jon's 12-hour time on his PC, read as this device's local time; an ISO date is understood too). A link marked
