@@ -149,6 +149,7 @@ apps-button { --apps-sep: var(--line); }  /* the Apps button's plain divider: th
 .list-head .col.sorted { color: var(--text); }
 .list-head .col .arrow { font-size: 10px; }
 .row { height: var(--row); border-bottom: 1px solid var(--line-2); cursor: pointer; user-select: none; -webkit-user-select: none; position: relative; }
+a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /* a row is its item's link (view.js linkOf): it looks like a row */
 .row:hover { background: var(--surface-2); }
 .row.sel { background: var(--accent-soft); }
 .row.sel:hover { background: var(--accent-soft-2); }
@@ -195,6 +196,9 @@ apps-button { --apps-sep: var(--line); }  /* the Apps button's plain divider: th
 .fail .fail-title { font-weight: 650; font-size: 17px; margin-bottom: 6px; }
 .fail .fail-why { color: var(--muted); margin-bottom: 14px; }
 .fail .fail-retry { color: var(--faint); font-size: 13px; margin-top: 10px; }
+/* a private file opened from its link in a new tab (app.js openLink): over the list, under the header */
+.fail.launch { position: absolute; inset: 0; z-index: 6; background: var(--surface); align-content: center; }
+.launch .launch-acts { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 
 .dropzone { position: absolute; inset: 8px; z-index: 5; border: 2.5px dashed var(--accent); border-radius: 14px; background: color-mix(in srgb, var(--accent-soft) 82%, transparent); display: grid; place-items: center; pointer-events: none; }
 .dropzone-card { display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--accent); font-weight: 650; font-size: 17px; background: var(--surface); padding: 18px 28px; border-radius: 14px; box-shadow: var(--shadow-lg); }
@@ -332,6 +336,9 @@ apps-button { --apps-sep: var(--line); }  /* the Apps button's plain divider: th
   .pickbar { padding: 10px 12px; }
   .pickbar .btn { height: 40px; }
 }
+@media (max-width: 400px) {
+  .selbar.full .sb-word { display: none; }  /* every button is there (signed in): the count is the number alone */
+}
 @media (min-width: 721px) {
   .selbar, .fab { display: none !important; }
 }
@@ -375,7 +382,7 @@ apps-button { --apps-sep: var(--line); }  /* the Apps button's plain divider: th
   <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="2.75" y="6.75" width="18.5" height="10.5" rx="2.25" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 10.5h1M10 10.5h1M13.5 10.5h1M17 10.5h.5M7.5 14h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
   <symbol id="i-signal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.2"/><path d="M8.3 15.7a5.2 5.2 0 0 1 0-7.4M15.7 8.3a5.2 5.2 0 0 1 0 7.4M5.5 18.5a9.2 9.2 0 0 1 0-13M18.5 5.5a9.2 9.2 0 0 1 0 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
 </svg>
-<div id="app" class="app" data-build="V1.0.31">
+<div id="app" class="app" data-build="V1.0.36">
   <header class="top">
     <div class="top-row">
       <!-- The Apps button (Projects\app-kit, WEB-APP-CONVENTIONS.md): top left, before everything, its separator built in;
@@ -401,7 +408,7 @@ apps-button { --apps-sep: var(--line); }  /* the Apps button's plain divider: th
   </main>
   <footer class="status">
     <span class="status-left"></span>
-    <span class="status-right"><span class="conn"></span><span class="build" title="Built 2026-11-08 12:29 AM">V1.0.31</span></span>
+    <span class="status-right"><span class="conn"></span><span class="build" title="Built 2026-11-08 1:32 AM">V1.0.36</span></span>
   </footer>
   <div class="selbar" hidden></div>
   <button class="fab" type="button" data-act="fab" aria-label="Add: upload or new folder" hidden><svg><use href="#i-plus"/></svg></button>
@@ -410,7 +417,7 @@ apps-button { --apps-sep: var(--line); }  /* the Apps button's plain divider: th
 </div>
 <input type="file" id="pick-files" multiple hidden>
 <input type="file" id="pick-folder" webkitdirectory multiple hidden>
-<script>window.FM_BUILD = { version: "V1.0.31", built: "2026-11-08 12:29 AM", note: "PC Relay: the PC's address from the Cool tools address file (relay.json), read fresh before connecting; the address built in only when that file cannot be loaded, said in the status line and the PC's log (the PC was renamed DESKTOP-42)" };</script>
+<script>window.FM_BUILD = { version: "V1.0.36", built: "2026-11-08 1:32 AM", note: "Clicks: every row is its link: a middle-click or Ctrl+click opens it in a new tab behind this one (a folder in a new file manager tab, a private file by its ticket fetched in the new tab), Shift+click a new window, Shift+right-click the browser's menu; only the box ticks; Open on several ticked rows (toolbar, menu, phone bar, Enter), each in its own tab, the tabs a browser blocks said with how to allow pop-ups and a button for the rest; more than 10 asks first" };</script>
 <script>
 // ---- relay-client.js ----
 /* relay-client.js 2: the PC Relay client (ONE source: Projects\pc-relay\client\relay-client.js; each page's build
@@ -1358,6 +1365,16 @@ FM.saveBlob = (blob, name) => {
 // The "leave this page?" guard (transfers.js) is told it is a download, not a leave (else it would ask, and "Stay"
 // would cancel the download).
 FM.navigateDownload = (url) => { FM.handingOff = Date.now(); const a = FM.h("a", { href: url, rel: "noopener" }); a.style.display = "none"; document.body.append(a); a.click(); setTimeout(() => a.remove(), 5000); };
+// Does a browser tab show a file sent with this type (else the browser downloads it)? The browser's own answer where
+// it has one (sound and video it can play, its PDF viewer); text, web pages, JSON and XML, the pictures tabs show.
+FM.tabShows = (ct) => {
+  const t = String(ct || "").split(";")[0].trim().toLowerCase();
+  if (/^text\//.test(t) || /^application\/(json|xml|xhtml\+xml)$/.test(t)) return true;
+  if (t === "application/pdf") return navigator.pdfViewerEnabled !== false;
+  if (/^image\/(png|jpeg|gif|webp|bmp|x-icon|vnd\.microsoft\.icon|svg\+xml|avif|apng)$/.test(t)) return true;
+  if (/^(audio|video)\//.test(t)) { try { return document.createElement(t.slice(0, 5)).canPlayType(t) !== ""; } catch (e) { return false; } }
+  return false;
+};
 FM.capital = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
 FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!?]$/.test(s) ? s + "." : s; };
 
@@ -2121,9 +2138,9 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     view: "folder",          // folder | search | trash
     folder: null, crumbs: [], items: [], q: "",
     sort: FM.store.get("sort", { key: "name", dir: 1 }),
-    sel: new Set(),          // the ticked rows (only a person ticks: the row's box, Shift/Ctrl+click, Space, Shift+arrows, Ctrl+A)
+    sel: new Set(),          // the ticked rows (only a person ticks: the row's box, Space, Shift+arrows, Ctrl+A)
     focus: null,             // the keyboard's cursor (arrows move it; Enter opens it; Space ticks it)
-    anchor: null,            // the last row ticked or unticked: Shift+click ticks from there
+    anchor: null,            // the last row ticked or unticked: Shift+click on a box ticks from there
     clip: null,              // { mode: "cut" | "copy", items, from }
     signed: false, writable: false, version: "",
     conn: { state: "wait", why: "Connecting to the PC…" },
@@ -2179,6 +2196,21 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
   }
   const parentPath = (it) => { const p = (it.path || "").split("/"); p.pop(); return p.length ? p.join(" › ") : "Relay Files"; };
 
+  // A row's own link, so the browser's own link clicks work on it (app.js leaves them to the browser): a middle-click
+  // or Ctrl+click opens it in a new tab behind this one, Shift+click in a new window, and Shift+right-click has the
+  // browser's own menu (Copy link address). A folder: this page at that folder (#f=); a public file: its own link on
+  // the PC; a private file: this page told to open it (#open=<id>/<name>; the new tab shares this browser's one
+  // sign-in and gets the file's ticket itself, app.js openLink). None in the trash (nothing there opens).
+  function linkOf(it) {
+    if (!it || it.tid || !it.id) return ""; // a trash entry has a tid, never an id
+    const page = location.href.split("#")[0];
+    if (it.dir) return page + "#f=" + encodeURIComponent(it.id);
+    if (it.locked) return "";
+    if (it.private) return page + "#open=" + it.id + "/" + encodeURIComponent(it.name);
+    return FM.api.client.url("files", FM.api.filePath(it));
+  }
+  FM.linkOf = linkOf;
+
   function rowEl(it) {
     const id = key(it);
     const cls = ["row", it.dir ? "dir" : "file"];
@@ -2187,7 +2219,9 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     if (it.locked) cls.push("locked");
     if (S.clip && S.clip.mode === "cut" && S.clip.items.some((c) => c.id === id)) cls.push("cut");
     if (!fits(it)) cls.push("nomatch");
-    const el = h("div", { cls: cls.join(" "), role: "row", "aria-selected": String(S.sel.has(id)), data: { id }, draggable: S.writable && S.view === "folder" && !it.locked && !FM.isPhone() ? "true" : null });
+    // a link (not in the Tab order: the list holds the keyboard), or a plain row where there is nothing to open
+    const link = linkOf(it), drag = S.writable && S.view === "folder" && !it.locked && !FM.isPhone();
+    const el = h(link ? "a" : "div", { cls: cls.join(" "), role: "row", "aria-selected": String(S.sel.has(id)), data: { id }, href: link || null, tabindex: link ? "-1" : null, draggable: drag ? "true" : "false" });
     const check = h("button.check", { type: "button", role: "checkbox", "aria-checked": String(S.sel.has(id)), "aria-label": `Select ${it.name}`, tabindex: "-1" }, icon("check"));
     const kind = it.locked ? "lock" : FM.kind(it);
     const ico = icon(kind === "folder" ? "folder" : kind === "lock" ? "lock" : kind, "ico " + kind);
@@ -2312,7 +2346,9 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       if (S.writable && S.view === "folder") kids.push(tb("newfolder", "newfolder", "New folder", { key: "N" }), tb("upload", "upload", "Upload", { key: "U", title: "Upload files (U), or a folder (Shift+U); or drop them here" }));
       kids.push(h("span.sep"));
       kids.push(tb("download", "download", n > 1 ? `Download ${n}` : "Download", { disabled: !n || locked, key: "D" }));
-      kids.push(tb("open", "open", "Open", { disabled: !one || one.dir || one.locked, title: "Open in a new tab (Enter)" }));
+      // Open: one file in a new tab, one folder here; several, each in its own new tab (ops.js openTabs)
+      kids.push(tb("open", "open", n > 1 ? `Open ${n}` : "Open", { disabled: !n || (one ? one.locked && !one.dir : sel.every((i) => i.locked)),
+        title: n > 1 ? "Open each in its own new tab: files by their links, folders in new Cloud File Manager tabs" : one && one.dir ? "Open: go into it (Enter)" : "Open in a new tab (Enter)" }));
       if (S.writable) {
         kids.push(tb("rename", "rename", "Rename", { disabled: !one || one.locked || one.protected, key: "F2" }),
           tb("cut", "move", "Move", { disabled: !n || locked || sel.some((i) => i.protected), title: "Move: pick them up, go to the folder, then Paste here (Ctrl+X, Ctrl+V)" }),
@@ -2370,9 +2406,12 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     if (!on) { if (S.clip && FM.isPhone() && S.view === "folder") renderClipbar(bar); return; }
     const n = sel.length, locked = sel.some((i) => i.locked), prot = sel.some((i) => i.protected);
     const b = (act, ic, label, dis, danger) => h("button.iconbtn" + (danger ? ".danger" : ""), { type: "button", data: { act }, disabled: !!dis, title: label, "aria-label": label }, icon(ic));
-    const kids = [b("unselect", "close", "Untick all"), h("span.sb-count", { text: `${n} selected` }), b("download", "download", "Download", !n || locked)];
+    // the count's word goes on a narrow phone when every button is there (phone.css), the number stays
+    const kids = [b("unselect", "close", "Untick all"), h("span.sb-count", null, String(n), h("span.sb-word", { text: " selected" })),
+      b("open", "open", n > 1 ? `Open ${n}, each in its own new tab` : "Open", sel.every((i) => i.locked && !i.dir)), b("download", "download", "Download", !n || locked)];
     if (S.writable) kids.push(b("cut", "move", "Move", !n || locked || prot), b("copy", "copy", "Copy", !n || locked), b("delete", "trash", "Delete", !n || locked || prot, true));
     kids.push(b("selmore", "more", "More", !n));
+    bar.classList.toggle("full", !!S.writable);
     bar.replaceChildren(...kids);
   }
   function renderClipbar(bar) {
@@ -2653,14 +2692,15 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
   }
 
   // ---- download and open ---------------------------------------------------------------------------------------
+  // returns the transfer (its .done settles when it ends; .state says how), or null when there is nothing to download
   function download(items) {
     items = items.filter((i) => !i.locked);
-    if (!items.length) return;
+    if (!items.length) return null;
     const one = items.length === 1 ? items[0] : null;
     const zip = !one || one.dir;
     const total = items.reduce((a, i) => a + (i.size || 0), 0);
     const name = one ? (one.dir ? one.name + ".zip" : one.name) : `${items.length} items from ${(S.folder && S.folder.name) || "Relay Files"}.zip`;
-    FM.transfers.add({
+    return FM.transfers.add({
       kind: "down", name, total,
       run: async (t) => {
         if (total > FM.limits.inPage) { // straight to disk through the browser
@@ -2711,6 +2751,34 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     try { tab(await FM.api.link([it], { inline: true }), it.name); }
     catch (e) { fail(e, `“${it.name}” could not be opened`, { action: "open", items: [it] }); }
   }
+  // Open for what is ticked (the toolbar's Open, the phone's bar, the menu): one file in a new tab, one folder here;
+  // several, each in its own new tab.
+  function openMany(items) {
+    if (items.length === 1) return items[0].dir ? FM.app.go(items[0].id) : open(items[0]);
+    return openTabs(items);
+  }
+  // Several at once, in the list's order: each by its row's own link in a new tab (a file shows or downloads there,
+  // a folder opens in a new Cloud File Manager tab, a private file gets its ticket in its tab: view.js linkOf), all
+  // in this one click. More than 10 asks first. A browser lets a page open one tab per click unless the site may open
+  // pop-ups: the tabs it blocked are said, with how to allow pop-ups here, and a button opens the rest (never a
+  // silent part of them).
+  async function openTabs(items, asked) {
+    const order = FM.sorted();
+    items = items.filter((i) => FM.linkOf(i)).sort((a, b) => order.indexOf(a) - order.indexOf(b));
+    const n = items.length;
+    if (!n) return;
+    if (n > 10 && !asked && !(await FM.ui.confirm(`Open ${n} tabs?`, [`Each of the ${n} opens in its own new tab: a file by its own link (one a tab cannot show downloads), a folder in a new Cloud File Manager tab.`], `Open ${n} tabs`))) return;
+    const blocked = [];
+    for (const it of items) {
+      const w = window.open(FM.linkOf(it), "_blank");
+      if (w) { try { w.opener = null; } catch (e) {} } else blocked.push(it);
+    }
+    if (!blocked.length) return;
+    const b = blocked.length, site = location.host || "this page";
+    FM.report("open", `the browser blocked ${b} of ${n} new tabs (pop-ups not allowed for ${site})`, { what: "several opened at once", items: blocked.slice(0, 50) });
+    toast(`${b < n ? `Opened ${n - b} of ${n}: the browser blocked the other ${b}` : `The browser blocked all ${n} new tabs`}. It lets a page open only one new tab per click unless pop-ups are allowed for ${site}. Allow them (Chrome: the blocked pop-up sign at the right end of the address bar, then “Always allow”; on a phone: Settings › Site settings › Pop-ups and redirects), then press “Open the other ${b}”.`,
+      { bad: true, action: () => openTabs(blocked, true), actionText: `Open the other ${b}` });
+  }
 
   // ---- the trash -------------------------------------------------------------------------------------------------
   async function restore(items) {
@@ -2751,7 +2819,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     } catch (e) { fail(e, "The trash was not emptied", { action: "empty-trash" }); }
   }
 
-  FM.ops = { fail, signIn, signOut, newFolder, rename, del, pickUp, paste, moveTo, setPrivate, download, open, restore, purge, emptyTrash, askConflicts, asking };
+  FM.ops = { fail, signIn, signOut, newFolder, rename, del, pickUp, paste, moveTo, setPrivate, download, open, openMany, openTabs, restore, purge, emptyTrash, askConflicts, asking };
 })();
 
 // ---- upload.js ----
@@ -2942,27 +3010,34 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
 
 // ---- keys.js ----
 // keys.js: keyboard shortcuts (desktop). Arrows move the cursor (nothing is ticked), Shift+arrows tick the rows they
-// pass, Space ticks or unticks the cursor's row, Enter opens it, Alt+← goes back, Backspace goes up, R refreshes;
-// Ctrl+A / C / X / V; Delete; F2; N, U, D, /, ?. Delete, F2, D, Ctrl+C / X act on the ticked rows, or with none
-// ticked on the cursor's row. Escape closes the top thing (a menu, a dialog, the search, the ticks, what was picked
-// up); with nothing left, a page that opened this one in a window may close it.
+// pass, Space ticks or unticks the cursor's row, Enter opens, Alt+← goes back, Backspace goes up, R refreshes;
+// Ctrl+A / C / X / V; Delete; F2; N, U, D, /, ?. Enter, Delete, F2, D, Ctrl+C / X act on the ticked rows, or with none
+// ticked on the cursor's row (Enter on several: each in its own new tab, app.js openAll). Escape closes the top thing
+// (a menu, a dialog, the search, the ticks, what was picked up); with nothing left, a page that opened this one in a
+// window may close it. The `?` list says what the mouse does too.
 "use strict";
 (function () {
   const S = FM.S;
   const KEYS = [
-    ["Click or tap a row, Enter", "Open: a folder goes in, a file opens in a new tab"], ["The box on a row, Ctrl+click", "Tick or untick that row"],
-    ["Shift+click", "Tick the rows from the last one ticked"], ["↑ ↓, Home, End, Page Up/Down", "Move through the list (nothing is ticked)"],
+    ["Click or tap a row", "Open: a folder goes in, a file opens in a new tab"],
+    ["Middle-click or Ctrl+click a row (⌘+click on a Mac)", "Open it in a new tab behind this one (a folder in a new Cloud File Manager tab); you stay here"],
+    ["Shift+click a row", "Open it in a new window"],
+    ["The box on a row", "Tick or untick that row (a click on the row itself never ticks)"], ["Shift+click a box", "Tick the rows from the last one ticked"],
+    ["Enter", "Open the ticked rows, each in its own new tab when there are several; with none ticked, the row you are on"],
+    ["↑ ↓, Home, End, Page Up/Down", "Move through the list (nothing is ticked)"],
     ["Space", "Tick or untick the row you are on"], ["Shift + ↑ ↓ (Home, End, Page Up/Down)", "Tick the rows you move over"],
     ["Alt+←, Back", "Back to the folder you were in before (up, if you came straight here)"], ["Backspace, Alt+↑", "Up one folder"],
     ["R, Refresh", "List this folder again from the PC"], ["Ctrl+A", "Tick everything here"], ["Ctrl+C, Ctrl+X, Ctrl+V", "Copy, move (cut), paste here"],
     ["Delete", "Move to the trash (Undo in the message)"], ["F2", "Rename"], ["N", "New folder"], ["U, Shift+U", "Upload files, upload a folder"],
     ["D", "Download"], ["/ or Ctrl+F", "Search all of Relay Files"], ["Drag rows onto a folder", "Move there (hold Ctrl to copy)"],
-    ["Drop files from the computer", "Upload (onto a folder row: into it)"], ["Right-click, ⋯", "Actions for the item"], ["Escape", "Close, untick everything, put picked-up items down"], ["?", "This list"],
+    ["Drop files from the computer", "Upload (onto a folder row: into it)"], ["Right-click, ⋯", "Actions for the item (for all the ticked rows when it is one of them)"],
+    ["Shift+right-click a row", "The browser's own menu for its link (open in a new tab or window, copy the link address)"],
+    ["Escape", "Close, untick everything, put picked-up items down"], ["?", "This list"],
   ];
   function help() {
     const t = FM.h("table.keys");
     for (const [k, v] of KEYS) t.append(FM.h("tr", null, FM.h("td", null, FM.h("b", { text: k })), FM.h("td", { text: v })));
-    FM.ui.dialog({ title: "Keyboard and mouse", body: [t, "Delete, F2, D and Ctrl+C / X act on the ticked rows; with none ticked, on the row you are on."], actions: [{ text: "Close", value: true, primary: true }] });
+    FM.ui.dialog({ title: "Keyboard and mouse", body: [t, "Enter, Delete, F2, D and Ctrl+C / X act on the ticked rows; with none ticked, on the row you are on. To open several at once the browser must allow pop-ups for this site (the page says how when it blocks them)."], actions: [{ text: "Close", value: true, primary: true }] });
   }
   // Shift+moves tick like text is selected: the rows from where the cursor was when Shift began to where it is now
   // (going back unticks them again); rows ticked before stay ticked. A run goes on while nothing else changed the ticks.
@@ -3020,7 +3095,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     else if (k === "Home") move("home", e.shiftKey);
     else if (k === "End") move("end", e.shiftKey);
     else if (k === " ") { if (here) { S.sel.has(S.focus) ? S.sel.delete(S.focus) : S.sel.add(S.focus); S.anchor = S.focus; FM.view.sel(); } }
-    else if (k === "Enter") { const it = here || (ticked.length === 1 ? ticked[0] : null); if (it && !e.repeat) FM.app.activate(it); } // a held key opens once
+    else if (k === "Enter") { if (!e.repeat) FM.app.openAll(sel); } // the ticked rows, or the cursor's; a held key opens once
     else if (k === "Backspace") FM.app.up();
     else if (ctrl && (k === "a" || k === "A")) { S.sel = new Set(S.items.map((i) => i.id || i.tid)); FM.view.sel(); }
     else if (ctrl && (k === "c" || k === "C") && S.view !== "trash") FM.ops.pickUp(sel, "copy");
@@ -3161,9 +3236,11 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
 
 // ---- app.js ----
 // app.js: start-up, going from folder to folder (Back, Refresh), the live updates, and the pointer: a click or tap
-// opens, the row's box ticks (Shift and Ctrl too), right-click or ⋯ for the actions, and dragging rows onto a folder.
+// opens, a middle-click or Ctrl+click opens in a new tab behind this one (each row is a link: the browser's own),
+// only the row's box ticks, right-click or ⋯ for the actions, and dragging rows onto a folder.
 // Opened on its own, the browser's Back and Forward go through the folders (the address keeps the folder:
 // #f=<id>), the same steps as the page's Back; inside another page's window it keeps its trail to itself.
+// Opened at #open=<id>/<name> (a private file's row link, in a new tab): it opens that file (openLink).
 "use strict";
 (function () {
   const S = FM.S;
@@ -3408,6 +3485,15 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     if (S.pick && FM.fits(it) && S.pick.files) return FM.pick.choose([it]); // a page asked for a file: this one
     FM.ops.open(it);
   }
+  // Enter on several ticked rows: in the trash they are restored; inside another page's window Choose takes them (or
+  // says why it cannot); else each opens in its own new tab. One row: what a click on it does.
+  function openAll(list) {
+    if (!list.length) return;
+    if (list.length === 1) return activate(list[0]);
+    if (S.view === "trash") return FM.ops.restore(list);
+    if (S.pick) { const ch = FM.pickChoice(list); return ch.ok ? FM.pick.choose(list) : FM.ui.toast(ch.why, { bad: true, ms: 6000 }); }
+    return FM.ops.openTabs(list);
+  }
 
   // ---- menus -------------------------------------------------------------------------------------------------------------
   // What a row's menu (⋯, right-click) or a drag acts on: every ticked row when this one is ticked, else this row alone
@@ -3419,8 +3505,9 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     if (S.view === "trash") return FM.ui.menu([{ head: one ? one.name : `${n} items` }, { icon: "restore", text: n > 1 ? `Restore ${n}` : "Restore", act: () => FM.ops.restore(sel) }, { icon: "trash", text: "Delete forever", danger: true, act: () => FM.ops.purge(sel) }], at);
     const locked = sel.some((i) => i.locked), prot = sel.some((i) => i.protected);
     const items = [{ head: one ? one.name : `${n} items selected` }];
-    if (one && one.dir) items.push({ icon: "folder", text: "Open", key: "Enter", act: () => activate(one) });
+    if (one && one.dir) items.push({ icon: "folder", text: "Open", key: "Enter", act: () => activate(one) }, { icon: "open", text: "Open in a new tab", act: () => FM.ops.openTabs([one]) });
     if (one && !one.dir && !one.locked) items.push({ icon: "open", text: "Open in a new tab", key: "Enter", act: () => FM.ops.open(one) });
+    if (n > 1 && sel.some((i) => FM.linkOf(i))) items.push({ icon: "open", text: `Open ${n} in new tabs`, key: S.pick ? "" : "Enter", act: () => FM.ops.openTabs(sel) });
     if (S.pick && FM.pickChoice(sel).ok) items.push({ icon: "check", text: FM.pickChoice(sel).label, act: () => FM.pick.choose(sel) });
     if (!locked) items.push({ icon: "download", text: n > 1 || (one && one.dir) ? "Download as a zip" : "Download", key: "D", act: () => FM.ops.download(sel) });
     if (S.view === "search" && one) items.push({ icon: "folder", text: "Show in its folder", act: () => reveal(one) });
@@ -3460,7 +3547,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
   const ACTS = {
     up, prev: back, refresh: refreshList, root: () => go("root"), retry: () => reload(), signin: () => FM.ops.signIn(),
     newfolder: FM.ops.newFolder, upload: (b) => { if (FM.isPhone()) return FM.upload.choose(false); FM.ui.menu([{ icon: "upload", text: "Files…", key: "U", act: () => FM.upload.choose(false) }, { icon: "folder", text: "A whole folder…", key: "Shift+U", act: () => FM.upload.choose(true) }], { anchor: b }); },
-    download: () => FM.ops.download(FM.selected()), open: () => FM.ops.open(FM.selected()[0]), rename: () => FM.ops.rename(FM.selected()[0]),
+    download: () => FM.ops.download(FM.selected()), open: () => FM.ops.openMany(FM.selected()), rename: () => FM.ops.rename(FM.selected()[0]),
     cut: () => FM.ops.pickUp(FM.selected(), "cut"), copy: () => FM.ops.pickUp(FM.selected(), "copy"), paste: FM.ops.paste,
     clipcancel: () => { S.clip = null; FM.view.render(); }, delete: () => FM.ops.del(FM.selected()),
     private: () => FM.ops.setPrivate(FM.selected()[0], true), public: () => FM.ops.setPrivate(FM.selected()[0], false),
@@ -3475,9 +3562,11 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
 
   // ---- the pointer on the list ----------------------------------------------------------------------------------------------
   // One click or tap on a row opens it: a folder goes in, a file opens in a new tab (a page that asked for a file gets
-  // it; in the trash: the row's actions). The row's box ticks it: a click on the box ticks or unticks that row,
-  // Shift+click ticks the rows from the last one ticked to it, Ctrl+click is that row alone; Shift or Ctrl on the row
-  // itself ticks instead of opening. Nothing else ticks a row: not a click, not ⋯ or right-click, not a drag.
+  // it; in the trash: the row's actions). Each row is a link (view.js linkOf), and the browser's own link clicks are
+  // left to it: a middle-click or Ctrl+click (⌘+click on a Mac) opens the row in a new tab behind this one, Shift+click
+  // in a new window, Shift+right-click shows the browser's own menu for the link; this page stays as it is. Only the
+  // row's box ticks: a click on it ticks or unticks that row, Shift+click ticks the rows from the last one ticked to it.
+  // Nothing else ticks a row: not a click on the row (with Ctrl or Shift or not), not ⋯ or right-click, not a drag.
   // A double-click or double-tap is one open: after an open the list takes no click for QUIET ms (and never the second
   // click of a mouse double-click), which would else open whatever is now under the pointer in the new folder, or the
   // file a second time. A long press on a phone (LONG ms or more) is not a tap: its lift opens nothing; where the browser
@@ -3487,6 +3576,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     const list = $(".list");
     let openedAt = -1e9, touchAt = 0, menuAt = 0;
     const rowOf = (e) => e.target.closest && e.target.closest(".row");
+    const linkRow = (r) => r && r.tagName === "A";
     function tick(id, range) { // range (Shift): tick from the last row ticked or unticked to this one; never unticks
       const ids = FM.sorted().map((i) => i.id || i.tid), a = ids.indexOf(S.anchor), b = ids.indexOf(id);
       if (range) for (const k of a >= 0 && b >= 0 ? ids.slice(Math.min(a, b), Math.max(a, b) + 1) : [id]) S.sel.add(k);
@@ -3501,12 +3591,15 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       const actBtn = e.target.closest("[data-act]");
       const r = rowOf(e);
       if (!r) { if (actBtn && ACTS[actBtn.dataset.act]) ACTS[actBtn.dataset.act](actBtn); return; }
+      const onBox = !!e.target.closest(".check"), onMore = !!actBtn && actBtn.dataset.act === "more";
+      if (!onBox && !onMore && linkRow(r) && (e.ctrlKey || e.metaKey || e.shiftKey)) return; // the browser's: a new tab or window
+      e.preventDefault(); // anything else is this page's: the row's link never takes this tab away
       if (performance.now() - openedAt < QUIET || (e.pointerType === "mouse" && e.detail > 1)) return;
       if (e.pointerType === "touch" && touchAt && (menuAt > touchAt || performance.now() - touchAt >= LONG)) return; // the lift of a long press
       const id = r.dataset.id, it = FM.byId(id);
       if (!it) return;
-      if (actBtn && actBtn.dataset.act === "more") return itemMenu({ anchor: actBtn, alignRight: true }, forRow(id));
-      if (e.target.closest(".check") || e.shiftKey || e.ctrlKey || e.metaKey) {
+      if (onMore) return itemMenu({ anchor: actBtn, alignRight: true }, forRow(id));
+      if (onBox) {
         tick(id, e.shiftKey);
         if (document.activeElement !== list && list.contains(document.activeElement)) list.focus({ preventScroll: true }); // keys stay the list's
         return;
@@ -3515,9 +3608,17 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       if (S.view === "trash") return itemMenu({ x: e.clientX, y: e.clientY }, forRow(id));
       activate(it);
     });
+    // a middle-click on the box or ⋯ opens nothing (on the rest of the row it is the browser's: the link in a new tab)
+    list.addEventListener("auxclick", (e) => { if (e.target.closest && e.target.closest(".row button")) e.preventDefault(); });
+    // a press focuses the row's link: once the pointer is up (or a drag of it ends) the keys are the list's again (its
+    // cursor, its shortcuts). Not at the press itself: moving the focus then stops the row from being dragged.
+    const keysBack = () => { const a = document.activeElement; if (a && a !== list && a.matches && a.matches("a.row")) list.focus({ preventScroll: true }); };
+    list.addEventListener("pointerup", keysBack);
+    list.addEventListener("dragend", keysBack);
     list.addEventListener("pointerdown", (e) => { touchAt = e.pointerType === "touch" ? performance.now() : 0; });
     list.addEventListener("contextmenu", (e) => {
       const r = rowOf(e);
+      if (linkRow(r) && e.shiftKey && !e.target.closest("button")) return; // Shift+right-click: the browser's own menu for the link
       e.preventDefault();
       menuAt = performance.now();
       if (!r) return spaceMenu({ x: e.clientX, y: e.clientY });
@@ -3532,6 +3633,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       const items = forRow(r.dataset.id).filter((i) => !i.locked);
       if (!items.length) return e.preventDefault();
       dragIds = items.map((i) => i.id);
+      e.dataTransfer.clearData(); // not the row's link: a link dropped where nothing takes it would take the tab there
       e.dataTransfer.setData(MIME, JSON.stringify(dragIds));
       e.dataTransfer.setData("text/plain", items.map((i) => i.name).join("\n"));
       e.dataTransfer.effectAllowed = "copyMove";
@@ -3579,6 +3681,9 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     document.addEventListener("keydown", FM.keys.onKey);
     FM.upload.wireDrops();
     addEventListener("popstate", (e) => { if (!FM.embedded && e.state && e.state.fm) go(e.state.fm, { noHistory: true }); });
+    // a row's link pasted into this tab's address bar changes only the part after #, so the page would not start
+    // again: it does (the page's own steps carry their state, and are popstate's)
+    addEventListener("hashchange", () => { if (!FM.embedded && !(history.state && history.state.fm) && /^#(open|f)=/.test(location.hash)) location.reload(); });
     addEventListener("online", () => { if (S.error) { retryWait = 2000; reload(); } });
     document.addEventListener("visibilitychange", () => { if (!document.hidden) { if (S.error) reload(); else if (events) events.restart(); } });
     let wasPhone = FM.isPhone();
@@ -3604,6 +3709,66 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     wire();
     FM.api.onLost(lost);
     FM.api.onChange(() => { refresh(); });   // signed in or out on another page of this site (one pass per browser)
+    const op = !FM.embedded && /^#open=([0-9a-f]+)(?:\/(.*))?$/.exec(location.hash);
+    if (op) { let name = ""; try { name = decodeURIComponent(op[2] || ""); } catch (e) {} return openLink(op[1], name); }
+    return start();
+  }
+
+  // ---- a private file opened from its row's link (#open=<id>/<name>, view.js linkOf) -----------------------------------
+  // A middle-click, Ctrl+click or the browser's own "Open link in new tab" on a private file opens this page in the new
+  // tab: a link cannot carry the pass, but this tab shares the browser's one sign-in, so it asks the PC for the file's
+  // 10-minute ticket and goes there. A file a tab shows (FM.tabShows) is shown in this tab; any other comes down through
+  // the page as Download does, then the tab closes (as a link's download closes its tab). What fails is said here with
+  // a way on: Sign in, Try again, or the Cloud File Manager itself. The header (the Apps button) stays reachable.
+  function launchCard(title, text, buttons = []) {
+    let el = document.querySelector(".launch");
+    if (!el) { el = FM.h("div.fail.launch", { role: "status" }); $(".main").append(el); }
+    const card = FM.h("div.fail-card", null, FM.h("div.fail-title", { text: title }), text ? FM.h("div.fail-why", { text }) : null);
+    const acts = FM.h("div.launch-acts");
+    for (const [label, fn, primary] of buttons) { const b = FM.h("button.btn" + (primary ? ".primary" : ""), { type: "button", text: label }); b.addEventListener("click", fn); acts.append(b); }
+    if (buttons.length) card.append(acts);
+    el.replaceChildren(card);
+  }
+  async function openLink(id, name) {
+    const it = { id, name: name || "the file", private: true };
+    const toFM = ["Open the Cloud File Manager", () => { const el = document.querySelector(".launch"); if (el) el.remove(); history.replaceState(null, "", location.pathname + location.search); S.loading = false; start(); }];
+    const again = ["Try again", () => openLink(id, name), true];
+    const shut = (title) => { window.close(); setTimeout(() => launchCard(title, "This tab can be closed now.", [toFM]), 700); }; // a tab some other way opened stays
+    S.loading = true; S.signed = FM.api.hasPass(); FM.view.render(); // the header: this browser's sign-in, as far as it knows
+    document.title = `${it.name} · Cloud File Manager`;
+    launchCard(`Opening “${it.name}”…`, "");
+    let url, head;
+    try {
+      url = await FM.api.link([it], { inline: true });
+      head = await fetch(url, { method: "HEAD", cache: "no-store" }).catch(() => { throw new FM.ApiError("Could not reach the PC (no network, or the PC is off or asleep).", { net: true }); });
+      if (!head.ok) throw new FM.ApiError(FM.sentence(RelayClient.httpWhy(head.status)), { status: head.status });
+      setConn("on", "Connected");
+    } catch (e) {
+      setConn(e.net ? "off" : "on", e.net ? e.message.replace(/\.$/, "") : "Connected");
+      if (e.signin) {
+        if (await FM.ops.signIn(`“${it.name}” is private: the PC's password opens it.`)) return openLink(id, name);
+        return launchCard(`“${it.name}” is private`, "Sign in with the PC's password to open it.", [["Sign in", () => openLink(id, name), true], toFM]);
+      }
+      FM.report("open", e, { what: "a private file opened from its link in a new tab", items: [it] });
+      return launchCard(`“${it.name}” could not be opened`, e.message, [again, toFM]);
+    }
+    if (FM.tabShows(head.headers.get("content-type"))) {
+      location.replace(url);
+      // still here after a while: the browser downloaded it after all, or the PC is slow to answer
+      setTimeout(() => launchCard(`“${it.name}” has not opened yet`, "If it is a kind of file a tab cannot show, it went to your browser's downloads instead, and this tab can be closed; if the PC is slow to answer, it still opens here.", [["Close this tab", () => shut(`“${it.name}”`), true], toFM]), 8000);
+      return;
+    }
+    it.size = Number(head.headers.get("content-length")) || 0;
+    launchCard(`Downloading “${it.name}”…`, "A tab cannot show this kind of file: it goes to your browser's downloads, then this tab closes by itself.");
+    const t = FM.ops.download([it]);
+    await t.done;
+    if (t.state === "done") { launchCard(`“${it.name}” is in your downloads`, "This tab closes by itself."); return setTimeout(() => shut(`“${it.name}” is in your downloads`), 1000); }
+    if (t.state === "handed") return launchCard(`“${it.name}” goes to your browser's downloads`, "It is big, so the browser downloads it itself (its downloads show how far it is). This tab can be closed.", [["Close this tab", () => shut(`“${it.name}”`), true], toFM]);
+    launchCard(`“${it.name}” could not be downloaded`, t.error || "It was stopped.", [again, toFM]);
+  }
+
+  // ---- the file manager itself: the folder in the address (#f=), or the top --------------------------------------------
+  async function start() {
     FM.view.render();
     if (FM.embedded) { // ready at once: a request can wait for the first listing
       WindowKit.child.onPick(FM.pick.onRequest);
@@ -3611,20 +3776,20 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     }
     FM.api.ping(8000).then((r) => { if (!r.ok && !S.items.length) setConn("off", FM.capital(r.why)); }).catch(() => {});
     const m = /#f=([^&]+)/.exec(location.hash);
-    const start = !FM.embedded && m ? decodeURIComponent(m[1]) : "root";
-    const st = history.state, again = !FM.embedded && !!st && st.fm === start && typeof st.n === "number"; // a reload: its steps are there
-    if (!FM.embedded && !again) history.replaceState({ fm: start, n: 0, from: "" }, "", location.hash || "");
-    const r = await load(start);
-    // opened straight at a folder below the top (a link, a bookmark): its parents become the steps before it, so Back
-    // (the page's, the browser's, a phone's) goes up from it, one folder at a time
-    if (!FM.embedded && !again && r && r.folder && r.folder.id === start && r.crumbs.length > 1 && history.state && history.state.fm === start && !history.state.n) {
+    const first = !FM.embedded && m ? decodeURIComponent(m[1]) : "root";
+    const st = history.state, again = !FM.embedded && !!st && st.fm === first && typeof st.n === "number"; // a reload: its steps are there
+    if (!FM.embedded && !again) history.replaceState({ fm: first, n: 0, from: "" }, "", location.hash || "");
+    const r = await load(first);
+    // opened straight at a folder below the top (a link, a bookmark, a row's link in a new tab): its parents become
+    // the steps before it, so Back (the page's, the browser's, a phone's) goes up from it, one folder at a time
+    if (!FM.embedded && !again && r && r.folder && r.folder.id === first && r.crumbs.length > 1 && history.state && history.state.fm === first && !history.state.n) {
       r.crumbs.forEach((c, i) => history[i ? "pushState" : "replaceState"]({ fm: c.id, n: i, from: i ? r.crumbs[i - 1].name : "" }, "", "#f=" + encodeURIComponent(c.id)));
       FM.view.render();
     }
     info();
     listen();
   }
-  FM.app = { go, up, back, backTarget, goPath, load, reload, refresh, refreshList, signedOut, activate, openSearch, closeSearch, runSearch, showTrash, get events() { return events; } };
+  FM.app = { go, up, back, backTarget, goPath, load, reload, refresh, refreshList, signedOut, activate, openAll, openSearch, closeSearch, runSearch, showTrash, get events() { return events; } };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
 })();
 
