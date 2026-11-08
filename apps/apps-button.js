@@ -1,4 +1,4 @@
-/* apps-button.js 1.6: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.10: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
    https://jonnystokes.github.io/Cool-tools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
@@ -27,7 +27,7 @@
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.6";
+  const VERSION = "1.10";
   const LAUNCHER = "https://jonnystokes.github.io/Cool-tools/apps/";
   const W = 460, H = 780;        // the menu window's first size (less on a short screen); the window kit remembers
                                  // what the person makes it

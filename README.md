@@ -17,7 +17,7 @@ Browser tools by Jon Stokes. Each one is a single web page: open it and it runs,
 **The front page's list of programs is written from one list**, `Projects\app-kit\programs.json`, by that kit's
 build; never edit the lines between `<!-- programs:` and `<!-- /programs -->` in `index.html` by hand. Each program
 publishes a `version.json` beside its page (`{"app", "version", "built"}`); the front page and the Apps menu show it
-as "Version X". The rules every program follows: `Projects\WEB-APP-CONVENTIONS.md`.
+as "Version X · updated <date> · <how long ago>" (`apps/versions.js`). The rules every program follows: `Projects\WEB-APP-CONVENTIONS.md`.
 
 The sound is analyzed only inside the page; nothing is sent anywhere.
 
