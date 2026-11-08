@@ -1,12 +1,12 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
      pastes the Apps kit's tab icons at the ICONS marker, and stamps the version and build time where
-     Book reader V1.0.646 and 2026-11-07 6:05 PM appear. -->
+     Book reader V1.0.648 and 2026-11-08 12:29 AM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Book reader V1.0.646</title>
+<title>Book reader V1.0.648</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
 <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlUlEQVR42p2SzytEURzFz33evBlNtsyCYtRkmrLASqwoKTtlYf4FyQabKSkrZWeNjdmxUrJUlkp+ZNj4tbAgUoyI7/lazLvPw0PN2dzX7X7ePefcrwGA9cn3UVILFLYJ1YgohISIQoQgNfgWqorwRETnptbqi8aHVxkAf8LBysqad0ktVAWLQqgF17ddDQwRtrk2c9+4h7srwcXeO65P5QesUDRmXaQ7PTSkY1iZvoWIGtfenMo4SGUc5PpjeC0ncLn/hs3FJ4gQg2N1aOnwkEgaWFnOsbbDiicNMt1e4CDbG0ciafDYMvP5A59zrVUAGGreCg5sXAwEmaMkoiAVri3MQmHZwqJEvxvXth3pwG872kFEhO8O7Av8FqFSYvC+v99iVXc+60fTUImV2TZLE/dId8bQ2hVHU9aDU/N5i4XODl5wtFPG/nbZxlOzMHJ7LNRseMJitUBzu4cD/2Cupxanu894epDQtCpIlsz88M0oydXQeH4Za0bs+TBIzTtTa/VFoeaFWhKh/gtTlWSJ1PzyYa74AfvjIbDIJi4vAAAAAElFTkSuQmCC">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVR42r2Xe0yVZRzHP+8573u4KxzkvoAkoELkGHkpsGJsbpa0uTabq5htrY3W3Np0mn+53LQ/yjZy+UelXci2LHKzRWtt2Sbr4g0DnRw1EUjwAgocOcA5PL/+OBfe876IOo3vX+/O7z3P53l+1/fRMKl5YzBHRNaLUCciJaLEUAIighJBlPlZiNqUIJbnqXcEEQKixKtEDorQuGF/Rl+EqUUevt8YfFlEdishWayAe4NbbT5R0rCpOaspuoEw/AslaP8zPGITEeq3HMhu0po3BnMQ8c7CyWNtSnxKpEQPx3y24SiRZBHWO8IJN9vwiK1OD2f77MOVICIljvtYancLRwRDt8KT3FBQqXOjX3HpTJDxm/cGj0vUyF/gwp3npOM3P4N9wQgcpQTdevLaN+NJyQy1B1FxXL0wSe+pID0dQS6fD94WjibkFusUVrgoXOgit8RAc4R6TUVtAo2vXY7xgm51ewQOoDkgs8hJZpGTx56PY8Iv9J4O0tMe4EJbgKErk4gIKekOCjwGBQsN8he4iEvUmE7uXD0GrkTQrTGfSa4EjfmVBvMrDaoDwof1gyglrPsgFacxBR1/pwXnUw+hP1NsW8MMF8EcglDCRXS+Y5jBK+OUL3UTn+S0LeQ0tKjbzXCAib1/YIyMoboGQxtftzRqM8OVioZgKtsj2rPDy8nWAXTDwcOL5lJRnY6nKp1Sz1wcznCOhPPhVgrsPx7awCuLw7t22CpBt5ZaRJt3VXD00FXaDg/Q1jpAx87rfLXzHElzdLbuqeSRx1NtYZPhMbQ58baN+F//GoCET1+yliG6tc4jSkkzqFmdS83qXAC6vT7aWgfoPDFESpoRrhKJekD1XOdmTSMJH71oj3v/sC0HYsvQVOcR/fB5N91nfXiq0il/wk1+STL5JcnwqmlhMW16ZBwmFTI8NmMiizUE1iYTUc85Hy37evmxqQeHU6OobA6LngrlQfkyN5pGtMPdjWLLEBxyixA0bHuUfcdreHu3hxVr8hi5McE3u/5hy9ojtLb020Iwk7TURLTUREsZhv6vW1uoWSmpBlUrs6hamQVAf7cf78khKp+eZw/BDEr4eK2lDKc2r1v7d0TbG9roPHGDRdXzqKhy46lOJzs/gez8BJs7b+uBRJcpb8yDSdCtvT2i5c9lM3RtgkMHLvHLt/+iaVBQmoKnOp01bzzIHLcr6k4ArSAN4wUPzsoHomvoiwvsOWCCi8LciGLduXxVNstXZTM2Osnfvw9G+8GBT7pYsCSNZSsyoxkNoCXFEf/e6hhY3NZn7SVpgqupRjRVCX1ng+QU69E/xCc6WVKbwZLaDABGfUESk/UZQ6DNS0bLTLH93tUxFgOfmoamSvhu+xClT4ZGaX65fbJF4OaMtir58FtghOaH36fwHvNz5s9Rjv48EgNXCnQRAiJiRJLR71Oc+MnPsZZRNA1yig0KPS7mV7jIK3VFZ7t5sMS4eFK46A3SeWSEzr9G6To1RjAotpOr0BQO6OEbS9l0HxpqUug+Pc7FU+P8+qXgStQoXOiiyBOHO0+Pvnf22BjXegN4j/jxHvfjH5m0Zfs0cETEq72/5uoOETbf4TecbZ5Pb7sjOCK86xChMXxdmlW4Enwi0ujYsD+jT5Q0hK9LswUXEWnY217W5wDY1JzVJEJ9+Lo0Gyev/6y9rCnmdgywre5SjgjrlUidKCkRwbhP8ICIeEU4KCKNe9vLotfz/wCKU53CYXSQUAAAAABJRU5ErkJggg==">
@@ -15,9 +15,9 @@
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.646";
-  window.APP_BUILT = "2026-11-07 6:05 PM";
-  window.APP_NOTE = "the Apps kit 1.11: the Apps button's divider follows the light and dark theme; closing the Apps menu leaves the keyboard on the reader (Space and Enter no longer open it again)";
+  window.APP_VERSION = "Book reader V1.0.648";
+  window.APP_BUILT = "2026-11-08 12:29 AM";
+  window.APP_NOTE = "PC Relay: the PC's address from the Cool tools address file (relay.json), read fresh before connecting; the address built in only when that file cannot be loaded, said in the Cloud tab and the log (the PC was renamed DESKTOP-42)";
   window.APP_KEY = "br1";
 </script>
 <style>
@@ -1131,7 +1131,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     // Cloud (Jon's PC through PC Relay: cloud.js, cloudtab.js, engines/cloud.js)
     pcCard: "cuda",                // Use my PC, the PC's graphics card: "cuda" (the Go CUDA worker: Kokoro ~6x, Supertonic ~4x, Piper ~26x real time) or "webgpu" (Kokoro ~3.6x, Supertonic ~2.7x; Piper on the processor)
     useMyPC: false,                // Use my PC for the voice: the chosen voice is made on the PC (engines/cloud.js); Apply
-    pcAddress: "",                 // the relay's address; "" = Jon's PC (https://desktop-krq9ti2.tail46434.ts.net)
+    pcAddress: "",                 // the relay's address; "" = Jon's PC (its address from the Cool tools address file, relay.json)
     // Sound group: Voice
     voice: "kokoro:af_heart",      // "engine:voice"
     runOn: "gpu",                  // "gpu" or "cpu": the card and its speed first (Jon, 2026-10-17); a device without WebGPU fails at Play with the reason (no fallbacks)
@@ -5168,6 +5168,14 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
    copies it in, so never edit a copy). Talks to PC Relay 2 on Jon's PC (Tailscale Funnel). SECURITY.md beside the
    relay says what the PC allows; this file only carries the pass and says plainly what the PC answered.
    - Nothing happens until the page calls something: no background traffic of its own.
+   - The PC's address (2026-11-08, after the PC was renamed DESKTOP-KRQ9TI2 -> DESKTOP-42): unless the page names
+     one (opts.base: a setting, a test, the relay's own origin for a page it serves), it is read from the address
+     file on Jon's Cool tools site, ADDRESS_FILE ({"address": "https://..."}), fresh (never a cached copy) before the
+     first connection, and again when a connection fails (at most once a minute), so an open page follows a rename.
+     After a rename only that file changes; no page is rebuilt. If the file cannot be loaded (no network, a page
+     opened from a file while offline, the site down), the address this copy was built with (BUILT_PC) is used and
+     the page is told so: R.where is { from: "built-in", why }, and the page's log function (opts.log) and the
+     browser's console get the same words. Never silently. (Tried again before a request, at most once a minute.)
    - ONE pass per browser (localStorage "relay-pass", shared by every page of the same site), from signIn(password).
      It is sent in the X-Relay-Pass header (HTTP) or as the WebSocket subprotocol "pass.<p>" (a browser cannot set
      WebSocket headers); never in a URL, never in cookies. Signed in = everything; signed out = view and download
@@ -5177,7 +5185,9 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
    - Status events: checking / connected / starting / ready / offline / off / signin / reload, each with a plain `why`.
    - Version-checked: a relay that needs a newer client says so (426), and the status becomes "reload".
 
-   const R = RelayClient.create({ app: "reader" });       // app names the page in the PC's logs
+   const R = RelayClient.create({ app: "reader", log });  // app names the page in the PC's logs; log(text) hears
+                                                           // relay-client's notes (which address, and why)
+   await R.address();                                      // { url, from: "file" | "built-in" | "page", why }
    await R.ping();                                         // { ok, info, latency } ; info.signed_in, info.services
    R.signedIn();                                           // this browser holds a pass (the last ping says if it is valid)
    await R.signIn(password);                               // { ok, why, device, name }
@@ -5188,11 +5198,19 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
    const ws = R.ws("voice", "ws");                         // a WebSocket carrying the pass
    await R.open("voice", (p) => ..., 60000);               // start a program, with progress
    R.url("files", "file/ID/name?dl=1");                    // a plain link (public things only: a link carries no pass)
+   R.url, R.wsUrl and R.ws answer at once, with the address the last call used: call one of the others first.
 */
 (function (root) {
   "use strict";
   const VERSION = 2;
-  const DEFAULT_PC = "https://desktop-krq9ti2.tail46434.ts.net";
+  // The address this copy was built with: used only when the address file cannot be loaded, and then said.
+  const BUILT_PC = "https://desktop-42.tail46434.ts.net";
+  // Where the PC's address is published (WEB-APP-CONVENTIONS.md 5): after a rename, edit only that file.
+  const ADDRESS_FILE = "https://jonnystokes.github.io/Cool-tools/relay.json";
+  const RECHECK_MS = 60000;  // the address file is read again after a failed connection at most once a minute
+  const ADDRESS_MS = 6000;   // the address file's own time limit
+  const trim = (u) => String(u || "").trim().replace(/\/+$/, "");
+  const goodAddress = (a) => /^https:\/\/[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+(:\d{1,5})?$/i.test(a);
   const KEY = "relay-pass";
   const store = {
     get(k) { try { return root.localStorage.getItem(k) || ""; } catch (e) { return ""; } },
@@ -5231,15 +5249,79 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   class Relay {
     constructor(opts) {
       this.app = (opts.app || "page").replace(/[^A-Za-z0-9_.-]/g, "");
-      this.base = String(opts.base || DEFAULT_PC).replace(/\/+$/, "");
+      this.log = typeof opts.log === "function" ? opts.log : null;
       this.status = { state: "idle", why: "", at: Date.now() };
       this.info = null;          // the last /relay/ping answer
       this.latency = 0;          // ms, the last ping's round trip
       this.bytes = 0;            // bytes this client has fetched through call() (approximate)
       this.subs = new Set();
+      this._job = null;          // the address file being read (one read at a time)
+      this._readAt = 0;          // when it was last asked for
+      this._name(opts.base);
       if (typeof opts.onStatus === "function") this.subs.add(opts.onStatus);
     }
-    setBase(url) { this.base = String(url || DEFAULT_PC).replace(/\/+$/, ""); }
+    // ---- the PC's address -------------------------------------------------------------------------------------
+    // given: the page's own address (opts.base, setBase(url)), or "" = Jon's PC, from the address file.
+    // where: { url, from, why }: from "page" (given), "file" (read from the address file in this page's life),
+    // "built-in" (the file could not be loaded: why says so, plainly), "unread" (nothing asked yet).
+    _name(url) {
+      this.given = trim(url);
+      this.base = this.given || BUILT_PC;
+      this.where = this.given ? { url: this.given, from: "page", why: "" } : { url: BUILT_PC, from: "unread", why: "" };
+      this._readAt = 0;
+    }
+    setBase(url) { if (trim(url) !== this.given) this._name(url); }
+    async address() { await this._ready(); return this.where; }
+    // before a request: the address file read once per page load (and again at most once a minute while it fails)
+    async _ready() {
+      if (this.given) return;
+      const w = this.where.from;
+      if (w === "unread" || (w === "built-in" && Date.now() - this._readAt >= RECHECK_MS)) await this._read();
+    }
+    _read() {
+      if (!this._job) this._job = this._readNow().finally(() => { this._job = null; });
+      return this._job;
+    }
+    // after a connection failed: has the PC moved? Read the file again (at most once a minute); true = a new address
+    async _recheck() {
+      if (this.given || this._job || Date.now() - this._readAt < RECHECK_MS) return false;
+      const was = this.base;
+      await this._read();
+      return this.base !== was;
+    }
+    async _readNow() {
+      this._readAt = Date.now();
+      const was = this.where;
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), ADDRESS_MS);
+      let why = "";
+      try {
+        const r = await fetch(`${ADDRESS_FILE}?t=${Date.now()}`, { cache: "no-store", credentials: "omit", signal: ac.signal });
+        if (!r.ok) throw new Error(`the site answered ${r.status}`);
+        const j = await r.json().catch(() => null);
+        const a = trim(j && j.address);
+        if (!goodAddress(a)) throw new Error(j ? "it holds no https address" : "it is not JSON");
+        if (this.given) return;                    // the page named its own address meanwhile
+        this.base = a;
+        this.where = { url: a, from: "file", why: "" };
+        if (was.from !== "file") this._note(`the PC's address: ${a} (from ${ADDRESS_FILE})`, false);
+        else if (was.url !== a) this._note(`the PC's address changed to ${a} (it was ${was.url}; from ${ADDRESS_FILE})`, false);
+        return;
+      } catch (e) {
+        why = e && e.name === "AbortError" ? `no answer within ${ADDRESS_MS / 1000} s`
+          : typeof navigator !== "undefined" && navigator.onLine === false ? "this device is offline"
+          : e && e.name === "TypeError" ? "the Cool tools site could not be reached"
+          : String((e && e.message) || e);
+      } finally { clearTimeout(timer); }
+      if (this.given || was.from === "file") return;  // read fine earlier in this page's life: that address stays
+      const text = `the PC's address file (${ADDRESS_FILE}) could not be loaded (${why}): using the address this page was built with, ${BUILT_PC}`;
+      this.base = BUILT_PC;
+      this.where = { url: BUILT_PC, from: "built-in", why: text };
+      if (was.why !== text) this._note(text, true);
+    }
+    _note(text, warn) {
+      if (this.log) { try { this.log(text); } catch (e) {} }
+      try { if (typeof console !== "undefined") (warn ? console.warn : console.info)("relay-client: " + text); } catch (e) {}
+    }
     on(fn) { this.subs.add(fn); return () => this.subs.delete(fn); }
     _set(state, extra) {
       this.status = Object.assign({ state, why: "", at: Date.now() }, extra || {});
@@ -5275,10 +5357,12 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     wsProtocols() { const p = this._pass(); return p ? ["relay", "pass." + p] : ["relay"]; }
     ws(service, path) { return new WebSocket(this.wsUrl(service, path), this.wsProtocols()); }
     // fetch through the relay: a Response. opts.timeout (ms) aborts a request that has not started answering. A 401
-    // forgets this browser's pass (it is not valid any more) and sets the status "signin".
+    // forgets this browser's pass (it is not valid any more) and sets the status "signin". A request that could not
+    // reach the PC has the address file read again (in the background: the next request goes to a new address).
     async fetch(service, path, opts) {
       opts = Object.assign({}, opts || {});
       const timeout = opts.timeout || 0; delete opts.timeout;
+      await this._ready();
       opts.headers = this.headers(opts.headers);
       const sent = !!opts.headers["X-Relay-Pass"];
       let timer = 0, ac = null;
@@ -5287,6 +5371,9 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
         const r = await fetch(this.url(service, path), opts);
         if (r.status === 401) { const why = await readError(r); if (sent) this._lost(why); else this._set("signin", { service, why }); }
         return r;
+      } catch (err) {
+        if (ac || !(opts.signal && opts.signal.aborted)) this._recheck().catch(() => {});   // (not when the page stopped it)
+        throw err;
       } finally { clearTimeout(timer); }
     }
     // call: a request with a JSON answer, as one plain result: { ok, status, data, why, kind, signin }. opts.json
@@ -5312,9 +5399,11 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
       return { ok: false, status: r.status, data, why, kind: kindOf(r.status), signin: r.status === 401 };
     }
     // ---- the light check: the PC, its programs, and whether this browser's pass is still valid ----
+    // (no answer: the address file is read again, at most once a minute; a new address there is tried at once)
     async ping(timeoutMs) {
       timeoutMs = timeoutMs || 8000;
       this._set("checking", { why: "checking the connection…" });
+      await this._ready();
       const ac = new AbortController(), timer = setTimeout(() => ac.abort(), timeoutMs), t0 = performance.now();
       try {
         const r = await fetch(`${this.base}/relay/ping?t=${Date.now()}`, { headers: this.headers(), cache: "no-store", signal: ac.signal });
@@ -5328,6 +5417,8 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
         this._set("connected", { why: `connected (${this.latency} ms)`, info, latency: this.latency, signedIn: !!info.signed_in });
         return { ok: true, info, latency: this.latency, signedIn: !!info.signed_in };
       } catch (err) {
+        clearTimeout(timer);
+        if (await this._recheck()) return this.ping(timeoutMs);   // the PC has a new address: try it now (once)
         const why = netWhy(err, timeoutMs);
         this._set("offline", { why });
         return { ok: false, why, kind: netKind(err) };
@@ -5336,6 +5427,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     service(id) { return ((this.info && this.info.services) || []).find((s) => s.id === id) || null; }
     // ---- sign-in: the password -> this browser's one pass (the old one, if any, is replaced on the PC) ----
     async signIn(password) {
+      await this._ready();
       const ac = new AbortController(), timer = setTimeout(() => ac.abort(), 15000);
       try {
         const r = await fetch(`${this.base}/relay/login`, { method: "POST", headers: this.headers({ "Content-Type": "application/json" }),
@@ -5345,7 +5437,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
         this._keep({ pass: j.pass, device: j.device || "", name: j.name || "", at: Date.now() });
         this._set("connected", { why: "signed in", signedIn: true });
         return { ok: true, device: j.device || "", name: j.name || "", expiresDays: j.expires_days || 0 };
-      } catch (err) { return { ok: false, why: netWhy(err, 15000), kind: netKind(err) }; }
+      } catch (err) { this._recheck().catch(() => {}); return { ok: false, why: netWhy(err, 15000), kind: netKind(err) }; }
       finally { clearTimeout(timer); }
     }
     // sign-out: forgotten here at once; the PC ends the pass (and the connections it opened) when it hears it
@@ -5353,6 +5445,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
       const p = this._pass();
       this._keep(null);
       if (!p) return { ok: true };
+      await this._ready();
       try {
         const r = await fetch(`${this.base}/relay/logout`, { method: "POST", headers: { "X-Relay-Pass": p, "X-Relay-Client": this.app + "/" + VERSION }, cache: "no-store" });
         const j = await r.json().catch(() => ({}));
@@ -5363,6 +5456,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     async open(service, onProgress, timeoutMs) {
       timeoutMs = timeoutMs || 60000;
       this._set("starting", { service, why: `starting ${service} on the PC…` });
+      await this._ready();
       const ac = new AbortController(), timer = setTimeout(() => ac.abort(), timeoutMs);
       try {
         const h = this.headers();
@@ -5389,6 +5483,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
         this._set("offline", { service, why });
         return { ok: false, why, kind: "start" };
       } catch (err) {
+        this._recheck().catch(() => {});
         const why = netWhy(err, timeoutMs);
         this._set("offline", { service, why });
         return { ok: false, why, kind: netKind(err) };
@@ -5412,25 +5507,29 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     }
   }
 
-  root.RelayClient = { VERSION, DEFAULT_PC, create: (opts) => new Relay(opts || {}), httpWhy };
+  // DEFAULT_PC: relay-client 2's old name for BUILT_PC (kept for code that still reads it)
+  root.RelayClient = { VERSION, BUILT_PC, DEFAULT_PC: BUILT_PC, ADDRESS_FILE, create: (opts) => new Relay(opts || {}), httpWhy };
 })(typeof window !== "undefined" ? window : globalThis);
 </script>
 <script>
 // cloud.js: the reader's link to Jon's PC through PC Relay (Projects\pc-relay; the client library
 // relay-client.js is copied in by build.py from pc-relay\client, never edited here). One shared RelayClient
 // (PCRELAY.client()), made on first use: nothing talks to the PC until Settings → Cloud or "Use my PC for the
-// voice" asks. The address: SETTINGS pcAddress (blank = Jon's PC). (Open → From my PC used it too, until
-// 2026-11-07: Open → From Cloud File Manager replaced it, and the file manager keeps its own address.)
+// voice" asks. The address: SETTINGS pcAddress, or blank = Jon's PC, whose address relay-client reads from the Cool
+// tools address file (relay.json) before it connects (2026-11-08: the PC was renamed, and a rename now needs that
+// one file changed, no new reader); if the file cannot be loaded, the address built into this page is used and the
+// log and the Cloud tab say so. (Open → From my PC used it too, until 2026-11-07: Open → From Cloud File Manager
+// replaced it, and the file manager keeps its own address.)
 (function () {
   let client = null;
-  const base = () => String(SETTINGS.get("pcAddress") || "").trim().replace(/\/+$/, "") || RelayClient.DEFAULT_PC;
+  const own = () => String(SETTINGS.get("pcAddress") || "").trim().replace(/\/+$/, "");   // "" = Jon's PC
   function get() {
-    const b = base();
-    if (!client) client = RelayClient.create({ app: "reader", base: b });
-    else if (client.base !== b) client.setBase(b);
+    const b = own();
+    if (!client) client = RelayClient.create({ app: "reader", base: b, log: (text) => log("voice", "PC Relay: " + text) });
+    else if (client.given !== b) client.setBase(b);
     return client;
   }
-  globalThis.PCRELAY = { client: get, get base() { return base(); } };
+  globalThis.PCRELAY = { client: get, get base() { return get().base; } };
 })();
 </script>
 <script>
@@ -5720,7 +5819,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 })(typeof window !== "undefined" ? window : globalThis);
 </script>
 <script>
-/* apps-button.js 1.11: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.12: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
    https://jonnystokes.github.io/Cool-tools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
@@ -5752,7 +5851,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.11";
+  const VERSION = "1.12";
   const LAUNCHER = "https://jonnystokes.github.io/Cool-tools/apps/";
   const W = 460, H = 780;        // the menu window's first size (less on a short screen); the window kit remembers
                                  // what the person makes it
@@ -14257,6 +14356,15 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   }
   // After a sign-in or out here: the status box says the same as the sign-in row.
   const showSigned = (text) => { for (const el of document.querySelectorAll(".cloudsigned")) el.textContent = text; };
+  // The address and where it came from (relay-client: the Cool tools address file, the PC address box below, or,
+  // when the file could not be loaded, the one built into this page: then a warning line says why).
+  function addressLines(c) {
+    const w = c.where || {};
+    const from = w.from === "file" ? " (from the Cool tools address file)" : w.from === "page" ? " (the PC address set below)" : w.from === "built-in" ? " (built into this page)" : "";
+    const out = [h("div", "shelp", `Address: ${c.base}${from}`)];
+    if (w.from === "built-in") out.push(h("div", "swarn", w.why.charAt(0).toUpperCase() + w.why.slice(1) + "."));
+    return out;
+  }
 
   // The link's status: checked at once, and while the tab is open tried again by itself until the PC answers
   // (engines/cloud.js's one retry loop): "Can't reach the PC yet: <reason>. Trying again in 4 s (attempt 3)…"
@@ -14275,7 +14383,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
         warn = h("div", "swarn", "");
         const now = button("sbtn", "Try now", () => C.tryNow());
         now.classList.add("cloudnow");
-        box.append(warn, now, h("div", "shelp", `Address: ${R().base}. The PC must be on and awake, with PC Relay running (tray icon). This tab keeps trying while it is open.`));
+        box.append(warn, now, ...addressLines(R()), h("div", "shelp", "The PC must be on and awake, with PC Relay running (tray icon). This tab keeps trying while it is open."));
       }
       if (warn.textContent !== t) warn.textContent = t;
     };
@@ -14286,10 +14394,10 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
       if (!box.isConnected && checkedAt) return;
       box.replaceChildren();
       const c = R();
-      if (!r.ok) { box.appendChild(h("div", "swarn", `The PC can't be reached: ${r.why}.`)); box.appendChild(h("div", "shelp", `Address: ${c.base}. The PC must be on, with PC Relay running (tray icon).`)); return; }
+      if (!r.ok) { box.append(h("div", "swarn", `The PC can't be reached: ${r.why}.`), ...addressLines(c), h("div", "shelp", "The PC must be on, with PC Relay running (tray icon).")); return; }
       const i = r.info;
       box.appendChild(h("div", "sname", `Connected · ${c.latency} ms · PC Relay ${i.version} on ${i.pc}${i.game ? " · Game mode is on" : ""}`));
-      box.appendChild(h("div", "shelp", `Address: ${c.base}`));
+      box.append(...addressLines(c));
       for (const s of i.services || []) {
         const state = s.blocked ? "switched off on the PC" : s.unavailable ? s.unavailable : s.state + (s.clients ? `, ${s.clients} connected` : "");
         box.appendChild(h("div", "shelp", `${s.name}: ${state} · ${s.private ? "private (sign-in needed)" : "public"}`));
@@ -14305,10 +14413,10 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 
   function addressRow() {
     const inp = h("input", "stext");
-    inp.type = "url"; inp.placeholder = RelayClient.DEFAULT_PC; inp.value = value("pcAddress") || "";
+    inp.type = "url"; inp.placeholder = "Blank = your PC"; inp.value = value("pcAddress") || "";
     inp.setAttribute("aria-label", "PC address");
     inp.addEventListener("change", () => { change("pcAddress", inp.value.trim()); });
-    return row("PC address", `Blank = your PC (${RelayClient.DEFAULT_PC}). Saved as soon as you leave the box.`, inp, { name: "pcAddress", block: true });
+    return row("PC address", `Blank = your PC: its address comes from the Cool tools site (relay.json) each time the reader connects, so a renamed PC needs no new reader. If that cannot be loaded, the address built into this page (${RelayClient.BUILT_PC || RelayClient.DEFAULT_PC}) is used and the status above says so. Saved as soon as you leave the box.`, inp, { name: "pcAddress", block: true });
   }
 
   function testRow() {
