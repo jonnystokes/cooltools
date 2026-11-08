@@ -1,12 +1,12 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
      pastes the Apps kit's tab icons at the ICONS marker, and stamps the version and build time where
-     Book reader V1.0.648 and 2026-11-08 12:29 AM appear. -->
+     Book reader V1.0.654 and 2026-11-08 1:55 PM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Book reader V1.0.648</title>
+<title>Book reader V1.0.654</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
 <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlUlEQVR42p2SzytEURzFz33evBlNtsyCYtRkmrLASqwoKTtlYf4FyQabKSkrZWeNjdmxUrJUlkp+ZNj4tbAgUoyI7/lazLvPw0PN2dzX7X7ePefcrwGA9cn3UVILFLYJ1YgohISIQoQgNfgWqorwRETnptbqi8aHVxkAf8LBysqad0ktVAWLQqgF17ddDQwRtrk2c9+4h7srwcXeO65P5QesUDRmXaQ7PTSkY1iZvoWIGtfenMo4SGUc5PpjeC0ncLn/hs3FJ4gQg2N1aOnwkEgaWFnOsbbDiicNMt1e4CDbG0ciafDYMvP5A59zrVUAGGreCg5sXAwEmaMkoiAVri3MQmHZwqJEvxvXth3pwG872kFEhO8O7Av8FqFSYvC+v99iVXc+60fTUImV2TZLE/dId8bQ2hVHU9aDU/N5i4XODl5wtFPG/nbZxlOzMHJ7LNRseMJitUBzu4cD/2Cupxanu894epDQtCpIlsz88M0oydXQeH4Za0bs+TBIzTtTa/VFoeaFWhKh/gtTlWSJ1PzyYa74AfvjIbDIJi4vAAAAAElFTkSuQmCC">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVR42r2Xe0yVZRzHP+8573u4KxzkvoAkoELkGHkpsGJsbpa0uTabq5htrY3W3Np0mn+53LQ/yjZy+UelXci2LHKzRWtt2Sbr4g0DnRw1EUjwAgocOcA5PL/+OBfe876IOo3vX+/O7z3P53l+1/fRMKl5YzBHRNaLUCciJaLEUAIighJBlPlZiNqUIJbnqXcEEQKixKtEDorQuGF/Rl+EqUUevt8YfFlEdishWayAe4NbbT5R0rCpOaspuoEw/AslaP8zPGITEeq3HMhu0po3BnMQ8c7CyWNtSnxKpEQPx3y24SiRZBHWO8IJN9vwiK1OD2f77MOVICIljvtYancLRwRDt8KT3FBQqXOjX3HpTJDxm/cGj0vUyF/gwp3npOM3P4N9wQgcpQTdevLaN+NJyQy1B1FxXL0wSe+pID0dQS6fD94WjibkFusUVrgoXOgit8RAc4R6TUVtAo2vXY7xgm51ewQOoDkgs8hJZpGTx56PY8Iv9J4O0tMe4EJbgKErk4gIKekOCjwGBQsN8he4iEvUmE7uXD0GrkTQrTGfSa4EjfmVBvMrDaoDwof1gyglrPsgFacxBR1/pwXnUw+hP1NsW8MMF8EcglDCRXS+Y5jBK+OUL3UTn+S0LeQ0tKjbzXCAib1/YIyMoboGQxtftzRqM8OVioZgKtsj2rPDy8nWAXTDwcOL5lJRnY6nKp1Sz1wcznCOhPPhVgrsPx7awCuLw7t22CpBt5ZaRJt3VXD00FXaDg/Q1jpAx87rfLXzHElzdLbuqeSRx1NtYZPhMbQ58baN+F//GoCET1+yliG6tc4jSkkzqFmdS83qXAC6vT7aWgfoPDFESpoRrhKJekD1XOdmTSMJH71oj3v/sC0HYsvQVOcR/fB5N91nfXiq0il/wk1+STL5JcnwqmlhMW16ZBwmFTI8NmMiizUE1iYTUc85Hy37evmxqQeHU6OobA6LngrlQfkyN5pGtMPdjWLLEBxyixA0bHuUfcdreHu3hxVr8hi5McE3u/5hy9ojtLb020Iwk7TURLTUREsZhv6vW1uoWSmpBlUrs6hamQVAf7cf78khKp+eZw/BDEr4eK2lDKc2r1v7d0TbG9roPHGDRdXzqKhy46lOJzs/gez8BJs7b+uBRJcpb8yDSdCtvT2i5c9lM3RtgkMHLvHLt/+iaVBQmoKnOp01bzzIHLcr6k4ArSAN4wUPzsoHomvoiwvsOWCCi8LciGLduXxVNstXZTM2Osnfvw9G+8GBT7pYsCSNZSsyoxkNoCXFEf/e6hhY3NZn7SVpgqupRjRVCX1ng+QU69E/xCc6WVKbwZLaDABGfUESk/UZQ6DNS0bLTLH93tUxFgOfmoamSvhu+xClT4ZGaX65fbJF4OaMtir58FtghOaH36fwHvNz5s9Rjv48EgNXCnQRAiJiRJLR71Oc+MnPsZZRNA1yig0KPS7mV7jIK3VFZ7t5sMS4eFK46A3SeWSEzr9G6To1RjAotpOr0BQO6OEbS9l0HxpqUug+Pc7FU+P8+qXgStQoXOiiyBOHO0+Pvnf22BjXegN4j/jxHvfjH5m0Zfs0cETEq72/5uoOETbf4TecbZ5Pb7sjOCK86xChMXxdmlW4Enwi0ujYsD+jT5Q0hK9LswUXEWnY217W5wDY1JzVJEJ9+Lo0Gyev/6y9rCnmdgywre5SjgjrlUidKCkRwbhP8ICIeEU4KCKNe9vLotfz/wCKU53CYXSQUAAAAABJRU5ErkJggg==">
@@ -15,15 +15,15 @@
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.648";
-  window.APP_BUILT = "2026-11-08 12:29 AM";
-  window.APP_NOTE = "PC Relay: the PC's address from the Cool tools address file (relay.json), read fresh before connecting; the address built in only when that file cannot be loaded, said in the Cloud tab and the log (the PC was renamed DESKTOP-42)";
+  window.APP_VERSION = "Book reader V1.0.654";
+  window.APP_BUILT = "2026-11-08 1:55 PM";
+  window.APP_NOTE = "Chapter arrows under the text: under every chapter's last paragraph, big Previous and Next buttons in the accent colour (brown on the light theme, amber on the dark), each naming the chapter it goes to, sized to the text column; greyed at the first and last chapter; the same rules as the top bar's arrows. The top bar's previous and next chapter buttons tinted and edged in the accent with a thick arrow so they stand out";
   window.APP_KEY = "br1";
 </script>
 <style>
 /* base.css: the page's look. Colours through light-dark(); the Theme setting sets data-theme on <html>
    (reader.js applies it at start) and nothing else changes. Then the sizes, the sticky top bar with
-   the chapter navigation, the message line, the book area, the empty state, the Open window, the chapter list rows
+   the chapter navigation, the message line, the book area with the chapter arrows under the text, the empty state, the Open window, the chapter list rows
    and the fixed play bar. Everything sizes from --text (book text) and --ui (bars, buttons, windows). */
 :root {
   color-scheme: light dark;
@@ -38,6 +38,12 @@
   --play-h: calc(3.4 * var(--ui) + 16px + env(safe-area-inset-bottom, 0px));   /* the play bar's height; measured after the look is applied (reader.js); the body keeps that much clear */
   --gutter: max(12px, 3vw);  /* side margin on every bar and the text */
   --err: light-dark(#b3261e, #ff8a80);
+  /* The chapter arrows (Jon, 2026-11-08): --go fills the big arrows under the chapter, with the page's colours reversed
+     on it (--go-ink), and edges ‹ › in the top bar, whose chevrons are --go-mark on a tint of the accent (--go-tint). */
+  --go: light-dark(#8a521c, #e0ae62);
+  --go-ink: light-dark(#fffaf1, #1b1309);
+  --go-mark: light-dark(#7a4513, #e8b96f);
+  --go-tint: color-mix(in srgb, var(--accent) 18%, var(--bg));
   /* Touch targets (UX-22, Jon 2026-10-20: everywhere, not just phones): 44 px at UI size 100 % for every
      button, box and tab; 48 px for the play bar's. They scale with the UI size like everything else. */
   --tap: calc(2.75 * var(--ui));
@@ -139,7 +145,18 @@ button:disabled { opacity: 0.4; cursor: default; }
 .top #num { width: 5.5ch; min-height: var(--tap); padding: 0 0.3em; border: 0; background: transparent; text-align: center; }
 .top #num:focus { outline: none; box-shadow: inset 0 0 0 2px var(--accent); }
 .top .num { border-radius: 8px; }
-.top #prev, .top #next { font-size: 1.3em; min-height: var(--tap); min-width: calc(0.85 * var(--tap)); padding: 0 0.4em; }
+/* The chapter arrows in the top bar (Jon, 2026-11-08: "more visible and noticeable ... slightly different coloring"): a
+   tint of the accent, an accent edge and a thick chevron set them apart from the bar's other buttons in both themes. The
+   same size as before (on a 320 px phone the bar's second row has no room to spare). Off (the first or last chapter):
+   the plain look, faded like any button that cannot be used. */
+.top .chgo {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: var(--tap); min-width: calc(0.85 * var(--tap)); padding: 0 0.2em;
+  border: 2px solid var(--go); background: var(--go-tint); color: var(--go-mark);
+}
+.top .chgo svg { width: 1.6em; height: 1.6em; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.top .chgo:not(:disabled):hover { border-color: var(--go); background: color-mix(in srgb, var(--accent) 34%, var(--bg)); }
+.top .chgo:disabled { border: 1px solid var(--line); background: var(--bg); color: var(--fg); }
 
 /* A short message under the top bar (no chapter 5, chapters run 1478 to 3883...). */
 .msg {
@@ -169,6 +186,46 @@ button:disabled { opacity: 0.4; cursor: default; }
   border-radius: 2px; background: var(--accent);
 }
 .book .empty { color: var(--muted); font-size: var(--ui); }
+
+/* The chapter arrows under the text (Jon, 2026-11-08: "below the text ... underneath every chapter", "a contrasting
+   theme so it's easier to see", "big and scaled to the width of the page, smartly"): after the chapter's last paragraph,
+   Previous and Next side by side, filled with --go (the page's colours reversed on them), each naming the chapter it
+   goes to. They follow the UI size and grow with the text column (container units: the column, not the window, so a
+   docked Index narrows them too): 67 px tall with 18 px labels and a 28 px chevron on a 320 px phone, 88 px, 23 px and
+   42 px on a computer. Each is at most 22em wide, pushed to the column's edges when the column is wider still (a big text size on
+   a wide screen). Under 30 UI-ems of column the labels shorten to Previous / Next; where two cannot sit side by side
+   (a big UI size on a phone) they wrap, one under the other. Off (the first or last chapter): greyed and dashed, with
+   the note. The body keeps the play bar's height clear (--play-h), so scrolling to the end shows them whole. */
+.chend {
+  container: chend / inline-size;
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75em;
+  margin: 2.5em 0 0.5em;
+  font-size: var(--ui); line-height: 1.2; overflow-wrap: normal;
+}
+.endgo {
+  flex: 1 1 calc(8 * var(--ui)); min-width: 0; max-width: 22em;
+  display: flex; align-items: center; gap: clamp(0.3em, 1.2cqi, 0.7em);
+  min-height: clamp(3.8em, 2.7em + 3cqi, 4.8em);
+  padding: 0.5em clamp(0.45em, 4cqi - 0.4em, 1.2em);
+  border: 2px solid var(--go); border-radius: 14px;
+  background: var(--go); color: var(--go-ink);
+  font-size: clamp(1.1em, 0.88em + 1.2cqi, 1.45em);
+  text-align: left; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+.endnext { text-align: right; }
+.endgo svg { flex: none; width: clamp(1.6em, 1em + 2.4cqi, 2.1em); height: auto; aspect-ratio: 1; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.endl { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 0.12em; }
+.endnext .endl { align-items: flex-end; }
+.endk { font-weight: 700; }
+.endn { max-width: 100%; font-size: 0.78em; opacity: 0.92; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.endgo:not(:disabled):hover { background: color-mix(in srgb, var(--go) 86%, var(--fg)); border-color: color-mix(in srgb, var(--go) 86%, var(--fg)); }
+.endgo:not(:disabled):active { transform: translateY(1px); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); }
+.endgo:focus-visible { outline: 3px solid var(--fg); outline-offset: 3px; }
+.endgo:disabled { background: transparent; color: var(--muted); border: 2px dashed var(--line); box-shadow: none; opacity: 1; cursor: default; }
+.endgo:disabled svg { opacity: 0.5; }
+.endgo:disabled .endn { white-space: normal; }
+@container chend (max-width: 30em) { .endw { display: none; } }
 
 /* The empty state: shown instead of the book when none is open (the Open window brings books in). */
 .emptybook { max-width: 36em; margin: 2em auto; padding: 0 var(--gutter); text-align: center; }
@@ -822,12 +879,12 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   <button id="open" type="button" title="Open: your books; add files, a zip or a folder" aria-label="Open a book">Open</button>
   <span class="chname" id="chname" role="button" tabindex="0" title="Tap to show the full chapter name"></span>
   <nav class="nav" aria-label="Chapters">
-    <button id="prev" type="button" title="Previous chapter" aria-label="Previous chapter">&#8249;</button>
+    <button id="prev" class="chgo" type="button" title="Previous chapter" aria-label="Previous chapter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
     <span class="num">
       <input id="num" type="text" inputmode="numeric" autocomplete="off" aria-label="Chapter number">
     </span>
     <button id="go" type="button">Go</button>
-    <button id="next" type="button" title="Next chapter" aria-label="Next chapter">&#8250;</button>
+    <button id="next" class="chgo" type="button" title="Next chapter" aria-label="Next chapter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
   </nav>
   <button class="icon" id="key" type="button" title="Key: what the colours mean" aria-label="Key">?</button>
   <button class="icon" id="gear" type="button" title="Settings" aria-label="Settings">&#9881;</button>
@@ -849,6 +906,11 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   <div class="chno" id="chno"></div>
   <h1 id="ctitle"></h1>
   <div class="text" id="text"></div>
+  <!-- Under the chapter's last paragraph: the chapter arrows again, big (reader.js fills in the names). -->
+  <nav class="chend" id="chend" aria-label="Previous and next chapter">
+    <button id="endprev" class="endgo endprev" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span class="endl"><span class="endk">Previous<span class="endw"> chapter</span></span><span class="endn"></span></span></button>
+    <button id="endnext" class="endgo endnext" type="button"><span class="endl"><span class="endk">Next<span class="endw"> chapter</span></span><span class="endn"></span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+  </nav>
 </main>
 <section class="emptybook" id="empty" hidden>
   <h2>No book here yet.</h2>
@@ -3899,7 +3961,8 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 <script>
 // reader.js: the reader page. Shows the current chapter (title, one <p> per paragraph with its index),
 // the top bar's chapter navigation (previous, number box with the chapter list, Go, next; left and
-// right arrow keys), the empty state when no book is open (the Open window, library.js, brings books
+// right arrow keys; the same previous / next again as big buttons under the chapter's last paragraph),
+// the empty state when no book is open (the Open window, library.js, brings books
 // in and switches between them), the reading position (the paragraph read, marked and kept per book;
 // the screen place too), and the look from the settings (data-theme on <html>; --text from Text size,
 // the book text only; --ui from UI size: bars, buttons, menus and the windows' content, the windows
@@ -3913,6 +3976,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   const $ = (id) => document.getElementById(id);
   const book = $("book"), title = $("ctitle"), text = $("text"), chno = $("chno"), msg = $("msg"), chname = $("chname"), chfull = $("chfull");
   const num = $("num"), prev = $("prev"), next = $("next"), goBtn = $("go"), empty = $("empty");
+  const endNav = $("chend"), endPrev = $("endprev"), endNext = $("endnext");   // the arrows under the chapter's last paragraph
   let cur = -1;               // index position of the chapter shown
   let para = 0;               // the paragraph read (tapped, or moved by the player)
   let showing = 0;            // guards against an older chapter arriving after a newer one
@@ -3982,6 +4046,18 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     next.disabled = cur < 0 || cur >= BOOK.count - 1;
     prev.title = cur > 0 ? `Previous: ${shortName(cur - 1)} (←)` : "This is the first chapter";
     next.title = cur < BOOK.count - 1 ? `Next: ${shortName(cur + 1)} (→)` : "This is the last chapter";
+    // The big arrows under the chapter (Jon, 2026-11-08): the same moves as ‹ ›, each naming the chapter it goes to;
+    // greyed with a note at the first and the last chapter; none for a book of one chapter.
+    endNav.hidden = cur < 0 || BOOK.count < 2;
+    endSide(endPrev, cur > 0 ? cur - 1 : -1, "Previous chapter", "This is the first chapter");
+    endSide(endNext, cur >= 0 && cur < BOOK.count - 1 ? cur + 1 : -1, "Next chapter", "This is the last chapter");
+  }
+  function endSide(btn, i, what, none) {
+    const name = i >= 0 ? shortName(i) : none;
+    btn.disabled = i < 0;
+    btn.querySelector(".endn").textContent = name;
+    btn.setAttribute("aria-label", `${what}: ${name}`);
+    btn.title = i >= 0 ? `${what}: ${name}` : none;
   }
 
   // Show chapter i. where: { p, top } restores the paragraph read and the screen place.
@@ -4098,6 +4174,11 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   // ---- Navigation: buttons, the number box, keys ---------------------------------------------------
   prev.addEventListener("click", () => pick(cur - 1));
   next.addEventListener("click", () => pick(cur + 1));
+  // The arrows under the chapter go through the same pick() (the lock's rules for a reading in progress). A tap or a
+  // mouse click leaves no focus on them: the new chapter shows from its top, and Space must stay Play / Pause rather
+  // than press an arrow scrolled out of sight (as the play bar's buttons do).
+  endPrev.addEventListener("click", (e) => { if (e.detail > 0) endPrev.blur(); pick(cur - 1); });
+  endNext.addEventListener("click", (e) => { if (e.detail > 0) endNext.blur(); pick(cur + 1); });
   function jump() {
     const raw = num.value.trim();
     const n = /^\d+(?:\.\d+)?$/.test(raw) ? Number(raw) : NaN;     // 12.5 is a chapter number too (an interlude)
@@ -5819,7 +5900,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 })(typeof window !== "undefined" ? window : globalThis);
 </script>
 <script>
-/* apps-button.js 1.12: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.14: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
    https://jonnystokes.github.io/Cool-tools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
@@ -5851,7 +5932,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.12";
+  const VERSION = "1.14";
   const LAUNCHER = "https://jonnystokes.github.io/Cool-tools/apps/";
   const W = 460, H = 780;        // the menu window's first size (less on a short screen); the window kit remembers
                                  // what the person makes it
