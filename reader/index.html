@@ -1,12 +1,12 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
      pastes the Apps kit's tab icons at the ICONS marker, and stamps the version and build time where
-     Book reader V1.0.666 and 2026-11-08 7:20 PM appear. -->
+     Book reader V1.0.685 and 2026-11-08 11:14 PM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Book reader V1.0.666</title>
+<title>Book reader V1.0.685</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
 <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlUlEQVR42p2SzytEURzFz33evBlNtsyCYtRkmrLASqwoKTtlYf4FyQabKSkrZWeNjdmxUrJUlkp+ZNj4tbAgUoyI7/lazLvPw0PN2dzX7X7ePefcrwGA9cn3UVILFLYJ1YgohISIQoQgNfgWqorwRETnptbqi8aHVxkAf8LBysqad0ktVAWLQqgF17ddDQwRtrk2c9+4h7srwcXeO65P5QesUDRmXaQ7PTSkY1iZvoWIGtfenMo4SGUc5PpjeC0ncLn/hs3FJ4gQg2N1aOnwkEgaWFnOsbbDiicNMt1e4CDbG0ciafDYMvP5A59zrVUAGGreCg5sXAwEmaMkoiAVri3MQmHZwqJEvxvXth3pwG872kFEhO8O7Av8FqFSYvC+v99iVXc+60fTUImV2TZLE/dId8bQ2hVHU9aDU/N5i4XODl5wtFPG/nbZxlOzMHJ7LNRseMJitUBzu4cD/2Cupxanu894epDQtCpIlsz88M0oydXQeH4Za0bs+TBIzTtTa/VFoeaFWhKh/gtTlWSJ1PzyYa74AfvjIbDIJi4vAAAAAElFTkSuQmCC">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVR42r2Xe0yVZRzHP+8573u4KxzkvoAkoELkGHkpsGJsbpa0uTabq5htrY3W3Np0mn+53LQ/yjZy+UelXci2LHKzRWtt2Sbr4g0DnRw1EUjwAgocOcA5PL/+OBfe876IOo3vX+/O7z3P53l+1/fRMKl5YzBHRNaLUCciJaLEUAIighJBlPlZiNqUIJbnqXcEEQKixKtEDorQuGF/Rl+EqUUevt8YfFlEdishWayAe4NbbT5R0rCpOaspuoEw/AslaP8zPGITEeq3HMhu0po3BnMQ8c7CyWNtSnxKpEQPx3y24SiRZBHWO8IJN9vwiK1OD2f77MOVICIljvtYancLRwRDt8KT3FBQqXOjX3HpTJDxm/cGj0vUyF/gwp3npOM3P4N9wQgcpQTdevLaN+NJyQy1B1FxXL0wSe+pID0dQS6fD94WjibkFusUVrgoXOgit8RAc4R6TUVtAo2vXY7xgm51ewQOoDkgs8hJZpGTx56PY8Iv9J4O0tMe4EJbgKErk4gIKekOCjwGBQsN8he4iEvUmE7uXD0GrkTQrTGfSa4EjfmVBvMrDaoDwof1gyglrPsgFacxBR1/pwXnUw+hP1NsW8MMF8EcglDCRXS+Y5jBK+OUL3UTn+S0LeQ0tKjbzXCAib1/YIyMoboGQxtftzRqM8OVioZgKtsj2rPDy8nWAXTDwcOL5lJRnY6nKp1Sz1wcznCOhPPhVgrsPx7awCuLw7t22CpBt5ZaRJt3VXD00FXaDg/Q1jpAx87rfLXzHElzdLbuqeSRx1NtYZPhMbQ58baN+F//GoCET1+yliG6tc4jSkkzqFmdS83qXAC6vT7aWgfoPDFESpoRrhKJekD1XOdmTSMJH71oj3v/sC0HYsvQVOcR/fB5N91nfXiq0il/wk1+STL5JcnwqmlhMW16ZBwmFTI8NmMiizUE1iYTUc85Hy37evmxqQeHU6OobA6LngrlQfkyN5pGtMPdjWLLEBxyixA0bHuUfcdreHu3hxVr8hi5McE3u/5hy9ojtLb020Iwk7TURLTUREsZhv6vW1uoWSmpBlUrs6hamQVAf7cf78khKp+eZw/BDEr4eK2lDKc2r1v7d0TbG9roPHGDRdXzqKhy46lOJzs/gez8BJs7b+uBRJcpb8yDSdCtvT2i5c9lM3RtgkMHLvHLt/+iaVBQmoKnOp01bzzIHLcr6k4ArSAN4wUPzsoHomvoiwvsOWCCi8LciGLduXxVNstXZTM2Osnfvw9G+8GBT7pYsCSNZSsyoxkNoCXFEf/e6hhY3NZn7SVpgqupRjRVCX1ng+QU69E/xCc6WVKbwZLaDABGfUESk/UZQ6DNS0bLTLH93tUxFgOfmoamSvhu+xClT4ZGaX65fbJF4OaMtir58FtghOaH36fwHvNz5s9Rjv48EgNXCnQRAiJiRJLR71Oc+MnPsZZRNA1yig0KPS7mV7jIK3VFZ7t5sMS4eFK46A3SeWSEzr9G6To1RjAotpOr0BQO6OEbS9l0HxpqUug+Pc7FU+P8+qXgStQoXOiiyBOHO0+Pvnf22BjXegN4j/jxHvfjH5m0Zfs0cETEq72/5uoOETbf4TecbZ5Pb7sjOCK86xChMXxdmlW4Enwi0ujYsD+jT5Q0hK9LswUXEWnY217W5wDY1JzVJEJ9+Lo0Gyev/6y9rCnmdgywre5SjgjrlUidKCkRwbhP8ICIeEU4KCKNe9vLotfz/wCKU53CYXSQUAAAAABJRU5ErkJggg==">
@@ -15,9 +15,9 @@
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.666";
-  window.APP_BUILT = "2026-11-08 7:20 PM";
-  window.APP_NOTE = "Index: groups and chapters told apart. A group (a section, an EPUB part, an era) is a header band with a turning chevron and its chapter count, sticky while its chapters scroll; a tap only folds it. A chapter is a plain row (a tap opens it), behind a guide line inside its group; a chapter with headings has its own chevron on the left; headings are smaller, behind a dotted line. Chapters outside any group stay in their place (an EPUB's prologue and epilogue). Open groups remembered per book; Open all / Close all; arrow keys in the list. A folder of folders of plain text is grouped by sub-folder too";
+  window.APP_VERSION = "Book reader V1.0.685";
+  window.APP_BUILT = "2026-11-08 11:14 PM";
+  window.APP_NOTE = "One steady bottom bar: one height for a screen width and UI size, one line (Playing \u00b7 on this phone / on Jon's desktop, ready 4:58, the speed), a problem as one coloured line; a tap opens Now reading (it replaced the Status window; the old window under Technical details). New setting Read ahead (Settings > Voice: a number and a unit, 300 s, no upper limit; held and said when the device has no room). Make sound in bursts removed. The top bar's buttons let go of the focus after a click, so Space stays Play / Pause";
   window.APP_KEY = "br1";
 </script>
 <style>
@@ -479,7 +479,7 @@ html.cdock .ctop apps-button { display: none; }
 .cmark.part i { display: block; height: 100%; background: var(--accent); }
 </style>
 <style>
-/* play.css: the play bar's buttons and status line, the lock button in that bar, and the
+/* play.css: the play bar's buttons and status line, the lock button in that bar, the "Now reading" sheet, and the
    reading marks: the paragraph being read (bright), the rest of its piece (slight), the word being
    spoken, and the left-edge lines (::before = the paragraph Play starts from, from base.css;
    ::after = the state: sound made, or being read). The Key window lists these. */
@@ -494,7 +494,12 @@ html.cdock .ctop apps-button { display: none; }
   --warn: light-dark(#a35a00, #ffb347);
 }
 
-.play { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+/* The bar (Jon's plan 2026-11-08, 1.3): ONE height for a screen width and a UI size, whatever it says; nothing in
+   it wraps, comes or goes. A phone (a content box under 41 UI-ems: about 700 px at UI size 100 %): the buttons in row 1 with
+   the lock at its right end, the status line in row 2; wider: one row (buttons, status line, lock). The container
+   query's em is the bar's own font size (--ui), so the switch follows the UI size; at a big UI size on a narrow
+   phone the buttons may take two rows, still one height for that size. */
+.play { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; container: playbar / inline-size; }
 .play button {
   min-width: var(--tap-big); min-height: var(--tap-big); padding: 0;
   border: 1px solid var(--line); border-radius: 8px;
@@ -502,42 +507,95 @@ html.cdock .ctop apps-button { display: none; }
 }
 .play button:not(:disabled):hover { border-color: var(--accent); }
 .play #playbtn { min-width: calc(1.3 * var(--tap-big)); font-size: 1.3em; }
-/* The status (Jon's spec, 2026-10-18): two lines that wrap, never clipped; the bar grows to fit. Line 1
-   the state, line 2 "ready N s" first (the number Jon reads most: bold, tabular digits, a small meter,
-   amber when low, red at 0), then what is being made and checked. A tap opens the full status. */
+/* The status line: one row of fixed height, every part one line. Left the state and where ("Playing · on this
+   phone"), or a problem in its colour with its icon and " · tap"; a long line ends in "…", its suffix kept whole.
+   Right "ready 42 s" / "ready 4:58" (bold, tabular digits, a small meter full at 60 s, amber under 10 s, red at 0)
+   and the speed ("2.3×", "–"), in slots of fixed width so nothing slides. A tap opens the "Now reading" sheet. */
 .play .stbox {
-  flex: 1 1 12em; min-width: 0; margin-left: 2px; padding: 2px 6px;
-  font-size: 0.85em; line-height: 1.3; color: var(--muted);
+  flex: 1 1 0; min-width: 0; display: flex; align-items: center; gap: 0 0.6em;
+  height: 1.75em; margin-left: 2px; padding: 0 6px; overflow: hidden;
+  font-size: 0.9em; line-height: 1.3; color: var(--muted);
   border-radius: 6px; cursor: pointer;
 }
 .play .stbox:hover, .play .stbox:focus-visible { background: color-mix(in srgb, var(--accent) 12%, transparent); outline: none; }
-.play .status { color: var(--fg); white-space: normal; overflow-wrap: anywhere; }
+.play .status { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; overflow: hidden; white-space: nowrap; color: var(--fg); }
+.play .sttext { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.play .stsuf { flex: none; white-space: pre; }
+.play .stsuf::after { content: attr(data-s); }   /* " 37%", " · tap": kept whole at the end; not part of the line's text */
+.play .stico { flex: none; display: inline-flex; margin-right: 0.35em; }
+.play .stico svg { width: 1.1em; height: 1.1em; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
+.play .status.warn { color: var(--warn); font-weight: 600; }
 .play .status.err, .stlead { color: var(--err); }
-.play .st2 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 0.9em; }
+.play .status.err { font-weight: 600; }
 .ready {
-  flex: none; position: relative; min-width: 10.5ch; padding-bottom: 3px; font-size: 1.12em;
+  flex: none; position: relative; padding-bottom: 3px; font-size: 1.12em;
   font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--fg);
 }
+.play .ready { width: 10.2ch; overflow: hidden; }   /* fits "ready 99:59" (past 100 minutes the bar shows hours) */
 .ready .rbar { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; border-radius: 1px; background: var(--line); overflow: hidden; }
 .ready .rbar > span { display: block; height: 100%; width: 0; background: var(--made); }   /* no width transition (job 3, C8: ~48 frames of layout per 1 s step) */
 .ready.low { color: var(--warn); }
 .ready.low .rbar > span { background: var(--warn); }
 .ready.empty { color: var(--err); }
-.ready.idle { color: var(--muted); font-weight: 600; }
+.ready.idle { color: var(--muted); }   /* the colour only: a lighter weight would narrow the slot (its width is in ch) */
 .ready.idle .rbar > span { background: var(--muted); }
-.play .work { min-width: 0; display: flex; flex-wrap: wrap; gap: 0 0.9em; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
 .wv { color: var(--muted); }
-/* The voice's speed over the last minute, right after "ready" (job 1): "2.3×", or "resting". */
+/* The voice's speed over the last minute, right after "ready" (job 1): "2.3×"; "–" while there is none. */
 .vspeed { flex: none; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--fg); }
+.play .vspeed { width: 4.4ch; text-align: right; overflow: hidden; }   /* fits "9.9×", "99×" and ">99×" */
+.vspeed.none { color: var(--muted); }
 .vspeed.slow { color: var(--warn); }
 .stw-speed { margin-left: 0.8em; font-size: 1.2em; }
-.play .wk { color: var(--fg); }
-/* A narrow screen: the status takes a full row under the buttons (the lock stays beside them). */
-@media (max-width: 560px) {
-  .play .stbox { order: 5; flex-basis: 100%; margin-left: 0; }
+@container playbar (max-width: 41em) {   /* the bar's content box: about 700 px wide at UI size 100 % */
+  .play .stbox { order: 5; flex: 0 0 100%; margin-left: 0; }
+}
+/* Narrower still for the UI size (a big UI size on a phone): the line takes its own row and the two slots the row
+   under it, at the right; at the very narrowest only the number shows in the ready slot ("4:58"). Fixed heights. */
+@container playbar (max-width: 18em) {
+  .play .stbox { flex-wrap: wrap; align-content: space-around; height: 3.5em; }
+  .play .status { flex: 0 0 100%; }
+  .play .ready { margin-left: auto; }
+}
+@container playbar (max-width: 10.5em) {
+  .play .rw { display: none; }
+  .play .ready { width: 7ch; }
 }
 
-/* The full-status window. */
+/* The "Now reading" sheet (plan 1.4, it replaced the Status window): label and value rows in plain words; a big
+   number where there is one; the problem in its colour with its buttons; the technical details folded at the end. */
+.nrsheet { display: flex; flex-direction: column; padding: 0.2em 1em 1.2em; line-height: 1.35; }
+.nrrow { display: grid; grid-template-columns: minmax(5em, 28%) minmax(0, 1fr); gap: 0 0.8em; padding: 0.75em 0; border-bottom: 1px solid var(--line); }
+.nrk { color: var(--muted); }
+.nrv { min-width: 0; overflow-wrap: anywhere; }
+.nrmain { color: var(--fg); }
+.nrmain.slow { color: var(--warn); }
+.nrsub { margin-top: 0.15em; color: var(--muted); font-size: 0.92em; }
+.nrbig { font-size: 1.45em; font-weight: 700; font-variant-numeric: tabular-nums; }
+.nrbar { height: 6px; margin: 0.45em 0 0.2em; border-radius: 3px; background: var(--line); overflow: hidden; }
+.nrbar > span { display: block; height: 100%; width: 0; background: var(--made); }
+.nrbar.low > span { background: var(--warn); }
+.nrbar.empty > span { background: var(--err); }
+.nrwarn { color: var(--warn); }
+.nrtitle { font-size: 1.1em; font-weight: 700; }
+.nrtitle.warn { color: var(--warn); }
+.nrtitle.err { color: var(--err); }
+.nrtext { margin-top: 0.25em; }
+.nrbtns { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5em; margin-top: 0.7em; }
+.nrbtn { min-height: var(--tap); padding: 0 1em; border: 2px solid var(--warn); border-radius: 10px; background: var(--bg); color: inherit; font-weight: 600; text-align: left; cursor: pointer; }
+.nrbtn:hover { background: color-mix(in srgb, var(--warn) 12%, var(--bg)); }
+.nrnone { color: var(--made); font-weight: 700; }
+.nr-where { order: 1; } .nr-problem { order: 2; } .nr-voice { order: 3; } .nr-ready { order: 4; } .nr-speed { order: 5; } .nr-none { order: 6; }
+.nrsheet[data-problem="1"] .nr-ready { order: 3; }
+.nrsheet[data-problem="1"] .nr-voice { order: 4; }
+.nrtech { order: 20; margin-top: 1em; border: 1px solid var(--line); border-radius: 10px; }
+.nrtech > summary { display: flex; align-items: center; min-height: var(--tap); padding: 0 0.9em; color: var(--muted); cursor: pointer; }
+.nrtech[open] > summary { border-bottom: 1px solid var(--line); }
+.nrtech > summary::before { content: "▸"; margin-right: 0.5em; }
+.nrtech[open] > summary::before { content: "▾"; }
+.nrtech > summary::-webkit-details-marker { display: none; }
+.nrtech > summary { list-style: none; }
+
+/* The technical details: the old full-status window's content. */
 .stwin { padding: 0.6em 0.8em 1.2em; font-size: 0.92em; line-height: 1.4; }
 .stw-now { padding-bottom: 0.5em; border-bottom: 1px solid var(--line); }
 .stw-l1 { font-weight: 600; overflow-wrap: anywhere; }
@@ -646,8 +704,6 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 .keyrow .sw.add::before { content: "+"; }
 .keyrow .sw.spell { color: var(--spelled); }
 .keyrow .sw.word { width: auto; height: auto; padding: 0 0.3em; background: var(--word); border: 0; font-size: 0.9em; }
-/* the play bar's "Use this device's voice" (cloudtab.js): after a Play that could not reach the PC */
-.cloudoff { min-height: 48px; min-width: 48px; padding: 0 0.8em; border: 1px solid var(--accent); border-radius: 8px; background: var(--bg); color: inherit; font-weight: 600; cursor: pointer; }
 </style>
 <style>
 /* settings.css: the Settings window (settingswin.js). Its content sizes from --ui like every window
@@ -790,6 +846,8 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   border: 1px solid var(--line); border-radius: 8px; background: var(--bg);
 }
 .snum { width: 6em; min-height: var(--tap); padding: 0 0.5em; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); text-align: center; }
+.sahead { display: inline-flex; align-items: center; gap: 8px; }   /* Read ahead: the number and its unit */
+.sahead .snum { width: 7em; }
 
 /* The two editors */
 .spairs { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: 6px 8px; align-items: center; }
@@ -980,9 +1038,12 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   <button id="playbtn" type="button" title="Play (Space)" aria-label="Play">▶</button>
   <button id="nextpiece" type="button" title="Next piece (↓)" aria-label="Next piece">⏭</button>
   <button id="stopbtn" type="button" title="Stop" aria-label="Stop" disabled>⏹</button>
-  <div class="stbox" id="stbox" role="button" tabindex="0" title="Tap for the full status" aria-label="Status (tap for the full status)">
-    <div class="status" id="status" aria-live="polite"></div>
-    <div class="st2"><span class="ready idle" id="ready"><span id="readynum">ready 0 s</span><span class="rbar"><span id="readybar"></span></span></span><span class="vspeed" id="vspeed" hidden></span><span class="work" id="work"></span></div>
+  <!-- The status line: one line, one fixed height (playbar.js): the state and where, or a problem (icon, text, " · tap");
+       the sound ready and the voice's speed in fixed slots. A tap opens the "Now reading" sheet. -->
+  <div class="stbox" id="stbox" role="button" tabindex="0" title="Now reading (tap for details)" aria-label="Now reading: tap for details">
+    <span class="status" id="status" aria-live="polite"><span class="stico" id="stico" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 22 20.5H2Z"/><path class="stmark" d="M12 9.5v5.5M12 17.6v.4"/></svg></span><span class="sttext" id="sttext"></span><span class="stsuf" id="stsuf"></span></span>
+    <span class="ready idle" id="ready"><span id="readynum"><span class="rw">ready </span><span id="readyval">0 s</span></span><span class="rbar"><span id="readybar"></span></span></span>
+    <span class="vspeed none" id="vspeed">–</span>
   </div>
   <button id="lock" class="lock" type="button" aria-pressed="true" title="Locked: the screen follows the reading">
     <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10" rx="2"/>
@@ -1259,7 +1320,12 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     steps: null,                   // Supertonic only; null = from the benchmark
     copies: null,                  // processor voices; null = from the benchmark
     speaker: 0,                    // Piper's voices with several speakers only (libritts, vctk...); ignored by the rest
-    burst: true,                   // make sound in bursts (5 min ahead, then rest until 2 min are left): a smoother word highlight with a card voice
+    // Read ahead (Jon, 2026-11-08: "don't limit me ... Default: 300 seconds. Have a number field and a unit field"): how much
+    // sound is made ahead of the reading, on this device and with the PC alike, in seconds; no upper limit. The unit is only
+    // how the number is shown (300 s, 5000 min). When the device has no room for more sound, the player holds there and
+    // says so (player.js room), never a quiet cap.
+    readAhead: 300,
+    readAheadUnit: "s",            // "s", "min" or "h"
     // Word highlight
     wordTiming: "off",             // "model" (Kokoro), "listener", "estimate", "off"; Off by default (Jon, 2026-10-20: nothing turns it on by itself, the benchmark included)
     // Listener
@@ -1282,11 +1348,16 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     logTypesOff: [],               // unticked log types; everything else shows
   };
 
+  // Settings that were removed: their stored values are dropped at load, so an old record keeps nothing that no
+  // longer means anything (2026-11-08: "burst", Make sound in bursts, gone with its feature).
+  const REMOVED = ["burst"];
   function load() {
     try {
       const raw = localStorage.getItem(KEY);
       const v = raw ? JSON.parse(raw) : {};
-      return v && typeof v === "object" && !Array.isArray(v) ? v : {};
+      if (!(v && typeof v === "object" && !Array.isArray(v))) return {};
+      for (const k of REMOVED) delete v[k];
+      return v;
     } catch (e) { return {}; }
   }
   let stored = load();
@@ -1299,6 +1370,12 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     copies: (v) => typeof v === "number" && Number.isFinite(v),
     listenMode: (v) => v === "play" || v === "before",
   };
+  // Narrower rules for a few settings, past their kind: Read ahead above 0 (0 would make nothing ahead and the
+  // reading would never start) with no upper limit; its unit one of three.
+  const RANGES = {
+    readAhead: (v) => v > 0,
+    readAheadUnit: (v) => v === "s" || v === "min" || v === "h",
+  };
   // A value this setting can hold: null only where the default is null (D7), numbers finite, else the
   // default's kind (an array for an array).
   function valid(name, v) {
@@ -1306,7 +1383,8 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     if (v === undefined || !(name in DEFAULTS)) return false;
     if (v === null) return d === null;
     if (d === null) return NULL_KINDS[name] ? NULL_KINDS[name](v) : true;
-    if (typeof d === "number") return typeof v === "number" && Number.isFinite(v);
+    if (typeof d === "number") return typeof v === "number" && Number.isFinite(v) && (!RANGES[name] || RANGES[name](v));
+    if (RANGES[name] && !RANGES[name](v)) return false;
     return Array.isArray(d) ? Array.isArray(v) : typeof v === typeof d;
   }
 
@@ -1359,6 +1437,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 
   g.SETTINGS = {
     DEFAULTS, get, set, update, valid, short,
+    UNITS: Object.freeze({ s: 1, min: 60, h: 3600 }),   // Read ahead's units: seconds in one of each
     isDefault: (name) => same(get(name), DEFAULTS[name]),
     all: () => Object.fromEntries(Object.keys(DEFAULTS).map((k) => [k, get(k)])),
     // Every setting back to its default, except brokenPrecisions: device facts, not choices (D12).
@@ -4236,6 +4315,14 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   // than press an arrow scrolled out of sight (as the play bar's buttons do).
   endPrev.addEventListener("click", (e) => { if (e.detail > 0) endPrev.blur(); pick(cur - 1); });
   endNext.addEventListener("click", (e) => { if (e.detail > 0) endNext.blur(); pick(cur + 1); });
+  // The top bar's buttons the same (Jon's plan 2026-11-08, section 6, N1): after a mouse click or a tap, ‹ › Go ☰ Index,
+  // Open, ? and ⚙ (and the Index panel's own ☰) let go of the focus, so Space stays Play / Pause instead of pressing the
+  // button again (another chapter, the panel shut again). Enter or Space on a button reached with the keyboard (no
+  // click count) keeps it. The Apps button gives the focus back to the page itself (the Apps kit).
+  for (const id of ["prev", "next", "go", "toc", "open", "key", "gear", "ctoc"]) {
+    const b = $(id);
+    if (b) b.addEventListener("click", (e) => { if (e.detail > 0) b.blur(); });
+  }
   function jump() {
     const raw = num.value.trim();
     const n = /^\d+(?:\.\d+)?$/.test(raw) ? Number(raw) : NaN;     // 12.5 is a chapter number too (an interlude)
@@ -5437,11 +5524,16 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
      becomes "signin", and call() answers { ok: false, signin: true, status: 401, why }.
    - Status events: checking / connected / starting / ready / offline / off / signin / reload, each with a plain `why`.
    - Version-checked: a relay that needs a newer client says so (426), and the status becomes "reload".
+   - The PC's name (2026-11-08, relay 2.2: the ping's "name", e.g. "Jon's desktop"): R.pcName() is the name from the
+     last answer, remembered in this browser per address (localStorage "relay-pc-name"), so a page that cannot reach
+     the PC still says "Can't reach Jon's desktop"; "your PC" (RelayClient.YOUR_PC) before the PC has ever answered at
+     that address. A page shows it as text, never as HTML (textContent). It is a label, never an address.
 
    const R = RelayClient.create({ app: "reader", log });  // app names the page in the PC's logs; log(text) hears
                                                            // relay-client's notes (which address, and why)
    await R.address();                                      // { url, from: "file" | "built-in" | "page", why }
    await R.ping();                                         // { ok, info, latency } ; info.signed_in, info.services
+   R.pcName();                                             // "Jon's desktop" (the last answer's, or remembered), else "your PC"
    R.signedIn();                                           // this browser holds a pass (the last ping says if it is valid)
    await R.signIn(password);                               // { ok, why, device, name }
    await R.signOut();                                      // { ok }
@@ -5473,6 +5565,25 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   // relay-client 1 kept a device id and one pass per scope; relay 2 does not accept them: tidied away.
   for (const k of store.keys()) if (k === "relay-device" || k.startsWith("relay-pass:")) store.set(k, "");
   let memPass = null; // when localStorage is not available (a sandboxed page): this page only
+  // The PC's name, remembered per address: localStorage "relay-pc-name" = { "<address>": { name, at } } (the 10 newest).
+  const NAME_KEY = "relay-pc-name", YOUR_PC = "your PC";
+  const cleanName = (n) => (typeof n === "string" ? Array.from(n.replace(/[\x00-\x1f\x7f-\x9f]/g, "").trim()).slice(0, 64).join("").trim() : "");
+  const memNames = {}; // when localStorage is not available: this page only
+  function names() {
+    try { const j = JSON.parse(store.get(NAME_KEY) || "{}"); return j && typeof j === "object" && !Array.isArray(j) ? j : {}; } catch (e) { return {}; }
+  }
+  function nameAt(base) {
+    const e = names()[base] || memNames[base];
+    return e ? cleanName(typeof e === "string" ? e : e.name) : "";
+  }
+  function keepName(base, name) {
+    memNames[base] = { name, at: Date.now() };
+    const all = names();
+    if (all[base] && all[base].name === name) return;
+    all[base] = { name, at: Date.now() };
+    const keep = Object.entries(all).filter(([, e]) => e && typeof e === "object").sort((a, b) => (b[1].at || 0) - (a[1].at || 0)).slice(0, 10);
+    store.set(NAME_KEY, JSON.stringify(Object.fromEntries(keep)));
+  }
 
   function httpWhy(status) {
     return ({ 400: "the PC refused that address", 401: "sign-in needed", 403: "the PC refused this page",
@@ -5664,6 +5775,8 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
         const info = await r.json();
         this.latency = Math.round(performance.now() - t0);
         this.info = info;
+        const name = cleanName(info && info.name);   // the PC's name (relay 2.2), remembered for this address
+        if (name) { this._pc = { base: this.base, name }; keepName(this.base, name); }
         if ((info.min_client || 0) > VERSION) { const why = "this page is out of date: reload it"; this._set("reload", { why }); return { ok: false, why, info, kind: "reload" }; }
         if (info.pass === "unknown") this._lost("signed out on the PC (or the sign-in ended): sign in again");
         if (!info.on) { const why = "the PC relay is switched off (tray icon on the PC)"; this._set("off", { why, info }); return { ok: false, why, info, kind: "off" }; }
@@ -5678,6 +5791,11 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
       } finally { clearTimeout(timer); }
     }
     service(id) { return ((this.info && this.info.services) || []).find((s) => s.id === id) || null; }
+    // The PC's name: the last answer's at this address, else the one remembered here for it, else "your PC".
+    pcName() {
+      if (this._pc && this._pc.base === this.base) return this._pc.name;
+      return nameAt(this.base) || YOUR_PC;
+    }
     // ---- sign-in: the password -> this browser's one pass (the old one, if any, is replaced on the PC) ----
     async signIn(password) {
       await this._ready();
@@ -5761,7 +5879,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   }
 
   // DEFAULT_PC: relay-client 2's old name for BUILT_PC (kept for code that still reads it)
-  root.RelayClient = { VERSION, BUILT_PC, DEFAULT_PC: BUILT_PC, ADDRESS_FILE, create: (opts) => new Relay(opts || {}), httpWhy };
+  root.RelayClient = { VERSION, BUILT_PC, DEFAULT_PC: BUILT_PC, ADDRESS_FILE, YOUR_PC, create: (opts) => new Relay(opts || {}), httpWhy };
 })(typeof window !== "undefined" ? window : globalThis);
 </script>
 <script>
@@ -8089,7 +8207,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 // line), synth(piece) sends the piece's speech and settings and gets its sound (PCM16 at 24 kHz) and word
 // times back, stop() cancels the PC's work at once. Used instead of the voice's own engine while "Use my PC
 // for the voice" is on (player.js pickEngine). The PC is contacted only when this is on: one light check when
-// a book opens (the status bar says "Using cloud: …"), the real work from Play.
+// a book opens (the bar says "Stopped · on <the PC's name>", or "Can't reach …"), the real work from Play.
 // Trying again (Jon, 2026-10-25, after one passing "could not reach the PC"): ONE retry loop (run()) serves the
 // Cloud tab's check, the book-open check, Play and a connection that dropped mid-reading. It tries again by
 // itself, 1, 2, 4, 8 s apart, then every 12 s, for as long as the reason applies (the tab open; Use my PC on
@@ -8100,7 +8218,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 // Only a reason trying again cannot fix (the PC wants its password, the page is out of date, the PC refused)
 // stops Play, with the reason and the "Use this device's voice" button. No fallbacks: nothing switches to this
 // device's voice by itself. A voice the PC does not run (a browser voice; 2026-10-26, external-input.md §3) stops
-// Play before anything is sent, with the ways out named and offered on the play bar: "Use <the PC's voice>" (sets
+// Play before anything is sent, with the ways out named and offered in the "Now reading" sheet: "Use <the PC's voice>" (sets
 // the voice, keeps Use my PC on) and "Use this device's voice"; CLOUDVOICE.runs / DEFAULT / defaultName / where are
 // what the Settings window and voicedata.js ask so that the same rule holds everywhere. A dropped connection keeps the pieces not answered yet: once the PC is back (its
 // voice loaded again if it had to restart) they are sent again, so the reading goes on where it was with the
@@ -8108,14 +8226,14 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 // Marks: each chunk's place (queued on the PC, generating there, on the way) goes to the player
 // (PLAYER.cloudMark), which highlight.js colours. CLOUDVOICE: the status for the bar and the Cloud tab.
 (function () {
-  const st = { lastMsg: 0, ws: null, hello: null, waiters: new Map(), states: new Map(), times: new Map(), key: "", prep: null, loading: "", status: "", check: "", checkAt: 0, failed: false, badVoice: "", bytes: 0, pieces: 0, x: 0, lastMs: 0, seq: 0, opts: null, answered: "" };
+  const st = { pcNames: {}, lastMsg: 0, ws: null, hello: null, waiters: new Map(), states: new Map(), times: new Map(), key: "", prep: null, loading: "", status: "", check: "", checkAt: 0, failed: false, badVoice: "", bytes: 0, pieces: 0, x: 0, lastMs: 0, seq: 0, opts: null, answered: "" };
   const R = () => PCRELAY.client();
   const plain = (e) => String((e && e.message) || e || "").replace(/^Error: /, "");
   const err = (msg, extra) => Object.assign(new Error(msg), extra || {});
   const parseVoice = (v) => { const p = ENGINE.parse(String(v || "kokoro:af_heart")); return { engine: p.engine, voice: p.voice }; };
   // The voices the PC runs (2026-10-26, external-input.md §1-5: the one place that knows): Kokoro and Supertonic on
   // its card or processor, Piper on its processor; a browser voice is the device's own. runs(voice) gives "" when
-  // the PC makes it, else why not (the Settings window, voicedata.js and the play bar all ask here). DEFAULT is the
+  // the PC makes it, else why not (the Settings window, voicedata.js and the sheet all ask here). DEFAULT is the
   // PC's own voice, offered (never set by itself) wherever a browser voice meets Use my PC: Kokoro Heart fp32 on
   // the PC's card, about 6× real time through CUDA. where(values) is the short "Kokoro fp32 on the PC's graphics
   // card through CUDA" for the Voice tab's mark.
@@ -8129,6 +8247,15 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     return v.engine === "kokoro" ? `Kokoro ${a.precision || "fp32"} (${v.voice}) on ${on}` : v.engine === "supertonic" ? `Supertonic ${v.voice} on ${on}` : `Piper ${v.voice} on ${cuda ? "the PC's graphics card through CUDA" : "the PC's processor"}`;
   };
   const connected = () => !!(st.ws && st.ws.readyState === 1 && st.hello);
+  // The PC's name (Jon's plan 2026-11-08, 2.1: kept on the PC by PC Relay; "Jon's desktop"): relay-client's
+  // R.pcName() (the last answer's, remembered in this browser) where this build of it has one, else the name in
+  // the last ping this page saw, else "your PC". Always shown as text: control characters out, 64 at most (as relay-client).
+  const cleanName = (s) => String(s || "").replace(/[\u0000-\u001f\u007f]/g, "").trim().slice(0, 64);
+  function pcName() {
+    let n = "", base = "";
+    try { const c = R(); base = c.base; if (c && typeof c.pcName === "function") n = cleanName(c.pcName()); } catch (e) {}
+    return n || st.pcNames[base] || "your PC";
+  }
   const subs = new Set();
   function redraw() {
     if (globalThis.PLAYBAR) PLAYBAR.refresh();
@@ -8179,9 +8306,11 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   // A ping answered: every light check waiting has its answer.
   function settleChecks(r) {
     st.answered = R().base;                        // the door has answered at this address: later checks wait PING_MS
+    if (r.info && typeof r.info.name === "string") st.pcNames[R().base] = cleanName(r.info.name);   // the PC's name in its ping, per address (used where relay-client has no pcName yet)
     const v = r.info && r.info.services ? r.info.services.find((s) => s.id === "voice") : null;
     // PC Relay 2: the voice is private on Jon's PC, so a device that is not signed in is told before Play refuses
     const unsigned = v && v.private && !r.info.signed_in ? "; this device is not signed in: Settings → Cloud → Sign in" : "";
+    st.unsigned = !!unsigned;                      // the bar says so before Play (CLOUDVOICE.signedOut)
     st.check = v ? `connected (${R().latency} ms; the PC voice is ${v.state === "running" ? "running" : v.unavailable ? v.unavailable.replace(/\.$/, "") : "ready to start"}${unsigned})` : "connected, but the PC has no voice service";
     st.checkAt = Date.now();
     const labels = Array.from(new Set(loop.checks.map((c) => c.label)));
@@ -8434,7 +8563,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     async init(opts) {
       const v = parseVoice(opts.voice);
       // A voice the PC does not run (a browser voice): stopped here with the three ways out, none taken by itself.
-      // The play bar then shows "Use <the PC's voice>" and "Use this device's voice" (cloudtab.js: badVoice, failed).
+      // The "Now reading" sheet then offers "Use <the PC's voice>" and "Use this phone's voice" (playbar.js: badVoice, failed).
       const no = runs(opts.voice);
       if (no) { st.badVoice = String(opts.voice || ""); st.failed = true; redraw(); throw err(`Use my PC: ${no}. Choose a Kokoro, Piper or Supertonic voice in Settings → Voice, press "Use ${defaultName()}" for the PC's own voice, or press "Use this device's voice" to turn Use my PC off.`, { cannot: true, cloud: true }); }
       st.badVoice = "";
@@ -8500,7 +8629,15 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     // The retry loop as it is: running, the attempt, the reason, the countdown, the text shown.
     get retry() { return { running: loop.running, busy: loop.busy, mode: loop.mode, attempt: loop.attempt, why: loop.why, next: loop.next, label: loop.running ? label() : "", text: retryText() }; },
     get waiting() { return E.waiting; },
-    // The play bar's voice part while the PC voice reads: "Kokoro fp32 on your PC (card)"; while a dropped
+    pcName,
+    // For the "Now reading" sheet: the round trip of the last answer (ms; 0 before any), connected now, and where the
+    // PC makes the voice ("cuda" / "gpu" / "cpu": the chosen setting before the first Play).
+    get latency() { try { return Number(R().latency) || 0; } catch (e) { return 0; } },
+    get connected() { return connected(); },
+    // The last check said the PC's voice is private and this device is not signed in (and it still holds no pass).
+    get signedOut() { if (!st.unsigned) return false; try { return !R().signedIn(); } catch (e) { return true; } },
+    get runOn() { return (st.opts && st.opts.runOn) || (SETTINGS.get("runOn") === "cpu" ? "cpu" : SETTINGS.get("pcCard") === "webgpu" ? "gpu" : "cuda"); },
+    // The technical line's voice part while the PC voice reads: "Kokoro fp32 on your PC (card)"; while a dropped
     // connection is tried again, the attempt follows.
     short() { const o = st.opts || {}, t = loop.mode === "connect" ? retryText() : ""; return `${o.engine === "piper" ? "Piper " + o.voice : o.engine === "supertonic" ? "Supertonic " + o.voice : "Kokoro " + (o.precision || "fp32")} on your PC (${o.runOn === "cpu" ? "processor" : o.runOn === "cuda" ? "card, CUDA" : "card"})${st.loading ? " · " + st.loading : ""}${t ? " · " + t : ""}`; },
     // The stopped line: "Using cloud: connected (45 ms; ...)" while Use my PC is on; the attempt while it retries.
@@ -9332,14 +9469,16 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 // stream when the piece is buffered, else parks at the end of the buffer and waits for the piece to
 // be appended there (a new "run": only entries of the current run are ever sought); a chapter change
 // keeps appending; a piece made in chunks is appended chunk by chunk, its entry growing (step 5c);
-// up to AHEAD_SEC of sound is held ahead and KEEP_BEHIND_SEC behind. Without
+// as much sound is held ahead as the player's Read ahead asks (player.js) and KEEP_BEHIND_SEC behind. A
+// browser with no room for more refuses an append with QuotaExceededError (the stream's buffer full) or
+// e.room (a clip it cannot keep): the player holds its read-ahead there and says so. Without
 // MediaSource, or with Background playback off, mode "clips": each piece plays from its own WAV blob
 // URL, one after another, through the same interface. The timeline: entries { id, piece, ch, start,
 // end, dur, words, run }, in stream seconds. Events (STREAM.on): "time" (entry, seconds into it, at
 // each timeupdate and every 100 ms while playing), "waiting" (the sound ran out), "playing",
 // "ended" (after finish()), "blocked" (play() refused), "outside" ("pause" / "play" from the system).
 (function () {
-  const AHEAD_SEC = 300, KEEP_BEHIND_SEC = 60;
+  const KEEP_BEHIND_SEC = 60;
   // LEAD: the samples of silence each MP3 piece starts with: LAME's encoder delay (576) + the decoder's (529),
   // measured 1106 (test/timing.mjs). It is taken off the word times (player.js entry.lead). The END of each piece
   // is padded too (its last frame filled out: 50-70 ms, different per piece) and that is NOT compensated, on
@@ -9474,7 +9613,16 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
       if (S.parked) { S.parked = false; S.cur = e; try { audio.currentTime = start + 0.02; } catch (x) {} if (S.playing) play(); }
       return e;
     }
-    if (!item.url) item.url = URL.createObjectURL(new Blob([wav(item.audio, item.sampleRate)], { type: "audio/wav" }));
+    if (!item.url) {
+      // A browser out of room for clips makes the Blob anyway and fails only when it is read (or cannot make the
+      // samples' copy at all): its first bytes are read back here, so the player hears "no room" now, not a dead
+      // clip minutes later.
+      let blob;
+      try { blob = new Blob([wav(item.audio, item.sampleRate)], { type: "audio/wav" }); await blob.slice(0, 12).arrayBuffer(); }
+      catch (e) { throw Object.assign(new Error(`the browser could not keep more sound (${firstLine((e && e.message) || e)})`), { room: true }); }
+      if (!S.open) throw new Error("the stream is closed");
+      item.url = URL.createObjectURL(blob);
+    }
     const prev = S.entries[S.entries.length - 1];
     const start = prev ? prev.end : 0;
     const e = entryOf(item, start, start + item.dur, run);
@@ -9704,7 +9852,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   }
 
   globalThis.STREAM = {
-    AHEAD_SEC, KEEP_BEHIND_SEC, LEAD, hooks, noStream, supported, open, append, play, pause, seek, forget, park, finish, close, apply, on, time, entryAt, ahead, wav, tickGap, wantFrames,
+    KEEP_BEHIND_SEC, LEAD, hooks, noStream, supported, open, append, play, pause, seek, forget, park, finish, close, apply, on, time, entryAt, ahead, wav, tickGap, wantFrames,
     get clock() { return clock; }, get busy() { return S.busy || ""; },
     get frames() { return T.frames; }, get framesOn() { return T.want; }, get looping() { return !!T.raf; }, get timerOn() { return !!T.timer; },   // job 3: frame callbacks this reading, the C1 switch, the loop running now, the 100 ms timer
     get mode() { return S.mode; }, get isOpen() { return S.open; }, get parked() { return S.parked; }, get playing() { return S.playing; },
@@ -10624,28 +10772,35 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 })();
 </script>
 <script>
-// playbar.js: the play bar at the bottom (⏮ ▶/⏸ ⏭ ⏹, the status, and the lock button at the right
+// playbar.js: the play bar at the bottom (⏮ ▶/⏸ ⏭ ⏹, the status line, and the lock button at the right
 // end): locked, the screen follows the reading (auto-scroll keeps the paragraph read between the top bar
 // and the play bar, measured from the bars themselves); unlocked, the screen stays put. Scrolling never
 // affects playback. Keys: Space = play / pause, ↑ ↓ = previous / next piece (← → stay the reader's
 // chapter keys). The lock starts locked at every page open (not remembered).
-// The status (Jon's spec, 2026-10-18): two compact lines right of Stop. Line 1 = the state and the
-// compute-heavy parts at work ("Playing · Kokoro fp32 (card) · Whisper base (card)"), an error in the
-// error colour replacing it (the reading stopped) or leading it; line 2 = "ready 25 s" first (bold,
-// tabular digits, a small meter, amber under 10 s, red at 0, never cut), then what is being made and
-// checked ("making 3103: 5 6.2 8  checking 3103: 3 4"); right after "ready", the voice's speed over the
-// last minute ("2.3×": seconds of sound made ÷ seconds spent making them; "resting" while it rests;
-// shown once a chunk has landed; job 1). Nothing is clipped: the lines wrap and the bar
-// grows (its height goes to --play-h so the page keeps clear of it). A tap on the status opens the
-// full-status window (float.js), live while open. The player gives the content: PLAYBAR.provide({ status,
-// detail }) (player.js status() / detail()) and calls PLAYBAR.refresh(), PLAYBAR.update(state),
-// PLAYBAR.follow(element); PLAYBAR.status(text, isError) sets line 1 directly (kept for old callers).
+// The bar (Jon's plan 2026-11-08, PLAN-SIMPLER-SETTINGS.md 1.3): ONE fixed height, which depends only on the
+// screen width and the UI size, never on what it says. A phone (a content box under 41 UI-ems, about 700 px at 100 %):
+// row 1 the buttons with the lock at the right end, row 2 the status line; wider: one row, buttons, status line,
+// lock. The status line is one line: left the state and where the sound is made ("Playing · on this phone",
+// "Paused · on Jon's desktop", "Getting the voice ready… 37%", "Waiting for Jon's desktop…"), a problem as one
+// short coloured line ("⚠ Can't reach Jon's desktop · tap"); a long one ends in "…" (its end, " 37%" or " · tap",
+// kept whole). Right: "ready 42 s" ("ready 4:58" past a minute: bold, tabular digits, a small meter full at
+// 60 s, amber under 10 s, red at 0) and the voice's speed over the last minute ("2.3×", "–" while there is none),
+// both in slots of fixed width. Nothing else comes or goes in the bar (the buttons for a problem are in the sheet).
+// A tap on the status opens the "Now reading" sheet (plan 1.4; it replaced the Status window): where the sound is
+// made, the voice in plain words, the sound ready (with the Read ahead setting, and "held" when the device had no
+// room for more), the speed, the problem with Try now / Use this phone's voice, and "Technical details (for
+// testing)": the old Status window's content. The player gives the content: PLAYBAR.provide({ status, detail })
+// (player.js status() / detail()) and calls PLAYBAR.refresh(), PLAYBAR.update(state), PLAYBAR.follow(element).
+// PLAYBAR.device: "phone", "computer" or "device" (a tablet, or unsure); PLAYBAR.dur(seconds) "1 min 58 s";
+// PLAYBAR.readAheadText() the Read ahead setting as set ("300 s", "5000 min").
 (function () {
   const $ = (id) => document.getElementById(id);
   const KEY = (globalThis.APP_KEY || "br1") + "-lock";
   const playBtn = $("playbtn"), stopBtn = $("stopbtn"), prevBtn = $("prevpiece"), nextBtn = $("nextpiece"), lockBtn = $("lock");
-  const box = $("stbox"), status = $("status"), readyEl = $("ready"), readyNum = $("readynum"), readyBar = $("readybar"), workEl = $("work"), speedEl = $("vspeed");
+  const box = $("stbox"), status = $("status"), stIcon = $("stico"), stText = $("sttext"), stSuffix = $("stsuf");
+  const readyEl = $("ready"), readyVal = $("readyval"), readyBar = $("readybar"), speedEl = $("vspeed");
   const LOW = 10, METER_SEC = 60;            // ready: amber under LOW s; the meter is full at METER_SEC s
+  const hooks = { device: "" };              // the tests: "phone" / "computer" / "device" instead of the browser's own
   // The lock always starts locked when the page opens (Jon, 2026-10-19: an unlock left from an earlier visit
   // kept the screen on the opening chapter while the reading went on). Not remembered between visits.
   let locked = true, provider = null, win = null;
@@ -10671,81 +10826,256 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     refresh();
   }
 
-  // ---- The two lines ---------------------------------------------------------------------------------
-  const readyText = (r) => (r == null ? "ready —" : `ready ${Math.floor(r)} s`);
-  const readyClass = (w) => (w.idle || w.ready == null ? "idle" : w.ready < 0.5 ? "empty" : w.ready < LOW ? "low" : "");
-  function line1(el, l) {
-    el.replaceChildren();
-    if (l.lead) { const s = document.createElement("span"); s.className = "stlead"; s.textContent = l.lead; el.append(s, l.text ? " · " + l.text : ""); }
-    else el.textContent = l.text;
-    el.classList.toggle("err", !!l.err && !!l.text);
+  // ---- Words --------------------------------------------------------------------------------------------
+  // What this device is (Q10: "on this phone" / "on this computer", "on this device" when unsure, e.g. a tablet).
+  function deviceKind() {
+    if (hooks.device) return hooks.device;
+    const ua = navigator.userAgent || "", d = navigator.userAgentData;
+    if ((d && d.mobile === true) || /iPhone|iPod/.test(ua) || (/Android/.test(ua) && /Mobile/.test(ua))) return "phone";
+    if (/iPad|Android|Tablet|Silk|Kindle/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) return "device";
+    if (/Windows NT|Macintosh|X11|CrOS/.test(ua)) return "computer";
+    return "device";
   }
+  // 42 → "42 s", 118 → "1 min 58 s", 7500 → "2 h 5 min".
+  function dur(sec) {
+    const s = Math.max(0, Math.floor(Number(sec) || 0));
+    if (s < 60) return `${s} s`;
+    if (s < 3600) return `${Math.floor(s / 60)} min${s % 60 ? ` ${s % 60} s` : ""}`;
+    const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60);
+    return `${h} h${m ? ` ${m} min` : ""}`;
+  }
+  // The Read ahead setting as Jon set it: "300 s", "5000 min", "1.5 h".
+  function readAheadText() {
+    const unit = SETTINGS.get("readAheadUnit"), f = SETTINGS.UNITS[unit] || 1;
+    return `${+(Number(SETTINGS.get("readAhead")) / f).toPrecision(12)} ${unit}`;
+  }
+  const x1 = (x) => (x >= 10 ? x.toFixed(0) : x.toFixed(1));
+  // The bar's ready: "ready 42 s", past a minute "ready 4:58" (G1), from 100 minutes in hours ("ready 2.1 h": the slot
+  // holds "ready 99:59"). The word is its own span (.rw): at the biggest UI sizes on a narrow phone only the number shows.
+  const readyValue = (r) => (r == null ? "—" : r < 60 ? `${Math.floor(r)} s` : r < 6000 ? `${Math.floor(r / 60)}:${String(Math.floor(r % 60)).padStart(2, "0")}`
+    : `${r < 360000 ? (Math.floor(r / 360) / 10).toFixed(1) : Math.floor(r / 3600)} h`);
+  const readyText = (r) => "ready " + readyValue(r);
+  const readyClass = (w) => (w.idle || w.ready == null ? "idle" : w.ready < 0.5 ? "empty" : w.ready < LOW ? "low" : "");
+  const speedText = (v) => (v && v.x ? (v.x >= 100 ? ">99×" : `${x1(v.x)}×`) : "–");   // the slot holds four characters
+
+  // ---- The bar ------------------------------------------------------------------------------------------
+  // The suffix (" 37%", " · tap") is drawn by CSS from data-s, so the line's text stays the message itself.
+  function drawLine(b) {
+    stText.textContent = b.text || "";
+    stSuffix.dataset.s = b.suffix || "";
+    status.classList.toggle("warn", b.kind === "warn");
+    status.classList.toggle("err", b.kind === "err");
+    stIcon.hidden = !b.kind;
+    box.title = `${b.text || ""}${b.suffix || ""} (tap for details)`;
+  }
+  function fillReady(w) {
+    readyVal.textContent = readyValue(w.ready);
+    readyEl.className = "ready" + (readyClass(w) ? " " + readyClass(w) : "");
+    readyBar.style.width = w.ready == null ? "0" : Math.round(Math.min(1, w.ready / METER_SEC) * 100) + "%";
+    readyEl.title = w.ready == null ? "The device speaks the text itself: no sound is made ahead." : `${dur(w.ready)} of sound made ahead of what is being read${w.idle ? " (stopped)" : ""}`;
+  }
+  function fillSpeed(v) {
+    speedEl.textContent = speedText(v);
+    speedEl.classList.toggle("none", !(v && v.x));
+    speedEl.classList.toggle("slow", !!(v && v.x && v.x < 1));
+    speedEl.title = v && v.x ? `The voice's speed over the last ${v.window === 60 ? "minute" : v.window + " s"}: ${v.sound} s of sound made in ${v.busy} s of work (${v.chunks} chunk${v.chunks === 1 ? "" : "s"}); above 1× it keeps ahead of the reading` : "";
+  }
+  // Each part drawn only when what it SHOWS changed (job 3, C3). The periodic redraws (the player's 1 s tick, the
+  // sheet's timer) skip a hidden page, which is drawn again when it is back; a state change or a message still
+  // draws at once.
+  const drawn = { line: "", ready: "", speed: "" };
+  function refresh() {
+    if (!provider) return;
+    let s;
+    try { s = provider.status(); } catch (e) { return; }
+    const w = s.work, kl = JSON.stringify(s.bar);
+    const kr = [readyText(w.ready), readyClass(w), w.ready == null ? "n" : Math.round(Math.min(1, w.ready / METER_SEC) * 100), w.ready == null ? "" : Math.floor(w.ready), !!w.idle].join("|");
+    const ks = JSON.stringify(w.speed && typeof w.speed === "object" ? [w.speed.x, w.speed.sound, w.speed.busy, w.speed.chunks, w.speed.window] : null);
+    if (kl !== drawn.line) { drawn.line = kl; drawLine(s.bar || { text: "" }); }
+    if (kr !== drawn.ready) { drawn.ready = kr; fillReady(w); }
+    if (ks !== drawn.speed) { drawn.speed = ks; fillSpeed(w.speed); }
+  }
+  const redrawAll = () => { drawn.line = drawn.ready = drawn.speed = ""; };
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState !== "hidden") { refresh(); if (win) drawWindow(); } });
+  // The line set directly (kept for old callers; the player draws over it at its next refresh).
+  function setStatus(text, isError) { drawn.line = ""; drawLine({ text: text || "", kind: isError ? "err" : "", suffix: "" }); }
+
+  // The bar's height is fixed for a screen width and UI size: the page keeps that much clear at the bottom.
+  // Set in the next frame: the body's padding may show or hide the page's scroll bar, which resizes the bar again,
+  // and setting it inside the observer's own callback made Chrome report "ResizeObserver loop completed".
+  const play = $("play");
+  const playH = () => { const v = play.offsetHeight + "px"; if (document.documentElement.style.getPropertyValue("--play-h") !== v) document.documentElement.style.setProperty("--play-h", v); };
+  if (globalThis.ResizeObserver && play) new ResizeObserver(() => requestAnimationFrame(playH)).observe(play);
+
+  // ---- The sheet's actions (were the bar's buttons, cloudtab.js, until 2026-11-08) ---------------------------
+  const C = () => globalThis.CLOUDVOICE || null;
+  // Use this phone's voice: Use my PC off at once, the next Play uses this device's voice. Never taken by itself.
+  function useDevice() {
+    try { SETTINGS.update({ useMyPC: false }); } catch (e) { PLAYER.say(`Not saved: ${e.message}`); return; }
+    PLAYER.settingsChanged(["useMyPC"]);
+    log("voice", `Use my PC switched off from the Now reading sheet: this ${deviceKind()}'s voice from the next Play`);
+    PLAYER.say(`Using this ${deviceKind()}'s voice. Press Play.`);
+    drawWindow();
+  }
+  // Use <the PC's voice> after a Play refused because the voice is this device's own (a browser voice): Kokoro Heart
+  // fp32 on the PC's card becomes the voice, Use my PC stays on.
+  function usePC() {
+    const D = C() ? C().DEFAULT : { voice: "kokoro:af_heart", runOn: "gpu", precision: "fp32" };
+    const label = `Use ${C() ? C().defaultName() : "Kokoro Heart on the PC"}`;
+    let names;
+    try { names = SETTINGS.update(D); } catch (e) { PLAYER.say(`Not saved: ${e.message}`); return; }
+    PLAYER.settingsChanged(names.length ? names : ["voice"]);
+    log("voice", `${label} chosen from the Now reading sheet: ${D.voice}, ${D.precision}, on the PC's card from the next Play; Use my PC stays on`);
+    PLAYER.say(`Using ${C() ? C().defaultName() : "Kokoro Heart on the PC"}. Press Play.`);
+    drawWindow();
+  }
+  function tryNow() { if (C()) C().tryNow(); setTimeout(drawWindow, 50); }
+  // Sign in: the Cloud tab, where the PC's password is typed once per device.
+  function signIn() { if (win) win.close(); if (globalThis.SETTINGSWIN) { SETTINGSWIN.open(); SETTINGSWIN.show("Sound", "Cloud"); } }
+
+  // ---- The "Now reading" sheet -----------------------------------------------------------------------------
+  // In plain words (plan 4.4): the voice kinds Natural / Light / Experimental, the voice's short name ("Heart (US
+  // female)"), "graphics chip" on a phone, "graphics card" on a computer and on the PC. The family names, fp32, CUDA
+  // and the rest are only in the technical details. Built once per opening and updated in place (a button never
+  // disappears under a finger; the technical details stay open or closed as left: techOpen).
+  const GRADE = { A: "best quality", "A-": "very good quality", "B-": "good quality" };   // the makers' grades; C and lower: no word
+  const KIND = { kokoro: "Natural voice", piper: "Light voice", supertonic: "Experimental voice" };
+  function voiceWords() {
+    const id = String(SETTINGS.get("voice") || ""), v = ENGINE.parse(id), E = ENGINE.get(v.engine), device = deviceKind();
+    if (!E) return { name: id, kind: "" };
+    const vo = (E.voices || []).find((x) => x.id === v.voice);
+    if (E.id === "webspeech") {
+      const android = /Android/i.test(navigator.userAgent);
+      return { name: !v.voice || v.voice === E.id ? "The default voice" : vo ? vo.name.replace(/\s*\([^)]*\)\s*$/, "") : v.voice, kind: `This ${device}'s own voice${android ? " · stops when the screen goes off" : ""}` };
+    }
+    let name = vo ? vo.name : v.voice;
+    if (E.id === "kokoro") name = name.replace(/, grade .*$/, "");
+    else if (E.id === "piper") name = name.replace(/\((UK|US), [^)]*\)/, "($1)");
+    else if (E.id === "supertonic") name = name.replace(/\s*\([A-Z]\d+\).*$/, "");
+    const grade = E.id === "kokoro" && vo ? GRADE[vo.grade] : "";
+    return { name, kind: (KIND[E.id] || E.name) + (grade ? ` · ${grade}` : "") };
+  }
+  // The second line of Where: the chip (and the connection, for the PC).
+  function whereSub(where, s, dt) {
+    const P = globalThis.PLAYER;
+    if (where.pc) {
+      const c = C(), chip = c && c.runOn === "cpu" ? "Processor" : "Graphics card", lat = c ? c.latency : 0;
+      const link = !c ? "" : c.connected ? `connection ${lat && lat >= 800 ? "slow" : "good"}${lat ? ` (${(lat / 1000).toFixed(1)} s)` : ""}` : s.problem ? "" : c.retry.running ? "connecting…" : lat ? `answered in ${(lat / 1000).toFixed(1)} s` : "";
+      return [chip, link].filter(Boolean).join(" · ");
+    }
+    if (s.live) return "The browser speaks it";
+    const e = P && P.state !== "stopped" && P.engine && P.engine.id !== "cloud" ? P.engine : null, d = dt && dt.voice;   // stopped: the settings say where the next Play makes it
+    const piper = ENGINE.parse(String(SETTINGS.get("voice") || "")).engine === "piper";   // Piper runs on the processor only
+    const card = e ? e.runsOn === "the card" || (!e.runsOn && SETTINGS.get("runOn") !== "cpu") : !piper && SETTINGS.get("runOn") !== "cpu";
+    if (card) return where.device === "computer" ? "Graphics card" : "Graphics chip";
+    return d && d.copies > 1 ? `Processor · ${d.copies} copies` : "Processor";
+  }
+  function speedWords(x) {
+    if (x >= 1) return `made ${x >= 2 ? Math.round(x) : x.toFixed(1)} times faster than it is read: ${x >= 2 ? "plenty" : x >= 1.3 ? "enough" : "just keeps up"}`;
+    return "made slower than it is read: the sound runs out now and then";
+  }
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  let techOpen = false;
+  function buildSheet(w) {
+    const root = el("div", "nrsheet");
+    const row = (key, label) => {
+      const r = el("div", "nrrow nr-" + key), v = el("div", "nrv");
+      r.append(el("div", "nrk", label), v);
+      root.appendChild(r);
+      return { r, v };
+    };
+    const S = { root };
+    S.where = row("where", "Where");
+    S.whereMain = el("div", "nrmain"); S.whereSub = el("div", "nrsub");
+    S.where.v.append(S.whereMain, S.whereSub);
+    S.problem = row("problem", "Problem");
+    S.probTitle = el("div", "nrtitle"); S.probText = el("div", "nrtext"); S.probBtns = el("div", "nrbtns");
+    const btn = (text, fn, act) => { const b = el("button", "nrbtn", text); b.type = "button"; b.dataset.act = act; b.addEventListener("click", fn); S.probBtns.appendChild(b); return b; };
+    S.usePC = btn("Use Kokoro Heart on the PC", usePC, "usePC");              // first: it keeps Use my PC on
+    S.tryNow = btn("Try now", tryNow, "tryNow");
+    S.signIn = btn("Sign in", signIn, "signIn");
+    S.useDevice = btn("Use this phone's voice", useDevice, "useDevice");
+    S.problem.v.append(S.probTitle, S.probText, S.probBtns);
+    S.ready = row("ready", "Ready");
+    S.readyMain = el("div", "nrmain"); S.readyBar = el("div", "nrbar"); S.readyFill = el("span"); S.readyBar.appendChild(S.readyFill); S.readySub = el("div", "nrsub");
+    S.ready.v.append(S.readyMain, S.readyBar, S.readySub);
+    S.voice = row("voice", "Voice");
+    S.voiceMain = el("div", "nrmain"); S.voiceSub = el("div", "nrsub");
+    S.voice.v.append(S.voiceMain, S.voiceSub);
+    S.speed = row("speed", "Speed");
+    S.speedMain = el("div", "nrmain"); S.speedSub = el("div", "nrsub");
+    S.speed.v.append(S.speedMain, S.speedSub);
+    S.none = row("none", "Problems");
+    S.none.v.appendChild(el("div", "nrmain nrnone", "None"));
+    S.tech = el("details", "nrtech");
+    S.tech.open = techOpen;
+    S.tech.appendChild(el("summary", null, "Technical details (for testing)"));
+    S.techBody = el("div", "stwin");
+    S.tech.appendChild(S.techBody);
+    S.tech.addEventListener("toggle", () => { techOpen = S.tech.open; S.techDrawn = ""; drawWindow(); });
+    root.appendChild(S.tech);
+    w.body.appendChild(root);
+    return S;
+  }
+  // Written only when what they show changed (the sheet is drawn once a second: no layout work for nothing).
+  // "Made on " + the place in bold (text, never HTML: the PC's name is Jon's to choose).
+  const setText = (node, text) => { if (node.textContent !== text) node.textContent = text; };
+  function setMade(node, name) { if (node.dataset.k === name) return; node.dataset.k = name; node.replaceChildren(document.createTextNode("Made on "), el("b", null, name)); }
+  function setBig(node, big, rest) { const k = big + "|" + (rest || ""); if (node.dataset.k === k) return; node.dataset.k = k; node.replaceChildren(el("span", "nrbig", big), document.createTextNode(rest || "")); }
+  const show = (node, on) => { if (node.hidden === !!on) node.hidden = !on; };
+  function drawSheet(S, s, d) {
+    const where = s.where || { pc: false, name: "this device", words: "on this device", device: "device" }, device = deviceKind(), p = s.problem;
+    S.draws = (S.draws || 0) + 1;
+    if (S.root.dataset.problem !== (p ? "1" : "")) S.root.dataset.problem = p ? "1" : "";
+    setMade(S.whereMain, where.name);
+    setText(S.whereSub, whereSub(where, s, d));
+    // The problem: its reason, and what can be done (Use <the PC's voice>, Try now, Use this phone's voice).
+    show(S.problem.r, !!p);
+    show(S.none.r, !p);
+    if (p) {
+      setText(S.probTitle, p.title);
+      if (S.probTitle.className !== "nrtitle " + (p.kind || "")) S.probTitle.className = "nrtitle " + (p.kind || "");
+      setText(S.probText, p.text === p.title ? "" : p.text);
+      setText(S.useDevice, `Use this ${device}'s voice`);
+      if (C()) setText(S.usePC, `Use ${C().defaultName()}`);
+      for (const b of [S.usePC, S.tryNow, S.signIn, S.useDevice]) show(b, (p.acts || []).includes(b.dataset.act));
+      show(S.probBtns, (p.acts || []).length > 0);
+    }
+    // The sound ready, against the read-ahead (held when the device had no room for more).
+    const w = s.work, bf = d.buffer || {}, max = Math.max(1, bf.high || 0);
+    if (s.live) { setBig(S.readyMain, "", "Nothing is made ahead: the voice speaks for itself"); show(S.readyBar, false); }
+    else if (s.state === "stopped") { setBig(S.readyMain, "", "Nothing is made while stopped"); show(S.readyBar, false); }
+    else {
+      setBig(S.readyMain, dur(w.ready), " of sound ready");
+      show(S.readyBar, true);
+      const width = Math.round(Math.min(1, (w.ready || 0) / max) * 100) + "%", cls = "nrbar" + (w.ready < 0.5 && s.state === "playing" ? " empty" : w.ready < LOW ? " low" : "");
+      if (S.readyFill.style.width !== width) S.readyFill.style.width = width;
+      if (S.readyBar.className !== cls) S.readyBar.className = cls;
+    }
+    const held = bf.room && !s.live ? ` · held at ${dur(bf.room.ahead)}: this ${device} has no room for more sound` : "";
+    const rk = (s.live ? "" : `Read ahead ${readAheadText()}`) + "|" + held;
+    if (S.readySub.dataset.k !== rk) { S.readySub.dataset.k = rk; S.readySub.replaceChildren(document.createTextNode(s.live ? "" : `Read ahead ${readAheadText()}`)); if (held) S.readySub.appendChild(el("span", "nrwarn", held)); }
+    const vw = voiceWords();
+    setText(S.voiceMain, vw.name);
+    setText(S.voiceSub, vw.kind);
+    const sp = w.speed && w.speed.x ? w.speed.x : 0;
+    show(S.speed.r, !!sp);
+    if (sp) { setBig(S.speedMain, `${x1(sp)}×`, ""); setText(S.speedSub, speedWords(sp)); S.speedMain.classList.toggle("slow", sp < 1); }
+    // The technical details (the old Status window), drawn only while open.
+    if (S.tech.open) { const h = html(d); if (h !== S.techDrawn) { S.techDrawn = h; S.techBody.innerHTML = h; } }
+  }
+
+  // ---- The technical details (the old Status window, as it was, without the bursts lines) --------------------
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  const row = (k, v) => `<div class="stw-row"><span class="stw-k">${esc(k)}</span><span class="stw-v">${v}</span></div>`;
+  const section = (title, body) => `<section class="stw-sec"><h3>${esc(title)}</h3>${body}</section>`;
+  const CHIP = { waiting: "waiting", making: "making", made: "made" };
   function workText(w) {
     const out = [];
     if (w.making) out.push([w.verb, w.making]);
     if (w.checking) out.push(["checking", w.checking]);
     return out;
   }
-  function fillWork(el, w) {
-    el.replaceChildren();
-    for (const [verb, list] of workText(w)) {
-      const s = document.createElement("span");
-      s.className = "wk";
-      const v = document.createElement("span"); v.className = "wv"; v.textContent = verb + " ";
-      s.append(v, list);
-      el.appendChild(s);
-    }
-  }
-  function fillReady(el, num, bar, w) {
-    num.textContent = readyText(w.ready);
-    el.className = "ready" + (readyClass(w) ? " " + readyClass(w) : "");
-    bar.style.width = w.ready == null ? "0" : Math.round(Math.min(1, w.ready / METER_SEC) * 100) + "%";
-    el.title = w.ready == null ? "The device speaks the text itself: no sound is made ahead." : `${Math.floor(w.ready)} s of sound made ahead of what is being read${w.idle ? " (stopped)" : ""}`;
-  }
-  // The voice's speed now: "2.3×" (the sliding window's figure), "resting", or nothing yet.
-  const speedText = (v) => (v === "resting" ? "resting" : v && v.x ? `${x1(v.x)}×` : "");
-  function fillSpeed(el, v) {
-    if (!el) return;
-    const t = speedText(v);
-    el.hidden = !t;
-    el.textContent = t;
-    el.classList.toggle("slow", !!(v && v.x && v.x < 1));
-    el.title = v === "resting" ? "The voice is resting: enough sound is made ahead" : v && v.x ? `The voice's speed over the last ${v.window === 60 ? "minute" : v.window + " s"}: ${v.sound} s of sound made in ${v.busy} s of work (${v.chunks} chunk${v.chunks === 1 ? "" : "s"}); above 1× it keeps ahead of the reading` : "";
-  }
-  // Draw the bar from the player's status: each part only when what it SHOWS changed (job 3, C3: the
-  // raw "ready" float changed the old single key on every call, so all three parts were rebuilt every
-  // second). The periodic redraws (the player's 1 s tick, the window's timer) skip a hidden page, which
-  // is drawn again when it is back; a state change or a message still draws at once (the text is right
-  // whenever the page shows). The full-status window is drawn by its own 1 s timer (C4), not here.
-  const drawn3 = { l1: "", ready: "", speed: "", work: "" };
-  function refresh() {
-    if (!provider) return;
-    let s;
-    try { s = provider.status(); } catch (e) { return; }
-    const w = s.work, k1 = JSON.stringify(s.line1);
-    const kr = [readyText(w.ready), readyClass(w), w.ready == null ? "n" : Math.round(Math.min(1, w.ready / METER_SEC) * 100), w.ready == null ? "" : Math.floor(w.ready), !!w.idle].join("|");
-    const ks = JSON.stringify(w.speed && typeof w.speed === "object" ? [w.speed.x, w.speed.sound, w.speed.busy, w.speed.chunks, w.speed.window] : w.speed == null ? null : w.speed);
-    const kw = JSON.stringify(workText(w));
-    if (k1 !== drawn3.l1) { drawn3.l1 = k1; line1(status, s.line1); }
-    if (kr !== drawn3.ready) { drawn3.ready = kr; fillReady(readyEl, readyNum, readyBar, w); }
-    if (ks !== drawn3.speed) { drawn3.speed = ks; fillSpeed(speedEl, w.speed); }
-    if (kw !== drawn3.work) { drawn3.work = kw; fillWork(workEl, w); }
-  }
-  const redrawAll = () => { drawn3.l1 = drawn3.ready = drawn3.speed = drawn3.work = ""; };
-  document.addEventListener("visibilitychange", () => { if (document.visibilityState !== "hidden") { refresh(); if (win) drawWindow(); } });
-  // Line 1 set directly (the player draws over it at its next refresh).
-  function setStatus(text, isError) { drawn3.l1 = ""; line1(status, { lead: "", text: text || "", err: !!isError }); }
-
-  // The bar grows with its lines: the page keeps that much clear at the bottom.
-  const play = $("play");
-  if (globalThis.ResizeObserver && play) new ResizeObserver(() => document.documentElement.style.setProperty("--play-h", play.offsetHeight + "px")).observe(play);
-
-  // ---- The full-status window ------------------------------------------------------------------------
-  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
-  const x1 = (x) => (x >= 10 ? x.toFixed(0) : x.toFixed(1));
-  const row = (k, v) => `<div class="stw-row"><span class="stw-k">${esc(k)}</span><span class="stw-v">${v}</span></div>`;
-  const section = (title, body) => `<section class="stw-sec"><h3>${esc(title)}</h3>${body}</section>`;
-  const CHIP = { waiting: "waiting", making: "making", made: "made" };
   function chunkChip(c) {
     const chk = c.chk ? ` · ${c.chk}` : "";
     const cls = ["stw-c", "st-" + c.st, c.chk ? "ck-" + c.chk.replace(/[^a-z]+/g, "-").replace(/-$/, "") : ""].filter(Boolean).join(" ");
@@ -10753,20 +11083,19 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   }
   function html(d) {
     const out = [];
-    const l = d.line1, w = d.work;
+    const l = d.line1, w = d.work, sp = w.speed && w.speed.x ? `${x1(w.speed.x)}×` : "";
     out.push(`<div class="stw-now"><div class="stw-l1${l.err ? " err" : ""}">${l.lead ? `<span class="stlead">${esc(l.lead)}</span>${l.text ? " · " : ""}` : ""}${esc(l.text)}</div>`
       + `<div class="stw-ready ready ${readyClass(w)}"><span class="stw-big">${esc(readyText(w.ready))}</span><span class="rbar"><span style="width:${w.ready == null ? 0 : Math.round(Math.min(1, w.ready / METER_SEC) * 100)}%"></span></span></div>`
-      + (speedText(w.speed) ? `<span class="vspeed stw-speed">${esc(speedText(w.speed))}</span>` : "")
+      + (sp ? `<span class="vspeed stw-speed">${esc(sp)}</span>` : "")
       + `<div class="stw-work">${workText(w).map(([v, s]) => `<div><span class="wv">${esc(v)}</span> ${esc(s)}</div>`).join("") || (d.state === "stopped" ? "" : "<div>nothing being made or checked</div>")}</div></div>`);
     if (d.error) out.push(section("Last error", `<div class="stw-err">${esc(d.error.text)}</div><div class="stw-dim">at ${esc(d.error.when)}</div>`));
     const v = d.voice;
     if (v) {
       const b = [row("Voice", esc(v.short || "?") + (v.loaded ? "" : ` (loading${v.status ? ": " + esc(v.status) : ""})`))];
       if (!v.live) {
-        b.push(row("Speed now", v.now ? `${x1(v.now.x)}× real time over the last ${v.window === 60 ? "1 min" : v.window + " s"} (${v.now.sound} s of sound made in ${v.now.busy} s of work, ${v.now.chunks} chunk${v.now.chunks === 1 ? "" : "s"})` : v.resting ? `resting (no chunk made in the last ${v.window === 60 ? "1 min" : v.window + " s"})` : `no chunk made in the last ${v.window === 60 ? "1 min" : v.window + " s"}`));
+        b.push(row("Speed now", v.now ? `${x1(v.now.x)}× real time over the last ${v.window === 60 ? "1 min" : v.window + " s"} (${v.now.sound} s of sound made in ${v.now.busy} s of work, ${v.now.chunks} chunk${v.now.chunks === 1 ? "" : "s"})` : `no chunk made in the last ${v.window === 60 ? "1 min" : v.window + " s"}`));
         b.push(row("Speed", v.x ? `${x1(v.x)}× real time (measured: ${v.sound.toFixed(0)} s of sound in ${v.chunks} chunks)` : "not measured yet"));
         b.push(row("Chunks", `up to ${v.chunkSize} characters, ${v.copies > 1 ? v.copies + " at a time" : "one at a time"}; ${v.pieces} pieces made this reading`));
-        b.push(row("Bursts", v.burst ? (v.resting ? "resting until the buffer runs down" : "making sound") : "off (makes whenever there is room)"));
       } else b.push(row("Pieces", `${v.pieces} said this reading`));
       if (v.failures) b.push(row("Failures", `${v.failures}${v.timeouts ? ` (${v.timeouts} timed out)` : ""}`));
       out.push(section("Voice", b.join("")));
@@ -10774,7 +11103,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     const bf = d.buffer;
     if (bf && bf.ready != null) {
       out.push(section("Buffer", row("Ready", `${bf.ready.toFixed(1)} s of sound ahead of the playhead`)
-        + row("Limits", v && v.burst ? `makes up to ${bf.high} s, rests, starts again under ${bf.low} s` : `up to ${bf.high} s`)
+        + row("Read ahead", `up to ${esc(dur(bf.high))}${bf.room ? ` (the setting is ${esc(readAheadText())}; held at ${esc(dur(bf.room.ahead))}: no room for more sound here: ${esc(bf.room.why)})` : ` (${esc(readAheadText())})`}`)
         + row("Sound path", bf.mode === "stream" ? "one MP3 stream" : bf.mode === "clips" ? "one clip per piece" : "closed")
         + (bf.stalls ? row("Ran out", `${bf.stalls} time${bf.stalls === 1 ? "" : "s"} this reading`) : "")
         + (bf.held ? row("Scroll pause", "the next chunk waits while the page is scrolled") : "")));
@@ -10800,27 +11129,27 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     }
     return out.join("");
   }
+
   function drawWindow() {
-    if (!win || !provider) return;
-    let d;
-    try { d = provider.detail(); } catch (e) { win.inner.textContent = "The status could not be read: " + e.message; win.drawn = ""; return; }
-    const h = html(d);
-    if (h !== win.drawn) { win.drawn = h; win.inner.innerHTML = h; }
+    if (!win || !provider || !win.sheet) return;
+    let s, d;
+    try { s = provider.status(); d = provider.detail(); }
+    catch (e) { win.sheet.whereMain.textContent = "The status could not be read: " + e.message; return; }
+    drawSheet(win.sheet, s, d);
   }
   function openWindow() {
-    if (win) { FLOAT.open("status"); return; }
-    const w = FLOAT.open("status", { title: "Status", width: 460, height: 560, onClose: () => { win = null; } });
-    w.inner = document.createElement("div");
-    w.inner.className = "stwin";
-    w.body.appendChild(w.inner);
+    if (win) { FLOAT.open("status"); drawWindow(); return; }
+    const w = FLOAT.open("status", { title: "Now reading", width: 440, height: 600, onClose: () => { win = null; } });
+    w.title("Now reading");
+    w.sheet = buildSheet(w);
     win = w;
     drawWindow();
   }
-  box.addEventListener("click", openWindow);
+  // A tap on the status line opens the sheet; a mouse click leaves no focus on it, so Space stays Play / Pause.
+  box.addEventListener("click", (e) => { if (e.detail > 0) box.blur(); openWindow(); });
   box.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.stopPropagation(); openWindow(); } });
-  // The window is live once a second whatever the player's state (while stopped the player does not
-  // tick: a download, a finished benchmark), never while the page is hidden (job 3, C4: it was drawn
-  // twice a second while playing, plus on every status() call).
+  // The sheet is live once a second whatever the player's state (while stopped the player does not tick: a
+  // download, the PC tried again), never while the page is hidden.
   setInterval(() => { if (win && document.visibilityState !== "hidden") { refresh(); drawWindow(); } }, 1000);
 
   // ---- Following the reading ---------------------------------------------------------------------------
@@ -10857,8 +11186,9 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   });
 
   globalThis.PLAYBAR = {
-    update, status: setStatus, refresh, follow, lock: setLock, open: openWindow,
+    update, status: setStatus, refresh, follow, lock: setLock, open: openWindow, hooks, dur, readAheadText,
     provide: (p) => { provider = p; redrawAll(); refresh(); },
+    get device() { return deviceKind(); },
     get window() { return win; },
     get locked() { return locked; },
   };
@@ -11502,12 +11832,15 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 // Step 8a: the listener (listener.js) hears every chunk made (listen()); in "check before reading" a
 // chunk waits in feed() until its check (and re-rolls) are done and a kept re-roll replaces its sound;
 // a card voice beside a card listener goes through LISTENER.gate (one card job at a time, taking turns).
-// The status (2026-10-18): status() gives the two lines playbar.js draws (line 1 the state and the parts
-// at work, or the error; line 2 ready seconds and the chunks being made and checked), detail() the
-// full-status window.
+// The status (2026-10-18, the bar 2026-11-08): status() gives the bar's one line (bar: the state and where the sound
+// is made, or a problem, playbar.js), the problem for the "Now reading" sheet, the ready seconds and the speed, and
+// the technical line (line1: the state and the parts at work, or the error); detail() the sheet's technical details.
+// Read ahead (Jon, 2026-11-08): the voice makes sound steadily up to the Read ahead setting (seconds, no upper limit),
+// on this device and with the PC; Make sound in bursts (rest at 5 minutes, start again under 2) is gone. A browser with
+// no room for more sound holds the read-ahead where it was and says so (room), never a quiet cap.
 (function () {
-  const AHEAD_SEC = STREAM.AHEAD_SEC;
-  const AHEAD_LOW = 120;             // bursts: the voice rests until this much is left
+  const MIN_ROOM_SEC = 10;           // the stream refusing sound with less than this ready is a failure, not a full buffer
+  const BACKLOG_SEC = 60;            // made pieces waiting to go into the stream: a voice faster than the MP3 encoder waits at this much (memory), never a cap on Read ahead
   const LOOK_AHEAD = 40;             // pieces beyond the stream head the pump looks at
   const MADE_MAX = 150;              // made pieces kept; the sound of the oldest goes
   const PAUSE_SEC = 0.5;
@@ -11515,7 +11848,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   const CHUNK_FLOOR = 30;            // characters: the smallest chunk the measured speed may ask for
   const TROUBLE = ["asking for the piece again", "restarting the voice, then asking again"];
   const ANDROID = /Android/i.test(navigator.userAgent);
-  const hooks = { pumpOff: false, watchdogMs: 0, ahead: null, chunk: 0, hold: "", holdMinAhead: null, holdAfter: 0, holdMomentum: 0, madeMax: 0 };   // chunk: a size pinned by the tests (0 = by speed); hold: Play waits, saying this (the full benchmark, bench.js); holdMinAhead: the scroll hold's buffer floor in s (null = 30); holdAfter / holdMomentum: its quiet window / momentum in ms (0 = 10000 / 1500)
+  const hooks = { pumpOff: false, watchdogMs: 0, chunk: 0, hold: "", holdMinAhead: null, holdAfter: 0, holdMomentum: 0, madeMax: 0 };   // chunk: a size pinned by the tests (0 = by speed); hold: Play waits, saying this (the full benchmark, bench.js); holdMinAhead: the scroll hold's buffer floor in s (null = 30); holdAfter / holdMomentum: its quiet window / momentum in ms (0 = 10000 / 1500)
 
   let state = "stopped";
   let gen = 0;                       // a Stop makes everything in flight stale
@@ -11598,8 +11931,9 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   // stops with the engine's plain message, which says what to choose instead. Nothing is switched.
   const settingFailed = (e) => !!(e && (e.cannot || e.fatal));
   // Use my PC (Jon, 2026-10-25): the PC runs flat out and the network's round trip is hidden. Whole pieces
-  // (one chunk each), a deep pipeline (as many pieces asked at once as the PC's read-ahead, engine.depth),
-  // no bursts, no copies, no scroll hold; each piece's times (queue, making, on the way) are logged.
+  // (one chunk each), a deep pipeline (as many pieces asked at once as the PC's read-ahead, engine.depth, up to
+  // the Read ahead setting's seconds of sound), no copies, no scroll hold; each piece's times (queue, making, on the
+  // way) are logged.
   const cloudOn = () => !!(engine && engine.id === "cloud");
   const inFlightMax = () => (cloudOn() ? Math.max(1, Number(engine.depth) || 6) : copiesNow());
 
@@ -11674,33 +12008,38 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   const flagsOf = (m) => m.chunks.map((c, i) => (c.dur != null ? true : (engine && engine.id === "cloud" && globalThis.CLOUDVOICE && CLOUDVOICE.stateOf(`${m.piece.id}#${i}`)) || false));
   function madePause(p) {
     const rate = (engine && engine.sampleRate) || 24000;
-    const m = { piece: p, chunks: [{ text: "", chars: 0, audio: new Float32Array(Math.round(rate * PAUSE_SEC)), sampleRate: rate, dur: PAUSE_SEC, words: null, ms: 0 }], done: 1, dur: PAUSE_SEC, chars: 0, ms: 0, t0: performance.now(), complete: true, appended: 0 };
+    const m = { piece: p, chunks: [{ text: "", chars: 0, audio: new Float32Array(Math.round(rate * PAUSE_SEC)), sampleRate: rate, dur: PAUSE_SEC, words: null, ms: 0 }], done: 1, dur: PAUSE_SEC, chars: 0, ms: 0, t0: performance.now(), complete: true, appended: 0, want: STREAM.run };
     made.set(p.id, m);
     HIGHLIGHT.made(p, [true]);
   }
-  // Bursts (the "Make sound in bursts" setting, on by default): the voice makes sound until AHEAD_SEC
-  // is ready, then rests until AHEAD_LOW is left, then makes again. A voice on the graphics card
-  // starves the screen while it works (the word tint freezes: measured 2026-10-17), so resting most
-  // of the time at steady state keeps the highlight smooth for minutes at a stretch; a voice slower
-  // than real time never reaches the top mark and simply keeps making. Off: a piece is made as soon as
-  // there is room under AHEAD_SEC. hooks.ahead = { high, low } lets the tests shrink the marks.
-  let resting = false;
-  function wantMore(ahead) {
-    const high = (hooks.ahead && hooks.ahead.high) || AHEAD_SEC, low = (hooks.ahead && hooks.ahead.low) || AHEAD_LOW;
-    if (!SETTINGS.get("burst") || cloudOn()) { resting = false; return ahead < high; }   // (Use my PC: the phone's card is idle, no bursts)   // switched off mid-reading: no "resting" left on line 1
-    if (resting && ahead < low) { resting = false; log("playback", `making sound again: ${ahead.toFixed(0)} s ready`); }
-    else if (!resting && ahead >= high) { resting = true; log("playback", `resting: ${ahead.toFixed(0)} s of sound ready; the voice starts again under ${low} s`); }
-    return !resting;
+  // ---- Read ahead (Jon, 2026-11-08: "don't limit me") ------------------------------------------------
+  // The voice makes sound steadily: a piece is asked for whenever less than the Read ahead setting is ready (sound in
+  // the stream plus the pieces made and on their way to it), on this device and with the PC alike; no rest and resume
+  // cycle (Make sound in bursts is gone). No upper limit of our own: when the browser has no room for more sound (the
+  // stream's buffer full, QuotaExceededError; a clip it cannot keep), the reading goes on and the read-ahead is held
+  // at what was ready then for the rest of the reading (room), said once in the log and in the "Now reading" sheet.
+  const readAheadSec = () => { const v = Number(SETTINGS.get("readAhead")); return v > 0 ? v : 300; };
+  let room = null;                   // { ahead, why, at }: the browser refused more sound this reading
+  const aheadMax = () => (room ? Math.min(readAheadSec(), room.ahead) : readAheadSec());
+  const noRoom = (e) => !!(e && (e.room || e.name === "QuotaExceededError"));
+  function full(e) {
+    if (room) return;
+    room = { ahead: STREAM.ahead(), why: firstLine((e && e.message) || e), at: Date.now() };
+    log("playback", `read ahead held at ${PLAYBAR.dur(room.ahead)}: this device has no room for more sound (${room.why}); Read ahead is ${PLAYBAR.readAheadText()}. The reading goes on, and more is made as the sound plays`);
+    PLAYBAR.refresh();
   }
   // The next piece to make: from the stream head on, past what is made or being made (a piece with
-  // chunks missing after a failure is made again: only those chunks), while more is wanted
-  // (wantMore), into the next chapter when Continue is on. Null when there is nothing to make now
-  // (a chapter still loading calls the pump when it is in).
+  // chunks missing after a failure is made again: only those chunks), while less than the read-ahead
+  // is ready, into the next chapter when Continue is on. Null when there is nothing to make now
+  // (a chapter still loading calls the pump when it is in). A made piece passed on the way is marked
+  // as wanted by this run (trimMade keeps it). Made pieces not yet in the stream (the MP3 encoder or the
+  // stream behind a very fast voice) stop the making at BACKLOG_SEC of their sound: the pump goes on as
+  // they go in, so the read-ahead is reached all the same and memory stays small.
   function nextToMake() {
     if (!head) return null;
-    let { ch, k } = head, list = lists.get(ch), ahead = STREAM.ahead(), looked = 0;
-    if (!wantMore(ahead)) return null;
-    while (list && looked < LOOK_AHEAD && ahead < ((hooks.ahead && hooks.ahead.high) || AHEAD_SEC)) {
+    const max = aheadMax();
+    let { ch, k } = head, list = lists.get(ch), ahead = STREAM.ahead(), looked = 0, waiting = 0;
+    while (list && looked < LOOK_AHEAD && ahead < max && waiting < BACKLOG_SEC) {
       if (k >= list.length) {
         if (!SETTINGS.get("continueChapters") || ch + 1 >= BOOK.count) return null;
         ch++; k = 0; list = lists.get(ch);
@@ -11708,13 +12047,29 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
         continue;
       }
       const p = list[k], m = made.get(p.id);
-      if (m && m.complete) ahead += m.dur;
+      if (m) m.want = STREAM.run;
+      if (m && m.complete) { ahead += m.dur; waiting += m.dur; }
       else if (making.has(p.id)) ahead += (m ? m.dur : 0) + estimateSec(p) * (m ? 1 - m.done / m.chunks.length : 1);
       else if (p.pause) { madePause(p); ahead += PAUSE_SEC; feed(); }
       else return { ch, k, piece: p };
       k++; looked++;
     }
     return null;
+  }
+  // The made pieces kept: at most MADE_MAX, the oldest let go first, but never one still ahead of the reading (in
+  // the stream, a clip still to play, or made for this run and waiting to go in): with a long Read ahead there can
+  // be more pieces ahead than MADE_MAX, and letting those go would make them twice and drop their made marks.
+  const waitingToGoIn = (m) => STREAM.isOpen && m.want === STREAM.run && !(m.run === STREAM.run && m.appended >= m.chunks.length);
+  function trimMade() {
+    const max = hooks.madeMax || MADE_MAX;
+    if (made.size <= max) return;
+    const now = STREAM.isOpen ? STREAM.time() : 0, ahead = new Set();
+    for (const e of STREAM.entries) if (e.end > now) ahead.add(e.id);
+    for (const [id, old] of made) {
+      if (made.size <= max) break;
+      if (!old.complete || old.appending || making.has(id) || ahead.has(id) || waitingToGoIn(old)) continue;
+      letGo(id, old);
+    }
   }
   // The jobs: one per chunk. The next job is the earliest chunk not yet started of a piece being
   // made, else the first missing chunk of the next piece to make (opened here). peek = only say
@@ -11731,11 +12086,9 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     if (!m) {
       const spans = PIECES.chunks(x.piece.speech, chunkSize);
       const chunks = spans.map((c) => ({ text: c.text, chars: c.text.length }));
-      m = { piece: x.piece, chunks: chunks.length ? chunks : [{ text: x.piece.speech, chars: x.piece.speech.length }], spans: spans.length ? spans : null, done: 0, dur: 0, chars: x.piece.speech.length, ms: 0, t0: performance.now(), complete: false, appended: 0 };
+      m = { piece: x.piece, chunks: chunks.length ? chunks : [{ text: x.piece.speech, chars: x.piece.speech.length }], spans: spans.length ? spans : null, done: 0, dur: 0, chars: x.piece.speech.length, ms: 0, t0: performance.now(), complete: false, appended: 0, want: STREAM.run };
       made.set(x.piece.id, m);
-      const max = hooks.madeMax || MADE_MAX;
-      const now = STREAM.isOpen ? STREAM.time() : 0, toPlay = (id) => STREAM.entries.some((e) => e.id === id && e.end > now);   // a clip still to be played keeps its sound
-      if (made.size > max) { for (const [id, old] of made) { if (made.size <= max) break; if (!old.complete || old.appending || making.has(id) || (old.url && toPlay(id))) continue; letGo(id, old); } }
+      trimMade();
     }
     const rec = { piece: x.piece, ch: x.ch, k: x.k, name: nameOf(x.ch, x.k), t0: performance.now(), m, jobs: new Map() };
     making.set(x.piece.id, rec);
@@ -11760,7 +12113,8 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   // ---- The voice's speed now (Jon, job 1: beside "ready N s") -------------------------------------
   // Seconds of sound made ÷ wall-clock seconds the voice spent making them, over the chunks that landed
   // in the last SPEED_WINDOW_S: overlapping jobs (copies side by side) count their time once, a chunk's
-  // time starts when it really starts (after the card gate), resting time is not work.
+  // time starts when it really starts (after the card gate), time waiting for room under the read-ahead
+  // is not work.
   const SPEED_WINDOW_S = 60;
   let speedLog = [];                 // { a, b, dur }: a chunk's start and end (performance.now()) and its seconds of sound
   function speedNow(now = performance.now()) {
@@ -12030,7 +12384,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     feeding = true;
     try {
       while (state !== "stopped" && head && STREAM.isOpen) {
-        if (STREAM.ahead() > AHEAD_SEC) break;                 // the tick tries again
+        if (STREAM.ahead() > aheadMax()) break;                // the tick tries again
         const h = head, list = lists.get(h.ch);
         if (!list) { loadList(h.ch).then(feed, (e) => stop(`The chapter could not be read: ${e.message}`, true)); break; }
         if (h.k >= list.length) {
@@ -12050,6 +12404,9 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
         const i = clips ? 0 : m.appended, c = m.chunks[i];
         if (c.dur == null) { pump(); break; }                     // the next chunk in order is not made yet
         if (clips ? m.chunks.some(waitsForCheck) : waitsForCheck(c)) break;   // waiting for the listener (check before reading): it feeds again
+        // No room in the browser this reading (room): the next piece goes in once the sound played has made room for it
+        // (an almost empty buffer always tries, so a piece longer than the room can never wedge the reading).
+        if (room && STREAM.ahead() > 0.5 && STREAM.ahead() + (clips ? m.dur : c.dur) > room.ahead) break;
         const myGen = gen;
         const item = clips ? Object.assign({ id: piece.id, piece, ch: h.ch, url: m.url, dur: m.dur, sampleRate: m.chunks[0].sampleRate, offs: m.offs }, m.url ? {} : whole(m))
           : { id: piece.id, piece, ch: h.ch, audio: c.audio, mp3: c.mp3, sampleRate: c.sampleRate, dur: c.dur, words: c.words, chunk: i, chunks: n, cover: coverOf(m, i) };
@@ -12065,8 +12422,12 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
           else { if (item.mp3) c.mp3 = item.mp3; if (c.mp3) delete c.audio; m.appended = i + 1; }   // the encoded copy is enough from here
         } catch (e) {
           if (gen !== myGen) break;
+          if (!clips && item.mp3 && !c.mp3) c.mp3 = item.mp3;  // the encoded copy is kept for the next try
+          // The browser has no room for more sound: held here, said once (full); the tick tries again as the sound
+          // plays. With almost nothing ready that is no full buffer but a failure, and it stops as one.
+          if (noRoom(e) && STREAM.ahead() >= MIN_ROOM_SEC) { full(e); break; }
           log("error", `piece ${nameOf(h.ch, h.k)}${n > 1 ? ` (chunk ${i + 1} of ${n})` : ""} could not be added to the sound: ${firstLine(e.message)}`);
-          if (++appendFails >= 3) { stop(`The sound could not be played: ${firstLine(e.message)}. The reading has stopped.`, true); break; }
+          if (++appendFails >= 3) { stop(noRoom(e) ? `This device has no room for the sound (${firstLine(e.message)}). The reading has stopped.` : `The sound could not be played: ${firstLine(e.message)}. The reading has stopped.`, true); break; }
         }
         if (m.appended >= n && head === h) head = { ch: h.ch, k: h.k + 1 };   // else a jump moved it meanwhile
       }
@@ -12230,7 +12591,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     if (loading.size) w.push(`preparing ${Array.from(loading.keys()).map((ch) => BOOK.label(ch, true)).join(", ")}`);
     if (recovering) w.push("restarting the voice");
     else if (engine && !engineLoaded) w.push("loading the voice");
-    if (!w.length && resting) return `the voice resting (${STREAM.ahead().toFixed(0)} s ready)`;
+    if (!w.length && head && STREAM.ahead() >= aheadMax() - 0.5) return `nothing: the read-ahead is full (${STREAM.ahead().toFixed(0)} s ready)`;
     return w.join("; ") || "nothing (idle)";
   }
   STREAM.on("time", (entry, at) => { if (state !== "stopped" && entry && !live) follow(entry, at); });
@@ -12348,13 +12709,13 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     MEDIA.update();
     SCREEN.update();
   }
-  // ---- The status (playbar.js draws it; Jon's spec 2026-10-18) -----------------------------------
-  // Line 1: the state and the compute-heavy parts at work ("Playing · Kokoro fp32 (card) · Whisper
-  // base (card)", "resting", "scroll pause"); an error replaces it when the reading stopped, or leads
-  // it (the listener stopped, the reading goes on); a notice (status(text)) shows while the state it
-  // was given in lasts (15 s at most while playing). Line 2: the chunks being made and checked
-  // ("making 3103: 5 6.2 8 · checking 3103: 3 4"), and ready = seconds of sound made ahead of the
-  // playhead (STREAM.ahead()). detail() is the full-status window's content.
+  // ---- The status (playbar.js draws it; the bar's line 2026-11-08, the technical line 2026-10-18) ----
+  // bar: the one line the bottom bar shows (barNow, below). line1, the technical line (the sheet's technical
+  // details): the state and the compute-heavy parts at work ("Playing · Kokoro fp32 (card) · Whisper base (card)",
+  // "scroll pause"); an error replaces it when the reading stopped, or leads it (the listener stopped, the reading
+  // goes on); a notice (status(text)) shows while the state it was given in lasts (15 s at most while playing).
+  // work: the chunks being made and checked ("making 3103: 5 6.2 8 · checking 3103: 3 4"), ready = seconds of sound
+  // made ahead of the playhead (STREAM.ahead()), the voice's speed. detail() is the sheet's technical details.
   const NOTICE_MS = 15000;
   let lastStatus = "", lastError = false, statusAt = 0, statusState = "", lastErr = null, lastLag = "";
   function status(text, isError) {
@@ -12378,8 +12739,9 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     const extra = engine.id === "kokoro" && o.engine === "newer" ? "newer engine" : "";
     return `${name}${where || extra ? ` (${[where, extra].filter(Boolean).join(", ")})` : ""}`;
   }
+  const noticeNow = () => (lastStatus && statusState === state && (state !== "playing" || performance.now() - statusAt < NOTICE_MS) ? lastStatus : "");
   function line1() {
-    const notice = lastStatus && statusState === state && (state !== "playing" || performance.now() - statusAt < NOTICE_MS) ? lastStatus : "";
+    const notice = noticeNow();
     if (state === "stopped") {
       if (lastError && notice) return { lead: "", text: notice, err: true };          // the error replaces the line
       return { lead: "", text: ["Stopped", notice, browserNote(), globalThis.CLOUDVOICE ? CLOUDVOICE.using() : ""].filter(Boolean).join(" · "), err: false };
@@ -12390,7 +12752,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     if (!engine || !engineLoaded) parts.push(recovering ? "Restarting the voice…" : engine && engine.waiting && engine.status ? "" : "Loading voice…", engine && engine.status ? engine.status : "");   // Use my PC waiting: "Waiting for the PC · Can't reach the PC yet: …"
     else {
       if (state === "playing") parts.push("Playing");
-      parts.push(voiceShort() + (resting && !making.size ? " resting" : ""));
+      parts.push(voiceShort());
       const L = LISTENER.brief();
       if (L) parts.push(L);
       if (held) parts.push("scroll pause");
@@ -12398,6 +12760,60 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     if (live && browserNote()) parts.push(BROWSER_NOTE);
     if (notice && !lastError) parts.push(notice);
     return { lead, text: parts.filter(Boolean).join(" · "), err: false };
+  }
+  // ---- The bar's line, the problem, where (Jon's plan 2026-11-08, 1.3 and 1.4) ------------------------
+  // Where the sound is made: "on this phone" / "on this computer" / "on this device" (PLAYBAR.device: a tablet, or
+  // unsure), or with Use my PC "on <the PC's name>" (CLOUDVOICE.pcName(): the name PC Relay keeps, "your PC" until
+  // it is known). Stopped, the next Play's way (the setting); else the voice in use.
+  const pcWanted = () => (state === "stopped" ? !!SETTINGS.get("useMyPC") && !!globalThis.CLOUDVOICE : cloudOn());
+  const pcName = () => (globalThis.CLOUDVOICE ? CLOUDVOICE.pcName() : "your PC");
+  const Cap = (s) => String(s).charAt(0).toUpperCase() + String(s).slice(1);
+  function whereNow() {
+    if (pcWanted()) { const name = pcName(); return { pc: true, name, words: "on " + name }; }
+    const device = PLAYBAR.device;
+    return { pc: false, device, name: "this " + device, words: "on this " + device };
+  }
+  // A problem, for the bar (one short coloured line, "· tap") and the sheet (the reason, and what to do: acts are
+  // "tryNow", "useDevice" (Use my PC off), "usePC" (the PC's own voice)). An error that stopped the reading; the PC
+  // that can't be reached (Play waiting, a dropped connection, the book-open check); the listener that stopped.
+  function problemNow() {
+    const C = globalThis.CLOUDVOICE, notice = noticeNow(), name = pcName();
+    if (lastError && notice) {
+      if (state === "stopped" && C && C.badVoice) return { kind: "err", short: `${Cap(name)} can't make this voice`, title: `${Cap(name)} can't make this voice`, text: notice, acts: ["usePC", "useDevice"] };
+      if (state === "stopped" && C && C.failed) { const t = /password|sign this device in/i.test(notice) ? `${Cap(name)} wants its password` : `Can't use ${name}`; return { kind: "err", short: t, title: t, text: notice, acts: ["useDevice"] }; }
+      return { kind: "err", short: notice, title: state === "stopped" ? "The reading stopped" : "Something went wrong", text: notice, acts: [] };
+    }
+    if (pcWanted() && C && C.retry.running && C.retry.why) {
+      const r = C.retry, when = r.busy || !r.next ? "Trying again now" : `Trying again in ${Math.max(1, Math.ceil((r.next - Date.now()) / 1000))} s`;
+      const keeps = state !== "stopped" && STREAM.ahead() > 0.5 ? " The sound already here keeps playing." : "";
+      return { kind: "warn", short: `Can't reach ${name}`, title: `Can't reach ${name}`, text: `${Cap(r.why)}. ${when} (try ${r.attempt}).${keeps}`, acts: ["tryNow", "useDevice"] };
+    }
+    // The PC answered, but its voice is private and this device is not signed in: said before Play refuses.
+    if (state === "stopped" && pcWanted() && C && C.signedOut) return { kind: "warn", short: `Sign in to ${name}`, title: `Not signed in to ${name}`, text: "Its voice is private: sign this device in once (Settings → Cloud → Sign in).", acts: ["signIn", "useDevice"] };
+    if (state !== "stopped" && engineLoaded && !recovering && LISTENER.state.why) return { kind: "warn", short: "Listener stopped", title: "Listener stopped", text: LISTENER.note(), acts: [] };   // (an earlier reading's failure is not this one's until the voice is in and the listener began)
+    return null;
+  }
+  // The voice's own progress as a percentage ("Loading Cardy 40%", "Downloading model.onnx: 120 MB of 326 MB"), or null.
+  function percentOf(s) {
+    const t = String(s || ""), p = /(\d{1,3})\s?%/.exec(t);
+    if (p) return Math.min(100, Number(p[1]));
+    const m = /([\d.]+)\s?MB of ([\d.]+)\s?MB/.exec(t);
+    return m && Number(m[2]) > 0 ? Math.min(100, Math.round(Number(m[1]) / Number(m[2]) * 100)) : null;
+  }
+  // The bar's one line (playbar.js keeps it one line high, a long one ending in "…"): text, kind ("" / "warn" /
+  // "err"), suffix (kept whole at the end: " 37%", " · tap").
+  function barNow(p) {
+    if (p) return { text: p.short, kind: p.kind, suffix: " · tap" };
+    const where = whereNow(), notice = noticeNow();
+    const word = state === "playing" ? "Playing" : state === "paused" ? "Paused" : "Stopped";
+    if (state !== "stopped" && (!engine || !engineLoaded || recovering)) {
+      if (recovering) return { text: "Restarting the voice…", kind: "", suffix: "" };
+      if (engine && engine.id === "cloud" && engine.waiting) return { text: `Waiting for ${where.name}…`, kind: "", suffix: "" };
+      const pct = percentOf(engine && engine.status);
+      return { text: "Getting the voice ready…", kind: "", suffix: pct != null ? ` ${pct}%` : "" };
+    }
+    if (notice) return { text: state === "stopped" || notice.toLowerCase().startsWith(word.toLowerCase()) ? notice : `${word} · ${notice}`, kind: "", suffix: "" };
+    return { text: `${word} · ${where.words}`, kind: "", suffix: "" };
   }
   // "3103:5" + chunk 1 of 3 -> { c: "3103", t: "5.2" }; a list of those -> "3103: 5.2 6 3104: 0 +3".
   function label(name, i, n) {
@@ -12422,10 +12838,10 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     return {
       verb: live ? "saying" : "making", making: group(mk, 6), checking: group(ck, 6), counts: { making: mk.length, checking: ck.length },
       ready: state === "stopped" ? 0 : live ? null : STREAM.ahead(), idle: state === "stopped",
-      speed: state === "stopped" || live || !engineLoaded ? null : resting && !making.size ? "resting" : speedNow(),
+      speed: state === "stopped" || live || !engineLoaded ? null : speedNow(),
     };
   }
-  const statusNow = () => ({ state, loading: state !== "stopped" && !engineLoaded, line1: line1(), work: work() });
+  const statusNow = () => { const p = problemNow(); return { state, loading: state !== "stopped" && !engineLoaded, live, bar: barNow(p), problem: p, where: whereNow(), line1: line1(), work: work() }; };
   // The full-status window: everything above plus each piece's chunks from the one being read on
   // (waiting / making / made, then to check / checking / checked), the voice's measured speed, the
   // buffer, the last error, the listener and the word lag.
@@ -12458,8 +12874,8 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     const L = LISTENER.state, x = stats.synthMs ? stats.sound / (stats.synthMs / 1000) : 0;
     return Object.assign(statusNow(), {
       error: lastErr ? { text: lastErr.text, when: LOG.clock(new Date(lastErr.when)) } : null,
-      voice: engine ? { short: voiceShort(), loaded: engineLoaded, status: engine.status || "", live, x, now: state === "stopped" || live ? null : speedNow(), window: SPEED_WINDOW_S, chunks: stats.chunks, pieces: stats.pieces, sound: stats.sound, chunkSize, copies: copiesNow(), copiesAsked: copiesAsked(), resting, burst: !!SETTINGS.get("burst"), failures: stats.failures, timeouts: stats.timeouts } : null,
-      buffer: { ready: state === "stopped" ? 0 : live ? null : STREAM.ahead(), mode: STREAM.mode, high: (hooks.ahead && hooks.ahead.high) || AHEAD_SEC, low: (hooks.ahead && hooks.ahead.low) || AHEAD_LOW, stalls: stats.stalls, held: !!held },
+      voice: engine ? { short: voiceShort(), loaded: engineLoaded, status: engine.status || "", live, x, now: state === "stopped" || live ? null : speedNow(), window: SPEED_WINDOW_S, chunks: stats.chunks, pieces: stats.pieces, sound: stats.sound, chunkSize, copies: copiesNow(), copiesAsked: copiesAsked(), runsOn: engine.runsOn || "", failures: stats.failures, timeouts: stats.timeouts } : null,
+      buffer: { ready: state === "stopped" ? 0 : live ? null : STREAM.ahead(), mode: STREAM.mode, high: aheadMax(), setting: readAheadSec(), room, stalls: stats.stalls, held: !!held },
       listener: L.on || L.why ? { name: L.name, runOn: L.runOn, loaded: L.loaded, mode: L.mode, why: L.why, stats: L.stats, queue: L.queue + (L.busy ? 1 : 0), shared: LISTENER.shared, gate: L.gate } : null,
       lag: lastLag,
       activity: state === "stopped" ? "" : activity(),
@@ -12506,7 +12922,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   }
   async function start(myGen) {
     fresh();
-    trouble.clear(); speedLog = []; appendFails = 0; endMsg = ""; cut = null; hiddenPause = false; mediaCh = -1; resting = false; lag = null; lastPiecesLog = performance.now();
+    trouble.clear(); speedLog = []; appendFails = 0; endMsg = ""; cut = null; hiddenPause = false; mediaCh = -1; room = null; lag = null; lastPiecesLog = performance.now();
     setState("playing");
     status("");                          // line 1 says "Loading voice…" until the voice is in
     // The resume rule: back to the chapter where the reading stopped, unless Jon moved by hand since.
@@ -12716,6 +13132,9 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
       else { titleStale = true; status(`Read the chapter title first: ${SETTINGS.get("readTitle") ? "on" : "off"} from the next chapter not prepared yet (the rest from the next Play).`); }
     }
     if (names.includes("backgroundPlay") && state !== "stopped") status(`Background playback ${SETTINGS.get("backgroundPlay") ? "on" : "off"} from the next Play.`);
+    // Read ahead is used at once: more is asked for now when it went up; when it went down nothing more is made
+    // until the reading has played down to it (the sound already made stays).
+    if ((names.includes("readAhead") || names.includes("readAheadUnit")) && state !== "stopped") { log("playback", `read ahead now ${PLAYBAR.readAheadText()}${room ? ` (held at ${PLAYBAR.dur(room.ahead)} this reading: no room for more)` : ""}`); pump(); feed(); PLAYBAR.refresh(); }
   }
   READER.onChange((what, v) => {
     if (what === "para") { if (state === "stopped") { last = null; forgetReading(); } else if (!moving) jumpToPara(READER.chapter, v, "tap"); }
@@ -12745,7 +13164,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     }
   });
 
-  // The tick: the pump (chunks become wanted as the sound plays down from the 300 s ahead), the feed,
+  // The tick: the pump (chunks become wanted as the sound plays down under the read-ahead), the feed,
   // the pump watchdog (fires only when the pump itself left chunks waiting; for a voice that speaks
   // for itself, when nothing has been said for two seconds with a piece waiting), the status line.
   const pw = { since: 0, lastFire: -1e9 };
@@ -12775,7 +13194,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   }
   setInterval(() => {
     if (state === "stopped") return;
-    if (head && !feeding && STREAM.ahead() < AHEAD_SEC) feed();
+    if (head && !feeding && STREAM.ahead() < aheadMax()) feed();
     pump();
     try { pumpWatchdog(); } catch (e) { log("error", "the pump watchdog failed", e); }
     if (document.visibilityState !== "hidden") PLAYBAR.refresh();   // job 3, C3: nothing drawn while hidden (playbar.js draws on the way back)
@@ -12817,7 +13236,8 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     made: (id) => made.get(id) || null,            // the chunk record (the tests look at it)
     get making() { return Array.from(making.keys()); },
     get jobs() { return jobsInFlight(); },
-    get resting() { return resting; },
+    get readAhead() { return aheadMax(); },         // seconds made ahead at most now: the setting, or less when the browser had no room (room)
+    get room() { return room; },                    // { ahead, why, at }: the browser refused more sound this reading; null
     get held() { return !!held; },                  // the next chunk waiting while the page is scrolled (E3)
     get sentence() { return nowSaid; },             // what the notification title shows (E6)
   };
@@ -12831,8 +13251,8 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 // (Background · Storage · Debug; Storage is storagetab.js), and the buttons above them.
 // LIVE vs APPLY (Jon, 2026-10-20, job 1): the light settings (LIVE: theme, text size, UI size, speed,
 // volume, title first, continue, word timing, scroll pause, keep-alive ×2, screen awake, debug view, log
-// types) are saved and applied the moment they change (a slider logs once when it is let go); only the
-// heavy ones (voice, engine, run on, precision, pace, steps, copies, bursts, the listener, background
+// types, read ahead) are saved and applied the moment they change (a slider logs once when it is let go); only the
+// heavy ones (voice, engine, run on, precision, pace, steps, copies, the listener, background
 // playback, the text rules, offline, slim) wait as pending for Apply, and their rows say so ("Applies
 // when you press Apply"). A choice made on a button elsewhere (first run's Good enough / Default:
 // SETTINGSWIN.choose) is applied at once, as if Apply had been pressed for exactly those settings,
@@ -12888,7 +13308,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   const GROUPS = [["Reading", ["Book", "Reading", "Text"]], ["Sound", ["Voice", "Cloud", "Word highlight", "Listener", "Voice data", "Offline package"]], ["System", ["Background", "Storage", "Debug"]]];
   const OWNS = {
     Book: ["skipWatermarks", "watermarkRules"], Reading: ["speed", "volume", "readTitle", "continueChapters", "theme", "textSize", "uiSize"],
-    Text: ["spelling", "capsAsWords", "numbersToWords", "joinShort"], Voice: ["voice", "kokoroEngine", "runOn", "precision", "pace", "steps", "copies", "speaker", "burst"],
+    Text: ["spelling", "capsAsWords", "numbersToWords", "joinShort"], Voice: ["voice", "kokoroEngine", "runOn", "precision", "pace", "steps", "copies", "speaker", "readAhead", "readAheadUnit"],
     Cloud: ["useMyPC", "pcCard", "pcAddress"], "Word highlight": ["wordTiming"], Listener: ["listenerOn", "listener", "listenMode", "reroll"], "Voice data": ["offline", "slim"], "Offline package": [], Background: ["backgroundPlay", "keepAlive", "keepAliveIdle", "holdOnScroll", "screenAwake"],
     Debug: ["debugView", "detailedMarks", "logTypesOff"],
   };
@@ -12896,7 +13316,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     skipWatermarks: "Skip website watermarks", watermarkRules: "Watermark rules", speed: "Speed", volume: "Volume", readTitle: "Read the chapter title first",
     continueChapters: "Continue into the next chapter", theme: "Theme", textSize: "Text size", uiSize: "UI size", spelling: "Spelling replacements",
     capsAsWords: "Read ALL-CAPS as normal words", numbersToWords: "Read numbers as words", joinShort: "Join short pieces", voice: "Voice", runOn: "Run on",
-    precision: "Precision", pace: "Pace", steps: "Steps", copies: "Copies", speaker: "Speaker", burst: "Make sound in bursts", wordTiming: "Word timing source",
+    precision: "Precision", pace: "Pace", steps: "Steps", copies: "Copies", speaker: "Speaker", readAhead: "Read ahead", readAheadUnit: "Read ahead", wordTiming: "Word timing source",
     backgroundPlay: "Background playback", keepAlive: "Keep-alive sound", keepAliveIdle: "Keep-alive while stopped or paused", screenAwake: "Keep the screen awake",
     offline: "Offline mode", slim: "Slim mode", kokoroEngine: "Engine", holdOnScroll: "Pause making sound while I scroll",
     listenerOn: "Listener", listener: "Listener model", listenMode: "Word check timing", reroll: "Re-roll faulty chunks",
@@ -12904,7 +13324,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     useMyPC: "Use my PC for the voice", pcCard: "PC graphics card", pcAddress: "PC address",
   };
   // Saved and applied the moment they change (Jon, 2026-10-20). Everything else a tab owns waits for Apply.
-  const LIVE = ["theme", "textSize", "uiSize", "speed", "volume", "readTitle", "continueChapters", "wordTiming", "holdOnScroll", "keepAlive", "keepAliveIdle", "screenAwake", "debugView", "detailedMarks", "logTypesOff", "pcAddress"];
+  const LIVE = ["theme", "textSize", "uiSize", "speed", "volume", "readTitle", "continueChapters", "wordTiming", "holdOnScroll", "keepAlive", "keepAliveIdle", "screenAwake", "debugView", "detailedMarks", "logTypesOff", "pcAddress", "readAhead", "readAheadUnit"];
   const HEAVY = new Set(Object.values(OWNS).flat().filter((n) => !LIVE.includes(n)));
   const APPLY_NOTE = "Applies when you press Apply";
   const LATER = {};                                         // tabs not built yet (none); datatab.js and storagetab.js add theirs
@@ -12954,6 +13374,16 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     if (names.length) apply(names);
     if (opts.drag) { marks(); return; }
     say(`Saved: ${LABELS[name] || name}.${note ? ` ${note}.` : ""}`);
+    rerender();
+  }
+  // Several light settings saved as one (Read ahead's number and unit): one write, one log line, applied now.
+  function liveMany(changes, label) {
+    for (const k of Object.keys(changes)) pending.delete(k);
+    let names;
+    try { names = S.update(changes); }
+    catch (e) { say(`Not saved: ${firstLine(e.message)}. ${label} is unchanged.`); log("settings", `not saved (${Object.entries(changes).map(([k, v]) => `${k} ${S.short(v)}`).join(" · ")}): ${firstLine(e.message)}`); rerender(); return; }
+    if (names.length) apply(names);
+    say(`Saved: ${label}.`);
     rerender();
   }
   // A live slider let go: one settings log line for the whole drag, and the message.
@@ -13214,8 +13644,35 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
       [{ id: "", label: `Automatic (${VOICEWORK.copies(null)} on this device: half the threads, up to 8)` }].concat(Array.from({ length: 16 }, (_, i) => ({ id: String(i + 1), label: String(i + 1) }))),
       { toValue: (v) => (v === "" ? null : Number(v)), fromValue: (v) => (v == null ? "" : String(v)) }));
     if (d.speaker > 1) body.appendChild(speakerRow(d.speaker));
-    body.appendChild(toggle("burst", "Make sound in bursts", "Makes up to 5 minutes of sound ahead, then rests until 2 minutes are left. Resting frees the graphics card, which keeps the word highlight smooth. Off: sound is made whenever there is room.", pcOn ? "not used while Use my PC is on: the PC keeps its own pieces ahead" : ""));
+    body.appendChild(readAheadRow());
     body.appendChild(whereRow());
+  }
+  // Read ahead (Jon, 2026-11-08: "don't limit me. If I want it to be 5,000 minutes, then let me. Default: 300 seconds.
+  // Have a number field and a unit field"): how much sound is made ahead, on this device and with the PC. Applies at
+  // once. A new unit keeps the number as typed (300 seconds → 300 minutes). No upper limit; when the device had no
+  // room for more sound this reading, the row says where the player held it (player.js room).
+  function readAheadRow() {
+    const unitNow = () => value("readAheadUnit"), shownNumber = () => String(+(Number(value("readAhead")) / (S.UNITS[unitNow()] || 1)).toPrecision(12));
+    const box = h("span", "sahead");
+    const num = h("input", "snum");
+    num.type = "number"; num.min = "0"; num.step = "any"; num.inputMode = "decimal"; num.value = shownNumber();
+    num.setAttribute("aria-label", "Read ahead");
+    const sel = h("select");
+    sel.setAttribute("aria-label", "Read ahead unit");
+    for (const [id, label] of [["s", "seconds"], ["min", "minutes"], ["h", "hours"]]) { const o = h("option", null, label); o.value = id; sel.appendChild(o); }
+    sel.value = unitNow();
+    const commit = () => {
+      const n = Number(String(num.value).replace(",", ".").trim()), u = sel.value, sec = n * (S.UNITS[u] || 1);
+      if (!(n > 0) || !Number.isFinite(sec)) { say("Read ahead needs a number above 0."); num.value = shownNumber(); sel.value = unitNow(); return; }
+      liveMany({ readAhead: sec, readAheadUnit: u }, "Read ahead");
+    };
+    num.addEventListener("change", commit);
+    sel.addEventListener("change", commit);
+    box.append(num, sel);
+    const r = row("Read ahead", "", box, { name: "readAhead" });
+    const room = globalThis.PLAYER && PLAYER.room;
+    if (room) r.querySelector(".slab").appendChild(h("div", "swarn", `Held at ${PLAYBAR.dur(room.ahead)} this reading: this device has no room for more sound.`));
+    return r;
   }
   // What runs on the processor and on the card with these settings (pending included), and the
   // contention warning when a card listener shares the card with a card voice (both tabs show it).
@@ -14591,9 +15048,9 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 // (engines/cloud.js). PC address (live). Test: one short sentence made on the PC and played here, with its
 // timing. Sign in / out (PC Relay 2, 2026-11-07: the PC's password, once per device: one pass for this browser,
 // shared by every page of the same site; the PC voice and the Private files are private). Data used.
-// "Use this device's voice" turns Use my PC off at once (the button the play bar shows after a failed Play too,
+// "Use this device's voice" turns Use my PC off at once (the "Now reading" sheet offers it after a failed Play too,
 // and while Play waits for the PC). The status box keeps trying while the tab is open (engines/cloud.js's retry
-// loop), with Try now; the play bar has a Try now while Use my PC tries again.
+// loop), with Try now; the sheet has a Try now while Use my PC tries again.
 (function () {
   const W = globalThis.SETTINGSWIN;
   if (!W) return;
@@ -14799,55 +15256,8 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     body.appendChild(dataRow());
   }
   W.addTab("Cloud", cloudTab);
-
-  // The play bar's "Use this device's voice" button: shown after a Play that could not reach the PC.
-  const btn = h("button", "cloudoff", "Use this device's voice");
-  btn.type = "button"; btn.hidden = true; btn.id = "cloudoff";
-  btn.title = "Turns off Use my PC for the voice; the next Play uses this device's voice";
-  btn.addEventListener("click", () => {
-    try { SETTINGS.update({ useMyPC: false }); } catch (e) { return; }
-    btn.hidden = true;
-    PLAYER.settingsChanged(["useMyPC"]);
-    log("voice", "Use my PC switched off from the play bar: this device's voice from the next Play");
-    PLAYER.say("Using this device's voice. Press Play.");
-  });
-  // "Try now" beside it while Use my PC is trying the PC again (the book-open check, a Play waiting, a dropped
-  // connection): the next attempt at once, instead of at the end of the countdown.
-  const now = h("button", "cloudoff cloudnow", "Try now");
-  now.type = "button"; now.hidden = true; now.id = "cloudnow";
-  now.title = "Try to reach the PC again now";
-  now.addEventListener("click", () => { if (globalThis.CLOUDVOICE) CLOUDVOICE.tryNow(); });
-  // "Use <the PC's voice>" beside it after a Play that stopped because the chosen voice is this device's own (a
-  // browser voice; engines/cloud.js badVoice): sets Kokoro Heart fp32 on the PC's card as the voice and keeps Use
-  // my PC on; the other button turns Use my PC off. Two ways out on the bar, neither taken by itself.
-  const pc = h("button", "cloudoff cloudpc", "Use Kokoro Heart on the PC");
-  pc.type = "button"; pc.hidden = true; pc.id = "cloudpc";
-  pc.title = "Chooses the PC's own voice (Kokoro Heart, fp32, on its graphics card); Use my PC stays on";
-  pc.addEventListener("click", () => {
-    const D = C() ? C().DEFAULT : { voice: "kokoro:af_heart", runOn: "gpu", precision: "fp32" };
-    let names;
-    try { names = SETTINGS.update(D); } catch (e) { PLAYER.say(`Not saved: ${e.message}`); return; }
-    pc.hidden = true; btn.hidden = true;
-    PLAYER.settingsChanged(names.length ? names : ["voice"]);
-    log("voice", `${pc.textContent} chosen from the play bar: ${D.voice}, ${D.precision}, on the PC's card from the next Play; Use my PC stays on`);
-    PLAYER.say(`Using ${C() ? C().defaultName() : "Kokoro Heart on the PC"}. Press Play.`);
-  });
-  const box = document.getElementById("stbox");
-  if (box && box.parentNode) { box.parentNode.insertBefore(now, box.nextSibling); box.parentNode.insertBefore(btn, box.nextSibling); box.parentNode.insertBefore(pc, box.nextSibling); }
-  // Shown: "Use this device's voice" after a Play the PC could not serve, and while Play (or a reading) waits
-  // for the PC: still Jon's choice, nothing switches by itself; "Try now" while a retry counts down; "Use <the
-  // PC's voice>" after a Play refused because the voice is a browser voice, while that voice is still the setting.
-  const sync = () => {
-    const C = globalThis.CLOUDVOICE, on = !!SETTINGS.get("useMyPC");
-    const show = !!(C && on && ((C.failed && PLAYER.status().state === "stopped") || (C.waiting && PLAYER.status().state !== "stopped")));
-    if (btn.hidden === show) btn.hidden = !show;
-    const retry = !!(C && on && C.retry.running && C.retry.why);
-    if (now.hidden === retry) now.hidden = !retry;
-    const bad = !!(C && on && C.badVoice && PLAYER.status().state === "stopped");
-    if (pc.hidden === bad) { pc.hidden = !bad; if (bad) pc.textContent = `Use ${C.defaultName()}`; }
-  };
-  if (globalThis.CLOUDVOICE) CLOUDVOICE.on(sync);
-  setInterval(sync, 1000);
+  // The bar's buttons (Use this device's voice, Try now, Use <the PC's voice>) moved to the "Now reading" sheet
+  // with the problem they answer (playbar.js, 2026-11-08): the bar keeps one height whatever happens.
 })();
 </script>
 <script>
