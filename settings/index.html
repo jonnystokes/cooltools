@@ -199,11 +199,16 @@ form.inline input { flex: 1 1 180px; }
      becomes "signin", and call() answers { ok: false, signin: true, status: 401, why }.
    - Status events: checking / connected / starting / ready / offline / off / signin / reload, each with a plain `why`.
    - Version-checked: a relay that needs a newer client says so (426), and the status becomes "reload".
+   - The PC's name (2026-11-08, relay 2.2: the ping's "name", e.g. "Jon's desktop"): R.pcName() is the name from the
+     last answer, remembered in this browser per address (localStorage "relay-pc-name"), so a page that cannot reach
+     the PC still says "Can't reach Jon's desktop"; "your PC" (RelayClient.YOUR_PC) before the PC has ever answered at
+     that address. A page shows it as text, never as HTML (textContent). It is a label, never an address.
 
    const R = RelayClient.create({ app: "reader", log });  // app names the page in the PC's logs; log(text) hears
                                                            // relay-client's notes (which address, and why)
    await R.address();                                      // { url, from: "file" | "built-in" | "page", why }
    await R.ping();                                         // { ok, info, latency } ; info.signed_in, info.services
+   R.pcName();                                             // "Jon's desktop" (the last answer's, or remembered), else "your PC"
    R.signedIn();                                           // this browser holds a pass (the last ping says if it is valid)
    await R.signIn(password);                               // { ok, why, device, name }
    await R.signOut();                                      // { ok }
@@ -235,6 +240,25 @@ form.inline input { flex: 1 1 180px; }
   // relay-client 1 kept a device id and one pass per scope; relay 2 does not accept them: tidied away.
   for (const k of store.keys()) if (k === "relay-device" || k.startsWith("relay-pass:")) store.set(k, "");
   let memPass = null; // when localStorage is not available (a sandboxed page): this page only
+  // The PC's name, remembered per address: localStorage "relay-pc-name" = { "<address>": { name, at } } (the 10 newest).
+  const NAME_KEY = "relay-pc-name", YOUR_PC = "your PC";
+  const cleanName = (n) => (typeof n === "string" ? Array.from(n.replace(/[\x00-\x1f\x7f-\x9f]/g, "").trim()).slice(0, 64).join("").trim() : "");
+  const memNames = {}; // when localStorage is not available: this page only
+  function names() {
+    try { const j = JSON.parse(store.get(NAME_KEY) || "{}"); return j && typeof j === "object" && !Array.isArray(j) ? j : {}; } catch (e) { return {}; }
+  }
+  function nameAt(base) {
+    const e = names()[base] || memNames[base];
+    return e ? cleanName(typeof e === "string" ? e : e.name) : "";
+  }
+  function keepName(base, name) {
+    memNames[base] = { name, at: Date.now() };
+    const all = names();
+    if (all[base] && all[base].name === name) return;
+    all[base] = { name, at: Date.now() };
+    const keep = Object.entries(all).filter(([, e]) => e && typeof e === "object").sort((a, b) => (b[1].at || 0) - (a[1].at || 0)).slice(0, 10);
+    store.set(NAME_KEY, JSON.stringify(Object.fromEntries(keep)));
+  }
 
   function httpWhy(status) {
     return ({ 400: "the PC refused that address", 401: "sign-in needed", 403: "the PC refused this page",
@@ -426,6 +450,8 @@ form.inline input { flex: 1 1 180px; }
         const info = await r.json();
         this.latency = Math.round(performance.now() - t0);
         this.info = info;
+        const name = cleanName(info && info.name);   // the PC's name (relay 2.2), remembered for this address
+        if (name) { this._pc = { base: this.base, name }; keepName(this.base, name); }
         if ((info.min_client || 0) > VERSION) { const why = "this page is out of date: reload it"; this._set("reload", { why }); return { ok: false, why, info, kind: "reload" }; }
         if (info.pass === "unknown") this._lost("signed out on the PC (or the sign-in ended): sign in again");
         if (!info.on) { const why = "the PC relay is switched off (tray icon on the PC)"; this._set("off", { why, info }); return { ok: false, why, info, kind: "off" }; }
@@ -440,6 +466,11 @@ form.inline input { flex: 1 1 180px; }
       } finally { clearTimeout(timer); }
     }
     service(id) { return ((this.info && this.info.services) || []).find((s) => s.id === id) || null; }
+    // The PC's name: the last answer's at this address, else the one remembered here for it, else "your PC".
+    pcName() {
+      if (this._pc && this._pc.base === this.base) return this._pc.name;
+      return nameAt(this.base) || YOUR_PC;
+    }
     // ---- sign-in: the password -> this browser's one pass (the old one, if any, is replaced on the PC) ----
     async signIn(password) {
       await this._ready();
@@ -523,7 +554,7 @@ form.inline input { flex: 1 1 180px; }
   }
 
   // DEFAULT_PC: relay-client 2's old name for BUILT_PC (kept for code that still reads it)
-  root.RelayClient = { VERSION, BUILT_PC, DEFAULT_PC: BUILT_PC, ADDRESS_FILE, create: (opts) => new Relay(opts || {}), httpWhy };
+  root.RelayClient = { VERSION, BUILT_PC, DEFAULT_PC: BUILT_PC, ADDRESS_FILE, YOUR_PC, create: (opts) => new Relay(opts || {}), httpWhy };
 })(typeof window !== "undefined" ? window : globalThis);
 
 // ---- apps.js ----
@@ -1175,6 +1206,9 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
     version: () => (P.info && P.info.version) || "",
     // relay 2.1 or newer answers the Settings page's own requests
     has21: () => !!(P.info && S.atLeast(P.info.version, "2.1")),
+    // the PC's name (relay 2.2: "Jon's desktop"), as relay-client remembers it; "your PC" before any answer
+    name: () => R.pcName(),
+    has22: () => !!(P.info && S.atLeast(P.info.version, "2.2")),
     async ping(timeout) {
       const t0 = Date.now();
       const r = await R.ping(timeout || 8000);
@@ -1245,9 +1279,9 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
 })();
 
 // ---- connection.js ----
-// connection.js: the Connection tab: this browser's one sign-in (shared by every Cool tools page), the PC's address
-// (where it comes from, what the PC itself says, the programs here with an address of their own), and a link to the
-// Browser app cache manager for what this browser keeps.
+// connection.js: the Connection tab: this browser's one sign-in (shared by every Cool tools page), this PC's name (relay
+// 2.2: "Jon's desktop", with Rename, signed in), the PC's address (where it comes from, what the PC itself says, the
+// programs here with an address of their own), and a link to the Browser app cache manager.
 "use strict";
 (function () {
   const { h, $, clear } = S;
@@ -1263,26 +1297,23 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
     if (S.pc.signedIn()) {
       const name = (info.device && info.device.name) || (dev && dev.name) || "this browser";
       const since = (info.device && info.device.since) || (dev && dev.since) || 0;
-      status.append(h("span.okmark", { text: "✓ " }), `Signed in on this device. The PC calls it `, h("b", { text: name }),
-        since ? ` (signed in ${S.when(since)}).` : ".");
+      status.append(h("span.okmark", { text: "✓ " }), `Signed in to ${S.pc.name()} as `, h("b", { text: name }),
+        since ? ` (since ${S.when(since)}).` : ".");
     } else if (info.pass === "unknown" || (R.status && R.status.state === "signin" && /ended|signed out on the PC/.test(R.status.why || ""))) {
-      status.textContent = "The PC ended this device's sign-in (signed out on the PC, a new password, or not used for a long time). Sign in again below.";
+      status.textContent = `${S.pc.name()} ended this device's sign-in. Sign in again below.`;
       status.classList.add("warn");
     } else status.textContent = "Not signed in on this device.";
     card.append(status);
-    card.append(h("p.help", { text: "One sign-in for this whole browser: signing in or out here signs every Cool tools page in this browser in or out " +
-      "(the Book reader, the Cloud File Manager, Screen Peek and the rest), because they are one site and share one pass. Signed in: everything on the PC, " +
-      "this page's devices, log, switches and Restart included. Signed out: public things only. A sign-in not used for " +
-      ((info.expires_days || 30) + " days ends by itself.") }));
+    card.append(h("p.help", { text: "One sign-in for every Cool tools page in this browser." }));
     const say = h("p.say");
     if (said.text && Date.now() - said.at < 60000) S.say(say, said.text, said.kind);
     if (!S.pc.signedIn()) {
-      const pw = h("input#pw", { type: "password", autocomplete: "current-password", placeholder: "The PC's password", "aria-label": "The PC's password" });
-      const nm = h("input#devname", { type: "text", autocomplete: "off", maxlength: "60", placeholder: "Name this device (optional), e.g. Jon's phone", "aria-label": "A name for this device (optional)" });
+      const pw = h("input#pw", { type: "password", autocomplete: "current-password", placeholder: `The password for ${S.pc.name()}`, "aria-label": `The password for ${S.pc.name()}` });
+      const nm = h("input#devname", { type: "text", autocomplete: "off", maxlength: "60", placeholder: "This device's name (optional)", "aria-label": "This device's name (optional)" });
       const go = h("button.primary#signin", { type: "submit", text: "Sign in" });
       const form = h("form.row.signform", { on: { submit: async (e) => {
         e.preventDefault();
-        if (!pw.value) { S.say(say, "Type the PC's password first.", "bad"); pw.focus(); return; }
+        if (!pw.value) { S.say(say, "Type the password first.", "bad"); pw.focus(); return; }
         go.disabled = true; S.say(say, "Signing in…");
         const r = await S.pc.signIn(pw.value, nm.value);
         go.disabled = false;
@@ -1298,54 +1329,91 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
           "Signed out here (every Cool tools page in this browser)." + (r.why ? " " + S.sentence(r.why) : ""), "ok");
         render();
       } } });
-      card.append(h("div.row", out, h("span.help", { text: "Signs this browser out of every Cool tools page, here and on the PC." })));
+      card.append(h("div.row", out));
     }
     card.append(say);
     return card;
   }
 
+  // ---- this PC's name (relay 2.2): what every page calls it; signed-in devices rename it --------------------------
+  let nameInfo = null;   // { name, default_name } from GET /relay/pc
+  let nameSaid = { text: "", kind: "" };
+  async function loadName() {
+    const r = await S.pc.api("pc");
+    if (r.ok && r.data) { nameInfo = { name: r.data.name, default_name: r.data.default_name }; refreshName(); }
+  }
+  function nameCard() {
+    const card = h("section.card#namecard", h("h2", { text: "This PC" }));
+    if (!S.pc.signedIn()) return null;
+    const name = S.pc.name();
+    const say = h("p.say#namesay");
+    S.say(say, nameSaid.text, nameSaid.kind);
+    const shown = h("span#pcname", h("b", { text: name }));
+    const rename = h("button.small#pcrename", { type: "button", text: "Rename", on: { click: () => {
+      if (S.pc.info && !S.pc.has22()) { S.say(say, `Renaming needs PC Relay 2.2 (the PC runs ${S.pc.version()}).`, "bad"); return; }
+      const def = nameInfo && nameInfo.default_name;
+      const inp = h("input#pcnamebox", { type: "text", value: name === RelayClient.YOUR_PC ? "" : name, maxlength: "32", placeholder: def ? `Empty: ${def}` : "Empty: the default", "aria-label": "This PC's name" });
+      const save = h("button.small.primary#pcnamesave", { type: "submit", text: "Save" });
+      const form = h("form.row.inline#pcnameform", { on: { submit: async (e) => {
+        e.preventDefault();
+        save.disabled = true;
+        const r = await S.pc.api("pc", { json: { name: inp.value } });
+        if (!r.ok) { save.disabled = false; S.say(say, S.sentence(r.why), "bad"); if (r.signin) S.emit("auth"); return; }
+        nameInfo = { name: r.data.name, default_name: r.data.default_name };
+        nameSaid = { text: `Renamed: ${r.data.name}.`, kind: "ok" };
+        await S.pc.ping().catch(() => {});   // relay-client keeps the new name for every page of this browser
+        form.remove();
+        refreshName();
+        S.emit("name");
+      } } }, inp, save, h("button.small", { type: "button", text: "Cancel", on: { click: refreshName } }));
+      shown.replaceWith(form); rename.remove(); inp.focus(); inp.select();
+    } } });
+    card.append(h("p.row", h("span", { text: "This PC's name: " }), shown, " ", rename));
+    if (nameInfo && nameInfo.default_name && name === nameInfo.default_name) card.append(h("p.help#namedefault", { text: "(the default)" }));
+    card.append(say);
+    return card;
+  }
+  function refreshName() { const old = $("#namecard"), c = nameCard(); if (old && c) old.replaceWith(c); else if (old) old.remove(); }
+
   // the programs in this browser that have their own address for the PC (a test, another PC, an old setting)
   function ownAddresses() {
     const out = [];
     const reader = (() => { try { const j = JSON.parse(S.peek("br1-settings") || "null"); return j && typeof j.pcAddress === "string" ? j.pcAddress.trim() : ""; } catch (e) { return ""; } })();
-    if (reader) out.push(["Book reader", reader, "its Settings → Cloud → PC address (blank = the usual address)"]);
+    if (reader) out.push(["Book reader", reader, "its Settings → Cloud → PC address"]);
     const fm = (() => { const v = S.peek("fm-pc-address"); if (!v) return ""; try { const j = JSON.parse(v); return typeof j === "string" ? j.trim() : ""; } catch (e) { return v.trim(); } })();
-    if (fm) out.push(["Cloud File Manager", fm, "localStorage fm-pc-address (a test or another PC)"]);
-    if (S.pc.own()) out.push(["Settings (this page)", S.pc.own(), "localStorage settings-pc-address (a test or another PC)"]);
+    if (fm) out.push(["Cloud File Manager", fm, "localStorage fm-pc-address"]);
+    if (S.pc.own()) out.push(["Settings (this page)", S.pc.own(), "localStorage settings-pc-address"]);
     return out;
   }
 
   function addrCard() {
-    const card = h("section.card#addrcard", h("h2", { text: "The PC's address" }));
+    const card = h("section.card#addrcard", h("h2", { text: "Address" }));
     const R = S.pc.R, w = R.where || {}, url = R.base;
-    const from = w.from === "file" ? "from the Cool tools address file (relay.json), as every page reads it" : w.from === "page" ? "this page's own address (localStorage settings-pc-address: a test or another PC)"
-      : w.from === "built-in" ? "built into this page, because the Cool tools address file could not be loaded" : "not looked up yet";
+    const from = w.from === "file" ? "from the Cool tools address file (relay.json)" : w.from === "page" ? "this page's own address (localStorage settings-pc-address)"
+      : w.from === "built-in" ? "built into this page (the address file could not be loaded)" : "not looked up yet";
     const copyBtn = h("button.small#copyaddr", { type: "button", text: "Copy", on: { click: async () => {
       const ok = await S.copy(url);
       S.say($("#addrcard .say"), ok ? "Copied: " + url : "This browser did not let the page copy it: select the address and copy it by hand.", ok ? "ok" : "bad");
     } } });
-    card.append(h("p.addr", h("span", { text: "This browser reaches the PC at " }), h("code#addrnow", { text: url }), " ", copyBtn));
+    card.append(h("p.addr", h("code#addrnow", { text: url }), " ", copyBtn));
     card.append(h("p.help#addrfrom", { text: S.sentence(from) }));
     if (w.from === "built-in" && w.why) card.append(h("p.warn", { text: S.sentence(w.why) }));
     const info = S.pc.info;
     const pcSays = h("p#pcsays");
-    if (!info) pcSays.textContent = "The PC has not answered yet, so it could not be asked for its own address.";
-    else if (!("address" in info)) pcSays.textContent = `The PC runs PC Relay ${info.version}, which does not say its own address (2.1 does).`;
-    else if (!info.address) pcSays.textContent = "The PC does not know its public address right now (Tailscale has not given it its name, or this is a test relay).";
-    else if (info.address === url) { pcSays.append(h("span.okmark", { text: "✓ " }), "The PC says the same: it answers at that address (its Tailscale name)."); }
+    if (!info) pcSays.textContent = "The PC has not answered yet.";
+    else if (!("address" in info)) pcSays.textContent = `PC Relay ${info.version} does not say its own address (2.1 does).`;
+    else if (!info.address) pcSays.textContent = "The PC does not know its public address right now (Tailscale has not named it yet, or this is a test relay).";
+    else if (info.address === url) { pcSays.append(h("span.okmark", { text: "✓ " }), "The PC says the same."); }
     else {
       pcSays.classList.add("warn");
       pcSays.textContent = `The PC says its public address is ${info.address}, but this page uses ${url}. ` +
-        (w.from === "file" ? "The Cool tools address file is out of date: edit cool-tools\\relay.json to " + info.address + " and push it (WEB-APP-CONVENTIONS.md 5); every page follows within a minute." : "This page's own address is not the PC's.");
+        (w.from === "file" ? "Edit cool-tools\\relay.json to " + info.address + " and push it (WEB-APP-CONVENTIONS.md 5)." : "This page's own address is not the PC's.");
     }
     card.append(pcSays);
-    card.append(h("p.help", { text: `If the address file cannot be loaded, pages use the address built into them (this page: ${RelayClient.BUILT_PC}) and say so. ` +
-      "The address file is the one place to change after the PC is renamed." }));
     const list = ownAddresses();
-    if (!list.length) card.append(h("p.help#ownaddr", { text: "No program in this browser has an address of its own: they all use the one above." }));
-    else {
-      card.append(h("p#ownaddr", { text: "Programs in this browser with an address of their own (theirs wins over the one above):" }));
-      card.append(h("ul.plain#ownlist", list.map(([who, a, where]) => h("li", h("b", { text: who + ": " }), h("code", { text: a }), h("span.help", { text: " · set in " + where })))));
+    if (list.length) {
+      card.append(h("p#ownaddr", { text: "Programs with an address of their own:" }));
+      card.append(h("ul.plain#ownlist", list.map(([who, a, where]) => h("li", h("b", { text: who + ": " }), h("code", { text: a }), h("span.help", { text: " · " + where })))));
     }
     card.append(h("p.say"));
     return card;
@@ -1353,14 +1421,14 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
 
   function browserCard() {
     return h("section.card#browsercard", h("h2", { text: "This browser" }),
-      h("p", { text: "Every Cool tools page keeps what it saves in this browser's storage for jonnystokes.github.io: the sign-in above, each program's settings, the Book reader's books and voices. " }),
-      h("p", h("a.button#cachelink", { href: "../browser-storage/", text: "Browser app cache manager" }), h("span.help", { text: " · see and delete what these pages keep in this browser" })));
+      h("p", h("a.button#cachelink", { href: "../browser-storage/", text: "Browser app cache manager" }), h("span.help", { text: " · what these pages keep in this browser" })));
   }
 
   function render() {
     const p = panel();
     if (!p) return;
-    clear(p, signCard(), addrCard(), browserCard());
+    clear(p, signCard(), nameCard(), addrCard(), browserCard());
+    if (S.pc.signedIn() && S.pc.has21() && !nameInfo) loadName();
   }
   function refreshAddr() { const old = $("#addrcard"); if (old) old.replaceWith(addrCard()); }
   function refreshStatus() {   // the sign-in line follows the PC's word without clearing a password being typed
@@ -1369,14 +1437,18 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
     const typing = $("#pw") && ($("#pw").value || document.activeElement === $("#pw") || document.activeElement === $("#devname"));
     if (!typing) card.replaceWith(signCard());
   }
-  let lastAddr = "", lastSigned = null;
+  let lastAddr = "", lastSigned = null, lastName = "";
   S.on("ping", () => {
     const key = [S.pc.R.base, S.pc.R.where && S.pc.R.where.from, S.pc.info && S.pc.info.address, S.pc.info && S.pc.info.version].join("|");
     if (key !== lastAddr) { lastAddr = key; refreshAddr(); }
-    const sig = S.pc.signedIn() + "|" + (S.pc.info && S.pc.info.signed_in) + "|" + (S.pc.info && S.pc.info.device && S.pc.info.device.name);
+    const sig = S.pc.signedIn() + "|" + (S.pc.info && S.pc.info.signed_in) + "|" + (S.pc.info && S.pc.info.device && S.pc.info.device.name) + "|" + S.pc.name();
     if (sig !== lastSigned) { lastSigned = sig; refreshStatus(); }
+    const nm = S.pc.name();
+    if (nm !== lastName) { lastName = nm; S.emit("name"); }
+    if (S.pc.signedIn() && S.pc.has21() && !nameInfo && panel() && !panel().hidden) loadName();
   });
-  S.on("auth", render);
+  S.on("name", () => { if (!$("#pcnameform")) refreshName(); refreshStatus(); });
+  S.on("auth", () => { nameInfo = null; nameSaid = { text: "", kind: "" }; render(); });
   S.connection = { render };
 })();
 
@@ -1499,7 +1571,7 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
       w.windowsAt = pcInfo ? pcInfo.windows_started : 0;
       w.relayAt = pcInfo ? pcInfo.relay_started : 0;
       w.detail = rs.last && rs.last.asked === w.asked ? rs.last.detail || "" : "";
-      note(winNew ? "The PC is back." : "PC Relay answers again, but Windows did not restart.");
+      note(winNew ? `${pcName()} is back.` : "PC Relay answers again, but Windows did not restart.");
       saveWatch(); drawRestart(); restartLoop();
       return;
     }
@@ -1526,8 +1598,7 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
       h("div.chart#pingchart", { role: "img", "aria-label": "The last 60 pings' round trips" }),
       h("p.stats#pingstats"),
       h("ul.pinglog#pinglog"),
-      h("p.help", { text: "Each ping is one request to PC Relay on the PC (/relay/ping) and its answer, through the PC's public address, timed in this browser. " +
-        "It runs while this tab is open (and while a restart is watched), and pauses while the page is hidden. The rate is kept on this device." }));
+      h("p.help", { text: "Round trips to PC Relay, timed in this browser while this tab is open." }));
   }
 
   function drawPings() {
@@ -1592,8 +1663,10 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
     if (!body) return;
     const info = S.pc.info, rows = [];
     if (!info) { clear(body, h("p.help", { text: "Waiting for the first answer from the PC…" })); return; }
-    rows.push(h("p", h("b", { text: info.pc || "The PC" }), ` · PC Relay ${info.version}` + (info.on === false ? " · switched off in the tray" : "") + (info.game ? " · Game mode on" : "")));
-    if (!S.pc.signedIn()) rows.push(h("p.help", { text: "Sign in (Connection tab) to see when Windows and PC Relay started and whether the public address answers." }));
+    // "Jon's desktop (DESKTOP-42) · PC Relay 2.2.0": the PC's name (relay 2.2), then its Windows name
+    const nm = info.name ? S.pc.name() : "";
+    rows.push(h("p#pcline", h("b", { text: nm || info.pc || "The PC" }), (nm && info.pc ? ` (${info.pc})` : "") + ` · PC Relay ${info.version}` + (info.on === false ? " · switched off in the tray" : "") + (info.game ? " · Game mode on" : "")));
+    if (!S.pc.signedIn()) rows.push(h("p.help", { text: "Sign in (Connection tab) for more." }));
     else if (!S.pc.has21()) rows.push(h("p.help", { text: `PC Relay ${info.version} does not tell more: this needs 2.1.` }));
     else if (!pcInfo) rows.push(h("p.help", { text: pcWhy && pcWhy !== "signin" ? S.sentence(pcWhy) : "Asking the PC…" }));
     else {
@@ -1609,14 +1682,15 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
     clear(body, rows);
   }
 
-  // ---- Restart this PC ----
-  function restartCard() { return card("restartcard", "Restart this PC", h("div#restartbody")); }
+  // ---- Restart this PC (the card and its buttons carry the PC's name: "Restart Jon's desktop") ----
+  const pcName = () => S.pc.name();
+  function restartCard() { return card("restartcard", "Restart " + pcName(), h("div#restartbody")); }
 
   function afterWords() {
     const a = (pcInfo && pcInfo.after_restart) || {};
-    if (a.auto_sign_in === "on") return "Windows signs in by itself on this PC (automatic sign-in is on), so PC Relay starts again with nobody at the PC, usually a minute or two after Windows starts: the PC should answer here again a few minutes after the countdown ends (longer if Windows installs updates while it restarts). The PC's own screen is then signed in, as after any restart there.";
-    if (a.auto_sign_in === "off") return "This PC does not sign in by itself (automatic sign-in is off). PC Relay starts only when someone signs in to Windows at the PC, so after the restart this page cannot reach the PC until then. (If Windows' own \"Use my sign-in info to automatically finish setting up after an update or restart\" is on, Windows may sign in and lock the screen by itself: this restart asks for that, and then PC Relay starts.)";
-    return "The PC could not tell whether Windows signs in by itself after a restart" + (a.detail ? ` (${a.detail})` : "") + ". If it does not, PC Relay starts only when someone signs in to Windows at the PC, and this page cannot reach the PC until then.";
+    if (a.auto_sign_in === "on") return "Windows signs in by itself (automatic sign-in is on), so PC Relay is back a few minutes after the countdown ends.";
+    if (a.auto_sign_in === "off") return "Windows does not sign in by itself (automatic sign-in is off): PC Relay starts only when someone signs in at the PC.";
+    return `${pcName()} could not tell whether Windows signs in by itself` + (a.detail ? ` (${a.detail})` : "") + ": if not, PC Relay starts only when someone signs in at the PC.";
   }
 
   let confirming = false;
@@ -1624,9 +1698,11 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
     drawBanner();
     const body = $("#restartbody");
     if (!body) return;
+    const head = $("#restartcard h2");
+    if (head && head.textContent !== "Restart " + pcName()) head.textContent = "Restart " + pcName();
     const say = h("p.say#restartsay");
     if (watch && (watching() || watch.done)) { clear(body, watchView(), say); return; }
-    if (!S.pc.signedIn()) { clear(body, h("p", { text: "Only a signed-in device can restart the PC: sign in first (Connection tab). The PC refuses everyone else, whatever a page shows." }), h("button.danger", { type: "button", text: "Restart this PC…", disabled: true })); return; }
+    if (!S.pc.signedIn()) { clear(body, h("p", { text: "Only a signed-in device can restart it: sign in first (Connection tab)." }), h("button.danger", { type: "button", text: `Restart ${pcName()}…`, disabled: true })); return; }
     if (S.pc.info && !S.pc.has21()) { clear(body, h("p", { text: `The PC runs PC Relay ${S.pc.version()}, which cannot restart it: this needs PC Relay 2.1.` })); return; }
     if (!pcInfo) { clear(body, h("p.help", { text: pcWhy && pcWhy !== "signin" ? S.sentence(pcWhy) : "Asking the PC…" })); return; }
     const rs = pcInfo.restart || {};
@@ -1634,14 +1710,14 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
     const last = rs.last ? h("p.help#lastrestart", { text: lastWords(rs.last) }) : null;
     if (!rs.allowed || rs.why) { clear(body, h("p.warn#restartwhy", { text: S.sentence(rs.why || "Restarts from pages are switched off on the PC.") }), last); return; }
     if (!confirming) {
-      clear(body, h("p", { text: "Restarts Windows on the PC after a countdown that can be cancelled. Windows does it, and warns whoever is at the PC." }),
-        h("button.danger#restartopen", { type: "button", text: "Restart this PC…", on: { click: () => { confirming = true; drawRestart(); } } }), last);
+      clear(body, h("p", { text: "Restarts Windows after a countdown you can cancel." }),
+        h("button.danger#restartopen", { type: "button", text: `Restart ${pcName()}…`, on: { click: () => { confirming = true; drawRestart(); } } }), last);
       return;
     }
     const opts = [[30, "in 30 seconds"], [60, "in 1 minute"], [120, "in 2 minutes"], [300, "in 5 minutes"]].filter(([s]) => s >= (rs.min || 30) && s <= (rs.max || 600));
-    const sel = h("select#restartwhen", { "aria-label": "When", on: { change: () => { go.textContent = "Restart the PC " + sel.selectedOptions[0].textContent; } } },
+    const sel = h("select#restartwhen", { "aria-label": "When", on: { change: () => { go.textContent = `Restart ${pcName()} ` + sel.selectedOptions[0].textContent; } } },
       opts.map(([s, l]) => h("option", { value: String(s), text: l, selected: s === (rs.default || 60) })));
-    const go = h("button.danger#restartgo", { type: "button", text: "Restart the PC " + (opts.find(([s]) => s === (rs.default || 60)) || opts[0])[1] });
+    const go = h("button.danger#restartgo", { type: "button", text: `Restart ${pcName()} ` + (opts.find(([s]) => s === (rs.default || 60)) || opts[0])[1] });
     const no = h("button#restartno", { type: "button", text: "Not now", on: { click: () => { confirming = false; drawRestart(); } } });
     go.addEventListener("click", async () => {
       go.disabled = no.disabled = sel.disabled = true;
@@ -1657,11 +1733,11 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
       h("div.confirm#restartconfirm",
         h("p", h("b", { text: "What happens:" })),
         h("ul",
-          h("li", "Windows restarts ", sel, ". It shows its own warning on the PC's screen; until then it can be cancelled here or at the PC (PC Relay's tray icon, the restart line)."),
-          h("li", { text: "Programs on the PC are closed without asking to save: anything unsaved on the PC is lost." }),
-          h("li", { text: "Everything through PC Relay stops until the PC is back: Screen Peek, the PC voice, file transfers, and this page's own connection." }),
+          h("li", "Windows restarts ", sel, ". Until then: Cancel here or in the tray."),
+          h("li", { text: `Programs on ${pcName()} close without saving.` }),
+          h("li", { text: "Screen Peek, the PC voice and file transfers stop until it is back." }),
           h("li#afterwords", { text: "After the restart: " + afterWords() }),
-          h("li", { text: "This page keeps pinging and says when the PC is back." })),
+          h("li", { text: "This page says when it is back." })),
         h("div.row", go, no)),
       say, last);
   }
@@ -1695,13 +1771,13 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
         out.append(h("div.row", cancel), say);
       }
     }
-    if (!w.done && w.phase === "away") out.append(h("p.countdown", h("b", { text: "The PC is restarting" }), ` · no answer since ${S.clock(w.awayAt, true)} (${S.span(Date.now() - w.awayAt)})`));
+    if (!w.done && w.phase === "away") out.append(h("p.countdown", h("b", { text: `${pcName()} is restarting` }), ` · no answer since ${S.clock(w.awayAt, true)} (${S.span(Date.now() - w.awayAt)})`));
     if (!w.done && w.phase === "windows") out.append(h("p.countdown", h("b", { text: "Windows is back, PC Relay not yet" }), ` · Tailscale answers (since ${S.clock(w.windowsSeen, true)}), but PC Relay is not running: it starts once Windows has signed in.`));
     if (!w.done && (w.phase === "away" || w.phase === "windows")) out.append(h("p.help", { text: "After the restart: " + afterWords() }));
     if (w.done) {
       let text = "";
-      if (w.result === "restarted") text = `✓ The PC is back (${S.clock(w.backAt, true)}). Windows restarted: it started at ${S.clock(w.windowsAt, true)}` +
-        (w.relayAt ? `, and PC Relay ${S.span(w.relayAt - w.windowsAt)} after that` : "") + (w.awayAt ? `. The PC could not be reached for ${S.span(w.backAt - w.awayAt)}.` : ".");
+      if (w.result === "restarted") text = `✓ ${pcName()} is back (${S.clock(w.backAt, true)}). Windows restarted: it started at ${S.clock(w.windowsAt, true)}` +
+        (w.relayAt ? `, and PC Relay ${S.span(w.relayAt - w.windowsAt)} after that` : "") + (w.awayAt ? `. It could not be reached for ${S.span(w.backAt - w.awayAt)}.` : ".");
       else if (w.result === "relay-only") text = `PC Relay answers again (${S.clock(w.backAt, true)}), but Windows did not restart (it has run since ${S.when(w.windowsAt)}).` + (w.detail ? " " + S.sentence(w.detail) : "");
       else if (w.result === "cancelled") text = "The restart was cancelled" + (w.by && w.by !== "this page" ? ` (${w.by === "tray" ? "at the PC, from the tray" : w.by})` : " from this page") + ".";
       else if (w.result === "not") text = "The restart did not happen: " + (w.detail || "its time passed with PC Relay still running") + ".";
@@ -1720,10 +1796,10 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
     let text = "", back = false;
     if (watching()) {
       const left = watch.at - S.pc.pcNow();
-      text = watch.phase === "away" ? `The PC is restarting · no answer since ${S.clock(watch.awayAt, true)}`
+      text = watch.phase === "away" ? `${pcName()} is restarting · no answer since ${S.clock(watch.awayAt, true)}`
         : watch.phase === "windows" ? "Windows is back, PC Relay not yet"
         : left > 0 ? `Windows restarts at ${S.clock(watch.at, true)} · in ${S.mmss(left)} · Cancel on the Pinger tab` : "Windows is restarting…";
-    } else if (watch && watch.done && watch.result === "restarted") { text = "✓ The PC is back after its restart"; back = true; }
+    } else if (watch && watch.done && watch.result === "restarted") { text = `✓ ${pcName()} is back after its restart`; back = true; }
     b.hidden = !text;
     b.classList.toggle("back", back);
     if (b.textContent !== text) b.textContent = text;
@@ -1742,6 +1818,7 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
     setTimeout(() => { const c = $("#restartcard"); if (c) c.scrollIntoView({ block: "start", behavior: "smooth" }); }, 50);
   });
   S.on("auth", () => { pcInfo = null; pcAt = 0; confirming = false; render(); });
+  S.on("name", () => { if ($("#pcbody")) { drawPC(); if (!confirming) drawRestart(); } });   // renamed (Connection tab, or the tray)
   S.on("tab", (t) => { if (t === "pinger") { render(); start(); } else if (!watching()) stop(); });
   S.pinger = { render, start, stop, get pings() { return pings; }, get watch() { return watch; } };
   if (watching()) setTimeout(start, 0);
@@ -1771,13 +1848,13 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
   }
 
   function needs() {
-    if (!S.pc.signedIn()) return "Sign in (Connection tab) to see the devices signed in to the PC and the recent sign-ins. The PC shows them to signed-in devices only.";
+    if (!S.pc.signedIn()) return "Sign in (Connection tab) to see the devices signed in and the recent sign-ins.";
     if (S.pc.info && !S.pc.has21()) return `The PC runs PC Relay ${S.pc.version()}: the devices and the log need PC Relay 2.1 (until then they are in the tray on the PC).`;
     return "";
   }
 
   function devCard() {
-    const c = h("section.card#devcard", h("h2", { text: "Signed in to the PC" }));
+    const c = h("section.card#devcard", h("h2", { text: `Signed in to ${S.pc.name()}` }));
     if (!devs) { c.append(h("p.help", { text: devWhy ? S.sentence(devWhy) : "Asking the PC…" })); return c; }
     const list = h("ul.devices#devlist");
     for (const d of devs.devices) {
@@ -1816,7 +1893,7 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
       await S.pc.signOut();   // this browser's pass ended with the rest: forget it here too
     } } });
     c.append(h("div.row", allBtn), say,
-      h("p.help", { text: `The same list is in the tray on the PC (Signed in: N devices). A sign-in not used for ${devs.expires_days} days ends by itself; a new password signs every device out.` }));
+      h("p.help", { text: `A sign-in not used for ${devs.expires_days} days ends by itself.` }));
     return c;
   }
 
@@ -1864,6 +1941,7 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
   }
   function render() { draw(); if (!needs() && (!devs || !log)) load(); }
   S.on("auth", () => { devs = null; log = null; if (S.app && S.app.tab === "devices") render(); });
+  S.on("name", () => { const h2 = $("#devcard h2"); if (h2) h2.textContent = `Signed in to ${S.pc.name()}`; });
   S.on("tab", (t) => { if (t === "devices") { devs = null; log = null; render(); } });
   S.devices = { render, load };
 })();
@@ -1903,7 +1981,7 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
     if (!p) return;
     const info = S.pc.info;
     if (!info) { clear(p, h("section.card", h("h2", { text: "Programs" }), h("p.help", { text: "Waiting for the PC to answer…" }))); return; }
-    const note = !S.pc.signedIn() ? "Sign in (Connection tab) to change these. Signed out, this is what the PC tells every page."
+    const note = !S.pc.signedIn() ? "Sign in (Connection tab) to change these."
       : !S.pc.has21() ? `The PC runs PC Relay ${info.version}: switching from here needs 2.1 (until then: the tray on the PC).` : "";
     const game = h("section.card#gamecard", h("h2", { text: "Game mode" }),
       h("div.row.switchrow", S.toggle("Game mode", info.game, (on) => change({ action: "game", on }), { disabled: !can() || busy }),
@@ -1924,12 +2002,10 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
       }
       list.append(row);
     }
-    const progs = h("section.card#progcard", h("h2", { text: "Programs on the PC" }), note ? h("p.help", { text: note }) : null, list,
-      can() ? h("div.row", h("button#allprivate", { type: "button", text: "Make everything private", disabled: busy, on: { click: () => change({ action: "everything-private" }) } }),
-        h("span.help", { text: "Every program needs the sign-in (each can be made public again)." })) : null,
+    const progs = h("section.card#progcard", h("h2", { text: `Programs on ${S.pc.name()}` }), note ? h("p.help", { text: note }) : null, list,
+      can() ? h("div.row", h("button#allprivate", { type: "button", text: "Make everything private", disabled: busy, on: { click: () => change({ action: "everything-private" }) } })) : null,
       h("p.say" + (sayKind ? "." + sayKind : ""), { text: say }),
-      h("p.help", { text: "Private: only signed-in devices can use it. Public: anyone may view and download; changes always need the sign-in. Allowed off: pages hear it is switched off on the PC. " +
-        "These are the tray's own switches (Programs) and are logged on the PC with this device's name. Stop now and Start now restart one program, which is often enough before restarting the PC." }));
+      h("p.help", { text: "Private: signed-in devices only. Public: anyone may view; changes always need the sign-in." }));
     clear(p, game, progs);
   }
 
@@ -1942,6 +2018,7 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
     poll = setInterval(() => { if (document.visibilityState === "visible" && !busy) S.pc.ping().then(draw); }, 5000);
   });
   S.on("auth", () => { if (S.app && S.app.tab === "programs") draw(); });
+  S.on("name", () => { if (S.app && S.app.tab === "programs") draw(); });
   S.programs = { render: draw };
 })();
 
@@ -1972,7 +2049,7 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
     if (last && last.ok) { text = `${last.ms} ms`; kind = "on"; title = `PC Relay ${S.pc.version()} answered in ${last.ms} ms at ${S.clock(last.at, true)}`; }
     else if (st.state === "off") { text = "Switched off"; kind = "off"; }
     else if (st.state === "reload") { text = "Reload the page"; kind = "off"; }
-    else if (last && !last.ok) { text = last.status === 502 ? "PC Relay not running" : "Can't reach the PC"; kind = "off"; title = last.why || title; }
+    else if (last && !last.ok) { text = last.status === 502 ? "PC Relay not running" : `Can't reach ${S.pc.name()}`; kind = "off"; title = last.why || title; }
     c.className = "chip " + kind;
     c.textContent = text + (S.pc.signedIn() ? " · signed in" : "");
     c.title = title + (S.pc.signedIn() ? " · this device is signed in" : " · not signed in");
@@ -2003,7 +2080,7 @@ S.setToggle = (b, on) => b.setAttribute("aria-checked", String(!!on));
 
 </script>
 <script>
-S.VERSION = "1.0.11"; S.BUILT = "2026-11-08 2:45 PM";
+S.VERSION = "1.0.14"; S.BUILT = "2026-11-08 10:36 PM";
 S.start();
 </script>
 </body>

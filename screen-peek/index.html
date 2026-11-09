@@ -627,7 +627,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 <div id="login">
   <form id="lf">
     <h2>Screen Peek</h2>
-    <p>Enter the password set on the PC (tray icon → Set password). This browser stays signed in.</p>
+    <p id="lwhat">The password for your PC.</p>
     <input id="pw" type="password" autocomplete="current-password" placeholder="Password" required>
     <button type="submit">Sign in</button>
     <p id="lerr" class="err"></p>
@@ -655,11 +655,16 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
      becomes "signin", and call() answers { ok: false, signin: true, status: 401, why }.
    - Status events: checking / connected / starting / ready / offline / off / signin / reload, each with a plain `why`.
    - Version-checked: a relay that needs a newer client says so (426), and the status becomes "reload".
+   - The PC's name (2026-11-08, relay 2.2: the ping's "name", e.g. "Jon's desktop"): R.pcName() is the name from the
+     last answer, remembered in this browser per address (localStorage "relay-pc-name"), so a page that cannot reach
+     the PC still says "Can't reach Jon's desktop"; "your PC" (RelayClient.YOUR_PC) before the PC has ever answered at
+     that address. A page shows it as text, never as HTML (textContent). It is a label, never an address.
 
    const R = RelayClient.create({ app: "reader", log });  // app names the page in the PC's logs; log(text) hears
                                                            // relay-client's notes (which address, and why)
    await R.address();                                      // { url, from: "file" | "built-in" | "page", why }
    await R.ping();                                         // { ok, info, latency } ; info.signed_in, info.services
+   R.pcName();                                             // "Jon's desktop" (the last answer's, or remembered), else "your PC"
    R.signedIn();                                           // this browser holds a pass (the last ping says if it is valid)
    await R.signIn(password);                               // { ok, why, device, name }
    await R.signOut();                                      // { ok }
@@ -691,6 +696,25 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   // relay-client 1 kept a device id and one pass per scope; relay 2 does not accept them: tidied away.
   for (const k of store.keys()) if (k === "relay-device" || k.startsWith("relay-pass:")) store.set(k, "");
   let memPass = null; // when localStorage is not available (a sandboxed page): this page only
+  // The PC's name, remembered per address: localStorage "relay-pc-name" = { "<address>": { name, at } } (the 10 newest).
+  const NAME_KEY = "relay-pc-name", YOUR_PC = "your PC";
+  const cleanName = (n) => (typeof n === "string" ? Array.from(n.replace(/[\x00-\x1f\x7f-\x9f]/g, "").trim()).slice(0, 64).join("").trim() : "");
+  const memNames = {}; // when localStorage is not available: this page only
+  function names() {
+    try { const j = JSON.parse(store.get(NAME_KEY) || "{}"); return j && typeof j === "object" && !Array.isArray(j) ? j : {}; } catch (e) { return {}; }
+  }
+  function nameAt(base) {
+    const e = names()[base] || memNames[base];
+    return e ? cleanName(typeof e === "string" ? e : e.name) : "";
+  }
+  function keepName(base, name) {
+    memNames[base] = { name, at: Date.now() };
+    const all = names();
+    if (all[base] && all[base].name === name) return;
+    all[base] = { name, at: Date.now() };
+    const keep = Object.entries(all).filter(([, e]) => e && typeof e === "object").sort((a, b) => (b[1].at || 0) - (a[1].at || 0)).slice(0, 10);
+    store.set(NAME_KEY, JSON.stringify(Object.fromEntries(keep)));
+  }
 
   function httpWhy(status) {
     return ({ 400: "the PC refused that address", 401: "sign-in needed", 403: "the PC refused this page",
@@ -882,6 +906,8 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
         const info = await r.json();
         this.latency = Math.round(performance.now() - t0);
         this.info = info;
+        const name = cleanName(info && info.name);   // the PC's name (relay 2.2), remembered for this address
+        if (name) { this._pc = { base: this.base, name }; keepName(this.base, name); }
         if ((info.min_client || 0) > VERSION) { const why = "this page is out of date: reload it"; this._set("reload", { why }); return { ok: false, why, info, kind: "reload" }; }
         if (info.pass === "unknown") this._lost("signed out on the PC (or the sign-in ended): sign in again");
         if (!info.on) { const why = "the PC relay is switched off (tray icon on the PC)"; this._set("off", { why, info }); return { ok: false, why, info, kind: "off" }; }
@@ -896,6 +922,11 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
       } finally { clearTimeout(timer); }
     }
     service(id) { return ((this.info && this.info.services) || []).find((s) => s.id === id) || null; }
+    // The PC's name: the last answer's at this address, else the one remembered here for it, else "your PC".
+    pcName() {
+      if (this._pc && this._pc.base === this.base) return this._pc.name;
+      return nameAt(this.base) || YOUR_PC;
+    }
     // ---- sign-in: the password -> this browser's one pass (the old one, if any, is replaced on the PC) ----
     async signIn(password) {
       await this._ready();
@@ -979,7 +1010,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   }
 
   // DEFAULT_PC: relay-client 2's old name for BUILT_PC (kept for code that still reads it)
-  root.RelayClient = { VERSION, BUILT_PC, DEFAULT_PC: BUILT_PC, ADDRESS_FILE, create: (opts) => new Relay(opts || {}), httpWhy };
+  root.RelayClient = { VERSION, BUILT_PC, DEFAULT_PC: BUILT_PC, ADDRESS_FILE, YOUR_PC, create: (opts) => new Relay(opts || {}), httpWhy };
 })(typeof window !== "undefined" ? window : globalThis);
 // relay-client:end
 </script>
@@ -987,7 +1018,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 "use strict";
 // The version (WEB-APP-CONVENTIONS.md 3): stamped here by build_page.py on every build (version.txt, CHANGES.md); shown
 // at the bottom of Settings and in the first log line; version.json beside the published page says the same.
-const APP_VERSION = "V1.0.6", APP_BUILT = "2026-11-08 2:45 PM";
+const APP_VERSION = "V1.0.7", APP_BUILT = "2026-11-08 10:28 PM";
 // Jon's PC (Tailscale Funnel) through PC Relay: Screen Peek is the relay's "screen" program, under /svc/screen/.
 // The relay starts it on demand and signs browsers in (PC Relay 2, 2026-11-07: one pass per browser, kept by
 // relay-client and shared with Jon's other Cool tools pages; Screen Peek is private, so every request needs it).
@@ -1291,10 +1322,15 @@ const conn = { want: false, live: null, gen: 0, attempt: 0, retries: 0, down: 0,
 const C = { ws: null, ready: false, sid: "", boot: "", attempt: 0, timer: 0, down: 0, why: "", unanswered: 0, lastPing: 0, lastRx: 0,
             openedAt: 0, connectTimer: 0, mute: false, rtts: [] };
 const BUILT_NOTE = " (PC address built in: the address file could not be loaded)";
+// "{pc}" in a state's text is the PC's name ("Watching Jon's desktop (ws)."; PC Relay 2.2, relay-client's R.pcName():
+// "your PC" until the PC has answered once in this browser); the line is written again when the name comes.
+let lastState = { kind: "", text: "Ready." };
 function setState(kind, text) {
+  lastState = { kind, text };
   $("dot").className = kind;
-  $("conntext").textContent = text + (R.where.from === "built-in" ? BUILT_NOTE : "");
+  $("conntext").textContent = text.split("{pc}").join(R.pcName()) + (R.where.from === "built-in" ? BUILT_NOTE : "");
 }
+const signInWords = () => `The password for ${R.pcName()}.`;
 // The sign-in box hides the connection line, so it says the same itself: why the address is the built-in one.
 const addrNote = () => (R.where.from === "built-in" ? R.where.why.charAt(0).toUpperCase() + R.where.why.slice(1) + "." : "");
 const backoff = (n) => Math.round(Math.min(2500, 250 * 2 ** (n - 1)) * (0.8 + Math.random() * 0.4));
@@ -1319,7 +1355,7 @@ function setCont(on) {
     log("Continuous OFF");
     clearTimeout(conn.timer); conn.timer = 0; conn.down = 0; conn.attempt = 0;
     dataStop("Continuous off");
-    setState(C.ready ? "wait" : "", C.ready ? "Connected (Continuous off)." : "Off.");
+    setState(C.ready ? "wait" : "", C.ready ? "Connected to {pc} (Continuous off)." : "Off.");
   }
 }
 
@@ -1332,7 +1368,7 @@ function ctlOpen(why) {
   const ws = R.ws("screen", "ctl");
   C.ws = ws; C.ready = false; C.unanswered = 0; C.openedAt = now(); C.lastRx = now(); C.mute = false; C.rtts = [];
   if (C.attempt <= 10 || C.attempt % 10 === 0) log(`control: connecting (${why})${C.attempt ? `, attempt ${C.attempt + 1}` : ""}…`);
-  if (!C.down) setState("wait", "Connecting…");
+  if (!C.down) setState("wait", "Connecting to {pc}…");
   C.connectTimer = setTimeout(() => { if (C.ws === ws && !C.ready) ctlDown("no answer within 10 s"); }, 10000);
   ws.onopen = () => { if (C.ws === ws) ws.send(JSON.stringify({ type: "hello", token: KEY, page: VID, v: 5 })); };
   ws.onmessage = (ev) => {
@@ -1385,7 +1421,7 @@ function ctlMsg(m) {
     C.attempt = 0; C.down = 0; C.unanswered = 0;
     for (let i = 0; i < 5; i++) setTimeout(() => ctlPing(true), i * 150);    // a burst for clock sync
     if (conn.want) dataStart("control connected");
-    else setState("wait", "Connected (Continuous off).");
+    else setState("wait", "Connected to {pc} (Continuous off).");
     return;
   }
   if (m.type === "pong") {
@@ -1449,7 +1485,7 @@ function onUp(gen, what) {
   if (conn.down) log(`data path back after ${r0((now() - conn.down) / 1000)} s and ${conn.attempt} ${conn.attempt === 1 ? "try" : "tries"}`);
   conn.attempt = 0; conn.down = 0; conn.lastData = now(); conn.upAt = now();
   log(`connected: ${what} (data path ${gen}, ${r0(now() - conn.pathAt)} ms after it started)`);
-  setState("live", `Live (${S.transport}).`);
+  setState("live", `Watching {pc} (${S.transport}).`);
 }
 function onFail(gen, why, kind) {
   if (!conn.live || conn.live.gen !== gen) return;
@@ -1782,6 +1818,7 @@ $("out").onclick = () => {                           // signs this browser out (
 
 // ---- Sign-in: the password box; Continuous stays as it was ------------------------------------------
 function signIn(msg) {
+  $("lwhat").textContent = signInWords();
   $("lerr").textContent = [msg, addrNote()].filter(Boolean).join(" ");
   $("login").classList.add("show");
   $("pw").value = ""; setTimeout(() => $("pw").focus(), 50);
@@ -1883,6 +1920,8 @@ ADDR.then(() => {
   if (!$("conntext").textContent.endsWith(BUILT_NOTE)) $("conntext").textContent += BUILT_NOTE;
   if ($("login").classList.contains("show") && !$("lerr").textContent.includes(addrNote())) $("lerr").textContent = [$("lerr").textContent, addrNote()].filter(Boolean).join(" ");
 });
+// the PC's name (PC Relay 2.2: "Jon's desktop") from one light check at the start: the connection line and the sign-in box
+ADDR.then(() => R.ping(8000)).then(() => { setState(lastState.kind, lastState.text); $("lwhat").textContent = signInWords(); }).catch(() => {});
 wake("page loaded");
 if (!signedIn()) signIn();
 else ctlOpen("page loaded");                       // the control connection stays open, so Continuous starts warm
