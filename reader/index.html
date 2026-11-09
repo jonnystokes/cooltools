@@ -1,12 +1,12 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
      pastes the Apps kit's tab icons at the ICONS marker, and stamps the version and build time where
-     Book reader V1.0.656 and 2026-11-08 2:56 PM appear. -->
+     Book reader V1.0.666 and 2026-11-08 7:20 PM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Book reader V1.0.656</title>
+<title>Book reader V1.0.666</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
 <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlUlEQVR42p2SzytEURzFz33evBlNtsyCYtRkmrLASqwoKTtlYf4FyQabKSkrZWeNjdmxUrJUlkp+ZNj4tbAgUoyI7/lazLvPw0PN2dzX7X7ePefcrwGA9cn3UVILFLYJ1YgohISIQoQgNfgWqorwRETnptbqi8aHVxkAf8LBysqad0ktVAWLQqgF17ddDQwRtrk2c9+4h7srwcXeO65P5QesUDRmXaQ7PTSkY1iZvoWIGtfenMo4SGUc5PpjeC0ncLn/hs3FJ4gQg2N1aOnwkEgaWFnOsbbDiicNMt1e4CDbG0ciafDYMvP5A59zrVUAGGreCg5sXAwEmaMkoiAVri3MQmHZwqJEvxvXth3pwG872kFEhO8O7Av8FqFSYvC+v99iVXc+60fTUImV2TZLE/dId8bQ2hVHU9aDU/N5i4XODl5wtFPG/nbZxlOzMHJ7LNRseMJitUBzu4cD/2Cupxanu894epDQtCpIlsz88M0oydXQeH4Za0bs+TBIzTtTa/VFoeaFWhKh/gtTlWSJ1PzyYa74AfvjIbDIJi4vAAAAAElFTkSuQmCC">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVR42r2Xe0yVZRzHP+8573u4KxzkvoAkoELkGHkpsGJsbpa0uTabq5htrY3W3Np0mn+53LQ/yjZy+UelXci2LHKzRWtt2Sbr4g0DnRw1EUjwAgocOcA5PL/+OBfe876IOo3vX+/O7z3P53l+1/fRMKl5YzBHRNaLUCciJaLEUAIighJBlPlZiNqUIJbnqXcEEQKixKtEDorQuGF/Rl+EqUUevt8YfFlEdishWayAe4NbbT5R0rCpOaspuoEw/AslaP8zPGITEeq3HMhu0po3BnMQ8c7CyWNtSnxKpEQPx3y24SiRZBHWO8IJN9vwiK1OD2f77MOVICIljvtYancLRwRDt8KT3FBQqXOjX3HpTJDxm/cGj0vUyF/gwp3npOM3P4N9wQgcpQTdevLaN+NJyQy1B1FxXL0wSe+pID0dQS6fD94WjibkFusUVrgoXOgit8RAc4R6TUVtAo2vXY7xgm51ewQOoDkgs8hJZpGTx56PY8Iv9J4O0tMe4EJbgKErk4gIKekOCjwGBQsN8he4iEvUmE7uXD0GrkTQrTGfSa4EjfmVBvMrDaoDwof1gyglrPsgFacxBR1/pwXnUw+hP1NsW8MMF8EcglDCRXS+Y5jBK+OUL3UTn+S0LeQ0tKjbzXCAib1/YIyMoboGQxtftzRqM8OVioZgKtsj2rPDy8nWAXTDwcOL5lJRnY6nKp1Sz1wcznCOhPPhVgrsPx7awCuLw7t22CpBt5ZaRJt3VXD00FXaDg/Q1jpAx87rfLXzHElzdLbuqeSRx1NtYZPhMbQ58baN+F//GoCET1+yliG6tc4jSkkzqFmdS83qXAC6vT7aWgfoPDFESpoRrhKJekD1XOdmTSMJH71oj3v/sC0HYsvQVOcR/fB5N91nfXiq0il/wk1+STL5JcnwqmlhMW16ZBwmFTI8NmMiizUE1iYTUc85Hy37evmxqQeHU6OobA6LngrlQfkyN5pGtMPdjWLLEBxyixA0bHuUfcdreHu3hxVr8hi5McE3u/5hy9ojtLb020Iwk7TURLTUREsZhv6vW1uoWSmpBlUrs6hamQVAf7cf78khKp+eZw/BDEr4eK2lDKc2r1v7d0TbG9roPHGDRdXzqKhy46lOJzs/gez8BJs7b+uBRJcpb8yDSdCtvT2i5c9lM3RtgkMHLvHLt/+iaVBQmoKnOp01bzzIHLcr6k4ArSAN4wUPzsoHomvoiwvsOWCCi8LciGLduXxVNstXZTM2Osnfvw9G+8GBT7pYsCSNZSsyoxkNoCXFEf/e6hhY3NZn7SVpgqupRjRVCX1ng+QU69E/xCc6WVKbwZLaDABGfUESk/UZQ6DNS0bLTLH93tUxFgOfmoamSvhu+xClT4ZGaX65fbJF4OaMtir58FtghOaH36fwHvNz5s9Rjv48EgNXCnQRAiJiRJLR71Oc+MnPsZZRNA1yig0KPS7mV7jIK3VFZ7t5sMS4eFK46A3SeWSEzr9G6To1RjAotpOr0BQO6OEbS9l0HxpqUug+Pc7FU+P8+qXgStQoXOiiyBOHO0+Pvnf22BjXegN4j/jxHvfjH5m0Zfs0cETEq72/5uoOETbf4TecbZ5Pb7sjOCK86xChMXxdmlW4Enwi0ujYsD+jT5Q0hK9LswUXEWnY217W5wDY1JzVJEJ9+Lo0Gyev/6y9rCnmdgywre5SjgjrlUidKCkRwbhP8ICIeEU4KCKNe9vLotfz/wCKU53CYXSQUAAAAABJRU5ErkJggg==">
@@ -15,9 +15,9 @@
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.656";
-  window.APP_BUILT = "2026-11-08 2:56 PM";
-  window.APP_NOTE = "the site moved to https://jonnystokes.github.io/cooltools/ (it was /Cool-tools/): the Apps menu, the PC's address file (relay.json) and the Cloud File Manager it picks from at the new address";
+  window.APP_VERSION = "Book reader V1.0.666";
+  window.APP_BUILT = "2026-11-08 7:20 PM";
+  window.APP_NOTE = "Index: groups and chapters told apart. A group (a section, an EPUB part, an era) is a header band with a turning chevron and its chapter count, sticky while its chapters scroll; a tap only folds it. A chapter is a plain row (a tap opens it), behind a guide line inside its group; a chapter with headings has its own chevron on the left; headings are smaller, behind a dotted line. Chapters outside any group stay in their place (an EPUB's prologue and epilogue). Open groups remembered per book; Open all / Close all; arrow keys in the list. A folder of folders of plain text is grouped by sub-folder too";
   window.APP_KEY = "br1";
 </script>
 <style>
@@ -388,30 +388,85 @@ html.cdock .ctop .idx { display: none; }
    own shows beside the panel and this one is hidden. */
 html.cdock .ctop apps-button { display: none; }
 .idx[aria-pressed="true"] { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 22%, var(--bg)); }
-.chead { padding: 0.4em calc(var(--gutter) / 2 + 4px); color: var(--muted); font-size: 0.9em; border-bottom: 1px solid var(--line); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.ctree { flex: 1 1 0; min-height: 0; overflow: auto; overscroll-behavior: contain; padding-bottom: 2em; }
+/* The book's name and chapter count, with Open all / Close all for a book of groups (contents.js). */
+.cheadrow { flex: none; display: flex; align-items: center; gap: 6px; padding-right: 6px; border-bottom: 1px solid var(--line); }
+#chead { flex: 1; min-width: 0; padding: 0.4em calc(var(--gutter) / 2 + 4px); color: var(--muted); font-size: 0.9em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cfoldall { flex: none; min-height: calc(var(--tap) - 10px); padding: 0 0.8em; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); color: var(--fg); font-size: 0.85em; cursor: pointer; }
+.cfoldall:hover { border-color: var(--accent); }
+/* The tree (Jon, 2026-11-08: "which one I would click, which would go to a chapter, versus which one is just a group of
+   chapters"). Three kinds of row, each with its own look in both themes:
+   - a GROUP (a section, an EPUB part, an era): a header band (--grp) across the panel, bold, an accent chevron that
+     turns down when open, the number of its chapters in a pill, its read mark; it stays at the top of the list while
+     its chapters scroll under it (sticky); a tap only folds it.
+   - a CHAPTER: a plain row on the page colour, its name in the text colour; a tap opens it. Inside a group it sits
+     behind a guide line under the group's chevron. A chapter with headings has a quieter chevron of its own on the left
+     (it shows the headings; the row still opens the chapter); its neighbours keep the same space, so names line up.
+   - a HEADING: smaller, in --sub, behind a dotted guide line under its chapter's chevron; a tap goes to its paragraph.
+   The chapter being read: an accent tint, an accent bar on its left edge, bold; the group it is in has the bar too.
+   Hover (a mouse) and press tint the row. Contrast (WCAG, measured by test/indexgroups.mjs): the band against the page
+   1.35:1 light / 1.41:1 dark, the group's name on it 9.6 / 8.5, its chevron 3.4 / 5.9, a chapter's name 13.2 / 12.1, a
+   heading 6.3 / 7.3. */
+.contents {
+  --cpad: calc(var(--gutter) / 2 + 4px);       /* the rows' left edge */
+  --fw: 2.25em;                                /* the chevron column */
+  --grp: light-dark(#ddd0b8, #2e323c);         /* a group's band */
+  --grp-hi: light-dark(#d5c7ac, #393e4a);      /* ... hovered or pressed */
+  --sub: light-dark(#5f574d, #aaa498);         /* headings, counts */
+  --guide: light-dark(#c9baa0, #444855);       /* the guide lines */
+  --sep: color-mix(in srgb, var(--line) 65%, transparent);   /* between chapters */
+}
+.ctree { flex: 1 1 0; min-height: 0; overflow: auto; overscroll-behavior: contain; padding-bottom: 2em; scroll-padding-top: calc(var(--tap) + 8px); }
 .ctree.none::after { content: "Nothing matches."; display: block; padding: 1em; color: var(--muted); text-align: center; }
 .cmore { padding: 0.8em 1em; color: var(--muted); text-align: center; }
 .crow {
-  display: flex; align-items: center; gap: 0.5em; width: 100%; min-height: var(--tap);
-  padding: 0.3em 0.5em 0.3em calc(var(--gutter) / 2 + 4px);
-  border: 0; border-bottom: 1px solid var(--line); border-radius: 0;
-  background: none; text-align: left; cursor: pointer; line-height: 1.3;
+  display: flex; align-items: center; gap: 0.5em; width: 100%; min-width: 0; min-height: var(--tap);
+  padding: 0.3em 0.6em 0.3em var(--cpad);
+  border: 0; border-radius: 0; background: none; color: var(--fg); text-align: left; cursor: pointer; line-height: 1.3;
 }
-.crow:hover { background: var(--bar); }
 .crow .ct { flex: 1; min-width: 0; overflow-wrap: anywhere; }
 .crow .cn { min-width: 4ch; color: var(--muted); font-variant-numeric: tabular-nums; }
-.crow .ccount { color: var(--muted); font-size: 0.85em; }
-.csech { font-weight: 600; background: color-mix(in srgb, var(--bar) 60%, transparent); }
-.csec.here > .csech { color: var(--accent); }
-.cbody .crow { padding-left: calc(var(--gutter) / 2 + 1.4em); }
-.citem.current > .cchap { background: color-mix(in srgb, var(--accent) 18%, transparent); font-weight: 600; }
-.cfold { flex: none; display: inline-flex; align-items: center; justify-content: center; min-width: var(--tap); min-height: calc(var(--tap) - 0.6em); color: var(--muted); border: 0; background: none; cursor: pointer; font: inherit; }
-.csech .cfold { min-width: 1.2em; }
-.cheads .crow { padding-left: calc(var(--gutter) / 2 + 2.6em + 0.9em * var(--lvl, 0)); font-size: 0.92em; color: var(--muted); border-bottom: 1px dashed var(--line); }
-.cbody .cheads .crow { padding-left: calc(var(--gutter) / 2 + 3.6em + 0.9em * var(--lvl, 0)); }
-.cheads .crow.current { color: var(--fg); background: color-mix(in srgb, var(--accent) 12%, transparent); }
-.csecname { color: var(--muted); font-size: 0.85em; white-space: nowrap; }
+.crow:focus-visible, .cfold:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+/* A group */
+.csech {
+  position: sticky; top: 0; z-index: 1;
+  min-height: calc(var(--tap) + 4px); gap: 0.35em;
+  background: var(--grp); font-weight: 700;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.csec:first-child > .csech { border-top: 0; }
+.csech .cfold { flex: none; width: var(--fw); display: inline-grid; place-items: center; color: var(--accent); }
+.csec.here > .csech { box-shadow: inset 4px 0 0 var(--accent); }
+.ccount {
+  flex: none; min-width: 2.1em; padding: 0.1em 0.55em; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--bg); color: var(--sub); font-size: 0.8em; font-weight: 600; text-align: center; font-variant-numeric: tabular-nums;
+}
+.cbody { margin-left: calc(var(--cpad) + var(--fw) / 2 - 1px); border-left: 2px solid var(--guide); }
+.csec.open + .csec > .csech, .csec.open + .citem { margin-top: 0.4em; }
+/* A chapter */
+.cline { display: flex; align-items: stretch; padding-left: var(--cpad); border-bottom: 1px solid var(--sep); }
+.cbody .cline { padding-left: 0.25em; }
+.cline > .cchap { flex: 1 1 auto; padding-left: 0.1em; }
+.cfolds .cline > .cchap { padding-left: 0.35em; }
+.cfold { flex: none; width: var(--fw); min-height: var(--tap); display: inline-grid; place-items: center; padding: 0; border: 0; border-radius: 8px; background: none; color: var(--sub); cursor: pointer; font: inherit; }
+.cnofold { flex: none; width: var(--fw); }
+.cfold svg { width: 1.05em; height: 1.05em; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.15s; }
+.csec.open > .csech .cfold svg, .cfold[aria-expanded="true"] svg { transform: rotate(90deg); }
+.citem.current > .cline { background: color-mix(in srgb, var(--accent) 16%, var(--bg)); box-shadow: inset 4px 0 0 var(--accent); }
+.citem.current .cchap { font-weight: 700; }
+/* Headings */
+.cheads { margin-left: calc(var(--cpad) + var(--fw) / 2 - 1px); border-left: 2px dotted var(--guide); padding: 0.15em 0; }
+.cbody .cheads { margin-left: calc(0.25em + var(--fw) / 2 - 1px); }
+.crow.chead { min-height: calc(var(--tap) - 8px); padding: 0.25em 0.6em 0.25em calc(0.75em + 0.9em * var(--lvl, 0)); font-size: 0.9em; color: var(--sub); }
+.crow.chead.current { color: var(--fg); font-weight: 600; background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.csecname { color: var(--sub); font-size: 0.8em; white-space: nowrap; }
+/* Hover (a mouse) and press */
+@media (hover: hover) {
+  .cchap:hover, .crow.chead:hover { background: color-mix(in srgb, var(--fg) 7%, transparent); }
+  .csech:hover { background: var(--grp-hi); }
+  .cfold:hover { background: color-mix(in srgb, var(--fg) 10%, transparent); color: var(--fg); }
+}
+.cchap:active, .crow.chead:active, .cfold:active { background: color-mix(in srgb, var(--fg) 14%, transparent); }
+.csech:active { background: var(--grp-hi); }
 /* A tap that moves the reading place: the row flashes once, then stays marked; "Now at: …" fades in at
    the bottom of the panel for a few seconds (and a short buzz where the phone supports it, contents.js). */
 .crow.flash { animation: cflash 0.6s ease-out; }
@@ -897,7 +952,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     <button class="icon idx" id="ctoc" type="button" title="Index: tap to close" aria-label="Index" aria-pressed="true"><span class="idxi">&#9776;</span><span class="idxt">Index</span></button>
     <input type="search" id="csearch" placeholder="Search sections, chapters, headings" aria-label="Search the contents" autocomplete="off">
   </div>
-  <div class="chead" id="chead">Contents</div>
+  <div class="cheadrow"><div class="chead" id="chead">Contents</div><button class="cfoldall" id="cfoldall" type="button" hidden>Close all</button></div>
   <div class="ctree" id="ctree"></div>
   <div class="cnow" id="cnow" aria-live="polite"></div>
 </aside>
@@ -3412,10 +3467,12 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     let nextC = 0;      // a grid book: a chapter per era within a file, numbered as they come
     // One source of the "files" kind: a plain file is one chapter; a Markdown file also gives its outline
     // (headings → paragraph places); in a grid book (job.grid) each era of the file is a chapter of its own.
+    // A plain file in a sections book (a folder of folders) carries its section too (2026-11-08), so the Index groups
+    // it under its sub-folder as it does Markdown files; the naming pass gives it the same "section · file" title.
     const fileChapters = (s, raw, t) => {
       const stem = CHAPTER.stem(s.name) || `Part ${s.c}`;
       const title = (s.section ? s.section + " · " : "") + stem;
-      if (!/\.md$/i.test(s.name)) return [add(s.c, null, title, CHAPTER.paragraphs(t, job.join), s.name, false)];
+      if (!/\.md$/i.test(s.name)) return [add(s.c, null, title, CHAPTER.paragraphs(t, job.join), s.name, false, s.section ? { file: stem, sec: s.section } : undefined)];
       const ol = CHAPTER.outline(raw);
       if (job.grid === "time") ol.eras = ol.eras.filter((e) => !e.plain);   // a file with no hb-time eras (an introduction) stays whole
       const facts = { file: stem, sec: s.section || "", h1: ol.h1, hb: ol.hb };
@@ -4344,39 +4401,88 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 // before the place being read (in the current order), a part-mark (how far along) on the current one,
 // from the stored place; nothing on the rest. Search filters by section, chapter and heading names as
 // you type (a flat list of hits; headings under their chapter).
+// Groups and chapters told apart (Jon, 2026-11-08: "which one I would click, which would go to a chapter, versus
+// which one is just a group of chapters"): a GROUP (a section, an EPUB part, an era: a run of chapters with the same
+// group name, in reading order) is a header band with a turning chevron, the number of its chapters and its read mark;
+// a tap folds or unfolds it, nothing else; it stays at the top of the list while its chapters scroll. A CHAPTER is a
+// plain row: a tap opens it. A chapter with headings has its own chevron on the left, which shows or hides them (the
+// row still opens the chapter). Chapters with no group (an EPUB's prologue) sit at the top level, in their place.
+// Which groups are open is remembered per book (br1-contents-folds); a book's first open shows every group open when
+// it has at most 60 chapters, else only the group being read. "Open all / Close all" beside the book's name. Keys:
+// ↑ ↓ move between rows, → opens (or steps in), ← closes (or steps out), Home / End, Enter / Space press.
 (function () {
   const $ = (id) => document.getElementById(id);
-  const panel = $("contents"), back = $("cback"), box = $("csearch"), tree = $("ctree"), head = $("chead"), tocBtn = $("toc"), panelToc = $("ctoc");
+  const panel = $("contents"), back = $("cback"), box = $("csearch"), tree = $("ctree"), head = $("chead"), tocBtn = $("toc"), panelToc = $("ctoc"), foldAll = $("cfoldall");
   const root = document.documentElement;
   const fmt = (n) => Number(n || 0).toLocaleString("en-US");
   const h = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  const plural = (n, w) => `${fmt(n)} ${w}${n === 1 ? "" : "s"}`;
   const MAX_HITS = 400;
   const KEY = (globalThis.APP_KEY || "br1") + "-contents";
+  const FOLDS = (globalThis.APP_KEY || "br1") + "-contents-folds";   // { "<book id>[|a]": [open group keys] }
+  const SMALL = 60;           // a book of at most this many chapters opens with every group open (until the reader folds one)
   const DOCK = matchMedia("(min-width: 700px)");     // docked beside the text from here up; an overlay below
   const docked = () => DOCK.matches;
   let builtFor = null;        // the index the tree was built from
-  let model = null;           // { groups: [{ name, items: [i] }] | null, flat: [i] }
+  let model = null;           // { nodes: [i (a chapter with no group) | { name, key, items: [i] }], groups: [the group nodes], heads: any chapter has headings }
   let open = false;
   let query = "";
   let searchTimer = 0;
   let hideTimer = 0;
 
   // ---- The model: how the index groups --------------------------------------------------------------
+  // A group is a RUN of chapters with the same group name, in reading order: an EPUB's prologue before its first part
+  // and its epilogue after the last stay chapters of their own at the top level (they were once gathered into a
+  // made-up "Chapters" group at the top). Read across time: the eras, the era-less chapters (an introduction) under
+  // their section, else at the top level.
   const across = () => BOOK.across;
-  const groupOf = (e) => (across() ? (e.era ? e.era.label : e.sec || e.short || e.title) : e.sec || "");
+  const groupOf = (e) => (across() ? (e.era ? e.era.label : e.sec || "") : e.sec || "");
   const rowName = (e, i) => (across() && e.era ? e.sec || e.short || e.title : e.short || e.title || `Part ${i + 1}`);   // across time: the topic under its era; an era-less chapter its own name
   function build() {
     const list = BOOK.index();
     builtFor = list;
-    const grouped = list.some((e) => e.sec) || across();
-    if (!grouped) { model = { groups: null, flat: list.map((_, i) => i) }; return; }
-    const groups = [], by = new Map();
+    const nodes = [], seen = new Map();
+    let run = null;
     list.forEach((e, i) => {
       const k = groupOf(e);
-      if (!by.has(k)) { by.set(k, { name: k || "Chapters", items: [] }); groups.push(by.get(k)); }
-      by.get(k).items.push(i);
+      if (!k) { run = null; nodes.push(i); return; }
+      if (!run || run.name !== k) {
+        const n = (seen.get(k) || 0) + 1;
+        seen.set(k, n);
+        run = { name: k, key: k + (n > 1 ? " #" + n : ""), items: [] };
+        nodes.push(run);
+      }
+      run.items.push(i);
     });
-    model = { groups, flat: null };
+    const groups = nodes.filter((x) => typeof x === "object");
+    // cols: the chevron column (a book with groups or headings): every chapter keeps that space, so the names line up
+    // under their group's name, indented; a flat book with no headings (Walker of Worlds) has none.
+    model = { nodes, groups, heads: list.some((e) => e.heads && e.heads.length), cols: groups.length > 0 || list.some((e) => e.heads && e.heads.length) };
+  }
+
+  // ---- Which groups are open, per book (remembered) -----------------------------------------------------
+  let folds = null;           // { id, open: Set(group keys) } for the book open now (and its order)
+  const foldId = () => (BOOK.current || "") + (across() ? "|a" : "");
+  function foldsNow() {
+    if (folds && folds.id === foldId()) return folds;
+    let kept = null;
+    try { kept = (JSON.parse(localStorage.getItem(FOLDS)) || {})[foldId()] || null; } catch (e) {}
+    folds = { id: foldId(), open: new Set(Array.isArray(kept) ? kept : []) };
+    if (!kept && BOOK.count <= SMALL && model) for (const g of model.groups) folds.open.add(g.key);   // a small book: all open at first
+    return folds;
+  }
+  function saveFolds() {
+    const f = foldsNow();
+    try { const all = JSON.parse(localStorage.getItem(FOLDS)) || {}; all[f.id] = Array.from(f.open); localStorage.setItem(FOLDS, JSON.stringify(all)); } catch (e) {}
+  }
+  // The chevron: one shape for every fold, pointing right when closed, turned down when open (CSS).
+  const SVG = "http://www.w3.org/2000/svg";
+  function chevron() {
+    const s = document.createElementNS(SVG, "svg"), p = document.createElementNS(SVG, "path");
+    s.setAttribute("viewBox", "0 0 24 24"); s.setAttribute("aria-hidden", "true");
+    p.setAttribute("d", "M9 5l7 7-7 7");
+    s.appendChild(p);
+    return s;
   }
 
   // ---- Marks: ✓ before the place being read, a part-mark on it ----------------------------------------
@@ -4402,23 +4508,29 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   }
 
   // ---- Rows --------------------------------------------------------------------------------------------
-  // A chapter row: [mark] [number] name [▸ when it has headings]; its headings in a box under it, built
-  // when opened (the current chapter's opened at once, the heading reached highlighted).
+  // A chapter: a line of [its chevron when it has headings, else a spacer when other chapters have some] [the
+  // chapter's button: number, name, read mark]; its headings in a box under the line, built when opened (the current
+  // chapter's opened at once, the heading reached highlighted).
   function chapterRow(i, at, cur) {
     const e = BOOK.info(i);
     const wrap = h("div", "citem" + (i === cur ? " current" : ""));
     wrap.dataset.i = i;
-    const b = h("button", "crow cchap"); b.type = "button"; b.dataset.i = i;
-    b.append(mark(i, at));
-    if (BOOK.numbered) b.append(h("span", "cn", e.c));
-    b.append(h("span", "ct", rowName(e, i)));
-    wrap.appendChild(b);
+    const line = h("div", "cline");
     const heads = e.heads || [];
+    const name = rowName(e, i);
     if (heads.length) {
-      const t = h("button", "cfold", "▸"); t.type = "button"; t.title = `${heads.length} heading${heads.length === 1 ? "" : "s"}`; t.setAttribute("aria-label", t.title); t.setAttribute("aria-expanded", "false");
-      t.dataset.i = i;
-      b.appendChild(t);
-    }
+      const t = h("button", "cfold"); t.type = "button"; t.dataset.i = i;
+      t.title = `${plural(heads.length, "heading")} in this chapter`;
+      t.setAttribute("aria-label", `${plural(heads.length, "heading")} in ${name}`); t.setAttribute("aria-expanded", "false");
+      t.appendChild(chevron());
+      line.appendChild(t);
+    } else if (model && model.cols) line.appendChild(h("span", "cnofold"));
+    const b = h("button", "crow cchap"); b.type = "button"; b.dataset.i = i;
+    if (BOOK.numbered) b.append(h("span", "cn", e.c));
+    b.append(h("span", "ct", name), mark(i, at));
+    if (i === cur) b.setAttribute("aria-current", "true");
+    line.appendChild(b);
+    wrap.appendChild(line);
     return wrap;
   }
   function headRows(i) {
@@ -4438,20 +4550,29 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   }
   function toggleHeads(item, on) {
     const fold = item.querySelector(".cfold"), has = item.querySelector(".cheads");
-    const want = on === undefined ? !has : on;
+    const want = (on === undefined ? !has : on) && !!fold;          // a chapter with no headings has nothing to show (no empty box)
     if (want && !has) item.appendChild(headRows(Number(item.dataset.i)));
     else if (!want && has) has.remove();
-    if (fold) { fold.textContent = want ? "▾" : "▸"; fold.setAttribute("aria-expanded", String(want)); }
+    if (fold) fold.setAttribute("aria-expanded", String(want));
   }
+  // A group: a header button (the whole of it folds: [chevron] name [count] [read mark]), then, when open, its
+  // chapters in a box behind a guide line.
   function groupRow(g, at, cur) {
     const sec = h("div", "csec" + (g.items.includes(cur) ? " here" : ""));
+    sec.dataset.key = g.key;
     const b = h("button", "crow csech"); b.type = "button"; b.setAttribute("aria-expanded", "false");
-    b.append(groupMark(g.items, at), h("span", "cfold", "▸"), h("span", "ct", g.name), h("span", "ccount", fmt(g.items.length)));
+    const n = g.items.length, count = h("span", "ccount", fmt(n));
+    count.title = plural(n, "chapter");
+    b.setAttribute("aria-label", `${g.name}: a group of ${plural(n, "chapter")}`);
+    const fold = h("span", "cfold");
+    fold.appendChild(chevron());
+    b.append(fold, h("span", "ct", g.name), count, groupMark(g.items, at));
     sec.appendChild(b);
     sec._items = g.items;
     return sec;
   }
-  function toggleGroup(sec, on) {
+  // user: a tap or a key (remembered for this book); else the tree opening itself to the place being read.
+  function toggleGroup(sec, on, user) {
     const has = sec.querySelector(".cbody"), b = sec.firstChild;
     const want = on === undefined ? !has : on;
     if (want && !has) {
@@ -4460,27 +4581,38 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
       for (const i of sec._items) body.appendChild(chapterRow(i, at, cur));
       sec.appendChild(body);
     } else if (!want && has) has.remove();
-    b.querySelector(".cfold").textContent = want ? "▾" : "▸";
+    sec.classList.toggle("open", want);
     b.setAttribute("aria-expanded", String(want));
+    const f = foldsNow();
+    if (want) f.open.add(sec.dataset.key); else f.open.delete(sec.dataset.key);
+    if (user) saveFolds();
+    showFoldAll();
   }
+  // Open all / Close all, beside the book's name: shown for a book with two groups or more (not while searching).
+  function showFoldAll() {
+    const secs = groupsShown();
+    foldAll.hidden = !!query || secs.length < 2;
+    const any = secs.some((s) => s.classList.contains("open"));
+    foldAll.textContent = any ? "Close all" : "Open all";
+    foldAll.title = any ? "Fold every group away" : "Show the chapters of every group";
+  }
+  const groupsShown = () => Array.from(tree.children).filter((x) => x._items);
 
   // ---- The tree, and the search list -------------------------------------------------------------------
-  // The folds the user opened stay open across a rebuild (the panel stays open while reading: a tap on
-  // a chapter must not fold everything else away).
+  // The groups open are this book's remembered ones (the panel stays open while reading: a tap on a chapter must not
+  // fold everything else away); the chapters whose headings were open stay so across a rebuild.
   function renderTree() {
-    const at = place(), cur = READER.chapter;
-    const openGroups = new Set(Array.from(tree.querySelectorAll(".csec")).filter((s) => s.querySelector(".cbody")).map((s) => s.querySelector(".ct").textContent));
-    const openHeads = new Set(Array.from(tree.querySelectorAll(".citem")).filter((it) => it.querySelector(".cheads")).map((it) => it.dataset.i));
+    const at = place(), cur = READER.chapter, f = foldsNow();
+    const openHeads = tree.dataset.book === f.id ? new Set(Array.from(tree.querySelectorAll(".citem")).filter((it) => it.querySelector(".cheads")).map((it) => it.dataset.i)) : new Set();   // never another book's
     const frag = document.createDocumentFragment();
-    if (!model.groups) {
-      for (const i of model.flat) frag.appendChild(chapterRow(i, at, cur));
-    } else {
-      for (const g of model.groups) frag.appendChild(groupRow(g, at, cur));
-    }
+    for (const n of model.nodes) frag.appendChild(typeof n === "number" ? chapterRow(n, at, cur) : groupRow(n, at, cur));
     tree.replaceChildren(frag);
+    tree.dataset.book = f.id;
     tree.classList.remove("none");
-    for (const sec of tree.children) if (sec._items && openGroups.has(sec.querySelector(".ct").textContent)) toggleGroup(sec, true);
+    tree.classList.toggle("cfolds", model.cols);
+    for (const sec of groupsShown()) if (f.open.has(sec.dataset.key)) toggleGroup(sec, true);
     for (const i of openHeads) { const it = tree.querySelector(`.citem[data-i="${i}"]`); if (it) toggleHeads(it, true); }
+    showFoldAll();
   }
   // A paragraph change while open: the part-marks and the heading reached move; nothing is rebuilt or
   // scrolled (the user may be browsing the tree while the reading goes on).
@@ -4510,39 +4642,44 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
       if (!own && !heads.length) continue;
       if (++hits > MAX_HITS) { more++; continue; }
       const item = chapterRow(i, at, cur);
-      if (e.sec && !across()) item.firstChild.insertBefore(h("span", "csecname", e.sec + " › "), item.firstChild.querySelector(".ct"));
+      const row = item.querySelector(".cchap");
+      if (e.sec && !across()) row.insertBefore(h("span", "csecname", e.sec + " › "), row.querySelector(".ct"));
       if (heads.length && !own) {
         const box = h("div", "cheads");
         for (const hd of heads) { const b = h("button", "crow chead"); b.type = "button"; b.dataset.i = i; b.dataset.p = hd.p; b.style.setProperty("--lvl", Math.max(0, hd.l - 1)); b.append(h("span", "ct", hd.t)); box.appendChild(b); }
         item.appendChild(box);
-        const fold = item.querySelector(".cfold"); if (fold) { fold.textContent = "▾"; fold.setAttribute("aria-expanded", "true"); }
+        const fold = item.querySelector(".cfold"); if (fold) fold.setAttribute("aria-expanded", "true");
       }
       frag.appendChild(item);
     }
     if (more) frag.appendChild(h("div", "cmore", `${fmt(more)} more; type more of the name`));
     tree.replaceChildren(frag);
     tree.classList.toggle("none", !hits);
+    tree.classList.toggle("cfolds", model.cols);
+    showFoldAll();
   }
   function render() {
-    if (!BOOK.count) { tree.replaceChildren(h("div", "cmore", "No book is open. Tap Open to pick one.")); head.textContent = "Contents"; return; }
+    if (!BOOK.count) { tree.replaceChildren(h("div", "cmore", "No book is open. Tap Open to pick one.")); head.textContent = "Contents"; foldAll.hidden = true; return; }
     if (builtFor !== BOOK.index() || !model) build();
     head.textContent = `${BOOK.title} · ${fmt(BOOK.count)} chapters${across() ? " · across time" : ""}`;
     if (query) { renderSearch(query); return; }
     renderTree();
     revealCurrent();
   }
-  // The tree opened to the chapter being read: its section opened, its headings shown, scrolled into view.
+  // The tree opened to the chapter being read: its group opened, its headings shown, scrolled into view (clear of
+  // the group's header, which stays at the top: the tree's scroll-padding).
   function revealCurrent() {
     const cur = READER.chapter;
     if (cur < 0) return;
-    if (model.groups) { for (const sec of tree.children) if (sec._items && sec._items.includes(cur)) toggleGroup(sec, true); }
+    for (const sec of groupsShown()) if (sec._items.includes(cur)) toggleGroup(sec, true);
     const item = tree.querySelector(`.citem[data-i="${cur}"]`);
     if (!item) return;
     toggleHeads(item, true);
-    const row = item.querySelector(".chead.current") || item.firstChild;
+    const row = item.querySelector(".chead.current") || item.querySelector(".cchap");
     requestAnimationFrame(() => {      // scrolled to the middle only when it is out of view (a tapped row stays where it was)
       const r = row.getBoundingClientRect(), t = tree.getBoundingClientRect();
-      if (r.top < t.top || r.bottom > t.bottom) { try { row.scrollIntoView({ block: "center" }); } catch (e) {} }
+      const sec = row.closest(".csec"), over = sec ? sec.firstChild.getBoundingClientRect().height : 0;   // the group's header covers the top
+      if (r.top < t.top + over || r.bottom > t.bottom) { try { row.scrollIntoView({ block: "center" }); } catch (e) {} }
     });
   }
 
@@ -4572,7 +4709,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     render();
     if (!instant && matchMedia("(pointer: fine)").matches) box.focus();
     remember();
-    log("page", `the contents panel ${docked() ? "beside" : "over"} the text (${BOOK.count ? `${fmt(BOOK.count)} chapters${model && model.groups ? `, ${model.groups.length} ${across() ? "eras" : "sections"}` : ""}` : "no book"})`);
+    log("page", `the contents panel ${docked() ? "beside" : "over"} the text (${BOOK.count ? `${fmt(BOOK.count)} chapters${model && model.groups.length ? `, ${model.groups.length} ${across() ? "eras" : "groups"}` : ""}` : "no book"})`);
   }
   function close() {
     if (!open) return;
@@ -4588,9 +4725,9 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 
   tree.addEventListener("click", (e) => {
     const fold = e.target.closest(".cfold");
-    if (fold && fold.closest(".cchap")) { e.stopPropagation(); toggleHeads(fold.closest(".citem")); return; }
+    if (fold && fold.closest(".citem")) { e.stopPropagation(); toggleHeads(fold.closest(".citem")); return; }
     const sech = e.target.closest(".csech");
-    if (sech) { toggleGroup(sech.parentElement); return; }
+    if (sech) { toggleGroup(sech.parentElement, undefined, true); return; }
     const row = e.target.closest(".crow");
     if (!row) return;
     const i = Number(row.dataset.i);
@@ -4629,6 +4766,41 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   });
   box.addEventListener("keydown", (e) => {
     if (e.key === "Enter") { const b = tree.querySelector(".crow.cchap, .crow.chead"); if (b) b.click(); }
+    else if (e.key === "ArrowDown") { const b = tree.querySelector(".crow"); if (b) { e.preventDefault(); b.focus(); } }
+  });
+  // Keys in the tree (the rows are buttons, so Tab, Enter and Space work as on any button): ↑ ↓ the row above or
+  // below; → a closed group or chapter with headings opens, an open one steps into its first row; ← an open one
+  // closes, else the focus goes to the group or chapter it sits in; Home / End the first and last rows.
+  tree.addEventListener("keydown", (e) => {
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    const row = e.target.closest && e.target.closest(".crow, .cfold");
+    if (!row) return;
+    const rows = Array.from(tree.querySelectorAll(".crow")).filter((r) => r.offsetParent !== null);
+    const me = row.classList.contains("cfold") ? row.parentElement.querySelector(".cchap") : row;
+    const k = rows.indexOf(me);
+    const go = (r) => { if (r) { e.preventDefault(); r.focus(); r.scrollIntoView({ block: "nearest" }); } };
+    const item = me.closest(".citem"), sec = me.closest(".csec");
+    if (e.key === "ArrowDown") go(rows[k + 1]);
+    else if (e.key === "ArrowUp") go(rows[k - 1]);
+    else if (e.key === "Home") go(rows[0]);
+    else if (e.key === "End") go(rows[rows.length - 1]);
+    else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      if (me.classList.contains("csech")) { if (!sec.classList.contains("open")) toggleGroup(sec, true, true); else go(sec.querySelector(".cbody .crow")); }
+      else if (me.classList.contains("cchap") && item.querySelector(".cfold")) { if (!item.querySelector(".cheads")) toggleHeads(item, true); else go(item.querySelector(".cheads .crow")); }
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      if (me.classList.contains("chead")) go(item.querySelector(".cchap"));
+      else if (me.classList.contains("cchap") && item.querySelector(".cheads")) toggleHeads(item, false);
+      else if (me.classList.contains("cchap") && sec) go(sec.querySelector(".csech"));
+      else if (me.classList.contains("csech") && sec.classList.contains("open")) toggleGroup(sec, false, true);
+    }
+  });
+  foldAll.addEventListener("click", () => {
+    const secs = groupsShown(), want = !secs.some((s) => s.classList.contains("open"));
+    for (const s of secs) toggleGroup(s, want);
+    saveFolds();
+    showFoldAll();
   });
   panelToc.addEventListener("click", close);     // the panel's stand-in for the top bar's ☰ (narrow screens)
   back.addEventListener("click", close);
