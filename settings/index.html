@@ -403,7 +403,12 @@ button.lcol:focus-visible { outline: 2px solid var(--accent); outline-offset: -2
 .lastrow .la { display: flex; flex-wrap: wrap; gap: 2px 12px; color: var(--muted); font-size: 0.9em; align-items: center; min-width: 0; }
 .lastrow .la b { color: var(--ink); font-weight: 600; }
 
-/* This PC */
+/* Relay (the section that was "This PC") */
+/* Restart, and the time before it beside it. While the button says "Tap again to restart" it is amber: it needs a look. */
+.restartline { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.restartline .after { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); }
+.restartline .after select { color: var(--ink); }
+button.danger.armed, button.danger.armed:hover:not(:disabled) { background: var(--warn-soft); color: var(--warn-ink); border-color: var(--warn); }
 .pingtop { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 14px; }
 .pingbig { font-size: 2.2em; font-weight: 750; font-variant-numeric: tabular-nums; }
 .pingbig.ok { color: var(--ok-ink); } .pingbig.bad { color: var(--bad-ink); font-size: 1.6em; }
@@ -3660,11 +3665,13 @@ S.every = (ms, fn, wanted) => {
 })();
 
 // ---- pinger.js ----
-// pinger.js: inside This PC: the live pinger (each ping's round trip to PC Relay, the last 60 drawn) and Restart
-// Jon's desktop: one press starts Windows' own countdown, with Cancel beside it (no question first: the countdown is
-// the second chance). While a restart is set or under way the pinger keeps going, whatever section is open, and says
-// how far it got: Windows going away, Windows back without PC Relay yet, and the PC back (with how long it took). The
-// strip at the bottom of every section shows the countdown too.
+// pinger.js: inside Relay: the live pinger (each ping's round trip to PC Relay, the last 60 drawn) and Restart Jon's
+// desktop, with a small choice of time beside it: 0 seconds (what it shows at first), 10 seconds, 30 seconds, 1 minute,
+// 5 minutes. Above 0, one press starts Windows' own countdown, with Cancel beside it (no question first: the countdown
+// is the second chance). At 0 the PC restarts at once, so a slip is caught another way, without a pop-up: the first tap
+// turns the button into "Tap again to restart" for three seconds. While a restart is set or under way the pinger keeps
+// going, whatever section is open, and says how far it got: Windows going away, Windows back without PC Relay yet, and
+// the PC back (with how long it took). The strip at the bottom of every section shows the countdown too.
 "use strict";
 (function () {
   const { h, $, clear } = S;
@@ -3679,7 +3686,7 @@ S.every = (ms, fn, wanted) => {
   if (watch && Date.now() - (watch.asked || 0) > 60 * 60 * 1000) watch = null;
   const saveWatch = () => S.store.set("restart-watch", watch);
   const watching = () => !!(watch && !watch.done);
-  const want = () => document.visibilityState === "visible" && S.app.state !== "leaving" && ((S.app.is("pc") && !!box) || watching());
+  const want = () => document.visibilityState === "visible" && S.app.state !== "leaving" && ((S.app.is("relay") && !!box) || watching());
   const name = () => S.pc.name();
 
   // Does anything answer at the PC's address, PC Relay or not? (A browser hides Tailscale's own answer when PC Relay is
@@ -3725,7 +3732,7 @@ S.every = (ms, fn, wanted) => {
     if (r.ok && S.app.state === "away") S.app.connect(true);   // (it answers again: the sections come back at once)
     if (r.ok && info && info.restart_at && (!watch || watch.at !== info.restart_at)) { await loadPC(); beginWatch(); }
     if (watching()) await follow(r, p);
-    if (S.app.is("pc") && Date.now() - pcAt > 30000) loadPC();
+    if (S.app.is("relay") && Date.now() - pcAt > 30000) loadPC();
   }
   async function loadPC() {
     if (!S.pc.can("pc.control")) return;
@@ -3740,7 +3747,7 @@ S.every = (ms, fn, wanted) => {
   function beginWatch() {
     const rs = pc && pc.restart;
     if (!rs || !rs.pending) return;
-    watch = { asked: rs.asked, at: rs.at, name: rs.name, relay: pc.relay_started, windows: pc.windows_started, phase: "set" };
+    watch = { asked: rs.asked, at: rs.at, seconds: rs.seconds || 0, name: rs.name, relay: pc.relay_started, windows: pc.windows_started, phase: "set" };
     saveWatch();
     again();
   }
@@ -3805,6 +3812,13 @@ S.every = (ms, fn, wanted) => {
   }
 
   // ---- Restart ----
+  // The time before the restart: 0 seconds unless someone picks another (not kept: it is 0 seconds again next time).
+  const TIMES = [[0, "0 seconds"], [10, "10 seconds"], [30, "30 seconds"], [60, "1 minute"], [300, "5 minutes"]];
+  const AGAIN = "Tap again to restart", ARM_MS = 3000, DEAF_MS = 500;
+  let after = 0, armed = 0, armTimer = 0;   // armed: until when the button says "Tap again to restart" (0: it does not)
+  const isArmed = () => after === 0 && armed > Date.now();
+  function disarm() { armed = 0; clearTimeout(armTimer); armTimer = 0; }
+  PG.TIMES = TIMES;
   function afterWords() {
     const a = (pc && pc.after_restart) || {};
     if (a.auto_sign_in === "on") return "Windows signs in by itself, so PC Relay is back a few minutes later.";
@@ -3830,23 +3844,49 @@ S.every = (ms, fn, wanted) => {
     const rs = pc.restart || {};
     if (rs.pending) { beginWatch(); clear(body, watchView(), say); return; }
     if (!rs.allowed || rs.why) { clear(body, h("button.danger#restartgo", { type: "button", text: btnText, disabled: true }), h("p.only#restartwhy", { text: S.sentence(rs.why || "Restarts from pages are switched off on the PC") })); return; }
-    const go = h("button.danger#restartgo", { type: "button", text: btnText });
+    const focused = document.activeElement && body.contains(document.activeElement) ? document.activeElement.id : "";
+    const helpText = () => `${after ? "A countdown you can cancel." : "At once, with no countdown."} Programs on ${name()} close without saving.`;
+    const go = h("button.danger#restartgo" + (isArmed() ? ".armed" : ""), { type: "button", text: isArmed() ? AGAIN : btnText });
+    const help = h("p.muted.small#restarthelp", { text: helpText() });
+    const pick = h("select#restartafter", { "aria-label": "Restart after", on: { change: () => {
+      after = Number(pick.value) || 0;
+      disarm();
+      go.textContent = btnText; go.classList.remove("armed");
+      help.textContent = helpText();
+    } } }, TIMES.map(([n, l]) => h("option", { value: String(n), text: l, selected: n === after })));
     go.addEventListener("click", async () => {
-      go.disabled = true;
+      if (after === 0) {
+        // No countdown to cancel, so a slip is caught here, without a pop-up: the first tap only turns the button into
+        // "Tap again to restart" for three seconds. (A second tap in the first half second is the same slip: a double click.)
+        if (!isArmed()) {
+          armed = Date.now() + ARM_MS;
+          clearTimeout(armTimer);
+          armTimer = setTimeout(() => { disarm(); if (go.isConnected) { go.textContent = btnText; go.classList.remove("armed"); } else drawRestart(); }, ARM_MS);
+          go.textContent = AGAIN;
+          go.classList.add("armed");
+          return;
+        }
+        if (Date.now() < armed - ARM_MS + DEAF_MS) return;
+      }
+      disarm();
+      go.classList.remove("armed");
+      go.textContent = btnText;
+      go.disabled = true; pick.disabled = true;
       S.say(say, "Asking the PC…");
-      const r = await S.pc.post("restart", { seconds: rs.default || 60 });
-      if (!r.ok) { go.disabled = false; S.say(say, S.sentence(r.why), "bad"); return; }
+      const r = await S.pc.post("restart", { seconds: after });
+      if (!r.ok) { go.disabled = false; pick.disabled = false; S.say(say, S.sentence(r.why), "bad"); return; }
       pc.restart = r.data.restart;
       beginWatch();
       drawRestart();
     });
-    clear(body, go, h("p.muted.small#restarthelp", { text: `A one-minute countdown you can cancel. Programs on ${name()} close without saving.` }), say);
+    clear(body, h("div.restartline", go, h("label.after", h("span", { text: "after" }), pick)), help, say);
+    if (focused === "restartgo") go.focus(); else if (focused === "restartafter") pick.focus();
   }
   function watchView() {
     const w = watch, out = h("div.watch#watch"), now = S.pc.pcNow();
     if (!w.done && (w.phase === "set" || w.phase === "due")) {
       const left = w.at - now;
-      if (left > 0) {
+      if (left > 0 && w.seconds !== 0) {   // (a restart asked with 0 seconds has no countdown, whatever the two clocks say)
         const say = h("p.say");
         const cancel = h("button.primary.big#restartcancel", { type: "button", text: "Cancel", on: { click: async () => {
           cancel.disabled = true;
@@ -3859,7 +3899,7 @@ S.every = (ms, fn, wanted) => {
         } } });
         out.append(h("p.countdown#countdown", h("b", { text: `${name()} restarts in ${S.mmss(left)}` }), ` · at ${S.clock(w.at, true)}`), cancel, say,
           h("p.muted.small", { text: `Programs on ${name()} close without saving. ${afterWords()}` }));
-      } else out.append(h("p.countdown#countdown", h("b", { text: "The countdown is over: Windows is restarting…" })));
+      } else out.append(h("p.countdown#countdown", h("b", { text: w.seconds ? "The countdown is over: Windows is restarting…" : "Windows is restarting…" })));
     }
     if (!w.done && w.phase === "away") out.append(h("p.countdown#countdown", h("b", { text: `${name()} is restarting` }), ` · no answer since ${S.clock(w.awayAt, true)}`), h("p.muted.small", { text: afterWords() }));
     if (!w.done && w.phase === "windows") out.append(h("p.countdown#countdown", h("b", { text: "Windows is back, PC Relay not yet" })), h("p.muted.small", { text: afterWords() }));
@@ -3875,7 +3915,7 @@ S.every = (ms, fn, wanted) => {
     return out;
   }
 
-  // the two blocks This PC puts in its page
+  // the two blocks Relay puts in its page
   PG.make = (el) => {
     box = el;
     clear(el, h("div#restartbody"),
@@ -3888,17 +3928,18 @@ S.every = (ms, fn, wanted) => {
     return sel;
   };
   setInterval(() => { if (watching() && document.visibilityState === "visible") { if (box && $("#countdown", box)) drawRestart(); else note(); } }, 500);
-  S.on("section", (id) => { if (id === "pc") { start(); loadPC(); } else if (!watching()) stop(); });
+  S.on("section", (id) => { if (id === "relay") { start(); loadPC(); } else { disarm(); if (!watching()) stop(); } });
   if (watching()) setTimeout(start, 500);
 })();
 
-// ---- thispc.js ----
-// thispc.js: This PC: the computer itself (PLAN 8.6; for accounts with pc.control: the main admin).
-// The PC's name ("Jon's desktop"); the public address, with Copy; the connection check (is the address reachable
-// from outside?) with one Fix button; Restart with its countdown and Cancel, and the live pinger (pinger.js). Under
-// More: Start with Windows, the version with Update and Go back a version, the PC's name, the pinger's pace. Debug,
-// the one place for technical detail: logs, the config file, reload, test buttons, details, Quit.
-// Start with Windows, Update, Go back, the folders and Quit work only at the computer.
+// ---- relay.js ----
+// relay.js: the section Relay: the computer itself and PC Relay on it (PLAN 8.6; for accounts with pc.control: the
+// main admin). It was called "This PC" until 2026-11-12 (Jon's word for it is Relay; an old link to #pc still opens it).
+// The PC's name ("Jon's desktop") with PC Relay's version, a plain number; the public address, with Copy; the
+// connection check (is the address reachable from outside?) with one Fix button; Restart after a chosen time, with its
+// countdown and Cancel, and the live pinger (pinger.js). Under More: Start with Windows, Restart from a page, the PC's
+// name, the pinger's pace. Debug, the one place for technical detail: logs, the config file, reload, test buttons,
+// details, Quit. Start with Windows, the folders and Quit work only at the computer.
 "use strict";
 (function () {
   const { h, $, clear } = S;
@@ -3947,27 +3988,9 @@ S.every = (ms, fn, wanted) => {
     fix.hidden = ok || !check.canFix;
   }
 
-  // ---- under More: Start with Windows, the version, the name, the pinger's pace ----
-  function drawVersion() {
-    const box = $("#versionrow", el);
-    if (!box) return;
-    const loc = S.app.local, ver = (loc && loc.version) || (S.app.status && S.app.status.version) || (S.pc.info && S.pc.info.version) || "";
-    const vsay = h("p.say#versionsay");
-    const act = async (body, word) => {
-      S.say(vsay, word);
-      const r = await S.pc.local("version", body, 60000);
-      if (!r.ok) { S.say(vsay, S.sentence(r.why), "bad"); return; }
-      S.say(vsay, "PC Relay is restarting…");
-      for (const b of box.querySelectorAll("button")) b.disabled = true;
-      setTimeout(() => S.app.connect(true), 4000);
-    };
-    const up = h("button#update", { type: "button", text: loc && loc.newer ? `Update to ${loc.newer}` : "Update", disabled: !(loc && loc.newer), on: { click: () => act({ action: "update" }, "Updating…") } });
-    const back = h("button#goback", { type: "button", text: "Go back a version", disabled: !(loc && (loc.versions || []).some((v) => !v.current)) });
-    S.menu(back, () => (loc.versions || []).filter((v) => !v.current).map((v) => ({ text: `${v.version}${v.built ? " · built " + S.when(Number(v.built) || Date.parse(v.built)) : ""}`, pick: () => act({ action: "rollback", to: v.version }, "Going back…") })));
-    const row = h("div.row#versionline", h("div.rl", h("div.rn#versionnow", { text: "Version " + ver }), h("div.rh#versionhelp", { text: loc ? (loc.newer ? `Version ${loc.newer} is ready.` : "This is the newest.") : "" }), vsay), h("div.rc", up, back));
-    S.pcOnly(row);
-    clear(box, row);
-  }
+  // ---- under More: Start with Windows, Restart from a page, the name, the pinger's pace ----
+  // (The version is a plain number beside the PC's name. Update and Go back a version are gone, 2026-11-12, Jon:
+  // "That seems useless in our way of working.")
   function nameRow() {
     const nsay = h("p.say#namesay");
     const inp = h("input#namebox", { type: "text", maxlength: "32", "aria-label": "This PC's name", value: (S.pinger.pc && S.pinger.pc.name) || "" });
@@ -4081,7 +4104,7 @@ S.every = (ms, fn, wanted) => {
   }
 
   S.section({
-    id: "pc", name: "This PC", icon: "pc", needs: "pc.control",
+    id: "relay", name: "Relay", icon: "pc", needs: "pc.control",
     make(root) {
       el = root;
       const csay = h("p.say#copysay");
@@ -4106,10 +4129,10 @@ S.every = (ms, fn, wanted) => {
       pagesRow.querySelector(".rl").append(h("p.say#restartssay"));
       S.pcOnly(pagesRow);
       const pingBox = h("div#pinger");
-      const more = S.more("Start with Windows · version · this PC's name · the pinger's pace",
-        h("div.rows", startRow, pagesRow, h("div#versionrow"), nameRow(), S.row("The pinger's pace", "How often this page asks PC Relay for an answer.", S.pinger.rateBox())));
-      more.id = "pcmore";
-      clear(root, h("h2.sh", { text: "This PC" }),
+      const more = S.more("Start with Windows · this PC's name · the pinger's pace",
+        h("div.rows", startRow, pagesRow, nameRow(), S.row("The pinger's pace", "How often this page asks PC Relay for an answer.", S.pinger.rateBox())));
+      more.id = "relaymore";
+      clear(root, h("h2.sh", { text: "Relay" }),
         h("div.card#pccard", h("div.pers", h("div", h("div.pn#pcname", { text: S.pc.name() }), h("div.pm#pcsub"))),
           h("div.rows", { style: "margin-top:12px" },
             h("div.row", h("div.rl", h("div.rn", { text: "Public address" }), h("div.rh.addr#pcaddr"), csay), h("div.rc", copy)),
@@ -4119,9 +4142,8 @@ S.every = (ms, fn, wanted) => {
         h("div.card", debug()));
       S.pinger.make(pingBox);
       S.on("pc-data", () => { drawTop(); if ($("#debug", el).open) drawDetails(); const nb = $("#namebox", el); if (nb && document.activeElement !== nb && S.pinger.pc) nb.value = S.pinger.pc.name || ""; });
-      S.on("local", () => { drawTop(); drawVersion(); drawWarnings(); });
-      S.on("status-data", (st) => { if (!S.app.local && st && $("#versionnow", el) && $("#versionnow", el).textContent !== "Version " + st.version) drawVersion(); });
-      drawTop(); drawVersion(); drawCheck();
+      S.on("local", () => { drawTop(); drawWarnings(); });
+      drawTop(); drawCheck();
     },
     show() { S.pinger.loadPC(); if (!check && !checking) runCheck(false); if (S.pc.door) S.app.loadLocal(); },
   });
@@ -4135,7 +4157,10 @@ S.every = (ms, fn, wanted) => {
 "use strict";
 (function () {
   const { h, $, clear } = S;
-  const ORDER = ["home", "people", "programs", "files", "activity", "pc"];
+  const ORDER = ["home", "people", "programs", "files", "activity", "relay"];
+  // (the section Relay was "This PC", #pc, until 2026-11-12: an old link or a remembered place still opens it)
+  const OLD = { pc: "relay" };
+  const named = (id) => OLD[id] || id;
   const A = (S.app = { section: "", status: null, local: null, allowed: [], state: "starting", made: {} });
   let stopStatus = null, retry = 0, misses = 0;
 
@@ -4163,7 +4188,7 @@ S.every = (ms, fn, wanted) => {
     if (v.kind !== "off") parts.push(h("span.sep", { text: "·" }), h("span#striphere", { text: `${S.plural(st.here_count || 0, "person", "people")} here` }));
     if (st.space && st.space.free != null && !st.space.why) parts.push(h("span.sep", { text: "·" }), h("span#stripfree", { text: `${S.bytes(st.space.free)} free` }));
     // a restart that is set or under way is said here too, on every section (pinger.js sets A.note)
-    if (A.note) parts.push(h("span.sep", { text: "·" }), h("button.plain.stripnote#stripnote", { type: "button", on: { click: () => show("pc") } }, S.state(A.note.kind, A.note.text)));
+    if (A.note) parts.push(h("span.sep", { text: "·" }), h("button.plain.stripnote#stripnote", { type: "button", on: { click: () => show("relay") } }, S.state(A.note.kind, A.note.text)));
     clear(el, parts);
   }
   S.on("strip", strip);
@@ -4188,6 +4213,7 @@ S.every = (ms, fn, wanted) => {
 
   // ---- one section at a time ----
   function show(id, quiet) {
+    id = named(id);
     if (!A.allowed.includes(id)) id = A.allowed[0];
     const was = A.section;
     if (was === id && A.made[id]) return;
@@ -4200,7 +4226,7 @@ S.every = (ms, fn, wanted) => {
     if (!el) { el = h("section#s-" + id, { "aria-label": sec.name }); $("#main").append(el); }
     if (!A.made[id]) { A.made[id] = true; sec.make(el); }
     S.store.set("section", id);
-    if (!quiet && location.hash !== "#" + id) history.replaceState(null, "", "#" + id);
+    if ((!quiet || OLD[location.hash.slice(1)]) && location.hash !== "#" + id) history.replaceState(null, "", "#" + id);
     document.title = (S.pc.door ? "PC Relay" : "Settings") + " · " + sec.name;
     S.closeMenu();
     if (sec.show) { try { sec.show(); } catch (e) { console.error(e); } }
@@ -4223,8 +4249,8 @@ S.every = (ms, fn, wanted) => {
     }
     $("#rail").hidden = false;
     meChip();
-    const want = location.hash.slice(1);
-    const id = allowed.includes(want) ? want : allowed.includes(A.section) ? A.section : allowed.includes(S.store.get("section", "")) ? S.store.get("section", "") : allowed[0];
+    const want = named(location.hash.slice(1)), kept = named(S.store.get("section", ""));
+    const id = allowed.includes(want) ? want : allowed.includes(A.section) ? A.section : allowed.includes(kept) ? kept : allowed[0];
     A.section = A.section === id && A.made[id] ? id : "";
     show(id, true);
     if (!stopStatus) stopStatus = S.every(5000, loadStatus, () => A.state === "ready");
@@ -4313,7 +4339,7 @@ S.every = (ms, fn, wanted) => {
 
 </script>
 <script>
-S.VERSION = "2.0.32"; S.BUILT = "2026-11-12 7:18 AM";
+S.VERSION = "2.0.35"; S.BUILT = "2026-11-12 9:02 AM";
 S.app.start();
 </script>
 </body>
