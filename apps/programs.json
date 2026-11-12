@@ -1,8 +1,9 @@
 {
-  "_": "THE list of Jon's programs. build.py writes the Apps menu (cool-tools/apps/), the Cool tools front page and the cloud's hidden .relay-apps\\apps.json (the file manager and the files service read it there) from this file. A new program = one entry here, its drawing in icons/make_icons.py, then python build.py. 'path' is the program's folder on the site; 'about' is the front page's line, 'short' the Apps menu's; 'folder' its folder in a person's home (only when it saves); 'extensions' its own file kinds (the first is the one it saves); 'opens' other kinds it can open; 'listed': false keeps an entry out of the menu, the front page and Open with (it is in the list only so the files service knows its id).",
+  "_": "THE list of Jon's programs. build.py writes the Apps menu (cool-tools/apps/), the Cool tools front page and the cloud's hidden .relay-apps\\apps.json (the file manager and the files service read it there) from this file. A new program = one entry here, its drawing in icons/make_icons.py, then python build.py. 'path' is the program's folder on the site; 'about' is the front page's line, 'short' the Apps menu's; 'folder' its folder in a person's home (only when it saves); 'extensions' its own file kinds (the first is the one it saves); 'opens' other kinds it can open; 'listed': false keeps an entry out of the menu, the front page and Open with (a test entry that is in the list only so the files service knows its id, or a program that is not published yet). A group shows only while it has a listed program.",
   "groups": [
     { "id": "now", "name": "Current Projects", "accent": "255, 210, 61" },
     { "id": "fun", "name": "Fun Projects", "accent": "255, 61, 242" },
+    { "id": "games", "name": "Games", "accent": "61, 142, 255" },
     { "id": "test", "name": "Testing", "accent": "61, 252, 255" },
     { "id": "archived", "name": "Archived", "accent": "150, 160, 182" }
   ],
@@ -54,6 +55,13 @@
       "short": "See and delete what these tools stored",
       "about": "See and delete what these tools have stored in your browser: books, settings, downloaded voice files.",
       "source": "Projects\\browser-storage",
+      "extensions": [], "opens": []
+    },
+    {
+      "id": "thaw", "group": "games", "name": "Thaw", "path": "thaw/",
+      "short": "Bring dead planets back to life",
+      "about": "A game with a real climate model. Wake a planet that is frozen solid or far too hot, then switch your machines off and see whether it stays alive on its own.",
+      "source": "Projects\\thaw",
       "extensions": [], "opens": []
     },
     {

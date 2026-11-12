@@ -14,6 +14,7 @@ the other programs and to the account.
 | Cloud File Manager | https://jonnystokes.github.io/cooltools/file-manager/ | Your files and the Shared Folder, from anywhere: open, download, upload, move, rename and delete (into a trash). A file of one of these programs opens in that program. |
 | Settings | https://jonnystokes.github.io/cooltools/settings/ | Your name, picture and password (`settings/account.html`, the account page every program opens). For admins: the people, programs, files and activity of the PC. |
 | Plan Cutter | https://jonnystokes.github.io/cooltools/plan-cutter/ | Draw a crooked room, lay sheet material on a ceiling or wall, cut it along the walls and get the numbers to mark on the real board. Saves `.plan-cutter` files. |
+| Thaw | https://jonnystokes.github.io/cooltools/thaw/ | A game with a real climate model. Wake a planet that is frozen solid or far too hot, then switch your machines off and see whether it stays alive on its own. |
 | Screen Peek (test) | https://jonnystokes.github.io/cooltools/screen-peek/ | A live screenshot of Jon's desktop, single or continuous, for those allowed to use it. Works only while sharing is on at the PC. |
 | Simple Bench | https://jonnystokes.github.io/cooltools/simple-bench/ | A 10-second device test: processor and graphics card scores, and which voice and settings the Book reader would suggest on this device. |
 | Browser app cache manager | https://jonnystokes.github.io/cooltools/browser-storage/ | See and delete what these tools have stored in your browser, each thing named for its program. Never shows a sign-in. |
@@ -44,4 +45,5 @@ the other programs and to the account.
 | `simple-bench/` | `Projects\simple-bench` |
 | `browser-storage/` | `Projects\browser-storage` |
 | `hyperwave/` | `Projects\hyperwave` (archived, not rebuilt) |
+| `thaw/` | `Projects\thaw` |
 | `apps/`, the list in `index.html` | `Projects\app-kit` |
