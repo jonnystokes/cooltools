@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="icons/apps-16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/apps-32.png">
 <link rel="apple-touch-icon" href="icons/apps-180.png">
-<!-- The Apps menu (1.24, built 2026-11-12 7:17 AM). Written by Projects\app-kit\build.py from launcher.html and
+<!-- The Apps menu (1.26, built 2026-11-12 9:17 AM). Written by Projects\app-kit\build.py from launcher.html and
      programs.json: edit those, never this file. Each program's Apps button opens this page in a floating window
      (?app=<id> marks the program it came from). A tap goes to a program in the same tab (the whole tab, not this
      window); Ctrl+click, a middle click or a long press open it in a new tab, as links do. -->
@@ -79,7 +79,7 @@
     <h2 id="g-archived">Archived</h2>
     <a class="app" data-id="hyperwave" data-ver=".t" href="../hyperwave/" target="_top"><img src="icons/hyperwave-48.png" srcset="icons/hyperwave-96.png 2x, icons/hyperwave-144.png 3x" width="48" height="48" alt=""><span class="t"><b>HYPERWAVE Studio</b><span class="d">Experimental, no longer worked on</span><span class="ver"></span></span></a>
   </section>
-  <p class="foot"><a href="../" target="_top">The Cool tools front page</a><span>Apps 1.24</span></p>
+  <p class="foot"><a href="../" target="_top">The Cool tools front page</a><span>Apps 1.26</span></p>
 </main>
 <script>
 (function () {
@@ -132,7 +132,7 @@
     start();
     window.addEventListener("focus", () => setTimeout(start, 0), { once: true });
   }
-  window.APPS_MENU = { version: "1.24", here, framed };
+  window.APPS_MENU = { version: "1.26", here, framed };
   // Back from the account page (it goes back in this frame's history): the window's title is the menu's again.
   if (framed) post({ type: "title", text: "Apps" });
 })();
@@ -664,7 +664,7 @@
 })();
 </script>
 <script>
-/* versions.js 1.24: each program's version, the date it was last built and how long ago that was, under its line
+/* versions.js 1.26: each program's version, the date it was last built and how long ago that was, under its line
    on the Cool tools front page and in the Apps menu. ONE source: Projects\app-kit\versions.js (built into the menu;
    published as https://jonnystokes.github.io/cooltools/apps/versions.js, which the front page loads).
 
