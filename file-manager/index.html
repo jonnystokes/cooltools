@@ -239,7 +239,9 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
 
 /* ---- ui.css ---- */
 /* ui.css: menus, dialogs, toasts, the transfers panel. */
-.menu { position: fixed; z-index: 50; min-width: 230px; max-width: calc(100vw - 16px); max-height: calc(100dvh - 16px); overflow: auto; padding: 6px; border-radius: 12px; background: var(--raised); border: 1px solid var(--line); box-shadow: var(--shadow-lg); }
+/* the see-through layer under an open menu (ui.js): it takes the first press off the menu, so that press only closes it */
+.menu-shield { position: fixed; inset: 0; z-index: 2147483600; background: transparent; touch-action: none; -webkit-tap-highlight-color: transparent; }
+.menu { position: fixed; z-index: 2147483601; min-width: 230px; max-width: calc(100vw - 16px); max-height: calc(100dvh - 16px); overflow: auto; padding: 6px; border-radius: 12px; background: var(--raised); border: 1px solid var(--line); box-shadow: var(--shadow-lg); }
 .menu .mi { display: flex; align-items: center; gap: 11px; width: 100%; height: 40px; padding: 0 12px; border: 0; border-radius: 8px; background: none; text-align: left; white-space: nowrap; }
 .menu .mi:hover:not(:disabled), .menu .mi:focus-visible { background: var(--line-2); outline: none; }
 .menu .mi svg { width: 19px; height: 19px; color: var(--muted); }
@@ -419,7 +421,7 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
   <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8.4" r="3.6"/><path d="M4.8 19.6c.5-3.9 3.4-6 7.2-6s6.7 2.1 7.2 6z"/></symbol>
   <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 11v5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="7.8" r="1.1"/></symbol>
 </svg>
-<div id="app" class="app" data-build="V2.0.55">
+<div id="app" class="app" data-build="V2.0.57">
   <header class="top">
     <div class="top-row">
       <!-- The Apps button (Projectspp-kit, WEB-APP-CONVENTIONS.md): top left, before everything, its separator built in;
@@ -452,7 +454,7 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
 </div>
 <input type="file" id="pick-files" multiple hidden>
 <input type="file" id="pick-folder" webkitdirectory multiple hidden>
-<script>window.FM_BUILD = { version: "V2.0.55", built: "2026-11-12 7:18 AM", note: "switch-over: published to the live site with PC Relay 3.1.2 and files 3.0.2" };</script>
+<script>window.FM_BUILD = { version: "V2.0.57", built: "2026-11-12 11:41 AM", note: "a click or tap off an open menu only closes the menu: it never opens, ticks or starts what is under it (a right-click off it too; Escape as before); a tap beside a dialog no longer presses what is behind it; the cloud kit's chooser does the same; no built-in Private folder any more (files 3.1.0)" };</script>
 <script>
 // ---- relay-client.js ----
 /* relay-client.js 3: the PC Relay client (ONE source: Projects\pc-relay\client\relay-client.js; each page's build
@@ -1217,7 +1219,7 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
 })(typeof window !== "undefined" ? window : globalThis);
 
 // ---- apps-button.js ----
-/* apps-button.js 1.24: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.27: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
    https://jonnystokes.github.io/cooltools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
@@ -1249,11 +1251,11 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.24";
+  const VERSION = "1.27";
   // The menu comes from the site the page itself is on, so the menu's account strip reads the same browser memory
-  // (one origin) and the same relay.json as the program: the live site, or the stage (CONTRACT 3). Any other page
-  // (a file on this device, a test page) gets the live site's menu.
-  const SITES = ["https://jonnystokes.github.io/cooltools/", "http://127.0.0.1:28801/", "http://localhost:28801/"];
+  // (one origin) and the same relay.json as the program: the live site. Any other page (a file on this device, a
+  // test page) gets the live site's menu too; launcher="..." overrides.
+  const SITES = ["https://jonnystokes.github.io/cooltools/"];
   const LAUNCHER = (() => {
     let href = "";
     try { href = root.location.href; } catch (e) {}
@@ -2008,24 +2010,58 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
 // ui.js: dialogs, menus and toasts. A dialog keeps the focus inside it (Tab cycles), Enter does the main
 // button, Escape cancels; a menu opens at the pointer (a sheet from the bottom on a phone) and closes on any
 // outside tap or Escape. Toasts say what happened; an error stays until it is closed (nothing fails silently).
+// A click off a menu only closes the menu (Jon, 2026-11-12; the rule for every program, WEB-APP-CONVENTIONS.md
+// "Every page"): while a menu is open a see-through layer covers the page just under it, so the first press outside
+// lands on that layer, never on what is underneath.
 "use strict";
 (function () {
   const { h, icon } = FM;
-  let menuEl = null, menuBack = null, menuAt = 0;
+  let menuEl = null, menuBack = null, menuAt = 0, shield = null, shieldTimer = 0;
   const dialogs = [];
   // A tap or click outside closes a menu or a dialog, but not in its first 400 ms: a row opens on one click (app.js),
-  // and the second half of a double-click or double-tap must not close the sign-in box or menu that click opened.
+  // and the second half of a double-click or double-tap must not close the menu or box that click opened.
   const GRACE = 400;
 
-  function closeMenu() {
+  function dropShield() { clearTimeout(shieldTimer); if (shield) { shield.remove(); shield = null; } }
+  // keepShield: the press that closes the menu is still going on; the layer stays until that press is over
+  function closeMenu(keepShield) {
     if (!menuEl) return false;
     menuEl.remove(); menuEl = null;
-    document.removeEventListener("pointerdown", outside, true);
+    if (keepShield !== true) dropShield();
     if (menuBack && menuBack.focus) try { menuBack.focus({ preventScroll: true }); } catch (e) {}
     menuBack = null;
     return true;
   }
-  function outside(e) { if (menuEl && !menuEl.contains(e.target) && performance.now() - menuAt > GRACE) closeMenu(); }
+  // The layer under an open menu. A press on it (mouse, finger or pen; any button) closes the menu and goes no
+  // further. The layer stays until that press is over: the click, right-click or tap that ends it is stopped here
+  // too (on a phone the click of a tap goes to whatever is under the finger when it lifts, so a layer that went at
+  // the press would let it through). isHeld(): the menu was opened under a finger that is still down.
+  function raiseShield(isHeld) {
+    dropShield();
+    const sh = (shield = h("div.menu-shield"));
+    const eat = (e) => { e.preventDefault(); e.stopPropagation(); };
+    const later = (ms) => { clearTimeout(shieldTimer); shieldTimer = setTimeout(() => { if (shield === sh) dropShield(); }, ms); };
+    let pressed = false, down = false; // pressed: the press that closed the menu has begun; down: it is not over yet
+    sh.addEventListener("pointerdown", (e) => {
+      eat(e);
+      if (pressed || isHeld() || performance.now() - menuAt <= GRACE) return;
+      pressed = down = true;
+      try { sh.setPointerCapture(e.pointerId); } catch (x) {}
+      closeMenu(true);
+      later(8000); // a lost press never leaves the layer in the way
+    });
+    // the press is over: a tap's click comes a moment after the finger lifts, so the layer waits for it
+    for (const t of ["pointerup", "pointercancel"]) sh.addEventListener(t, (e) => { eat(e); if (pressed) { down = false; later(400); } });
+    // what ends the press (a click, a middle or right click, the browser's own menu) stops here, then the layer goes
+    for (const t of ["click", "dblclick", "auxclick", "contextmenu"]) sh.addEventListener(t, (e) => {
+      eat(e);
+      if (!pressed || down) return; // a right-click's own-menu event can come at the press (Mac, Linux): wait for the lift
+      if (t === "auxclick" && e.button === 2) return; // its own-menu event may still follow
+      later(0);
+    });
+    sh.addEventListener("wheel", (e) => e.stopPropagation(), { passive: true });
+    document.body.append(sh);
+  }
   // items: [{ icon | img (a picture's address: a program's icon), text, key, act, danger, disabled, title, on (a tick at
   // the end: the choice in use) }, "-" (a line), { head: "text" }]
   // at: { x, y } | { anchor, alignRight }; held: opened under a finger that is still down (a long press): nothing in the
@@ -2054,14 +2090,16 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       el.append(b);
     }
     if (el.lastChild && el.lastChild.classList.contains("msep")) el.lastChild.remove();
+    menuAt = performance.now();
+    raiseShield(() => held);
     document.body.append(el);
     const r = el.getBoundingClientRect();
     let x = at.x, y = at.y;
     if (at.anchor) { const a = at.anchor.getBoundingClientRect(); x = at.alignRight ? a.right - r.width : a.left; y = a.bottom + 4; if (y + r.height > innerHeight - 8) y = a.top - r.height - 4; }
     el.style.left = Math.max(8, Math.min(x, innerWidth - r.width - 8)) + "px";
     el.style.top = Math.max(8, Math.min(y, innerHeight - r.height - 8)) + "px";
-    menuEl = el; menuAt = performance.now();
-    setTimeout(() => document.addEventListener("pointerdown", outside, true), 0);
+    menuEl = el;
+    el.addEventListener("contextmenu", (e) => e.preventDefault()); // a right-click or a held finger on the menu: never the browser's own menu over it
     const first = el.querySelector(".mi:not(:disabled)");
     if (first) first.focus({ preventScroll: true });
     el.addEventListener("keydown", (e) => {
@@ -2127,8 +2165,16 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       }
       box.append(acts);
       scrim.append(box);
+      // A press outside the box closes it when that press is over (its click, or its right-click), not when it begins:
+      // a box that went at the press would let a tap's click through to whatever is underneath.
       const born = performance.now();
-      scrim.addEventListener("pointerdown", (e) => { if (e.target === scrim && performance.now() - born > GRACE) finish(null); });
+      let onScrim = false;
+      scrim.addEventListener("pointerdown", (e) => { onScrim = e.target === scrim && performance.now() - born > GRACE; });
+      for (const t of ["click", "contextmenu"]) scrim.addEventListener(t, (e) => {
+        if (e.target !== scrim) return;
+        if (t === "contextmenu") e.preventDefault();
+        if (onScrim) { onScrim = false; finish(null); }
+      });
       box.addEventListener("keydown", (e) => {
         if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); finish(null); }
         else if (e.key === "Enter" && !e.isComposing && (e.target === inp || e.target.tagName !== "BUTTON")) {
@@ -2387,13 +2433,13 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
   const zoneOk = (it) => { const z = FM.zone(it); return z === "home" || (z === "shared" && S.rights.shared && (!it.private || S.rights.private)) || (z === "other" && S.rights.everyone); };
   // rename it, move it away, delete it
   FM.canChange = (it) => {
-    if (!it || it.tid || it.locked || it.protected || it.kind || !S.me.account || S.pick) return false;
+    if (!it || it.tid || it.locked || it.kind || !S.me.account || S.pick) return false;
     return S.view === "folder" ? S.writable : zoneOk(it);
   };
   // put things into this folder (a drop on its row)
   FM.canWriteInto = (it) => !!it && it.dir && !it.locked && !!S.me.account && it.kind !== "users" && it.kind !== "guests" && zoneOk(it);
   // make a folder private or public: folders of the Shared Folder only, with both rights
-  FM.canMark = (it) => !!it && it.dir && !it.kind && !it.locked && !it.protected && S.rights.shared && S.rights.private && FM.zone(it) === "shared" && !S.pick;
+  FM.canMark = (it) => !!it && it.dir && !it.kind && !it.locked && S.rights.shared && S.rights.private && FM.zone(it) === "shared" && !S.pick;
   // served to anyone by its own plain link (anything else needs this browser's pass, or a ticket)
   FM.isPublic = (it) => !!it && !it.dir && !it.private && !it.locked && FM.zone(it) === "shared";
   // Does this file fit what the program that is choosing asked for?
@@ -2460,7 +2506,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
 
   function privBadge(it) {
     if (!it.private || it.locked) return null;
-    if (it.own_private) return h("span.badge", { title: it.protected ? "Always private" : "Private: only people with the right see it" }, icon("lock"), "Private");
+    if (it.own_private) return h("span.badge", { title: "Private: only people with the right see it" }, icon("lock"), "Private");
     if (it.dir) return h("span.badge.inherited", { title: `Private because it is inside “${it.priv_from || "a private folder"}”` }, icon("lock"));
     return null;
   }

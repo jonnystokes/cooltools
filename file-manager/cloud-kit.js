@@ -1194,8 +1194,17 @@ button:disabled{cursor:default;opacity:.55;background:none}
 @media (pointer:coarse){button{min-height:50px;font-size:16px}}
 </style><div class="m${isDark() ? " dark" : ""}" role="menu"></div>`;
       const box = sh.querySelector(".m");
-      let done = false;
-      const shut = (v) => {
+      // A click off the menu only closes the menu (the rule for every program, WEB-APP-CONVENTIONS.md "Every page"):
+      // a see-through layer covers the page just under the menu and takes that press, so nothing underneath is
+      // opened or started by it. The layer stays until the press is over: the click that ends it stops here too (a
+      // tap's click goes to whatever is under the finger when it lifts).
+      const veil = document.createElement("div");
+      veil.className = "cloud-kit-veil";
+      veil.style.cssText = "position:fixed;inset:0;z-index:2147481499;margin:0;padding:0;border:0;background:transparent;touch-action:none;-webkit-tap-highlight-color:transparent";
+      let done = false, pressed = false, down = false, veilTimer = 0;
+      const eat = (e) => { e.preventDefault(); e.stopPropagation(); };
+      const unveil = (ms) => { clearTimeout(veilTimer); if (ms === undefined) veil.remove(); else veilTimer = setTimeout(() => veil.remove(), ms); };
+      const shut = (v, keepVeil) => {
         if (done) return;
         done = true;
         document.removeEventListener("pointerdown", outside, true);
@@ -1203,11 +1212,28 @@ button:disabled{cursor:default;opacity:.55;background:none}
         root.removeEventListener("resize", place);
         root.removeEventListener("blur", away);
         host.remove();
+        if (!keepVeil) unveil();
         if (v === null && back && back.focus && document.contains(back)) try { back.focus({ preventScroll: true }); } catch (e) {}
         resolve(v);
       };
+      veil.addEventListener("pointerdown", (e) => {
+        eat(e);
+        if (pressed) return;
+        pressed = down = true;
+        try { veil.setPointerCapture(e.pointerId); } catch (x) {}
+        shut(null, true);
+        unveil(8000); // a lost press never leaves the layer in the way
+      });
+      for (const t of ["pointerup", "pointercancel"]) veil.addEventListener(t, (e) => { eat(e); if (pressed) { down = false; unveil(400); } });
+      for (const t of ["click", "dblclick", "auxclick", "contextmenu"]) veil.addEventListener(t, (e) => {
+        eat(e);
+        if (!pressed || down) return; // a right-click's own-menu event can come at the press (Mac, Linux): wait for the lift
+        if (t === "auxclick" && e.button === 2) return; // its own-menu event may still follow
+        unveil(0);
+      });
       const away = () => shut(null);
-      const outside = (e) => { if (e.composedPath().includes(host)) return; if (anchor && anchor.contains && anchor.contains(e.target)) lastShut = { anchor, at: Date.now() }; shut(null); };
+      // a press on something that lies over the layer (a window of the window kit): the menu closes, as before
+      const outside = (e) => { if (e.target === veil || e.composedPath().includes(host)) return; if (anchor && anchor.contains && anchor.contains(e.target)) lastShut = { anchor, at: Date.now() }; shut(null); };
       const keys = (e) => {
         if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); return shut(null); }
         if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
@@ -1227,6 +1253,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
         b.addEventListener("click", () => { let v; try { v = r.run ? r.run() : r.id; } catch (e) { console.error("cloud-kit:", e); v = null; } shut(v === null || v === undefined ? false : v); });
         box.appendChild(b);
       }
+      document.body.appendChild(veil);
       document.body.appendChild(host);
       const place = () => { // under the button; above it when there is no room below; always inside the window
         const a = anchor && anchor.getBoundingClientRect ? anchor.getBoundingClientRect() : null;
