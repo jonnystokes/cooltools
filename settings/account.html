@@ -1,0 +1,2033 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="color-scheme" content="light dark">
+<title>Account</title>
+<link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACS0lEQVR42o1TXUiTYRR+vjkqnVmziH4sJAbpRexmCaYzw4ukm4oGjQn2I4l0UeJVFyMCvaguXRRIRGGZQa2sqJiFiGaisZmWrbIMFAsKA8O5zfd5vy7m9+7HLjrwwjmH85yf57xHA4BmX8AjpfSSLCKFRhKJJ5DUl2xBnRRhki3tlxs7tGZfwCN1eZskKJKALBNgK9wAKSXef5zCQjQKimWJa0xLldPApMDWzVbUuStw0lOJbVvy/wUGSa95qW2QBCBVQP4aCwxZb81VYEBPTVRkNmYuLFiHo65SvBmdxHwkhr27i1UC94EyrM3LQXb2CpSXFOOi7x5Gx7+CpKadveDXSeL08SoUbLLif+TLt+9oOtcGCgGz0c7j7hBqXWWw5KwEAATHJjHU1wkpiRKnGw67DQAw9yeCm3dfKM5Mxszjn6fRfr9fVRnq60SD8xlO7QlgoOeW8vuudSH49pMi0pS6ZympAtN1maanbstsGDu2b0Stq0IFljjdaH0pIKVEaWWN8p+pP4T5yAKGgx9AMsnBwWoHci2rVKDDboPDfn4ZgXmrc3DCU43B4XcpHAiis+sVFqJxdPeOwP/0NWLxRQWKxRZxx9+DR88HEIlEceX6QzWGVtd0VZLUjE8Sjy+CFKgqt6Ph2H4AQGvbAzwJDIIU0ADE4nGDA92UOIzEJgwwScz8+KU6mJ75qfwKnFhjOGvnrn2/SR7O/Oezs3MIT0yhpz+EkbGJlKrJu5G6bNQA4Ej9JQ9JLymKSGqZh5Vx0jrJsJSyJdR7o+MvICAMdyskq7wAAAAASUVORK5CYII=">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFtklEQVR42r2WfUzUdRzH33e/3wEHJw8KhHBwGXCAmKgopgVzQ8v+0GRrqzVzy4rSGdSytbbmbLX1T/kHa/mwcsJwmf5ZoYY6wyIFzWeFQx6cCCigCHg8HPd598fhD353x3Fb6eevu9/3+/m+vt/PswGT5Mvvfp9NsoTCNUKxkzSJCCgCkhARCAUUghSIEBz/JuPfPP89eyftcQnFQZFfhCyrKCvpfMQ0TMCr15PcSYpFd8h/h2u/PfoyKMJN+7//qFK7wDi8ghTDY4Y/Oo+kbPhp1yeVBo/Z4XgCL9fOG98/SBG7kWRJMHCjAZifZUXxGwWwJsb4wG1Js1Cy8SXkPvsMFCOmg0NELEKWqBSuIQPDIy1hKN24EjMsYQAAszkE3+yq0g4DiddfWQ6bNRZz7VY8GFiGL749iN77A1PBxy/PNUah2Kcz+0PnMMLNIVq2pCTOwvLcNO2w5/PssFljtfWI8FAMDg5NB4dQ7GowqTYy5kJbew9SbfEaZN3qxXhuURoIYnZc9ORsRnNbF4ZHRqeDgyImNdiAc7R06S4QFmrC08lx8CfXGm8FA4eQME7lc1UxavCoGWbMz0pGsJKbk4royHANYlIVzIy2+MBFBKq/aC/duBLh5hC0tffA0dKF+VnJSEqICfoCKUlx2Lq5CPUXmpCdkYz0OYkYfDiM4o/L4HbpA171Nnt2plWL9lRbvM7sk+VOdx8amm4BIDLTk/FUnP6CNmscbNYJF0VHRSBvkR2nTl/RBbzq7fO8nDkBXzc25sbuiiqcrL0CRVFBEi7XKFYsn4fNb62BqipT6hbmL8AftZd0Mad6B9xvJy7CbA5BSuIsv4fsrqjCX/UOpCUZkG93gAROXreh5u9rIInS4iK/ejdaO1B56LhPwBu2fvUzvcsrQCzPTcO61YsRFmrSmX3LZzuRlmTAtrXVMIe4AADOURM+P1SAG+2CPTs+REL8hDucQyMoP1CNIyfOwu12+1ZYf7Vd3G7UnGlA190+3Ssamm5BUVTk25s1OACEh7iwIqsNRqOCa41tOp32jh5UHa/3CyfFk4ZTNhbQy5AESZB+bExPivlZCFBnBEZ/cJDIX5rhU+Ey05Phco3i5HUbnKMTrnGOqjh2xQr3mAtzM2w6HWtiHFYXLgFBHziFUPIKirZ7d7X331yJ/KWZPhFtiTDjTvc9XLzeg3M3kzEyZkRjRwz2nMhGa5eCwvwcrFqRq9MxmVTkLcpA3sJM3GjtQE9vnwYXCpS8gnXbJ5t9w6v5SJ+TEKDKpeNO9z2cu9yJC20zca4lCr0P3CjMz8EH7xbBaDT61Zs1MxLxsVGoPnlWg4sQqnet/rOuEXPt1ikvoKoKSouL8Nq6FVrAzc2wISF+5rQV8vCxOh2cFKjek8w/l5vxYGAZIsJD0dzWhWuNt5Cbk4qUJH3jSYiP0aWbt7Tc7ERt3VXkZKciy56C/gEnTp2+5BPwhvc+/YHeY1RUZDgGB4e0lhodGY6tm4t0pTWQtNzsxLav9+FuTx9IgcmkwhIRhrvd930C3uhvhuu9P6Dr5733+lF/oSnoZlRbd1WDiwiGh0b8wj1pGNwAiewMfTt2Do3A0XwbjuZ2OIdGdGs52am6VJuyznh6gbhIMQWCm1QF6XMSdZDyA9WoOl4PimB14RJseXuttpZlT4HJpGJ4aCQgnKTLKBTHNNOrZ8Z7OKxrLEdOnNX2Vx07g6bm29p6/4ATloiwgHDxVE6HsmDpy8lCvhBogHQ6h/FrdR1utt+FOSwUe/cfRXdv30R5FcGN1g7Ex0bhx8rD2LHzIPoHHgaEj/P2GjaUlM2miIOkJZgZLvAMOb3PJ+AySMJurCgr6RThJhHhE4ST5KbzNfs6FQC4XH/00rzFq5qFfFFEQh7/y/nO+ZrySgDQus2Vs9WXshcW7iPpojBGKDEUUf4POEkXKQ0k95JYf76mvPYR91/HthHld2odcwAAAABJRU5ErkJggg==">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<style>
+/* ---- base.css ---- */
+/* base.css: the look both pages share (the six sections and the account page). Light and dark follow the device.
+   One meaning per colour, everywhere: green is fine, amber needs a look, red is broken, grey is off (--ok, --warn,
+   --bad, --off: a fill for dots and bars, an -ink for words). Blue (--accent) only marks what is chosen or pressed.
+   Big basic buttons: every control is at least --tap tall. No page zoom on phones, nothing wider than the screen.
+   The Apps button's look is the kit's own (never styled here). */
+:root {
+  --bg: #f2f4f8; --card: #ffffff; --ink: #161b26; --muted: #586174; --line: #dce1ea; --bar: #ffffff; --soft: #f5f7fb;
+  --accent: #2f5fd0; --accent-ink: #ffffff; --accent-soft: #e6edff;
+  --ok: #17a34a; --ok-ink: #116a34; --ok-soft: #e4f6ea;
+  --warn: #f2a31b; --warn-ink: #8a5300; --warn-soft: #fff3d9;
+  --bad: #d13a34; --bad-ink: #b3261e; --bad-soft: #fdeceb;
+  --off: #9aa3b2; --off-ink: #5d6677; --off-soft: #eceff4;
+  --tap: 44px; --r: 10px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1116; --card: #171b22; --ink: #e7ecf3; --muted: #a0a9b8; --line: #2a313c; --bar: #13171d; --soft: #1c2129;
+    --accent: #84a2ff; --accent-ink: #0b1020; --accent-soft: #1e2a4d;
+    --ok: #35b56a; --ok-ink: #63d391; --ok-soft: #14301f;
+    --warn: #f2b33d; --warn-ink: #f6c665; --warn-soft: #3a2c0d;
+    --bad: #f0645c; --bad-ink: #ff8a82; --bad-soft: #3a1715;
+    --off: #6f7887; --off-ink: #a0a9b8; --off-soft: #232933;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { touch-action: manipulation; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.4 "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
+h1, h2, h3, p { margin: 0; }
+h2 { font-size: 1.12em; font-weight: 700; }
+h3 { font-size: 1em; font-weight: 700; }
+b { font-weight: 650; }
+a { color: var(--accent); }
+.muted { color: var(--muted); }
+.small { font-size: 0.875em; }
+.num { font-variant-numeric: tabular-nums; }
+svg.ico { width: 22px; height: 22px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* buttons, boxes */
+button, input, select, textarea { font: inherit; color: inherit; }
+button, a.button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: var(--tap); padding: 0 16px; border-radius: var(--r); border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; text-decoration: none; font-weight: 600; white-space: nowrap; }
+button:hover:not(:disabled), a.button:hover { border-color: var(--accent); }
+button:disabled { opacity: 0.45; cursor: default; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+button.danger { border: 2px solid var(--ink); font-weight: 700; }   /* weighty, never red: red means broken, nothing else */
+button.danger:hover:not(:disabled) { border-color: var(--accent); }
+button.big { min-height: 52px; padding: 0 22px; font-size: 1.06em; }
+button.plain { border-color: transparent; background: transparent; padding: 0 10px; color: var(--accent); }
+button.wide { width: 100%; }
+input[type="text"], input[type="password"], input[type="number"], select { min-height: var(--tap); padding: 0 12px; border-radius: var(--r); border: 1px solid var(--line); background: var(--card); min-width: 0; }
+input[type="number"] { width: 5.5em; }
+select { padding-right: 8px; }
+
+/* a switch: green when on, grey when off */
+.switch { position: relative; width: 52px; min-height: 30px; height: 30px; padding: 0; border-radius: 999px; background: var(--off); border: none; flex: none; }
+.switch::before { content: ""; position: absolute; inset: calc((30px - var(--tap)) / 2) -4px; }   /* the tap area reaches past the knob */
+.switch .knob { position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / 0.35); transition: left 0.15s; }
+.switch[aria-checked="true"] { background: var(--ok); }
+.switch[aria-checked="true"] .knob { left: 25px; }
+.switch.unknown { background: var(--off-soft); border: 1px dashed var(--off); }   /* its position is not known here */
+.switch.unknown .knob { left: 14px; background: var(--off); box-shadow: none; }
+.switch.big { width: 76px; height: 44px; min-height: 44px; }
+.switch.big .knob { width: 36px; height: 36px; top: 4px; left: 4px; }
+.switch.big[aria-checked="true"] .knob { left: 36px; }
+
+/* a row: the label and one short line at the left, the control at the right (under the label when there is no room) */
+.rows { border-top: 1px solid var(--line); }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.rows > .row:last-child, .card > .row:last-child { border-bottom: 0; }
+.rl { flex: 1 1 13em; min-width: 0; }
+.rn { font-weight: 650; overflow-wrap: anywhere; }
+.rh { margin-top: 2px; color: var(--muted); font-size: 0.875em; overflow-wrap: anywhere; }
+.rc { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; min-width: 0; }
+/* a row whose control is a line of boxes (a path, a name): the line goes under the label, the full width */
+.row.wide .rc { flex: 1 1 100%; justify-content: flex-start; }
+.row.wide .rc form { flex: 1 1 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; }
+.row.wide .rc input[type="text"] { flex: 1 1 14em; }
+.row.resting .rn { color: var(--muted); }
+.only { margin-top: 2px; color: var(--off-ink); font-size: 0.875em; font-style: italic; }
+
+/* the More fold */
+details.more { border-top: 1px solid var(--line); margin-top: 4px; }
+details.more > summary { list-style: none; display: flex; flex-direction: column; justify-content: center; min-height: var(--tap); padding: 8px 0 8px 22px; position: relative; cursor: pointer; border-radius: 6px; }
+details.more > summary::-webkit-details-marker { display: none; }
+details.more > summary::before { content: ""; position: absolute; left: 4px; top: 50%; margin-top: -5px; border: 5px solid transparent; border-left: 8px solid var(--accent); border-right: 0; transition: transform 0.12s; }
+details.more[open] > summary::before { transform: rotate(90deg); }
+.mt { font-weight: 650; color: var(--accent); }
+.mh { color: var(--muted); font-size: 0.875em; }
+.morebody { padding: 2px 0 6px; }
+
+/* messages */
+.say { min-height: 1.2em; margin: 6px 0 0; font-size: 0.9em; color: var(--muted); overflow-wrap: anywhere; }
+.say:empty { display: none; }
+.say.ok { color: var(--ok-ink); }
+.say.bad { color: var(--bad-ink); font-weight: 600; }
+.notice { padding: 10px 12px; border-radius: var(--r); background: var(--warn-soft); color: var(--warn-ink); }
+.notice.bad { background: var(--bad-soft); color: var(--bad-ink); }
+
+/* the state of something: a dot and a word */
+.state { display: inline-flex; align-items: center; gap: 7px; font-weight: 600; white-space: nowrap; }
+.state .dot, .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--off); flex: none; }
+.state.ok { color: var(--ok-ink); } .state.ok .dot, .dot.ok { background: var(--ok); }
+.state.warn { color: var(--warn-ink); } .state.warn .dot, .dot.warn { background: var(--warn); }
+.state.bad { color: var(--bad-ink); } .state.bad .dot, .dot.bad { background: var(--bad); }
+.state.off { color: var(--off-ink); }
+
+/* a person's picture, or their initial */
+.avatar { --av: 40px; position: relative; display: inline-grid; place-items: center; width: var(--av); height: var(--av); border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: calc(var(--av) * 0.44); line-height: 1; flex: none; overflow: hidden; user-select: none; }
+.avatar.guest { background: var(--off-soft); color: var(--off-ink); font-size: calc(var(--av) * 0.3); font-weight: 650; }
+.avatar.guest .letter { font-size: calc(var(--av) * 0.44); font-weight: 700; }   /* a guest's "G": the size of any initial */
+.avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.avatar.has img { opacity: 1; }
+.avatar svg.ico { width: 56%; height: 56%; }
+
+/* a small menu under a button */
+.menu { position: absolute; z-index: 50; min-width: 180px; max-width: min(340px, calc(100vw - 16px)); padding: 6px; border-radius: 12px; border: 1px solid var(--line); background: var(--card); box-shadow: 0 10px 30px rgb(0 0 0 / 0.22); display: flex; flex-direction: column; gap: 2px; }
+.menu > button { justify-content: flex-start; border-color: transparent; width: 100%; font-weight: 500; }
+.menu > button:hover:not(:disabled) { background: var(--accent-soft); border-color: transparent; }
+.menu .mhead { padding: 6px 10px 2px; color: var(--muted); font-size: 0.85em; font-weight: 600; }
+
+/* the one confirmation (before deleting) */
+dialog.confirm { width: min(420px, calc(100vw - 32px)); padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); color: var(--ink); box-shadow: 0 18px 50px rgb(0 0 0 / 0.35); }
+dialog.confirm::backdrop { background: rgb(10 14 22 / 0.5); }
+dialog.confirm h2 { margin-bottom: 6px; }
+dialog.confirm p { color: var(--muted); overflow-wrap: anywhere; }
+dialog.confirm .btns { display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; }
+
+/* ---- account.css ---- */
+/* account.css: the account page. One narrow column of big things, the same in a tab, in the window kit's window and
+   in the Apps menu's frame (where the top bar goes: the window has its own title). */
+header.bar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 16px; background: var(--bar); border-bottom: 1px solid var(--line); }
+header.bar apps-button { --apps-h: 36px; --apps-sep: var(--line); flex: none; }
+header.bar h1 { font-size: 1.15em; font-weight: 700; white-space: nowrap; }
+.framed header.bar, .door header.bar apps-button, .framed footer { display: none; }
+body.account { background: var(--card); }
+main#acct { width: min(440px, 100%); margin: 0 auto; padding: 16px 16px 28px; display: flex; flex-direction: column; gap: 14px; }
+footer { text-align: center; color: var(--muted); font-size: 0.8em; padding: 0 16px 20px; }
+.topline { display: flex; margin: -6px 0 -6px -10px; }
+.backbtn { color: var(--accent); }
+.title { font-size: 1.35em; text-align: center; }
+.center { text-align: center; justify-content: center; }
+.label { font-weight: 650; margin-bottom: 6px; }
+.block { display: flex; flex-direction: column; }
+.block + .block { padding-top: 14px; border-top: 1px solid var(--line); }
+form { display: flex; flex-direction: column; gap: 10px; margin: 0; }
+.line { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.line > input { flex: 1 1 10em; }
+.line.two > * { flex: 1 1 0; }
+.line.outline { padding-top: 14px; border-top: 1px solid var(--line); }
+input[type="text"], input[type="password"] { min-height: 48px; font-size: 1.05em; width: 100%; }
+.line > input[type="text"] { width: auto; }
+.pwbox { position: relative; display: flex; }
+.pwbox input { padding-right: 76px; }
+.pwbox .showpw { position: absolute; right: 4px; top: 4px; min-height: 40px; height: 40px; padding: 0 12px; border-color: transparent; background: transparent; color: var(--accent); }
+
+/* who this is */
+.who { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 6px 0 2px; }
+.whoname { font-size: 1.4em; font-weight: 700; text-align: center; overflow-wrap: anywhere; }
+.whokind { color: var(--muted); font-size: 0.9em; margin-top: -6px; }
+
+/* the accounts used from this network: big buttons */
+.pick { display: flex; flex-direction: column; gap: 8px; max-height: min(46vh, 340px); overflow-y: auto; padding: 2px; margin: -2px; }
+.pick .person { justify-content: flex-start; gap: 12px; min-height: 60px; padding: 6px 12px; width: 100%; font-size: 1.05em; }
+.pick .person .pname { flex: 1; min-width: 0; text-align: left; overflow: hidden; text-overflow: ellipsis; }
+.pick .person svg.ico { color: var(--muted); }
+
+/* the walk-through's three steps */
+.steps { display: flex; align-items: center; justify-content: center; gap: 6px; }
+.steps > span:not(.stepword) { width: 34px; height: 6px; border-radius: 3px; background: var(--line); }
+.steps > span.on, .steps > span.done { background: var(--accent); }
+.steps > span.done { opacity: 0.45; }
+.stepword { margin-left: 8px; color: var(--muted); font-size: 0.85em; }
+
+.rows .row form { flex: 1 1 100%; }
+.val { font-weight: 500; overflow-wrap: anywhere; }
+.pickbox { display: flex; flex: 1 1 auto; }
+.line.center .pickbox { flex: 0 1 auto; }
+.line.center .pickbox button { width: auto; }
+.offbox { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 28px 0; }
+.bigdot { width: 22px; height: 22px; border-radius: 50%; background: var(--off); }
+@media (max-width: 380px) { main#acct { padding: 12px 12px 24px; } }
+
+</style>
+</head>
+<body class="account">
+<header class="bar">
+  <apps-button app="settings" stack="560"></apps-button>
+  <h1>Account</h1>
+</header>
+<main id="acct" aria-live="polite"></main>
+<footer><span id="ver"></span></footer>
+<script>
+// ---- relay-client.js ----
+/* relay-client.js 3: the PC Relay client (ONE source: Projects\pc-relay\client\relay-client.js; each page's build
+   copies it in, so never edit a copy). Talks to PC Relay 3 (accounts) on Jon's PC. The relay decides every request;
+   this file carries the pass, remembers who this browser is, and says plainly what the PC answered.
+   The exact requests: Projects\cool-tools-upgrade\API-relay.md.
+
+   - Nothing happens until the page calls something: no background traffic of its own (seen() is the page's call).
+   - The PC's address: read from relay.json beside the programs ("../relay.json" from a program's page, or
+     opts.addressFile), fresh before the first connection and again after a failed one (at most once a minute).
+     {"address": "https://..."}; http only for 127.0.0.1 and localhost (the stage). No address is built in: if the file
+     cannot be read the cloud is simply off, with a plain reason (status "off", where.why). opts.base names the address
+     instead (tests, the relay's own window on the local door).
+   - Kept in this browser (localStorage, shared by every page of the site): "relay-pass" ({pass, device, at}) and
+     "relay-account" ({id, name, kind, number, at}), so the name shows at once, even with the cloud off. Another tab's
+     sign-in, sign-out or change arrives as an "account" event.
+   - The pass goes in the X-Relay-Pass header (HTTP) or the WebSocket subprotocol "pass.<p>"; never in a URL.
+   - When the PC says the pass is not valid any more (X-Relay-Info: pass-unknown, or the ping's pass "unknown"), the
+     pass and the account are forgotten and "account" fires with null. me() forgets them only on a whole answer that
+     says {account: null}. An answer cut off, garbled or late, a timeout or a network error never ends a sign-in:
+     it is a result with ok false and kind "network" or "timeout".
+   - Errors from the relay are { why, kind }; every result here carries why and kind.
+
+   const R = RelayClient.create({ app: "plan-cutter", log });
+   await R.ping();                 // { ok, latency, info }
+   R.account();                    // at once, from this browser: { id, name, kind, number } or null
+   await R.me();                   // from the PC: { ok, account, can, programs, network, limited }
+   R.can("files.shared.change");  R.canUse("voice");      // from the last me()
+   await R.accountsHere();         // { ok, accounts: [{ id, name, kind, number, picture, hasPassword }] }
+   await R.signIn(name, password); // { ok, kind, why, account }
+   await R.signOut();              // { ok }
+   await R.guest();                // { ok, account }  (a guest for this browser; itself when it has an account)
+   await R.setup({ name, password });   // { ok, kind, why, account }
+   await R.update({ name, password });  // { ok, kind, why, account }   (password: null removes it)
+   R.seen();                       // "this app is open" (call once a minute while the page is visible)
+   R.on("account", fn);            // fn(account or null)
+   R.on("status", fn);             // fn({ state: checking|connected|off|offline|starting|ready|reload, why })
+   await R.api("people");          // any /relay/ request: { ok, status, data, why, kind }
+   R.call, R.fetch, R.url, R.ws, R.open, R.pcName, R.address, R.watch     // as in relay-client 2
+*/
+(function (root) {
+  "use strict";
+  const VERSION = 3;
+  const RECHECK_MS = 60000, ADDRESS_MS = 6000;
+  const PASS_KEY = "relay-pass", ACCOUNT_KEY = "relay-account", NAME_KEY = "relay-pc-name", YOUR_PC = "your PC";
+  const trim = (u) => String(u || "").trim().replace(/\/+$/, "");
+  const goodAddress = (a) =>
+    /^https:\/\/[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*(:\d{1,5})?$/i.test(a) ||
+    /^http:\/\/(127\.0\.0\.1|localhost)(:\d{1,5})?$/i.test(a);
+  const store = {
+    get(k) { try { return root.localStorage.getItem(k) || ""; } catch (e) { return mem[k] || ""; } },
+    set(k, v) {
+      try { if (v) root.localStorage.setItem(k, v); else root.localStorage.removeItem(k); }
+      catch (e) { if (v) mem[k] = v; else delete mem[k]; }
+    },
+  };
+  const mem = {}; // when localStorage is not available (a sandboxed page): this page only
+  const json = (k) => { try { const j = JSON.parse(store.get(k) || "null"); return j && typeof j === "object" ? j : null; } catch (e) { return null; } };
+  const cleanName = (n) => (typeof n === "string" ? Array.from(n.replace(/[\x00-\x1f\x7f-\x9f]/g, "").trim()).slice(0, 64).join("").trim() : "");
+  const shortAcct = (a) => (a && a.id ? { id: a.id, name: String(a.name || ""), kind: String(a.kind || ""), number: a.number || 0 } : null);
+
+  function httpWhy(status) {
+    return ({ 400: "the PC refused that request", 401: "sign-in needed", 403: "not allowed", 404: "not found on the PC",
+      409: "that clashes with something on the PC", 410: "this page is out of date: reload it", 426: "this page is out of date: reload it",
+      429: "too many requests: wait a minute", 502: "the program on the PC did not answer", 503: "the PC said it is busy or switched off" })[status] || `the PC answered ${status}`;
+  }
+  function netWhy(err, ms) {
+    if (err && err.name === "AbortError") return `no answer from the PC within ${Math.round(ms / 1000)} s`;
+    if (typeof navigator !== "undefined" && navigator.onLine === false) return "this device is offline";
+    return "could not reach the PC (no network, or the PC is off or asleep)";
+  }
+  function netKind(err) {
+    if (err && err.name === "AbortError") return "timeout";
+    if (typeof navigator !== "undefined" && navigator.onLine === false) return "offline";
+    return "network";
+  }
+  const kindOf = (status) => status === 401 ? "signin" : status === 426 || status === 410 ? "reload" : "http";
+
+  class Relay {
+    constructor(opts) {
+      opts = opts || {};
+      this.app = String(opts.app || "page").toLowerCase().replace(/[^a-z0-9-]/g, "");
+      this.log = typeof opts.log === "function" ? opts.log : null;
+      this.addressFile = opts.addressFile || "";
+      this.status = { state: "idle", why: "", at: Date.now() };
+      this.info = null;
+      this.latency = 0;
+      this.bytes = 0;
+      this._me = null;
+      this._subs = { status: new Set(), account: new Set() };
+      this._job = null;
+      this._readAt = 0;
+      this._acctSeen = JSON.stringify(shortAcct(json(ACCOUNT_KEY)));
+      this._setBase(opts.base);
+      if (typeof opts.onStatus === "function") this._subs.status.add(opts.onStatus);
+      if (typeof addEventListener === "function") {
+        addEventListener("storage", (e) => { if (!e || e.key === ACCOUNT_KEY || e.key === PASS_KEY || e.key === null) this._acctChanged(); });
+      }
+    }
+    // ---- the PC's address ---------------------------------------------------------------------------------------
+    _setBase(url) {
+      this.given = trim(url);
+      this.base = this.given;
+      this.where = this.given ? { url: this.given, from: "page", why: "" } : { url: "", from: "unread", why: "" };
+      this._readAt = 0;
+    }
+    setBase(url) { if (trim(url) !== this.given) this._setBase(url); }
+    _fileUrl() {
+      if (this.addressFile) return this.addressFile;
+      try { return new URL("../relay.json", root.location.href).href; } catch (e) { return "../relay.json"; }
+    }
+    async address() { await this._ready(); return this.where; }
+    async _ready() {
+      if (this.given) return;
+      const w = this.where.from;
+      if (w === "unread" || (w === "none" && Date.now() - this._readAt >= RECHECK_MS)) await this._read();
+    }
+    _read() {
+      if (!this._job) this._job = this._readNow().finally(() => { this._job = null; });
+      return this._job;
+    }
+    async _recheck() {
+      if (this.given || this._job || Date.now() - this._readAt < RECHECK_MS) return false;
+      const was = this.base;
+      await this._read();
+      return this.base !== was;
+    }
+    async _readNow() {
+      this._readAt = Date.now();
+      const file = this._fileUrl(), was = this.where;
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), ADDRESS_MS);
+      let why = "";
+      try {
+        const sep = file.includes("?") ? "&" : "?";
+        const r = await fetch(`${file}${sep}t=${Date.now()}`, { cache: "no-store", credentials: "omit", signal: ac.signal });
+        if (!r.ok) throw new Error(`the site answered ${r.status}`);
+        const j = await r.json().catch(() => null);
+        const a = trim(j && j.address);
+        if (!goodAddress(a)) throw new Error(j ? "it holds no usable address" : "it is not JSON");
+        if (this.given) return;
+        this.base = a;
+        this.where = { url: a, from: "file", why: "" };
+        if (was.url !== a) this._note(`the PC's address: ${a} (from ${file})`, false);
+        return;
+      } catch (e) {
+        why = e && e.name === "AbortError" ? `no answer within ${ADDRESS_MS / 1000} s`
+          : typeof navigator !== "undefined" && navigator.onLine === false ? "this device is offline"
+          : e && e.name === "TypeError" ? "the site could not be reached"
+          : String((e && e.message) || e);
+      } finally { clearTimeout(timer); }
+      if (this.given || was.from === "file") return; // read fine earlier in this page's life: that address stays
+      const text = `the PC's address (${file}) could not be read (${why}): the cloud is off`;
+      this.base = "";
+      this.where = { url: "", from: "none", why: text };
+      if (was.why !== text) this._note(text, true);
+    }
+    _note(text, warn) {
+      if (this.log) { try { this.log(text); } catch (e) {} }
+      try { if (typeof console !== "undefined") (warn ? console.warn : console.info)("relay-client: " + text); } catch (e) {}
+    }
+    // ---- events ----
+    on(what, fn) {
+      if (typeof what === "function") { fn = what; what = "status"; }
+      const set = this._subs[what];
+      if (!set || typeof fn !== "function") return () => {};
+      set.add(fn);
+      return () => set.delete(fn);
+    }
+    _set(state, extra) {
+      this.status = Object.assign({ state, why: "", at: Date.now() }, extra || {});
+      for (const f of this._subs.status) { try { f(this.status); } catch (e) {} }
+    }
+    _acctChanged() {
+      const now = JSON.stringify(this.account());
+      if (now === this._acctSeen) return;
+      this._acctSeen = now;
+      const a = this.account();
+      // another person (or nobody) now: the rights the last me() gave are not theirs; can() says no until me() is asked again
+      if (!a || !this._me || !this._me.account || this._me.account.id !== a.id) this._me = null;
+      for (const f of this._subs.account) { try { f(a); } catch (e) {} }
+    }
+    // ---- the pass and the account, kept in this browser ----
+    _pass() { const r = json(PASS_KEY); return r && typeof r.pass === "string" ? r.pass : ""; }
+    _keep(pass, account) {
+      if (pass !== undefined) store.set(PASS_KEY, pass ? JSON.stringify({ pass, at: Date.now() }) : "");
+      if (account !== undefined) store.set(ACCOUNT_KEY, account ? JSON.stringify(Object.assign(shortAcct(account), { at: Date.now() })) : "");
+      this._acctChanged();
+    }
+    _forget(why) {
+      if (!this._pass() && !this.account()) return;
+      this._me = null;
+      this._keep("", null);
+      this._note("this browser's sign-in ended on the PC" + (why ? ` (${why})` : ""), false);
+    }
+    // An answer speaks only about the pass its request carried. While it was on its way, another tab of this browser
+    // may have signed in or switched user: the browser then holds a new pass, and an answer about the old one ("pass
+    // unknown", "no account", an older account) must not wipe or overwrite the new sign-in. _current(sent) says whether
+    // the pass sent is still the one kept.
+    _current(sent) { return sent === this._pass(); }
+    _info(r, sent) { // every answer: the PC may say the pass is not valid any more
+      const i = (r.headers && r.headers.get("X-Relay-Info")) || "";
+      if (/pass-unknown/.test(i) && this._current(sent)) this._forget("the PC does not know it");
+    }
+    account() { return shortAcct(json(ACCOUNT_KEY)); }
+    signedIn() { return !!this._pass(); }
+    can(flag) { return !!(this._me && this._me.can.includes(flag)); }
+    canUse(prog) { return prog === "files" || !!(this._me && this._me.programs.includes(prog)); }
+    headers(extra) {
+      const h = { "X-Relay-Client": this.app + "/" + VERSION };
+      const p = this._pass();
+      if (p) h["X-Relay-Pass"] = p;
+      return Object.assign(h, extra || {});
+    }
+    // ---- addresses ----
+    url(service, path) { return `${this.base}/svc/${service}/${String(path || "").replace(/^\/+/, "")}`; }
+    wsUrl(service, path) { return this.url(service, path).replace(/^http/, "ws"); }
+    wsProtocols() { const p = this._pass(); return p ? ["relay", "pass." + p] : ["relay"]; }
+    ws(service, path) { return new WebSocket(this.wsUrl(service, path), this.wsProtocols()); }
+    _off() { return { ok: false, status: 0, data: null, why: this.where.why || "the cloud is off", kind: "off" }; }
+    // fetch through the relay: a Response (throws when the PC cannot be reached, or the address is not known)
+    async fetch(service, path, opts) {
+      opts = Object.assign({}, opts || {});
+      const timeout = opts.timeout || 0; delete opts.timeout;
+      await this._ready();
+      if (!this.base) throw new TypeError(this.where.why || "the cloud is off");
+      const sent = this._pass();
+      opts.headers = this.headers(opts.headers);
+      let timer = 0, ac = null;
+      if (timeout && !opts.signal) { ac = new AbortController(); opts.signal = ac.signal; timer = setTimeout(() => ac.abort(), timeout); }
+      try {
+        const r = await fetch(this.url(service, path), opts);
+        this._info(r, sent);
+        return r;
+      } catch (err) {
+        if (ac || !(opts.signal && opts.signal.aborted)) this._recheck().catch(() => {});
+        throw err;
+      } finally { clearTimeout(timer); }
+    }
+    // _result: an answer read whole. A body that cannot be read (the page left, the connection dropped, a timeout
+    // while reading) or a 2xx body that is not whole JSON is NOT ok: kind "network" (or "timeout"). Only a real,
+    // whole answer from the PC may say anything about the sign-in (reader agent's find, 2026-11-12).
+    async _result(r) {
+      let text, cut = null;
+      try { text = await r.text(); } catch (err) { text = ""; cut = err; }
+      this.bytes += text.length;
+      let data = null, bad = false;
+      try { data = text ? JSON.parse(text) : null; } catch (e) { data = null; bad = true; }
+      if (cut || (r.ok && bad)) {
+        const kind = cut ? netKind(cut) : "network";
+        const why = cut && kind === "timeout" ? "the PC's answer did not arrive in time" : "the PC's answer was cut off: try again";
+        return { ok: false, status: r.status, data: null, why, kind, cut: true };
+      }
+      if (r.ok) return { ok: true, status: r.status, data, why: "", kind: "" };
+      const why = (data && (data.why || data.error)) || httpWhy(r.status);
+      const kind = (data && data.kind) || kindOf(r.status);
+      if (r.status === 426) this._set("reload", { why });
+      return { ok: false, status: r.status, data, why, kind, signin: r.status === 401 };
+    }
+    _body(opts) {
+      opts = Object.assign({ cache: "no-store" }, opts || {});
+      if (opts.json !== undefined) {
+        opts.body = JSON.stringify(opts.json);
+        opts.headers = Object.assign({ "Content-Type": "application/json" }, opts.headers || {});
+        delete opts.json;
+      }
+      return opts;
+    }
+    // call: a program's request with a JSON answer: { ok, status, data, why, kind }
+    async call(service, path, opts) {
+      opts = this._body(opts);
+      const ms = opts.timeout || 0;
+      let r;
+      try { r = await this.fetch(service, path, opts); }
+      catch (err) { return this.base ? { ok: false, status: 0, data: null, why: netWhy(err, ms), kind: netKind(err) } : this._off(); }
+      return this._result(r);
+    }
+    // api: the relay's own request /relay/<path>: { ok, status, data, why, kind, current }. current: this browser
+    // still holds the pass the request carried (false: its sign-in changed meanwhile, the answer is about the old one).
+    async api(path, opts) {
+      opts = this._body(opts);
+      const ms = opts.timeout || 15000; delete opts.timeout;
+      await this._ready();
+      if (!this.base) return this._off();
+      const sent = this._pass();
+      opts.headers = this.headers(opts.headers);
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), ms);
+      opts.signal = opts.signal || ac.signal;
+      try {
+        const r = await fetch(`${this.base}/relay/${String(path).replace(/^\/+/, "")}`, opts);
+        this._info(r, sent);
+        const res = await this._result(r);
+        res.current = this._current(sent);
+        return res;
+      } catch (err) {
+        this._recheck().catch(() => {});
+        return { ok: false, status: 0, data: null, why: netWhy(err, ms), kind: netKind(err) };
+      } finally { clearTimeout(timer); }
+    }
+    // ---- the light check ----
+    async ping(timeoutMs) {
+      timeoutMs = timeoutMs || 8000;
+      this._set("checking", { why: "checking the connection…" });
+      await this._ready();
+      if (!this.base) { const why = this.where.why || "the cloud is off"; this._set("off", { why }); return { ok: false, why, kind: "off" }; }
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), timeoutMs), t0 = performance.now();
+      try {
+        const sent = this._pass();
+        const r = await fetch(`${this.base}/relay/ping?t=${Date.now()}`, { headers: this.headers(), cache: "no-store", signal: ac.signal });
+        this._info(r, sent);
+        if (!r.ok) { const res = await this._result(r); this._set(r.status === 426 ? "reload" : "offline", { why: res.why }); return { ok: false, why: res.why, kind: res.kind, status: r.status }; }
+        const info = await r.json();
+        this.latency = Math.round(performance.now() - t0);
+        this.info = info;
+        const name = cleanName(info && info.name);
+        if (name) { this._pc = { base: this.base, name }; this._keepName(this.base, name); }
+        if ((info.min_client || 0) > VERSION) { const why = "this page is out of date: reload it"; this._set("reload", { why }); return { ok: false, why, info, kind: "reload" }; }
+        if (!this._current(sent)) { /* this browser's sign-in changed while the PC answered: the answer is about the old one */ }
+        else if (info.pass === "unknown") this._forget("the PC does not know it");
+        else if (info.account && this._pass()) this._keep(undefined, info.account);
+        if (!info.on) { const why = "PC Relay is switched off (it is switched on at the computer)"; this._set("off", { why, info }); return { ok: false, why, info, kind: "off" }; }
+        this._set("connected", { why: `connected (${this.latency} ms)`, info, latency: this.latency });
+        return { ok: true, info, latency: this.latency };
+      } catch (err) {
+        clearTimeout(timer);
+        if (await this._recheck()) return this.ping(timeoutMs);
+        const why = netWhy(err, timeoutMs);
+        this._set("offline", { why });
+        return { ok: false, why, kind: netKind(err) };
+      } finally { clearTimeout(timer); }
+    }
+    service(id) { return ((this.info && this.info.services) || []).find((s) => s.id === id) || null; }
+    _names() { const j = json(NAME_KEY); return j && !Array.isArray(j) ? j : {}; }
+    _keepName(base, name) {
+      const all = this._names();
+      if (all[base] && all[base].name === name) return;
+      all[base] = { name, at: Date.now() };
+      const keep = Object.entries(all).filter(([, e]) => e && typeof e === "object").sort((a, b) => (b[1].at || 0) - (a[1].at || 0)).slice(0, 10);
+      store.set(NAME_KEY, JSON.stringify(Object.fromEntries(keep)));
+    }
+    pcName() {
+      if (this._pc && this._pc.base === this.base) return this._pc.name;
+      const e = this._names()[this.base];
+      return (e && cleanName(e.name)) || YOUR_PC;
+    }
+    // ---- accounts ----
+    async me() {
+      let r = await this.api("me");
+      if (r.ok && !r.current) r = await this.api("me"); // this browser's sign-in changed while the PC answered (another tab): ask again
+      if (!r.ok) return r;
+      // Only an answer that says so itself ({account: null}) ends the sign-in; anything else changes nothing.
+      if (!r.data || typeof r.data !== "object" || !("account" in r.data)) return { ok: false, status: r.status, data: r.data, why: "the PC's answer could not be read: try again", kind: "network", current: r.current };
+      const d = r.data;
+      const me = { account: shortAcct(d.account), can: d.can || [], programs: d.programs || [], network: d.network || "", limited: !!d.limited };
+      this._me = me;
+      if (!r.current) { /* still changing: nothing kept or forgotten from an answer about an older sign-in */ }
+      else if (d.account && this._pass()) this._keep(undefined, d.account);
+      else if (!d.account && this.account() && !d.local) {
+        this._forget(""); // (it clears _me: the PC no longer knows this browser's account)
+        this._me = me;     // what the PC just said is true now: a plain visitor
+      }
+      return { ok: true, account: d.account || null, can: me.can, programs: me.programs, network: me.network, limited: me.limited, local: !!d.local };
+    }
+    async accountsHere() {
+      const r = await this.api("accounts/here");
+      return r.ok ? { ok: true, accounts: (r.data && r.data.accounts) || [], network: r.data && r.data.network } : r;
+    }
+    _signed(r) {
+      if (!r.ok) return { ok: false, kind: r.kind, why: r.why, status: r.status };
+      const d = r.data || {};
+      if (d.pass) this._keep(d.pass, d.account); else if (d.account) this._keep(undefined, d.account);
+      this._me = null;
+      return { ok: true, kind: "", why: "", account: d.account || null };
+    }
+    async signIn(name, password) {
+      return this._signed(await this.api("signin", { method: "POST", json: { name: String(name || ""), password: password == null ? "" : String(password) } }));
+    }
+    async signOut() {
+      const had = this._pass();
+      let onPC = false;
+      if (had) { const r = await this.api("signout", { method: "POST" }); onPC = !!(r.ok && r.data && r.data.signed_out); }
+      this._me = null;
+      this._keep("", null);
+      return { ok: true, onPC };
+    }
+    async guest() { return this._signed(await this.api("guest", { method: "POST" })); }
+    async setup(o) {
+      o = o || {};
+      const body = { name: String(o.name || "") };
+      if (o.password) body.password = String(o.password);
+      return this._signed(await this.api("setup", { method: "POST", json: body }));
+    }
+    async update(o) {
+      o = o || {};
+      const body = {};
+      if (o.name !== undefined) body.name = String(o.name);
+      if (o.password !== undefined) body.password = o.password === null ? null : String(o.password);
+      const r = await this.api("me", { method: "POST", json: body });
+      if (!r.ok) return { ok: false, kind: r.kind, why: r.why, status: r.status };
+      if (r.data && r.data.account && r.current) this._keep(undefined, r.data.account);
+      return { ok: true, kind: "", why: "", account: r.data && r.data.account };
+    }
+    seen() {
+      this.api("seen", { method: "POST", json: { app: this.app }, timeout: 8000 }).catch(() => {});
+    }
+    // ---- start a program, with progress ----
+    async open(service, onProgress, timeoutMs) {
+      timeoutMs = timeoutMs || 60000;
+      this._set("starting", { service, why: `starting ${service} on the PC…` });
+      await this._ready();
+      if (!this.base) { const why = this.where.why || "the cloud is off"; this._set("off", { why }); return { ok: false, why, kind: "off" }; }
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), timeoutMs);
+      try {
+        const sent = this._pass();
+        const r = await fetch(`${this.base}/relay/open/${service}`, { headers: this.headers(), cache: "no-store", signal: ac.signal });
+        this._info(r, sent);
+        if (!r.ok) { const res = await this._result(r); this._set(r.status === 426 ? "reload" : "offline", { service, why: res.why }); return { ok: false, why: res.why, kind: res.kind, status: r.status }; }
+        const rd = r.body.getReader(), dec = new TextDecoder();
+        let buf = "", last = null;
+        for (;;) {
+          const { value, done } = await rd.read();
+          if (done) break;
+          buf += dec.decode(value, { stream: true });
+          let i;
+          while ((i = buf.indexOf("\n")) >= 0) {
+            const line = buf.slice(0, i); buf = buf.slice(i + 1);
+            if (!line.trim()) continue;
+            try { last = JSON.parse(line); } catch (e) { continue; }
+            if (onProgress) { try { onProgress(last); } catch (e) {} }
+            if (last.state === "starting") this._set("starting", { service, why: last.text || "starting…", seconds: last.seconds || 0 });
+          }
+        }
+        if (last && last.state === "ready") { this._set("ready", { service, why: last.warm ? "ready" : `ready (started in ${(last.ms / 1000).toFixed(1)} s)` }); return { ok: true, warm: !!last.warm, ms: last.ms || 0 }; }
+        const why = (last && last.error) || "the PC stopped answering while it was starting";
+        this._set("offline", { service, why });
+        return { ok: false, why, kind: "start" };
+      } catch (err) {
+        this._recheck().catch(() => {});
+        const why = netWhy(err, timeoutMs);
+        this._set("offline", { service, why });
+        return { ok: false, why, kind: netKind(err) };
+      } finally { clearTimeout(timer); }
+    }
+    // ---- keep checking (only while the page wants it) ----
+    watch(everyMs) {
+      everyMs = everyMs || 15000;
+      let stopped = false, timer = 0, fails = 0;
+      const tick = async () => {
+        if (stopped) return;
+        const r = await this.ping();
+        fails = r.ok ? 0 : fails + 1;
+        const wait = r.ok ? everyMs : Math.min(30000, 1000 * 2 ** Math.min(fails - 1, 5));
+        if (!stopped) timer = setTimeout(tick, wait * (0.9 + Math.random() * 0.2));
+      };
+      const online = () => { clearTimeout(timer); tick(); };
+      if (typeof addEventListener === "function") addEventListener("online", online);
+      tick();
+      return () => { stopped = true; clearTimeout(timer); if (typeof removeEventListener === "function") removeEventListener("online", online); };
+    }
+  }
+
+  root.RelayClient = { VERSION, YOUR_PC, create: (opts) => new Relay(opts || {}), httpWhy };
+})(typeof window !== "undefined" ? window : globalThis);
+
+// ---- apps.js ----
+/* apps.js 1.24 (built 2026-11-12 7:17 AM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
+   app-kit\apps-button.js and file-manager\kit\window-kit.js (one source each; never edit this file). The window kit
+   runs only when the page has none of its own. */
+if (!window.WindowKit) {
+/* window-kit.js: open one of Jon's pages in a floating window inside another page, and pick files from the file
+   manager through it. ONE source: Projects\file-manager\kit\window-kit.js (pages copy it in at build time, or load
+   https://jonnystokes.github.io/cooltools/file-manager/window-kit.js). The protocol and an example: kit\README.md.
+
+   Host side (the page that opens the window):
+     const win = WindowKit.open(url, { title, name, width, height, onClose });   // a floating window with the page
+     const got = await WindowKit.pick(fileManagerUrl, { app: "reader", accept: [".zip"], folder: "files" });  // null = cancelled
+   Version 2 (2026-11-11, the Cool tools upgrade): pick takes `app` (the asking program's id from the one list: the
+   chooser starts in its folder and shows its recent files) and `keep` ({ label }: one checkbox beside Use selected);
+   its answer carries `ids` (each file's id in the cloud), `folderId` and `keep`. Nothing about the window changed.
+   Version 3 (2026-11-12): pick takes `start`, the folder the chooser opens in ("Shared Folder/Reader files").
+   The window: drag by its title bar, resize from every edge and corner, maximise (button or double-click the
+   title), close (button or Escape); its size and place are remembered per name. On a phone it is a full-screen
+   sheet, and the phone's Back button closes it. Every message is checked: it must come from the window's own
+   frame and from the origin of the address it opened.
+   Child side (the page inside): WindowKit.child.ready(), .title(text), .close(), .busy(why), .onPick(handler); it accepts
+   requests only from its parent frame, from an allowed origin (Jon's pages on jonnystokes.github.io, its own
+   origin, local file pages), and refuses to run inside any other site (location.ancestorOrigins). */
+(function (root) {
+  "use strict";
+  const VERSION = 3;
+  const MIN_W = 320, MIN_H = 220, MARGIN = 8, HEAD = 40;
+  const SHEET = "(max-width: 640px), (max-height: 480px) and (pointer: coarse)";
+  const KEY = "wk-win:";
+  const wins = [];
+  let z = 2147482000, styled = false, seq = 0;
+
+  function css() {
+    if (styled) return;
+    styled = true;
+    const s = document.createElement("style");
+    s.textContent = `
+.wk-win{position:fixed;z-index:2147482000;display:flex;flex-direction:column;box-sizing:border-box;background:#fff;color:#171c28;border:1px solid rgba(15,23,42,.14);border-radius:12px;box-shadow:0 18px 50px rgba(15,23,42,.3),0 2px 8px rgba(15,23,42,.16);overflow:visible;font:14px/1.3 "Segoe UI",system-ui,-apple-system,sans-serif;margin:0;padding:0}
+@media (prefers-color-scheme:dark){.wk-win{background:#131826;color:#e8ecf6;border-color:rgba(255,255,255,.14);box-shadow:0 18px 50px rgba(0,0,0,.6)}}
+.wk-head{flex:none;height:${HEAD}px;display:flex;align-items:center;gap:2px;padding:0 4px 0 14px;background:rgba(127,127,127,.09);border-bottom:1px solid rgba(127,127,127,.2);border-radius:11px 11px 0 0;cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none;box-sizing:border-box}
+.wk-win.wk-dragging .wk-head{cursor:grabbing}
+.wk-title{flex:1;min-width:0;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}
+.wk-btn{all:unset;box-sizing:border-box;width:36px;height:30px;border-radius:7px;display:grid;place-items:center;cursor:pointer;color:inherit}
+.wk-btn:hover{background:rgba(127,127,127,.2)}.wk-btn:focus-visible{outline:2px solid #2563eb;outline-offset:1px}
+.wk-btn.wk-x:hover{background:#e5484d;color:#fff}
+.wk-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.wk-frame{flex:1;display:block;width:100%;min-height:0;border:0;margin:0;padding:0;background:transparent;border-radius:0 0 11px 11px}
+.wk-win.wk-sheet .wk-head,.wk-win.wk-sheet .wk-frame{border-radius:0}
+.wk-shield{position:absolute;left:0;right:0;bottom:0;top:${HEAD}px;display:none;z-index:3}
+.wk-win.wk-dragging .wk-shield{display:block}
+.wk-grip{position:absolute;z-index:4}
+.wk-g-n{top:-4px;left:12px;right:12px;height:8px;cursor:ns-resize}.wk-g-s{bottom:-4px;left:12px;right:12px;height:8px;cursor:ns-resize}
+.wk-g-e{right:-4px;top:12px;bottom:12px;width:8px;cursor:ew-resize}.wk-g-w{left:-4px;top:12px;bottom:12px;width:8px;cursor:ew-resize}
+.wk-g-ne{right:-4px;top:-4px;width:16px;height:16px;cursor:nesw-resize}.wk-g-sw{left:-4px;bottom:-4px;width:16px;height:16px;cursor:nesw-resize}
+.wk-g-nw{left:-4px;top:-4px;width:16px;height:16px;cursor:nwse-resize}.wk-g-se{right:-4px;bottom:-4px;width:16px;height:16px;cursor:nwse-resize}
+.wk-win.wk-maxed .wk-grip{display:none}.wk-win.wk-maxed .wk-head{cursor:default}
+.wk-win.wk-sheet{left:0!important;top:0!important;width:100%!important;height:100%!important;border:0;border-radius:0;animation:wk-rise .2s ease-out}
+.wk-win.wk-sheet .wk-grip,.wk-win.wk-sheet .wk-max{display:none}
+.wk-win.wk-sheet .wk-head{height:calc(48px + env(safe-area-inset-top));padding-top:env(safe-area-inset-top);cursor:default}
+.wk-win.wk-sheet .wk-btn{width:44px;height:40px}.wk-win.wk-sheet .wk-shield{top:48px}
+@keyframes wk-rise{from{transform:translateY(24px);opacity:.5}}`;
+    document.head.appendChild(s);
+  }
+  const svg = (d) => `<svg viewBox="0 0 16 16" aria-hidden="true">${d}</svg>`;
+  const ICON = { max: svg('<rect x="3" y="3" width="10" height="10" rx="1.5"/>'), restore: svg('<rect x="3" y="5.5" width="7.5" height="7.5" rx="1.3"/><path d="M5.5 5.5V4.3c0-.7.6-1.3 1.3-1.3h4.9c.7 0 1.3.6 1.3 1.3v4.9c0 .7-.6 1.3-1.3 1.3h-1.2"/>'), close: svg('<path d="M4 4l8 8M12 4l-8 8"/>') };
+
+  function load(name) { try { const g = JSON.parse(localStorage.getItem(KEY + name)); return g && typeof g.w === "number" ? g : null; } catch (e) { return null; } }
+  function save(name, g) { try { localStorage.setItem(KEY + name, JSON.stringify(g)); } catch (e) {} }
+  function fit(g) {
+    const W = innerWidth, H = innerHeight;
+    const w = Math.round(Math.min(Math.max(g.w, MIN_W), W - 2 * MARGIN)), h = Math.round(Math.min(Math.max(g.h, MIN_H), H - 2 * MARGIN));
+    return { x: Math.round(Math.max(MARGIN, Math.min(g.x, W - w - MARGIN))), y: Math.round(Math.max(MARGIN, Math.min(g.y, H - h - MARGIN))), w, h };
+  }
+  const isSheet = () => root.matchMedia(SHEET).matches;
+  const top = () => (wins.length ? wins.reduce((a, b) => (+a.el.style.zIndex > +b.el.style.zIndex ? a : b)) : null);
+
+  // open(url, opts) -> the window: { el, frame, url, origin, name, ready, closed, close, maximize, restore, toggleMax,
+  // front, focus, post(msg, transfer), on(type, fn), title(text) }
+  function open(url, opts) {
+    opts = opts || {};
+    css();
+    const abs = new URL(url, location.href).href;
+    const origin = new URL(abs).origin; // "null" for a file: address (then postMessage needs "*", and the reply's origin is "null")
+    const name = opts.name || new URL(abs).pathname;
+    const id = ++seq;
+    const back = document.activeElement;
+    const el = document.createElement("div");
+    el.className = "wk-win";
+    el.setAttribute("role", "dialog");
+    el.setAttribute("aria-label", opts.title || "Window");
+    el.innerHTML = `<div class="wk-head"><span class="wk-title"></span><button class="wk-btn wk-max" type="button" aria-label="Maximise" title="Maximise">${ICON.max}</button><button class="wk-btn wk-x" type="button" aria-label="Close" title="Close (Escape)">${ICON.close}</button></div><iframe class="wk-frame" allow="clipboard-read; clipboard-write; fullscreen"></iframe><div class="wk-shield"></div>`
+      + ["n", "s", "e", "w", "ne", "nw", "se", "sw"].map((d) => `<div class="wk-grip wk-g-${d}" data-dir="${d}"></div>`).join("");
+    const head = el.querySelector(".wk-head"), titleEl = el.querySelector(".wk-title"), maxBtn = el.querySelector(".wk-max"), frame = el.querySelector(".wk-frame");
+    titleEl.textContent = opts.title || "";
+    const handlers = {};
+    let readyRes, closedRes, closedNow = false;
+    const saved = load(name);
+    const w0 = opts.width || Math.min(980, Math.round(innerWidth * 0.8)), h0 = opts.height || Math.min(700, Math.round(innerHeight * 0.8));
+    let g = fit(saved || { x: (innerWidth - w0) / 2, y: Math.max(MARGIN, (innerHeight - h0) / 3), w: w0, h: h0 });
+    let maxed = !!(saved && saved.max), before = null;
+    const win = {
+      id, el, frame, url: abs, origin, name, pushed: false,
+      ready: new Promise((r) => { readyRes = r; }), closed: new Promise((r) => { closedRes = r; }),
+      on(type, fn) { (handlers[type] = handlers[type] || []).push(fn); return win; },
+      title(t) { titleEl.textContent = t; el.setAttribute("aria-label", t); },
+      post(msg, transfer) { if (frame.contentWindow) frame.contentWindow.postMessage(msg, origin === "null" ? "*" : origin, transfer || []); },
+      front() { el.style.zIndex = String(++z); },
+      focus() { try { frame.focus(); } catch (e) {} },
+      maximize() { if (maxed) return; before = g; maxed = true; layout(); remember(); },
+      restore() { if (!maxed) return; maxed = false; if (before) g = before; layout(); remember(); },
+      toggleMax() { maxed ? win.restore() : win.maximize(); },
+      busy: "", // what the page inside says is still running (uploads): a person closing the window is asked first
+      ask() { return !win.busy || root.confirm(`${win.busy} in this window. Close it anyway (they stop)?`); },
+      close(fromPop) {
+        if (closedNow) return;
+        closedNow = true;
+        wins.splice(wins.indexOf(win), 1);
+        el.remove();
+        if (win.pushed && !fromPop && history.state && history.state.wkSheet === id) history.back();
+        if (back && back.focus && document.contains(back)) try { back.focus({ preventScroll: true }); } catch (e) {}
+        closedRes();
+        if (opts.onClose) try { opts.onClose(); } catch (e) {}
+      },
+      _emit(type, m) { for (const fn of handlers[type] || []) try { fn(m); } catch (e) {} },
+      _ready(m) { readyRes(m); },
+    };
+    function layout() {
+      const sheet = isSheet();
+      el.classList.toggle("wk-sheet", sheet);
+      el.classList.toggle("wk-maxed", maxed && !sheet);
+      maxBtn.innerHTML = maxed ? ICON.restore : ICON.max;
+      maxBtn.title = maxed ? "Restore" : "Maximise";
+      maxBtn.setAttribute("aria-label", maxBtn.title);
+      if (sheet) {
+        if (!win.pushed && opts.back !== false) { try { history.pushState(Object.assign({}, history.state, { wkSheet: id }), ""); win.pushed = true; } catch (e) {} }
+        return;
+      }
+      const r = maxed ? { x: MARGIN, y: MARGIN, w: innerWidth - 2 * MARGIN, h: innerHeight - 2 * MARGIN } : (g = fit(g));
+      el.style.left = r.x + "px"; el.style.top = r.y + "px"; el.style.width = r.w + "px"; el.style.height = r.h + "px";
+    }
+    function remember() { save(name, Object.assign({}, maxed && before ? before : g, { max: maxed })); }
+    win._layout = layout;
+
+    // Drag by the title bar; resize from the edges and corners. A shield over the frame keeps the pointer's moves
+    // coming while it passes over the page inside.
+    function grab(handle, apply) {
+      handle.addEventListener("pointerdown", (e) => {
+        if (e.button !== 0 || e.target.closest(".wk-btn") || isSheet() || maxed) return;
+        e.preventDefault();
+        win.front();
+        const start = { x: e.clientX, y: e.clientY, g: Object.assign({}, g) };
+        el.classList.add("wk-dragging");
+        try { handle.setPointerCapture(e.pointerId); } catch (x) {}
+        const move = (ev) => { g = fit(apply(start, ev.clientX - start.x, ev.clientY - start.y)); layout(); };
+        const end = () => { handle.removeEventListener("pointermove", move); handle.removeEventListener("pointerup", end); handle.removeEventListener("pointercancel", end); el.classList.remove("wk-dragging"); remember(); };
+        handle.addEventListener("pointermove", move);
+        handle.addEventListener("pointerup", end);
+        handle.addEventListener("pointercancel", end);
+      });
+    }
+    grab(head, (s, dx, dy) => ({ x: s.g.x + dx, y: s.g.y + dy, w: s.g.w, h: s.g.h }));
+    for (const grip of el.querySelectorAll(".wk-grip")) {
+      const d = grip.dataset.dir;
+      grab(grip, (s, dx, dy) => {
+        let { x, y, w, h } = s.g;
+        if (d.includes("e")) w = Math.max(MIN_W, s.g.w + dx);
+        if (d.includes("s")) h = Math.max(MIN_H, s.g.h + dy);
+        if (d.includes("w")) { w = Math.max(MIN_W, s.g.w - dx); x = s.g.x + s.g.w - w; }
+        if (d.includes("n")) { h = Math.max(MIN_H, s.g.h - dy); y = s.g.y + s.g.h - h; }
+        return { x, y, w, h };
+      });
+    }
+    head.addEventListener("dblclick", (e) => { if (!e.target.closest(".wk-btn") && !isSheet()) win.toggleMax(); });
+    maxBtn.addEventListener("click", () => win.toggleMax());
+    el.querySelector(".wk-x").addEventListener("click", () => { if (win.ask()) win.close(); });
+    el.addEventListener("pointerdown", () => win.front(), true);
+    // A same-origin page inside: its own Escape, when it did not use it, closes the window too.
+    frame.addEventListener("load", () => {
+      try {
+        frame.contentWindow.addEventListener("keydown", (e) => { if (e.key === "Escape" && !e.defaultPrevented && win.ask()) win.close(); });
+      } catch (e) { /* another origin: it says "escape" by message (WindowKit.child) */ }
+    });
+    wins.push(win);
+    document.body.appendChild(el);
+    win.front();
+    layout();
+    frame.src = abs;
+    setTimeout(() => win.focus(), 50);
+    return win;
+  }
+
+  // Messages from the pages inside: only from a window's own frame and from the origin it was opened at.
+  root.addEventListener("message", (e) => {
+    const win = wins.find((w) => w.frame.contentWindow === e.source);
+    if (!win) return;
+    if (win.origin === "null" ? e.origin !== "null" : e.origin !== win.origin) return;
+    const m = e.data;
+    if (!m || m.wk !== 1 || typeof m.type !== "string") return;
+    if (m.type === "ready") win._ready(m);
+    else if (m.type === "escape") { if (win.ask()) win.close(); }
+    else if (m.type === "close") win.close();
+    else if (m.type === "title" && typeof m.text === "string") win.title(m.text.slice(0, 200));
+    else if (m.type === "busy") win.busy = typeof m.why === "string" ? m.why.slice(0, 200) : "";
+    win._emit(m.type, m);
+  });
+  // Escape on the page itself closes the top window (it sits above everything, so it goes first).
+  root.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape" || e.defaultPrevented || !wins.length) return;
+    e.preventDefault();
+    const w = top();
+    if (w.ask()) w.close();
+  }, true);
+  root.addEventListener("resize", () => { for (const w of wins) w._layout(); });
+  root.addEventListener("popstate", () => {
+    for (const w of wins.slice()) if (w.pushed && !(history.state && history.state.wkSheet === w.id)) w.close(true);
+  });
+
+  // pick(url, opts): open the file manager, ask it for files, give back { kind, files, paths, ids, folder, folderId,
+  // missing, keep } or null when the person closes the window. opts: accept [".zip"], multiple, files (default true),
+  // folder (false | "files" | "zip"), host (the name shown: "Book reader"), app (the asking program's id from the one
+  // list: the chooser starts in that program's folder, with its recent files on top, and shows its name),
+  // keep ({ label }: one unticked checkbox beside Use selected; the answer's `keep` says whether it was ticked),
+  // start (the folder the chooser opens in, as a signed-in person sees its path: "Shared Folder/Reader files"; it
+  // comes before the program's own folder, and when it is not there the chooser says so and opens where it would
+  // have without it), title, name, onProgress, signal. In the answer, ids[i] is the cloud id of files[i] for kind
+  // "files"; for a folder ("folder", "zip") folderId is the folder's id and ids holds "" for each file.
+  function pick(url, o) {
+    o = o || {};
+    return new Promise((resolve, reject) => {
+      let done = false, port = null, win = null;
+      const end = (fn, v) => { if (done) return; done = true; clearTimeout(timer); if (port) port.close(); if (win) win.close(); fn(v); };
+      const timer = setTimeout(() => end(reject, new Error("The file manager did not open within 30 s (no network, or its page could not load).")), 30000);
+      win = open(url, { name: o.name || "file-manager-pick", title: o.title || heading(o), width: o.width, height: o.height, onClose: () => end(resolve, null) });
+      win.on("ready", () => {
+        clearTimeout(timer);
+        if (port) port.close();
+        const ch = new MessageChannel();
+        port = ch.port1;
+        port.onmessage = (e) => {
+          const d = e.data || {};
+          if (d.type === "progress") { if (o.onProgress) try { o.onProgress(d); } catch (x) {} }
+          else if (d.type === "picked") end(resolve, result(d));
+          else if (d.type === "cancel") end(resolve, null);
+          else if (d.type === "error") end(reject, new Error(d.why || "The file manager could not give the files."));
+        };
+        win.post({ wk: 1, type: "pick", version: VERSION, accept: accepts(o.accept), multiple: !!o.multiple, files: o.files !== false, folder: o.folder || false,
+          host: String(o.host || document.title || location.host).slice(0, 80), app: String(o.app || "").slice(0, 60),
+          keep: o.keep && o.keep.label ? { label: String(o.keep.label).slice(0, 80) } : null, start: String(o.start || "").slice(0, 400) }, [ch.port2]);
+      });
+      if (o.signal) o.signal.addEventListener("abort", () => end(resolve, null), { once: true });
+    });
+  }
+  const accepts = (a) => [].concat(a || []).map((x) => String(x).trim().toLowerCase()).filter(Boolean).map((x) => (x === "*" || x.startsWith(".") ? x : "." + x));
+  // The window's first title, one short heading: "Book reader: choose a file or folder" (the file manager sets the
+  // same words again once it has the request, with the program's name from the one list).
+  function heading(o) {
+    const w = o.files === false ? "a folder" : o.folder ? "a file or folder" : o.multiple ? "files" : "a file";
+    const who = String(o.host || "").trim().slice(0, 80);
+    return who ? `${who}: choose ${w}` : `Choose ${w}`;
+  }
+  function result(d) {
+    const files = Array.isArray(d.files) ? d.files : [];
+    const paths = Array.isArray(d.paths) ? d.paths : files.map((f) => f.name);
+    const ids = files.map((f, i) => (Array.isArray(d.ids) && typeof d.ids[i] === "string" ? d.ids[i] : ""));
+    files.forEach((f, i) => { try { Object.defineProperty(f, "webkitRelativePath", { value: paths[i] || f.name, configurable: true }); } catch (e) {} });
+    return { kind: d.kind || "files", files, paths, ids, folder: d.folder || "", folderId: typeof d.folderId === "string" ? d.folderId : "", missing: d.missing || "", keep: !!d.keep };
+  }
+
+  // ---- the child side: a page inside a window --------------------------------------------------------------------
+  const ALLOW = ["https://jonnystokes.github.io", "null", "file://"];
+  const inWindow = root.parent !== root;
+  let pickHandler = null, autoEscape = false, refused = "";
+  function allowed(o) { return o === location.origin || ALLOW.includes(o) || child.allow.includes(o); }
+  // Inside a frame: every frame above must be one of the allowed origins (Chrome and Safari list them), so a
+  // stranger's site cannot wrap this page (clickjacking) or ask it for files.
+  function ancestors() {
+    if (!inWindow) return "";
+    const list = location.ancestorOrigins ? Array.from(location.ancestorOrigins) : [];
+    for (const o of list) if (!allowed(o)) return o;
+    return "";
+  }
+  const child = {
+    inWindow, allow: [],
+    get refusedBy() { return ancestors(); },
+    ready(info) { autoEscape = true; if (inWindow && !ancestors()) root.parent.postMessage(Object.assign({ wk: 1, type: "ready", version: VERSION }, info || {}), "*"); },
+    title(text) { if (inWindow) root.parent.postMessage({ wk: 1, type: "title", text: String(text) }, "*"); },
+    close() { if (inWindow) root.parent.postMessage({ wk: 1, type: "close" }, "*"); },
+    escape() { if (inWindow) root.parent.postMessage({ wk: 1, type: "escape" }, "*"); },
+    busy(why) { if (inWindow) root.parent.postMessage({ wk: 1, type: "busy", why: why || "" }, "*"); }, // "" = nothing running
+    onPick(fn) { pickHandler = fn; },
+  };
+  root.addEventListener("message", (e) => {
+    if (!inWindow || e.source !== root.parent || !allowed(e.origin) || ancestors()) return;
+    const m = e.data;
+    if (!m || m.wk !== 1 || m.type !== "pick" || !e.ports || !e.ports[0]) return;
+    if (pickHandler) pickHandler(m, e.ports[0], e.origin);
+    else e.ports[0].postMessage({ type: "error", why: "This page does not pick files." });
+  });
+  // Escape the page inside did not use: the window closes (the page's own listeners run first, on document).
+  root.addEventListener("keydown", (e) => { if (e.key === "Escape" && !e.defaultPrevented && autoEscape && inWindow) child.escape(); });
+
+  root.WindowKit = { VERSION, open, pick, child, get windows() { return wins.slice(); } };
+})(typeof window !== "undefined" ? window : globalThis);
+}
+/* apps-button.js 1.24: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+   Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
+   page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
+   https://jonnystokes.github.io/cooltools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
+
+     <apps-button app="file-manager"></apps-button>     the first thing in the page's top bar, top left
+
+   Three thick bars (magenta, yellow, cyan) and the word "Apps" on black with a neon edge: one look in every program,
+   made to clash with any page, because it is the way out of this program into another. Then a plain divider (Jon,
+   2026-11-07: only the button stands out): 1 px in the bar's own text colour, faint, so it blends with each app's bar.
+   A click opens the Apps menu (the launcher, cool-tools/apps/) in a floating window (the window kit; a full-screen
+   sheet on a phone); a second click closes it. The menu marks the program named by app="...". When the menu cannot
+   load (this device offline, the site down), the window says so in plain words, with Try again.
+
+   Attributes:
+     app="<id>"         this program's id in app-kit\programs.json: the menu marks it "You are here"
+     stack              bars above the word (for a tight bar); stack="720": only while the page is 720 px wide or less
+     launcher="<url>"   another menu address (tests)
+     in-frame           show the button inside a frame too. Hidden there by default: inside another page's window a
+                        program chosen from the menu would take that page's whole tab
+   Size: CSS --apps-h on the element is the button's height (default 36px; the bars, the word and the divider scale
+   with it):  apps-button { --apps-h: 40px; }
+   The divider takes the bar's text colour by itself; --apps-sep sets it to the app's own line colour instead (a
+   light-dark() pair works: the button takes the page's light or dark color-scheme):
+     apps-button { --apps-sep: var(--line); }
+   Focus: when the menu closes, the focus goes back to the page, not to the button, so the page's own keys work at
+   once (Space would press the button again); the button stays in the Tab order.
+   Script: AppsKit.open({ app }), AppsKit.close(), AppsKit.window (the open menu's window, or null),
+   AppsKit.launcher (the menu's address), AppsKit.VERSION. */
+(function (root) {
+  "use strict";
+  if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
+  const VERSION = "1.24";
+  // The menu comes from the site the page itself is on, so the menu's account strip reads the same browser memory
+  // (one origin) and the same relay.json as the program: the live site, or the stage (CONTRACT 3). Any other page
+  // (a file on this device, a test page) gets the live site's menu.
+  const SITES = ["https://jonnystokes.github.io/cooltools/", "http://127.0.0.1:28801/", "http://localhost:28801/"];
+  const LAUNCHER = (() => {
+    let href = "";
+    try { href = root.location.href; } catch (e) {}
+    const site = SITES.find((s) => href.startsWith(s)) || SITES[0];
+    return site + "apps/";
+  })();
+  const W = 460, H = 780;        // the menu window's first size (less on a short screen); the window kit remembers
+                                 // what the person makes it
+  const NAME = "apps";           // its key in the window kit (localStorage wk-win:apps); the same in every program
+  let current = null;            // { win, href } while the menu is open
+
+  const BARS = ["#ff3df2", "#ffd23d", "#3dfcff"];
+  const CSS = `
+:host{all:initial;color:inherit;color-scheme:inherit;display:inline-flex;align-items:center;flex:none;vertical-align:middle;--h:var(--apps-h,36px)}
+.b{all:unset;box-sizing:border-box;position:relative;display:inline-flex;flex-direction:row;align-items:center;justify-content:center;
+  gap:calc(var(--h)*.2);height:var(--h);padding:0 calc(var(--h)*.3) 0 calc(var(--h)*.26);border:2px solid transparent;border-radius:calc(var(--h)*.28);
+  background:linear-gradient(#0b0816,#0b0816) padding-box,linear-gradient(120deg,${BARS[0]},${BARS[1]} 52%,${BARS[2]}) border-box;
+  color:#fff;font:800 calc(var(--h)*.42)/1 "Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;letter-spacing:.015em;
+  white-space:nowrap;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;touch-action:manipulation;
+  box-shadow:0 0 0 1px rgba(0,0,0,.65),0 0 calc(var(--h)*.3) rgba(255,61,242,.55),0 0 calc(var(--h)*.55) rgba(61,252,255,.3);
+  transition:box-shadow .15s,filter .15s,transform .08s}
+.b:hover{filter:brightness(1.15) saturate(1.1);box-shadow:0 0 0 1px rgba(0,0,0,.65),0 0 calc(var(--h)*.42) rgba(255,61,242,.85),0 0 calc(var(--h)*.8) rgba(61,252,255,.5)}
+.b:active{transform:translateY(1px) scale(.97)}
+.b:focus-visible{outline:2px solid #000;outline-offset:2px;box-shadow:0 0 0 6px #fff,0 0 calc(var(--h)*.5) rgba(255,61,242,.9)}
+.b[aria-expanded=true]{box-shadow:0 0 0 1px rgba(0,0,0,.65),0 0 0 calc(var(--h)*.09) rgba(255,210,61,.55),0 0 calc(var(--h)*.5) rgba(255,61,242,.8)}
+.bars{display:flex;flex-direction:column;justify-content:center;gap:calc(var(--h)*.085);width:calc(var(--h)*.5);flex:none}
+.bars i{display:block;height:calc(var(--h)*.12);height:round(calc(var(--h)*.12),1px);border-radius:99px}
+.bars i:nth-child(1){background:${BARS[0]};box-shadow:0 0 calc(var(--h)*.14) rgba(255,61,242,.8)}
+.bars i:nth-child(2){background:${BARS[1]};box-shadow:0 0 calc(var(--h)*.14) rgba(255,210,61,.7)}
+.bars i:nth-child(3){background:${BARS[2]};box-shadow:0 0 calc(var(--h)*.14) rgba(61,252,255,.7)}
+.w{display:block;text-shadow:0 0 calc(var(--h)*.22) rgba(255,255,255,.4)}
+.sep{display:block;flex:none;width:1px;height:calc(var(--h)*.72);margin:0 calc(var(--h)*.2) 0 calc(var(--h)*.3);background:var(--apps-sep,rgba(127,127,127,.4))}
+@supports (color:color-mix(in srgb,red,blue)){.sep{background:var(--apps-sep,color-mix(in srgb,currentColor 22%,transparent))}}`;
+  // The stacked form (bars above the word), for a tight bar: the same parts, arranged in a column.
+  const STACK = `
+.b{flex-direction:column;gap:calc(var(--h)*.07);padding:0 calc(var(--h)*.17);border-radius:calc(var(--h)*.24);font-size:calc(var(--h)*.27);letter-spacing:.04em}
+.bars{width:calc(var(--h)*.52);gap:calc(var(--h)*.075)}
+.bars i{height:calc(var(--h)*.1);height:round(calc(var(--h)*.1),1px)}
+.sep{margin:0 calc(var(--h)*.16) 0 calc(var(--h)*.22)}`;
+  function stackCss(v) {
+    if (v === null) return "";
+    const px = parseInt(v, 10);
+    return px > 0 ? `@media (max-width:${px}px){${STACK}}` : STACK;
+  }
+  const inFrame = () => { try { return root.self !== root.top; } catch (e) { return true; } };
+
+  // ---- the menu window --------------------------------------------------------------------------------------------
+  // Its first place is just under the button (the window kit has no place option, so its remembered place is set
+  // before it opens); once the person moves or resizes it, the window kit keeps their place and this leaves it be.
+  function place(anchor) {
+    try {
+      const key = "wk-win:" + NAME, seeded = localStorage.getItem("apps-place");
+      const saved = localStorage.getItem(key);
+      if (saved && saved !== seeded) return;   // the person's own place
+      const r = anchor && anchor.getBoundingClientRect ? anchor.getBoundingClientRect() : { left: 8, bottom: 8 };
+      const y = Math.round(r.bottom + 8);
+      const g = JSON.stringify({ x: Math.max(8, Math.round(r.left)), y, w: Math.min(W, innerWidth - 16), h: Math.max(320, Math.min(H, innerHeight - y - 8)), max: false });
+      localStorage.setItem(key, g);
+      localStorage.setItem("apps-place", g);
+    } catch (e) { /* no storage: the window kit centres it */ }
+  }
+
+  function open(o) {
+    o = o || {};
+    if (current) { current.win.front(); current.win.focus(); return current.win; }
+    const u = new URL(o.launcher || api.launcher, location.href);
+    if (o.app) u.searchParams.set("app", String(o.app).slice(0, 60));
+    const href = u.href;
+    if (!root.WindowKit) { location.href = href; return null; } // no window kit on this page: the menu as a page
+    place(o.anchor);
+    const btn = o.anchor || null;
+    const win = root.WindowKit.open(href, {
+      title: "Apps", name: NAME, width: W, height: H,
+      onClose: () => {
+        if (current && current.win === win) { current.stop(); current = null; }
+        if (btn) { btn.setAttribute("aria-expanded", "false"); letGo(btn); }
+      },
+    });
+    if (btn) btn.setAttribute("aria-expanded", "true");
+    current = watch(win, href);
+    current.arm();
+    return win;
+  }
+  function close() { if (current) current.win.close(); }
+  // The window kit gives the focus back to what had it when the menu opened, which is this button (the click put it
+  // there). Left there, the page's own keys would press it: Space or Enter opens the menu again (HYPERWAVE's Space).
+  // So the focus goes back to the page. The button stays in the Tab order: the keyboard still reaches it with Tab.
+  function letGo(btn) {
+    const sr = btn.getRootNode();
+    if (sr && sr.activeElement === btn) btn.blur();
+  }
+
+  // ---- when the menu cannot load ------------------------------------------------------------------------------------
+  // The menu page says "ready" (the window kit's protocol) as soon as it runs. Offline when the window opens, or its
+  // frame loaded something that never said ready (the browser's own error page), or nothing at all within 20 s:
+  // the window shows a plain message instead, with Try again (and tries again by itself when the device is back
+  // online). A late "ready" still wins: the message goes and the menu shows.
+  function watch(win, href) {
+    let ok = false, loadT = 0, slowT = 0, box = null;
+    const st = { win, href };
+    const why = () => (navigator.onLine === false ? "offline" : "noload");
+    const fail = (kind) => { if (!ok && current === st) show(kind); };
+    const arm = () => {
+      clearTimeout(slowT);
+      slowT = setTimeout(() => fail(why()), 20000);
+      if (navigator.onLine === false) fail("offline");
+    };
+    const onLoad = () => { clearTimeout(loadT); loadT = setTimeout(() => fail(why()), 2500); };
+    const onOnline = () => { if (box && box.isConnected && !ok) retry(); };
+    function show(kind) {
+      if (!box) {
+        box = document.createElement("div");
+        box.className = "apps-fail";
+        box.style.cssText = "flex:1 1 auto;min-height:0;overflow:auto;display:block;margin:0;padding:0;border:0";
+        const sr = box.attachShadow({ mode: "open" });
+        sr.innerHTML = `<style>${FAIL_CSS}</style><div class="m" role="alert"><div class="bars" aria-hidden="true"><i></i><i></i><i></i></div><h2></h2><p class="t"></p><p class="f"></p><button type="button">Try again</button></div>`;
+        sr.querySelector("button").addEventListener("click", retry);
+        win.frame.after(box);
+      }
+      const sr = box.shadowRoot;
+      sr.querySelector("h2").textContent = kind === "offline" ? "No internet" : "The Apps menu did not load";
+      sr.querySelector(".t").textContent = kind === "offline"
+        ? "The Apps menu comes from the Cool tools site, and this device is offline. Connect it to the internet, then try again."
+        : "The Cool tools site (jonnystokes.github.io) could not be reached: no internet here, or the site is down.";
+      sr.querySelector(".f").textContent = location.protocol === "file:"
+        ? "This page is a file on this device; the menu of programs still comes from the web."
+        : "";
+      box.hidden = false;
+      box.style.display = "block";
+      win.frame.style.display = "none";
+    }
+    function hide() { if (box) box.style.display = "none"; win.frame.style.display = ""; }
+    function retry() { hide(); win.frame.src = href; arm(); }
+    win.frame.addEventListener("load", onLoad);
+    root.addEventListener("online", onOnline);
+    win.ready.then(() => { ok = true; clearTimeout(loadT); clearTimeout(slowT); hide(); });
+    st.stop = () => { clearTimeout(loadT); clearTimeout(slowT); root.removeEventListener("online", onOnline); };
+    st.retry = retry;
+    st.arm = arm;   // open() calls it once this is the current menu
+    return st;
+  }
+  const FAIL_CSS = `
+:host{all:initial;display:block}
+.m{box-sizing:border-box;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:28px 24px;text-align:center;
+  background:#05060c;color:#eaf1ff;font:15px/1.45 "Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif}
+.bars{display:flex;flex-direction:column;gap:5px;width:34px;margin-bottom:6px;opacity:.55}
+.bars i{display:block;height:6px;border-radius:9px}.bars i:nth-child(1){background:${BARS[0]}}.bars i:nth-child(2){background:${BARS[1]}}.bars i:nth-child(3){background:${BARS[2]}}
+h2{margin:0;font-size:19px;font-weight:700}
+p{margin:0;max-width:30em;color:#b8c4dc}p:empty{display:none}.f{font-size:13.5px;color:#8d9ab6}
+button{all:unset;box-sizing:border-box;margin-top:8px;padding:10px 20px;border-radius:10px;background:#ffd23d;color:#05060c;font-weight:700;cursor:pointer}
+button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff;outline-offset:2px}`;
+
+  // ---- the element ------------------------------------------------------------------------------------------------
+  class AppsButton extends HTMLElement {
+    static get observedAttributes() { return ["stack"]; }
+    constructor() {
+      super();
+      const sr = this.attachShadow({ mode: "open" });
+      sr.innerHTML = `<style></style><button class="b" type="button" aria-haspopup="dialog" aria-expanded="false" title="Apps: open another of Jon's programs"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span class="w">Apps</span></button><span class="sep" aria-hidden="true"></span>`;
+      this._style = sr.querySelector("style");
+      this._btn = sr.querySelector("button");
+      this._btn.addEventListener("click", () => {
+        if (current) close();
+        else open({ app: this.getAttribute("app") || "", launcher: this.getAttribute("launcher") || "", anchor: this._btn });
+      });
+      // Enter and Space belong to the button. A page's own shortcuts on document see this element (not the button
+      // inside it), so a page that presses focused buttons itself, or opens its list's row on Enter, would take them.
+      for (const t of ["keydown", "keypress", "keyup"]) this._btn.addEventListener(t, (e) => { if (e.key === "Enter" || e.key === " ") e.stopPropagation(); });
+      this._paint();
+    }
+    connectedCallback() { if (inFrame() && !this.hasAttribute("in-frame")) this.style.display = "none"; }
+    attributeChangedCallback() { this._paint(); }
+    _paint() { this._style.textContent = CSS + stackCss(this.getAttribute("stack")); }
+    focus(o) { this._btn.focus(o); }
+    click() { this._btn.click(); }
+  }
+
+  const api = {
+    VERSION, launcher: LAUNCHER, open, close,
+    get window() { return current ? current.win : null; },
+  };
+  root.AppsKit = api;
+  if (root.customElements && !root.customElements.get("apps-button")) root.customElements.define("apps-button", AppsButton);
+})(typeof window !== "undefined" ? window : globalThis);
+
+// ---- util.js ----
+// util.js: small helpers shared by the two pages (the six sections and the account page). Everything that comes from
+// the PC or from a person (names, addresses, log lines) goes into the page as text, never as HTML.
+"use strict";
+const S = (globalThis.S = {});
+
+// h("div.card#x", {text, title, on: {click}, data: {id}}, ...children): an element
+S.h = function h(spec, props, ...kids) {
+  const m = /^([a-z0-9-]+)((?:[.#][\w-]+)*)$/i.exec(spec);
+  const el = document.createElement(m ? m[1] : "div");
+  if (m) for (const part of m[2].match(/[.#][\w-]+/g) || []) part[0] === "." ? el.classList.add(part.slice(1)) : (el.id = part.slice(1));
+  if (props && (typeof props !== "object" || props instanceof Node || Array.isArray(props))) { kids.unshift(props); props = null; }
+  for (const [k, v] of Object.entries(props || {})) {
+    if (v === undefined || v === null || v === false) continue;
+    if (k === "text") el.textContent = v;
+    else if (k === "on") for (const [ev, fn] of Object.entries(v)) el.addEventListener(ev, fn);
+    else if (k === "class") el.className = v;
+    else if (k === "data") for (const [dk, dv] of Object.entries(v)) el.dataset[dk] = dv;
+    else if (["value", "checked", "disabled", "selected", "hidden"].includes(k)) el[k] = v;
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  for (const kid of kids.flat(3)) if (kid !== null && kid !== undefined && kid !== false) el.append(kid instanceof Node ? kid : String(kid));
+  return el;
+};
+S.$ = (sel, root) => (root || document).querySelector(sel);
+S.$$ = (sel, root) => [...(root || document).querySelectorAll(sel)];
+S.clear = (el, ...kids) => { el.replaceChildren(...kids.flat(3).filter((k) => k !== null && k !== undefined && k !== false)); return el; };
+
+// small drawings (one path each, drawn with the text colour), named by what they show
+const ICONS = {
+  home: "M3 11.2 12 4l9 7.2M5.5 9.8V20h4.8v-5.6h3.4V20h4.8V9.8",
+  people: "M8.6 11.2a3.4 3.4 0 1 0 0-6.8 3.4 3.4 0 0 0 0 6.8ZM2.5 20c0-3.4 2.7-5.6 6.1-5.6s6.1 2.2 6.1 5.6M16 4.8a3.2 3.2 0 0 1 0 6.2M17.6 14.6c2.3.6 3.9 2.5 3.9 5.4",
+  programs: "M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z",
+  files: "M3 6.5c0-1 .8-1.8 1.8-1.8h4.4l2 2.3h8c1 0 1.8.8 1.8 1.8v8.9c0 1-.8 1.8-1.8 1.8H4.8c-1 0-1.8-.8-1.8-1.8z",
+  activity: "M3 13h4l2.4-7 4.2 13L16 13h5",
+  pc: "M3.5 5h17v11h-17zM9 20h6M12 16v4",
+  back: "M14.5 5 8 12l6.5 7",
+  next: "M9.5 5 16 12l-6.5 7",
+  check: "M5 12.5 10 17.5 19 7",
+  more: "M9 6l6 6-6 6",
+  person: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4.5 20.5c0-4 3.3-6.2 7.5-6.2s7.5 2.2 7.5 6.2",
+  lock: "M7 11V8a5 5 0 0 1 10 0v3M5.5 11h13v9h-13z",
+  nolock: "M7 11V8a5 5 0 0 1 9.6-2M5.5 11h13v9h-13z",
+  trash: "M4 7h16M9.5 7V4.5h5V7M6.5 7l1 13h9l1-13",
+  copy: "M8.5 8.5h11v11h-11zM5 15.5H4.5v-11h11V5",
+  close: "M6 6l12 12M18 6 6 18",
+};
+S.icon = (name, size) => {
+  const ns = "http://www.w3.org/2000/svg", svg = document.createElementNS(ns, "svg"), p = document.createElementNS(ns, "path");
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("class", "ico");
+  svg.setAttribute("aria-hidden", "true");
+  if (size) { svg.style.width = size + "px"; svg.style.height = size + "px"; }
+  p.setAttribute("d", ICONS[name] || "");
+  svg.append(p);
+  return svg;
+};
+
+// This page's own settings in this browser (localStorage "settings-<name>": never anything that must not be lost)
+S.store = {
+  get(k, d) { try { const v = localStorage.getItem("settings-" + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { if (v === undefined || v === null) localStorage.removeItem("settings-" + k); else localStorage.setItem("settings-" + k, JSON.stringify(v)); } catch (e) {} },
+};
+
+// events inside the page
+(function () {
+  const subs = {};
+  S.on = (name, fn) => { (subs[name] = subs[name] || new Set()).add(fn); return () => subs[name].delete(fn); };
+  S.emit = (name, data) => { for (const fn of subs[name] || []) { try { fn(data); } catch (e) { console.error(e); } } };
+})();
+
+// ---- times: always 12-hour with AM/PM ----
+const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+S.MON = MON;
+S.clock = (t, secs) => {
+  const d = new Date(t);
+  let hh = d.getHours();
+  const ap = hh < 12 ? "AM" : "PM";
+  hh = hh % 12 || 12;
+  const mm = String(d.getMinutes()).padStart(2, "0"), ss = String(d.getSeconds()).padStart(2, "0");
+  return `${hh}:${mm}${secs ? ":" + ss : ""} ${ap}`;
+};
+S.sameDay = (a, b) => { const x = new Date(a), y = new Date(b); return x.getFullYear() === y.getFullYear() && x.getMonth() === y.getMonth() && x.getDate() === y.getDate(); };
+// "Nov 5" this year, "Nov 5, 2025" another year
+S.day = (t, now) => {
+  const d = new Date(t), day = `${MON[d.getMonth()]} ${d.getDate()}`;
+  return d.getFullYear() === new Date(now || Date.now()).getFullYear() ? day : `${day}, ${d.getFullYear()}`;
+};
+// "3:04 PM" today, "yesterday 3:04 PM", "Nov 5, 3:04 PM", "Nov 5, 2025, 3:04 PM"
+S.when = (t, secs, now) => {
+  if (!t) return "";
+  now = now || Date.now();
+  if (S.sameDay(t, now)) return S.clock(t, secs);
+  const y = new Date(now); y.setDate(y.getDate() - 1);
+  if (S.sameDay(t, y)) return "yesterday " + S.clock(t, secs);
+  return `${S.day(t, now)}, ${S.clock(t, secs)}`;
+};
+S.plural = (n, w, ws) => `${n} ${n === 1 ? w : ws || w + "s"}`;
+// how long ago, one unit: "just now", "5 minutes ago", "3 hours ago", "yesterday", "12 days ago", "4 months ago", "2 years ago"
+S.ago = (t, now) => {
+  if (!t) return "";
+  const s = Math.max(0, ((now || Date.now()) - t) / 1000);
+  if (s < 90) return "just now";
+  if (s < 3600) return S.plural(Math.round(s / 60), "minute") + " ago";
+  if (s < 86400) return S.plural(Math.round(s / 3600), "hour") + " ago";
+  const days = Math.round(s / 86400);
+  if (days === 1) return "yesterday";
+  if (days < 60) return S.plural(days, "day") + " ago";
+  if (days < 700) return S.plural(Math.round(days / 30.4), "month") + " ago";
+  return S.plural(Math.round(days / 365.25), "year") + " ago";
+};
+// minutes as time spent: "0 min", "45 min", "2 h 5 min", "31 h"
+S.mins = (m) => {
+  m = Math.max(0, Math.round(m || 0));
+  if (m < 60) return m + " min";
+  const h = Math.floor(m / 60), r = m % 60;
+  return h >= 20 || !r ? h + " h" : `${h} h ${r} min`;
+};
+// a length of time in plain words, the two biggest units: "2 minutes 31 seconds", "45 seconds", "1 hour 5 minutes"
+S.span = (ms) => {
+  const s = Math.max(0, Math.round(ms / 1000));
+  const units = [[86400, "day"], [3600, "hour"], [60, "minute"], [1, "second"]];
+  for (let i = 0; i < units.length; i++) {
+    const [n, w] = units[i];
+    if (s < n && n > 1) continue;
+    let k = Math.floor(s / n);
+    if (n === 1) return S.plural(k, w);
+    const [n2, w2] = units[i + 1];
+    let r = Math.round((s - k * n) / n2);
+    if (r * n2 >= n) { k++; r = 0; }
+    return S.plural(k, w) + (r ? " " + S.plural(r, w2) : "");
+  }
+  return "0 seconds";
+};
+S.mmss = (ms) => { const s = Math.max(0, Math.ceil(ms / 1000)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; };
+// a size, as Windows counts it (1 GB = 1024 MB): "0 KB", "340 KB", "96 MB", "1.2 GB", "331 GB"
+S.bytes = (n) => {
+  n = Number(n) || 0;
+  if (n < 1024) return n ? "1 KB" : "0 KB";
+  const units = ["KB", "MB", "GB", "TB"];
+  let v = n / 1024, i = 0;
+  while (v >= 1000 && i < units.length - 1) { v /= 1024; i++; }
+  return (v >= 10 || i === 0 ? Math.round(v) : Math.round(v * 10) / 10) + " " + units[i];
+};
+// a reason as a sentence: a full stop at the end, and a capital at the start when it begins with a plain word
+// (relay-client's own reasons do: "could not reach the PC…"). A reason from the PC that begins with a person's name
+// keeps it as it is ("jon has no password: …").
+const PLAIN = /^(the|this|that|these|those|not|no|nothing|too|could|sign-in|checking|connected|a|an|it|its|there|only)\b/;
+S.sentence = (s) => { s = String(s || "").trim(); if (!s) return ""; if (PLAIN.test(s)) s = s[0].toUpperCase() + s.slice(1); return /[.!?…]\)?$/.test(s) ? s : s + "."; };
+
+// copy text; true when it worked
+S.copy = async (text) => {
+  try { await navigator.clipboard.writeText(text); return true; } catch (e) {}
+  try {
+    const t = S.h("textarea", { value: text, style: "position:fixed;left:-9999px;top:0" });
+    document.body.append(t); t.select();
+    const ok = document.execCommand("copy");
+    t.remove();
+    return ok;
+  } catch (e) { return false; }
+};
+
+// a small message beside a control: S.say(el, "Saved.", "ok" | "bad" | "")
+S.say = (el, text, kind) => { if (!el) return; el.textContent = text || ""; el.className = "say" + (kind ? " " + kind : ""); };
+
+// The page's names for kinds of people
+S.KIND = { main: "Main admin", admin: "Admin", user: "User", guest: "Guest", visitor: "Visitor" };
+S.KINDS = { main: "Main admin", admin: "Admins", user: "Users", guest: "Guests", visitor: "Visitors" };
+
+// The six sections register themselves here (app.js draws the ones the person has the right to):
+// S.section({ id, name, icon, needs: "<flag>", make(el), show(), hide() })
+S.sections = [];
+S.section = (def) => { S.sections.push(def); return def; };
+
+// do something every so often while it is wanted (the page showing, the section open), never two at once:
+// const stop = S.every(5000, fn, () => wanted);  the first run is at once
+S.every = (ms, fn, wanted) => {
+  let stopped = false, running = false, timer = 0;
+  const tick = async () => {
+    if (stopped) return;
+    if (!running && document.visibilityState === "visible" && (!wanted || wanted())) {
+      running = true;
+      try { await fn(); } catch (e) { console.error(e); } finally { running = false; }
+    }
+    if (!stopped) timer = setTimeout(tick, ms);
+  };
+  tick();
+  return () => { stopped = true; clearTimeout(timer); };
+};
+
+// ---- pc.js ----
+// pc.js: the PC, through PC Relay 3 (relay-client.js 3, copied in at build time from pc-relay\client: one source,
+// never edited here). Shared by the two pages. The PC decides every request; a page only shows buttons.
+//
+// Two doors (CONTRACT 14):
+//   - in a browser: the address comes from relay.json beside the programs (relay-client reads it), and the person is
+//     whoever this browser is signed in as;
+//   - in PC Relay's own window: the page is served by the relay's local door on 127.0.0.1, where the caller is the
+//     main admin. The copy built for the window (pc-relay\panel: the same page with one <meta> more) asks its own
+//     address for /relay/me, and on "local": true makes its client with base = that door. Only there do the
+//     /local/... requests work (S.pc.local).
+"use strict";
+(function () {
+  const notes = [];
+  const P = (S.pc = {
+    R: null,           // the RelayClient
+    door: false,       // true in PC Relay's own window (the local door)
+    who: null,         // the last me(): { ok, account, can, programs, network, limited, local }
+    info: null,        // the last ping's answer
+    last: null,        // the last ping: { ok, at, ms, why, kind, status }
+    offset: 0,         // the PC's clock minus this device's (from the quickest ping), ms
+    best: Infinity,
+    notes,
+    SITE: "https://jonnystokes.github.io/cooltools/",   // the public site, for a page that runs elsewhere (the window)
+
+    async init(app) {
+      P.door = await atDoor();
+      P.R = RelayClient.create({ app: app || "settings", base: P.door ? location.origin : "", log: (text) => { notes.push({ at: Date.now(), text }); if (notes.length > 200) notes.shift(); } });
+      P.R.on("account", (a) => S.emit("account", a));
+      P.R.on("status", (st) => S.emit("status", st));
+      return P;
+    },
+    name: () => P.R.pcName(),
+    account: () => (P.who && P.who.account) || P.R.account(),
+    can: (flag) => !!(P.who && P.who.ok && P.who.can.includes(flag)),
+    isMain: () => P.door || !!(P.who && P.who.account && P.who.account.kind === "main"),
+    // any admin right at all (else the person gets the account page)
+    anyAdmin: () => ["settings.admin", "users.manage", "pc.control"].some(P.can),
+    pcNow: () => Date.now() + P.offset,
+
+    async ping(timeout) {
+      const t0 = Date.now();
+      const r = await P.R.ping(timeout || 8000);
+      const at = Date.now();
+      P.last = { ok: !!r.ok, at, ms: r.ok ? r.latency : at - t0, why: r.why || "", kind: r.kind || "", status: r.status || 0 };
+      if (r.info) P.info = r.info;
+      if (r.ok && r.info && r.latency <= P.best + 5 && r.info.time) { P.best = Math.min(P.best, r.latency); P.offset = r.info.time - (at - r.latency / 2); }
+      S.emit("ping", P.last);
+      return r;
+    },
+    // who am I, and what may I do (asked again on every account change: relay-client's can() says no until then)
+    async me() {
+      const r = await P.R.me();
+      P.who = r;
+      S.emit("me", r);
+      return r;
+    },
+    // one of the relay's own requests: { ok, status, data, why, kind }
+    api: (path, opts) => P.R.api(path, opts),
+    post: (path, json) => P.R.api(path, { method: "POST", json }),
+    // the files service: { ok, status, data, why, kind }
+    files: (path, opts) => P.R.call("files", path, Object.assign({ timeout: 15000 }, opts || {})),
+    // a person's picture (anyone may read it; no picture answers 404, and the page draws the initial)
+    picture(id) {
+      let v = "";
+      try { v = localStorage.getItem("relay-picture") || ""; } catch (e) {}
+      return P.R.base && id ? `${P.R.base}/svc/files/picture/${encodeURIComponent(id)}${v ? "?v=" + encodeURIComponent(v) : ""}` : "";
+    },
+    // what only the computer may do: /local/<path> at the local door. Anywhere else it answers at once.
+    async local(path, json, timeout) {
+      if (!P.door) return { ok: false, status: 0, data: null, why: "Only at the computer.", kind: "at-the-pc" };
+      const ac = new AbortController(), ms = timeout || 30000, timer = setTimeout(() => ac.abort(), ms);
+      try {
+        const r = await fetch("/local/" + path, { method: json === undefined ? "GET" : "POST", cache: "no-store", signal: ac.signal,
+          headers: json === undefined ? {} : { "Content-Type": "application/json" }, body: json === undefined ? undefined : JSON.stringify(json) });
+        let data = null;
+        try { data = await r.json(); } catch (e) {}
+        if (r.ok) return { ok: true, status: r.status, data, why: "", kind: "" };
+        const why = (data && data.why) || (r.status === 404 ? "This PC Relay does not know that request." : RelayClient.httpWhy(r.status));
+        return { ok: false, status: r.status, data, why, kind: (data && data.kind) || "http" };
+      } catch (e) {
+        return { ok: false, status: 0, data: null, why: e && e.name === "AbortError" ? `PC Relay did not answer within ${Math.round(ms / 1000)} s.` : "PC Relay did not answer.", kind: "network" };
+      } finally { clearTimeout(timer); }
+    },
+  });
+
+  // In PC Relay's own window? Only the copy built for the window asks (build.py marks it with one <meta>, in
+  // pc-relay\panel), and only on 127.0.0.1 or localhost: the copy on the site never asks anything of its own address.
+  async function atDoor() {
+    if (!document.querySelector('meta[name="pc-relay-window"]')) return false;
+    if (location.protocol !== "http:" || !/^(127\.0\.0\.1|localhost)$/.test(location.hostname)) return false;
+    const ac = new AbortController(), timer = setTimeout(() => ac.abort(), 2500);
+    try {
+      const r = await fetch("/relay/me", { cache: "no-store", headers: { "X-Relay-Client": "settings/3" }, signal: ac.signal });
+      if (!r.ok) return false;
+      const j = await r.json();
+      return !!(j && j.local === true);
+    } catch (e) { return false; }
+    finally { clearTimeout(timer); }
+  }
+})();
+
+// ---- ui.js ----
+// ui.js: the few pieces every screen is made of (shared by the two pages): a person's picture, a switch, a row with a
+// label and one short line, the More fold, the "Only at the computer" line, a small menu, and the one confirmation
+// (before deleting).
+"use strict";
+(function () {
+  const { h } = S;
+
+  // ---- a person's picture, or their initial ----
+  // Each account is asked for its picture once (the answer is remembered while the page lives, and asked again when
+  // someone changes a picture: localStorage "relay-picture" is the mark the account page sets).
+  const seen = new Map();   // account id -> "has" | "none"
+  let stamp = "";
+  const mark = () => { try { return localStorage.getItem("relay-picture") || ""; } catch (e) { return ""; } };
+  // A guest's circle shows "G" on every page (the main agent's rule, 2026-11-12: the Apps menu and the Cloud File
+  // Manager already did; here it was the guest's number). The name beside it says which guest.
+  S.initial = (a) => {
+    const n = String((a && a.name) || "").trim();
+    if (a && a.kind === "guest") return "G";
+    return n ? Array.from(n)[0].toUpperCase() : "?";
+  };
+  S.avatar = (a, size) => {
+    const el = h("span.avatar", { "aria-hidden": "true" });
+    if (size) el.style.setProperty("--av", size + "px");
+    if (a && a.kind === "guest") el.classList.add("guest");
+    if (a && (a.id === "visitors" || a.kind === "visitor")) { el.classList.add("guest"); el.append(S.icon("person")); return el; }
+    el.append(h("span.letter", { text: S.initial(a) }));
+    const id = a && a.id;
+    if (mark() !== stamp) { stamp = mark(); seen.clear(); }
+    const url = id ? S.pc.picture(id) : "";
+    if (!url || seen.get(id) === "none") return el;
+    const img = h("img", { alt: "", decoding: "async" });
+    img.addEventListener("load", () => { seen.set(id, "has"); el.classList.add("has"); });
+    img.addEventListener("error", () => { seen.set(id, "none"); img.remove(); });
+    img.src = url;
+    el.append(img);
+    return el;
+  };
+  S.forgetPictures = () => { seen.clear(); };
+
+  // ---- a switch (role="switch"): S.toggle(label, on, change(newValue) -> Promise) ----
+  S.toggle = (label, on, change, opts = {}) => {
+    const b = h("button.switch", { type: "button", role: "switch", "aria-checked": String(!!on), "aria-label": label, disabled: !!opts.disabled });
+    b.append(h("span.knob"));
+    b.addEventListener("click", async () => {
+      if (b.disabled) return;
+      const want = b.getAttribute("aria-checked") !== "true";
+      b.disabled = true;
+      try { await change(want, b); } finally { b.disabled = !!opts.disabled; }
+    });
+    return b;
+  };
+  S.setToggle = (b, on) => { if (b) b.setAttribute("aria-checked", String(!!on)); };
+
+  // ---- a row: a label, at most one short line under it, the control at the right ----
+  S.row = (label, help, ...ctl) => {
+    const r = h("div.row", h("div.rl", h("div.rn", { text: label }), help ? h("div.rh", { text: help }) : null), h("div.rc", ...ctl));
+    return r;
+  };
+  S.setHelp = (row, text) => {
+    let e = row.querySelector(".rh");
+    if (!text) { if (e) e.remove(); return; }
+    if (!e) { e = h("div.rh"); row.querySelector(".rl").append(e); }
+    e.textContent = text;
+  };
+
+  // ---- the More fold: closed until asked for; its line says what is inside ----
+  S.more = (inside, ...kids) => {
+    const d = h("details.more", h("summary", h("span.mt", { text: "More" }), inside ? h("span.mh", { text: inside }) : null), h("div.morebody", ...kids));
+    return d;
+  };
+
+  // ---- "Only at the computer": a control that works only in PC Relay's own window rests anywhere else ----
+  // S.pcOnly(row) marks a row (its buttons, switches and boxes rest) and gives it the line; returns true when resting.
+  S.ONLY = "Only at the computer";
+  S.pcOnly = (row) => {
+    if (S.pc.door) return false;
+    row.classList.add("resting");
+    for (const c of row.querySelectorAll("button, input, select")) c.disabled = true;
+    const l = row.querySelector(".rl") || row;
+    if (!l.querySelector(".only")) l.append(h("div.only", { text: S.ONLY }));
+    return true;
+  };
+  // the same for something the person has no right to: S.notYours(row, "Only the main admin")
+  S.notYours = (row, why) => {
+    row.classList.add("resting");
+    for (const c of row.querySelectorAll("button, input, select")) c.disabled = true;
+    const l = row.querySelector(".rl") || row;
+    if (!l.querySelector(".only")) l.append(h("div.only", { text: why }));
+  };
+
+  // ---- a small menu under a button: S.menu(button, [{ text, pick }]) ----
+  let openMenu = null;
+  const closeMenu = () => { if (openMenu) { openMenu.el.remove(); openMenu.btn.setAttribute("aria-expanded", "false"); openMenu = null; } };
+  S.closeMenu = closeMenu;
+  S.menu = (btn, build) => {
+    btn.setAttribute("aria-haspopup", "true");
+    btn.setAttribute("aria-expanded", "false");
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (openMenu && openMenu.btn === btn) { closeMenu(); return; }
+      closeMenu();
+      const el = h("div.menu", { role: "menu" });
+      const content = build(closeMenu);
+      for (const it of Array.isArray(content) ? content : [content]) {
+        if (it instanceof Node) el.append(it);
+        else el.append(h("button", { type: "button", role: "menuitem", text: it.text, disabled: !!it.disabled, on: { click: () => { closeMenu(); it.pick(); } } }));
+      }
+      document.body.append(el);
+      const r = btn.getBoundingClientRect(), w = el.offsetWidth, hh = el.offsetHeight;
+      el.style.left = Math.max(8, Math.min(r.left + scrollX, scrollX + innerWidth - w - 8)) + "px";
+      el.style.top = (r.bottom + hh + 8 > innerHeight && r.top - hh - 6 > 0 ? r.top + scrollY - hh - 6 : r.bottom + scrollY + 6) + "px";
+      btn.setAttribute("aria-expanded", "true");
+      openMenu = { el, btn };
+      const first = el.querySelector("button:not(:disabled), input, select");
+      if (first) first.focus({ preventScroll: true });
+    });
+  };
+  document.addEventListener("click", (e) => { if (openMenu && !openMenu.el.contains(e.target)) closeMenu(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && openMenu) { const b = openMenu.btn; closeMenu(); e.preventDefault(); b.focus(); } });
+  addEventListener("resize", closeMenu);
+
+  // ---- the one confirmation: before deleting. Resolves true only on the Delete button. ----
+  S.confirmDelete = (title, line, word) => new Promise((resolve) => {
+    const dlg = h("dialog.confirm", { "aria-label": title });
+    const done = (v) => { if (dlg.open) dlg.close(); dlg.remove(); resolve(v); };
+    const no = h("button", { type: "button", text: "Cancel", on: { click: () => done(false) } });
+    const yes = h("button.danger", { type: "button", text: word || "Delete", on: { click: () => done(true) } });
+    dlg.append(h("h2", { text: title }), line ? h("p", { text: line }) : null, h("div.btns", no, yes));
+    dlg.addEventListener("cancel", (e) => { e.preventDefault(); done(false); });
+    dlg.addEventListener("click", (e) => { if (e.target === dlg) done(false); });
+    document.body.append(dlg);
+    dlg.showModal();
+    no.focus();
+  });
+
+  // ---- a coloured dot with a word: the state of something (green fine, amber look, red broken, grey off) ----
+  S.state = (kind, text) => h("span.state." + (kind || "off"), h("span.dot"), h("span", { text }));
+})();
+
+// ---- account.js ----
+// account.js: the account page (CONTRACT 13): one page that every program shows in the window kit's window, the Apps
+// menu shows in its own frame (?from=apps), and Settings sends people to when they have no admin right (?from=settings).
+//   a visitor: the accounts used from this network to pick from, a box to type a name, and Set up user
+//   a guest:   "guest 179", and Set up user: a short walk-through (name, then password, then picture: the last two
+//              may be skipped). The account exists from the first step on, so stopping half way loses nothing.
+//   a user:    name, picture, password (set, change, remove), Sign out, Switch user
+// After every change the page tells the window it is in ({wk: 1, type: "account", account, changed}); other tabs of
+// this browser follow through relay-client's "account" event. A changed picture also sets localStorage
+// "relay-picture" (the time), which pages add to the picture's address so it is fetched again.
+"use strict";
+(function () {
+  const { h, clear } = S;
+  const Q = new URLSearchParams(location.search);
+  const FROM = Q.get("from") || "";
+  const framed = (() => { try { return self !== top; } catch (e) { return true; } })();
+  const kit = typeof WindowKit !== "undefined" && WindowKit.child ? WindowKit.child : null;
+  const post = (m) => { if (framed) { try { parent.postMessage(Object.assign({ wk: 1 }, m), "*"); } catch (e) {} } };
+  const A = (S.acct = { view: "", account: null, sent: [], from: FROM, framed });
+  let root, R, back = null;   // back: what the Back button of the present view does (null: the page's own Back, or none)
+
+  // ---- telling the others, and leaving ----
+  function tell(changed) {
+    const a = R.account();
+    const short = A.account ? { id: A.account.id, name: A.account.name, kind: A.account.kind, number: A.account.number || 0 } : a;
+    A.sent.push({ changed, account: short });
+    post({ type: "account", account: short || null, changed });
+    S.emit("told", changed);
+  }
+  // the visit is over (signed in, set up, signed out): back to the menu, close the window, or back to Settings
+  function finish() {
+    if (FROM === "apps") { leaveToApps(); return true; }
+    if (framed) { if (kit) kit.close(); else post({ type: "close" }); A.closed = true; return true; }
+    if (FROM === "settings" && A.account && S.pc.anyAdmin()) { location.replace("./"); return true; }
+    return false;
+  }
+  // back to the Apps menu, which sent its own frame here: one step back in that frame's history (this page never
+  // adds a step of its own). With nothing to go back to (the page was opened by its address), the menu's address.
+  let leaveTimer = 0;
+  function leaveToApps() {
+    A.left = true;
+    const here = location.href;
+    try { history.back(); } catch (e) {}
+    clearTimeout(leaveTimer);
+    leaveTimer = setTimeout(() => { if (location.href === here) location.replace("../apps/"); }, 700);
+  }
+  addEventListener("pagehide", () => clearTimeout(leaveTimer));
+  addEventListener("pageshow", (e) => { if (e.persisted) { A.left = false; A.closed = false; start(true); } });
+
+  // ---- the frame of every view ----
+  function page(view, title, ...kids) {
+    A.view = view;
+    const top = [];
+    if (back) top.push(h("button.plain.backbtn#back", { type: "button", on: { click: back } }, S.icon("back", 18), "Back"));
+    else if (FROM === "apps") top.push(h("button.plain.backbtn#back", { type: "button", on: { click: leaveToApps } }, S.icon("back", 18), "Back"));
+    else if (FROM === "settings" && !framed && A.account && S.pc.anyAdmin()) top.push(h("a.button.plain.backbtn#back", { href: "./" }, S.icon("back", 18), "Settings"));
+    clear(root, top.length ? h("div.topline", top) : null, title ? h("h2.title", { text: title }) : null, ...kids);
+    root.dataset.view = view;
+    const f = root.querySelector("[autofocus]");
+    if (f && !("ontouchstart" in window)) setTimeout(() => { try { f.focus({ preventScroll: true }); } catch (e) {} }, 0);
+    S.emit("view", view);
+  }
+  const who = (a, size) => h("div.who", S.avatar(a, size || 88), h("div.whoname", { text: a ? a.name : "" }),
+    a && a.kind !== "user" && a.kind !== "guest" ? h("div.whokind", { text: S.KIND[a.kind] || "" }) : null);
+  const form = (onSubmit, ...kids) => h("form", { autocomplete: "off", novalidate: true, on: { submit: (e) => { e.preventDefault(); onSubmit(); } } }, ...kids);
+  // a password box with Show
+  function passwordBox(id, placeholder) {
+    const inp = h("input", { type: "password", id, placeholder, autocomplete: "off", autocapitalize: "none", spellcheck: "false", "aria-label": placeholder });
+    const show = h("button.showpw", { type: "button", text: "Show", "aria-pressed": "false", on: { click: () => { const on = inp.type === "password"; inp.type = on ? "text" : "password"; show.textContent = on ? "Hide" : "Show"; show.setAttribute("aria-pressed", String(on)); inp.focus(); } } });
+    return { inp, el: h("div.pwbox", inp, show) };
+  }
+  // run an action from a button: the button rests while it runs, and what the PC answered shows beside it
+  // (while it runs, relay-client's "account" events are this page's own doing: only another tab's are followed)
+  async function busy(fn) {
+    A.busy = (A.busy || 0) + 1;
+    try { return await fn(); } finally { A.busy--; }
+  }
+  async function run(btn, say, fn) {
+    if (btn.disabled) return;
+    btn.disabled = true;
+    S.say(say, "");
+    let r;
+    try { r = await busy(fn); } catch (e) { r = { ok: false, why: String((e && e.message) || e) }; }
+    btn.disabled = false;
+    if (r && !r.ok) S.say(say, S.sentence(r.why || "That did not work"), "bad");
+    return r;
+  }
+
+  // ---- the cloud is off, or cannot be reached ----
+  function viewOff(why, switchedOff) {
+    back = null;
+    const a = R.account();
+    page("off", "", h("div.offbox", h("div.bigdot.off"),
+      h("h2#offhead", { text: "Cloud File Manager is off." }),
+      h("p.muted#offwhy", { text: switchedOff ? `PC Relay is switched off on ${S.pc.name()}.` : S.sentence(why) }),
+      a ? h("p.muted#offwho", { text: `This device is signed in as ${a.name}.` }) : null,
+      h("button.big#retry", { type: "button", text: "Try again", on: { click: () => start(true) } })));
+  }
+
+  // ---- a visitor: sign in ----
+  let here = null;   // the accounts used from this network
+  async function viewSignIn(opts = {}) {
+    back = opts.back || null;
+    const say = h("p.say#say");
+    const name = h("input#name", { type: "text", placeholder: "Your name", maxlength: "32", autocomplete: "off", autocapitalize: "words", spellcheck: "false", "aria-label": "Your name", value: opts.name || "" });
+    const go = h("button.primary#signin", { type: "submit", text: "Sign in" });
+    const list = h("div.pick#here", { role: "list" });
+    const setup = h("button.big.wide#setup", { type: "button", text: "Set up user", on: { click: () => viewSetupName({ name: name.value.trim(), back: () => viewSignIn(opts) }) } });
+    page("signin", opts.title || "Sign in",
+      h("div.block#herebox", { hidden: true }, h("div.label", { text: "On this network" }), list),
+      h("div.block", h("div.label#otherlabel", { text: "Your name" }),
+        form(() => run(go, say, () => signIn(name.value.trim(), "", say)), h("div.line", name, go)), say),
+      A.account && A.account.kind !== "guest" ? null : h("div.block.newbox", h("div.label", { text: A.account ? "Keep your work under your own name" : "New here?" }), setup));
+    if (opts.say) S.say(say, opts.say, "bad");
+    const r = here && !opts.fresh ? { ok: true, accounts: here } : await R.accountsHere();
+    if (A.view !== "signin") return;
+    if (!r.ok) { if (!opts.say) S.say(say, S.sentence(r.why), "bad"); return; }
+    here = r.accounts || [];
+    const others = here.filter((a) => !A.account || a.id !== A.account.id);
+    if (!others.length) return;
+    for (const a of others) {
+      list.append(h("button.person", { type: "button", role: "listitem", data: { id: a.id, name: a.name }, on: { click: (e) => (a.hasPassword ? viewPassword(a, { back: () => viewSignIn(opts) }) : run(e.currentTarget, say, () => signIn(a.name, "", say))) } },
+        S.avatar(a, 44), h("span.pname", { text: a.name }), a.hasPassword ? S.icon("lock", 18) : null, S.icon("next", 18)));
+    }
+    root.querySelector("#herebox").hidden = false;
+    root.querySelector("#otherlabel").textContent = "Someone else";
+  }
+  // signing in: the name, and the password when the account has one
+  async function signIn(name, password, say) {
+    if (!name) return { ok: false, why: "Type your name first" };
+    const r = await R.signIn(name, password);
+    if (r.ok) { await signedIn("signin"); return r; }
+    // no password was sent and the PC wants one: ask for it (not a mistake yet; relay 3.1.1 says "password-needed"
+    // at once and counts no wrong try, an older relay said "wrong-password" after its wait)
+    if ((r.kind === "password-needed" || r.kind === "wrong-password") && !password) { viewPassword({ name, hasPassword: true }, { back: () => viewSignIn({ name }) }); return { ok: true }; }
+    return r;
+  }
+  async function signedIn(changed) {
+    here = null;
+    await S.pc.me();
+    A.account = S.pc.who && S.pc.who.account;
+    tell(changed);
+    if (!finish()) viewAccount();
+  }
+  function viewPassword(a, opts = {}) {
+    back = opts.back || (() => viewSignIn());
+    const say = h("p.say#say");
+    const pw = passwordBox("password", "Password");
+    pw.inp.setAttribute("autofocus", "");
+    const go = h("button.primary.big.wide#signin", { type: "submit", text: "Sign in" });
+    page("password", "", who(a), form(() => run(go, say, async () => {
+      if (!pw.inp.value) return { ok: false, why: "Type the password" };
+      const r = await R.signIn(a.name, pw.inp.value);
+      if (r.ok) await signedIn("signin");
+      else { pw.inp.select(); }
+      return r;
+    }), pw.el, go), say);
+  }
+
+  // ---- Set up user: name, then password (may be skipped), then picture (may be skipped) ----
+  const steps = (n) => h("div.steps", { role: "img", "aria-label": `Step ${n} of 3` }, [1, 2, 3].map((i) => h("span" + (i === n ? ".on" : i < n ? ".done" : ""))), h("span.stepword", { text: `Step ${n} of 3` }));
+  function viewSetupName(opts = {}) {
+    back = opts.back || null;
+    const say = h("p.say#say");
+    const name = h("input#newname", { type: "text", placeholder: "Your name", maxlength: "32", autocomplete: "off", autocapitalize: "words", spellcheck: "false", "aria-label": "Your name", autofocus: true, value: opts.name || "" });
+    const go = h("button.primary.big.wide#next", { type: "submit", text: "Next" });
+    const again = h("div#takenhere");
+    page("setup-name", "Set up user", steps(1), h("div.label", { text: "Your name" }),
+      form(() => run(go, say, async () => {
+        clear(again);
+        const n = name.value.trim();
+        if (!n) return { ok: false, why: "Type your name first" };
+        const r = await R.setup({ name: n });
+        if (r.ok) { await S.pc.me(); A.account = S.pc.who && S.pc.who.account; here = null; tell("setup"); viewSetupPassword(); return r; }
+        // "That name is already used on this network. Is it you? Sign in.": the way to sign in is right there
+        if (r.kind === "taken-here") again.append(h("button.wide#itsme", { type: "button", text: `Sign in as ${n}`, on: { click: () => viewSignInAs(n, () => viewSetupName({ name: n, back: opts.back })) } }));
+        name.select();
+        return r;
+      }), name, go), say, again,
+      A.account && A.account.kind === "guest" ? h("p.muted.small#keeps", { text: `What ${A.account.name} saved stays yours.` }) : null);
+  }
+  function viewSignInAs(name, goBack) {
+    return busy(async () => {
+      const r = await R.signIn(name, "");
+      if (r.ok) return signedIn("signin");
+      if (r.kind === "password-needed" || r.kind === "wrong-password") return viewPassword({ name, hasPassword: true }, { back: goBack });
+      viewSignIn({ name, say: S.sentence(r.why), back: goBack });
+    });
+  }
+  function viewSetupPassword() {
+    back = null;
+    const say = h("p.say#say");
+    const pw = passwordBox("newpassword", "Password");
+    pw.inp.setAttribute("autofocus", "");
+    const go = h("button.primary.big#next", { type: "submit", text: "Next" });
+    const skip = h("button.big#skip", { type: "button", text: "Skip", on: { click: () => viewSetupPicture() } });
+    page("setup-password", "Set up user", steps(2), h("div.label", { text: "A password, if you want one" }),
+      form(() => run(go, say, async () => {
+        if (!pw.inp.value) return { ok: false, why: "Type a password, or press Skip" };
+        const r = await R.update({ password: pw.inp.value });
+        if (r.ok) { A.account = r.account || A.account; tell("password"); viewSetupPicture(); }
+        return r;
+      }), pw.el, h("div.line.two", skip, go)), say,
+      h("p.muted.small", { text: "Without one, your name is enough to sign in." }));
+  }
+  function viewSetupPicture() {
+    back = null;
+    const say = h("p.say#say");
+    const shown = h("div.who", S.avatar(A.account, 112));
+    let blob = null;
+    const use = h("button.primary.big#next", { type: "button", text: "Next", disabled: true });
+    const pick = pictureButton("Choose a picture", say, (b, url) => { blob = b; clear(shown, h("span.avatar.has", { style: "--av:112px" }, h("img", { src: url, alt: "" }))); use.disabled = false; });
+    const skip = h("button.big#skip", { type: "button", text: "Skip", on: { click: () => viewDone() } });
+    use.addEventListener("click", () => run(use, say, async () => { const r = await savePicture(blob); if (r.ok) viewDone(); return r; }));
+    page("setup-picture", "Set up user", steps(3), h("div.label", { text: "A picture, if you want one" }), shown, pick, h("div.line.two", skip, use), say);
+  }
+  function viewDone() {
+    back = null;
+    const done = h("button.primary.big.wide#done", { type: "button", text: "Done", autofocus: true, on: { click: () => { if (!finish()) viewAccount(); } } });
+    page("done", "", who(A.account, 112), h("h2.title#welcome", { text: `You are set up, ${A.account ? A.account.name : ""}.` }), done);
+  }
+
+  // ---- pictures: made small in the browser (512 px square, JPEG), so a phone's photo is never too big ----
+  function pictureButton(label, say, got) {
+    const input = h("input", { type: "file", accept: "image/*", hidden: true, "aria-hidden": "true", tabindex: "-1" });
+    const btn = h("button.wide#pickpicture", { type: "button", text: label, on: { click: () => input.click() } });
+    input.addEventListener("change", async () => {
+      const f = input.files && input.files[0];
+      input.value = "";
+      if (!f) return;
+      S.say(say, "");
+      try { const b = await shrink(f); got(b, URL.createObjectURL(b)); }
+      catch (e) { S.say(say, "That picture could not be read. Try another.", "bad"); }
+    });
+    return h("div.pickbox", btn, input);
+  }
+  async function shrink(file, edge = 512) {
+    const url = URL.createObjectURL(file);
+    try {
+      const img = new Image();
+      img.src = url;
+      await img.decode();
+      const side = Math.min(img.naturalWidth, img.naturalHeight);
+      if (!side) throw new Error("empty");
+      const n = Math.min(edge, side), c = h("canvas", { width: String(n), height: String(n) }), g = c.getContext("2d");
+      g.fillStyle = "#fff";
+      g.fillRect(0, 0, n, n);
+      g.drawImage(img, (img.naturalWidth - side) / 2, (img.naturalHeight - side) / 2, side, side, 0, 0, n, n);
+      const b = await new Promise((res) => c.toBlob(res, "image/jpeg", 0.9));
+      if (!b) throw new Error("no picture");
+      return b;
+    } finally { URL.revokeObjectURL(url); }
+  }
+  A.shrink = shrink;
+  async function filesAnswer(r) {
+    let data = null;
+    try { data = await r.json(); } catch (e) {}
+    return r.ok ? { ok: true, data } : { ok: false, why: (data && (data.why || data.error)) || RelayClient.httpWhy(r.status), kind: data && data.kind };
+  }
+  function pictureChanged() {
+    try { localStorage.setItem("relay-picture", String(Date.now())); } catch (e) {}
+    S.forgetPictures();
+    tell("picture");
+  }
+  async function savePicture(blob) {
+    let r;
+    try { r = await filesAnswer(await R.fetch("files", "me/picture", { method: "PUT", body: blob, headers: { "Content-Type": blob.type || "image/jpeg" }, timeout: 30000 })); }
+    catch (e) { return { ok: false, why: "The picture did not reach the PC. Try again" }; }
+    if (r.ok) pictureChanged();
+    return r;
+  }
+  A.savePicture = savePicture;
+  async function removePicture() {
+    let r;
+    try { r = await filesAnswer(await R.fetch("files", "me/picture", { method: "DELETE", timeout: 15000 })); }
+    catch (e) { return { ok: false, why: "The PC did not answer. Try again" }; }
+    if (r.ok) pictureChanged();
+    return r;
+  }
+
+  // ---- a guest ----
+  function viewGuest() {
+    back = null;
+    const say = h("p.say#say");
+    const out = h("button#signout", { type: "button", text: "Sign out", on: { click: () => run(out, say, signOut) } });
+    page("guest", "", who(A.account),
+      h("p.muted.center#guestline", { text: "Your work is saved under this name." }),
+      h("button.primary.big.wide#setup", { type: "button", text: "Set up user", on: { click: () => viewSetupName({ back: viewGuest }) } }),
+      h("div.line.two", h("button#switch", { type: "button", text: "Switch user", on: { click: () => viewSignIn({ title: "Switch user", back: viewGuest, fresh: true }) } }), out), say);
+  }
+  async function signOut() {
+    await R.signOut();
+    A.account = null; S.pc.who = null; here = null;
+    await S.pc.me();
+    tell("signout");
+    if (!finish()) viewSignIn({ fresh: true });
+    return { ok: true };
+  }
+
+  // ---- a user: name, picture, password, Sign out, Switch user ----
+  function viewAccount() {
+    back = null;
+    const a = A.account;
+    if (!a) return viewSignIn();
+    if (a.kind === "guest") return viewGuest();
+    const door = S.pc.door, say = h("p.say#say");
+    const rows = h("div.rows");
+    // the picture
+    const picSay = h("p.say#picsay");
+    const pic = pictureButton("Change picture", picSay, async (b) => { const r = await savePicture(b); if (r.ok) viewAccount(); else S.say(picSay, S.sentence(r.why), "bad"); });
+    const rm = h("button#removepicture", { type: "button", text: "Remove", on: { click: () => run(rm, picSay, async () => { const r = await removePicture(); if (r.ok) viewAccount(); return r; }) } });
+    const head = who(a, 96);
+    const av = head.querySelector(".avatar");
+    rm.hidden = true;
+    new MutationObserver(() => { rm.hidden = !av.classList.contains("has"); }).observe(av, { attributes: true, attributeFilter: ["class"] });
+    // the name
+    const nameRow = S.row("Name", "", h("span.val#namenow", { text: a.name }), h("button#changename", { type: "button", text: "Change", on: { click: () => editName() } }));
+    function editName() {
+      const inp = h("input#editname", { type: "text", maxlength: "32", value: a.name, autocomplete: "off", spellcheck: "false", "aria-label": "Name" });
+      const save = h("button.primary#savename", { type: "submit", text: "Save" });
+      const f = form(() => run(save, say, async () => {
+        const n = inp.value.trim();
+        if (!n || n === a.name) { viewAccount(); return { ok: true }; }
+        const r = await R.update({ name: n });
+        if (r.ok) { A.account = r.account || Object.assign({}, a, { name: n }); here = null; await S.pc.me(); tell("name"); viewAccount(); }
+        return r;
+      }), h("div.line", inp, save, h("button#cancelname", { type: "button", text: "Cancel", on: { click: viewAccount } })));
+      clear(nameRow, h("div.rl", h("div.rn", { text: "Name" })), f);
+      f.classList.add("editing");
+      inp.focus(); inp.select();
+    }
+    // the password
+    const pwRow = S.row("Password", a.hasPassword ? "Set" : "None: your name is enough to sign in",
+      h("button#changepassword", { type: "button", text: a.hasPassword ? "Change" : "Set a password", on: { click: () => editPassword() } }),
+      a.hasPassword ? h("button#removepassword", { type: "button", text: "Remove", on: { click: (e) => run(e.currentTarget, say, () => setPassword(null)) } }) : null);
+    pwRow.id = "pwrow";
+    const mainAway = a.kind === "main" && !door;
+    if (mainAway) S.pcOnly(pwRow);
+    async function setPassword(value) {
+      const r = door ? await S.pc.local("password", { password: value }) : await R.update({ password: value });
+      if (r.ok) { await S.pc.me(); A.account = (S.pc.who && S.pc.who.account) || A.account; tell("password"); viewAccount(); }
+      return r;
+    }
+    function editPassword() {
+      const pw = passwordBox("editpassword", a.hasPassword ? "New password" : "Password");
+      const save = h("button.primary#savepassword", { type: "submit", text: "Save" });
+      const f = form(() => run(save, say, async () => (pw.inp.value ? setPassword(pw.inp.value) : { ok: false, why: "Type a password" })),
+        pw.el, h("div.line.two", h("button#cancelpassword", { type: "button", text: "Cancel", on: { click: viewAccount } }), save));
+      clear(pwRow, h("div.rl", h("div.rn", { text: "Password" })), f);
+      f.classList.add("editing");
+      pw.inp.focus();
+    }
+    rows.append(nameRow, pwRow);
+    const out = h("button#signout", { type: "button", text: "Sign out", on: { click: () => run(out, say, signOut) } });
+    const sw = h("button#switch", { type: "button", text: "Switch user", on: { click: () => viewSignIn({ title: "Switch user", back: viewAccount, fresh: true }) } });
+    page("account", "", head, h("div.line.center", pic, rm), picSay, rows, say,
+      door ? h("p.muted.small.center#atpc", { text: "At the computer you are the main admin." }) : h("div.line.two.outline", sw, out),
+      !framed && !door && FROM !== "settings" && S.pc.anyAdmin() ? h("a.button.wide#tosettings", { href: "./" }, "Settings") : null);
+    if (a.kind === "main" && !door && !a.hasPassword) S.setHelp(pwRow, "None");
+  }
+
+  // ---- start ----
+  function start(again) {
+    return busy(async () => {
+      back = null;
+      if (!again) page("loading", "", h("p.muted.center#checking", { text: "Checking…" }));
+      const p = await S.pc.ping(8000);
+      if (!p.ok && !(S.pc.door && p.kind === "off")) {   // (at the computer the page still works while the relay is switched off)
+        viewOff(p.why, p.kind === "off" && !!(p.info && p.info.on === false));
+        return;
+      }
+      const m = await S.pc.me();
+      if (!m.ok) { viewOff(m.why, m.kind === "off"); return; }
+      A.account = m.account;
+      if (!A.account) viewSignIn({ fresh: true });
+      else viewAccount();
+    });
+  }
+  A.start = async function () {
+    root = document.getElementById("acct");
+    document.documentElement.classList.toggle("framed", framed);
+    if (kit && kit.refusedBy) { clear(root, h("p.muted.center", { text: "This page works only inside Cool tools." })); return; }
+    await S.pc.init("settings");
+    R = S.pc.R;
+    if (S.pc.door) document.documentElement.classList.add("door");
+    if (kit) { kit.ready({ app: "account" }); kit.title("Account"); } else { post({ type: "ready", version: 1, app: "account" }); post({ type: "title", text: "Account" }); }
+    // another tab signed in, out or changed: show who this browser is now
+    S.on("account", () => {
+      if (A.left || A.closed || A.busy) return;
+      const now = R.account(), was = A.account;
+      if ((now && now.id) === (was && was.id) && (now && now.name) === (was && was.name)) return;
+      start(true);
+    });
+    const v = document.getElementById("ver");
+    if (v) v.textContent = `Settings ${S.VERSION}`;
+    await start();
+  };
+})();
+
+</script>
+<script>
+S.VERSION = "2.0.32"; S.BUILT = "2026-11-12 7:18 AM";
+S.acct.start();
+</script>
+</body>
+</html>

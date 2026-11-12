@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-build="built">
+<html lang="en" data-build="built" data-version="V1.0.12">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -126,18 +126,27 @@ h3:first-child { margin-top: 2px; }
 .app { height: 100%; display: grid; grid-template-rows: auto 1fr auto; grid-template-columns: minmax(0, 1fr); }
 .topbar, .toolbar, .side, .status, .tabs, .snapbar, .viewbar, .windows, .ctxmenu, .toasts, .tutorial { zoom: var(--ui); }
 .topbar { display: flex; align-items: center; gap: 6px; padding: 4px 8px; background: var(--panel); border-bottom: 1px solid var(--line); min-height: 44px; }
-/* Too narrow for one row (on a computer about 1170 px at the normal UI size): the bar wraps. The menus and undo, redo,
-   settings are one group (.top-tools), so they move to the second row together, the menus at its left, undo, redo
-   and settings at its right; nothing is hidden at any width or UI size. */
+/* Too narrow for one row (on a computer below about 1320 px at the normal UI size): the bar wraps. The menus, the
+   name, the indicator, undo, redo and settings are one group (.top-tools, its basis fixed so that the indicator's
+   changing words never make the bar jump between one row and two), so they move to the second row together, the
+   menus at its left, the rest at its right; nothing is hidden at any width or UI size. */
 .topbar { flex-wrap: wrap; row-gap: 4px; }
-.top-tools { flex: 1 1 auto; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.top-tools { flex: 1 1 720px; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 .brand { display: flex; align-items: center; gap: 6px; font-weight: 700; letter-spacing: 0.01em; padding-right: 8px; white-space: nowrap; }
 .brand-mark { color: var(--accent); font-size: 18px; }
 .menubar { display: flex; gap: 2px; }
 .menubar > button { background: transparent; border-color: transparent; padding: 6px 10px; min-height: 32px; }
 .menubar > button:hover, .menubar > button.open { background: var(--panel-2); border-color: transparent; }
-.top-right { margin-left: auto; display: flex; align-items: center; gap: 2px; }
-.ws-name { color: var(--muted); font-size: 13px; margin-right: 8px; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* the name, the indicator, undo, redo and settings: always on the menus' row, at its right; the name and the
+   indicator's words give way (the words wrap) when the row is short, so the group never drops to a row of its own */
+.top-right { margin-left: auto; display: flex; align-items: center; justify-content: flex-end; gap: 2px; flex: 1 1 0; min-width: 0; }
+/* the workspace's name: plain text that is a box only while it is being changed (click it to rename) */
+input.ws-name { flex: 0 3 11em; width: 11em; min-width: 3.5em; min-height: 32px; margin: 0 2px; padding: 0 8px; border: 1px solid transparent; border-radius: 8px; background: transparent; color: var(--fg); font: inherit; font-size: 14px; font-weight: 650; text-overflow: ellipsis; }
+input.ws-name:hover { border-color: var(--line); }
+input.ws-name:focus { border-color: var(--accent); background: var(--canvas); outline: none; }
+/* the cloud kit's indicator (its words and colours are the kit's) and its choosers in the app's own colours */
+:root { --cloud-bg: var(--panel); --cloud-fg: var(--fg); --cloud-line: var(--line); }
+.top-right cloud-status { margin: 0 6px 0 2px; color: var(--muted); flex: 0 1 auto; min-width: 0; }
 .only-narrow { display: none; }
 
 .screen-layout { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; min-height: 0; min-width: 0; }
@@ -181,9 +190,8 @@ h3:first-child { margin-top: 2px; }
 .st-hint { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .status input.st-input { width: 220px; min-height: 28px; padding: 3px 8px; font-size: 13px; }
 .status input.st-input:focus { width: 300px; }
-.st-pos, .st-solve, .st-save { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.st-pos, .st-solve { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .st-solve.bad { color: var(--danger); font-weight: 600; } .st-solve.floating { color: var(--warn); }
-.st-save.failed { color: var(--danger); }
 
 /* menus */
 .menu { position: fixed; z-index: 800; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow); padding: 4px; min-width: 220px; max-height: 80vh; overflow-y: auto; }
@@ -194,13 +202,14 @@ h3:first-child { margin-top: 2px; }
 .menu .sep { border-top: 1px solid var(--line-2); margin: 4px 6px; }
 .menu .head { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 6px 10px 2px; }
 .menu button.sub::after { content: "›"; margin-left: auto; color: var(--muted); }
+.menu button.sub.open { background: var(--panel-2); }
 .ctxmenu { position: fixed; z-index: 850; }
 .backdrop { position: fixed; inset: 0; z-index: 790; }
 
 @media (max-width: 759px) {
   .menubar { display: none; }
   .only-narrow { display: inline-flex; }
-  .ws-name { display: none; }
+  input.ws-name { flex-basis: 8em; font-size: 13px; padding: 0 4px; }
   .screen-layout { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; }
   .toolbar { flex-direction: row; width: auto; height: 62px; border-right: 0; border-top: 1px solid var(--line); overflow-x: auto; overflow-y: hidden; padding: 4px 6px; order: 2; justify-content: flex-start; }
   .tool-sep { width: 0; border-top: 0; border-left: 1px solid var(--line-2); height: 36px; margin: 0 4px; }
@@ -397,9 +406,6 @@ table.pieces .sub { display: block; color: var(--muted); font-size: 11px; }
 .setting:hover .reset, .setting.changed .reset { opacity: 1; }
 .setting.changed .lbl { font-weight: 600; }
 .setting-group { margin-top: 14px; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
-.ws-row { display: flex; align-items: center; gap: 8px; padding: 8px 6px; border-bottom: 1px solid var(--line-2); }
-.ws-row .nm { font-weight: 600; }
-.ws-row .meta { color: var(--muted); font-size: 12px; display: block; }
 .console { font: 12px/1.45 var(--mono); background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px; padding: 8px; max-height: 240px; overflow: auto; white-space: pre-wrap; word-break: break-word; user-select: text; }
 textarea.script { font: 12.5px/1.4 var(--mono); min-height: 90px; }
 @media (max-width: 759px) {
@@ -515,7 +521,8 @@ textarea.script { font: 12.5px/1.4 var(--mono); min-height: 90px; }
     <div class="top-tools">
       <nav id="menubar" class="menubar" aria-label="Menus"></nav>
       <div class="top-right">
-        <span id="ws-name" class="ws-name" title="Workspace"></span>
+        <input id="ws-name" class="ws-name" title="The workspace's name: click it to rename" aria-label="Workspace name" maxlength="64" autocomplete="off" spellcheck="false">
+        <cloud-status></cloud-status>
         <button type="button" class="icon-btn" data-cmd="undo" title="Undo (Ctrl+Z)" aria-label="Undo">↶</button>
         <button type="button" class="icon-btn" data-cmd="redo" title="Redo (Ctrl+Y)" aria-label="Redo">↷</button>
         <button type="button" class="icon-btn" data-act="settings" title="Settings" aria-label="Settings">⚙</button>
@@ -556,7 +563,6 @@ textarea.script { font: 12.5px/1.4 var(--mono); min-height: 90px; }
     <input id="st-input" class="st-input" type="text" placeholder="type a length or angle" aria-label="Typed input" autocomplete="off">
     <span id="st-pos" class="st-pos"></span>
     <span id="st-solve" class="st-solve"></span>
-    <span id="st-save" class="st-save"></span>
   </footer>
 
   <!-- Other screens are built by their modules into these -->
@@ -569,8 +575,471 @@ textarea.script { font: 12.5px/1.4 var(--mono); min-height: 90px; }
   <div id="tutorial" class="tutorial" hidden></div>
 </div>
 <script>
-// ---- app-kit/dist/apps.js ----
-/* apps.js 1.15 (built 2026-11-08 2:45 PM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
+// ---- pc-relay/client/relay-client.js (copied in by build.py; never edit this copy) ----
+/* relay-client.js 3: the PC Relay client (ONE source: Projects\pc-relay\client\relay-client.js; each page's build
+   copies it in, so never edit a copy). Talks to PC Relay 3 (accounts) on Jon's PC. The relay decides every request;
+   this file carries the pass, remembers who this browser is, and says plainly what the PC answered.
+   The exact requests: Projects\cool-tools-upgrade\API-relay.md.
+
+   - Nothing happens until the page calls something: no background traffic of its own (seen() is the page's call).
+   - The PC's address: read from relay.json beside the programs ("../relay.json" from a program's page, or
+     opts.addressFile), fresh before the first connection and again after a failed one (at most once a minute).
+     {"address": "https://..."}; http only for 127.0.0.1 and localhost (the stage). No address is built in: if the file
+     cannot be read the cloud is simply off, with a plain reason (status "off", where.why). opts.base names the address
+     instead (tests, the relay's own window on the local door).
+   - Kept in this browser (localStorage, shared by every page of the site): "relay-pass" ({pass, device, at}) and
+     "relay-account" ({id, name, kind, number, at}), so the name shows at once, even with the cloud off. Another tab's
+     sign-in, sign-out or change arrives as an "account" event.
+   - The pass goes in the X-Relay-Pass header (HTTP) or the WebSocket subprotocol "pass.<p>"; never in a URL.
+   - When the PC says the pass is not valid any more (X-Relay-Info: pass-unknown, or the ping's pass "unknown"), the
+     pass and the account are forgotten and "account" fires with null. me() forgets them only on a whole answer that
+     says {account: null}. An answer cut off, garbled or late, a timeout or a network error never ends a sign-in:
+     it is a result with ok false and kind "network" or "timeout".
+   - Errors from the relay are { why, kind }; every result here carries why and kind.
+
+   const R = RelayClient.create({ app: "plan-cutter", log });
+   await R.ping();                 // { ok, latency, info }
+   R.account();                    // at once, from this browser: { id, name, kind, number } or null
+   await R.me();                   // from the PC: { ok, account, can, programs, network, limited }
+   R.can("files.shared.change");  R.canUse("voice");      // from the last me()
+   await R.accountsHere();         // { ok, accounts: [{ id, name, kind, number, picture, hasPassword }] }
+   await R.signIn(name, password); // { ok, kind, why, account }
+   await R.signOut();              // { ok }
+   await R.guest();                // { ok, account }  (a guest for this browser; itself when it has an account)
+   await R.setup({ name, password });   // { ok, kind, why, account }
+   await R.update({ name, password });  // { ok, kind, why, account }   (password: null removes it)
+   R.seen();                       // "this app is open" (call once a minute while the page is visible)
+   R.on("account", fn);            // fn(account or null)
+   R.on("status", fn);             // fn({ state: checking|connected|off|offline|starting|ready|reload, why })
+   await R.api("people");          // any /relay/ request: { ok, status, data, why, kind }
+   R.call, R.fetch, R.url, R.ws, R.open, R.pcName, R.address, R.watch     // as in relay-client 2
+*/
+(function (root) {
+  "use strict";
+  const VERSION = 3;
+  const RECHECK_MS = 60000, ADDRESS_MS = 6000;
+  const PASS_KEY = "relay-pass", ACCOUNT_KEY = "relay-account", NAME_KEY = "relay-pc-name", YOUR_PC = "your PC";
+  const trim = (u) => String(u || "").trim().replace(/\/+$/, "");
+  const goodAddress = (a) =>
+    /^https:\/\/[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*(:\d{1,5})?$/i.test(a) ||
+    /^http:\/\/(127\.0\.0\.1|localhost)(:\d{1,5})?$/i.test(a);
+  const store = {
+    get(k) { try { return root.localStorage.getItem(k) || ""; } catch (e) { return mem[k] || ""; } },
+    set(k, v) {
+      try { if (v) root.localStorage.setItem(k, v); else root.localStorage.removeItem(k); }
+      catch (e) { if (v) mem[k] = v; else delete mem[k]; }
+    },
+  };
+  const mem = {}; // when localStorage is not available (a sandboxed page): this page only
+  const json = (k) => { try { const j = JSON.parse(store.get(k) || "null"); return j && typeof j === "object" ? j : null; } catch (e) { return null; } };
+  const cleanName = (n) => (typeof n === "string" ? Array.from(n.replace(/[\x00-\x1f\x7f-\x9f]/g, "").trim()).slice(0, 64).join("").trim() : "");
+  const shortAcct = (a) => (a && a.id ? { id: a.id, name: String(a.name || ""), kind: String(a.kind || ""), number: a.number || 0 } : null);
+
+  function httpWhy(status) {
+    return ({ 400: "the PC refused that request", 401: "sign-in needed", 403: "not allowed", 404: "not found on the PC",
+      409: "that clashes with something on the PC", 410: "this page is out of date: reload it", 426: "this page is out of date: reload it",
+      429: "too many requests: wait a minute", 502: "the program on the PC did not answer", 503: "the PC said it is busy or switched off" })[status] || `the PC answered ${status}`;
+  }
+  function netWhy(err, ms) {
+    if (err && err.name === "AbortError") return `no answer from the PC within ${Math.round(ms / 1000)} s`;
+    if (typeof navigator !== "undefined" && navigator.onLine === false) return "this device is offline";
+    return "could not reach the PC (no network, or the PC is off or asleep)";
+  }
+  function netKind(err) {
+    if (err && err.name === "AbortError") return "timeout";
+    if (typeof navigator !== "undefined" && navigator.onLine === false) return "offline";
+    return "network";
+  }
+  const kindOf = (status) => status === 401 ? "signin" : status === 426 || status === 410 ? "reload" : "http";
+
+  class Relay {
+    constructor(opts) {
+      opts = opts || {};
+      this.app = String(opts.app || "page").toLowerCase().replace(/[^a-z0-9-]/g, "");
+      this.log = typeof opts.log === "function" ? opts.log : null;
+      this.addressFile = opts.addressFile || "";
+      this.status = { state: "idle", why: "", at: Date.now() };
+      this.info = null;
+      this.latency = 0;
+      this.bytes = 0;
+      this._me = null;
+      this._subs = { status: new Set(), account: new Set() };
+      this._job = null;
+      this._readAt = 0;
+      this._acctSeen = JSON.stringify(shortAcct(json(ACCOUNT_KEY)));
+      this._setBase(opts.base);
+      if (typeof opts.onStatus === "function") this._subs.status.add(opts.onStatus);
+      if (typeof addEventListener === "function") {
+        addEventListener("storage", (e) => { if (!e || e.key === ACCOUNT_KEY || e.key === PASS_KEY || e.key === null) this._acctChanged(); });
+      }
+    }
+    // ---- the PC's address ---------------------------------------------------------------------------------------
+    _setBase(url) {
+      this.given = trim(url);
+      this.base = this.given;
+      this.where = this.given ? { url: this.given, from: "page", why: "" } : { url: "", from: "unread", why: "" };
+      this._readAt = 0;
+    }
+    setBase(url) { if (trim(url) !== this.given) this._setBase(url); }
+    _fileUrl() {
+      if (this.addressFile) return this.addressFile;
+      try { return new URL("../relay.json", root.location.href).href; } catch (e) { return "../relay.json"; }
+    }
+    async address() { await this._ready(); return this.where; }
+    async _ready() {
+      if (this.given) return;
+      const w = this.where.from;
+      if (w === "unread" || (w === "none" && Date.now() - this._readAt >= RECHECK_MS)) await this._read();
+    }
+    _read() {
+      if (!this._job) this._job = this._readNow().finally(() => { this._job = null; });
+      return this._job;
+    }
+    async _recheck() {
+      if (this.given || this._job || Date.now() - this._readAt < RECHECK_MS) return false;
+      const was = this.base;
+      await this._read();
+      return this.base !== was;
+    }
+    async _readNow() {
+      this._readAt = Date.now();
+      const file = this._fileUrl(), was = this.where;
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), ADDRESS_MS);
+      let why = "";
+      try {
+        const sep = file.includes("?") ? "&" : "?";
+        const r = await fetch(`${file}${sep}t=${Date.now()}`, { cache: "no-store", credentials: "omit", signal: ac.signal });
+        if (!r.ok) throw new Error(`the site answered ${r.status}`);
+        const j = await r.json().catch(() => null);
+        const a = trim(j && j.address);
+        if (!goodAddress(a)) throw new Error(j ? "it holds no usable address" : "it is not JSON");
+        if (this.given) return;
+        this.base = a;
+        this.where = { url: a, from: "file", why: "" };
+        if (was.url !== a) this._note(`the PC's address: ${a} (from ${file})`, false);
+        return;
+      } catch (e) {
+        why = e && e.name === "AbortError" ? `no answer within ${ADDRESS_MS / 1000} s`
+          : typeof navigator !== "undefined" && navigator.onLine === false ? "this device is offline"
+          : e && e.name === "TypeError" ? "the site could not be reached"
+          : String((e && e.message) || e);
+      } finally { clearTimeout(timer); }
+      if (this.given || was.from === "file") return; // read fine earlier in this page's life: that address stays
+      const text = `the PC's address (${file}) could not be read (${why}): the cloud is off`;
+      this.base = "";
+      this.where = { url: "", from: "none", why: text };
+      if (was.why !== text) this._note(text, true);
+    }
+    _note(text, warn) {
+      if (this.log) { try { this.log(text); } catch (e) {} }
+      try { if (typeof console !== "undefined") (warn ? console.warn : console.info)("relay-client: " + text); } catch (e) {}
+    }
+    // ---- events ----
+    on(what, fn) {
+      if (typeof what === "function") { fn = what; what = "status"; }
+      const set = this._subs[what];
+      if (!set || typeof fn !== "function") return () => {};
+      set.add(fn);
+      return () => set.delete(fn);
+    }
+    _set(state, extra) {
+      this.status = Object.assign({ state, why: "", at: Date.now() }, extra || {});
+      for (const f of this._subs.status) { try { f(this.status); } catch (e) {} }
+    }
+    _acctChanged() {
+      const now = JSON.stringify(this.account());
+      if (now === this._acctSeen) return;
+      this._acctSeen = now;
+      const a = this.account();
+      // another person (or nobody) now: the rights the last me() gave are not theirs; can() says no until me() is asked again
+      if (!a || !this._me || !this._me.account || this._me.account.id !== a.id) this._me = null;
+      for (const f of this._subs.account) { try { f(a); } catch (e) {} }
+    }
+    // ---- the pass and the account, kept in this browser ----
+    _pass() { const r = json(PASS_KEY); return r && typeof r.pass === "string" ? r.pass : ""; }
+    _keep(pass, account) {
+      if (pass !== undefined) store.set(PASS_KEY, pass ? JSON.stringify({ pass, at: Date.now() }) : "");
+      if (account !== undefined) store.set(ACCOUNT_KEY, account ? JSON.stringify(Object.assign(shortAcct(account), { at: Date.now() })) : "");
+      this._acctChanged();
+    }
+    _forget(why) {
+      if (!this._pass() && !this.account()) return;
+      this._me = null;
+      this._keep("", null);
+      this._note("this browser's sign-in ended on the PC" + (why ? ` (${why})` : ""), false);
+    }
+    // An answer speaks only about the pass its request carried. While it was on its way, another tab of this browser
+    // may have signed in or switched user: the browser then holds a new pass, and an answer about the old one ("pass
+    // unknown", "no account", an older account) must not wipe or overwrite the new sign-in. _current(sent) says whether
+    // the pass sent is still the one kept.
+    _current(sent) { return sent === this._pass(); }
+    _info(r, sent) { // every answer: the PC may say the pass is not valid any more
+      const i = (r.headers && r.headers.get("X-Relay-Info")) || "";
+      if (/pass-unknown/.test(i) && this._current(sent)) this._forget("the PC does not know it");
+    }
+    account() { return shortAcct(json(ACCOUNT_KEY)); }
+    signedIn() { return !!this._pass(); }
+    can(flag) { return !!(this._me && this._me.can.includes(flag)); }
+    canUse(prog) { return prog === "files" || !!(this._me && this._me.programs.includes(prog)); }
+    headers(extra) {
+      const h = { "X-Relay-Client": this.app + "/" + VERSION };
+      const p = this._pass();
+      if (p) h["X-Relay-Pass"] = p;
+      return Object.assign(h, extra || {});
+    }
+    // ---- addresses ----
+    url(service, path) { return `${this.base}/svc/${service}/${String(path || "").replace(/^\/+/, "")}`; }
+    wsUrl(service, path) { return this.url(service, path).replace(/^http/, "ws"); }
+    wsProtocols() { const p = this._pass(); return p ? ["relay", "pass." + p] : ["relay"]; }
+    ws(service, path) { return new WebSocket(this.wsUrl(service, path), this.wsProtocols()); }
+    _off() { return { ok: false, status: 0, data: null, why: this.where.why || "the cloud is off", kind: "off" }; }
+    // fetch through the relay: a Response (throws when the PC cannot be reached, or the address is not known)
+    async fetch(service, path, opts) {
+      opts = Object.assign({}, opts || {});
+      const timeout = opts.timeout || 0; delete opts.timeout;
+      await this._ready();
+      if (!this.base) throw new TypeError(this.where.why || "the cloud is off");
+      const sent = this._pass();
+      opts.headers = this.headers(opts.headers);
+      let timer = 0, ac = null;
+      if (timeout && !opts.signal) { ac = new AbortController(); opts.signal = ac.signal; timer = setTimeout(() => ac.abort(), timeout); }
+      try {
+        const r = await fetch(this.url(service, path), opts);
+        this._info(r, sent);
+        return r;
+      } catch (err) {
+        if (ac || !(opts.signal && opts.signal.aborted)) this._recheck().catch(() => {});
+        throw err;
+      } finally { clearTimeout(timer); }
+    }
+    // _result: an answer read whole. A body that cannot be read (the page left, the connection dropped, a timeout
+    // while reading) or a 2xx body that is not whole JSON is NOT ok: kind "network" (or "timeout"). Only a real,
+    // whole answer from the PC may say anything about the sign-in (reader agent's find, 2026-11-12).
+    async _result(r) {
+      let text, cut = null;
+      try { text = await r.text(); } catch (err) { text = ""; cut = err; }
+      this.bytes += text.length;
+      let data = null, bad = false;
+      try { data = text ? JSON.parse(text) : null; } catch (e) { data = null; bad = true; }
+      if (cut || (r.ok && bad)) {
+        const kind = cut ? netKind(cut) : "network";
+        const why = cut && kind === "timeout" ? "the PC's answer did not arrive in time" : "the PC's answer was cut off: try again";
+        return { ok: false, status: r.status, data: null, why, kind, cut: true };
+      }
+      if (r.ok) return { ok: true, status: r.status, data, why: "", kind: "" };
+      const why = (data && (data.why || data.error)) || httpWhy(r.status);
+      const kind = (data && data.kind) || kindOf(r.status);
+      if (r.status === 426) this._set("reload", { why });
+      return { ok: false, status: r.status, data, why, kind, signin: r.status === 401 };
+    }
+    _body(opts) {
+      opts = Object.assign({ cache: "no-store" }, opts || {});
+      if (opts.json !== undefined) {
+        opts.body = JSON.stringify(opts.json);
+        opts.headers = Object.assign({ "Content-Type": "application/json" }, opts.headers || {});
+        delete opts.json;
+      }
+      return opts;
+    }
+    // call: a program's request with a JSON answer: { ok, status, data, why, kind }
+    async call(service, path, opts) {
+      opts = this._body(opts);
+      const ms = opts.timeout || 0;
+      let r;
+      try { r = await this.fetch(service, path, opts); }
+      catch (err) { return this.base ? { ok: false, status: 0, data: null, why: netWhy(err, ms), kind: netKind(err) } : this._off(); }
+      return this._result(r);
+    }
+    // api: the relay's own request /relay/<path>: { ok, status, data, why, kind, current }. current: this browser
+    // still holds the pass the request carried (false: its sign-in changed meanwhile, the answer is about the old one).
+    async api(path, opts) {
+      opts = this._body(opts);
+      const ms = opts.timeout || 15000; delete opts.timeout;
+      await this._ready();
+      if (!this.base) return this._off();
+      const sent = this._pass();
+      opts.headers = this.headers(opts.headers);
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), ms);
+      opts.signal = opts.signal || ac.signal;
+      try {
+        const r = await fetch(`${this.base}/relay/${String(path).replace(/^\/+/, "")}`, opts);
+        this._info(r, sent);
+        const res = await this._result(r);
+        res.current = this._current(sent);
+        return res;
+      } catch (err) {
+        this._recheck().catch(() => {});
+        return { ok: false, status: 0, data: null, why: netWhy(err, ms), kind: netKind(err) };
+      } finally { clearTimeout(timer); }
+    }
+    // ---- the light check ----
+    async ping(timeoutMs) {
+      timeoutMs = timeoutMs || 8000;
+      this._set("checking", { why: "checking the connection…" });
+      await this._ready();
+      if (!this.base) { const why = this.where.why || "the cloud is off"; this._set("off", { why }); return { ok: false, why, kind: "off" }; }
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), timeoutMs), t0 = performance.now();
+      try {
+        const sent = this._pass();
+        const r = await fetch(`${this.base}/relay/ping?t=${Date.now()}`, { headers: this.headers(), cache: "no-store", signal: ac.signal });
+        this._info(r, sent);
+        if (!r.ok) { const res = await this._result(r); this._set(r.status === 426 ? "reload" : "offline", { why: res.why }); return { ok: false, why: res.why, kind: res.kind, status: r.status }; }
+        const info = await r.json();
+        this.latency = Math.round(performance.now() - t0);
+        this.info = info;
+        const name = cleanName(info && info.name);
+        if (name) { this._pc = { base: this.base, name }; this._keepName(this.base, name); }
+        if ((info.min_client || 0) > VERSION) { const why = "this page is out of date: reload it"; this._set("reload", { why }); return { ok: false, why, info, kind: "reload" }; }
+        if (!this._current(sent)) { /* this browser's sign-in changed while the PC answered: the answer is about the old one */ }
+        else if (info.pass === "unknown") this._forget("the PC does not know it");
+        else if (info.account && this._pass()) this._keep(undefined, info.account);
+        if (!info.on) { const why = "PC Relay is switched off (it is switched on at the computer)"; this._set("off", { why, info }); return { ok: false, why, info, kind: "off" }; }
+        this._set("connected", { why: `connected (${this.latency} ms)`, info, latency: this.latency });
+        return { ok: true, info, latency: this.latency };
+      } catch (err) {
+        clearTimeout(timer);
+        if (await this._recheck()) return this.ping(timeoutMs);
+        const why = netWhy(err, timeoutMs);
+        this._set("offline", { why });
+        return { ok: false, why, kind: netKind(err) };
+      } finally { clearTimeout(timer); }
+    }
+    service(id) { return ((this.info && this.info.services) || []).find((s) => s.id === id) || null; }
+    _names() { const j = json(NAME_KEY); return j && !Array.isArray(j) ? j : {}; }
+    _keepName(base, name) {
+      const all = this._names();
+      if (all[base] && all[base].name === name) return;
+      all[base] = { name, at: Date.now() };
+      const keep = Object.entries(all).filter(([, e]) => e && typeof e === "object").sort((a, b) => (b[1].at || 0) - (a[1].at || 0)).slice(0, 10);
+      store.set(NAME_KEY, JSON.stringify(Object.fromEntries(keep)));
+    }
+    pcName() {
+      if (this._pc && this._pc.base === this.base) return this._pc.name;
+      const e = this._names()[this.base];
+      return (e && cleanName(e.name)) || YOUR_PC;
+    }
+    // ---- accounts ----
+    async me() {
+      let r = await this.api("me");
+      if (r.ok && !r.current) r = await this.api("me"); // this browser's sign-in changed while the PC answered (another tab): ask again
+      if (!r.ok) return r;
+      // Only an answer that says so itself ({account: null}) ends the sign-in; anything else changes nothing.
+      if (!r.data || typeof r.data !== "object" || !("account" in r.data)) return { ok: false, status: r.status, data: r.data, why: "the PC's answer could not be read: try again", kind: "network", current: r.current };
+      const d = r.data;
+      const me = { account: shortAcct(d.account), can: d.can || [], programs: d.programs || [], network: d.network || "", limited: !!d.limited };
+      this._me = me;
+      if (!r.current) { /* still changing: nothing kept or forgotten from an answer about an older sign-in */ }
+      else if (d.account && this._pass()) this._keep(undefined, d.account);
+      else if (!d.account && this.account() && !d.local) {
+        this._forget(""); // (it clears _me: the PC no longer knows this browser's account)
+        this._me = me;     // what the PC just said is true now: a plain visitor
+      }
+      return { ok: true, account: d.account || null, can: me.can, programs: me.programs, network: me.network, limited: me.limited, local: !!d.local };
+    }
+    async accountsHere() {
+      const r = await this.api("accounts/here");
+      return r.ok ? { ok: true, accounts: (r.data && r.data.accounts) || [], network: r.data && r.data.network } : r;
+    }
+    _signed(r) {
+      if (!r.ok) return { ok: false, kind: r.kind, why: r.why, status: r.status };
+      const d = r.data || {};
+      if (d.pass) this._keep(d.pass, d.account); else if (d.account) this._keep(undefined, d.account);
+      this._me = null;
+      return { ok: true, kind: "", why: "", account: d.account || null };
+    }
+    async signIn(name, password) {
+      return this._signed(await this.api("signin", { method: "POST", json: { name: String(name || ""), password: password == null ? "" : String(password) } }));
+    }
+    async signOut() {
+      const had = this._pass();
+      let onPC = false;
+      if (had) { const r = await this.api("signout", { method: "POST" }); onPC = !!(r.ok && r.data && r.data.signed_out); }
+      this._me = null;
+      this._keep("", null);
+      return { ok: true, onPC };
+    }
+    async guest() { return this._signed(await this.api("guest", { method: "POST" })); }
+    async setup(o) {
+      o = o || {};
+      const body = { name: String(o.name || "") };
+      if (o.password) body.password = String(o.password);
+      return this._signed(await this.api("setup", { method: "POST", json: body }));
+    }
+    async update(o) {
+      o = o || {};
+      const body = {};
+      if (o.name !== undefined) body.name = String(o.name);
+      if (o.password !== undefined) body.password = o.password === null ? null : String(o.password);
+      const r = await this.api("me", { method: "POST", json: body });
+      if (!r.ok) return { ok: false, kind: r.kind, why: r.why, status: r.status };
+      if (r.data && r.data.account && r.current) this._keep(undefined, r.data.account);
+      return { ok: true, kind: "", why: "", account: r.data && r.data.account };
+    }
+    seen() {
+      this.api("seen", { method: "POST", json: { app: this.app }, timeout: 8000 }).catch(() => {});
+    }
+    // ---- start a program, with progress ----
+    async open(service, onProgress, timeoutMs) {
+      timeoutMs = timeoutMs || 60000;
+      this._set("starting", { service, why: `starting ${service} on the PC…` });
+      await this._ready();
+      if (!this.base) { const why = this.where.why || "the cloud is off"; this._set("off", { why }); return { ok: false, why, kind: "off" }; }
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), timeoutMs);
+      try {
+        const sent = this._pass();
+        const r = await fetch(`${this.base}/relay/open/${service}`, { headers: this.headers(), cache: "no-store", signal: ac.signal });
+        this._info(r, sent);
+        if (!r.ok) { const res = await this._result(r); this._set(r.status === 426 ? "reload" : "offline", { service, why: res.why }); return { ok: false, why: res.why, kind: res.kind, status: r.status }; }
+        const rd = r.body.getReader(), dec = new TextDecoder();
+        let buf = "", last = null;
+        for (;;) {
+          const { value, done } = await rd.read();
+          if (done) break;
+          buf += dec.decode(value, { stream: true });
+          let i;
+          while ((i = buf.indexOf("\n")) >= 0) {
+            const line = buf.slice(0, i); buf = buf.slice(i + 1);
+            if (!line.trim()) continue;
+            try { last = JSON.parse(line); } catch (e) { continue; }
+            if (onProgress) { try { onProgress(last); } catch (e) {} }
+            if (last.state === "starting") this._set("starting", { service, why: last.text || "starting…", seconds: last.seconds || 0 });
+          }
+        }
+        if (last && last.state === "ready") { this._set("ready", { service, why: last.warm ? "ready" : `ready (started in ${(last.ms / 1000).toFixed(1)} s)` }); return { ok: true, warm: !!last.warm, ms: last.ms || 0 }; }
+        const why = (last && last.error) || "the PC stopped answering while it was starting";
+        this._set("offline", { service, why });
+        return { ok: false, why, kind: "start" };
+      } catch (err) {
+        this._recheck().catch(() => {});
+        const why = netWhy(err, timeoutMs);
+        this._set("offline", { service, why });
+        return { ok: false, why, kind: netKind(err) };
+      } finally { clearTimeout(timer); }
+    }
+    // ---- keep checking (only while the page wants it) ----
+    watch(everyMs) {
+      everyMs = everyMs || 15000;
+      let stopped = false, timer = 0, fails = 0;
+      const tick = async () => {
+        if (stopped) return;
+        const r = await this.ping();
+        fails = r.ok ? 0 : fails + 1;
+        const wait = r.ok ? everyMs : Math.min(30000, 1000 * 2 ** Math.min(fails - 1, 5));
+        if (!stopped) timer = setTimeout(tick, wait * (0.9 + Math.random() * 0.2));
+      };
+      const online = () => { clearTimeout(timer); tick(); };
+      if (typeof addEventListener === "function") addEventListener("online", online);
+      tick();
+      return () => { stopped = true; clearTimeout(timer); if (typeof removeEventListener === "function") removeEventListener("online", online); };
+    }
+  }
+
+  root.RelayClient = { VERSION, YOUR_PC, create: (opts) => new Relay(opts || {}), httpWhy };
+})(typeof window !== "undefined" ? window : globalThis);
+</script>
+<script>
+// ---- app-kit/dist/apps.js (copied in by build.py; never edit this copy) ----
+/* apps.js 1.24 (built 2026-11-12 7:17 AM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
    app-kit\apps-button.js and file-manager\kit\window-kit.js (one source each; never edit this file). The window kit
    runs only when the page has none of its own. */
 if (!window.WindowKit) {
@@ -580,7 +1049,11 @@ if (!window.WindowKit) {
 
    Host side (the page that opens the window):
      const win = WindowKit.open(url, { title, name, width, height, onClose });   // a floating window with the page
-     const got = await WindowKit.pick(fileManagerUrl, { accept: [".zip"], folder: "files" });  // null = cancelled
+     const got = await WindowKit.pick(fileManagerUrl, { app: "reader", accept: [".zip"], folder: "files" });  // null = cancelled
+   Version 2 (2026-11-11, the Cool tools upgrade): pick takes `app` (the asking program's id from the one list: the
+   chooser starts in its folder and shows its recent files) and `keep` ({ label }: one checkbox beside Use selected);
+   its answer carries `ids` (each file's id in the cloud), `folderId` and `keep`. Nothing about the window changed.
+   Version 3 (2026-11-12): pick takes `start`, the folder the chooser opens in ("Shared Folder/Reader files").
    The window: drag by its title bar, resize from every edge and corner, maximise (button or double-click the
    title), close (button or Escape); its size and place are remembered per name. On a phone it is a full-screen
    sheet, and the phone's Back button closes it. Every message is checked: it must come from the window's own
@@ -590,7 +1063,7 @@ if (!window.WindowKit) {
    origin, local file pages), and refuses to run inside any other site (location.ancestorOrigins). */
 (function (root) {
   "use strict";
-  const VERSION = 1;
+  const VERSION = 3;
   const MIN_W = 320, MIN_H = 220, MARGIN = 8, HEAD = 40;
   const SHEET = "(max-width: 640px), (max-height: 480px) and (pointer: coarse)";
   const KEY = "wk-win:";
@@ -782,16 +1255,22 @@ if (!window.WindowKit) {
     for (const w of wins.slice()) if (w.pushed && !(history.state && history.state.wkSheet === w.id)) w.close(true);
   });
 
-  // pick(url, opts): open the file manager, ask it for files, give back { kind, files, paths, folder, missing } or
-  // null when the person cancels or closes the window. opts: accept [".zip"], multiple, files (default true),
-  // folder (false | "files" | "zip"), host (the name shown: "Book reader"), title, name, onProgress, signal.
+  // pick(url, opts): open the file manager, ask it for files, give back { kind, files, paths, ids, folder, folderId,
+  // missing, keep } or null when the person closes the window. opts: accept [".zip"], multiple, files (default true),
+  // folder (false | "files" | "zip"), host (the name shown: "Book reader"), app (the asking program's id from the one
+  // list: the chooser starts in that program's folder, with its recent files on top, and shows its name),
+  // keep ({ label }: one unticked checkbox beside Use selected; the answer's `keep` says whether it was ticked),
+  // start (the folder the chooser opens in, as a signed-in person sees its path: "Shared Folder/Reader files"; it
+  // comes before the program's own folder, and when it is not there the chooser says so and opens where it would
+  // have without it), title, name, onProgress, signal. In the answer, ids[i] is the cloud id of files[i] for kind
+  // "files"; for a folder ("folder", "zip") folderId is the folder's id and ids holds "" for each file.
   function pick(url, o) {
     o = o || {};
     return new Promise((resolve, reject) => {
       let done = false, port = null, win = null;
       const end = (fn, v) => { if (done) return; done = true; clearTimeout(timer); if (port) port.close(); if (win) win.close(); fn(v); };
       const timer = setTimeout(() => end(reject, new Error("The file manager did not open within 30 s (no network, or its page could not load).")), 30000);
-      win = open(url, { name: o.name || "file-manager-pick", title: o.title || "Choose " + what(o), width: o.width, height: o.height, onClose: () => end(resolve, null) });
+      win = open(url, { name: o.name || "file-manager-pick", title: o.title || heading(o), width: o.width, height: o.height, onClose: () => end(resolve, null) });
       win.on("ready", () => {
         clearTimeout(timer);
         if (port) port.close();
@@ -805,22 +1284,26 @@ if (!window.WindowKit) {
           else if (d.type === "error") end(reject, new Error(d.why || "The file manager could not give the files."));
         };
         win.post({ wk: 1, type: "pick", version: VERSION, accept: accepts(o.accept), multiple: !!o.multiple, files: o.files !== false, folder: o.folder || false,
-          host: String(o.host || document.title || location.host).slice(0, 80) }, [ch.port2]);
+          host: String(o.host || document.title || location.host).slice(0, 80), app: String(o.app || "").slice(0, 60),
+          keep: o.keep && o.keep.label ? { label: String(o.keep.label).slice(0, 80) } : null, start: String(o.start || "").slice(0, 400) }, [ch.port2]);
       });
       if (o.signal) o.signal.addEventListener("abort", () => end(resolve, null), { once: true });
     });
   }
   const accepts = (a) => [].concat(a || []).map((x) => String(x).trim().toLowerCase()).filter(Boolean).map((x) => (x === "*" || x.startsWith(".") ? x : "." + x));
-  function what(o) {
-    const a = accepts(o.accept).filter((x) => x !== "*");
-    const f = o.files === false ? "" : a.length ? a.join(" or ") + (o.multiple ? " files" : " file") : o.multiple ? "files" : "a file";
-    return o.folder ? (f ? f + " or a folder" : "a folder") : f;
+  // The window's first title, one short heading: "Book reader: choose a file or folder" (the file manager sets the
+  // same words again once it has the request, with the program's name from the one list).
+  function heading(o) {
+    const w = o.files === false ? "a folder" : o.folder ? "a file or folder" : o.multiple ? "files" : "a file";
+    const who = String(o.host || "").trim().slice(0, 80);
+    return who ? `${who}: choose ${w}` : `Choose ${w}`;
   }
   function result(d) {
     const files = Array.isArray(d.files) ? d.files : [];
     const paths = Array.isArray(d.paths) ? d.paths : files.map((f) => f.name);
+    const ids = files.map((f, i) => (Array.isArray(d.ids) && typeof d.ids[i] === "string" ? d.ids[i] : ""));
     files.forEach((f, i) => { try { Object.defineProperty(f, "webkitRelativePath", { value: paths[i] || f.name, configurable: true }); } catch (e) {} });
-    return { kind: d.kind || "files", files, paths, folder: d.folder || "", missing: d.missing || "" };
+    return { kind: d.kind || "files", files, paths, ids, folder: d.folder || "", folderId: typeof d.folderId === "string" ? d.folderId : "", missing: d.missing || "", keep: !!d.keep };
   }
 
   // ---- the child side: a page inside a window --------------------------------------------------------------------
@@ -859,7 +1342,7 @@ if (!window.WindowKit) {
   root.WindowKit = { VERSION, open, pick, child, get windows() { return wins.slice(); } };
 })(typeof window !== "undefined" ? window : globalThis);
 }
-/* apps-button.js 1.15: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.24: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
    https://jonnystokes.github.io/cooltools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
@@ -891,8 +1374,17 @@ if (!window.WindowKit) {
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.15";
-  const LAUNCHER = "https://jonnystokes.github.io/cooltools/apps/";
+  const VERSION = "1.24";
+  // The menu comes from the site the page itself is on, so the menu's account strip reads the same browser memory
+  // (one origin) and the same relay.json as the program: the live site, or the stage (CONTRACT 3). Any other page
+  // (a file on this device, a test page) gets the live site's menu.
+  const SITES = ["https://jonnystokes.github.io/cooltools/", "http://127.0.0.1:28801/", "http://localhost:28801/"];
+  const LAUNCHER = (() => {
+    let href = "";
+    try { href = root.location.href; } catch (e) {}
+    const site = SITES.find((s) => href.startsWith(s)) || SITES[0];
+    return site + "apps/";
+  })();
   const W = 460, H = 780;        // the menu window's first size (less on a short screen); the window kit remembers
                                  // what the person makes it
   const NAME = "apps";           // its key in the window kit (localStorage wk-win:apps); the same in every program
@@ -1071,7 +1563,1347 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   root.AppsKit = api;
   if (root.customElements && !root.customElements.get("apps-button")) root.customElements.define("apps-button", AppsButton);
 })(typeof window !== "undefined" ? window : globalThis);
+</script>
+<script>
+// ---- file-manager/kit/cloud-kit.js (copied in by build.py; never edit this copy) ----
+/* cloud-kit.js 1: every program opens and saves through the Cloud File Manager with this one script.
+   ONE source: Projects\file-manager\kit\cloud-kit.js. A program's build copies it in after relay-client.js (3) and
+   window-kit.js; never edit a copy. How to use it, with an example to copy: kit\CLOUD-KIT.md.
 
+     const cloud = CloudKit.for({ app: "plan-cutter", ext: ".plan-cutter", relay: R });
+     await cloud.start();                          // is the cloud on, who is this, send up what was kept on this device
+     let doc = await cloud.openLast();             // the last document, or null
+     doc = await cloud.open({ anchor: button });   // the small Open chooser: Cloud File Manager, This device
+     doc = await cloud.openById(id);               // "#open=<id>" from the file manager
+     doc = cloud.create("My home");                // a new document: saved at its first save
+     await cloud.save(doc, text);                  // now: into this browser first, then to the cloud
+     const auto = cloud.autosave(doc, () => text); // auto.touch() on every change, auto.stop() when it is closed
+     await cloud.rename(doc, "Garage");   await cloud.list();
+     await cloud.data.get("settings");    await cloud.data.set("settings", value);    // small things that follow the person
+     <cloud-status></cloud-status>                 // the dot and the few words, in the program's bar
+
+   What it holds to (each has a test in test\cloud-kit.test.mjs):
+   - A save goes into this browser first (IndexedDB "cloud-kit"), then to the cloud as that day's file. The cloud off,
+     or not answering: the work stays in this browser, the words say so, and it goes up by itself when the cloud is back.
+   - Nobody signed in: the first save makes a guest, silently. A document whose owner signed out waits for them.
+   - A new day starts a new dated file. Another device saved the same day's file: both are kept (theirs as
+     "<name> <date> (2)"), a small notice says so, nobody is asked anything.
+   - The browser refuses to keep a copy (full, private mode): said once, plainly; saving to the cloud goes on.
+   - When the page is hidden or closed, what was not yet saved is handed to the browser at once.
+   - No timer runs while the page is hidden. "This program is open" (seen) is said once a minute while it is in view.
+   Nothing here throws for a failure it expects: results carry ok and why, and cloud.state says where things stand. */
+(function (root) {
+  "use strict";
+  const VERSION = 1;
+  const DB = "cloud-kit", SEP = "\n", HIGH = String.fromCharCode(0xffff);
+  const SAVE_AFTER = 1500, SAVE_MAX = 8000, SEEN_EVERY = 60000, RETRY = [5000, 10000, 20000, 30000], NOTE_MS = 15000, KEEP_DOCS = 12;
+  const KEY = /^[A-Za-z0-9_-][A-Za-z0-9_.-]{0,63}$/;
+
+  // Every word a person reads comes from here, so every program says the same thing.
+  const W = {
+    cloud: "Cloud File Manager", device: "This device", deviceFile: "This device: a file", deviceFolder: "This device: a folder",
+    connecting: "Connecting…", connected: "Connected", saving: "Saving…", saved: "Saved",
+    off: "Cloud File Manager is off.", kept: "Saved on this device.", notSaved: "Not saved.",
+    notInCloud: "Not saved in Cloud File Manager.", signIn: "Sign in to save.", reload: "This page is out of date. Reload it.",
+    isOff: "It is off right now", untitled: "Untitled", account: "Account",
+    noCopy: "This browser cannot keep a copy on this device. Your work is saved in Cloud File Manager only.",
+    noCopyOff: "This browser cannot keep a copy on this device, and Cloud File Manager is off. Keep this page open.",
+    nothing: "There is nothing to save.",
+    badKey: "That name cannot be used for a setting.",
+    clash: (n) => `“${n}” was changed on another device too. Both versions are kept.`,
+    clashTab: (n) => `“${n}” was changed in another tab too. Both versions are kept.`,
+    taken: (n) => `There is already a document named “${n}”.`,
+    savedAs: (was, now) => `Saved as “${now}”: there is already a document named “${was}”.`,
+    cantOpen: (n, why) => `${n ? `“${n}”` : "That file"} could not be opened${why ? ": " + why : "."}`,
+  };
+
+  // ---- small things ---------------------------------------------------------------------------------------------
+  const pad = (n) => String(n).padStart(2, "0");
+  const today = () => { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; };
+  const lower = (s) => String(s).toLowerCase();
+  const rnd = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+  const q = encodeURIComponent;
+  const soft = (p, v) => p.then((x) => x, () => v);
+  const enc = new TextEncoder(), dec = new TextDecoder();
+  const hidden = () => !!root.document && root.document.visibilityState === "hidden";
+  const isBlob = (x) => typeof Blob !== "undefined" && x instanceof Blob;
+  const savable = (x) => typeof x === "string" || x instanceof ArrayBuffer || ArrayBuffer.isView(x) || isBlob(x);
+  // a reason as the PC or relay-client words it ("could not reach the PC (...)"), as a sentence a person reads
+  const sentence = (s) => { s = String(s || "").trim(); if (!s) return ""; s = s[0].toUpperCase() + s.slice(1); return /[.!?…]$/.test(s) ? s : s + "."; };
+  const keptIn = (rec) => { if (rec.kept) rec.keptIn = rec.app + SEP + rec.owner; else delete rec.keptIn; return rec; };
+  // a failed answer that is worth another try by itself (the cloud is off, busy or not answering), not a refusal
+  const isLater = (r) => !r.status || r.status === 429 || r.kind === "off" || (r.status >= 500 && r.status !== 507);
+  async function toBytes(data) {
+    if (typeof data === "string") return enc.encode(data);
+    if (data instanceof ArrayBuffer) return new Uint8Array(data);
+    if (ArrayBuffer.isView(data)) return new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
+    if (isBlob(data)) return new Uint8Array(await data.arrayBuffer());
+    return null;
+  }
+  // the PC's version of a file: the first 16 hex characters of its SHA-256 ("" where the browser cannot work it out)
+  async function hashOf(bytes) {
+    try {
+      const d = new Uint8Array(await root.crypto.subtle.digest("SHA-256", bytes));
+      let s = "";
+      for (let i = 0; i < 8; i++) s += d[i].toString(16).padStart(2, "0");
+      return s;
+    } catch (e) { return ""; }
+  }
+  // what a document may be called: Windows' rules and the cloud's own (it hides dot names), in plain words
+  function badName(n) {
+    if (!n.trim()) return "A name cannot be empty.";
+    if (n.length > 80) return "That name is too long.";
+    const m = /[\\/:*?"<>|]/.exec(n);
+    if (m) return `A name cannot contain ${m[0]}`;
+    if (/[\x00-\x1f\x7f]/.test(n)) return "A name cannot contain control characters.";
+    if (/[. ]$/.test(n)) return "A name cannot end with a dot or a space.";
+    if (/^(\.|~\$)/.test(n) || /\.(tmp|part|partial|crdownload)$/i.test(n) || /^(desktop\.ini|thumbs\.db)$/i.test(n)) return "That name cannot be used. Choose another.";
+    if (/^(con|prn|aux|nul|conin\$|conout\$|com\d|lpt\d)$/i.test(n.split(".")[0].trim())) return "Windows keeps that name for itself. Choose another.";
+    return "";
+  }
+  function unique(name, taken) { // taken: lower-case names
+    if (!taken.has(lower(name))) return name;
+    const m = /^(.*) \((\d{1,3})\)$/.exec(name), stem = m ? m[1] : name;
+    for (let n = m ? +m[2] + 1 : 2; n < 1000; n++) { const c = `${stem} (${n})`; if (!taken.has(lower(c))) return c; }
+    return `${stem} (${rnd()})`;
+  }
+  // the id of a document's file for one day, from the cloud's answer to a rename ({ doc: { files: [{ id, date, copy }] } })
+  function fileId(d, date) {
+    const files = (d && d.doc && d.doc.files) || [], f = files.find((x) => x.date === date && !x.copy) || files[0];
+    return (f && f.id) || "";
+  }
+  const accepts = (a) => [].concat(a || []).map((x) => lower(x).trim()).filter(Boolean).map((x) => (x === "*" || x.startsWith(".") ? x : "." + x));
+  function nameIn(disposition) { // Content-Disposition: inline; filename="a.txt"; filename*=UTF-8''a.txt
+    const m = /filename\*=UTF-8''([^;]+)/i.exec(disposition || "") || /filename="([^"]*)"/i.exec(disposition || "");
+    try { return m ? decodeURIComponent(m[1]) : ""; } catch (e) { return m ? m[1] : ""; }
+  }
+  // light or dark: what the page really looks like, however it themes itself
+  function isDark() {
+    try {
+      for (const el of [document.body, document.documentElement]) {
+        const m = /rgba?\(([\d.]+),\s*([\d.]+),\s*([\d.]+)(?:,\s*([\d.]+))?/.exec(getComputedStyle(el).backgroundColor);
+        if (m && (m[4] === undefined || +m[4] > 0.5)) return 0.2126 * m[1] + 0.7152 * m[2] + 0.0722 * m[3] < 110;
+      }
+      return root.matchMedia("(prefers-color-scheme: dark)").matches;
+    } catch (e) { return false; }
+  }
+
+  // ---- this browser's copy (IndexedDB "cloud-kit") --------------------------------------------------------------
+  // docs: one record per document { key, app, owner, name, cloudName, version, date, id, rev, hash, size, at, kept }
+  // (key = app \n owner \n name in lower case; owner "" = nobody yet); bodies: its content under the same key;
+  // values: cloud.data values; marks: what was open last. kept = not in the cloud yet. rev names one content: a
+  // record written by another tab has another rev.
+  function makeDevice() {
+    let db = null, opening = null;
+    const dev = { ok: true, why: "" };
+    const fail = (e) => { dev.ok = false; dev.why = String((e && e.message) || e || "refused"); };
+    function open() {
+      if (db) return Promise.resolve(db);
+      return opening || (opening = new Promise((res) => {
+        let rq;
+        try { rq = root.indexedDB.open(DB, 1); } catch (e) { fail(e); return res(null); }
+        rq.onupgradeneeded = () => {
+          const d = rq.result;
+          d.createObjectStore("docs", { keyPath: "key" }).createIndex("kept", "keptIn");
+          d.createObjectStore("bodies");
+          d.createObjectStore("values", { keyPath: "key" }).createIndex("kept", "keptIn");
+          d.createObjectStore("marks", { keyPath: "key" });
+        };
+        rq.onsuccess = () => {
+          const d = (db = rq.result);
+          d.onversionchange = d.onclose = () => { try { d.close(); } catch (e) {} if (db === d) db = null; };
+          res(d);
+        };
+        rq.onerror = (ev) => { fail(rq.error); if (ev && ev.preventDefault) ev.preventDefault(); res(null); };
+        rq.onblocked = () => { fail("blocked"); res(null); };
+      }).then((d) => { opening = null; return d; }));
+    }
+    // run: one transaction. body(t, done, on) issues the requests (on(request, fn): fn gets its result); the promise
+    // resolves with what was handed to done() once everything is committed, and rejects when the browser refuses.
+    function run(stores, mode, body, strict) {
+      return open().then((d) => new Promise((res, rej) => {
+        if (!d) return rej(new Error(dev.why || "no storage"));
+        let t, out, thrown = null;
+        try { t = d.transaction(stores, mode, strict ? { durability: "strict" } : undefined); } catch (e) { return rej(e); }
+        const stop = (e) => { thrown = thrown || e; try { t.abort(); } catch (x) {} rej(thrown); };
+        const on = (rq, fn) => { rq.onsuccess = () => { try { fn(rq.result); } catch (e) { stop(e); } }; };
+        t.oncomplete = () => res(out);
+        t.onabort = t.onerror = () => rej(thrown || t.error || new Error("refused"));
+        try { body(t, (v) => { out = v; }, on); } catch (e) { stop(e); }
+      })).then((v) => { if (mode === "readwrite") { dev.ok = true; dev.why = ""; } return v; }, (e) => { fail(e); throw e; });
+    }
+    const range = (app, owner) => IDBKeyRange.bound(app + SEP + owner + SEP, app + SEP + owner + SEP + HIGH);
+    dev.open = () => open().then((d) => !!d);
+    // putDoc: the document's newest content. A version another tab saved here that has not reached the cloud is not
+    // lost: it stays as a copy of its own (displaced), and goes up as "<name> <date> (2)".
+    dev.putDoc = (rec, body, expect) => run(["docs", "bodies"], "readwrite", (t, done, on) => {
+      const docs = t.objectStore("docs"), bodies = t.objectStore("bodies");
+      done({});
+      on(docs.get(rec.key), (cur) => {
+        if (cur && cur.kept && cur.rev !== expect && !(rec.hash && cur.hash === rec.hash)) {
+          on(bodies.get(rec.key), (old) => { const c = Object.assign({}, cur, { key: rec.key + SEP + "#" + cur.rev, copyOf: cur.name }); docs.put(c); bodies.put(old, c.key); done({ displaced: true }); });
+        }
+        docs.put(rec);
+        bodies.put(body, rec.key);
+      });
+    }, rec.kept);
+    // putNow: as the page is hidden or closed. Handed to the browser at once, with nothing to wait for.
+    dev.putNow = (rec, body) => {
+      if (!db) return false;
+      try {
+        const t = db.transaction(["docs", "bodies"], "readwrite", { durability: "strict" });
+        t.objectStore("docs").put(rec);
+        t.objectStore("bodies").put(body, rec.key);
+        if (t.commit) t.commit();
+        return true;
+      } catch (e) { return false; }
+    };
+    // settle: the cloud has taken the content named rev. The record learns the cloud's version either way; it stops
+    // being "kept" only if it still holds that content (a newer save may have arrived meanwhile).
+    dev.settle = (key, rev, base) => run(["docs"], "readwrite", (t, done, on) => {
+      const s = t.objectStore("docs");
+      done(false);
+      on(s.get(key), (cur) => { if (!cur) return; Object.assign(cur, base); if (cur.rev === rev) cur.kept = false; s.put(keptIn(cur)); done(cur.rev === rev); });
+    });
+    dev.getDoc = (key) => run(["docs", "bodies"], "readonly", (t, done, on) => {
+      done(null);
+      on(t.objectStore("docs").get(key), (rec) => { if (rec) on(t.objectStore("bodies").get(key), (body) => done({ rec, body })); });
+    });
+    dev.body = (key) => run(["bodies"], "readonly", (t, done, on) => on(t.objectStore("bodies").get(key), done));
+    dev.docs = (app, owner) => run(["docs"], "readonly", (t, done, on) => on(t.objectStore("docs").getAll(range(app, owner)), (all) => done(all.filter((r) => !r.copyOf))));
+    dev.del = (keys) => run(["docs", "bodies"], "readwrite", (t) => { for (const k of keys) { t.objectStore("docs").delete(k); t.objectStore("bodies").delete(k); } });
+    // move: a rename, or nobody's document becoming a person's. change(rec) gives the record its new key and name.
+    dev.move = (from, change) => run(["docs", "bodies"], "readwrite", (t, done, on) => {
+      const docs = t.objectStore("docs"), bodies = t.objectStore("bodies");
+      done(null);
+      on(docs.get(from), (cur) => {
+        if (cur) on(bodies.get(from), (body) => { const rec = keptIn(change(cur)); if (rec.key !== from) { docs.delete(from); bodies.delete(from); } docs.put(rec); bodies.put(body, rec.key); done(rec); });
+      });
+    }, true);
+    dev.kept = (store, app, owner) => run([store], "readonly", (t, done, on) => on(t.objectStore(store).index("kept").getAll(app + SEP + owner), done));
+    dev.count = (app, docOwners, valueOwner) => run(["docs", "values"], "readonly", (t, done, on) => {
+      let n = 0;
+      const add = (store, owner) => on(t.objectStore(store).index("kept").count(app + SEP + owner), (c) => done((n += c)));
+      done(0);
+      for (const o of docOwners) add("docs", o);
+      if (valueOwner) add("values", valueOwner);
+    });
+    dev.get = (store, key) => run([store], "readonly", (t, done, on) => on(t.objectStore(store).get(key), (v) => done(v || null)));
+    dev.put = (store, rec) => run([store], "readwrite", (t) => { t.objectStore(store).put(keptIn(rec)); }, !!rec.kept);
+    dev.remove = (store, key) => run([store], "readwrite", (t) => { t.objectStore(store).delete(key); });
+    return dev;
+  }
+
+  // ---- what the indicator says ----------------------------------------------------------------------------------
+  // tone: ok (green), busy (green, moving), wait (amber: needs a look), off (grey), bad (red)
+  function wordsFor(s) {
+    if (s.cloud === "checking") return { tone: "off", words: [W.connecting] };
+    if (s.unsaved) return { tone: "bad", words: s.cloud === "off" ? [W.notSaved, W.off] : [W.notSaved] };
+    if (s.signIn) return { tone: "wait", words: s.kept ? [W.signIn, W.kept] : [W.signIn] };
+    if (s.cloud === "off") return { tone: "off", words: s.kept ? [W.off, W.kept] : [s.why === W.reload ? W.reload : W.off] };
+    if (s.saving) return { tone: "busy", words: [W.saving] };
+    if (s.problem) return { tone: "bad", words: s.kept ? [W.notInCloud, W.kept] : [W.notInCloud] };
+    if (s.kept) return { tone: "wait", words: [W.kept] };
+    return { tone: "ok", words: [s.savedAt ? W.saved : W.connected] };
+  }
+
+  // ---- one program's cloud ---------------------------------------------------------------------------------------
+  const kits = new Map(), waiting = new Set(), metas = new WeakMap();
+  // what the kit knows about an open document, beside the document itself (which stays a plain object)
+  function meta(doc) {
+    let m = metas.get(doc);
+    if (!m) metas.set(doc, (m = { owner: undefined, cloudName: "", rev: "", seq: 0, done: 0, w: Promise.resolve(), cur: null, queued: null, hold: 0, clashes: 0, clashAt: 0 }));
+    return m;
+  }
+
+  class Kit {
+    constructor(o) {
+      this.app = lower(o.app);
+      this.ext = o.ext ? (String(o.ext).startsWith(".") ? String(o.ext) : "." + o.ext) : "";
+      this.binary = !!o.binary;
+      this.R = o.relay;
+      this.name = o.name || "";
+      this.fileManager = o.fileManager || "../file-manager/";
+      this.accountPage = o.accountPage || "../settings/account.html";
+      this.saveAfter = o.saveAfter || SAVE_AFTER;
+      this._subs = { state: new Set(), notice: new Set(), account: new Set(), data: new Set() };
+      this._dev = makeDevice();
+      this._q = Promise.resolve(); // one cloud write at a time
+      this._autos = new Set();
+      this._open = new Map(); // key -> the document open in this page (held weakly)
+      this._known = new Set(); // lower-case names of this person's documents, as far as this page knows
+      this._vjobs = new Map();
+      this._busy = 0;
+      this._reach = false;
+      this._tries = 0;
+      this.state = { cloud: "checking", why: "", account: this.R.account(), saving: false, kept: 0, savedAt: 0, device: true, problem: "", signIn: false, unsaved: false, notice: "" };
+      Object.assign(this.state, wordsFor(this.state));
+      this.data = { get: (k) => this._dataGet(k), set: (k, v) => this._dataSet(k, v), update: (k, fn) => this._dataUpdate(k, fn) };
+    }
+
+    // ---- state and events ----
+    on(what, fn) {
+      const set = this._subs[what];
+      if (!set || typeof fn !== "function") return () => {};
+      set.add(fn);
+      return () => set.delete(fn);
+    }
+    _emit(what, v) { for (const f of this._subs[what]) { try { f(v); } catch (e) { console.error("cloud-kit:", e); } } }
+    _set(patch) {
+      const s = Object.assign({}, this.state, patch);
+      Object.assign(s, wordsFor(s));
+      if (JSON.stringify(s) === JSON.stringify(this.state)) return;
+      this.state = s;
+      this._emit("state", s);
+    }
+    _notice(text) {
+      this._set({ notice: text });
+      this._emit("notice", text);
+      clearTimeout(this._noteTimer);
+      this._noteTimer = text && !hidden() ? setTimeout(() => { this._noteTimer = 0; this._set({ notice: "" }); }, NOTE_MS) : 0;
+    }
+    _refused() { // this browser will not keep a copy: said once (and once more if the cloud is off as well)
+      this._set({ device: false });
+      const text = this._reach ? W.noCopy : W.noCopyOff;
+      if (!this._told) this._told = new Set();
+      if (this._told.has(text) || !this._started) return;
+      this._told.add(text);
+      this._notice(text);
+    }
+    _away() { return !!this._leaving || hidden(); }
+    _owner() { const a = this.R.account(); return (a && a.id) || ""; }
+    _key(owner, name) { return this.app + SEP + owner + SEP + lower(name); }
+    _work(n) { this._busy += n; this._set({ saving: this._busy > 0 }); }
+    _tell(what, key) { try { if (this._bc) this._bc.postMessage({ app: this.app, what, key: key || "" }); } catch (e) {} }
+
+    // ---- start: is the cloud on, who is this, send up what was kept ----
+    start() {
+      return this._started || (this._started = (async () => {
+        try {
+          if (!(await this._dev.open())) this._set({ device: false }); // said when something is saved
+          this._listen();
+          await this._check();
+          await this._sync();
+          await this._learn();
+          this._tick(true);
+        } catch (e) { console.error("cloud-kit:", e); }
+        if (this.state.cloud === "checking") this._set({ cloud: "off" });
+        return this.state;
+      })());
+    }
+    _listen() {
+      const d = root.document;
+      this._handlers = [
+        [d, "visibilitychange", () => (hidden() ? this._hidden() : this._tick())],
+        [root, "pagehide", () => this._hidden()],
+        [root, "pageshow", (e) => { if (e.persisted) this._tick(); }],
+        [root, "online", () => this._recheck()],
+      ];
+      for (const [t, n, f] of this._handlers) t.addEventListener(n, f);
+      this._offAccount = this.R.on("account", () => { this._account().catch((e) => console.error("cloud-kit:", e)); });
+      try { this._bc = new BroadcastChannel("cloud-kit"); this._bc.onmessage = (e) => this._heard(e.data); } catch (e) {}
+    }
+    // stop: everything the kit set running (for a page that takes the kit down again; tests)
+    async stop() {
+      this._stopped = true;
+      for (const a of Array.from(this._autos)) await a.stop();
+      for (const [t, n, f] of this._handlers || []) t.removeEventListener(n, f);
+      if (this._offAccount) this._offAccount();
+      clearInterval(this._seenTimer); clearTimeout(this._retryTimer); clearTimeout(this._noteTimer);
+      this._seenTimer = this._retryTimer = this._noteTimer = 0;
+      try { if (this._bc) this._bc.close(); } catch (e) {}
+      kits.delete(this.app);
+    }
+    async _check() {
+      const p = await this.R.ping(5000);
+      if (!p.ok) {
+        this._reach = false;
+        this._set({ cloud: "off", why: p.kind === "reload" ? W.reload : p.why || "", account: this.R.account() });
+        return false;
+      }
+      await this.R.me();
+      this._reach = true;
+      this._set({ account: this.R.account() });
+      return true;
+    }
+    _down(why) { // it did not answer: off, and looked at again in a while
+      this._reach = false;
+      this._set({ cloud: "off", why: why || "" });
+      this._later();
+    }
+    // a failed answer from the cloud: off for now (it is tried again by itself), or refused (said plainly)
+    _verdict(r) {
+      r = r || {};
+      if (isLater(r)) { this._down(r.why); return { kind: "later", why: r.why || "" }; }
+      this._set({ problem: r.why || W.notInCloud });
+      return { kind: "refused", why: r.why || "" };
+    }
+    _later() { // look again in a while: only while the page is in view and there is a reason to
+      if (this._stopped || this._retryTimer || this._away()) return;
+      if (this._reach && !this._holdUntil) { this._tries = 0; return; }
+      const wait = RETRY[Math.min(this._tries, RETRY.length - 1)];
+      this._retryTimer = setTimeout(() => { this._retryTimer = 0; this._tries++; this._recheck(); }, wait);
+    }
+    _recheck() {
+      if (this._stopped || !this._started) return Promise.resolve();
+      return this._checking || (this._checking = (async () => {
+        clearTimeout(this._retryTimer);
+        this._retryTimer = 0;
+        try {
+          if (!this._reach) await this._check();
+          if (this._reach) await this._sync();
+        } catch (e) { console.error("cloud-kit:", e); }
+        this._checking = null;
+        this._later();
+      })());
+    }
+    // in view: say "open" once a minute, and look at once if something waits
+    _tick(first) {
+      if (this._stopped || hidden()) return;
+      this._leaving = false;
+      if (!this._seenTimer) this._seenTimer = setInterval(() => this._seen(), SEEN_EVERY);
+      if (Date.now() - (this._seenAt || 0) >= SEEN_EVERY) this._seen();
+      if (this.state.notice && !this._noteTimer) this._noteTimer = setTimeout(() => { this._noteTimer = 0; this._set({ notice: "" }); }, NOTE_MS);
+      if (first) this._later(); // start() has just looked
+      else if (!this._reach || this.state.kept) this._recheck();
+    }
+    _seen() {
+      this._seenAt = Date.now();
+      if (!this._reach || this._away()) return;
+      // the same request as relay-client's seen(); asked here so the answer is known (no answer: the cloud is off)
+      this.R.api("seen", { method: "POST", json: { app: this.app }, timeout: 8000 }).then((r) => { if (!r.ok && isLater(r) && this._reach) this._down(r.why); });
+    }
+    // hidden or closing: no timers, and what is not saved yet goes into the browser now
+    _hidden() {
+      this._leaving = true;
+      clearInterval(this._seenTimer); clearTimeout(this._retryTimer); clearTimeout(this._noteTimer);
+      this._seenTimer = this._retryTimer = this._noteTimer = 0;
+      for (const a of this._autos) a._hide();
+    }
+    async _account() { // signed in, out, or another person (this tab or another)
+      const a = this.R.account(), was = this.state.account;
+      const quiet = this._quiet && !was && a && a.kind === "guest"; // the guest this page's own first save just made
+      this._docsCache = null;
+      this._lastSaid = "";
+      this._recentId = "";
+      if (this._reach) await this.R.me();
+      this._set({ account: this.R.account(), signIn: false, problem: "" });
+      await this._sync();
+      await this._learn();
+      if ((a && a.id) !== (was && was.id) && !quiet) this._emit("account", this.R.account());
+    }
+    _heard(m) { // another tab of this browser changed what is kept here
+      if (!m || m.app !== this.app) return;
+      this._count();
+      if (m.what === "data") this._emit("data", m.key);
+    }
+    async _count() {
+      const me = this._owner();
+      let n = await soft(this._dev.count(this.app, me ? [me, ""] : [""], me), -1);
+      const open = this._docsOpen().map((d) => meta(d).cur).filter((c) => c && c.rec.kept);
+      if (n < 0) n = open.length; // no browser copy: what this page holds
+      else n += open.filter((c) => c.rec.owner && c.rec.owner !== me).length; // open here, waiting for an owner who signed out
+      this._set({ kept: n });
+      return n;
+    }
+    _docsOpen() {
+      const out = [];
+      for (const [k, ref] of this._open) { const d = ref.deref ? ref.deref() : ref; if (d) out.push(d); else this._open.delete(k); }
+      return out;
+    }
+    _remember(doc) {
+      const m = meta(doc);
+      for (const [k, ref] of this._open) if ((ref.deref ? ref.deref() : ref) === doc) this._open.delete(k);
+      this._open.set(this._key(m.owner || "", doc.name), typeof WeakRef === "function" ? new WeakRef(doc) : doc);
+      this._known.add(lower(doc.name));
+    }
+    _docAt(key) { const ref = this._open.get(key), d = ref && (ref.deref ? ref.deref() : ref); return d || null; }
+    async _learn() { // the names in use, so a new document gets one of its own
+      const me = this._owner(), known = new Set();
+      for (const o of me ? [me, ""] : [""]) for (const r of await soft(this._dev.docs(this.app, o), [])) known.add(lower(r.name));
+      if (me && this._reach && this.ext) for (const d of (await this._docs(3000)) || []) known.add(lower(d.name));
+      for (const d of this._docsOpen()) known.add(lower(d.name));
+      this._known = known;
+    }
+    async _docs(maxAge) { // this person's documents in the cloud (null: it could not be read)
+      const me = this._owner(), c = this._docsCache;
+      if (!me) return [];
+      if (c && c.owner === me && Date.now() - c.at < (maxAge || 0)) return c.list;
+      const r = await this.R.call("files", `app/${this.app}/docs`, { timeout: 20000 });
+      if (!r.ok || !Array.isArray(r.data)) { this._failed = r; return null; }
+      this._docsCache = { at: Date.now(), owner: me, list: r.data };
+      return r.data;
+    }
+
+    // ---- sending up what was kept ----
+    _sync() {
+      if (this._syncing) { this._again = true; return this._syncing; }
+      return (this._syncing = (async () => {
+        try { do { this._again = false; await this._syncOnce(); } while (this._again && this._reach); }
+        catch (e) { console.error("cloud-kit:", e); }
+        this._syncing = null;
+        await this._count();
+        this._later();
+      })());
+    }
+    async _syncOnce() {
+      if (!this._reach) return;
+      let stuck = false;
+      const note = (r) => { if (r && r.kind === "later" && !r.held) stuck = true; };
+      // the documents open in this page: through themselves, so each stays in step with what went up
+      for (const d of this._docsOpen()) { const c = meta(d).cur; if (c && c.rec.kept && this._reach) note(await this._push(d)); }
+      // what else this browser kept (one tab at a time sends it)
+      const rest = async () => {
+        const me = this._owner();
+        for (const o of me ? [me, ""] : [""]) {
+          for (const rec of await soft(this._dev.kept("docs", this.app, o), [])) {
+            if (!this._reach) return;
+            const d = rec.copyOf ? null : this._docAt(rec.key);
+            if (d && meta(d).rev === rec.rev) note(await this._push(d)); // this page's own content
+            else note(await this._pushKept(rec)); // kept by an earlier visit, or by another tab that has gone
+          }
+        }
+        if (!me) return;
+        for (const o of [me, ""]) for (const rec of await soft(this._dev.kept("values", this.app, o), [])) { if (!this._reach) return; note(await this._pushValue(rec, me)); }
+        await this._pushLast(me);
+      };
+      const locks = root.navigator && root.navigator.locks;
+      if (locks) await locks.request("cloud-kit:" + this.app, { ifAvailable: true }, (l) => (l ? rest() : null));
+      else await rest();
+      if (this._holdUntil && Date.now() >= this._holdUntil) this._holdUntil = 0;
+      if (this._reach && !stuck) this._set({ cloud: "on", why: "" });
+    }
+    _pushKept(rec) { // a kept document that is not open in this page
+      this._work(1);
+      const job = this._q.then(async () => {
+        const body = await soft(this._dev.body(rec.key), undefined);
+        if (body === undefined) return { kind: "same" };
+        if (rec.copyOf) return this._pushCopy(rec, body);
+        return this._pushRec({ rec, data: body }, null);
+      }).catch((e) => { console.error("cloud-kit:", e); return { kind: "later" }; });
+      this._q = job.then(() => this._work(-1));
+      return job;
+    }
+    async _pushCopy(rec, body) { // another tab's version, displaced here while the cloud was off: "<name> <date> (2)"
+      const me = this._owner();
+      if (!me || (rec.owner && rec.owner !== me)) return { kind: "signin" };
+      const bytes = await toBytes(body);
+      const r = await this._putDoc(rec.name, rec.date > today() ? rec.date : today(), bytes, "&as=copy");
+      if (!r.ok) return this._verdict(r);
+      await soft(this._dev.del([rec.key]));
+      return { kind: "saved" };
+    }
+    async _pushLast(me) { // what was open last: the newer of this browser's word and the cloud's
+      const key = this._key(me, "") + "last", mark = await soft(this._dev.get("marks", key), null);
+      if (!mark || mark.sent) return;
+      const r = await this.R.call("files", `app/${this.app}/last`, { timeout: 15000 });
+      if (!r.ok) return;
+      const at = (r.data && r.data.value && r.data.value.at) || 0;
+      if (mark.at > at) { const p = await this.R.call("files", `app/${this.app}/last`, { method: "PUT", json: { name: mark.name, at: mark.at }, timeout: 15000 }); if (!p.ok) return; }
+      mark.sent = true;
+      await soft(this._dev.put("marks", mark));
+    }
+    _guest() { // the first save makes a guest, silently (one at a time, in every tab of this browser)
+      const make = async () => {
+        if (this._owner()) return { ok: true };
+        this._quiet = true; // the open document simply becomes theirs: no "account" event for the program
+        const r = await this.R.guest().then((x) => x, () => ({ ok: false }));
+        this._quiet = false;
+        return r.ok ? { ok: true } : { ok: false, status: r.status || 0, why: r.why, kind: r.kind };
+      };
+      const locks = root.navigator && root.navigator.locks;
+      return this._guesting || (this._guesting = (locks ? locks.request("cloud-kit-guest", make) : make()).then((r) => { this._guesting = null; return r; }, () => { this._guesting = null; return { ok: false, status: 0 }; }));
+    }
+    _putDoc(name, date, bytes, extra, keepalive) {
+      const o = { method: "PUT", body: bytes, headers: { "Content-Type": "application/octet-stream" }, timeout: 30000 + Math.round(bytes.byteLength / 20) };
+      if (keepalive && bytes.byteLength < 60000) o.keepalive = true; // it may outlive the page
+      return this.R.call("files", `app/${this.app}/doc?name=${q(name)}&date=${date}&ext=${q(this.ext)}${extra || ""}`, o);
+    }
+    async _getDoc(name, extra, etag) { // { ok, bytes, version, date, id } or { ok, same } or { ok: false, status, why, kind }
+      let res;
+      try { res = await this.R.fetch("files", `app/${this.app}/doc?name=${q(name)}${extra || ""}`, { cache: "no-store", timeout: 120000, headers: etag ? { "If-None-Match": `"${etag}"` } : {} }); }
+      catch (e) { return { ok: false, status: 0, why: this.R.base ? "could not reach the PC" : this.R.where.why, kind: this.R.base ? "network" : "off" }; }
+      if (res.status === 304) return { ok: true, same: true };
+      if (!res.ok) { const j = await res.json().catch(() => null); return { ok: false, status: res.status, why: (j && j.why) || `the PC answered ${res.status}`, kind: (j && j.kind) || "http" }; }
+      const bytes = new Uint8Array(await res.arrayBuffer()), h = (n) => res.headers.get(n) || "";
+      let file = "";
+      try { file = decodeURIComponent(h("X-Doc-Name")); } catch (e) {}
+      return { ok: true, bytes, version: h("X-Doc-Version"), date: h("X-Doc-Date"), id: h("X-Doc-Id"), file };
+    }
+    // _pushRec: one document's newest content to the cloud. cur = { rec, data, bytes?, hash? }; doc when it is open
+    // in this page. Answers { kind: "saved" | "same" | "later" | "refused" | "signin", why }.
+    async _pushRec(cur, doc) {
+      const m = doc ? meta(doc) : null;
+      let rec = cur.rec;
+      if (!this._reach) return { kind: "later" };
+      if (m && m.hold > Date.now()) return { kind: "later", held: true }; // just after a clash: not again at once (two devices editing at the same time)
+      let me = this._owner();
+      if (!me) {
+        if (rec.owner) { this._set({ signIn: true }); return { kind: "signin", why: W.signIn }; } // its owner signed out: it waits here for them
+        const g = await this._guest();
+        if (!g.ok) return this._verdict(g);
+        me = this._owner();
+        if (!me) return { kind: "later" };
+      }
+      if (rec.owner !== me) rec = await this._adopt(cur, me, doc);
+      if (doc) { rec.version = doc.version || ""; rec.date = doc.date || ""; rec.cloudName = m.cloudName || ""; } // the open document knows what went up last
+      const bytes = cur.bytes || (cur.bytes = await toBytes(cur.data));
+      const hash = cur.hash || (cur.hash = await hashOf(bytes));
+      let clashed = false;
+      for (let round = 0; round < 6; round++) {
+        if (!rec.cloudName) { // new in the cloud: its name must be free there
+          const docs = await this._docs(3000);
+          if (!docs) return this._verdict(this._failed);
+          const names = new Set(docs.map((d) => lower(d.name)));
+          if (names.has(lower(rec.name))) rec = await this._retitle(cur, names, doc);
+        } else if (rec.cloudName !== rec.name) { // renamed while the cloud was off
+          const r = await this.R.call("files", `app/${this.app}/doc/rename`, { method: "POST", json: { from: rec.cloudName, to: rec.name }, timeout: 30000 });
+          if (r.ok) { rec.cloudName = rec.name; rec.id = fileId(r.data, rec.date) || rec.id; if (m) m.cloudName = rec.name; if (doc) doc.id = rec.id; this._docsCache = null; }
+          else if (r.status === 409) { const docs = (await this._docs(0)) || []; rec = await this._retitle(cur, new Set(docs.map((d) => lower(d.name)).concat(lower(rec.name))), doc); continue; }
+          else if (r.status === 404 && r.kind === "none") { rec.cloudName = ""; rec.version = ""; if (m) m.cloudName = ""; continue; }
+          else return this._verdict(r);
+        }
+        const date = rec.date > today() ? rec.date : today(); // never an earlier day than the file it came from
+        if (rec.cloudName && hash && hash === rec.version) return this._settled(cur, doc, {}, clashed); // the cloud has exactly this
+        const r = await this._putDoc(rec.name, date, bytes, "&base=" + q(rec.version), cur.keepalive);
+        if (r.ok && r.data && r.data.version) return this._settled(cur, doc, r.data, clashed);
+        if (r.status === 409 && r.kind === "clash") {
+          const theirs = (r.data && r.data.version) || "";
+          if (hash && theirs === hash) return this._settled(cur, doc, { version: hash, date }, clashed); // the same content, from another tab
+          if (!rec.cloudName) { this._docsCache = null; rec = await this._retitle(cur, new Set([lower(rec.name)]), doc); continue; }
+          // both changed it. Theirs is kept as "<name> <date> (2)", then this one goes in: nothing is lost, nobody is asked
+          const g = await this._getDoc(rec.name, `&date=${date}&copy=0`);
+          if (g.ok) {
+            const v = g.version || (await hashOf(g.bytes));
+            if (!v) return this._verdict({ status: 0, why: "Cloud File Manager did not say which version it holds" }); // never a copy without knowing what it is a copy of
+            const c = await this._putDoc(rec.name, date, g.bytes, "&as=copy");
+            if (!c.ok) return this._verdict(c);
+            rec.version = v;
+          } else if (g.status === 404) rec.version = "";
+          else return this._verdict(g);
+          clashed = true;
+          continue;
+        }
+        if (r.status === 401 && !this._owner()) { this._set({ signIn: true }); return { kind: "signin", why: W.signIn }; } // the sign-in ended on the PC
+        return this._verdict(r);
+      }
+      return this._verdict({ status: 0, why: "the document keeps changing in Cloud File Manager" }); // tried again in a while
+    }
+    // the cloud has it: the record and the open document learn the new version
+    async _settled(cur, doc, d, clashed) {
+      const rec = cur.rec, m = doc ? meta(doc) : null;
+      if (d.version) rec.version = d.version;
+      if (d.date) rec.date = d.date;
+      if (d.id) rec.id = d.id;
+      rec.cloudName = rec.name;
+      rec.kept = false;
+      await soft(this._dev.settle(rec.key, rec.rev, { version: rec.version, date: rec.date, id: rec.id, cloudName: rec.name }), false);
+      if (doc) { doc.version = rec.version; doc.date = rec.date; doc.id = rec.id || doc.id || ""; doc.source = "cloud"; m.cloudName = rec.name; m.owner = rec.owner; }
+      this._set({ savedAt: Date.now(), problem: "", signIn: false, unsaved: false });
+      if (clashed) {
+        this._notice(W.clash(rec.name));
+        if (m) { // two devices at the same document: each clash makes the next save wait longer, so copies do not pile up
+          m.clashes = Date.now() - m.clashAt < 600000 ? m.clashes + 1 : 1;
+          m.clashAt = Date.now();
+          m.hold = Date.now() + Math.min(300000, 5000 * 2 ** (m.clashes - 1));
+          this._holdUntil = Math.max(this._holdUntil || 0, m.hold);
+        }
+      }
+      this._known.add(lower(rec.name));
+      this._docsCache = null;
+      if (rec.id && rec.id !== this._recentId) { this._recentId = rec.id; this.R.call("files", `app/${this.app}/recent`, { method: "POST", json: { id: rec.id, name: rec.name }, timeout: 15000 }); }
+      this._last(rec.name);
+      this._trim(rec.owner);
+      this._tell("docs");
+      return { kind: "saved" };
+    }
+    // nobody's document becomes this person's (it moves); another person's becomes a new one of this person's
+    async _adopt(cur, me, doc) {
+      const old = cur.rec, names = new Set((await soft(this._dev.docs(this.app, me), [])).map((r) => lower(r.name)));
+      const change = (r) => Object.assign(r, { owner: me, name: unique(r.name, names), cloudName: "", version: "", date: "", id: "", kept: true, key: this._key(me, unique(r.name, names)) });
+      let rec = old.owner ? null : await soft(this._dev.move(old.key, change), null);
+      if (!rec) { rec = keptIn(change(Object.assign({}, old))); if (old.owner) await soft(this._dev.putDoc(rec, typeof cur.data === "string" ? cur.data : cur.bytes || (cur.bytes = await toBytes(cur.data)), rec.rev), null); }
+      cur.rec = rec;
+      if (doc) { const m = meta(doc); m.owner = me; m.cloudName = ""; m.rev = rec.rev; doc.name = rec.name; doc.version = ""; doc.date = ""; doc.id = ""; this._remember(doc); }
+      return rec;
+    }
+    // the name is taken in the cloud (taken: lower-case names): a name of its own, free there and in this browser. Here
+    // first; the cloud follows at the next step. A notice says which name it got.
+    async _retitle(cur, taken, doc) {
+      const old = cur.rec, was = old.name;
+      for (const r of await soft(this._dev.docs(this.app, old.owner), [])) if (r.key !== old.key) taken.add(lower(r.name));
+      const name = unique(was, taken.add(lower(was)));
+      const change = (r) => Object.assign(r, { name, key: this._key(old.owner, name), kept: true });
+      const rec = (await soft(this._dev.move(old.key, change), null)) || change(old);
+      Object.assign(old, { name: rec.name, key: rec.key });
+      cur.rec = old;
+      if (doc) { doc.name = name; this._remember(doc); }
+      this._known.add(lower(name));
+      this._notice(W.savedAs(was, name));
+      return old;
+    }
+    async _last(name) { // this is what was open last: said here, and to the cloud
+      const me = this._owner(), said = me + SEP + lower(name);
+      if (this._lastSaid === said) return;
+      this._lastSaid = said;
+      const mark = { key: this._key(me, "") + "last", name, at: Date.now(), sent: false };
+      await soft(this._dev.put("marks", mark));
+      if (!me || !this._reach) return;
+      const r = await this.R.call("files", `app/${this.app}/last`, { method: "PUT", json: { name, at: mark.at }, timeout: 15000 });
+      if (r.ok) { mark.sent = true; await soft(this._dev.put("marks", mark)); }
+    }
+    async _trim(owner) { // the browser keeps the newest few documents that are safe in the cloud, and everything that is not
+      const recs = (await soft(this._dev.docs(this.app, owner), [])).filter((r) => !r.kept).sort((a, b) => b.at - a.at);
+      const drop = recs.slice(KEEP_DOCS).map((r) => r.key).filter((k) => !this._docAt(k));
+      if (drop.length) await soft(this._dev.del(drop));
+    }
+
+    // ---- saving ----
+    // _write: into this browser first. Resolves the newest write, { rec, data, bytes, hash, ok } (ok: the browser kept it).
+    _write(doc, data) {
+      const m = meta(doc), seq = ++m.seq;
+      return (m.w = m.w.then(async () => {
+        if (seq < m.done) return m.cur; // something newer is in already (the page was hidden meanwhile)
+        const bytes = await toBytes(data), hash = await hashOf(bytes);
+        if (seq < m.done) return m.cur;
+        if (m.owner === undefined) m.owner = this._owner();
+        const rec = this._rec(doc, m, hash, bytes.byteLength);
+        let ok = false;
+        try {
+          const r = await this._dev.putDoc(rec, typeof data === "string" ? data : bytes, m.rev);
+          ok = true;
+          if (r && r.displaced) this._notice(W.clashTab(doc.name));
+          this._set({ device: true });
+        } catch (e) { this._refused(); }
+        m.rev = rec.rev;
+        m.done = seq;
+        this._remember(doc);
+        return (m.cur = { rec, data, bytes, hash, ok, keepalive: !!this._leaving });
+      }).catch((e) => { console.error("cloud-kit:", e); return m.cur || { rec: this._rec(doc, m, "", 0), data, ok: false }; }));
+    }
+    _rec(doc, m, hash, size) {
+      return keptIn({ key: this._key(m.owner || "", doc.name), app: this.app, owner: m.owner || "", name: doc.name, cloudName: m.cloudName || "", version: doc.version || "",
+        date: doc.date || "", id: doc.id || "", rev: rnd(), hash, size, at: Date.now(), kept: true });
+    }
+    // _push: the document's newest write to the cloud. Saves that arrive while one waits its turn go up together.
+    _push(doc) {
+      const m = meta(doc);
+      if (m.queued) return m.queued;
+      this._work(1);
+      const job = this._q.then(async () => {
+        m.queued = null;
+        await m.w;
+        return m.cur ? this._pushRec(m.cur, doc) : { kind: "same" };
+      }).catch((e) => { console.error("cloud-kit:", e); return { kind: "later", why: String((e && e.message) || e) }; });
+      m.queued = job;
+      this._q = job.then(() => this._work(-1));
+      return job;
+    }
+    // save: now. { ok, where: "cloud" | "device", why }
+    async save(doc, data) {
+      if (!doc || !savable(data)) return { ok: false, where: "", why: W.nothing };
+      const why = badName(String(doc.name || ""));
+      if (why) return { ok: false, where: "", why };
+      doc.data = data;
+      await this._dev.open();
+      const w = await this._write(doc, data);
+      await this.start();
+      const r = this._reach ? await this._push(doc) : { kind: "later" };
+      const up = r.kind === "saved" || r.kind === "same";
+      if (!up && !w.ok) { this._set({ unsaved: true }); this._refused(); } // neither the cloud nor this browser has it
+      await this._count();
+      if (!up) this._later();
+      if (up) return { ok: true, where: "cloud", why: "" };
+      return w.ok ? { ok: true, where: "device", why: r.why || this.state.problem || this.state.why || "" } : { ok: false, where: "", why: r.why || this.state.why || W.notSaved };
+    }
+    // autosave: touch() on every change. It saves a moment after the last change, and at once when the page is
+    // hidden or closed. One per open document; stop() when the document is closed or replaced.
+    autosave(doc, getData) {
+      const kit = this;
+      let timer = 0, first = 0, dirty = false, stopped = false;
+      const take = () => { clearTimeout(timer); timer = 0; first = 0; if (!dirty) return undefined; dirty = false; try { return getData(); } catch (e) { console.error("cloud-kit:", e); return undefined; } };
+      const fire = () => { const data = take(); return data === undefined ? Promise.resolve(null) : kit.save(doc, data); };
+      const a = {
+        doc,
+        get dirty() { return dirty; },
+        touch() {
+          if (stopped) return;
+          dirty = true;
+          if (hidden()) { a._hide(); return; }
+          const now = Date.now();
+          if (!first) first = now;
+          clearTimeout(timer);
+          timer = setTimeout(fire, Math.max(0, Math.min(kit.saveAfter, first + SAVE_MAX - now)));
+        },
+        flush: fire,
+        stop() { stopped = true; kit._autos.delete(a); return fire(); },
+        _hide() { // into the browser now, with nothing to wait for; then to the cloud as usual
+          const data = take();
+          if (data === undefined || !savable(data)) return;
+          const m = meta(doc);
+          if (m.owner === undefined) m.owner = kit._owner();
+          const rec = kit._rec(doc, m, "", 0);
+          if (kit._dev.putNow(rec, data)) { m.rev = rec.rev; m.done = ++m.seq; m.cur = { rec, data, ok: true, keepalive: true }; kit._remember(doc); }
+          kit.save(doc, data);
+        },
+      };
+      this._autos.add(a);
+      this._remember(doc);
+      return a;
+    }
+    // rename: here and in the cloud. { ok, why, kind }
+    async rename(doc, to) {
+      to = String(to == null ? "" : to).trim();
+      const m = meta(doc), why = badName(to);
+      if (why) return { ok: false, kind: "bad-name", why };
+      await this.start();
+      this._work(1);
+      const job = this._q.then(async () => { // after a save that is on its way: it finishes under the old name first
+        await m.w;
+        const from = doc.name;
+        if (from === to) return { ok: true };
+        const me = this._owner(), owner = m.owner === undefined ? me : m.owner;
+        if (lower(from) !== lower(to)) {
+          const names = new Set((await soft(this._dev.docs(this.app, owner), [])).map((r) => lower(r.name)));
+          if (this._reach && me && owner === me) for (const d of (await this._docs(0)) || []) names.add(lower(d.name));
+          if (names.has(lower(to))) return { ok: false, kind: "exists", why: W.taken(to) };
+        }
+        let cloudName = m.cloudName, id = "";
+        if (cloudName && this._reach && me && owner === me) {
+          const r = await this.R.call("files", `app/${this.app}/doc/rename`, { method: "POST", json: { from: cloudName, to }, timeout: 30000 });
+          if (r.ok) { cloudName = to; id = fileId(r.data, doc.date); } // the file has a new id under its new name
+          else if (r.status === 409) return { ok: false, kind: "exists", why: W.taken(to) };
+          else if (r.status === 404 && r.kind === "none") cloudName = "";
+          else if (isLater(r)) this._down(r.why); // it is renamed here; the cloud follows when it is back
+          else return { ok: false, kind: r.kind || "refused", why: r.why };
+          this._docsCache = null;
+        }
+        const pending = !!cloudName && cloudName !== to;
+        m.w = m.w.then(async () => {
+          const change = (r) => Object.assign(r, { name: to, key: this._key(owner, to), cloudName, id: id || r.id, kept: r.kept || pending });
+          const rec = await soft(this._dev.move(this._key(owner, from), change), null);
+          if (m.cur) { change(m.cur.rec); keptIn(m.cur.rec); if (rec) m.cur.rec.rev = rec.rev; }
+          doc.name = to;
+          if (id) doc.id = id;
+          m.cloudName = cloudName;
+          this._remember(doc);
+        });
+        await m.w;
+        this._recent(id, to);
+        this._known.delete(lower(from));
+        this._lastSaid = "";
+        if (m.cur || m.cloudName) this._last(to);
+        this._tell("docs");
+        await this._count();
+        if (pending) this._later();
+        return { ok: true };
+      }).catch((e) => { console.error("cloud-kit:", e); return { ok: false, kind: "failed", why: String((e && e.message) || e) }; });
+      this._q = job.then(() => this._work(-1));
+      return job;
+    }
+
+    // ---- opening ----
+    _doc(name, data, o) { return { name, data, date: o.date || "", version: o.version || "", source: o.source, id: o.id || "" }; }
+    _asData(body) { // what the program gets: text, or bytes when the kit was made with binary
+      if (this.binary) { const b = typeof body === "string" ? enc.encode(body) : body; return b.buffer.byteLength === b.byteLength ? b.buffer : b.slice().buffer; }
+      return typeof body === "string" ? body : dec.decode(body);
+    }
+    _docName(fileName) { // "My home 2026-11-11 (2).plan-cutter" is a file of the document "My home"
+      const n = String(fileName || "");
+      return this.ext && lower(n).endsWith(lower(this.ext)) ? n.slice(0, -this.ext.length).replace(/ \d{4}-\d{2}-\d{2}( \(\d{1,4}\))?$/, "") : "";
+    }
+    _stem(fileName) { // any file's name as a new document's name
+      let n = this._docName(fileName) || String(fileName || "");
+      if (!this._docName(fileName) && n.lastIndexOf(".") > 0) n = n.slice(0, n.lastIndexOf("."));
+      n = n.replace(/[\\/:*?"<>|\x00-\x1f\x7f]/g, " ").replace(/[. ]+$/, "").trim().slice(0, 80).trim();
+      return badName(n) ? W.untitled : n;
+    }
+    async _fromRec(got) { // a document from this browser's copy
+      const rec = got.rec, body = typeof got.body === "string" ? got.body : (await toBytes(got.body)) || new Uint8Array(0);
+      const doc = this._doc(rec.name, this._asData(body), { date: rec.date, version: rec.version, source: rec.cloudName ? "cloud" : "device", id: rec.id });
+      const m = meta(doc);
+      m.owner = rec.owner; m.cloudName = rec.cloudName || ""; m.rev = rec.rev;
+      m.cur = { rec, data: body, hash: rec.hash || "", ok: true };
+      this._remember(doc);
+      this._last(doc.name);
+      return doc;
+    }
+    async _keepCopy(doc, body, o) { // the silent copy of a document just read from the cloud
+      const m = meta(doc);
+      m.owner = this._owner(); m.cloudName = doc.name;
+      const rec = this._rec(doc, m, o.hash || doc.version, body.byteLength || body.length || 0);
+      rec.kept = false; keptIn(rec);
+      try { await this._dev.putDoc(rec, body, ""); this._set({ device: true }); } catch (e) { this._refused(); }
+      m.rev = rec.rev;
+      m.cur = { rec, data: body, hash: rec.hash, ok: true };
+      this._remember(doc);
+    }
+    // create: a new document, at once. Its name is made unique; it is saved at its first save.
+    create(name) {
+      let n = String(name == null ? "" : name).trim();
+      if (badName(n)) n = W.untitled;
+      n = unique(n, this._known);
+      this._known.add(lower(n));
+      return this._doc(n, this.binary ? new ArrayBuffer(0) : "", { source: "new" });
+    }
+    // openLast: what this person had open last: the cloud's word, or this browser's when the cloud is off. Or null.
+    async openLast() {
+      await this.start();
+      const me = this._owner(), key = this._key(me, "") + "last";
+      let mark = await soft(this._dev.get("marks", key), null);
+      if (me && this._reach) {
+        const r = await this.R.call("files", `app/${this.app}/last`, { timeout: 15000 });
+        const v = r.ok && r.data && r.data.value;
+        if (v && v.name && !(mark && !mark.sent && mark.at > (v.at || 0))) {
+          mark = { key, name: String(v.name), at: v.at || 0, sent: true };
+          await soft(this._dev.put("marks", mark));
+        } else if (!r.ok && isLater(r)) this._down(r.why);
+      }
+      if (!mark || !mark.name) return null;
+      this._lastSaid = me + SEP + lower(mark.name);
+      return this.openDoc(mark.name);
+    }
+    // openDoc: one of this person's documents, by its name (as list() gives them). Or null.
+    async openDoc(name) {
+      await this.start();
+      const me = this._owner(), key = this._key(me, name);
+      const here = this._docAt(key);
+      if (here) return here; // already open in this page
+      const got = await soft(this._dev.getDoc(key), null);
+      if (got && got.rec.kept) { this._recheck(); return this._fromRec(got); } // newer here than in the cloud: it goes up by itself
+      if (me && this._reach && this.ext) {
+        const g = await this._getDoc(name, "", got ? got.rec.version : "");
+        if (g.ok && g.same) return this._fromRec(got); // the browser's copy is what the cloud has
+        if (g.ok) {
+          const real = this._docName(g.file); // its name as the cloud writes it
+          const doc = this._doc(lower(real) === lower(name) ? real : got ? got.rec.name : name, this._asData(g.bytes), { date: g.date, version: g.version, source: "cloud", id: g.id });
+          await this._keepCopy(doc, this.binary ? g.bytes : doc.data, { hash: g.version });
+          this._last(doc.name);
+          return doc;
+        }
+        if (g.status === 404) { if (got) await soft(this._dev.del([key])); return null; } // deleted in the cloud: the silent copy goes too
+        if (isLater(g)) this._down(g.why);
+        else if (!got) { this._notice(W.cantOpen(name, g.why)); return null; }
+      }
+      return got ? this._fromRec(got) : null;
+    }
+    // openById: a file of the Cloud File Manager by its id ("#open=<id>" from the file manager). Or null.
+    async openById(id) {
+      await this.start();
+      id = String(id || "").replace(/^#?open=/, "").split("/")[0];
+      if (!/^[0-9a-f]{20}$/.test(id)) { this._notice(W.cantOpen("", "")); return null; }
+      if (!this._reach) { this._notice(W.cantOpen("", W.off)); return null; }
+      let res;
+      try { res = await this.R.fetch("files", "file/" + id, { cache: "no-store", timeout: 120000 }); }
+      catch (e) { this._down(""); this._notice(W.cantOpen("", W.off)); return null; }
+      if (!res.ok) {
+        const j = await res.json().catch(() => null);
+        this._notice(W.cantOpen("", ((j && j.why) || `the PC answered ${res.status}`) + (this._owner() ? "" : " Sign in if it is yours.")));
+        return null;
+      }
+      const name = nameIn(res.headers.get("Content-Disposition")) || W.untitled;
+      const file = new File([await res.blob()], name, { type: res.headers.get("Content-Type") || "" });
+      const doc = await this._fromCloud(file, id);
+      this._recent(id, name);
+      return doc;
+    }
+    _recent(id, name) { // the program's recent files, which the chooser shows on top
+      if (!id || !this._owner() || !this._reach) return;
+      this._recentId = id;
+      this.R.call("files", `app/${this.app}/recent`, { method: "POST", json: { id, name: name || "" }, timeout: 15000 });
+    }
+    // a file that came from the Cloud File Manager: one of this program's own documents (it goes on as that
+    // document), or anything else (its content, as a new document here: the file itself is never changed)
+    async _fromCloud(file, id) {
+      const me = this._owner();
+      let mine = null;
+      if (this.ext && me && id) for (const d of (await this._docs(3000)) || []) for (const f of d.files || []) if (f.id === id) mine = { name: d.name, date: f.date, copy: f.copy || 0 };
+      const bytes = this.ext ? new Uint8Array(await file.arrayBuffer()) : null;
+      if (mine) {
+        const here = this._docAt(this._key(me, mine.name));
+        let version = await hashOf(bytes);
+        if (!version) { const g = await this._getDoc(mine.name, `&date=${mine.date}&copy=${mine.copy}`); version = g.ok ? g.version : ""; }
+        if (here && here.version === version) return here;
+        const doc = this._doc(mine.name, this._asData(bytes), { date: mine.date, version, source: "cloud", id });
+        doc.file = file;
+        await this._keepCopy(doc, this.binary ? bytes : doc.data, { hash: version });
+        this._last(doc.name);
+        return doc;
+      }
+      const doc = this._doc(unique(this._stem(file.name), this._known), bytes ? this._asData(bytes) : null, { source: "cloud", id });
+      doc.file = file;
+      return doc;
+    }
+    // open: the small Open chooser, under the program's Open button (o.anchor). Cloud File Manager first, then This
+    // device (a file; and a folder when o.folder). o.accept: extensions; o.keep: { label } for one checkbox in the
+    // cloud chooser; o.start: the folder the cloud chooser opens in ("Shared Folder/Reader files"; without it, the
+    // program's own folder). Resolves the document (with file, and files / paths for a folder, and keep), or null.
+    async open(o) {
+      o = o || {};
+      await this.start();
+      const accept = accepts(o.accept || (this.ext ? [this.ext] : []));
+      const rows = [{ id: "cloud", label: W.cloud, sub: this._reach ? "" : W.isOff, off: !this._reach, run: () => this._openCloud(o, accept) }];
+      if (o.folder) rows.push({ id: "file", label: W.deviceFile, run: () => this._openDevice(false, accept) }, { id: "folder", label: W.deviceFolder, run: () => this._openDevice(true, accept) });
+      else rows.push({ id: "file", label: W.device, run: () => this._openDevice(false, accept) });
+      return (await menu(o.anchor, rows)) || null;
+    }
+    async _openCloud(o, accept) {
+      if (!root.WindowKit) { console.error("cloud-kit: window-kit.js is not in the page"); return null; }
+      let got;
+      try {
+        got = await root.WindowKit.pick(this.fileManager, { app: this.app, host: this.name || document.title, accept, multiple: false, files: o.files !== false,
+          folder: o.folder === "zip" ? "zip" : o.folder ? "files" : false, keep: o.keep ? (typeof o.keep === "string" ? { label: o.keep } : o.keep) : undefined,
+          start: typeof o.start === "string" ? o.start : "" });
+      } catch (e) { this._notice(W.cantOpen("", String((e && e.message) || e))); return null; }
+      if (!got || !got.files || !got.files.length) return null;
+      let doc;
+      if (got.kind === "folder" || got.kind === "zip") {
+        doc = Object.assign(this._doc(got.folder || W.untitled, null, { source: "cloud", id: got.folderId || "" }), { kind: got.kind, files: got.files, paths: got.paths || [], missing: got.missing || "" });
+        if (got.kind === "zip") doc.file = got.files[0];
+        this._recent(got.folderId, got.folder);
+      } else {
+        const id = (got.ids && got.ids[0]) || "";
+        doc = await this._fromCloud(got.files[0], id);
+        this._recent(id, got.files[0].name);
+      }
+      doc.keep = !!got.keep;
+      return doc;
+    }
+    async _openDevice(folder, accept) {
+      const files = await pickFiles(folder, accept); // asked for inside the person's own click
+      if (!files || !files.length) return null;
+      if (folder) {
+        const paths = files.map((f) => f.webkitRelativePath || f.name);
+        return Object.assign(this._doc(paths[0].split("/")[0] || W.untitled, null, { source: "device" }), { kind: "folder", files, paths, missing: "", keep: false });
+      }
+      const f = files[0];
+      const doc = this._doc(unique(this._stem(f.name), this._known), this.ext ? this._asData(new Uint8Array(await f.arrayBuffer())) : null, { source: "device" });
+      doc.file = f;
+      doc.keep = false;
+      return doc;
+    }
+    // list: this person's documents for this program, newest first: [{ name, modified, date, id, size, kept }]
+    async list() {
+      await this.start();
+      const me = this._owner(), out = new Map();
+      const cloud = me && this._reach && this.ext ? await this._docs(0) : null;
+      for (const d of cloud || []) { const f = (d.files || [])[0] || {}; out.set(lower(d.name), { name: d.name, modified: d.modified || 0, date: f.date || "", id: f.id || "", size: f.size || 0, kept: false }); }
+      const gone = [];
+      for (const o of me ? [me, ""] : [""]) {
+        for (const r of await soft(this._dev.docs(this.app, o), [])) {
+          const it = out.get(lower(r.name));
+          if (it) { if (r.kept) { it.kept = true; it.modified = Math.max(it.modified, r.at); } }
+          else if (cloud && !r.kept && !this._docAt(r.key)) gone.push(r.key); // deleted in the cloud: the silent copy goes too
+          else out.set(lower(r.name), { name: r.name, modified: r.at, date: r.date, id: r.id || "", size: r.size || 0, kept: !!r.kept });
+        }
+      }
+      if (gone.length) await soft(this._dev.del(gone));
+      const list = Array.from(out.values()).sort((a, b) => b.modified - a.modified);
+      this._known = new Set(list.map((d) => lower(d.name)).concat(this._docsOpen().map((d) => lower(d.name))));
+      return list;
+    }
+
+    // ---- a copy on this device, and the Save chooser ----
+    // downloadCopy: the document as a file in this device's downloads ("<name><ext>")
+    async downloadCopy(doc, data) {
+      const bytes = await toBytes(data === undefined ? doc.data : data);
+      if (!bytes) return { ok: false, where: "", why: W.nothing };
+      const a = document.createElement("a"), url = URL.createObjectURL(new Blob([bytes], { type: "application/octet-stream" }));
+      a.href = url;
+      a.download = doc.name + this.ext;
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+      return { ok: true, where: "copy", name: a.download, why: "" };
+    }
+    // saveMenu: the same small chooser for Save: Cloud File Manager (save now), This device (a copy). Or null.
+    saveMenu(doc, data, o) {
+      return menu(o && o.anchor, [
+        { id: "cloud", label: W.cloud, run: () => this.save(doc, data) },
+        { id: "device", label: W.device, run: () => this.downloadCopy(doc, data) },
+      ]);
+    }
+    // account: the account window (sign in, set up user), the same page in every program
+    account() {
+      if (!root.WindowKit) return null;
+      return root.WindowKit.open(this.accountPage, { title: W.account, name: "account", width: 440, height: 660 });
+    }
+
+    // ---- data: small values that follow the person (settings, places) ----
+    _vkey(owner, key) { return this.app + SEP + owner + SEP + key; }
+    _vjob(key, fn) { // one at a time per key, in the order asked
+      const job = (this._vjobs.get(key) || Promise.resolve()).then(fn).catch((e) => { console.error("cloud-kit:", e); return { ok: false, where: "", why: String((e && e.message) || e) }; });
+      this._vjobs.set(key, job);
+      job.then(() => { if (this._vjobs.get(key) === job) this._vjobs.delete(key); });
+      return job;
+    }
+    // get: the value, or null. The cloud's when it answers; this browser's when it is off or holds a newer one.
+    async _dataGet(key) {
+      await this.start();
+      if (!KEY.test(key)) return null;
+      await (this._vjobs.get(key) || Promise.resolve());
+      const me = this._owner(), k = this._vkey(me, key), rec = await soft(this._dev.get("values", k), null);
+      if (rec && rec.kept) return rec.value;
+      if (me && this._reach) {
+        const r = await this.R.call("files", `app/${this.app}/data/${q(key)}`, { timeout: 15000 });
+        if (r.ok && r.data) {
+          const value = r.data.value === undefined ? null : r.data.value;
+          await soft(this._dev.put("values", { key: k, app: this.app, owner: me, name: key, value, version: r.data.version || "", at: r.data.modified || 0, kept: false }));
+          return value;
+        }
+        if (isLater(r)) this._down(r.why);
+      }
+      return rec ? rec.value : null;
+    }
+    // set: { ok, where }. Nobody signed in: it stays in this browser (a setting never makes a guest) and goes up
+    // when someone signs in who has none yet. The cloud off: kept here, sent when it is back.
+    _dataSet(key, value) {
+      if (!KEY.test(key) || key === "last" || key === "recent") return Promise.resolve({ ok: false, where: "", why: W.badKey });
+      if (value === undefined) value = null;
+      return this._vjob(key, async () => {
+        await this.start();
+        const me = this._owner(), k = this._vkey(me, key), old = await soft(this._dev.get("values", k), null);
+        const rec = { key: k, app: this.app, owner: me, name: key, value, version: old ? old.version : "", at: Date.now(), kept: true };
+        const here = await this._dev.put("values", rec).then(() => true, () => { this._refused(); return false; });
+        let why = "";
+        if (me && this._reach) {
+          const r = await this.R.call("files", `app/${this.app}/data/${q(key)}`, { method: "PUT", json: value, timeout: 20000 });
+          if (r.ok && r.data) {
+            Object.assign(rec, { version: r.data.version || "", kept: false });
+            await soft(this._dev.put("values", rec));
+            this._tell("data", key);
+            return { ok: true, where: "cloud", why: "" };
+          }
+          why = this._verdict(r).why;
+        }
+        this._tell("data", key);
+        if (me) { await this._count(); this._later(); }
+        return here ? { ok: true, where: "device", why } : { ok: false, where: "", why: why || this.state.why || W.notSaved };
+      });
+    }
+    // update: read, change, write, as one step: fn(old) gives the new value. Another device wrote in between: again.
+    _dataUpdate(key, fn) {
+      if (!KEY.test(key)) return Promise.resolve({ ok: false, where: "", why: W.badKey });
+      return this._vjob(key, async () => {
+        await this.start();
+        const me = this._owner(), k = this._vkey(me, key);
+        let rec = await soft(this._dev.get("values", k), null);
+        if (me && this._reach && !(rec && rec.kept)) {
+          let r = await this.R.call("files", `app/${this.app}/data/${q(key)}`, { timeout: 15000 });
+          for (let i = 0; i < 5 && r.ok && r.data; i++) {
+            const value = fn(r.data.value === undefined ? null : r.data.value), version = r.data.version || "";
+            const p = await this.R.call("files", `app/${this.app}/data/${q(key)}?base=${q(version)}`, { method: "PUT", json: value === undefined ? null : value, timeout: 20000 });
+            if (p.ok && p.data) {
+              await soft(this._dev.put("values", { key: k, app: this.app, owner: me, name: key, value, version: p.data.version || "", at: Date.now(), kept: false }));
+              this._tell("data", key);
+              return { ok: true, where: "cloud", value, why: "" };
+            }
+            if (p.status !== 409) { r = p; break; }
+            r = { ok: true, data: p.data }; // the clash answer carries the cloud's value and version
+          }
+          if (!r.ok && isLater(r)) this._down(r.why);
+        }
+        const value = fn(rec ? rec.value : null);
+        rec = { key: k, app: this.app, owner: me, name: key, value: value === undefined ? null : value, version: rec ? rec.version : "", at: Date.now(), kept: true };
+        const here = await this._dev.put("values", rec).then(() => true, () => { this._refused(); return false; });
+        this._tell("data", key);
+        if (me) { await this._count(); this._later(); }
+        return here ? { ok: true, where: "device", value, why: "" } : { ok: false, where: "", value, why: W.notSaved };
+      });
+    }
+    // a value kept here goes up. The cloud's was changed after this one was set: the cloud's is the newer, it stays.
+    async _pushValue(rec, me) {
+      const path = `app/${this.app}/data/${q(rec.name)}`, mine = this._vkey(me, rec.name);
+      if (!rec.owner) { // set while nobody was signed in: it becomes this person's, unless they have one already
+        const r = await this.R.call("files", path + "?base=", { method: "PUT", json: rec.value, timeout: 20000 });
+        if (!r.ok && r.status !== 409) return this._verdict(r);
+        const has = await soft(this._dev.get("values", mine), null);
+        if (r.ok && r.data && !has) await soft(this._dev.put("values", Object.assign({}, rec, { key: mine, owner: me, version: r.data.version || "", kept: false })));
+        await soft(this._dev.remove("values", rec.key));
+        this._emit("data", rec.name);
+        return { kind: "saved" };
+      }
+      let r = await this.R.call("files", `${path}?base=${q(rec.version || "")}`, { method: "PUT", json: rec.value, timeout: 20000 });
+      if (!r.ok && r.status === 409 && r.data) {
+        if ((r.data.modified || 0) > rec.at) {
+          await soft(this._dev.put("values", Object.assign({}, rec, { value: r.data.value === undefined ? null : r.data.value, version: r.data.version || "", at: r.data.modified, kept: false })));
+          this._emit("data", rec.name);
+          return { kind: "saved" };
+        }
+        r = await this.R.call("files", path, { method: "PUT", json: rec.value, timeout: 20000 });
+      }
+      if (!r.ok || !r.data) return this._verdict(r);
+      const now = await soft(this._dev.get("values", rec.key), null);
+      if (now && now.at === rec.at) await soft(this._dev.put("values", Object.assign({}, rec, { version: r.data.version || "", kept: false })));
+      return { kind: "saved" };
+    }
+  }
+
+  // ---- the small chooser: a menu under a button -----------------------------------------------------------------
+  // rows: [{ id, label, sub, off, run }]. A click on a row calls its run() inside the click itself (so a file
+  // picker may open) and the menu resolves what run() gives. Escape, or a click elsewhere: null.
+  let lastShut = null;
+  function menu(anchor, rows) {
+    return new Promise((resolve) => {
+      if (lastShut && lastShut.anchor === anchor && Date.now() - lastShut.at < 400) { lastShut = null; return resolve(null); } // the button pressed again: it closed
+      const host = document.createElement("div"), back = document.activeElement;
+      host.className = "cloud-kit-menu";
+      const sh = host.attachShadow({ mode: "open" });
+      sh.innerHTML = `<style>
+.m{position:fixed;z-index:2147481500;box-sizing:border-box;min-width:220px;max-width:calc(100vw - 16px);padding:6px;border-radius:12px;background:var(--cloud-bg,#fff);color:var(--cloud-fg,#171c28);border:1px solid var(--cloud-line,rgba(15,23,42,.16));box-shadow:0 12px 34px rgba(15,23,42,.26),0 2px 6px rgba(15,23,42,.14);font:15px/1.25 "Segoe UI",system-ui,-apple-system,sans-serif}
+.m.dark{background:var(--cloud-bg,#1b2130);color:var(--cloud-fg,#e8ecf6);border-color:var(--cloud-line,rgba(255,255,255,.18));box-shadow:0 12px 34px rgba(0,0,0,.6)}
+button{all:unset;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;width:100%;min-height:44px;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:600}
+button:hover,button:focus-visible{background:rgba(127,127,127,.18)}
+button:focus-visible{outline:2px solid #2563eb;outline-offset:-2px}
+button:disabled{cursor:default;opacity:.55;background:none}
+.s{font-weight:400;font-size:13px;opacity:.8}.s:empty{display:none}
+@media (pointer:coarse){button{min-height:50px;font-size:16px}}
+</style><div class="m${isDark() ? " dark" : ""}" role="menu"></div>`;
+      const box = sh.querySelector(".m");
+      let done = false;
+      const shut = (v) => {
+        if (done) return;
+        done = true;
+        document.removeEventListener("pointerdown", outside, true);
+        document.removeEventListener("keydown", keys, true);
+        root.removeEventListener("resize", place);
+        root.removeEventListener("blur", away);
+        host.remove();
+        if (v === null && back && back.focus && document.contains(back)) try { back.focus({ preventScroll: true }); } catch (e) {}
+        resolve(v);
+      };
+      const away = () => shut(null);
+      const outside = (e) => { if (e.composedPath().includes(host)) return; if (anchor && anchor.contains && anchor.contains(e.target)) lastShut = { anchor, at: Date.now() }; shut(null); };
+      const keys = (e) => {
+        if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); return shut(null); }
+        if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+        e.preventDefault();
+        const list = Array.from(box.querySelectorAll("button:not(:disabled)")), i = list.indexOf(sh.activeElement);
+        if (list.length) list[(i + (e.key === "ArrowDown" ? 1 : list.length - 1) + (i < 0 && e.key === "ArrowUp" ? 1 : 0)) % list.length].focus();
+      };
+      for (const r of rows) {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("role", "menuitem");
+        b.dataset.id = r.id;
+        b.disabled = !!r.off;
+        b.innerHTML = '<span class="l"></span><span class="s"></span>';
+        b.querySelector(".l").textContent = r.label;
+        b.querySelector(".s").textContent = r.sub || "";
+        b.addEventListener("click", () => { let v; try { v = r.run ? r.run() : r.id; } catch (e) { console.error("cloud-kit:", e); v = null; } shut(v === null || v === undefined ? false : v); });
+        box.appendChild(b);
+      }
+      document.body.appendChild(host);
+      const place = () => { // under the button; above it when there is no room below; always inside the window
+        const a = anchor && anchor.getBoundingClientRect ? anchor.getBoundingClientRect() : null;
+        const w = box.offsetWidth, h = box.offsetHeight, vw = root.innerWidth, vh = root.innerHeight;
+        let x = a ? a.left : (vw - w) / 2, y = a ? a.bottom + 6 : Math.max(12, vh * 0.2);
+        if (a && y + h > vh - 8 && a.top - h - 6 >= 8) y = a.top - h - 6;
+        box.style.left = Math.round(Math.max(8, Math.min(x, vw - w - 8))) + "px";
+        box.style.top = Math.round(Math.max(8, Math.min(y, vh - h - 8))) + "px";
+      };
+      place();
+      document.addEventListener("pointerdown", outside, true);
+      document.addEventListener("keydown", keys, true);
+      root.addEventListener("resize", place); // a phone's keyboard going away resizes the page: the menu stays, in its place
+      root.addEventListener("blur", away);
+      const first = box.querySelector("button:not(:disabled)");
+      if (first) first.focus({ preventScroll: true });
+    });
+  }
+  // the browser's own picker for this device: a file, or a folder (the browser has two pickers)
+  function pickFiles(folder, accept) {
+    return new Promise((resolve) => {
+      for (const old of document.querySelectorAll("input.cloud-kit-file")) old.remove();
+      const inp = document.createElement("input");
+      inp.type = "file";
+      inp.className = "cloud-kit-file";
+      inp.style.display = "none";
+      if (folder) inp.webkitdirectory = true;
+      else if (accept.length && !accept.includes("*")) inp.accept = accept.join(",");
+      inp.addEventListener("change", () => { const files = Array.from(inp.files || []); inp.remove(); resolve(files); });
+      inp.addEventListener("cancel", () => { inp.remove(); resolve(null); });
+      document.body.appendChild(inp);
+      inp.click();
+    });
+  }
+
+  // ---- <cloud-status>: the dot and the few words -----------------------------------------------------------------
+  // In the program's bar. It takes the bar's font and colour. for="<app>" names the kit when a page has several.
+  // A click opens the account window when there is something to do there (nobody signed in, or a guest).
+  const HTMLElementBase = root.HTMLElement || function () {};
+  class CloudStatus extends HTMLElementBase {
+    connectedCallback() {
+      if (!this.shadowRoot) {
+        this.attachShadow({ mode: "open" }).innerHTML = `<style>
+:host{display:inline-flex;min-width:0;max-width:100%;vertical-align:middle;font-size:.875em;line-height:1.2}
+.b{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:.5em;min-width:0;max-width:100%;padding:.3em .5em;border-radius:.6em;color:inherit;font:inherit;cursor:default}
+.b.act{cursor:pointer}.b.act:hover{background:rgba(127,127,127,.16)}
+.b:focus-visible{outline:2px solid #2563eb;outline-offset:1px}
+.dot{flex:none;width:.7em;height:.7em;border-radius:50%;background:#8b93a1}
+.ok .dot,.busy .dot{background:#22a05b}.wait .dot{background:#e08a00}.bad .dot{background:#e5484d}
+.busy .dot{animation:p 1s ease-in-out infinite alternate}
+@keyframes p{to{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.busy .dot{animation:none}}
+.w{min-width:0;text-align:left}.w span{display:inline-block;max-width:100%}
+.n{position:fixed;z-index:2147481400;box-sizing:border-box;max-width:min(320px,calc(100vw - 16px));padding:9px 12px;border-radius:10px;font:13px/1.35 "Segoe UI",system-ui,-apple-system,sans-serif;background:var(--cloud-bg,#fff);color:var(--cloud-fg,#171c28);border:1px solid var(--cloud-line,rgba(15,23,42,.16));box-shadow:0 8px 24px rgba(15,23,42,.2);cursor:pointer}
+.n.dark{background:var(--cloud-bg,#1b2130);color:var(--cloud-fg,#e8ecf6);border-color:var(--cloud-line,rgba(255,255,255,.18));box-shadow:0 8px 24px rgba(0,0,0,.55)}
+.n[hidden]{display:none}
+</style><button class="b" type="button"><span class="dot"></span><span class="w" role="status"></span></button><div class="n" role="note" hidden></div>`;
+        this.shadowRoot.querySelector(".b").addEventListener("click", () => { if (this._kit && this._act) this._kit.account(); });
+        this.shadowRoot.querySelector(".n").addEventListener("click", () => { if (this._kit) this._kit._set({ notice: "" }); this._shut = this._note; this._draw(); });
+      }
+      this._bind();
+    }
+    disconnectedCallback() { if (this._off) this._off(); this._off = null; this._kit = null; waiting.delete(this); }
+    _bind() {
+      const want = this.getAttribute("for"), kit = want ? kits.get(lower(want)) : kits.values().next().value;
+      if (!kit) { waiting.add(this); return; }
+      waiting.delete(this);
+      this._kit = kit;
+      this._off = kit.on("state", () => this._draw());
+      this._draw();
+    }
+    _draw() {
+      const s = this._kit.state, sh = this.shadowRoot, b = sh.querySelector(".b"), w = sh.querySelector(".w"), n = sh.querySelector(".n");
+      const a = s.account;
+      this._act = !!root.WindowKit && s.cloud === "on" && (s.signIn || !a || a.kind === "guest");
+      b.className = "b " + s.tone + (this._act ? " act" : "");
+      b.tabIndex = this._act ? 0 : -1;
+      w.textContent = "";
+      s.words.forEach((t, i) => { if (i) w.appendChild(document.createTextNode(" ")); const sp = document.createElement("span"); sp.textContent = t; w.appendChild(sp); });
+      const who = a ? `Signed in as ${a.name}.` : "Nobody is signed in.";
+      b.title = [who, s.cloud === "off" ? sentence(s.why) : "", this._act ? (a && !s.signIn ? "Click to set up a user." : "Click to sign in.") : ""].filter(Boolean).join(" ");
+      this._note = s.notice || (s.problem && s.problem !== W.notInCloud ? sentence(s.problem) : "");
+      if (this._note !== this._shut) this._shut = "";
+      const show = !!this._note && !this._shut;
+      n.hidden = !show;
+      if (show) {
+        n.textContent = this._note;
+        n.className = "n" + (isDark() ? " dark" : "");
+        const r = this.getBoundingClientRect(), vw = root.innerWidth;
+        n.style.top = Math.round(r.bottom + 6) + "px";
+        n.style.left = Math.round(Math.max(8, Math.min(r.left, vw - Math.min(320, vw - 16) - 8))) + "px";
+      }
+    }
+  }
+  if (root.customElements && !root.customElements.get("cloud-status")) root.customElements.define("cloud-status", CloudStatus);
+
+  root.CloudKit = {
+    VERSION, WORDS: W, kits,
+    // for({ app, ext, relay, binary, name }): the program's cloud (the same one when asked twice)
+    for(o) {
+      o = o || {};
+      if (!o.app || !o.relay || typeof o.relay.call !== "function") throw new Error("CloudKit.for needs { app, relay } (relay: RelayClient.create({ app }))");
+      const id = lower(o.app);
+      if (!kits.has(id)) kits.set(id, new Kit(o));
+      for (const el of Array.from(waiting)) el._bind();
+      return kits.get(id);
+    },
+  };
+})(typeof window !== "undefined" ? window : globalThis);
 </script>
 <script>
 // ---- prelude.js ----
@@ -1080,7 +2912,8 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 (function () {
   "use strict";
   var PC = window.PC || (window.PC = {});
-  PC.VERSION = "0.1.4";
+  // The version is the build's (build.py bumps version.txt and writes it into the page); "dev" in dev.html.
+  PC.VERSION = (function () { try { var v = document.documentElement.getAttribute("data-version"); return v && v.indexOf("__") < 0 ? v : "dev"; } catch (e) { return "dev"; } })();
   PC.APP = "plancutter";
 
   // ---- log ---------------------------------------------------------------------------
@@ -2052,7 +3885,10 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   var PC = window.PC, G = PC.geom;
   var M = PC.model = {};
 
-  M.FORMAT = { workspace: "plancutter-workspace", surface: "plancutter-surface", piece: "plancutter-piece", cut: "plancutter-cut" };
+  // One kind of saved file: a .plan-cutter workspace (FORMATS.md). "plancutter-workspace" is what the workspace
+  // files of October 2026 said; such a file still opens, as any workspace does.
+  M.FORMAT = { workspace: "plan-cutter" };
+  M.isWorkspace = function (obj) { return !!obj && (obj.format === M.FORMAT.workspace || obj.format === "plancutter-workspace"); };
   M.VERSION = 1;
   M.ORIGIN = "origin";
 
@@ -2300,26 +4136,21 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   };
 
   // ---- files --------------------------------------------------------------------------------------
-  M.exportSurface = function (s) { var o = PC.clone(s); o.format = M.FORMAT.surface; o.version = M.VERSION; return o; };
-  M.exportWorkspace = function (ws) { var o = PC.clone(ws); o.format = M.FORMAT.workspace; o.version = M.VERSION; o.modified = PC.isoNow(); return o; };
-  M.exportPiece = function (whole) { var o = PC.clone(whole); o.format = M.FORMAT.piece; o.version = M.VERSION; return o; };
-  M.exportCut = function (ws, s, pieces, name) {
-    var whole = M.wholeOf(ws, pieces[0]);
-    return {
-      format: M.FORMAT.cut, version: M.VERSION, name: name || (pieces[0].name + (pieces.length > 1 ? " and others" : "")),
-      whole: PC.clone(whole),
-      pieces: pieces.map(function (p) {
-        var room = M.roomOf(s, p, ws);
-        return { id: p.id, name: p.name, room: room ? room.name : "", faceUp: p.faceUp, outline: PC.clone(p.outline), holes: PC.clone(p.holes || []), origin: p.origin || (whole ? whole.origin : 0) || 0, measurements: PC.clone(p.measurements || []), seams: PC.clone(p.seams || []) };
-      }),
-    };
+  // The workspace as it is saved (a photo's loaded image is left out: the photo itself is its data: address)
+  M.exportWorkspace = function (ws) {
+    var photos = ws.surfaces.map(function (s) { var img = s.photo && s.photo.img; if (img) delete s.photo.img; return img; });
+    var o;
+    try { o = PC.clone(ws); } finally { ws.surfaces.forEach(function (s, i) { if (photos[i]) s.photo.img = photos[i]; }); }
+    o.format = M.FORMAT.workspace; o.version = M.VERSION;
+    return o;
   };
 
-  // Validate and normalise a loaded object; throws with a readable message. Notes every id.
+  // Validate and normalise a loaded workspace; throws with a readable message. Notes every id.
   M.validate = function (obj) {
     if (!obj || typeof obj !== "object") throw new Error("Not a Plan Cutter file");
     var f = obj.format;
-    if (f === M.FORMAT.workspace) {
+    if (M.isWorkspace(obj)) {
+      obj.format = M.FORMAT.workspace;
       if (!Array.isArray(obj.surfaces)) throw new Error("Workspace has no surfaces");
       obj.library = Array.isArray(obj.library) ? obj.library.map(normPiece) : [];
       obj.surfaces = obj.surfaces.map(normSurface);
@@ -2332,16 +4163,9 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
       if (!obj.surfaces.some(function (s) { return s.id === obj.activeSurface; })) obj.activeSurface = obj.surfaces[0].id;
       return obj;
     }
-    if (f === M.FORMAT.surface) return normSurface(obj);
-    if (f === M.FORMAT.piece) return normPiece(obj);
-    if (f === M.FORMAT.cut) {
-      if (!Array.isArray(obj.pieces) || !obj.pieces.length) throw new Error("Cut file has no pieces");
-      obj.whole = normPiece(obj.whole || {});
-      obj.pieces.forEach(function (p) { if (!Array.isArray(p.outline) || p.outline.length < 3) throw new Error("A cut piece has no outline"); });
-      return obj;
-    }
     throw new Error("Unknown file format" + (f ? " “" + f + "”" : ""));
   };
+  M.validatePiece = function (p) { return normPiece(p); };
   function num(v, d) { v = Number(v); return isFinite(v) ? v : d; }
   function normPiece(p) {
     if (!p || typeof p !== "object") throw new Error("Bad piece");
@@ -2414,38 +4238,6 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     return out;
   }
 
-  // Add a loaded surface / piece / cut file into a workspace (ids made unique when they clash).
-  M.importInto = function (ws, obj) {
-    var f = obj.format;
-    if (f === M.FORMAT.surface) {
-      var s = PC.clone(obj); delete s.format; delete s.version;
-      if (ws.surfaces.some(function (x) { return x.id === s.id; })) s.id = PC.uid("s");
-      ws.surfaces.push(s); ws.activeSurface = s.id;
-      return { kind: "surface", id: s.id };
-    }
-    if (f === M.FORMAT.piece) {
-      var p = PC.clone(obj); delete p.format; delete p.version;
-      if (ws.library.some(function (x) { return x.id === p.id; })) p.id = PC.uid("wp");
-      ws.library.push(p);
-      return { kind: "piece", id: p.id };
-    }
-    if (f === M.FORMAT.cut) {
-      // the pieces land on the active surface, side by side, as pieces of the embedded whole
-      var whole = PC.clone(obj.whole);
-      if (!ws.library.some(function (x) { return x.id === whole.id; })) ws.library.push(whole);
-      var surf = M.activeSurface(ws), x = 0, ids = [];
-      obj.pieces.forEach(function (cp) {
-        var pc = M.placePiece(ws, surf, whole, x, 0, 0, cp.faceUp);
-        pc.name = cp.name || pc.name; pc.outline = PC.clone(cp.outline); pc.holes = PC.clone(cp.holes || []); pc.measurements = PC.clone(cp.measurements || []); pc.seams = PC.clone(cp.seams || []);
-        pc.origin = cp.origin; pc.status = "cut";
-        x += G.bbox(whole.outline).w + 12;
-        ids.push(pc.id);
-      });
-      M.touch(surf);
-      return { kind: "cut", ids: ids };
-    }
-    throw new Error("Only a surface, a whole piece or a cut piece file can be imported into a workspace");
-  };
   M.activeSurface = function (ws) {
     for (var i = 0; i < ws.surfaces.length; i++) if (ws.surfaces[i].id === ws.activeSurface) return ws.surfaces[i];
     return ws.surfaces[0];
@@ -3170,117 +4962,147 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 })();
 
 // ---- store.js ----
-// Storage: workspaces and the shared library in IndexedDB, autosave, files in and out.
-// Everything is promise-based; failures are logged and surfaced as toasts by the UI.
+// Saving and opening. Everything goes through the cloud kit (Projects\file-manager\kit\CLOUD-KIT.md): the open
+// workspace is one cloud document, saved by itself into today's dated file in the person's "Plan Cutter" folder
+// (the kit also keeps the silent copy in this browser). The person's own library pieces follow them in the kit's
+// small data ("library"), so every new workspace starts with them. Plus a few file helpers (download, pick, image).
 (function () {
   "use strict";
   var PC = window.PC, M = PC.model;
-  var S = PC.store = {};
-  var DB = "plancutter", VERSION = 1, db = null;
+  var S = PC.store = { doc: null, auto: null, cloud: null, relay: null, shared: [], ready: false };
+  var APP = "plan-cutter", EXT = ".plan-cutter", NAME = "Plan Cutter";
+  function app() { return PC.app; }
+  function stem(name) { return String(name || "").replace(/\.[^.\/\\]*$/, "").trim() || "Untitled"; }
 
-  function open() {
-    if (db) return Promise.resolve(db);
-    return new Promise(function (resolve, reject) {
-      if (!window.indexedDB) return reject(new Error("This browser has no IndexedDB; nothing can be kept between visits."));
-      var req = indexedDB.open(DB, VERSION);
-      req.onupgradeneeded = function () {
-        var d = req.result;
-        if (!d.objectStoreNames.contains("workspaces")) d.createObjectStore("workspaces", { keyPath: "id" });
-        if (!d.objectStoreNames.contains("library")) d.createObjectStore("library", { keyPath: "id" });
-        if (!d.objectStoreNames.contains("photos")) d.createObjectStore("photos", { keyPath: "id" });
-        if (!d.objectStoreNames.contains("meta")) d.createObjectStore("meta", { keyPath: "key" });
-      };
-      req.onsuccess = function () { db = req.result; db.onversionchange = function () { db.close(); db = null; }; resolve(db); };
-      req.onerror = function () { reject(req.error || new Error("The browser would not open its database")); };
-      req.onblocked = function () { reject(new Error("The database is open in another tab")); };
-    });
-  }
-  function tx(store, mode, fn) {
-    return open().then(function (d) {
-      return new Promise(function (resolve, reject) {
-        var t = d.transaction(store, mode), st = t.objectStore(store), out;
-        try { out = fn(st); } catch (e) { reject(e); return; }
-        t.oncomplete = function () { resolve(out && out.result !== undefined ? out.result : out); };
-        t.onerror = function () { reject(t.error || new Error("Database error")); };
-        t.onabort = function () { reject(t.error || new Error("Database write was refused (storage full?)")); };
-      });
-    });
-  }
-  function all(store) {
-    return tx(store, "readonly", function (st) { return st.getAll(); });
-  }
-
-  // ---- workspaces -----------------------------------------------------------------------
-  S.listWorkspaces = function () {
-    return all("workspaces").then(function (rows) {
-      return rows.map(function (r) { return { id: r.id, name: r.name, modified: r.modified, created: r.created, size: r.size || 0, surfaces: r.surfaces || 0 }; })
-        .sort(function (a, b) { return String(b.modified).localeCompare(String(a.modified)); });
-    });
+  // ---- the kit --------------------------------------------------------------------------------------
+  // Made once at boot. Without the kit in the page (it is built in) nothing can be saved: said plainly.
+  S.init = function () {
+    if (S.cloud) return true;
+    if (!window.RelayClient || !window.CloudKit) { PC.error("The cloud kit is not in this page: nothing can be saved."); return false; }
+    S.relay = window.RelayClient.create({ app: APP, log: function (m) { PC.info("relay: " + m); } });
+    S.cloud = window.CloudKit.for({ app: APP, ext: EXT, relay: S.relay, name: NAME });
+    // the kit may give a document another name (at its first save, or after a clash): show what it is now
+    S.cloud.on("state", function () { var d = S.doc, a = app(); if (d && a.ws && a.ws.name !== d.name) { a.ws.name = d.name; PC.ui.refreshTitle(); } });
+    // another person signed in, out or switched at this browser: their last workspace
+    S.cloud.on("account", function () { S.loadShared().then(function () { return S.cloud.openLast(); }).then(function (d) { S.showOr(d); }); });
+    S.cloud.on("data", function (key) { if (key === "library") S.loadShared(); });
+    return true;
   };
-  S.saveWorkspace = function (ws) {
-    var data = M.exportWorkspace(ws);
-    var json = JSON.stringify(data);
-    var row = { id: ws.id, name: ws.name, modified: data.modified, created: ws.created, size: json.length, surfaces: ws.surfaces.length, json: json };
-    return tx("workspaces", "readwrite", function (st) { return st.put(row); }).then(function () { return row; });
-  };
-  S.loadWorkspace = function (id) {
-    return tx("workspaces", "readonly", function (st) { return st.get(id); }).then(function (row) {
-      if (!row) throw new Error("No workspace with id " + id);
-      return M.validate(JSON.parse(row.json));
-    });
-  };
-  S.deleteWorkspace = function (id) { return tx("workspaces", "readwrite", function (st) { return st.delete(id); }); };
-  S.duplicateWorkspace = function (id, name) {
-    return S.loadWorkspace(id).then(function (ws) {
-      ws.id = PC.uid("w"); ws.name = name || (ws.name + " copy"); ws.created = PC.isoNow();
-      return S.saveWorkspace(ws).then(function () { return ws; });
-    });
+  S.loadShared = function () {
+    if (!S.cloud) return Promise.resolve([]);
+    return S.cloud.data.get("library").then(function (v) { S.shared = Array.isArray(v) ? v : []; return S.shared; }, function () { return S.shared; });
   };
 
-  // ---- the shared library ------------------------------------------------------------------
-  S.listLibrary = function () { return all("library"); };
-  S.savePiece = function (p) { return tx("library", "readwrite", function (st) { return st.put(p); }); };
-  S.deletePiece = function (id) { return tx("library", "readwrite", function (st) { return st.delete(id); }); };
-
-  // ---- meta (last workspace, etc.) -------------------------------------------------------------
-  S.getMeta = function (key) { return tx("meta", "readonly", function (st) { return st.get(key); }).then(function (r) { return r ? r.value : undefined; }); };
-  S.setMeta = function (key, value) { return tx("meta", "readwrite", function (st) { return st.put({ key: key, value: value }); }); };
-
-  // ---- usage --------------------------------------------------------------------------------------
-  S.usage = function () {
-    var out = { workspaces: 0, library: 0, bytes: 0, quota: null };
-    return S.listWorkspaces().then(function (w) { out.workspaces = w.length; w.forEach(function (r) { out.bytes += r.size; }); return S.listLibrary(); })
-      .then(function (l) { out.library = l.length; })
-      .then(function () { if (navigator.storage && navigator.storage.estimate) return navigator.storage.estimate().then(function (e) { out.quota = e; }); })
-      .then(function () { return out; });
+  // At start: a file the Cloud File Manager sent (#open=<id>), else the last workspace, else a new one.
+  S.start = function () {
+    if (!S.init()) { app().loadWorkspace(app().newWorkspace("Untitled")); app().home(); return Promise.resolve(); }
+    return S.cloud.start().then(S.loadShared).then(function () {
+      var m = /[#&]open=([^&]+)/.exec(location.hash || "");
+      return m ? S.cloud.openById(decodeURIComponent(m[1])) : null;
+    }).then(function (d) {
+      if (d && S.show(d)) return null;
+      return S.cloud.openLast().then(function (last) { return S.showOr(last); });
+    }).then(function () { S.ready = true; });
   };
-  S.wipe = function () {
-    return open().then(function (d) { d.close(); db = null; return new Promise(function (res, rej) { var r = indexedDB.deleteDatabase(DB); r.onsuccess = res; r.onerror = function () { rej(r.error); }; r.onblocked = function () { rej(new Error("blocked by another tab")); }; }); });
+  // show d, or a new "Untitled" when there is none or it cannot be read
+  S.showOr = function (d) {
+    if (d && S.show(d)) return Promise.resolve(true);
+    return S.cloud.list().catch(function () {}).then(function () { S.show(S.cloud.create("Untitled")); return true; });
   };
 
-  // ---- autosave -----------------------------------------------------------------------------------
-  var pending = null, saving = false, dirty = false;
-  S.autosave = function (ws) {
-    if (!PC.settings.get("autosave")) return;
-    dirty = true;
-    clearTimeout(pending);
-    pending = setTimeout(function () { S.flush(ws); }, PC.settings.get("autosaveDelay") * 1000);
-    PC.events.emit("save", { state: "pending" });
+  // ---- what a file holds ---------------------------------------------------------------------------------
+  // Any file can be opened: this works out what it is from its name and what is inside. Only a Plan Cutter
+  // workspace opens; anything else gives a plain reason (thrown).
+  S.read = function (text, name) {
+    name = name || "This file";
+    if (/\.(png|jpe?g|webp|gif|bmp|heic|avif)$/i.test(name)) throw new Error("“" + name + "” is a picture. To draw over a photo, use Layers › Add a photo.");
+    if (/\.svg$/i.test(name)) throw new Error("“" + name + "” is a drawing. To make a board or object from it, use Import in the Library.");
+    var obj = null;
+    try { obj = JSON.parse(String(text || "")); } catch (e) { obj = null; }
+    if (obj && typeof obj === "object" && !obj.format && Array.isArray(obj.surfaces)) obj.format = M.FORMAT.workspace;
+    if (!obj || typeof obj !== "object" || !M.isWorkspace(obj)) throw new Error("“" + name + "” is not a Plan Cutter workspace.");
+    return M.validate(obj);
   };
-  S.flush = function (ws) {
-    clearTimeout(pending); pending = null;
-    if (!ws || saving) return Promise.resolve();
-    saving = true; dirty = false;
-    PC.events.emit("save", { state: "saving" });
-    return S.saveWorkspace(ws).then(function (row) {
-      saving = false;
-      PC.events.emit("save", { state: "saved", at: Date.now(), size: row.size });
-      if (dirty) S.autosave(ws);
-    }, function (e) {
-      saving = false;
-      PC.error("Autosave failed: " + e.message);
-      PC.events.emit("save", { state: "failed", error: e.message });
+  // the workspace as the text of a .plan-cutter file
+  S.text = function () { var ws = app().ws; return ws ? JSON.stringify(M.exportWorkspace(ws)) : ""; };
+
+  // ---- the open document -------------------------------------------------------------------------------------
+  // Put a document on the screen; from now on it saves by itself. A document from a file that is not one of the
+  // program's own (This device, another folder) becomes a workspace of its own here and is saved at once. False (and
+  // a notice) when its content is not a workspace: then nothing changes.
+  S.show = function (d) {
+    var ws;
+    if (d && d.data) {
+      try { ws = S.read(d.data, d.file ? d.file.name : d.name + EXT); }
+      catch (e) { PC.warn("Open: " + e.message); PC.ui.toast(e.message, "warn"); return false; }
+    } else if (d && d.kind === "folder") { PC.ui.toast("Plan Cutter opens one file, not a folder.", "warn"); return false; }
+    if (S.auto) S.auto.stop();          // saves what the last document still had unsaved
+    S.auto = null;
+    if (!ws) ws = app().newWorkspace(d.name);
+    ws.name = d.name;
+    S.doc = d;
+    app().loadWorkspace(ws);
+    app().home();
+    S.auto = S.cloud.autosave(d, S.text);
+    if (d.source !== "new" && !d.date) S.auto.touch();   // a file from elsewhere: it is a workspace of its own now
+    return true;
+  };
+  S.touch = function () { if (S.auto) S.auto.touch(); };
+
+  // File › New: a new workspace named "Untitled" (made unique). It never takes the place of a stored one.
+  S.newDoc = function (name) {
+    if (!S.cloud) return Promise.resolve(null);
+    return S.cloud.list().catch(function () {}).then(function () {
+      S.show(S.cloud.create(name || "Untitled"));
+      return { name: S.doc.name };
     });
+  };
+  // File › Open: the kit's small chooser (Cloud File Manager, then This device). It takes any file.
+  S.open = function (anchor) {
+    if (!S.cloud) return Promise.resolve(null);
+    return S.cloud.open({ anchor: anchor, accept: ["*"] }).then(function (d) { if (d) S.show(d); return d ? { name: S.doc.name } : null; });
+  };
+  // File › Save: the kit's small chooser: Cloud File Manager (save now), This device (a copy).
+  S.saveMenu = function (anchor) {
+    if (!S.cloud || !S.doc) return Promise.resolve(null);
+    return S.cloud.saveMenu(S.doc, S.text(), { anchor: anchor });
+  };
+  S.save = function () {
+    if (!S.cloud || !S.doc) return Promise.resolve({ ok: false, why: "Nothing is open." });
+    return S.cloud.save(S.doc, S.text());
+  };
+  S.rename = function (name) {
+    if (!S.cloud || !S.doc) return Promise.resolve({ ok: false, why: "Nothing is open." });
+    return S.cloud.rename(S.doc, name).then(function (r) {
+      app().ws.name = S.doc.name; PC.ui.refreshTitle(); S.touch();
+      return r;
+    });
+  };
+  S.list = function () { return S.cloud ? S.cloud.list() : Promise.resolve([]); };
+  // a file dropped on the drawing, or a workspace's text handed over (tests): a new document of its own
+  S.openText = function (text, name) {
+    var ws = S.read(text, name);
+    var d = S.cloud.create(stem(ws.name || name));
+    d.data = String(text);
+    if (!S.show(d)) return null;
+    S.touch();
+    return { kind: "workspace", name: d.name };
+  };
+
+  // ---- the person's own library pieces -------------------------------------------------------------------------
+  // Pieces made, edited or kept as offcuts go into the shared library, so every new workspace starts with them.
+  S.libPut = function (piece) {
+    if (!S.cloud || !piece) return;
+    var p = PC.clone(piece);
+    S.shared = S.shared.filter(function (q) { return q.id !== p.id; }).concat([p]);
+    S.cloud.data.update("library", function (old) { return (Array.isArray(old) ? old : []).filter(function (q) { return q.id !== p.id; }).concat([p]); })
+      .then(function (r) { if (r && r.ok === false) PC.warn("The shared library was not saved: " + (r.why || "")); });
+  };
+  S.libDel = function (id) {
+    if (!S.cloud) return;
+    S.shared = S.shared.filter(function (q) { return q.id !== id; });
+    S.cloud.data.update("library", function (old) { return (Array.isArray(old) ? old : []).filter(function (q) { return q.id !== id; }); })
+      .then(function (r) { if (r && r.ok === false) PC.warn("The shared library was not saved: " + (r.why || "")); });
   };
 
   // ---- files ----------------------------------------------------------------------------------------
@@ -3392,8 +5214,6 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     { key: "csCorners", tab: "cutsheet", label: "Number the corners", type: "bool", def: false },
     { key: "csFont", tab: "cutsheet", label: "Print text size", type: "range", def: 14, min: 10, max: 24, step: 1, unit: "pt" },
     // Storage
-    { key: "autosave", tab: "storage", label: "Autosave", type: "bool", def: true, note: "Every change is saved into this browser a moment after it happens." },
-    { key: "autosaveDelay", tab: "storage", label: "Autosave delay", type: "range", def: 1, min: 0.2, max: 10, step: 0.2, unit: "s" },
     { key: "historyLimit", tab: "storage", label: "History steps kept", type: "range", def: 500, min: 50, max: 2000, step: 50 },
     // Advanced
     { key: "solverTol", tab: "advanced", label: "Solver tolerance", type: "select", def: 1e-6, options: [[1e-4, "1/10000 in"], [1e-6, "1/1000000 in"], [1e-8, "1e-8 in"]] },
@@ -5362,27 +7182,12 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   function one(kind) { return sel().length === 1 && has(kind); }
   function lineish() { return kinds().every(function (k) { return k === "line" || k === "shape"; }) && sel().length > 0; }
   var MENUS = {
+    // New, Open, Save and nothing else (rename: click the name at the top; settings: the gear; print: Measure pieces).
+    // Open and Save are the cloud kit's small choosers, hung under the button the menu came from.
     file: { label: "File", items: [
-      { label: "New workspace…", act: function () { UI.newWorkspaceDialog(); }, key: "Ctrl+N" },
-      { label: "Open workspace…", act: function () { UI.openWorkspaceDialog(); } },
-      { label: "Save now", cmd: "workspace.save", key: "Ctrl+S" },
-      { label: "Rename workspace…", act: function () { UI.prompt("Workspace name", app().ws.name, function (v) { if (v) app().cmd("workspace.rename", { name: v }); }); } },
-      { sep: true },
-      { label: "Import file…", act: function () { UI.importDialog(); }, key: "Ctrl+O" },
-      { label: "Export", sub: [
-        { label: "Workspace file", cmd: "download", args: { what: "workspace" } },
-        { label: "This surface", cmd: "download", args: { what: "surface" } },
-        { label: "Selected pieces (cut file)", cmd: "download", args: { what: "cut" }, when: function () { return has("piece"); } },
-        { label: "Library", act: function () { PC.store.download(PC.store.safeName(app().ws.name) + ".library.json", JSON.stringify(app().exportFile("library"), null, 2)); } },
-      ] },
-      { label: "Export drawing", sub: [
-        { label: "SVG", act: function () { PC.exporters.svg(); } },
-        { label: "PNG", act: function () { PC.exporters.png(); } },
-        { label: "DXF", act: function () { PC.exporters.dxf(); } },
-      ] },
-      { label: "Print cut sheets…", act: function () { PC.cutsheet.printSelected(); }, when: function () { return has("piece"); } },
-      { sep: true },
-      { label: "Workspace settings…", act: function () { PC.settingsui.open("units"); } },
+      { label: "New", act: function () { UI.newDoc(); }, key: "Ctrl+N" },
+      { label: "Open", act: function () { UI.openDoc(); }, key: "Ctrl+O" },
+      { label: "Save", act: function () { UI.saveDoc(); }, key: "Ctrl+S" },
     ] },
     edit: { label: "Edit", items: [
       { label: "Undo", cmd: "undo", key: "Ctrl+Z", when: function () { return H.canUndo(); } },
@@ -5557,7 +7362,24 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     });
     box.addEventListener("blur", function () { setTimeout(function () { if (document.activeElement !== box) UI.keypad(false); }, 150); });
     PC.events.on("history", function () { PC.$$("[data-cmd=undo]").forEach(function (b) { b.disabled = !H.canUndo(); }); PC.$$("[data-cmd=redo]").forEach(function (b) { b.disabled = !H.canRedo(); }); if (panel === "history") UI.refreshPanels(); });
-    PC.events.on("save", function (ev) { UI.status.save(ev); });
+    // the workspace's name at the top: click it to rename (Enter keeps the new name, Escape puts the old one back)
+    var nameEl = PC.$("#ws-name");
+    nameEl.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); nameEl.blur(); }
+      else if (e.key === "Escape") { e.preventDefault(); nameEl.value = app().ws ? app().ws.name : ""; nameEl.blur(); }
+      e.stopPropagation();   // typing a name is not a shortcut
+    });
+    nameEl.addEventListener("change", function () {
+      var want = nameEl.value.trim(), a = app();
+      if (!a.ws || !want || want === a.ws.name) { UI.refreshTitle(); return; }
+      PC.store.rename(want).then(function (r) { UI.refreshTitle(); if (r && r.ok === false && r.why) UI.toast(r.why, "warn"); });
+    });
+    nameEl.addEventListener("blur", function () { UI.refreshTitle(); });
+    // A click (or a tap, or Tab) on the name selects all of it, so typing replaces it: "click the name, type, Enter".
+    // Without this the caret landed inside "Untitled" and the new name was typed into the middle of the old one
+    // (the final check, 2026-11-12). After the click's own caret is placed: hence the wait. A second click, in the
+    // box that has the focus already, places the caret as usual.
+    nameEl.addEventListener("focus", function () { setTimeout(function () { if (document.activeElement === nameEl) nameEl.select(); }, 0); });
     PC.events.on("view", function () { if (app().surface) { app().surface.camera.x = V.cam.x; app().surface.camera.y = V.cam.y; app().surface.camera.zoom = V.cam.zoom; } });
     window.addEventListener("resize", function () { UI.refreshSnapbar(); });
     UI.refreshTools(); UI.refreshSnapbar(); UI.showPanel("props", { quiet: true });
@@ -5572,7 +7394,21 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   if (window.matchMedia) matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { if (ST.get("theme") === "auto") UI.applyTheme(); });
 
   UI.refreshAll = function () { UI.refreshTitle(); UI.refreshTabs(); UI.refreshTools(); UI.refreshSnapbar(); UI.refreshPanels(); };
-  UI.refreshTitle = function () { var a = app(); PC.$("#ws-name").textContent = a.ws ? a.ws.name : ""; document.title = (a.ws ? a.ws.name + " · " : "") + "Plan Cutter"; };
+  UI.refreshTitle = function () {
+    var a = app(), n = PC.$("#ws-name");
+    if (n && document.activeElement !== n) n.value = a.ws ? a.ws.name : "";
+    document.title = (a.ws ? a.ws.name + " · " : "") + "Plan Cutter";
+  };
+  // File › New, Open, Save. Open and Save hang their small chooser under the button the person used: the File
+  // menu's button, or the ☰ button on a phone.
+  UI.fileAnchor = function () {
+    var cands = [UI.lastMenuAnchor, PC.$("#menubar [data-menu=file]"), PC.$("[data-act=menu]")];
+    for (var i = 0; i < cands.length; i++) { var b = cands[i]; if (b && document.contains(b) && b.getBoundingClientRect().width > 0) return b; }
+    return null;
+  };
+  UI.newDoc = function () { return PC.store.newDoc(); };
+  UI.openDoc = function () { return PC.store.open(UI.fileAnchor()); };
+  UI.saveDoc = function () { return PC.store.saveMenu(UI.fileAnchor()); };
   UI.refreshTools = function () {
     var a = app();
     PC.$$(".tool-btn[data-tool]").forEach(function (b) { var t = PC.tools.byName[b.dataset.tool]; b.classList.toggle("active", a.tool === t); b.querySelector(".lbl").textContent = t.label; b.querySelector(".ico").textContent = t.icon; });
@@ -5605,7 +7441,6 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
       { label: "Duplicate", cmd: "surface.duplicate", args: { id: id } },
       { label: "Move left", cmd: "surface.move", args: { id: id, dir: -1 } },
       { label: "Move right", cmd: "surface.move", args: { id: id, dir: 1 } },
-      { label: "Export this surface", cmd: "download", args: { what: "surface", id: id } },
       { sep: true },
       { label: "Remove surface", act: function () { UI.confirm("Remove surface “" + app().surfaceById(id).name + "” and everything on it?", function () { app().cmd("surface.remove", { id: id }); }); }, danger: true },
     ], null, { x: e.clientX, y: e.clientY });
@@ -5629,9 +7464,22 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
       if (it.sep) { menu.appendChild(el("div.sep")); return; }
       if (it.head) { menu.appendChild(el("div.head", { text: it.head })); return; }
       var marked = it.mark ? it.mark() : it.toggle ? ST.get(it.toggle) : false;
-      var b = el("button" + (it.sub ? ".sub" : ""), { className: it.danger ? "danger" : "" }, [el("span.mk", { text: marked ? "✓" : "" }), it.label, it.key ? el("span.k", { text: it.key }) : null]);
+      // (one class list: a className given after "button.sub" wiped the "sub", so an item with a side list never showed
+      // its "›" and its opener was never highlighted: found by the final check, 2026-11-12; the same since October)
+      var b = el("button", { className: ((it.sub ? "sub " : "") + (it.danger ? "danger" : "")).trim() }, [el("span.mk", { text: marked ? "✓" : "" }), it.label, it.key ? el("span.k", { text: it.key }) : null]);
+      // Side lists: pointing at another item of this menu closes the open side list (unless the pointer is on its
+      // way into it), and pointing at an item with a side list opens that one. See hoverItem below.
+      var openSub = it.sub ? function () {
+        if (menu._child && menu._child.opener === b) return;
+        closeChild(menu);
+        var m = UI.openMenu(it.sub, b, { child: true, side: true });
+        m.classList.add("child");
+        menu._child = { menu: m, opener: b };
+        b.dataset.open = "1"; b.classList.add("open");
+      } : null;
+      b.addEventListener("pointerenter", function (e) { if (e.pointerType !== "touch") hoverItem(menu, b, openSub); });
       if (it.sub) {
-        b.onmouseenter = b.onclick = function (e) { if (b.dataset.open) return; PC.$$(".menu.child").forEach(function (m) { m.remove(); }); b.dataset.open = "1"; var m = UI.openMenu(it.sub, b, { child: true, side: true }); m.classList.add("child"); m.addEventListener("mouseleave", function () { delete b.dataset.open; }); };
+        b.onclick = openSub;
       } else {
         b.onclick = function () {
           UI.closeMenus();
@@ -5661,11 +7509,54 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
       document.body.appendChild(bd);
       openMenus.push(bd);
       if (anchor) anchor.classList.add("open");
+      UI.lastMenuAnchor = anchor || null;
     }
     openMenus.push(menu);
     return menu;
   };
-  UI.closeMenus = function () { openMenus.forEach(function (m) { m.remove(); }); openMenus = []; PC.$$(".menubar .open").forEach(function (b) { b.classList.remove("open"); }); };
+  // close the side list a menu has open (and any side list that one has open)
+  function closeChild(menu) {
+    var c = menu && menu._child;
+    if (!c) return;
+    menu._child = null;
+    clearTimeout(menu._aimTimer);
+    closeChild(c.menu);
+    c.menu.remove();
+    openMenus = openMenus.filter(function (m) { return m !== c.menu; });
+    delete c.opener.dataset.open; c.opener.classList.remove("open");
+  }
+  // Where the pointer has been lately (for "is it on its way into the side list?")
+  var trail = [];
+  document.addEventListener("pointermove", function (e) {
+    if (e.pointerType === "touch" || !openMenus.length) return;
+    trail.push({ x: e.clientX, y: e.clientY, t: Date.now() });
+    if (trail.length > 6) trail.shift();
+  }, true);
+  // Heading into the open side list: moving towards its side, and more towards it than up or down.
+  function aimingAt(child) {
+    var now = Date.now(), recent = trail.filter(function (p) { return now - p.t <= 250; });
+    if (recent.length < 2) return false;
+    var a = recent[0], b = recent[recent.length - 1];
+    var r = child.getBoundingClientRect(), right = r.left >= a.x - 2;   // the list opened to the right of the pointer
+    var dx = (b.x - a.x) * (right ? 1 : -1), dy = Math.abs(b.y - a.y);
+    return dx >= 2 && dy <= dx * 1.5;
+  }
+  // The pointer came onto item b of menu. Another item's side list closes: at once when the pointer moves up or
+  // down the list, after a moment when it is heading into that side list (then it stays if it got there).
+  function hoverItem(menu, b, openSub) {
+    clearTimeout(menu._aimTimer);
+    var c = menu._child;
+    var act = function () { if (menu._child && menu._child.opener !== b) closeChild(menu); if (openSub) openSub(); };
+    if (!c || c.opener === b) { if (openSub) openSub(); return; }
+    if (!aimingAt(c.menu)) { act(); return; }
+    menu._aimTimer = setTimeout(function () {
+      if (!document.contains(b) || !menu._child) return;
+      var p = trail[trail.length - 1], under = p && document.elementFromPoint(p.x, p.y);
+      if (under && menu._child.menu.contains(under)) return;   // it got there: the side list stays
+      if (under && b.contains(under)) act();                    // it stayed on this item: this one wins
+    }, 300);
+  }
+  UI.closeMenus = function () { openMenus.forEach(function (m) { clearTimeout(m._aimTimer); m.remove(); }); openMenus = []; trail = []; PC.$$(".menubar .open").forEach(function (b) { b.classList.remove("open"); }); };
   UI.contextMenu = function (info) {
     var a = app();
     // right-clicking something not selected selects it first
@@ -5688,9 +7579,9 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     var a = app(), k = e.key, ctrl = e.ctrlKey || e.metaKey;
     if (ctrl && !e.shiftKey && k.toLowerCase() === "z") { a.cmd("undo"); return true; }
     if ((ctrl && k.toLowerCase() === "y") || (ctrl && e.shiftKey && k.toLowerCase() === "z")) { a.cmd("redo"); return true; }
-    if (ctrl && k.toLowerCase() === "s") { a.cmd("workspace.save").then ? a.cmd("workspace.save") : null; UI.toast("Saved", "ok"); return true; }
-    if (ctrl && k.toLowerCase() === "o") { UI.importDialog(); return true; }
-    if (ctrl && k.toLowerCase() === "n") { UI.newWorkspaceDialog(); return true; }
+    if (ctrl && k.toLowerCase() === "s") { PC.store.save(); return true; }   // the indicator says Saving…, then Saved
+    if (ctrl && k.toLowerCase() === "o") { UI.openDoc(); return true; }
+    if (ctrl && k.toLowerCase() === "n") { UI.newDoc(); return true; }
     if (ctrl && k.toLowerCase() === "a") { a.cmd("select.all"); return true; }
     if (ctrl && k.toLowerCase() === "d") { a.cmd("duplicate"); return true; }
     if (ctrl && k.toLowerCase() === "l") { a.cmd("select.chain"); return true; }
@@ -5720,7 +7611,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     if (t && !e.shiftKey && !e.altKey) { a.cmd("tool", { name: t.name }); return true; }
     return false;
   };
-  UI.SHORTCUTS = [["V", "Select"], ["M", "Move"], ["L", "Wall"], ["R", "Rectangle"], ["O", "Room"], ["D", "Measure"], ["T", "Two distances"], ["X", "Cut"], ["Esc", "Cancel / clear selection"], ["Enter", "Finish; measure a selected piece"], ["A H V D", "Measure pieces: automatic, horizontal, vertical, diagonal"], ["Del", "Delete"], ["Tab", "Cycle through things under the cursor"], ["H", "Home"], ["F", "Fit"], ["Shift+F", "Flip to the other solution"], ["+ / −", "Zoom"], ["Space", "Back to the Select tool (hold it and drag to pan)"], ["Middle drag", "Pan (and move windows)"], ["Wheel", "Zoom at the cursor"], ["Ctrl+Z / Y", "Undo / redo"], ["Ctrl+A", "Select all"], ["Ctrl+D", "Duplicate"], ["Ctrl+L", "Select connected walls"], ["K", "Hold a node (temporary lock); K again releases"], ["Ctrl+K", "Lock in place"], ["Ctrl+Shift+K", "Unlock"], ["Ctrl+S", "Save now"], ["Ctrl+O", "Import a file"], ["Ctrl+B", "Library"], [",", "Settings"], ["Digits", "Start typing a value"], ["Ctrl+click", "Add to selection"], ["Ctrl+Shift+click", "Remove from selection"], ["Right click / long press", "Menu for the selection"]];
+  UI.SHORTCUTS = [["V", "Select"], ["M", "Move"], ["L", "Wall"], ["R", "Rectangle"], ["O", "Room"], ["D", "Measure"], ["T", "Two distances"], ["X", "Cut"], ["Esc", "Cancel / clear selection"], ["Enter", "Finish; measure a selected piece"], ["A H V D", "Measure pieces: automatic, horizontal, vertical, diagonal"], ["Del", "Delete"], ["Tab", "Cycle through things under the cursor"], ["H", "Home"], ["F", "Fit"], ["Shift+F", "Flip to the other solution"], ["+ / −", "Zoom"], ["Space", "Back to the Select tool (hold it and drag to pan)"], ["Middle drag", "Pan (and move windows)"], ["Wheel", "Zoom at the cursor"], ["Ctrl+Z / Y", "Undo / redo"], ["Ctrl+A", "Select all"], ["Ctrl+D", "Duplicate"], ["Ctrl+L", "Select connected walls"], ["K", "Hold a node (temporary lock); K again releases"], ["Ctrl+K", "Lock in place"], ["Ctrl+Shift+K", "Unlock"], ["Ctrl+N", "New workspace"], ["Ctrl+O", "Open"], ["Ctrl+S", "Save now"], ["Ctrl+B", "Library"], [",", "Settings"], ["Digits", "Start typing a value"], ["Ctrl+click", "Add to selection"], ["Ctrl+Shift+click", "Remove from selection"], ["Right click / long press", "Menu for the selection"]];
 
   // ---- status bar ------------------------------------------------------------------------------------------
   UI.status = {
@@ -5732,11 +7623,6 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
       e.className = "st-solve" + (rep.conflicts.length ? " bad" : rep.floating ? " floating" : "");
       e.textContent = rep.conflicts.length ? rep.conflicts.length + " conflict" + (rep.conflicts.length > 1 ? "s" : "") : rep.floating ? "drawing is floating: lock a node" : rep.params ? rep.freedom + " free" : "";
       e.title = rep.floating ? "Nothing is fixed yet, so the whole drawing can slide. Select a node and Lock in place (Ctrl+K)." : rep.conflicts.length ? "Constraints shown in red cannot all be true." : "Degrees of freedom left in the constrained geometry";
-    },
-    save: function (ev) {
-      var e = PC.$("#st-save"); e.className = "st-save" + (ev.state === "failed" ? " failed" : "");
-      e.textContent = ev.state === "pending" ? "…" : ev.state === "saving" ? "saving" : ev.state === "saved" ? "saved" : ev.state === "failed" ? "not saved!" : "";
-      e.title = ev.state === "failed" ? ev.error : ev.state === "saved" ? "Saved in this browser at " + new Date(ev.at).toLocaleTimeString() : "";
     },
   };
   UI.focusInput = function () { var pair = PC.$("#st-len"), b = pair && !pair.hidden ? PC.$("#st-in") : PC.$("#st-input"); if (b) { b.focus(); b.select(); } };
@@ -6247,49 +8133,17 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   UI.modalOpen = function () { return PC.windows.any() || openMenus.length > 0; };
   UI.closeTop = function () { if (openMenus.length) UI.closeMenus(); else PC.windows.closeTop(); };
   UI.about = function () {
-    UI.alert("About Plan Cutter", "Plan Cutter " + PC.VERSION + "\n\nDraws a crooked house, places sheet material, cuts it along the walls and prints the numbers to mark the board.\nOne HTML file; your work stays in this browser (export files to move it).\n\nBuilt for Jon, 2026.\n\n" + PC.report());
+    UI.alert("About Plan Cutter", "Plan Cutter " + PC.VERSION + "\n\nDraws a crooked house, places sheet material, cuts it along the walls and prints the numbers to mark the board.\nYour work saves by itself to the Cloud File Manager (and to this device while the PC is off).\n\nBuilt for Jon, 2026.\n\n" + PC.report());
   };
-  UI.newWorkspaceDialog = function () {
-    var name = el("input", { type: "text", value: "New home" });
-    var own = el("input", { type: "checkbox" });
-    var units = el("select", null, PC.units.list.map(function (u) { return el("option", { value: u.id, text: u.label, selected: u.id === ST.get("units") }); }));
-    var frac = el("select", null, [2, 4, 8, 16, 32, 64].map(function (d) { return el("option", { value: d, text: "1/" + d, selected: d === ST.get("fraction") }); }));
-    var unitsBox = el("div", { hidden: true }, [field("Units", units), field("Fraction step", frac)]);
-    own.onchange = function () { unitsBox.hidden = !own.checked; };
-    var body = el("div.dialog", null, [field("Name", name), el("div.field.check", null, [own, el("label", { text: "This workspace keeps its own units and display settings" })]), el("div.note", { text: "Off: it follows the system settings (Settings › Units). You can change this later under File › Workspace settings." }), unitsBox]);
-    PC.windows.open({ id: "newws", title: "New workspace", body: body, width: 420, height: 360, buttons: [{ label: "Cancel", onclick: function () { return true; } }, { label: "Create", primary: true, onclick: function () { var settings = { own: own.checked }; if (own.checked) { settings.units = units.value; settings.fraction = Number(frac.value); } app().cmd("workspace.new", { name: name.value || "Untitled", settings: settings }); return true; } }] });
-    setTimeout(function () { name.focus(); name.select(); }, 30);
-  };
-  UI.openWorkspaceDialog = function () {
-    var body = el("div.dialog", null, el("div.note", { text: "Loading…" }));
-    PC.windows.open({ id: "openws", title: "Open workspace", body: body, width: 520, height: 420 });
-    PC.store.listWorkspaces().then(function (list) {
-      body.innerHTML = "";
-      if (!list.length) body.appendChild(el("div.empty", { text: "No saved workspaces in this browser." }));
-      list.forEach(function (w) {
-        body.appendChild(el("div.ws-row", null, [
-          el("div.grow", null, [el("span.nm", { text: w.name + (app().ws && w.id === app().ws.id ? "  (open)" : "") }), el("span.meta", { text: PC.fmtDate(w.modified) + " · " + w.surfaces + " surface(s) · " + PC.bytes(w.size) })]),
-          el("button", { text: "Open", onclick: function () { PC.windows.close("openws"); app().cmd("workspace.open", { id: w.id }); } }),
-          el("button.icon-btn.small", { text: "⧉", title: "Duplicate", onclick: function () { PC.store.duplicateWorkspace(w.id).then(function () { PC.windows.close("openws"); UI.openWorkspaceDialog(); }); } }),
-          el("button.icon-btn.small", { text: "✕", title: "Delete", onclick: function () { UI.confirm("Delete workspace “" + w.name + "” from this browser? Export it first if you want a copy.", function () { PC.store.deleteWorkspace(w.id).then(function () { PC.windows.close("openws"); UI.openWorkspaceDialog(); }); }); } }),
-        ]));
-      });
-    });
-  };
-  UI.importDialog = function () {
-    PC.store.pickFiles(".json,application/json", true).then(function (files) { UI.dropFiles(files.map(function (f) { return f; })); });
-  };
+  // A file dropped on the drawing opens like File › Open from This device: a workspace becomes a document of its
+  // own; anything else gets a plain reason. One file at a time.
   UI.dropFiles = function (files) {
-    files.forEach(function (f) {
-      var read = f.text !== undefined && typeof f.text === "string" ? Promise.resolve(f.text) : f.file ? f.file.text() : f.text();
-      read.then(function (text) {
-        var name = f.name || (f.file && f.file.name) || "file";
-        if (/^data:image|\.(png|jpe?g|webp|gif)$/i.test(name)) { UI.toast("For a photo use Layers › Add a photo.", "info"); return; }
-        try { var obj = JSON.parse(text); } catch (e) { UI.toast(name + " is not a JSON file", "error"); return; }
-        if (obj.format === "plancutter-library" && Array.isArray(obj.pieces)) { app().record("Import library", function () { obj.pieces.forEach(function (p) { try { var np = M.validate(p); delete np.format; delete np.version; if (!app().ws.library.some(function (q) { return q.id === np.id; })) app().ws.library.push(np); } catch (e) { PC.warn("library piece skipped: " + e.message); } }); }); UI.toast("Library imported", "ok"); return; }
-        try { app().importFile(obj, name); } catch (e) { UI.toast(name + ": " + e.message, "error"); }
-      });
-    });
+    var f = files && files[0];
+    if (!f) return;
+    if (files.length > 1) UI.toast("Plan Cutter opens one file at a time: " + f.name + " is opened.", "info");
+    var name = f.name || "file";
+    if (/\.(png|jpe?g|webp|gif|bmp|heic|avif)$/i.test(name)) { UI.toast("“" + name + "” is a picture. To draw over a photo, use Layers › Add a photo.", "info"); return; }
+    f.text().then(function (text) { app().importFile(text, name); }, function (e) { UI.toast("“" + name + "” could not be read: " + e.message, "warn"); });
   };
 })();
 
@@ -6488,22 +8342,8 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     renderNav();
   }
   function storage() {
-    var box = el("div", null, el("div.note", { text: "Loading…" }));
-    bodyEl.appendChild(box);
+    bodyEl.appendChild(el("p.note", { text: "Every change saves by itself to the Cloud File Manager, into today's file in your Plan Cutter folder. File › Open and File › Save are the way to other files." }));
     ST.DEFS.filter(function (d) { return d.tab === "storage"; }).forEach(function (d) { bodyEl.appendChild(row(d)); });
-    PC.store.usage().then(function (u) {
-      box.innerHTML = "";
-      box.appendChild(el("div.kv", null, [el("span", { text: "Workspaces" }), el("span", { text: String(u.workspaces) }), el("span", { text: "Library pieces" }), el("span", { text: String(u.library) }), el("span", { text: "Stored" }), el("span", { text: PC.bytes(u.bytes) }), el("span", { text: "Browser quota" }), el("span", { text: u.quota ? PC.bytes(u.quota.usage || 0) + " of " + PC.bytes(u.quota.quota || 0) : "unknown" })]));
-      box.appendChild(el("p.note", { text: "Everything lives in this browser's own database for this file. In Chrome a copy of the file opened from a different folder sees a different database, so export a workspace file to move it; import brings it back." }));
-      box.appendChild(el("div.btn-row", null, [
-        el("button", { text: "Open workspace…", onclick: function () { PC.ui.openWorkspaceDialog(); } }),
-        el("button", { text: "Export this workspace", onclick: function () { app().cmd("download", { what: "workspace" }); } }),
-        el("button", { text: "Export every workspace", onclick: function () { PC.store.listWorkspaces().then(function (list) { return Promise.all(list.map(function (w) { return PC.store.loadWorkspace(w.id); })); }).then(function (all) { PC.store.download("plancutter-all-workspaces.json", JSON.stringify({ format: "plancutter-bundle", version: 1, workspaces: all.map(PC.model.exportWorkspace), settings: ST.system() }, null, 2)); }); } }),
-        el("button", { text: "Export settings", onclick: function () { PC.store.download("plancutter-settings.json", JSON.stringify({ format: "plancutter-settings", settings: ST.system() }, null, 2)); } }),
-        el("button", { text: "Import settings…", onclick: function () { PC.store.pickFiles().then(function (f) { if (!f.length) return; try { var o = JSON.parse(f[0].text); ST.import(o.settings || o); PC.ui.toast("Settings imported", "ok"); renderBody(); } catch (e) { PC.ui.toast(e.message, "error"); } }); } }),
-        el("button.danger", { text: "Delete everything stored here…", onclick: function () { PC.ui.confirm("Delete every workspace and library piece stored in this browser? Export first if you want to keep anything.", function () { PC.store.wipe().then(function () { location.reload(); }, function (e) { PC.ui.toast(e.message, "error"); }); }); } }),
-      ]));
-    }, function (e) { box.textContent = "Storage is not available: " + e.message; });
   }
   function advanced() {
     bodyEl.appendChild(el("h3", { text: "Script console" }));
@@ -6528,7 +8368,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     PC.ui.SHORTCUTS.forEach(function (s) { t.appendChild(el("span", null, el("kbd", { text: s[0] }))); t.appendChild(el("span", { text: s[1] })); });
     bodyEl.appendChild(t);
     bodyEl.appendChild(el("h3", { text: "Files" }));
-    bodyEl.appendChild(el("p.note", { text: "Workspace (.plancut.json) holds everything. Surface, whole piece and cut piece files are the parts. Drop any of them on the drawing to import. FORMATS.md next to the source describes them so a program (or an AI) can write them." }));
+    bodyEl.appendChild(el("p.note", { text: "One kind of file: a workspace (.plan-cutter) holds everything, its surfaces, pieces and library. It saves by itself to the Cloud File Manager. FORMATS.md next to the source describes it so a program (or an AI) can write one." }));
   }
 })();
 
@@ -6563,8 +8403,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
       el("span.spacer"),
       el("button", { text: "New rectangle", onclick: function () { newPiece(M.rect(48, 24)); } }),
       el("button", { text: "New L-shape", onclick: function () { newPiece([[0, 0], [48, 0], [48, 12], [24, 12], [24, 24], [0, 24]]); } }),
-      el("button", { text: "Import…", onclick: function () { PC.store.pickFiles(".json,.svg,application/json,image/svg+xml", true).then(function (files) { files.forEach(importFile); }); } }),
-      el("button", { text: "Export library", onclick: function () { PC.store.download(PC.store.safeName(app().ws.name) + ".library.json", JSON.stringify(app().exportFile("library"), null, 2)); } }),
+      el("button", { text: "Import…", title: "A shape from an SVG drawing (its first polygon or straight-line path)", onclick: function () { PC.store.pickFiles(".svg,image/svg+xml", true).then(function (files) { files.forEach(importFile); }); } }),
     ]);
     var main = el("div.screen-main");
     var left = el("div.pane.lib", { style: { borderLeft: 0, borderRight: "1px solid var(--line)" } });
@@ -6584,13 +8423,9 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   }
   function importFile(f) {
     try {
-      if (/\.svg$/i.test(f.name)) { var pts = svgOutline(f.text); if (!pts) throw new Error("No polygon or path with straight segments found in " + f.name); newPiece(pts, f.name.replace(/\.svg$/i, "")); return; }
-      var obj = JSON.parse(f.text);
-      if (obj.format === "plancutter-library") { obj.pieces.forEach(function (p) { var np = M.validate(p); delete np.format; delete np.version; if (!app().ws.library.some(function (q) { return q.id === np.id; })) app().record("Import library", function () { app().ws.library.push(np); }); }); renderList(); return; }
-      var v = M.validate(obj);
-      if (v.format !== M.FORMAT.piece) throw new Error("Not a whole piece file");
-      delete v.format; delete v.version;
-      app().cmd("library.add", { piece: v }); select(v.id); renderList();
+      if (!/\.svg$/i.test(f.name)) throw new Error("“" + f.name + "” is not an SVG drawing.");
+      var pts = svgOutline(f.text); if (!pts) throw new Error("No polygon or path with straight segments found in " + f.name);
+      newPiece(pts, f.name.replace(/\.svg$/i, ""));
     } catch (e) { PC.ui.toast(e.message, "error"); }
   }
   // the first polygon, polyline or straight-segment path in an SVG, in inches (96 px per inch)
@@ -6673,7 +8508,6 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
       el("button.primary", { text: "Save", disabled: !dirty, onclick: save }),
       el("button", { text: "Place on surface", onclick: function () { if (dirty) save(); app().showScreen("layout"); app().cmd("piece.place", { whole: draft.id }); } }),
       el("button", { text: "Duplicate", onclick: function () { var c = PC.clone(draft); c.id = PC.uid("wp"); c.name += " copy"; app().cmd("library.add", { piece: c }); select(c.id); renderList(); } }),
-      el("button", { text: "Export", onclick: function () { app().cmd("download", { what: "piece", id: draft.id }); } }),
       el("button.danger", { text: "Delete", onclick: function () { PC.ui.confirm("Delete “" + draft.name + "” from the library? Placed pieces keep their own copy.", function () { app().cmd("library.remove", { id: draft.id }); cur = draft = null; dirty = false; renderList(); renderPane(); draw(); }); } }),
     ]));
     pane.appendChild(field("Name", input("name")));
@@ -7033,7 +8867,6 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     pane.appendChild(el("div.btn-row", null, [
       el("button.primary", { text: "Print", onclick: function () { CS.printSelected([p.id]); } }),
       el("button", { text: "Fit", onclick: function () { fit(); draw(); } }),
-      el("button", { text: "Export cut file", onclick: function () { app().cmd("download", { what: "cut", id: p.id }); } }),
     ]));
   }
 
@@ -7405,20 +9238,13 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   }
 
   // ---- workspace & files ----------------------------------------------------------------------
-  C.register("workspace.new", function (args) { return app().newWorkspace(args.name, args.settings); });
-  C.register("workspace.open", function (args) { return app().openWorkspace(args.id); });
-  C.register("workspace.save", function () { return PC.store.flush(app().ws).then(function () { return { ok: true }; }); });
-  C.register("workspace.list", function () { return PC.store.listWorkspaces(); });
-  C.register("workspace.rename", function (args) { var a = app(); return a.record("Rename workspace", function () { a.ws.name = String(args.name || "Untitled"); PC.ui.refreshTitle(); return a.ws.name; }); });
-  C.register("workspace.delete", function (args) { return PC.store.deleteWorkspace(args.id); });
+  // (opening and saving are the cloud kit's: PC.store; a workspace is one .plan-cutter document)
+  C.register("workspace.new", function (args) { return PC.store.newDoc(args.name); });
+  C.register("workspace.save", function () { return PC.store.save(); });
+  C.register("workspace.list", function () { return PC.store.list(); });
+  C.register("workspace.rename", function (args) { return PC.store.rename(String(args.name || "").trim() || "Untitled"); });
   C.register("workspace.settings", function (args) { var a = app(); return a.record("Workspace settings", function () { PC.assign(a.ws.settings, args); PC.events.emit("settings", { key: "*" }); return a.ws.settings; }); });
-  C.register("import", function (args) { return app().importFile(args.file, args.name); });
-  C.register("export", function (args) { return app().exportFile(args.what, args.id); });
-  C.register("download", function (args) {
-    var a = app(), obj = a.exportFile(args.what, args.id), name = args.name || PC.store.safeName(obj.name || a.ws.name) + (args.what === "workspace" ? ".plancut.json" : args.what === "surface" ? ".surface.json" : args.what === "piece" ? ".piece.json" : ".cut.json");
-    PC.store.download(name, JSON.stringify(obj, null, 2));
-    return { name: name };
-  });
+  C.register("export", function (args) { return app().exportFile(args.what || "workspace"); });
 
   // ---- surfaces ---------------------------------------------------------------------------------
   C.register("surface.add", function (args) {
@@ -7782,7 +9608,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
         var whole = M.wholeOf(ws, p), bb = G.bbox(p.outline);
         var def = M.newWholePiece({ name: (whole ? whole.name : "Piece") + " offcut " + p.name, category: whole ? whole.category : "other", faces: whole ? whole.faces.slice() : ["Front", "Back"], outline: G.translate(p.outline, [-bb.minX, -bb.minY]), thickness: whole ? whole.thickness : 0, color: whole ? whole.color : "", stock: 1, tags: ["offcut"], notes: "Offcut of " + p.name });
         ws.library.push(def); out.push(def.id);
-        PC.store.savePiece(def).catch(function () {});
+        PC.store.libPut(def);
         p.removed = true; p.status = "offcut";
       });
       M.touch(s); a.solve(); PC.ui.refreshPanels(); return { ids: out };
@@ -7790,9 +9616,9 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   });
   C.register("piece.rename", function (args) { return C.run("rename", args); });
   C.register("piece.origin", function (args) { var a = app(); return a.record("Set cut origin", function () { need(a.surface, args.id, "piece").origin = Number(args.corner) || 0; return { ok: true }; }); });
-  C.register("library.add", function (args) { var a = app(); return a.record("Add to library", function () { var p = M.newWholePiece(args.piece); a.ws.library.push(p); PC.store.savePiece(p).catch(function () {}); return { id: p.id }; }); });
-  C.register("library.update", function (args) { var a = app(); return a.record("Edit library piece", function () { var i = a.ws.library.findIndex(function (p) { return p.id === args.piece.id; }); if (i < 0) throw new Error("Not in the library"); a.ws.library[i] = PC.assign(a.ws.library[i], args.piece); PC.store.savePiece(a.ws.library[i]).catch(function () {}); return { id: args.piece.id }; }); });
-  C.register("library.remove", function (args) { var a = app(); return a.record("Remove from library", function () { a.ws.library = a.ws.library.filter(function (p) { return p.id !== args.id; }); PC.store.deletePiece(args.id).catch(function () {}); return { ok: true }; }); });
+  C.register("library.add", function (args) { var a = app(); return a.record("Add to library", function () { var p = M.newWholePiece(args.piece); a.ws.library.push(p); PC.store.libPut(p); return { id: p.id }; }); });
+  C.register("library.update", function (args) { var a = app(); return a.record("Edit library piece", function () { var i = a.ws.library.findIndex(function (p) { return p.id === args.piece.id; }); if (i < 0) throw new Error("Not in the library"); a.ws.library[i] = PC.assign(a.ws.library[i], args.piece); PC.store.libPut(a.ws.library[i]); return { id: args.piece.id }; }); });
+  C.register("library.remove", function (args) { var a = app(); return a.record("Remove from library", function () { a.ws.library = a.ws.library.filter(function (p) { return p.id !== args.id; }); PC.store.libDel(args.id); return { ok: true }; }); });
 
   // ---- selection & editing ------------------------------------------------------------------------------
   C.register("select", function (args) { app().select(args.ids || [], args.mode || "set"); return { selection: app().selection.slice() }; });
@@ -7908,17 +9734,8 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     log: function () { return PC.lines.slice(); },
     PC: PC,
   };
-  // postMessage and URL hash channels
-  window.addEventListener("message", function (e) {
-    if (!e.data || !e.data.plancutter) return;
-    API.run(e.data.plancutter, { continueOnError: true }).then(function (r) { try { e.source.postMessage({ plancutterResult: r }, "*"); } catch (x) {} });
-  });
-  C.runHash = function () {
-    var m = /[#&]run=([^&]+)/.exec(location.hash || "");
-    if (!m) return;
-    try { var list = JSON.parse(atob(decodeURIComponent(m[1]))); API.run(list, { continueOnError: true }).then(function (r) { PC.info("URL script ran: " + JSON.stringify(r).slice(0, 300)); }); }
-    catch (e) { PC.error("URL script failed: " + e.message); }
-  };
+  // Other pages cannot send commands: there is no message listener and no #run= link (removed in the Cool tools
+  // upgrade). The commands are for this page's own menus, the script console and the tests.
 })();
 
 // ---- tutorial.js ----
@@ -8063,10 +9880,11 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   A.commit = function (name) { if (H.commit(name)) A.afterChange(name); };
   A.afterChange = function (name) {
     if (A.surface) M.touch(A.surface);
+    if (A.ws) A.ws.modified = PC.isoNow();
     // a change may have removed selected things
     A.selection = A.selection.filter(function (id) { return M.any(A.surface, id); });
     if (!A.report) A.solve(); else { A.updateGhost(); PC.render.invalidate(); }
-    PC.store.autosave(A.ws);
+    PC.store.touch();
     PC.ui.refreshPanels();
     PC.events.emit("change", { name: name, summary: M.summary(A.surface) });
   };
@@ -8077,7 +9895,8 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     V.setCamera(A.surface.camera);
     A.selection = A.selection.filter(function (id) { return M.any(A.surface, id); });
     A.solve();
-    PC.store.autosave(A.ws);
+    A.ws.modified = PC.isoNow();
+    PC.store.touch();
     PC.ui.refreshTabs(); PC.ui.refreshPanels();
     PC.events.emit("change", { name: "history" });
   };
@@ -8182,8 +10001,8 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   };
 
   // ---- workspaces ----------------------------------------------------------------------------------------
+  // Put a workspace on the screen (PC.store decides which: it is the open cloud document's content).
   A.loadWorkspace = function (ws) {
-    if (A.ws) PC.store.flush(A.ws);
     // whatever was open (cut sheet, designer, a settings window, a tool mid-way) closes first
     if (A.tool && A.tool.cancel) A.tool.cancel();
     if (PC.windows && PC.windows.list) PC.windows.list.slice().forEach(function (w) { PC.windows.close(w.id); });
@@ -8197,56 +10016,38 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     PC.noteId(ws.id);
     A.selection = [];
     A.setSurface(ws.activeSurface);
-    PC.store.setMeta("lastWorkspace", ws.id).catch(function () {});
     PC.ui.refreshTitle(); PC.ui.refreshAll();
     PC.events.emit("workspace", { id: ws.id });
   };
-  A.newWorkspace = function (name, settings) {
-    var ws = M.newWorkspace(name || "Untitled", settings);
-    return PC.store.listLibrary().then(function (lib) {
-      // the shared library (pieces the person made) joins the starter set
-      lib.forEach(function (p) { if (!ws.library.some(function (q) { return q.id === p.id; })) ws.library.push(p); });
-    }, function () {}).then(function () {
-      A.loadWorkspace(ws);
-      A.home();
-      PC.store.autosave(ws);
-      return { id: ws.id };
+  // A new workspace (not on the screen yet): the starter set plus the person's own library pieces. A shared piece
+  // named like a starter piece is that piece as the person edited it, and takes its place. Ids are made unique
+  // inside the new workspace (the counters start afresh; loadWorkspace notes them again).
+  A.newWorkspace = function (name) {
+    PC.resetIds();
+    var ws = M.newWorkspace(name || "Untitled");
+    var used = {};
+    ws.library.forEach(function (q) { used[q.id] = true; });
+    (PC.store.shared || []).forEach(function (raw) {
+      var p;
+      try { p = M.validatePiece(PC.clone(raw)); } catch (e) { PC.warn("A shared library piece was left out: " + e.message); return; }
+      var i = ws.library.findIndex(function (q) { return q.name === p.name && q.id !== undefined && !q.shared; });
+      if (i >= 0) { p.id = ws.library[i].id; p.shared = true; ws.library[i] = p; return; }
+      while (used[p.id]) p.id = PC.uid("wp");
+      used[p.id] = true; PC.noteId(p.id);
+      ws.library.push(p);
     });
+    ws.library.forEach(function (q) { delete q.shared; });
+    return ws;
   };
-  A.openWorkspace = function (id) {
-    return PC.store.loadWorkspace(id).then(function (ws) { A.loadWorkspace(ws); A.home(); return { id: ws.id, name: ws.name }; });
+  // A workspace file's text opened as a workspace of its own (dropped files and the tests use it).
+  A.importFile = function (text, name) {
+    if (typeof text !== "string") text = JSON.stringify(text);
+    try { var r = PC.store.openText(text, name); if (r) PC.ui.toast("Opened “" + r.name + "”", "ok"); return r; }
+    catch (e) { PC.ui.toast(e.message, "warn"); return null; }
   };
-  A.importFile = function (obj, name) {
-    if (typeof obj === "string") obj = JSON.parse(obj);
-    obj = M.validate(obj);
-    if (obj.format === M.FORMAT.workspace) {
-      // a workspace file opens as its own workspace (a copy if the id is already stored)
-      return PC.store.listWorkspaces().then(function (list) {
-        if (list.some(function (w) { return w.id === obj.id; })) { obj.id = PC.uid("w"); obj.name = obj.name + " (imported)"; }
-        A.loadWorkspace(obj); A.home(); PC.store.autosave(obj);
-        PC.ui.toast("Opened workspace “" + obj.name + "”", "ok");
-        return { kind: "workspace", id: obj.id };
-      });
-    }
-    var r = A.record("Import " + (name || obj.format), function () { return M.importInto(A.ws, obj); });
-    if (r.kind === "surface") A.setSurface(r.id);
-    if (r.kind === "cut") A.select(r.ids, "set");
-    PC.ui.refreshAll();
-    PC.ui.toast("Imported " + r.kind + (name ? " from " + name : ""), "ok");
-    return r;
-  };
-  A.exportFile = function (what, id) {
-    var s = A.surface, ws = A.ws;
-    if (what === "workspace") return M.exportWorkspace(ws);
-    if (what === "surface") return M.exportSurface(id ? A.surfaceById(id) : s);
-    if (what === "piece") { var p = ws.library.find(function (x) { return x.id === id; }); if (!p) throw new Error("No library piece " + id); return M.exportPiece(p); }
-    if (what === "cut") {
-      var list = (Array.isArray(id) ? id : id ? [id] : A.selection).map(function (i) { return M.piece(s, i); }).filter(Boolean);
-      if (!list.length) throw new Error("Select the pieces to export");
-      return M.exportCut(ws, s, list);
-    }
-    if (what === "library") return { format: "plancutter-library", version: 1, pieces: ws.library.map(M.exportPiece) };
-    throw new Error("Export what? workspace, surface, piece, cut or library");
+  A.exportFile = function (what) {
+    if (what === "workspace") return M.exportWorkspace(A.ws);
+    throw new Error("Only the workspace can be exported");
   };
 
   // ---- screens ------------------------------------------------------------------------------------------
@@ -8283,19 +10084,13 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
       PC.render.invalidate(); PC.ui.refreshSnapbar(); PC.ui.refreshTools(); PC.ui.status.zoom();
       if (A.surface && (ev.key === "units" || ev.key === "*" || ev.key === "fraction")) PC.ui.refreshPanels();
     });
-    window.addEventListener("beforeunload", function () { if (A.ws) PC.store.flush(A.ws); });
-    document.addEventListener("visibilitychange", function () { if (document.hidden && A.ws) PC.store.flush(A.ws); });
-    // open the last workspace, else start a new one
-    PC.store.getMeta("lastWorkspace").then(function (id) {
-      if (id) return A.openWorkspace(id).catch(function (e) { PC.warn("Last workspace did not open: " + e.message); return A.newWorkspace("My home"); });
-      return PC.store.listWorkspaces().then(function (list) { return list.length ? A.openWorkspace(list[0].id) : A.newWorkspace("My home"); });
-    }).catch(function (e) {
-      PC.error("Storage unavailable: " + e.message);
-      PC.ui.toast("This browser will not keep work between visits (" + e.message + "). Export files to save.", "error");
-      A.loadWorkspace(M.newWorkspace("My home")); A.home();
+    // the file the Cloud File Manager sent (#open=<id>), else the last workspace, else a new one (the kit saves
+    // what is unsaved by itself when the page is hidden or closed)
+    PC.store.start().catch(function (e) {
+      PC.error("Opening failed: " + e.message, e.stack);
+      if (!A.ws) { A.loadWorkspace(A.newWorkspace("Untitled")); A.home(); }
     }).then(function () {
-      PC.commands.runHash();
-      if (!localStorage.getItem("plancutter.seen")) { localStorage.setItem("plancutter.seen", "1"); PC.tutorial.offer(); }
+      try { if (!localStorage.getItem("plancutter.seen")) { localStorage.setItem("plancutter.seen", "1"); PC.tutorial.offer(); } } catch (e) {}
     });
     PC.info("Plan Cutter " + PC.VERSION + " started");
   };

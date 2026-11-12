@@ -4,7 +4,11 @@
 
    Host side (the page that opens the window):
      const win = WindowKit.open(url, { title, name, width, height, onClose });   // a floating window with the page
-     const got = await WindowKit.pick(fileManagerUrl, { accept: [".zip"], folder: "files" });  // null = cancelled
+     const got = await WindowKit.pick(fileManagerUrl, { app: "reader", accept: [".zip"], folder: "files" });  // null = cancelled
+   Version 2 (2026-11-11, the Cool tools upgrade): pick takes `app` (the asking program's id from the one list: the
+   chooser starts in its folder and shows its recent files) and `keep` ({ label }: one checkbox beside Use selected);
+   its answer carries `ids` (each file's id in the cloud), `folderId` and `keep`. Nothing about the window changed.
+   Version 3 (2026-11-12): pick takes `start`, the folder the chooser opens in ("Shared Folder/Reader files").
    The window: drag by its title bar, resize from every edge and corner, maximise (button or double-click the
    title), close (button or Escape); its size and place are remembered per name. On a phone it is a full-screen
    sheet, and the phone's Back button closes it. Every message is checked: it must come from the window's own
@@ -14,7 +18,7 @@
    origin, local file pages), and refuses to run inside any other site (location.ancestorOrigins). */
 (function (root) {
   "use strict";
-  const VERSION = 1;
+  const VERSION = 3;
   const MIN_W = 320, MIN_H = 220, MARGIN = 8, HEAD = 40;
   const SHEET = "(max-width: 640px), (max-height: 480px) and (pointer: coarse)";
   const KEY = "wk-win:";
@@ -206,16 +210,22 @@
     for (const w of wins.slice()) if (w.pushed && !(history.state && history.state.wkSheet === w.id)) w.close(true);
   });
 
-  // pick(url, opts): open the file manager, ask it for files, give back { kind, files, paths, folder, missing } or
-  // null when the person cancels or closes the window. opts: accept [".zip"], multiple, files (default true),
-  // folder (false | "files" | "zip"), host (the name shown: "Book reader"), title, name, onProgress, signal.
+  // pick(url, opts): open the file manager, ask it for files, give back { kind, files, paths, ids, folder, folderId,
+  // missing, keep } or null when the person closes the window. opts: accept [".zip"], multiple, files (default true),
+  // folder (false | "files" | "zip"), host (the name shown: "Book reader"), app (the asking program's id from the one
+  // list: the chooser starts in that program's folder, with its recent files on top, and shows its name),
+  // keep ({ label }: one unticked checkbox beside Use selected; the answer's `keep` says whether it was ticked),
+  // start (the folder the chooser opens in, as a signed-in person sees its path: "Shared Folder/Reader files"; it
+  // comes before the program's own folder, and when it is not there the chooser says so and opens where it would
+  // have without it), title, name, onProgress, signal. In the answer, ids[i] is the cloud id of files[i] for kind
+  // "files"; for a folder ("folder", "zip") folderId is the folder's id and ids holds "" for each file.
   function pick(url, o) {
     o = o || {};
     return new Promise((resolve, reject) => {
       let done = false, port = null, win = null;
       const end = (fn, v) => { if (done) return; done = true; clearTimeout(timer); if (port) port.close(); if (win) win.close(); fn(v); };
       const timer = setTimeout(() => end(reject, new Error("The file manager did not open within 30 s (no network, or its page could not load).")), 30000);
-      win = open(url, { name: o.name || "file-manager-pick", title: o.title || "Choose " + what(o), width: o.width, height: o.height, onClose: () => end(resolve, null) });
+      win = open(url, { name: o.name || "file-manager-pick", title: o.title || heading(o), width: o.width, height: o.height, onClose: () => end(resolve, null) });
       win.on("ready", () => {
         clearTimeout(timer);
         if (port) port.close();
@@ -229,22 +239,26 @@
           else if (d.type === "error") end(reject, new Error(d.why || "The file manager could not give the files."));
         };
         win.post({ wk: 1, type: "pick", version: VERSION, accept: accepts(o.accept), multiple: !!o.multiple, files: o.files !== false, folder: o.folder || false,
-          host: String(o.host || document.title || location.host).slice(0, 80) }, [ch.port2]);
+          host: String(o.host || document.title || location.host).slice(0, 80), app: String(o.app || "").slice(0, 60),
+          keep: o.keep && o.keep.label ? { label: String(o.keep.label).slice(0, 80) } : null, start: String(o.start || "").slice(0, 400) }, [ch.port2]);
       });
       if (o.signal) o.signal.addEventListener("abort", () => end(resolve, null), { once: true });
     });
   }
   const accepts = (a) => [].concat(a || []).map((x) => String(x).trim().toLowerCase()).filter(Boolean).map((x) => (x === "*" || x.startsWith(".") ? x : "." + x));
-  function what(o) {
-    const a = accepts(o.accept).filter((x) => x !== "*");
-    const f = o.files === false ? "" : a.length ? a.join(" or ") + (o.multiple ? " files" : " file") : o.multiple ? "files" : "a file";
-    return o.folder ? (f ? f + " or a folder" : "a folder") : f;
+  // The window's first title, one short heading: "Book reader: choose a file or folder" (the file manager sets the
+  // same words again once it has the request, with the program's name from the one list).
+  function heading(o) {
+    const w = o.files === false ? "a folder" : o.folder ? "a file or folder" : o.multiple ? "files" : "a file";
+    const who = String(o.host || "").trim().slice(0, 80);
+    return who ? `${who}: choose ${w}` : `Choose ${w}`;
   }
   function result(d) {
     const files = Array.isArray(d.files) ? d.files : [];
     const paths = Array.isArray(d.paths) ? d.paths : files.map((f) => f.name);
+    const ids = files.map((f, i) => (Array.isArray(d.ids) && typeof d.ids[i] === "string" ? d.ids[i] : ""));
     files.forEach((f, i) => { try { Object.defineProperty(f, "webkitRelativePath", { value: paths[i] || f.name, configurable: true }); } catch (e) {} });
-    return { kind: d.kind || "files", files, paths, folder: d.folder || "", missing: d.missing || "" };
+    return { kind: d.kind || "files", files, paths, ids, folder: d.folder || "", folderId: typeof d.folderId === "string" ? d.folderId : "", missing: d.missing || "", keep: !!d.keep };
   }
 
   // ---- the child side: a page inside a window --------------------------------------------------------------------

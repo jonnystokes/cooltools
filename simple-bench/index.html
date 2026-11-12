@@ -11,7 +11,7 @@
 <!-- icons:end -->
 <script id="sb-apps">
 // apps:begin (the Apps button and the window kit it needs: copied from Projects\app-kit\dist\apps.js by publish.py; edit it there)
-/* apps.js 1.15 (built 2026-11-08 2:45 PM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
+/* apps.js 1.24 (built 2026-11-12 7:17 AM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
    app-kit\apps-button.js and file-manager\kit\window-kit.js (one source each; never edit this file). The window kit
    runs only when the page has none of its own. */
 if (!window.WindowKit) {
@@ -21,7 +21,11 @@ if (!window.WindowKit) {
 
    Host side (the page that opens the window):
      const win = WindowKit.open(url, { title, name, width, height, onClose });   // a floating window with the page
-     const got = await WindowKit.pick(fileManagerUrl, { accept: [".zip"], folder: "files" });  // null = cancelled
+     const got = await WindowKit.pick(fileManagerUrl, { app: "reader", accept: [".zip"], folder: "files" });  // null = cancelled
+   Version 2 (2026-11-11, the Cool tools upgrade): pick takes `app` (the asking program's id from the one list: the
+   chooser starts in its folder and shows its recent files) and `keep` ({ label }: one checkbox beside Use selected);
+   its answer carries `ids` (each file's id in the cloud), `folderId` and `keep`. Nothing about the window changed.
+   Version 3 (2026-11-12): pick takes `start`, the folder the chooser opens in ("Shared Folder/Reader files").
    The window: drag by its title bar, resize from every edge and corner, maximise (button or double-click the
    title), close (button or Escape); its size and place are remembered per name. On a phone it is a full-screen
    sheet, and the phone's Back button closes it. Every message is checked: it must come from the window's own
@@ -31,7 +35,7 @@ if (!window.WindowKit) {
    origin, local file pages), and refuses to run inside any other site (location.ancestorOrigins). */
 (function (root) {
   "use strict";
-  const VERSION = 1;
+  const VERSION = 3;
   const MIN_W = 320, MIN_H = 220, MARGIN = 8, HEAD = 40;
   const SHEET = "(max-width: 640px), (max-height: 480px) and (pointer: coarse)";
   const KEY = "wk-win:";
@@ -223,16 +227,22 @@ if (!window.WindowKit) {
     for (const w of wins.slice()) if (w.pushed && !(history.state && history.state.wkSheet === w.id)) w.close(true);
   });
 
-  // pick(url, opts): open the file manager, ask it for files, give back { kind, files, paths, folder, missing } or
-  // null when the person cancels or closes the window. opts: accept [".zip"], multiple, files (default true),
-  // folder (false | "files" | "zip"), host (the name shown: "Book reader"), title, name, onProgress, signal.
+  // pick(url, opts): open the file manager, ask it for files, give back { kind, files, paths, ids, folder, folderId,
+  // missing, keep } or null when the person closes the window. opts: accept [".zip"], multiple, files (default true),
+  // folder (false | "files" | "zip"), host (the name shown: "Book reader"), app (the asking program's id from the one
+  // list: the chooser starts in that program's folder, with its recent files on top, and shows its name),
+  // keep ({ label }: one unticked checkbox beside Use selected; the answer's `keep` says whether it was ticked),
+  // start (the folder the chooser opens in, as a signed-in person sees its path: "Shared Folder/Reader files"; it
+  // comes before the program's own folder, and when it is not there the chooser says so and opens where it would
+  // have without it), title, name, onProgress, signal. In the answer, ids[i] is the cloud id of files[i] for kind
+  // "files"; for a folder ("folder", "zip") folderId is the folder's id and ids holds "" for each file.
   function pick(url, o) {
     o = o || {};
     return new Promise((resolve, reject) => {
       let done = false, port = null, win = null;
       const end = (fn, v) => { if (done) return; done = true; clearTimeout(timer); if (port) port.close(); if (win) win.close(); fn(v); };
       const timer = setTimeout(() => end(reject, new Error("The file manager did not open within 30 s (no network, or its page could not load).")), 30000);
-      win = open(url, { name: o.name || "file-manager-pick", title: o.title || "Choose " + what(o), width: o.width, height: o.height, onClose: () => end(resolve, null) });
+      win = open(url, { name: o.name || "file-manager-pick", title: o.title || heading(o), width: o.width, height: o.height, onClose: () => end(resolve, null) });
       win.on("ready", () => {
         clearTimeout(timer);
         if (port) port.close();
@@ -246,22 +256,26 @@ if (!window.WindowKit) {
           else if (d.type === "error") end(reject, new Error(d.why || "The file manager could not give the files."));
         };
         win.post({ wk: 1, type: "pick", version: VERSION, accept: accepts(o.accept), multiple: !!o.multiple, files: o.files !== false, folder: o.folder || false,
-          host: String(o.host || document.title || location.host).slice(0, 80) }, [ch.port2]);
+          host: String(o.host || document.title || location.host).slice(0, 80), app: String(o.app || "").slice(0, 60),
+          keep: o.keep && o.keep.label ? { label: String(o.keep.label).slice(0, 80) } : null, start: String(o.start || "").slice(0, 400) }, [ch.port2]);
       });
       if (o.signal) o.signal.addEventListener("abort", () => end(resolve, null), { once: true });
     });
   }
   const accepts = (a) => [].concat(a || []).map((x) => String(x).trim().toLowerCase()).filter(Boolean).map((x) => (x === "*" || x.startsWith(".") ? x : "." + x));
-  function what(o) {
-    const a = accepts(o.accept).filter((x) => x !== "*");
-    const f = o.files === false ? "" : a.length ? a.join(" or ") + (o.multiple ? " files" : " file") : o.multiple ? "files" : "a file";
-    return o.folder ? (f ? f + " or a folder" : "a folder") : f;
+  // The window's first title, one short heading: "Book reader: choose a file or folder" (the file manager sets the
+  // same words again once it has the request, with the program's name from the one list).
+  function heading(o) {
+    const w = o.files === false ? "a folder" : o.folder ? "a file or folder" : o.multiple ? "files" : "a file";
+    const who = String(o.host || "").trim().slice(0, 80);
+    return who ? `${who}: choose ${w}` : `Choose ${w}`;
   }
   function result(d) {
     const files = Array.isArray(d.files) ? d.files : [];
     const paths = Array.isArray(d.paths) ? d.paths : files.map((f) => f.name);
+    const ids = files.map((f, i) => (Array.isArray(d.ids) && typeof d.ids[i] === "string" ? d.ids[i] : ""));
     files.forEach((f, i) => { try { Object.defineProperty(f, "webkitRelativePath", { value: paths[i] || f.name, configurable: true }); } catch (e) {} });
-    return { kind: d.kind || "files", files, paths, folder: d.folder || "", missing: d.missing || "" };
+    return { kind: d.kind || "files", files, paths, ids, folder: d.folder || "", folderId: typeof d.folderId === "string" ? d.folderId : "", missing: d.missing || "", keep: !!d.keep };
   }
 
   // ---- the child side: a page inside a window --------------------------------------------------------------------
@@ -300,7 +314,7 @@ if (!window.WindowKit) {
   root.WindowKit = { VERSION, open, pick, child, get windows() { return wins.slice(); } };
 })(typeof window !== "undefined" ? window : globalThis);
 }
-/* apps-button.js 1.15: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.24: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
    https://jonnystokes.github.io/cooltools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
@@ -332,8 +346,17 @@ if (!window.WindowKit) {
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.15";
-  const LAUNCHER = "https://jonnystokes.github.io/cooltools/apps/";
+  const VERSION = "1.24";
+  // The menu comes from the site the page itself is on, so the menu's account strip reads the same browser memory
+  // (one origin) and the same relay.json as the program: the live site, or the stage (CONTRACT 3). Any other page
+  // (a file on this device, a test page) gets the live site's menu.
+  const SITES = ["https://jonnystokes.github.io/cooltools/", "http://127.0.0.1:28801/", "http://localhost:28801/"];
+  const LAUNCHER = (() => {
+    let href = "";
+    try { href = root.location.href; } catch (e) {}
+    const site = SITES.find((s) => href.startsWith(s)) || SITES[0];
+    return site + "apps/";
+  })();
   const W = 460, H = 780;        // the menu window's first size (less on a short screen); the window kit remembers
                                  // what the person makes it
   const NAME = "apps";           // its key in the window kit (localStorage wk-win:apps); the same in every program
@@ -592,7 +615,7 @@ ul.facts b { font-weight: 600; }
     <div id="reader"></div>
     <p class="foot">Scores: Jon's PC (Ryzen 7 2700X, GTX 1050 Ti, Chrome 155) = 1000; higher is faster. The suggestion uses the Book reader's own rules (its rules.js, copied in by build.py), so it matches the reader's first-run check. "Runs well" = 1.3x real time after the model's margin; "barely" = keeps up with little to spare; phones, tablets and laptops on battery count 0.8 of their speed for warming up. The reader's full check also measures memory, which this short test does not.</p>
   </div>
-  <p class="ver" id="sb-ver">Simple Bench V1.0.4 · built 2026-11-08 2:45 PM</p>
+  <p class="ver" id="sb-ver">Simple Bench V1.0.7 · built 2026-11-12 7:18 AM</p>
 </main>
 
 <script>

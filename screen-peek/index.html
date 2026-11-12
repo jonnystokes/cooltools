@@ -11,7 +11,7 @@
 <!-- icons:end -->
 <script>
 // apps:begin (the Apps button and the window kit it needs: copied from Projects\app-kit\dist\apps.js by build_page.py; edit it there)
-/* apps.js 1.15 (built 2026-11-08 2:45 PM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
+/* apps.js 1.24 (built 2026-11-12 7:17 AM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
    app-kit\apps-button.js and file-manager\kit\window-kit.js (one source each; never edit this file). The window kit
    runs only when the page has none of its own. */
 if (!window.WindowKit) {
@@ -21,7 +21,11 @@ if (!window.WindowKit) {
 
    Host side (the page that opens the window):
      const win = WindowKit.open(url, { title, name, width, height, onClose });   // a floating window with the page
-     const got = await WindowKit.pick(fileManagerUrl, { accept: [".zip"], folder: "files" });  // null = cancelled
+     const got = await WindowKit.pick(fileManagerUrl, { app: "reader", accept: [".zip"], folder: "files" });  // null = cancelled
+   Version 2 (2026-11-11, the Cool tools upgrade): pick takes `app` (the asking program's id from the one list: the
+   chooser starts in its folder and shows its recent files) and `keep` ({ label }: one checkbox beside Use selected);
+   its answer carries `ids` (each file's id in the cloud), `folderId` and `keep`. Nothing about the window changed.
+   Version 3 (2026-11-12): pick takes `start`, the folder the chooser opens in ("Shared Folder/Reader files").
    The window: drag by its title bar, resize from every edge and corner, maximise (button or double-click the
    title), close (button or Escape); its size and place are remembered per name. On a phone it is a full-screen
    sheet, and the phone's Back button closes it. Every message is checked: it must come from the window's own
@@ -31,7 +35,7 @@ if (!window.WindowKit) {
    origin, local file pages), and refuses to run inside any other site (location.ancestorOrigins). */
 (function (root) {
   "use strict";
-  const VERSION = 1;
+  const VERSION = 3;
   const MIN_W = 320, MIN_H = 220, MARGIN = 8, HEAD = 40;
   const SHEET = "(max-width: 640px), (max-height: 480px) and (pointer: coarse)";
   const KEY = "wk-win:";
@@ -223,16 +227,22 @@ if (!window.WindowKit) {
     for (const w of wins.slice()) if (w.pushed && !(history.state && history.state.wkSheet === w.id)) w.close(true);
   });
 
-  // pick(url, opts): open the file manager, ask it for files, give back { kind, files, paths, folder, missing } or
-  // null when the person cancels or closes the window. opts: accept [".zip"], multiple, files (default true),
-  // folder (false | "files" | "zip"), host (the name shown: "Book reader"), title, name, onProgress, signal.
+  // pick(url, opts): open the file manager, ask it for files, give back { kind, files, paths, ids, folder, folderId,
+  // missing, keep } or null when the person closes the window. opts: accept [".zip"], multiple, files (default true),
+  // folder (false | "files" | "zip"), host (the name shown: "Book reader"), app (the asking program's id from the one
+  // list: the chooser starts in that program's folder, with its recent files on top, and shows its name),
+  // keep ({ label }: one unticked checkbox beside Use selected; the answer's `keep` says whether it was ticked),
+  // start (the folder the chooser opens in, as a signed-in person sees its path: "Shared Folder/Reader files"; it
+  // comes before the program's own folder, and when it is not there the chooser says so and opens where it would
+  // have without it), title, name, onProgress, signal. In the answer, ids[i] is the cloud id of files[i] for kind
+  // "files"; for a folder ("folder", "zip") folderId is the folder's id and ids holds "" for each file.
   function pick(url, o) {
     o = o || {};
     return new Promise((resolve, reject) => {
       let done = false, port = null, win = null;
       const end = (fn, v) => { if (done) return; done = true; clearTimeout(timer); if (port) port.close(); if (win) win.close(); fn(v); };
       const timer = setTimeout(() => end(reject, new Error("The file manager did not open within 30 s (no network, or its page could not load).")), 30000);
-      win = open(url, { name: o.name || "file-manager-pick", title: o.title || "Choose " + what(o), width: o.width, height: o.height, onClose: () => end(resolve, null) });
+      win = open(url, { name: o.name || "file-manager-pick", title: o.title || heading(o), width: o.width, height: o.height, onClose: () => end(resolve, null) });
       win.on("ready", () => {
         clearTimeout(timer);
         if (port) port.close();
@@ -246,22 +256,26 @@ if (!window.WindowKit) {
           else if (d.type === "error") end(reject, new Error(d.why || "The file manager could not give the files."));
         };
         win.post({ wk: 1, type: "pick", version: VERSION, accept: accepts(o.accept), multiple: !!o.multiple, files: o.files !== false, folder: o.folder || false,
-          host: String(o.host || document.title || location.host).slice(0, 80) }, [ch.port2]);
+          host: String(o.host || document.title || location.host).slice(0, 80), app: String(o.app || "").slice(0, 60),
+          keep: o.keep && o.keep.label ? { label: String(o.keep.label).slice(0, 80) } : null, start: String(o.start || "").slice(0, 400) }, [ch.port2]);
       });
       if (o.signal) o.signal.addEventListener("abort", () => end(resolve, null), { once: true });
     });
   }
   const accepts = (a) => [].concat(a || []).map((x) => String(x).trim().toLowerCase()).filter(Boolean).map((x) => (x === "*" || x.startsWith(".") ? x : "." + x));
-  function what(o) {
-    const a = accepts(o.accept).filter((x) => x !== "*");
-    const f = o.files === false ? "" : a.length ? a.join(" or ") + (o.multiple ? " files" : " file") : o.multiple ? "files" : "a file";
-    return o.folder ? (f ? f + " or a folder" : "a folder") : f;
+  // The window's first title, one short heading: "Book reader: choose a file or folder" (the file manager sets the
+  // same words again once it has the request, with the program's name from the one list).
+  function heading(o) {
+    const w = o.files === false ? "a folder" : o.folder ? "a file or folder" : o.multiple ? "files" : "a file";
+    const who = String(o.host || "").trim().slice(0, 80);
+    return who ? `${who}: choose ${w}` : `Choose ${w}`;
   }
   function result(d) {
     const files = Array.isArray(d.files) ? d.files : [];
     const paths = Array.isArray(d.paths) ? d.paths : files.map((f) => f.name);
+    const ids = files.map((f, i) => (Array.isArray(d.ids) && typeof d.ids[i] === "string" ? d.ids[i] : ""));
     files.forEach((f, i) => { try { Object.defineProperty(f, "webkitRelativePath", { value: paths[i] || f.name, configurable: true }); } catch (e) {} });
-    return { kind: d.kind || "files", files, paths, folder: d.folder || "", missing: d.missing || "" };
+    return { kind: d.kind || "files", files, paths, ids, folder: d.folder || "", folderId: typeof d.folderId === "string" ? d.folderId : "", missing: d.missing || "", keep: !!d.keep };
   }
 
   // ---- the child side: a page inside a window --------------------------------------------------------------------
@@ -300,7 +314,7 @@ if (!window.WindowKit) {
   root.WindowKit = { VERSION, open, pick, child, get windows() { return wins.slice(); } };
 })(typeof window !== "undefined" ? window : globalThis);
 }
-/* apps-button.js 1.15: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.24: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
    https://jonnystokes.github.io/cooltools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
@@ -332,8 +346,17 @@ if (!window.WindowKit) {
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.15";
-  const LAUNCHER = "https://jonnystokes.github.io/cooltools/apps/";
+  const VERSION = "1.24";
+  // The menu comes from the site the page itself is on, so the menu's account strip reads the same browser memory
+  // (one origin) and the same relay.json as the program: the live site, or the stage (CONTRACT 3). Any other page
+  // (a file on this device, a test page) gets the live site's menu.
+  const SITES = ["https://jonnystokes.github.io/cooltools/", "http://127.0.0.1:28801/", "http://localhost:28801/"];
+  const LAUNCHER = (() => {
+    let href = "";
+    try { href = root.location.href; } catch (e) {}
+    const site = SITES.find((s) => href.startsWith(s)) || SITES[0];
+    return site + "apps/";
+  })();
   const W = 460, H = 780;        // the menu window's first size (less on a short screen); the window kit remembers
                                  // what the person makes it
   const NAME = "apps";           // its key in the window kit (localStorage wk-win:apps); the same in every program
@@ -549,15 +572,18 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   .ver { margin: 10px 0 0; font-size: 0.85em; color: var(--dim); }
   #log { max-height: 45vh; overflow: auto; margin: 6px 0 0; padding: 8px; background: #000; border-radius: 8px; font: 12px ui-monospace, Consolas, monospace; white-space: pre-wrap; }
   .err { color: #f77; }
-  #login { position: fixed; inset: 0; z-index: 5; display: none; place-items: center; background: rgba(0, 0, 0, 0.75); }
+  /* Without the right to use Screen Peek (relay 3's program access, "screen"): the page shows only this, one plain line
+     and one button that opens the account page. It is the page itself (opaque), not a pop-up over it. */
+  #login { position: fixed; inset: 0; z-index: 5; display: none; place-items: center; background: var(--bg); }
   #login.show { display: grid; }
-  #login form { display: grid; gap: 10px; width: min(22rem, calc(100vw - 32px)); padding: 18px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); }
-  #login h2 { margin: 0; font-size: 1.15em; }
-  #login p { margin: 0; color: var(--dim); font-size: 0.9em; }
-  #login input { min-height: 48px; padding: 0 12px; font-size: 1em; border-radius: 10px; border: 1px solid #555; background: #333; color: var(--text); }
-  #login button { background: var(--go); border-color: var(--go); }
-  /* The sign-in box never covers the way out: while it shows, the bar sits above its dim layer with only the Apps
-     button showing (the bar's own buttons and status wait for the sign-in), so a person can leave without signing in. */
+  #login .box { display: grid; gap: 14px; width: min(22rem, calc(100vw - 32px)); padding: 20px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); }
+  #login h2 { margin: 0; font-size: 1.2em; }
+  #login p { margin: 0; font-size: 1em; }
+  #login p.err { font-size: 0.9em; }
+  #login p.err:empty { display: none; }
+  #login button { min-height: 56px; font-size: 1.1em; font-weight: 600; background: #2f5f9e; border-color: #2f5f9e; }
+  /* The way out stays: while the box shows, the bar sits above it with only the Apps button showing. */
+  body:has(#login.show) { overflow: hidden; }
   body:has(#login.show) header { z-index: 6; background: transparent; }
   body:has(#login.show) header > :not(apps-button) { visibility: hidden; }
 </style>
@@ -616,7 +642,6 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   <label class="chk"><input type="checkbox" id="verify"> Verify every frame (CRC32 check, counts mismatches)</label>
   <label class="chk"><input type="checkbox" id="wake" checked> Keep the screen on (Wake Lock): <span id="wakestate">…</span></label>
   <label class="chk"><input type="checkbox" id="zoomlock"> Lock zoom: the page keeps its size (pinch and double-tap don't zoom it)</label>
-  <div class="row"><button id="out">Sign out</button></div>
   <p class="ver" id="ver"></p>
 </details>
 <details id="logbox" open>
@@ -625,159 +650,134 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   <pre id="log"></pre>
 </details>
 <div id="login">
-  <form id="lf">
+  <div class="box">
     <h2>Screen Peek</h2>
-    <p id="lwhat">The password for your PC.</p>
-    <input id="pw" type="password" autocomplete="current-password" placeholder="Password" required>
-    <button type="submit">Sign in</button>
+    <p id="lwhat">Sign in to watch your PC.</p>
+    <button id="signin" type="button">Sign in</button>
     <p id="lerr" class="err"></p>
-  </form>
+  </div>
 </div>
 <script>
 // relay-client:begin (copied from Projects\pc-relay\client\relay-client.js by build_page.py; edit it there)
-/* relay-client.js 2: the PC Relay client (ONE source: Projects\pc-relay\client\relay-client.js; each page's build
-   copies it in, so never edit a copy). Talks to PC Relay 2 on Jon's PC (Tailscale Funnel). SECURITY.md beside the
-   relay says what the PC allows; this file only carries the pass and says plainly what the PC answered.
-   - Nothing happens until the page calls something: no background traffic of its own.
-   - The PC's address (2026-11-08, after the PC was renamed DESKTOP-KRQ9TI2 -> DESKTOP-42): unless the page names
-     one (opts.base: a setting, a test, the relay's own origin for a page it serves), it is read from the address
-     file on Jon's Cool tools site, ADDRESS_FILE ({"address": "https://..."}), fresh (never a cached copy) before the
-     first connection, and again when a connection fails (at most once a minute), so an open page follows a rename.
-     After a rename only that file changes; no page is rebuilt. If the file cannot be loaded (no network, a page
-     opened from a file while offline, the site down), the address this copy was built with (BUILT_PC) is used and
-     the page is told so: R.where is { from: "built-in", why }, and the page's log function (opts.log) and the
-     browser's console get the same words. Never silently. (Tried again before a request, at most once a minute.)
-   - ONE pass per browser (localStorage "relay-pass", shared by every page of the same site), from signIn(password).
-     It is sent in the X-Relay-Pass header (HTTP) or as the WebSocket subprotocol "pass.<p>" (a browser cannot set
-     WebSocket headers); never in a URL, never in cookies. Signed in = everything; signed out = view and download
-     public things. The PC decides every request; a page's buttons are only buttons.
-   - A 401 from the PC means "sign in": the pass (if one was sent) is no longer valid, so it is forgotten, the status
-     becomes "signin", and call() answers { ok: false, signin: true, status: 401, why }.
-   - Status events: checking / connected / starting / ready / offline / off / signin / reload, each with a plain `why`.
-   - Version-checked: a relay that needs a newer client says so (426), and the status becomes "reload".
-   - The PC's name (2026-11-08, relay 2.2: the ping's "name", e.g. "Jon's desktop"): R.pcName() is the name from the
-     last answer, remembered in this browser per address (localStorage "relay-pc-name"), so a page that cannot reach
-     the PC still says "Can't reach Jon's desktop"; "your PC" (RelayClient.YOUR_PC) before the PC has ever answered at
-     that address. A page shows it as text, never as HTML (textContent). It is a label, never an address.
+/* relay-client.js 3: the PC Relay client (ONE source: Projects\pc-relay\client\relay-client.js; each page's build
+   copies it in, so never edit a copy). Talks to PC Relay 3 (accounts) on Jon's PC. The relay decides every request;
+   this file carries the pass, remembers who this browser is, and says plainly what the PC answered.
+   The exact requests: Projects\cool-tools-upgrade\API-relay.md.
 
-   const R = RelayClient.create({ app: "reader", log });  // app names the page in the PC's logs; log(text) hears
-                                                           // relay-client's notes (which address, and why)
-   await R.address();                                      // { url, from: "file" | "built-in" | "page", why }
-   await R.ping();                                         // { ok, info, latency } ; info.signed_in, info.services
-   R.pcName();                                             // "Jon's desktop" (the last answer's, or remembered), else "your PC"
-   R.signedIn();                                           // this browser holds a pass (the last ping says if it is valid)
-   await R.signIn(password);                               // { ok, why, device, name }
-   await R.signOut();                                      // { ok }
-   await R.call("files", "list?folder=root");              // { ok, status, data, why, signin } (JSON in and out)
-   await R.call("files", "mkdir", { method: "POST", json: { parent, name } });
-   const r = await R.fetch("files", "file/ID/name");       // a Response (a 401 forgets the pass, as above)
-   const ws = R.ws("voice", "ws");                         // a WebSocket carrying the pass
-   await R.open("voice", (p) => ..., 60000);               // start a program, with progress
-   R.url("files", "file/ID/name?dl=1");                    // a plain link (public things only: a link carries no pass)
-   R.url, R.wsUrl and R.ws answer at once, with the address the last call used: call one of the others first.
+   - Nothing happens until the page calls something: no background traffic of its own (seen() is the page's call).
+   - The PC's address: read from relay.json beside the programs ("../relay.json" from a program's page, or
+     opts.addressFile), fresh before the first connection and again after a failed one (at most once a minute).
+     {"address": "https://..."}; http only for 127.0.0.1 and localhost (the stage). No address is built in: if the file
+     cannot be read the cloud is simply off, with a plain reason (status "off", where.why). opts.base names the address
+     instead (tests, the relay's own window on the local door).
+   - Kept in this browser (localStorage, shared by every page of the site): "relay-pass" ({pass, device, at}) and
+     "relay-account" ({id, name, kind, number, at}), so the name shows at once, even with the cloud off. Another tab's
+     sign-in, sign-out or change arrives as an "account" event.
+   - The pass goes in the X-Relay-Pass header (HTTP) or the WebSocket subprotocol "pass.<p>"; never in a URL.
+   - When the PC says the pass is not valid any more (X-Relay-Info: pass-unknown, or the ping's pass "unknown"), the
+     pass and the account are forgotten and "account" fires with null. me() forgets them only on a whole answer that
+     says {account: null}. An answer cut off, garbled or late, a timeout or a network error never ends a sign-in:
+     it is a result with ok false and kind "network" or "timeout".
+   - Errors from the relay are { why, kind }; every result here carries why and kind.
+
+   const R = RelayClient.create({ app: "plan-cutter", log });
+   await R.ping();                 // { ok, latency, info }
+   R.account();                    // at once, from this browser: { id, name, kind, number } or null
+   await R.me();                   // from the PC: { ok, account, can, programs, network, limited }
+   R.can("files.shared.change");  R.canUse("voice");      // from the last me()
+   await R.accountsHere();         // { ok, accounts: [{ id, name, kind, number, picture, hasPassword }] }
+   await R.signIn(name, password); // { ok, kind, why, account }
+   await R.signOut();              // { ok }
+   await R.guest();                // { ok, account }  (a guest for this browser; itself when it has an account)
+   await R.setup({ name, password });   // { ok, kind, why, account }
+   await R.update({ name, password });  // { ok, kind, why, account }   (password: null removes it)
+   R.seen();                       // "this app is open" (call once a minute while the page is visible)
+   R.on("account", fn);            // fn(account or null)
+   R.on("status", fn);             // fn({ state: checking|connected|off|offline|starting|ready|reload, why })
+   await R.api("people");          // any /relay/ request: { ok, status, data, why, kind }
+   R.call, R.fetch, R.url, R.ws, R.open, R.pcName, R.address, R.watch     // as in relay-client 2
 */
 (function (root) {
   "use strict";
-  const VERSION = 2;
-  // The address this copy was built with: used only when the address file cannot be loaded, and then said.
-  const BUILT_PC = "https://desktop-42.tail46434.ts.net";
-  // Where the PC's address is published (WEB-APP-CONVENTIONS.md 5): after a rename, edit only that file.
-  const ADDRESS_FILE = "https://jonnystokes.github.io/cooltools/relay.json";
-  const RECHECK_MS = 60000;  // the address file is read again after a failed connection at most once a minute
-  const ADDRESS_MS = 6000;   // the address file's own time limit
+  const VERSION = 3;
+  const RECHECK_MS = 60000, ADDRESS_MS = 6000;
+  const PASS_KEY = "relay-pass", ACCOUNT_KEY = "relay-account", NAME_KEY = "relay-pc-name", YOUR_PC = "your PC";
   const trim = (u) => String(u || "").trim().replace(/\/+$/, "");
-  const goodAddress = (a) => /^https:\/\/[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+(:\d{1,5})?$/i.test(a);
-  const KEY = "relay-pass";
+  const goodAddress = (a) =>
+    /^https:\/\/[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*(:\d{1,5})?$/i.test(a) ||
+    /^http:\/\/(127\.0\.0\.1|localhost)(:\d{1,5})?$/i.test(a);
   const store = {
-    get(k) { try { return root.localStorage.getItem(k) || ""; } catch (e) { return ""; } },
-    set(k, v) { try { if (v) root.localStorage.setItem(k, v); else root.localStorage.removeItem(k); } catch (e) {} },
-    keys() { try { return Object.keys(root.localStorage); } catch (e) { return []; } },
+    get(k) { try { return root.localStorage.getItem(k) || ""; } catch (e) { return mem[k] || ""; } },
+    set(k, v) {
+      try { if (v) root.localStorage.setItem(k, v); else root.localStorage.removeItem(k); }
+      catch (e) { if (v) mem[k] = v; else delete mem[k]; }
+    },
   };
-  // relay-client 1 kept a device id and one pass per scope; relay 2 does not accept them: tidied away.
-  for (const k of store.keys()) if (k === "relay-device" || k.startsWith("relay-pass:")) store.set(k, "");
-  let memPass = null; // when localStorage is not available (a sandboxed page): this page only
-  // The PC's name, remembered per address: localStorage "relay-pc-name" = { "<address>": { name, at } } (the 10 newest).
-  const NAME_KEY = "relay-pc-name", YOUR_PC = "your PC";
+  const mem = {}; // when localStorage is not available (a sandboxed page): this page only
+  const json = (k) => { try { const j = JSON.parse(store.get(k) || "null"); return j && typeof j === "object" ? j : null; } catch (e) { return null; } };
   const cleanName = (n) => (typeof n === "string" ? Array.from(n.replace(/[\x00-\x1f\x7f-\x9f]/g, "").trim()).slice(0, 64).join("").trim() : "");
-  const memNames = {}; // when localStorage is not available: this page only
-  function names() {
-    try { const j = JSON.parse(store.get(NAME_KEY) || "{}"); return j && typeof j === "object" && !Array.isArray(j) ? j : {}; } catch (e) { return {}; }
-  }
-  function nameAt(base) {
-    const e = names()[base] || memNames[base];
-    return e ? cleanName(typeof e === "string" ? e : e.name) : "";
-  }
-  function keepName(base, name) {
-    memNames[base] = { name, at: Date.now() };
-    const all = names();
-    if (all[base] && all[base].name === name) return;
-    all[base] = { name, at: Date.now() };
-    const keep = Object.entries(all).filter(([, e]) => e && typeof e === "object").sort((a, b) => (b[1].at || 0) - (a[1].at || 0)).slice(0, 10);
-    store.set(NAME_KEY, JSON.stringify(Object.fromEntries(keep)));
-  }
+  const shortAcct = (a) => (a && a.id ? { id: a.id, name: String(a.name || ""), kind: String(a.kind || ""), number: a.number || 0 } : null);
 
   function httpWhy(status) {
-    return ({ 400: "the PC refused that address", 401: "sign-in needed", 403: "the PC refused this page",
-      404: "the PC has no such program", 410: "this page is out of date: reload it", 426: "this page is out of date: reload it",
-      429: "too many requests: wait a minute", 502: "the PC is reachable but the relay is not running (502)",
-      503: "the PC said it is busy or switched off (503)" })[status] || `the PC answered ${status}`;
+    return ({ 400: "the PC refused that request", 401: "sign-in needed", 403: "not allowed", 404: "not found on the PC",
+      409: "that clashes with something on the PC", 410: "this page is out of date: reload it", 426: "this page is out of date: reload it",
+      429: "too many requests: wait a minute", 502: "the program on the PC did not answer", 503: "the PC said it is busy or switched off" })[status] || `the PC answered ${status}`;
   }
   function netWhy(err, ms) {
     if (err && err.name === "AbortError") return `no answer from the PC within ${Math.round(ms / 1000)} s`;
     if (typeof navigator !== "undefined" && navigator.onLine === false) return "this device is offline";
     return "could not reach the PC (no network, or the PC is off or asleep)";
   }
-  // What kind of failure, so a page can say which it was and decide whether trying again can help: "offline" (this
-  // device has no network), "timeout", "network" (no connection to the PC), "http" (the PC answered with an error
-  // status), "off" (the relay is switched off), "reload", "signin", "start" (a program failed while it started).
   function netKind(err) {
     if (err && err.name === "AbortError") return "timeout";
     if (typeof navigator !== "undefined" && navigator.onLine === false) return "offline";
     return "network";
   }
-  async function readError(r) {
-    try { const j = await r.clone().json(); if (j && j.error) return j.error; } catch (e) {}
-    return httpWhy(r.status);
-  }
   const kindOf = (status) => status === 401 ? "signin" : status === 426 || status === 410 ? "reload" : "http";
 
   class Relay {
     constructor(opts) {
-      this.app = (opts.app || "page").replace(/[^A-Za-z0-9_.-]/g, "");
+      opts = opts || {};
+      this.app = String(opts.app || "page").toLowerCase().replace(/[^a-z0-9-]/g, "");
       this.log = typeof opts.log === "function" ? opts.log : null;
+      this.addressFile = opts.addressFile || "";
       this.status = { state: "idle", why: "", at: Date.now() };
-      this.info = null;          // the last /relay/ping answer
-      this.latency = 0;          // ms, the last ping's round trip
-      this.bytes = 0;            // bytes this client has fetched through call() (approximate)
-      this.subs = new Set();
-      this._job = null;          // the address file being read (one read at a time)
-      this._readAt = 0;          // when it was last asked for
-      this._name(opts.base);
-      if (typeof opts.onStatus === "function") this.subs.add(opts.onStatus);
+      this.info = null;
+      this.latency = 0;
+      this.bytes = 0;
+      this._me = null;
+      this._subs = { status: new Set(), account: new Set() };
+      this._job = null;
+      this._readAt = 0;
+      this._acctSeen = JSON.stringify(shortAcct(json(ACCOUNT_KEY)));
+      this._setBase(opts.base);
+      if (typeof opts.onStatus === "function") this._subs.status.add(opts.onStatus);
+      if (typeof addEventListener === "function") {
+        addEventListener("storage", (e) => { if (!e || e.key === ACCOUNT_KEY || e.key === PASS_KEY || e.key === null) this._acctChanged(); });
+      }
     }
-    // ---- the PC's address -------------------------------------------------------------------------------------
-    // given: the page's own address (opts.base, setBase(url)), or "" = Jon's PC, from the address file.
-    // where: { url, from, why }: from "page" (given), "file" (read from the address file in this page's life),
-    // "built-in" (the file could not be loaded: why says so, plainly), "unread" (nothing asked yet).
-    _name(url) {
+    // ---- the PC's address ---------------------------------------------------------------------------------------
+    _setBase(url) {
       this.given = trim(url);
-      this.base = this.given || BUILT_PC;
-      this.where = this.given ? { url: this.given, from: "page", why: "" } : { url: BUILT_PC, from: "unread", why: "" };
+      this.base = this.given;
+      this.where = this.given ? { url: this.given, from: "page", why: "" } : { url: "", from: "unread", why: "" };
       this._readAt = 0;
     }
-    setBase(url) { if (trim(url) !== this.given) this._name(url); }
+    setBase(url) { if (trim(url) !== this.given) this._setBase(url); }
+    _fileUrl() {
+      if (this.addressFile) return this.addressFile;
+      try { return new URL("../relay.json", root.location.href).href; } catch (e) { return "../relay.json"; }
+    }
     async address() { await this._ready(); return this.where; }
-    // before a request: the address file read once per page load (and again at most once a minute while it fails)
     async _ready() {
       if (this.given) return;
       const w = this.where.from;
-      if (w === "unread" || (w === "built-in" && Date.now() - this._readAt >= RECHECK_MS)) await this._read();
+      if (w === "unread" || (w === "none" && Date.now() - this._readAt >= RECHECK_MS)) await this._read();
     }
     _read() {
       if (!this._job) this._job = this._readNow().finally(() => { this._job = null; });
       return this._job;
     }
-    // after a connection failed: has the PC moved? Read the file again (at most once a minute); true = a new address
     async _recheck() {
       if (this.given || this._job || Date.now() - this._readAt < RECHECK_MS) return false;
       const was = this.base;
@@ -786,60 +786,84 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     }
     async _readNow() {
       this._readAt = Date.now();
-      const was = this.where;
+      const file = this._fileUrl(), was = this.where;
       const ac = new AbortController(), timer = setTimeout(() => ac.abort(), ADDRESS_MS);
       let why = "";
       try {
-        const r = await fetch(`${ADDRESS_FILE}?t=${Date.now()}`, { cache: "no-store", credentials: "omit", signal: ac.signal });
+        const sep = file.includes("?") ? "&" : "?";
+        const r = await fetch(`${file}${sep}t=${Date.now()}`, { cache: "no-store", credentials: "omit", signal: ac.signal });
         if (!r.ok) throw new Error(`the site answered ${r.status}`);
         const j = await r.json().catch(() => null);
         const a = trim(j && j.address);
-        if (!goodAddress(a)) throw new Error(j ? "it holds no https address" : "it is not JSON");
-        if (this.given) return;                    // the page named its own address meanwhile
+        if (!goodAddress(a)) throw new Error(j ? "it holds no usable address" : "it is not JSON");
+        if (this.given) return;
         this.base = a;
         this.where = { url: a, from: "file", why: "" };
-        if (was.from !== "file") this._note(`the PC's address: ${a} (from ${ADDRESS_FILE})`, false);
-        else if (was.url !== a) this._note(`the PC's address changed to ${a} (it was ${was.url}; from ${ADDRESS_FILE})`, false);
+        if (was.url !== a) this._note(`the PC's address: ${a} (from ${file})`, false);
         return;
       } catch (e) {
         why = e && e.name === "AbortError" ? `no answer within ${ADDRESS_MS / 1000} s`
           : typeof navigator !== "undefined" && navigator.onLine === false ? "this device is offline"
-          : e && e.name === "TypeError" ? "the Cool tools site could not be reached"
+          : e && e.name === "TypeError" ? "the site could not be reached"
           : String((e && e.message) || e);
       } finally { clearTimeout(timer); }
-      if (this.given || was.from === "file") return;  // read fine earlier in this page's life: that address stays
-      const text = `the PC's address file (${ADDRESS_FILE}) could not be loaded (${why}): using the address this page was built with, ${BUILT_PC}`;
-      this.base = BUILT_PC;
-      this.where = { url: BUILT_PC, from: "built-in", why: text };
+      if (this.given || was.from === "file") return; // read fine earlier in this page's life: that address stays
+      const text = `the PC's address (${file}) could not be read (${why}): the cloud is off`;
+      this.base = "";
+      this.where = { url: "", from: "none", why: text };
       if (was.why !== text) this._note(text, true);
     }
     _note(text, warn) {
       if (this.log) { try { this.log(text); } catch (e) {} }
       try { if (typeof console !== "undefined") (warn ? console.warn : console.info)("relay-client: " + text); } catch (e) {}
     }
-    on(fn) { this.subs.add(fn); return () => this.subs.delete(fn); }
+    // ---- events ----
+    on(what, fn) {
+      if (typeof what === "function") { fn = what; what = "status"; }
+      const set = this._subs[what];
+      if (!set || typeof fn !== "function") return () => {};
+      set.add(fn);
+      return () => set.delete(fn);
+    }
     _set(state, extra) {
       this.status = Object.assign({ state, why: "", at: Date.now() }, extra || {});
-      for (const f of this.subs) { try { f(this.status); } catch (e) {} }
+      for (const f of this._subs.status) { try { f(this.status); } catch (e) {} }
     }
-    // ---- the pass: one per browser --------------------------------------------------------------------------
-    _rec() {
-      if (memPass) return memPass;
-      try { const j = JSON.parse(store.get(KEY) || "null"); return j && typeof j.pass === "string" && j.pass ? j : null; } catch (e) { return null; }
+    _acctChanged() {
+      const now = JSON.stringify(this.account());
+      if (now === this._acctSeen) return;
+      this._acctSeen = now;
+      const a = this.account();
+      // another person (or nobody) now: the rights the last me() gave are not theirs; can() says no until me() is asked again
+      if (!a || !this._me || !this._me.account || this._me.account.id !== a.id) this._me = null;
+      for (const f of this._subs.account) { try { f(a); } catch (e) {} }
     }
-    _pass() { const r = this._rec(); return r ? r.pass : ""; }
-    _keep(rec) {
-      store.set(KEY, rec ? JSON.stringify(rec) : "");
-      memPass = rec && !store.get(KEY) ? rec : null; // storage refused: keep it for this page's life only
+    // ---- the pass and the account, kept in this browser ----
+    _pass() { const r = json(PASS_KEY); return r && typeof r.pass === "string" ? r.pass : ""; }
+    _keep(pass, account) {
+      if (pass !== undefined) store.set(PASS_KEY, pass ? JSON.stringify({ pass, at: Date.now() }) : "");
+      if (account !== undefined) store.set(ACCOUNT_KEY, account ? JSON.stringify(Object.assign(shortAcct(account), { at: Date.now() })) : "");
+      this._acctChanged();
     }
-    // the PC no longer knows the pass this browser sent: forget it, and say "sign in" (why = what the PC said)
-    _lost(why) {
-      if (!this._pass()) return;
-      this._keep(null);
-      this._set("signin", { why: why || "signed out on the PC: sign in again" });
+    _forget(why) {
+      if (!this._pass() && !this.account()) return;
+      this._me = null;
+      this._keep("", null);
+      this._note("this browser's sign-in ended on the PC" + (why ? ` (${why})` : ""), false);
     }
+    // An answer speaks only about the pass its request carried. While it was on its way, another tab of this browser
+    // may have signed in or switched user: the browser then holds a new pass, and an answer about the old one ("pass
+    // unknown", "no account", an older account) must not wipe or overwrite the new sign-in. _current(sent) says whether
+    // the pass sent is still the one kept.
+    _current(sent) { return sent === this._pass(); }
+    _info(r, sent) { // every answer: the PC may say the pass is not valid any more
+      const i = (r.headers && r.headers.get("X-Relay-Info")) || "";
+      if (/pass-unknown/.test(i) && this._current(sent)) this._forget("the PC does not know it");
+    }
+    account() { return shortAcct(json(ACCOUNT_KEY)); }
     signedIn() { return !!this._pass(); }
-    device() { const r = this._rec(); return r ? { device: r.device || "", name: r.name || "", since: r.at || 0 } : null; }
+    can(flag) { return !!(this._me && this._me.can.includes(flag)); }
+    canUse(prog) { return prog === "files" || !!(this._me && this._me.programs.includes(prog)); }
     headers(extra) {
       const h = { "X-Relay-Client": this.app + "/" + VERSION };
       const p = this._pass();
@@ -851,120 +875,204 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     wsUrl(service, path) { return this.url(service, path).replace(/^http/, "ws"); }
     wsProtocols() { const p = this._pass(); return p ? ["relay", "pass." + p] : ["relay"]; }
     ws(service, path) { return new WebSocket(this.wsUrl(service, path), this.wsProtocols()); }
-    // fetch through the relay: a Response. opts.timeout (ms) aborts a request that has not started answering. A 401
-    // forgets this browser's pass (it is not valid any more) and sets the status "signin". A request that could not
-    // reach the PC has the address file read again (in the background: the next request goes to a new address).
+    _off() { return { ok: false, status: 0, data: null, why: this.where.why || "the cloud is off", kind: "off" }; }
+    // fetch through the relay: a Response (throws when the PC cannot be reached, or the address is not known)
     async fetch(service, path, opts) {
       opts = Object.assign({}, opts || {});
       const timeout = opts.timeout || 0; delete opts.timeout;
       await this._ready();
+      if (!this.base) throw new TypeError(this.where.why || "the cloud is off");
+      const sent = this._pass();
       opts.headers = this.headers(opts.headers);
-      const sent = !!opts.headers["X-Relay-Pass"];
       let timer = 0, ac = null;
       if (timeout && !opts.signal) { ac = new AbortController(); opts.signal = ac.signal; timer = setTimeout(() => ac.abort(), timeout); }
       try {
         const r = await fetch(this.url(service, path), opts);
-        if (r.status === 401) { const why = await readError(r); if (sent) this._lost(why); else this._set("signin", { service, why }); }
+        this._info(r, sent);
         return r;
       } catch (err) {
-        if (ac || !(opts.signal && opts.signal.aborted)) this._recheck().catch(() => {});   // (not when the page stopped it)
+        if (ac || !(opts.signal && opts.signal.aborted)) this._recheck().catch(() => {});
         throw err;
       } finally { clearTimeout(timer); }
     }
-    // call: a request with a JSON answer, as one plain result: { ok, status, data, why, kind, signin }. opts.json
-    // sends a JSON body (Content-Type set); opts.method, opts.headers, opts.body, opts.signal, opts.timeout as fetch.
-    async call(service, path, opts) {
+    // _result: an answer read whole. A body that cannot be read (the page left, the connection dropped, a timeout
+    // while reading) or a 2xx body that is not whole JSON is NOT ok: kind "network" (or "timeout"). Only a real,
+    // whole answer from the PC may say anything about the sign-in (reader agent's find, 2026-11-12).
+    async _result(r) {
+      let text, cut = null;
+      try { text = await r.text(); } catch (err) { text = ""; cut = err; }
+      this.bytes += text.length;
+      let data = null, bad = false;
+      try { data = text ? JSON.parse(text) : null; } catch (e) { data = null; bad = true; }
+      if (cut || (r.ok && bad)) {
+        const kind = cut ? netKind(cut) : "network";
+        const why = cut && kind === "timeout" ? "the PC's answer did not arrive in time" : "the PC's answer was cut off: try again";
+        return { ok: false, status: r.status, data: null, why, kind, cut: true };
+      }
+      if (r.ok) return { ok: true, status: r.status, data, why: "", kind: "" };
+      const why = (data && (data.why || data.error)) || httpWhy(r.status);
+      const kind = (data && data.kind) || kindOf(r.status);
+      if (r.status === 426) this._set("reload", { why });
+      return { ok: false, status: r.status, data, why, kind, signin: r.status === 401 };
+    }
+    _body(opts) {
       opts = Object.assign({ cache: "no-store" }, opts || {});
       if (opts.json !== undefined) {
         opts.body = JSON.stringify(opts.json);
         opts.headers = Object.assign({ "Content-Type": "application/json" }, opts.headers || {});
         delete opts.json;
       }
+      return opts;
+    }
+    // call: a program's request with a JSON answer: { ok, status, data, why, kind }
+    async call(service, path, opts) {
+      opts = this._body(opts);
       const ms = opts.timeout || 0;
       let r;
       try { r = await this.fetch(service, path, opts); }
-      catch (err) { return { ok: false, status: 0, data: null, why: netWhy(err, ms), kind: netKind(err), signin: false }; }
-      const text = await r.text().catch(() => "");
-      this.bytes += text.length;
-      let data = null;
-      try { data = text ? JSON.parse(text) : null; } catch (e) { data = null; }
-      if (r.ok) return { ok: true, status: r.status, data, why: "", kind: "", signin: false };
-      const why = (data && data.error) || httpWhy(r.status);
-      if (r.status === 426) this._set("reload", { why });
-      return { ok: false, status: r.status, data, why, kind: kindOf(r.status), signin: r.status === 401 };
+      catch (err) { return this.base ? { ok: false, status: 0, data: null, why: netWhy(err, ms), kind: netKind(err) } : this._off(); }
+      return this._result(r);
     }
-    // ---- the light check: the PC, its programs, and whether this browser's pass is still valid ----
-    // (no answer: the address file is read again, at most once a minute; a new address there is tried at once)
+    // api: the relay's own request /relay/<path>: { ok, status, data, why, kind, current }. current: this browser
+    // still holds the pass the request carried (false: its sign-in changed meanwhile, the answer is about the old one).
+    async api(path, opts) {
+      opts = this._body(opts);
+      const ms = opts.timeout || 15000; delete opts.timeout;
+      await this._ready();
+      if (!this.base) return this._off();
+      const sent = this._pass();
+      opts.headers = this.headers(opts.headers);
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), ms);
+      opts.signal = opts.signal || ac.signal;
+      try {
+        const r = await fetch(`${this.base}/relay/${String(path).replace(/^\/+/, "")}`, opts);
+        this._info(r, sent);
+        const res = await this._result(r);
+        res.current = this._current(sent);
+        return res;
+      } catch (err) {
+        this._recheck().catch(() => {});
+        return { ok: false, status: 0, data: null, why: netWhy(err, ms), kind: netKind(err) };
+      } finally { clearTimeout(timer); }
+    }
+    // ---- the light check ----
     async ping(timeoutMs) {
       timeoutMs = timeoutMs || 8000;
       this._set("checking", { why: "checking the connection…" });
       await this._ready();
+      if (!this.base) { const why = this.where.why || "the cloud is off"; this._set("off", { why }); return { ok: false, why, kind: "off" }; }
       const ac = new AbortController(), timer = setTimeout(() => ac.abort(), timeoutMs), t0 = performance.now();
       try {
+        const sent = this._pass();
         const r = await fetch(`${this.base}/relay/ping?t=${Date.now()}`, { headers: this.headers(), cache: "no-store", signal: ac.signal });
-        if (!r.ok) { const why = await readError(r); this._set(r.status === 426 ? "reload" : "offline", { why }); return { ok: false, why, kind: kindOf(r.status), status: r.status }; }
+        this._info(r, sent);
+        if (!r.ok) { const res = await this._result(r); this._set(r.status === 426 ? "reload" : "offline", { why: res.why }); return { ok: false, why: res.why, kind: res.kind, status: r.status }; }
         const info = await r.json();
         this.latency = Math.round(performance.now() - t0);
         this.info = info;
-        const name = cleanName(info && info.name);   // the PC's name (relay 2.2), remembered for this address
-        if (name) { this._pc = { base: this.base, name }; keepName(this.base, name); }
+        const name = cleanName(info && info.name);
+        if (name) { this._pc = { base: this.base, name }; this._keepName(this.base, name); }
         if ((info.min_client || 0) > VERSION) { const why = "this page is out of date: reload it"; this._set("reload", { why }); return { ok: false, why, info, kind: "reload" }; }
-        if (info.pass === "unknown") this._lost("signed out on the PC (or the sign-in ended): sign in again");
-        if (!info.on) { const why = "the PC relay is switched off (tray icon on the PC)"; this._set("off", { why, info }); return { ok: false, why, info, kind: "off" }; }
-        this._set("connected", { why: `connected (${this.latency} ms)`, info, latency: this.latency, signedIn: !!info.signed_in });
-        return { ok: true, info, latency: this.latency, signedIn: !!info.signed_in };
+        if (!this._current(sent)) { /* this browser's sign-in changed while the PC answered: the answer is about the old one */ }
+        else if (info.pass === "unknown") this._forget("the PC does not know it");
+        else if (info.account && this._pass()) this._keep(undefined, info.account);
+        if (!info.on) { const why = "PC Relay is switched off (it is switched on at the computer)"; this._set("off", { why, info }); return { ok: false, why, info, kind: "off" }; }
+        this._set("connected", { why: `connected (${this.latency} ms)`, info, latency: this.latency });
+        return { ok: true, info, latency: this.latency };
       } catch (err) {
         clearTimeout(timer);
-        if (await this._recheck()) return this.ping(timeoutMs);   // the PC has a new address: try it now (once)
+        if (await this._recheck()) return this.ping(timeoutMs);
         const why = netWhy(err, timeoutMs);
         this._set("offline", { why });
         return { ok: false, why, kind: netKind(err) };
       } finally { clearTimeout(timer); }
     }
     service(id) { return ((this.info && this.info.services) || []).find((s) => s.id === id) || null; }
-    // The PC's name: the last answer's at this address, else the one remembered here for it, else "your PC".
+    _names() { const j = json(NAME_KEY); return j && !Array.isArray(j) ? j : {}; }
+    _keepName(base, name) {
+      const all = this._names();
+      if (all[base] && all[base].name === name) return;
+      all[base] = { name, at: Date.now() };
+      const keep = Object.entries(all).filter(([, e]) => e && typeof e === "object").sort((a, b) => (b[1].at || 0) - (a[1].at || 0)).slice(0, 10);
+      store.set(NAME_KEY, JSON.stringify(Object.fromEntries(keep)));
+    }
     pcName() {
       if (this._pc && this._pc.base === this.base) return this._pc.name;
-      return nameAt(this.base) || YOUR_PC;
+      const e = this._names()[this.base];
+      return (e && cleanName(e.name)) || YOUR_PC;
     }
-    // ---- sign-in: the password -> this browser's one pass (the old one, if any, is replaced on the PC) ----
-    async signIn(password) {
-      await this._ready();
-      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), 15000);
-      try {
-        const r = await fetch(`${this.base}/relay/login`, { method: "POST", headers: this.headers({ "Content-Type": "application/json" }),
-          body: JSON.stringify({ password }), cache: "no-store", signal: ac.signal });
-        const j = await r.json().catch(() => ({}));
-        if (!r.ok) return { ok: false, why: j.error || httpWhy(r.status), status: r.status, kind: r.status === 401 ? "wrong" : kindOf(r.status) };
-        this._keep({ pass: j.pass, device: j.device || "", name: j.name || "", at: Date.now() });
-        this._set("connected", { why: "signed in", signedIn: true });
-        return { ok: true, device: j.device || "", name: j.name || "", expiresDays: j.expires_days || 0 };
-      } catch (err) { this._recheck().catch(() => {}); return { ok: false, why: netWhy(err, 15000), kind: netKind(err) }; }
-      finally { clearTimeout(timer); }
+    // ---- accounts ----
+    async me() {
+      let r = await this.api("me");
+      if (r.ok && !r.current) r = await this.api("me"); // this browser's sign-in changed while the PC answered (another tab): ask again
+      if (!r.ok) return r;
+      // Only an answer that says so itself ({account: null}) ends the sign-in; anything else changes nothing.
+      if (!r.data || typeof r.data !== "object" || !("account" in r.data)) return { ok: false, status: r.status, data: r.data, why: "the PC's answer could not be read: try again", kind: "network", current: r.current };
+      const d = r.data;
+      const me = { account: shortAcct(d.account), can: d.can || [], programs: d.programs || [], network: d.network || "", limited: !!d.limited };
+      this._me = me;
+      if (!r.current) { /* still changing: nothing kept or forgotten from an answer about an older sign-in */ }
+      else if (d.account && this._pass()) this._keep(undefined, d.account);
+      else if (!d.account && this.account() && !d.local) {
+        this._forget(""); // (it clears _me: the PC no longer knows this browser's account)
+        this._me = me;     // what the PC just said is true now: a plain visitor
+      }
+      return { ok: true, account: d.account || null, can: me.can, programs: me.programs, network: me.network, limited: me.limited, local: !!d.local };
     }
-    // sign-out: forgotten here at once; the PC ends the pass (and the connections it opened) when it hears it
+    async accountsHere() {
+      const r = await this.api("accounts/here");
+      return r.ok ? { ok: true, accounts: (r.data && r.data.accounts) || [], network: r.data && r.data.network } : r;
+    }
+    _signed(r) {
+      if (!r.ok) return { ok: false, kind: r.kind, why: r.why, status: r.status };
+      const d = r.data || {};
+      if (d.pass) this._keep(d.pass, d.account); else if (d.account) this._keep(undefined, d.account);
+      this._me = null;
+      return { ok: true, kind: "", why: "", account: d.account || null };
+    }
+    async signIn(name, password) {
+      return this._signed(await this.api("signin", { method: "POST", json: { name: String(name || ""), password: password == null ? "" : String(password) } }));
+    }
     async signOut() {
-      const p = this._pass();
-      this._keep(null);
-      if (!p) return { ok: true };
-      await this._ready();
-      try {
-        const r = await fetch(`${this.base}/relay/logout`, { method: "POST", headers: { "X-Relay-Pass": p, "X-Relay-Client": this.app + "/" + VERSION }, cache: "no-store" });
-        const j = await r.json().catch(() => ({}));
-        return { ok: true, onPC: !!j.signed_out };
-      } catch (e) { return { ok: true, onPC: false, why: "signed out here; the PC could not be told (" + netWhy(e, 0) + ")" }; }
+      const had = this._pass();
+      let onPC = false;
+      if (had) { const r = await this.api("signout", { method: "POST" }); onPC = !!(r.ok && r.data && r.data.signed_out); }
+      this._me = null;
+      this._keep("", null);
+      return { ok: true, onPC };
     }
-    // ---- start a program, with progress ("starting the voice engine…") ----
+    async guest() { return this._signed(await this.api("guest", { method: "POST" })); }
+    async setup(o) {
+      o = o || {};
+      const body = { name: String(o.name || "") };
+      if (o.password) body.password = String(o.password);
+      return this._signed(await this.api("setup", { method: "POST", json: body }));
+    }
+    async update(o) {
+      o = o || {};
+      const body = {};
+      if (o.name !== undefined) body.name = String(o.name);
+      if (o.password !== undefined) body.password = o.password === null ? null : String(o.password);
+      const r = await this.api("me", { method: "POST", json: body });
+      if (!r.ok) return { ok: false, kind: r.kind, why: r.why, status: r.status };
+      if (r.data && r.data.account && r.current) this._keep(undefined, r.data.account);
+      return { ok: true, kind: "", why: "", account: r.data && r.data.account };
+    }
+    seen() {
+      this.api("seen", { method: "POST", json: { app: this.app }, timeout: 8000 }).catch(() => {});
+    }
+    // ---- start a program, with progress ----
     async open(service, onProgress, timeoutMs) {
       timeoutMs = timeoutMs || 60000;
       this._set("starting", { service, why: `starting ${service} on the PC…` });
       await this._ready();
+      if (!this.base) { const why = this.where.why || "the cloud is off"; this._set("off", { why }); return { ok: false, why, kind: "off" }; }
       const ac = new AbortController(), timer = setTimeout(() => ac.abort(), timeoutMs);
       try {
-        const h = this.headers();
-        const r = await fetch(`${this.base}/relay/open/${service}`, { headers: h, cache: "no-store", signal: ac.signal });
-        if (r.status === 401) { const why = await readError(r); if (h["X-Relay-Pass"]) this._keep(null); this._set("signin", { service, why }); return { ok: false, signin: true, why, kind: "signin", status: 401 }; }
-        if (!r.ok) { const why = await readError(r); this._set(r.status === 426 ? "reload" : "offline", { service, why }); return { ok: false, why, kind: kindOf(r.status), status: r.status }; }
+        const sent = this._pass();
+        const r = await fetch(`${this.base}/relay/open/${service}`, { headers: this.headers(), cache: "no-store", signal: ac.signal });
+        this._info(r, sent);
+        if (!r.ok) { const res = await this._result(r); this._set(r.status === 426 ? "reload" : "offline", { service, why: res.why }); return { ok: false, why: res.why, kind: res.kind, status: r.status }; }
         const rd = r.body.getReader(), dec = new TextDecoder();
         let buf = "", last = null;
         for (;;) {
@@ -991,7 +1099,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
         return { ok: false, why, kind: netKind(err) };
       } finally { clearTimeout(timer); }
     }
-    // ---- keep checking (only while the page wants it): backoff 1 s, 2 s, 4 s ... 30 s while it fails ----
+    // ---- keep checking (only while the page wants it) ----
     watch(everyMs) {
       everyMs = everyMs || 15000;
       let stopped = false, timer = 0, fails = 0;
@@ -1009,8 +1117,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
     }
   }
 
-  // DEFAULT_PC: relay-client 2's old name for BUILT_PC (kept for code that still reads it)
-  root.RelayClient = { VERSION, BUILT_PC, DEFAULT_PC: BUILT_PC, ADDRESS_FILE, YOUR_PC, create: (opts) => new Relay(opts || {}), httpWhy };
+  root.RelayClient = { VERSION, YOUR_PC, create: (opts) => new Relay(opts || {}), httpWhy };
 })(typeof window !== "undefined" ? window : globalThis);
 // relay-client:end
 </script>
@@ -1018,15 +1125,18 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 "use strict";
 // The version (WEB-APP-CONVENTIONS.md 3): stamped here by build_page.py on every build (version.txt, CHANGES.md); shown
 // at the bottom of Settings and in the first log line; version.json beside the published page says the same.
-const APP_VERSION = "V1.0.7", APP_BUILT = "2026-11-08 10:28 PM";
-// Jon's PC (Tailscale Funnel) through PC Relay: Screen Peek is the relay's "screen" program, under /svc/screen/.
-// The relay starts it on demand and signs browsers in (PC Relay 2, 2026-11-07: one pass per browser, kept by
-// relay-client and shared with Jon's other Cool tools pages; Screen Peek is private, so every request needs it).
-// Opened from the PC itself (or its own address), the page talks to the relay that served it. Otherwise the PC's
-// address comes from the Cool tools address file (relay.json), read fresh by relay-client before the page connects
-// (2026-11-08: the PC was renamed DESKTOP-42; a rename now needs only that file changed); if it cannot be loaded, the
-// address built into relay-client is used, and the status line and the log say so (setState, the "PC Relay:" line).
-const own = ["127.0.0.1", "localhost"].includes(location.hostname) || location.hostname.endsWith(".ts.net");
+const APP_VERSION = "V1.0.12", APP_BUILT = "2026-11-12 7:18 AM";
+// Jon's PC through PC Relay 3: Screen Peek is the relay's "screen" program, under /svc/screen/. The relay starts it
+// on demand. Who may use it is the relay's program access (the "screen" right; by default the main admin only): the
+// page asks the PC (R.me(), R.canUse("screen")) and, without the right, shows one plain line and a Sign in button that
+// opens the account page (../settings/account.html, the same page in every program). Signing in is that page's job;
+// this page has no password box. The pass is relay-client's, one per browser, shared with every Cool tools page.
+// Served by the relay itself (/svc/screen/: its own address, or the local door at the computer, where the caller is
+// the main admin), the page talks to the relay that served it. Otherwise the PC's address comes from the Cool tools
+// address file (../relay.json), read fresh by relay-client; if it cannot be read, the PC is off for this page and the
+// status line says why.
+const own = location.pathname.startsWith("/svc/screen/");
+const SITE_PAGE = "https://jonnystokes.github.io/cooltools/screen-peek/";   // where an own-served page sends a sign-in
 const R = RelayClient.create({ base: own ? location.origin : "", app: "screen-peek", log: (text) => log("PC Relay: " + text) });
 let BASE = R.url("screen", "");                       // set again once the address is known (ADDR below)
 let addrKnown = own;
@@ -1036,17 +1146,15 @@ const ADDR = R.address().catch(() => {}).then(() => { BASE = R.url("screen", "")
 // server.py sees anything; in relay mode server.py takes any string as the session's name.
 const KEY = Array.from(crypto.getRandomValues(new Uint8Array(16)), (b) => b.toString(16).padStart(2, "0")).join("");
 const auth = () => R.headers({ "X-Key": KEY });
-const signedIn = () => R.signedIn();
+// ACCESS: what the PC last said about this browser's account and the "screen" right (checkAccess below).
+const ACCESS = { ok: false, known: false, account: null };
+const signedIn = () => ACCESS.ok;
 const $ = (id) => document.getElementById(id);
 const store = { get: (k) => { try { return localStorage.getItem(k) || ""; } catch (e) { return ""; } },
                 set: (k, v) => { try { v ? localStorage.setItem(k, v) : localStorage.removeItem(k); } catch (e) {} } };
 const now = () => performance.timeOrigin + performance.now();      // this device's clock, ms
 const dec = new TextDecoder();
 const VID = Array.from(crypto.getRandomValues(new Uint8Array(6)), (b) => b.toString(16).padStart(2, "0")).join("");
-// Before PC Relay 2 the page kept its own token ("peek-token", or an old pairing link's #key=...): those are not
-// valid any more, so they are removed here, never sent anywhere; every browser signs in once with the password.
-store.set("peek-token", "");
-if (location.hash) history.replaceState(null, "", location.pathname + location.search);
 
 // ---- Log: events with 12-hour times, plus a stats line every second while Continuous is on ----------
 const LOG = [], logEl = $("log");
@@ -1321,18 +1429,15 @@ const conn = { want: false, live: null, gen: 0, attempt: 0, retries: 0, down: 0,
                upAt: 0, pathAt: 0, firstOnPath: null };
 const C = { ws: null, ready: false, sid: "", boot: "", attempt: 0, timer: 0, down: 0, why: "", unanswered: 0, lastPing: 0, lastRx: 0,
             openedAt: 0, connectTimer: 0, mute: false, rtts: [] };
-const BUILT_NOTE = " (PC address built in: the address file could not be loaded)";
-// "{pc}" in a state's text is the PC's name ("Watching Jon's desktop (ws)."; PC Relay 2.2, relay-client's R.pcName():
-// "your PC" until the PC has answered once in this browser); the line is written again when the name comes.
+// "{pc}" in a state's text is the PC's name ("Watching Jon's desktop (ws)."; relay-client's R.pcName(): "your PC"
+// until the PC has answered once in this browser); the line is written again when the name comes.
 let lastState = { kind: "", text: "Ready." };
 function setState(kind, text) {
   lastState = { kind, text };
   $("dot").className = kind;
-  $("conntext").textContent = text.split("{pc}").join(R.pcName()) + (R.where.from === "built-in" ? BUILT_NOTE : "");
+  $("conntext").textContent = text.split("{pc}").join(R.pcName());
 }
-const signInWords = () => `The password for ${R.pcName()}.`;
-// The sign-in box hides the connection line, so it says the same itself: why the address is the built-in one.
-const addrNote = () => (R.where.from === "built-in" ? R.where.why.charAt(0).toUpperCase() + R.where.why.slice(1) + "." : "");
+const sentence = (s) => { s = String(s || "").trim(); return s ? s.charAt(0).toUpperCase() + s.slice(1) + (/[.!?]$/.test(s) ? "" : ".") : ""; };
 const backoff = (n) => Math.round(Math.min(2500, 250 * 2 ** (n - 1)) * (0.8 + Math.random() * 0.4));
 function httpWhy(status) {
   if (status === 502) return "the PC is reachable but sharing is off (502)";
@@ -1348,7 +1453,7 @@ function setCont(on) {
   if (on) {
     resetT(); resetW(); conn.onAt = now(); conn.warmAtOn = C.ready;
     log(`Continuous ON (${settingsText()})`);
-    if (!signedIn()) { signIn(); return; }
+    if (!signedIn()) { access("Continuous on"); return; }      // (it starts once the PC says yes)
     if (C.ready) dataStart("Continuous on");
     else if (!C.ws && !C.timer) ctlOpen("Continuous on");          // (reconnecting already: the path starts once it is up)
   } else {
@@ -1380,7 +1485,7 @@ function ctlOpen(why) {
   };
   ws.onclose = (ev) => {
     if (C.ws !== ws) return;
-    if (ev.code === 4401) return ctlDown("the PC refused the sign-in", "auth");
+    if (ev.code === 4401 || ev.code === 4403) return ctlDown(ev.reason || "the PC refused this account", "auth");
     ctlDown(ev.code === 1001 ? `the PC said: ${ev.reason || "going away"}` :
             C.ready ? `the control connection closed (code ${ev.code})` : `could not connect (code ${ev.code}): sharing off, or no network`);
   };
@@ -1395,10 +1500,11 @@ function ctlDown(why, kind) {
   ctlDrop();
   dataStop(`the control connection is down (${why})`, true);    // the PC stops that path itself when it notices
   if (kind === "auth") {
-    log(`sign-in needed: ${why}`); setState("bad", "Sign in needed.");
-    R.ping(8000).catch(() => {});                   // relay-client forgets a pass the PC no longer knows (its ping says so)
-    signIn("Please sign in (signed out on the PC, a new password, or not used for a long time)."); return;
-  }
+    // The PC refused this account: ask it again what this browser may do. No right: the Sign in box; still allowed
+    // (a sign-in that ended and came back meanwhile, say): the reconnect below, with its backoff.
+    log(`refused by the PC: ${why}`);
+    access("the PC refused the connection");
+  } else if (!was && (C.attempt === 0 || C.attempt % 10 === 9)) access("could not connect");   // (a right taken away)
   if (!signedIn()) return;
   if (!C.down) C.down = now();
   C.attempt++; C.why = why;
@@ -1429,7 +1535,7 @@ function ctlMsg(m) {
     if (typeof m.t === "number") { addSync(m.t, m.srv, now()); C.rtts.push(now() - m.t); if (C.rtts.length > 8) C.rtts.shift(); }
     return;
   }
-  if (m.type === "auth") return ctlDown("the PC refused the sign-in", "auth");
+  if (m.type === "auth") return ctlDown("the PC refused this account", "auth");
   if (m.gen == null || !conn.live || m.gen !== conn.live.gen) return;      // about an older data path: ignored
   if (m.type === "srv" || m.type === "auto") pcReport(m);
   else if (conn.live.rtc) conn.live.rtc(m);
@@ -1529,7 +1635,7 @@ const TRANSPORTS = {
         let m; try { m = JSON.parse(ev.data); } catch (e) { return; }
         if (m.type === "hello") { clearTimeout(startTimer); t.ready = true; onUp(gen, `WebSocket, PC capture ${m.be}`); }
         else if (m.type === "ka") { W.idle++; T.idle++; }
-        else if (m.type === "auth") t.fail("the PC refused the sign-in", "auth");
+        else if (m.type === "auth") t.fail("the PC refused this account", "auth");
         else if (m.type === "gone") t.fail("the PC does not know this page's control session", "session");
         else if (m.type === "reload") t.fail(m.why || "reload the page");
         return;
@@ -1541,7 +1647,7 @@ const TRANSPORTS = {
     };
     ws.onclose = (ev) => {
       if (dead) return;
-      if (ev.code === 4401) return t.fail("the PC refused the sign-in", "auth");
+      if (ev.code === 4401 || ev.code === 4403) return t.fail("the PC refused this account", "auth");
       if (ev.code === 4410) return t.fail("the PC does not know this page's control session", "session");
       t.fail(ev.code === 1001 ? `the PC said: ${ev.reason || "going away"}` : t.ready ? `the data WebSocket closed (code ${ev.code})` : `the data WebSocket could not connect (code ${ev.code})`);
     };
@@ -1560,7 +1666,7 @@ const TRANSPORTS = {
       let r;
       try { r = await fetch(`${BASE}stream?sid=${encodeURIComponent(C.sid)}&gen=${gen}&${qs()}`, { headers: auth(), cache: "no-store", signal: ac.signal }); }
       catch (e) { return t.fail("the stream could not connect: sharing off, or no network"); }
-      if (r.status === 401) return t.fail("the PC refused the sign-in", "auth");
+      if (r.status === 401 || r.status === 403) return t.fail("the PC refused this account", "auth");
       if (!r.ok) return t.fail(httpWhy(r.status), r.status === 410 ? "session" : undefined);
       const reader = r.body.getReader();
       let buf = new Uint8Array(1 << 20), len = 0;
@@ -1584,7 +1690,7 @@ const TRANSPORTS = {
             }
             else if (hdr.type === "hello") { clearTimeout(startTimer); t.ready = true; onUp(gen, `stream, PC capture ${hdr.be}`); }
             else if (hdr.type === "ka") { W.idle++; T.idle++; }
-            else if (hdr.type === "auth") return t.fail("the PC refused the sign-in", "auth");
+            else if (hdr.type === "auth") return t.fail("the PC refused this account", "auth");
             else if (hdr.type === "bye") return t.fail(`the PC said: ${hdr.why}`);
             off += 8 + hl + pl;
           }
@@ -1619,7 +1725,7 @@ function pullers(gen, n, kind) {                     // n requests in flight; ea
         wantFull = false; ack = "";
         const r = await fetch(`${BASE}frame?sid=${encodeURIComponent(C.sid)}&gen=${gen}&kind=${kind}&${qs()}&wait=2${extra}`, { headers: auth(), cache: "no-store", signal: ac.signal });
         if (dead) return;
-        if (r.status === 401) return t.fail("the PC refused the sign-in", "auth");
+        if (r.status === 401 || r.status === 403) return t.fail("the PC refused this account", "auth");
         if (r.status !== 200 && r.status !== 204) return t.fail(httpWhy(r.status), r.status === 410 ? "session" : undefined);
         if (!t.ready) { clearTimeout(startTimer); t.ready = true; onUp(gen, kind === "pipe" ? `${n} requests in flight` : "one request per frame"); }
         conn.lastData = now();
@@ -1794,12 +1900,12 @@ for (const m of ["fast", "mid", "rel"]) TRANSPORTS["udp-" + m] = (gen) => udp(ge
 
 // ---- Single picture (any transport, Continuous on or off) ---------------------------------------------
 $("one").onclick = async () => {
-  if (!signedIn()) return signIn();
+  if (!signedIn()) return access("Single");
   await ADDR;
   const t0 = now(), ac = new AbortController(), timer = setTimeout(() => ac.abort(), 10000);
   try {
     const r = await fetch(`${BASE}frame?once=1&${qs()}`, { headers: auth(), cache: "no-store", signal: ac.signal });
-    if (r.status === 401) { R.ping(8000).catch(() => {}); return signIn("Please sign in (signed out on the PC, a new password, or not used for a long time)."); }
+    if (r.status === 401 || r.status === 403) { log("single picture: the PC refused this account"); return access("the PC refused a picture"); }
     if (!r.ok) throw new Error(httpWhy(r.status));
     if (r.status === 204) throw new Error("the PC had no picture within 2 s");
     const hdr = JSON.parse(r.headers.get("X-Frame"));
@@ -1809,32 +1915,78 @@ $("one").onclick = async () => {
   finally { clearTimeout(timer); }
 };
 $("cont").onclick = () => setCont(!conn.want);
-$("out").onclick = () => {                           // signs this browser out (every Cool tools page in it shares the pass)
-  const p = R.signOut();                             // forgotten here at once; the PC ends it and cuts its connections
-  dataStop("signed out"); ctlDrop(); clearTimeout(C.timer); C.timer = 0;
-  p.then((r) => log(`signed out in this browser${r.why ? " (" + r.why + ")" : r.onPC ? " and on the PC" : ""}`));
-  signIn();
-};
-
-// ---- Sign-in: the password box; Continuous stays as it was ------------------------------------------
-function signIn(msg) {
-  $("lwhat").textContent = signInWords();
-  $("lerr").textContent = [msg, addrNote()].filter(Boolean).join(" ");
-  $("login").classList.add("show");
-  $("pw").value = ""; setTimeout(() => $("pw").focus(), 50);
+// ---- Access: may this browser's account use Screen Peek? (relay 3's program access, the "screen" right) --------
+// The PC decides (R.me(), then R.canUse("screen")). Asked at the start, when the account changes in any tab of this
+// browser (the account page signs in there), when the account window closes, and when the PC refuses a connection.
+// No right: the box with one line and one button (the account page); the control connection is closed. Could not ask
+// (the PC off, no network): what was known stays; nothing known yet: the status line says why and it asks again.
+let accessJob = null, accessTimer = 0, accessTries = 0, accountWin = null;
+function access(why) {
+  if (!accessJob) accessJob = checkAccess(why).finally(() => { accessJob = null; });
+  return accessJob;
 }
-$("lf").onsubmit = async (e) => {                    // (always handled here: the form never navigates)
-  e.preventDefault();
-  const ac = new AbortController(), timer = setTimeout(() => ac.abort(), 15000);
-  try {
-    const res = await R.signIn($("pw").value);
-    if (!res.ok) { $("lerr").textContent = [res.why.charAt(0).toUpperCase() + res.why.slice(1) + ".", addrNote()].filter(Boolean).join(" ").replace(/\.\./g, "."); return; }
-    $("login").classList.remove("show"); log(`signed in${res.name ? " (the PC calls this device " + res.name + ")" : ""}`);
-    C.attempt = 0; C.down = 0; conn.attempt = 0; conn.down = 0;
-    ctlOpen("signed in");                            // a fresh control connection with the new pass
-  } catch (err) { $("lerr").textContent = "The PC did not answer: is PC Relay running (tray icon), with Screen Peek allowed?"; }
-  finally { clearTimeout(timer); }
+async function checkAccess(why) {
+  clearTimeout(accessTimer); accessTimer = 0;
+  await ADDR;
+  let r;
+  // relay-client 3 (as of relay 3.1.1) throws in me() when the PC answers "no account" for an account this browser
+  // still remembered (it forgets it, then reads what it just cleared): asked again, the second answer is plain.
+  try { r = await R.me(); } catch (e) { log(`access: asked again (relay-client: ${e.message})`); r = await R.me(); }
+  if (!r.ok) {
+    log(`access: could not ask the PC (${why}): ${r.why}`);
+    if (!ACCESS.known) {
+      accessTries++;
+      setState("bad", `Can't reach {pc}: ${sentence(r.why)} Trying again…`);
+      accessTimer = setTimeout(() => access("again"), Math.min(15000, 2000 * accessTries));
+    }
+    return ACCESS.ok;
+  }
+  accessTries = 0;
+  const was = ACCESS.ok, wasKnown = ACCESS.known, a = r.account;
+  ACCESS.known = true; ACCESS.account = a; ACCESS.ok = R.canUse("screen");
+  const who = a ? a.name : "a visitor";
+  if (ACCESS.ok) {
+    const opening = !was;
+    gate(false);
+    if (opening) {
+      log(`access: ${who} may use Screen Peek${r.local ? " (at the computer)" : ""} (${why})`);
+      if (accountWin) accountWin.close();            // signed in through the account window: back to the picture
+    }
+    if (!C.ws && !C.timer) ctlOpen(opening ? "allowed" : why);
+  } else {
+    if (was || !wasKnown) log(`access: ${who} may not use Screen Peek (${why})`);
+    lockOut();
+    gate(true);
+  }
+  return ACCESS.ok;
+}
+function lockOut() {                                // everything that carried this browser's pass is closed
+  dataStop("no access"); ctlDrop();
+  clearTimeout(C.timer); C.timer = 0; C.down = 0; C.attempt = 0;
+  clearTimeout(conn.timer); conn.timer = 0; conn.down = 0; conn.attempt = 0;
+}
+function gate(show) {
+  $("login").classList.toggle("show", show);
+  if (!show) return;
+  const a = ACCESS.account;
+  $("lwhat").textContent = a ? `${a.name} may not watch ${R.pcName()}.` : `Sign in to watch ${R.pcName()}.`;
+  $("signin").textContent = a ? "Switch user" : "Sign in";
+  $("lerr").textContent = "";
+  setState("", "Sign in needed.");
+}
+$("signin").onclick = () => {
+  if (own) { location.href = SITE_PAGE; return; }   // served by the relay: the account page lives on the Cool tools site
+  if (accountWin) { accountWin.front(); return; }
+  if (!window.WindowKit) { $("lerr").textContent = "The account page could not be opened on this page."; return; }
+  accountWin = WindowKit.open("../settings/account.html", { title: "Account", name: "account", width: 440, height: 660,
+    onClose: () => { accountWin = null; access("the account window closed"); } });
 };
+R.on("account", (a) => {                            // signed in, out or switched, in any tab of this browser
+  log(`account: ${a ? a.name : "nobody"} is signed in in this browser now`);
+  if (C.ws || C.timer || conn.live) lockOut();      // those carried the old pass
+  ACCESS.ok = false;
+  access("the account changed");
+});
 
 // ---- Screen Wake Lock (on by default): asked for whenever the page is shown -------------------------
 let wakeLock = null;
@@ -1872,7 +2024,7 @@ window.addEventListener("pagehide", (e) => log(`pagehide (persisted: ${e.persist
 window.addEventListener("pageshow", (e) => log(`pageshow (persisted: ${e.persisted})`));
 document.addEventListener("freeze", () => log("freeze: the browser froze this page"));
 document.addEventListener("resume", () => { log("resume: the page runs again"); cameBack(); });
-window.addEventListener("online", () => { log("online"); if (signedIn() && !C.ready) { C.attempt = 0; ctlOpen("back online"); } });
+window.addEventListener("online", () => { log("online"); if (!ACCESS.known) access("back online"); else if (signedIn() && !C.ready) { C.attempt = 0; ctlOpen("back online"); } });
 window.addEventListener("offline", () => log("offline"));
 
 // Automation hooks for the headless tests (test/chrome_page.mjs).
@@ -1914,17 +2066,11 @@ window.PEEK = { S, sync, conn, C, log: LOG, cont: setCont,
 
 $("ver").textContent = `Screen Peek ${APP_VERSION}${APP_BUILT ? " · built " + APP_BUILT : ""}`;
 log(`Screen Peek ${APP_VERSION}${APP_BUILT ? " (built " + APP_BUILT + ")" : ""}: page loaded (${own ? "served by the PC" : "Cool tools"}); ${settingsText()}`);
-ADDR.then(() => {
-  log(`talks to ${BASE}${own ? " (the relay that served this page)" : R.where.from === "file" ? " (the address from the Cool tools address file)" : " (built in)"}`);
-  if (R.where.from !== "built-in") return;                    // said where it shows: the connection line, the sign-in box
-  if (!$("conntext").textContent.endsWith(BUILT_NOTE)) $("conntext").textContent += BUILT_NOTE;
-  if ($("login").classList.contains("show") && !$("lerr").textContent.includes(addrNote())) $("lerr").textContent = [$("lerr").textContent, addrNote()].filter(Boolean).join(" ");
-});
-// the PC's name (PC Relay 2.2: "Jon's desktop") from one light check at the start: the connection line and the sign-in box
-ADDR.then(() => R.ping(8000)).then(() => { setState(lastState.kind, lastState.text); $("lwhat").textContent = signInWords(); }).catch(() => {});
+ADDR.then(() => log(R.base ? `talks to ${BASE}${own ? " (the relay that served this page)" : " (from the Cool tools address file)"}` : `no PC to talk to: ${R.where.why}`));
+// the PC's name ("Jon's desktop") from one light check at the start: the connection line and the Sign in box
+ADDR.then(() => R.ping(8000)).then(() => { setState(lastState.kind, lastState.text); if ($("login").classList.contains("show")) gate(true); }).catch(() => {});
 wake("page loaded");
-if (!signedIn()) signIn();
-else ctlOpen("page loaded");                       // the control connection stays open, so Continuous starts warm
+access("page loaded");                             // allowed: the control connection opens and stays, so Continuous starts warm
 </script>
 </body>
 </html>

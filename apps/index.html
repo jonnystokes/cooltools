@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="icons/apps-16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/apps-32.png">
 <link rel="apple-touch-icon" href="icons/apps-180.png">
-<!-- The Apps menu (1.15, built 2026-11-08 2:45 PM). Written by Projects\app-kit\build.py from launcher.html and
+<!-- The Apps menu (1.24, built 2026-11-12 7:17 AM). Written by Projects\app-kit\build.py from launcher.html and
      programs.json: edit those, never this file. Each program's Apps button opens this page in a floating window
      (?app=<id> marks the program it came from). A tap goes to a program in the same tab (the whole tab, not this
      window); Ctrl+click, a middle click or a long press open it in a new tab, as links do. -->
@@ -39,6 +39,17 @@
   /* the program the menu was opened from */
   a.app.current { border-color: rgba(var(--accent), .9); background: rgba(var(--accent), .1); }
   a.app .here { flex: none; padding: 4px 9px; border-radius: 99px; background: rgb(var(--accent)); color: #05060c; font-size: 11px; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; white-space: nowrap; }
+  .group.archived a.app { opacity: .82; }
+  /* the account strip: who this browser is, and the one button that matters for them */
+  .who { display: flex; align-items: center; gap: 12px; min-height: 64px; margin: 0 0 14px; padding: 8px 10px; border: 1px solid rgba(255, 255, 255, .16); border-radius: 13px; background: rgba(30, 34, 58, .95); }
+  .who .pic { flex: none; position: relative; width: 44px; height: 44px; border-radius: 50%; overflow: hidden; display: grid; place-items: center; background: hsl(var(--hue, 220) 45% 38%); color: #fff; font-size: 20px; font-weight: 700; }
+  .who .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .who .pic svg { width: 26px; height: 26px; fill: rgba(255, 255, 255, .85); }
+  .who .nm { flex: 1; min-width: 0; font-size: 16px; font-weight: 650; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .who .nm.none { color: #9aa8c4; font-weight: 500; }
+  .who button { all: unset; box-sizing: border-box; flex: none; min-height: 44px; padding: 0 18px; border-radius: 11px; background: #ffd23d; color: #05060c; font-size: 15px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; }
+  .who button:hover { filter: brightness(1.08); }
+  .who button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
   .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 14px; margin: 10px 6px 0; color: #6f7c98; font-size: 12.5px; }
   .foot a { color: #b8c6e6; }
   @media (max-width: 380px) { main { padding: 10px 8px 14px; } a.app { gap: 10px; padding: 8px; } a.app .here { padding: 3px 7px; font-size: 10px; } }
@@ -47,24 +58,28 @@
 <body>
 <main>
   <h1>Apps</h1>
-  <section class="group now" aria-labelledby="g-now">
+  <div class="who" id="who"><span class="pic" id="who-pic" aria-hidden="true"></span><span class="nm none" id="who-name">Not signed in</span><button type="button" id="who-btn">Sign in</button></div>
+  <section class="group now" style="--accent: 255, 210, 61" aria-labelledby="g-now">
     <h2 id="g-now">Current Projects</h2>
     <a class="app" data-id="reader" data-ver=".t" href="../reader/" target="_top"><img src="icons/reader-48.png" srcset="icons/reader-96.png 2x, icons/reader-144.png 3x" width="48" height="48" alt=""><span class="t"><b>Book reader</b><span class="d">Reads books aloud with AI voices</span><span class="ver"></span></span></a>
-    <a class="app" data-id="file-manager" data-ver=".t" href="../file-manager/" target="_top"><img src="icons/file-manager-48.png" srcset="icons/file-manager-96.png 2x, icons/file-manager-144.png 3x" width="48" height="48" alt=""><span class="t"><b>Cloud File Manager</b><span class="d">The shared folder on Jon's PC, from anywhere</span><span class="ver"></span></span></a>
-    <a class="app" data-id="settings" data-ver=".t" href="../settings/" target="_top"><img src="icons/settings-48.png" srcset="icons/settings-96.png 2x, icons/settings-144.png 3x" width="48" height="48" alt=""><span class="t"><b>Settings</b><span class="d">Sign-in, PC address, pinger and restart</span><span class="ver"></span></span></a>
+    <a class="app" data-id="file-manager" data-ver=".t" href="../file-manager/" target="_top"><img src="icons/file-manager-48.png" srcset="icons/file-manager-96.png 2x, icons/file-manager-144.png 3x" width="48" height="48" alt=""><span class="t"><b>Cloud File Manager</b><span class="d">Your files and the Shared Folder</span><span class="ver"></span></span></a>
+    <a class="app" data-id="settings" data-ver=".t" href="../settings/" target="_top"><img src="icons/settings-48.png" srcset="icons/settings-96.png 2x, icons/settings-144.png 3x" width="48" height="48" alt=""><span class="t"><b>Settings</b><span class="d">Your account, and the PC's settings</span><span class="ver"></span></span></a>
   </section>
-  <section class="group fun" aria-labelledby="g-fun">
+  <section class="group fun" style="--accent: 255, 61, 242" aria-labelledby="g-fun">
     <h2 id="g-fun">Fun Projects</h2>
-    <a class="app" data-id="hyperwave" data-ver=".t" href="../hyperwave/" target="_top"><img src="icons/hyperwave-48.png" srcset="icons/hyperwave-96.png 2x, icons/hyperwave-144.png 3x" width="48" height="48" alt=""><span class="t"><b>HYPERWAVE Studio</b><span class="d">Sound-reactive visuals: 79 shapes</span><span class="ver"></span></span></a>
     <a class="app" data-id="plan-cutter" data-ver=".t" href="../plan-cutter/" target="_top"><img src="icons/plan-cutter-48.png" srcset="icons/plan-cutter-96.png 2x, icons/plan-cutter-144.png 3x" width="48" height="48" alt=""><span class="t"><b>Plan Cutter</b><span class="d">Lay and cut sheets in a crooked room</span><span class="ver"></span></span></a>
   </section>
-  <section class="group test" aria-labelledby="g-test">
+  <section class="group test" style="--accent: 61, 252, 255" aria-labelledby="g-test">
     <h2 id="g-test">Testing</h2>
-    <a class="app" data-id="screen-peek" data-ver=".t" href="../screen-peek/" target="_top"><img src="icons/screen-peek-48.png" srcset="icons/screen-peek-96.png 2x, icons/screen-peek-144.png 3x" width="48" height="48" alt=""><span class="t"><b>Screen Peek (test)</b><span class="d">A live look at Jon's PC screen</span><span class="ver"></span></span></a>
+    <a class="app" data-id="screen-peek" data-ver=".t" href="../screen-peek/" target="_top"><img src="icons/screen-peek-48.png" srcset="icons/screen-peek-96.png 2x, icons/screen-peek-144.png 3x" width="48" height="48" alt=""><span class="t"><b>Screen Peek (test)</b><span class="d">A live look at Jon's desktop</span><span class="ver"></span></span></a>
     <a class="app" data-id="simple-bench" data-ver=".t" href="../simple-bench/" target="_top"><img src="icons/simple-bench-48.png" srcset="icons/simple-bench-96.png 2x, icons/simple-bench-144.png 3x" width="48" height="48" alt=""><span class="t"><b>Simple Bench</b><span class="d">A 10-second test of this device</span><span class="ver"></span></span></a>
     <a class="app" data-id="browser-storage" data-ver=".t" href="../browser-storage/" target="_top"><img src="icons/browser-storage-48.png" srcset="icons/browser-storage-96.png 2x, icons/browser-storage-144.png 3x" width="48" height="48" alt=""><span class="t"><b>Browser app cache manager</b><span class="d">See and delete what these tools stored</span><span class="ver"></span></span></a>
   </section>
-  <p class="foot"><a href="../" target="_top">The Cool tools front page</a><span>Apps 1.15</span></p>
+  <section class="group archived" style="--accent: 150, 160, 182" aria-labelledby="g-archived">
+    <h2 id="g-archived">Archived</h2>
+    <a class="app" data-id="hyperwave" data-ver=".t" href="../hyperwave/" target="_top"><img src="icons/hyperwave-48.png" srcset="icons/hyperwave-96.png 2x, icons/hyperwave-144.png 3x" width="48" height="48" alt=""><span class="t"><b>HYPERWAVE Studio</b><span class="d">Experimental, no longer worked on</span><span class="ver"></span></span></a>
+  </section>
+  <p class="foot"><a href="../" target="_top">The Cool tools front page</a><span>Apps 1.24</span></p>
 </main>
 <script>
 (function () {
@@ -117,11 +132,539 @@
     start();
     window.addEventListener("focus", () => setTimeout(start, 0), { once: true });
   }
-  window.APPS_MENU = { version: "1.15", here, framed };
+  window.APPS_MENU = { version: "1.24", here, framed };
+  // Back from the account page (it goes back in this frame's history): the window's title is the menu's again.
+  if (framed) post({ type: "title", text: "Apps" });
 })();
 </script>
 <script>
-/* versions.js 1.15: each program's version, the date it was last built and how long ago that was, under its line
+/* relay-client.js 3: the PC Relay client (ONE source: Projects\pc-relay\client\relay-client.js; each page's build
+   copies it in, so never edit a copy). Talks to PC Relay 3 (accounts) on Jon's PC. The relay decides every request;
+   this file carries the pass, remembers who this browser is, and says plainly what the PC answered.
+   The exact requests: Projects\cool-tools-upgrade\API-relay.md.
+
+   - Nothing happens until the page calls something: no background traffic of its own (seen() is the page's call).
+   - The PC's address: read from relay.json beside the programs ("../relay.json" from a program's page, or
+     opts.addressFile), fresh before the first connection and again after a failed one (at most once a minute).
+     {"address": "https://..."}; http only for 127.0.0.1 and localhost (the stage). No address is built in: if the file
+     cannot be read the cloud is simply off, with a plain reason (status "off", where.why). opts.base names the address
+     instead (tests, the relay's own window on the local door).
+   - Kept in this browser (localStorage, shared by every page of the site): "relay-pass" ({pass, device, at}) and
+     "relay-account" ({id, name, kind, number, at}), so the name shows at once, even with the cloud off. Another tab's
+     sign-in, sign-out or change arrives as an "account" event.
+   - The pass goes in the X-Relay-Pass header (HTTP) or the WebSocket subprotocol "pass.<p>"; never in a URL.
+   - When the PC says the pass is not valid any more (X-Relay-Info: pass-unknown, or the ping's pass "unknown"), the
+     pass and the account are forgotten and "account" fires with null. me() forgets them only on a whole answer that
+     says {account: null}. An answer cut off, garbled or late, a timeout or a network error never ends a sign-in:
+     it is a result with ok false and kind "network" or "timeout".
+   - Errors from the relay are { why, kind }; every result here carries why and kind.
+
+   const R = RelayClient.create({ app: "plan-cutter", log });
+   await R.ping();                 // { ok, latency, info }
+   R.account();                    // at once, from this browser: { id, name, kind, number } or null
+   await R.me();                   // from the PC: { ok, account, can, programs, network, limited }
+   R.can("files.shared.change");  R.canUse("voice");      // from the last me()
+   await R.accountsHere();         // { ok, accounts: [{ id, name, kind, number, picture, hasPassword }] }
+   await R.signIn(name, password); // { ok, kind, why, account }
+   await R.signOut();              // { ok }
+   await R.guest();                // { ok, account }  (a guest for this browser; itself when it has an account)
+   await R.setup({ name, password });   // { ok, kind, why, account }
+   await R.update({ name, password });  // { ok, kind, why, account }   (password: null removes it)
+   R.seen();                       // "this app is open" (call once a minute while the page is visible)
+   R.on("account", fn);            // fn(account or null)
+   R.on("status", fn);             // fn({ state: checking|connected|off|offline|starting|ready|reload, why })
+   await R.api("people");          // any /relay/ request: { ok, status, data, why, kind }
+   R.call, R.fetch, R.url, R.ws, R.open, R.pcName, R.address, R.watch     // as in relay-client 2
+*/
+(function (root) {
+  "use strict";
+  const VERSION = 3;
+  const RECHECK_MS = 60000, ADDRESS_MS = 6000;
+  const PASS_KEY = "relay-pass", ACCOUNT_KEY = "relay-account", NAME_KEY = "relay-pc-name", YOUR_PC = "your PC";
+  const trim = (u) => String(u || "").trim().replace(/\/+$/, "");
+  const goodAddress = (a) =>
+    /^https:\/\/[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*(:\d{1,5})?$/i.test(a) ||
+    /^http:\/\/(127\.0\.0\.1|localhost)(:\d{1,5})?$/i.test(a);
+  const store = {
+    get(k) { try { return root.localStorage.getItem(k) || ""; } catch (e) { return mem[k] || ""; } },
+    set(k, v) {
+      try { if (v) root.localStorage.setItem(k, v); else root.localStorage.removeItem(k); }
+      catch (e) { if (v) mem[k] = v; else delete mem[k]; }
+    },
+  };
+  const mem = {}; // when localStorage is not available (a sandboxed page): this page only
+  const json = (k) => { try { const j = JSON.parse(store.get(k) || "null"); return j && typeof j === "object" ? j : null; } catch (e) { return null; } };
+  const cleanName = (n) => (typeof n === "string" ? Array.from(n.replace(/[\x00-\x1f\x7f-\x9f]/g, "").trim()).slice(0, 64).join("").trim() : "");
+  const shortAcct = (a) => (a && a.id ? { id: a.id, name: String(a.name || ""), kind: String(a.kind || ""), number: a.number || 0 } : null);
+
+  function httpWhy(status) {
+    return ({ 400: "the PC refused that request", 401: "sign-in needed", 403: "not allowed", 404: "not found on the PC",
+      409: "that clashes with something on the PC", 410: "this page is out of date: reload it", 426: "this page is out of date: reload it",
+      429: "too many requests: wait a minute", 502: "the program on the PC did not answer", 503: "the PC said it is busy or switched off" })[status] || `the PC answered ${status}`;
+  }
+  function netWhy(err, ms) {
+    if (err && err.name === "AbortError") return `no answer from the PC within ${Math.round(ms / 1000)} s`;
+    if (typeof navigator !== "undefined" && navigator.onLine === false) return "this device is offline";
+    return "could not reach the PC (no network, or the PC is off or asleep)";
+  }
+  function netKind(err) {
+    if (err && err.name === "AbortError") return "timeout";
+    if (typeof navigator !== "undefined" && navigator.onLine === false) return "offline";
+    return "network";
+  }
+  const kindOf = (status) => status === 401 ? "signin" : status === 426 || status === 410 ? "reload" : "http";
+
+  class Relay {
+    constructor(opts) {
+      opts = opts || {};
+      this.app = String(opts.app || "page").toLowerCase().replace(/[^a-z0-9-]/g, "");
+      this.log = typeof opts.log === "function" ? opts.log : null;
+      this.addressFile = opts.addressFile || "";
+      this.status = { state: "idle", why: "", at: Date.now() };
+      this.info = null;
+      this.latency = 0;
+      this.bytes = 0;
+      this._me = null;
+      this._subs = { status: new Set(), account: new Set() };
+      this._job = null;
+      this._readAt = 0;
+      this._acctSeen = JSON.stringify(shortAcct(json(ACCOUNT_KEY)));
+      this._setBase(opts.base);
+      if (typeof opts.onStatus === "function") this._subs.status.add(opts.onStatus);
+      if (typeof addEventListener === "function") {
+        addEventListener("storage", (e) => { if (!e || e.key === ACCOUNT_KEY || e.key === PASS_KEY || e.key === null) this._acctChanged(); });
+      }
+    }
+    // ---- the PC's address ---------------------------------------------------------------------------------------
+    _setBase(url) {
+      this.given = trim(url);
+      this.base = this.given;
+      this.where = this.given ? { url: this.given, from: "page", why: "" } : { url: "", from: "unread", why: "" };
+      this._readAt = 0;
+    }
+    setBase(url) { if (trim(url) !== this.given) this._setBase(url); }
+    _fileUrl() {
+      if (this.addressFile) return this.addressFile;
+      try { return new URL("../relay.json", root.location.href).href; } catch (e) { return "../relay.json"; }
+    }
+    async address() { await this._ready(); return this.where; }
+    async _ready() {
+      if (this.given) return;
+      const w = this.where.from;
+      if (w === "unread" || (w === "none" && Date.now() - this._readAt >= RECHECK_MS)) await this._read();
+    }
+    _read() {
+      if (!this._job) this._job = this._readNow().finally(() => { this._job = null; });
+      return this._job;
+    }
+    async _recheck() {
+      if (this.given || this._job || Date.now() - this._readAt < RECHECK_MS) return false;
+      const was = this.base;
+      await this._read();
+      return this.base !== was;
+    }
+    async _readNow() {
+      this._readAt = Date.now();
+      const file = this._fileUrl(), was = this.where;
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), ADDRESS_MS);
+      let why = "";
+      try {
+        const sep = file.includes("?") ? "&" : "?";
+        const r = await fetch(`${file}${sep}t=${Date.now()}`, { cache: "no-store", credentials: "omit", signal: ac.signal });
+        if (!r.ok) throw new Error(`the site answered ${r.status}`);
+        const j = await r.json().catch(() => null);
+        const a = trim(j && j.address);
+        if (!goodAddress(a)) throw new Error(j ? "it holds no usable address" : "it is not JSON");
+        if (this.given) return;
+        this.base = a;
+        this.where = { url: a, from: "file", why: "" };
+        if (was.url !== a) this._note(`the PC's address: ${a} (from ${file})`, false);
+        return;
+      } catch (e) {
+        why = e && e.name === "AbortError" ? `no answer within ${ADDRESS_MS / 1000} s`
+          : typeof navigator !== "undefined" && navigator.onLine === false ? "this device is offline"
+          : e && e.name === "TypeError" ? "the site could not be reached"
+          : String((e && e.message) || e);
+      } finally { clearTimeout(timer); }
+      if (this.given || was.from === "file") return; // read fine earlier in this page's life: that address stays
+      const text = `the PC's address (${file}) could not be read (${why}): the cloud is off`;
+      this.base = "";
+      this.where = { url: "", from: "none", why: text };
+      if (was.why !== text) this._note(text, true);
+    }
+    _note(text, warn) {
+      if (this.log) { try { this.log(text); } catch (e) {} }
+      try { if (typeof console !== "undefined") (warn ? console.warn : console.info)("relay-client: " + text); } catch (e) {}
+    }
+    // ---- events ----
+    on(what, fn) {
+      if (typeof what === "function") { fn = what; what = "status"; }
+      const set = this._subs[what];
+      if (!set || typeof fn !== "function") return () => {};
+      set.add(fn);
+      return () => set.delete(fn);
+    }
+    _set(state, extra) {
+      this.status = Object.assign({ state, why: "", at: Date.now() }, extra || {});
+      for (const f of this._subs.status) { try { f(this.status); } catch (e) {} }
+    }
+    _acctChanged() {
+      const now = JSON.stringify(this.account());
+      if (now === this._acctSeen) return;
+      this._acctSeen = now;
+      const a = this.account();
+      // another person (or nobody) now: the rights the last me() gave are not theirs; can() says no until me() is asked again
+      if (!a || !this._me || !this._me.account || this._me.account.id !== a.id) this._me = null;
+      for (const f of this._subs.account) { try { f(a); } catch (e) {} }
+    }
+    // ---- the pass and the account, kept in this browser ----
+    _pass() { const r = json(PASS_KEY); return r && typeof r.pass === "string" ? r.pass : ""; }
+    _keep(pass, account) {
+      if (pass !== undefined) store.set(PASS_KEY, pass ? JSON.stringify({ pass, at: Date.now() }) : "");
+      if (account !== undefined) store.set(ACCOUNT_KEY, account ? JSON.stringify(Object.assign(shortAcct(account), { at: Date.now() })) : "");
+      this._acctChanged();
+    }
+    _forget(why) {
+      if (!this._pass() && !this.account()) return;
+      this._me = null;
+      this._keep("", null);
+      this._note("this browser's sign-in ended on the PC" + (why ? ` (${why})` : ""), false);
+    }
+    // An answer speaks only about the pass its request carried. While it was on its way, another tab of this browser
+    // may have signed in or switched user: the browser then holds a new pass, and an answer about the old one ("pass
+    // unknown", "no account", an older account) must not wipe or overwrite the new sign-in. _current(sent) says whether
+    // the pass sent is still the one kept.
+    _current(sent) { return sent === this._pass(); }
+    _info(r, sent) { // every answer: the PC may say the pass is not valid any more
+      const i = (r.headers && r.headers.get("X-Relay-Info")) || "";
+      if (/pass-unknown/.test(i) && this._current(sent)) this._forget("the PC does not know it");
+    }
+    account() { return shortAcct(json(ACCOUNT_KEY)); }
+    signedIn() { return !!this._pass(); }
+    can(flag) { return !!(this._me && this._me.can.includes(flag)); }
+    canUse(prog) { return prog === "files" || !!(this._me && this._me.programs.includes(prog)); }
+    headers(extra) {
+      const h = { "X-Relay-Client": this.app + "/" + VERSION };
+      const p = this._pass();
+      if (p) h["X-Relay-Pass"] = p;
+      return Object.assign(h, extra || {});
+    }
+    // ---- addresses ----
+    url(service, path) { return `${this.base}/svc/${service}/${String(path || "").replace(/^\/+/, "")}`; }
+    wsUrl(service, path) { return this.url(service, path).replace(/^http/, "ws"); }
+    wsProtocols() { const p = this._pass(); return p ? ["relay", "pass." + p] : ["relay"]; }
+    ws(service, path) { return new WebSocket(this.wsUrl(service, path), this.wsProtocols()); }
+    _off() { return { ok: false, status: 0, data: null, why: this.where.why || "the cloud is off", kind: "off" }; }
+    // fetch through the relay: a Response (throws when the PC cannot be reached, or the address is not known)
+    async fetch(service, path, opts) {
+      opts = Object.assign({}, opts || {});
+      const timeout = opts.timeout || 0; delete opts.timeout;
+      await this._ready();
+      if (!this.base) throw new TypeError(this.where.why || "the cloud is off");
+      const sent = this._pass();
+      opts.headers = this.headers(opts.headers);
+      let timer = 0, ac = null;
+      if (timeout && !opts.signal) { ac = new AbortController(); opts.signal = ac.signal; timer = setTimeout(() => ac.abort(), timeout); }
+      try {
+        const r = await fetch(this.url(service, path), opts);
+        this._info(r, sent);
+        return r;
+      } catch (err) {
+        if (ac || !(opts.signal && opts.signal.aborted)) this._recheck().catch(() => {});
+        throw err;
+      } finally { clearTimeout(timer); }
+    }
+    // _result: an answer read whole. A body that cannot be read (the page left, the connection dropped, a timeout
+    // while reading) or a 2xx body that is not whole JSON is NOT ok: kind "network" (or "timeout"). Only a real,
+    // whole answer from the PC may say anything about the sign-in (reader agent's find, 2026-11-12).
+    async _result(r) {
+      let text, cut = null;
+      try { text = await r.text(); } catch (err) { text = ""; cut = err; }
+      this.bytes += text.length;
+      let data = null, bad = false;
+      try { data = text ? JSON.parse(text) : null; } catch (e) { data = null; bad = true; }
+      if (cut || (r.ok && bad)) {
+        const kind = cut ? netKind(cut) : "network";
+        const why = cut && kind === "timeout" ? "the PC's answer did not arrive in time" : "the PC's answer was cut off: try again";
+        return { ok: false, status: r.status, data: null, why, kind, cut: true };
+      }
+      if (r.ok) return { ok: true, status: r.status, data, why: "", kind: "" };
+      const why = (data && (data.why || data.error)) || httpWhy(r.status);
+      const kind = (data && data.kind) || kindOf(r.status);
+      if (r.status === 426) this._set("reload", { why });
+      return { ok: false, status: r.status, data, why, kind, signin: r.status === 401 };
+    }
+    _body(opts) {
+      opts = Object.assign({ cache: "no-store" }, opts || {});
+      if (opts.json !== undefined) {
+        opts.body = JSON.stringify(opts.json);
+        opts.headers = Object.assign({ "Content-Type": "application/json" }, opts.headers || {});
+        delete opts.json;
+      }
+      return opts;
+    }
+    // call: a program's request with a JSON answer: { ok, status, data, why, kind }
+    async call(service, path, opts) {
+      opts = this._body(opts);
+      const ms = opts.timeout || 0;
+      let r;
+      try { r = await this.fetch(service, path, opts); }
+      catch (err) { return this.base ? { ok: false, status: 0, data: null, why: netWhy(err, ms), kind: netKind(err) } : this._off(); }
+      return this._result(r);
+    }
+    // api: the relay's own request /relay/<path>: { ok, status, data, why, kind, current }. current: this browser
+    // still holds the pass the request carried (false: its sign-in changed meanwhile, the answer is about the old one).
+    async api(path, opts) {
+      opts = this._body(opts);
+      const ms = opts.timeout || 15000; delete opts.timeout;
+      await this._ready();
+      if (!this.base) return this._off();
+      const sent = this._pass();
+      opts.headers = this.headers(opts.headers);
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), ms);
+      opts.signal = opts.signal || ac.signal;
+      try {
+        const r = await fetch(`${this.base}/relay/${String(path).replace(/^\/+/, "")}`, opts);
+        this._info(r, sent);
+        const res = await this._result(r);
+        res.current = this._current(sent);
+        return res;
+      } catch (err) {
+        this._recheck().catch(() => {});
+        return { ok: false, status: 0, data: null, why: netWhy(err, ms), kind: netKind(err) };
+      } finally { clearTimeout(timer); }
+    }
+    // ---- the light check ----
+    async ping(timeoutMs) {
+      timeoutMs = timeoutMs || 8000;
+      this._set("checking", { why: "checking the connection…" });
+      await this._ready();
+      if (!this.base) { const why = this.where.why || "the cloud is off"; this._set("off", { why }); return { ok: false, why, kind: "off" }; }
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), timeoutMs), t0 = performance.now();
+      try {
+        const sent = this._pass();
+        const r = await fetch(`${this.base}/relay/ping?t=${Date.now()}`, { headers: this.headers(), cache: "no-store", signal: ac.signal });
+        this._info(r, sent);
+        if (!r.ok) { const res = await this._result(r); this._set(r.status === 426 ? "reload" : "offline", { why: res.why }); return { ok: false, why: res.why, kind: res.kind, status: r.status }; }
+        const info = await r.json();
+        this.latency = Math.round(performance.now() - t0);
+        this.info = info;
+        const name = cleanName(info && info.name);
+        if (name) { this._pc = { base: this.base, name }; this._keepName(this.base, name); }
+        if ((info.min_client || 0) > VERSION) { const why = "this page is out of date: reload it"; this._set("reload", { why }); return { ok: false, why, info, kind: "reload" }; }
+        if (!this._current(sent)) { /* this browser's sign-in changed while the PC answered: the answer is about the old one */ }
+        else if (info.pass === "unknown") this._forget("the PC does not know it");
+        else if (info.account && this._pass()) this._keep(undefined, info.account);
+        if (!info.on) { const why = "PC Relay is switched off (it is switched on at the computer)"; this._set("off", { why, info }); return { ok: false, why, info, kind: "off" }; }
+        this._set("connected", { why: `connected (${this.latency} ms)`, info, latency: this.latency });
+        return { ok: true, info, latency: this.latency };
+      } catch (err) {
+        clearTimeout(timer);
+        if (await this._recheck()) return this.ping(timeoutMs);
+        const why = netWhy(err, timeoutMs);
+        this._set("offline", { why });
+        return { ok: false, why, kind: netKind(err) };
+      } finally { clearTimeout(timer); }
+    }
+    service(id) { return ((this.info && this.info.services) || []).find((s) => s.id === id) || null; }
+    _names() { const j = json(NAME_KEY); return j && !Array.isArray(j) ? j : {}; }
+    _keepName(base, name) {
+      const all = this._names();
+      if (all[base] && all[base].name === name) return;
+      all[base] = { name, at: Date.now() };
+      const keep = Object.entries(all).filter(([, e]) => e && typeof e === "object").sort((a, b) => (b[1].at || 0) - (a[1].at || 0)).slice(0, 10);
+      store.set(NAME_KEY, JSON.stringify(Object.fromEntries(keep)));
+    }
+    pcName() {
+      if (this._pc && this._pc.base === this.base) return this._pc.name;
+      const e = this._names()[this.base];
+      return (e && cleanName(e.name)) || YOUR_PC;
+    }
+    // ---- accounts ----
+    async me() {
+      let r = await this.api("me");
+      if (r.ok && !r.current) r = await this.api("me"); // this browser's sign-in changed while the PC answered (another tab): ask again
+      if (!r.ok) return r;
+      // Only an answer that says so itself ({account: null}) ends the sign-in; anything else changes nothing.
+      if (!r.data || typeof r.data !== "object" || !("account" in r.data)) return { ok: false, status: r.status, data: r.data, why: "the PC's answer could not be read: try again", kind: "network", current: r.current };
+      const d = r.data;
+      const me = { account: shortAcct(d.account), can: d.can || [], programs: d.programs || [], network: d.network || "", limited: !!d.limited };
+      this._me = me;
+      if (!r.current) { /* still changing: nothing kept or forgotten from an answer about an older sign-in */ }
+      else if (d.account && this._pass()) this._keep(undefined, d.account);
+      else if (!d.account && this.account() && !d.local) {
+        this._forget(""); // (it clears _me: the PC no longer knows this browser's account)
+        this._me = me;     // what the PC just said is true now: a plain visitor
+      }
+      return { ok: true, account: d.account || null, can: me.can, programs: me.programs, network: me.network, limited: me.limited, local: !!d.local };
+    }
+    async accountsHere() {
+      const r = await this.api("accounts/here");
+      return r.ok ? { ok: true, accounts: (r.data && r.data.accounts) || [], network: r.data && r.data.network } : r;
+    }
+    _signed(r) {
+      if (!r.ok) return { ok: false, kind: r.kind, why: r.why, status: r.status };
+      const d = r.data || {};
+      if (d.pass) this._keep(d.pass, d.account); else if (d.account) this._keep(undefined, d.account);
+      this._me = null;
+      return { ok: true, kind: "", why: "", account: d.account || null };
+    }
+    async signIn(name, password) {
+      return this._signed(await this.api("signin", { method: "POST", json: { name: String(name || ""), password: password == null ? "" : String(password) } }));
+    }
+    async signOut() {
+      const had = this._pass();
+      let onPC = false;
+      if (had) { const r = await this.api("signout", { method: "POST" }); onPC = !!(r.ok && r.data && r.data.signed_out); }
+      this._me = null;
+      this._keep("", null);
+      return { ok: true, onPC };
+    }
+    async guest() { return this._signed(await this.api("guest", { method: "POST" })); }
+    async setup(o) {
+      o = o || {};
+      const body = { name: String(o.name || "") };
+      if (o.password) body.password = String(o.password);
+      return this._signed(await this.api("setup", { method: "POST", json: body }));
+    }
+    async update(o) {
+      o = o || {};
+      const body = {};
+      if (o.name !== undefined) body.name = String(o.name);
+      if (o.password !== undefined) body.password = o.password === null ? null : String(o.password);
+      const r = await this.api("me", { method: "POST", json: body });
+      if (!r.ok) return { ok: false, kind: r.kind, why: r.why, status: r.status };
+      if (r.data && r.data.account && r.current) this._keep(undefined, r.data.account);
+      return { ok: true, kind: "", why: "", account: r.data && r.data.account };
+    }
+    seen() {
+      this.api("seen", { method: "POST", json: { app: this.app }, timeout: 8000 }).catch(() => {});
+    }
+    // ---- start a program, with progress ----
+    async open(service, onProgress, timeoutMs) {
+      timeoutMs = timeoutMs || 60000;
+      this._set("starting", { service, why: `starting ${service} on the PC…` });
+      await this._ready();
+      if (!this.base) { const why = this.where.why || "the cloud is off"; this._set("off", { why }); return { ok: false, why, kind: "off" }; }
+      const ac = new AbortController(), timer = setTimeout(() => ac.abort(), timeoutMs);
+      try {
+        const sent = this._pass();
+        const r = await fetch(`${this.base}/relay/open/${service}`, { headers: this.headers(), cache: "no-store", signal: ac.signal });
+        this._info(r, sent);
+        if (!r.ok) { const res = await this._result(r); this._set(r.status === 426 ? "reload" : "offline", { service, why: res.why }); return { ok: false, why: res.why, kind: res.kind, status: r.status }; }
+        const rd = r.body.getReader(), dec = new TextDecoder();
+        let buf = "", last = null;
+        for (;;) {
+          const { value, done } = await rd.read();
+          if (done) break;
+          buf += dec.decode(value, { stream: true });
+          let i;
+          while ((i = buf.indexOf("\n")) >= 0) {
+            const line = buf.slice(0, i); buf = buf.slice(i + 1);
+            if (!line.trim()) continue;
+            try { last = JSON.parse(line); } catch (e) { continue; }
+            if (onProgress) { try { onProgress(last); } catch (e) {} }
+            if (last.state === "starting") this._set("starting", { service, why: last.text || "starting…", seconds: last.seconds || 0 });
+          }
+        }
+        if (last && last.state === "ready") { this._set("ready", { service, why: last.warm ? "ready" : `ready (started in ${(last.ms / 1000).toFixed(1)} s)` }); return { ok: true, warm: !!last.warm, ms: last.ms || 0 }; }
+        const why = (last && last.error) || "the PC stopped answering while it was starting";
+        this._set("offline", { service, why });
+        return { ok: false, why, kind: "start" };
+      } catch (err) {
+        this._recheck().catch(() => {});
+        const why = netWhy(err, timeoutMs);
+        this._set("offline", { service, why });
+        return { ok: false, why, kind: netKind(err) };
+      } finally { clearTimeout(timer); }
+    }
+    // ---- keep checking (only while the page wants it) ----
+    watch(everyMs) {
+      everyMs = everyMs || 15000;
+      let stopped = false, timer = 0, fails = 0;
+      const tick = async () => {
+        if (stopped) return;
+        const r = await this.ping();
+        fails = r.ok ? 0 : fails + 1;
+        const wait = r.ok ? everyMs : Math.min(30000, 1000 * 2 ** Math.min(fails - 1, 5));
+        if (!stopped) timer = setTimeout(tick, wait * (0.9 + Math.random() * 0.2));
+      };
+      const online = () => { clearTimeout(timer); tick(); };
+      if (typeof addEventListener === "function") addEventListener("online", online);
+      tick();
+      return () => { stopped = true; clearTimeout(timer); if (typeof removeEventListener === "function") removeEventListener("online", online); };
+    }
+  }
+
+  root.RelayClient = { VERSION, YOUR_PC, create: (opts) => new Relay(opts || {}), httpWhy };
+})(typeof window !== "undefined" ? window : globalThis);
+</script>
+<script>
+// The account strip (CONTRACT 13): the picture or initial, the name ("guest 179"), and one button: Sign in (nobody),
+// Set up user (a guest) or Account (a user). The button takes this frame to the one account page
+// (../settings/account.html?from=apps), whose Back returns here. The name shows at once from this browser's memory
+// (relay-client), then the PC is asked once; with the cloud off the remembered name stays.
+(function () {
+  "use strict";
+  if (!window.RelayClient) return;
+  const R = RelayClient.create({ app: "apps" });
+  const $ = (id) => document.getElementById(id);
+  const pic = $("who-pic"), nameEl = $("who-name"), btn = $("who-btn");
+  const PERSON = '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.2"/><path d="M3.8 21c.6-4.4 4-7 8.2-7s7.6 2.6 8.2 7z"/></svg>';
+  let shown = null, base = "";
+  const label = (a) => !a ? "" : a.kind === "guest" && !/\d/.test(a.name) && a.number ? `guest ${a.number}` : a.name;
+  function hue(s) { let h = 0; for (const c of String(s)) h = (h * 31 + c.codePointAt(0)) % 360; return h; }
+  function draw(a) {
+    const key = JSON.stringify(a && [a.id, a.name, a.kind]);
+    if (key === shown && !draw.force) return;
+    shown = key; draw.force = false;
+    pic.textContent = "";
+    if (!a) {
+      pic.style.removeProperty("--hue");
+      pic.innerHTML = PERSON;
+      nameEl.textContent = "Not signed in";
+      nameEl.classList.add("none");
+      btn.textContent = "Sign in";
+    } else {
+      const n = label(a);
+      pic.style.setProperty("--hue", hue(a.id || n));
+      pic.textContent = (Array.from(n.trim())[0] || "?").toUpperCase();
+      nameEl.textContent = n;
+      nameEl.classList.remove("none");
+      btn.textContent = a.kind === "guest" ? "Set up user" : "Account";
+      picture(a);
+    }
+    btn.dataset.kind = a ? a.kind : "visitor";
+  }
+  // The picture, when the PC has one: shown over the initial once it has loaded; a 404 (none) leaves the initial.
+  function picture(a) {
+    if (!base || !a) return;
+    let v = "";
+    try { v = localStorage.getItem("relay-picture") || ""; } catch (e) {}
+    const img = new Image();
+    img.alt = "";
+    img.onload = () => { if (shown === JSON.stringify([a.id, a.name, a.kind])) { pic.querySelectorAll("img").forEach((x) => x.remove()); pic.append(img); } };
+    img.src = `${base}/svc/files/picture/${encodeURIComponent(a.id)}?v=${encodeURIComponent(v)}`;
+  }
+  async function refresh() {
+    try { const w = await R.address(); base = (w && w.url) || ""; } catch (e) { base = ""; }
+    const r = await R.me();
+    draw.force = true;
+    draw(r.ok ? r.account : R.account());
+  }
+  btn.addEventListener("click", () => {
+    location.href = new URL("../settings/account.html?from=apps", location.href).href;
+  });
+  draw(R.account());
+  R.on("account", (a) => { draw(a); refresh(); });
+  window.addEventListener("storage", (e) => { if (e.key === "relay-picture") { draw.force = true; draw(R.account()); } });
+  window.addEventListener("pageshow", (e) => { if (e.persisted) refresh(); });
+  refresh();
+  window.APPS_MENU.account = { relay: R, refresh };
+})();
+</script>
+<script>
+/* versions.js 1.24: each program's version, the date it was last built and how long ago that was, under its line
    on the Cool tools front page and in the Apps menu. ONE source: Projects\app-kit\versions.js (built into the menu;
    published as https://jonnystokes.github.io/cooltools/apps/versions.js, which the front page loads).
 

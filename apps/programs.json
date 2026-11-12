@@ -1,58 +1,81 @@
 {
-  "_": "THE list of Jon's programs: the Apps menu (cool-tools/apps/) and the Cool tools front page are both built from this file by build.py. A new program = one entry here, its drawing in icons/make_icons.py, then python build.py --publish. 'path' is the program's folder in cool-tools; 'about' is the front page's line, 'short' the Apps menu's.",
+  "_": "THE list of Jon's programs. build.py writes the Apps menu (cool-tools/apps/), the Cool tools front page and the cloud's hidden .relay-apps\\apps.json (the file manager and the files service read it there) from this file. A new program = one entry here, its drawing in icons/make_icons.py, then python build.py. 'path' is the program's folder on the site; 'about' is the front page's line, 'short' the Apps menu's; 'folder' its folder in a person's home (only when it saves); 'extensions' its own file kinds (the first is the one it saves); 'opens' other kinds it can open; 'listed': false keeps an entry out of the menu, the front page and Open with (it is in the list only so the files service knows its id).",
   "groups": [
     { "id": "now", "name": "Current Projects", "accent": "255, 210, 61" },
     { "id": "fun", "name": "Fun Projects", "accent": "255, 61, 242" },
-    { "id": "test", "name": "Testing", "accent": "61, 252, 255" }
+    { "id": "test", "name": "Testing", "accent": "61, 252, 255" },
+    { "id": "archived", "name": "Archived", "accent": "150, 160, 182" }
   ],
   "programs": [
     {
       "id": "reader", "group": "now", "name": "Book reader", "path": "reader/",
       "short": "Reads books aloud with AI voices",
-      "about": "Reads books and documents aloud with AI voices that run in your browser. Open a folder, files or a zip; several books, each with its own place.",
-      "source": "Projects\\Walker of Worlds"
+      "about": "Reads books and documents aloud with AI voices that run in your browser. Open from the Cloud File Manager or this device; several books, each with its own place.",
+      "source": "Projects\\Walker of Worlds",
+      "extensions": [], "opens": [".txt", ".md", ".html", ".htm", ".epub", ".zip"]
     },
     {
       "id": "file-manager", "group": "now", "name": "Cloud File Manager", "path": "file-manager/",
-      "short": "The shared folder on Jon's PC, from anywhere",
-      "about": "The file manager for the shared folder on Jon's PC: browse and download anywhere; with the PC's password, upload, move, copy, rename, delete (into a trash) and make folders private.",
-      "source": "Projects\\file-manager"
+      "short": "Your files and the Shared Folder",
+      "about": "Your files and the Shared Folder, from anywhere: open, download, upload, move, rename and delete (into a trash).",
+      "source": "Projects\\file-manager",
+      "extensions": [], "opens": []
     },
     {
       "id": "settings", "group": "now", "name": "Settings", "path": "settings/",
-      "short": "Sign-in, PC address, pinger and restart",
-      "about": "What all these programs share: the PC's sign-in for every page, the PC's address, a live pinger to the PC with Restart this PC, the devices signed in with recent sign-ins, and the PC's programs.",
-      "source": "Projects\\settings"
-    },
-    {
-      "id": "hyperwave", "group": "fun", "name": "HYPERWAVE Studio", "path": "hyperwave/",
-      "short": "Sound-reactive visuals: 79 shapes",
-      "about": "Sound-reactive visuals: 79 shapes, fractals and 4D forms that react to your microphone, PC audio, a song file or 18 built-in demo tracks.",
-      "source": "Projects\\hyperwave"
+      "short": "Your account, and the PC's settings",
+      "about": "Your name, picture and password. For admins: the people, programs, files and activity of the PC.",
+      "source": "Projects\\settings",
+      "extensions": [], "opens": []
     },
     {
       "id": "plan-cutter", "group": "fun", "name": "Plan Cutter", "path": "plan-cutter/",
       "short": "Lay and cut sheets in a crooked room",
       "about": "Draw a crooked room, lay sheet material on a ceiling or wall, cut it along the walls and get the numbers to mark on the real board.",
-      "source": "Projects\\plan-cutter"
+      "source": "Projects\\plan-cutter",
+      "folder": "Plan Cutter", "extensions": [".plan-cutter"], "opens": []
     },
     {
       "id": "screen-peek", "group": "test", "name": "Screen Peek (test)", "path": "screen-peek/",
-      "short": "A live look at Jon's PC screen",
-      "about": "Shows a live screenshot of Jon's PC, single or continuous. Password protected; works only while sharing is on at the PC.",
-      "source": "Projects\\screen-peek"
+      "short": "A live look at Jon's desktop",
+      "about": "Shows a live screenshot of Jon's desktop, single or continuous, for those allowed to use it. Works only while sharing is on at the PC.",
+      "source": "Projects\\screen-peek",
+      "extensions": [], "opens": []
     },
     {
       "id": "simple-bench", "group": "test", "name": "Simple Bench", "path": "simple-bench/",
       "short": "A 10-second test of this device",
       "about": "A 10-second device test: processor and graphics card scores, and which voice and settings the Book reader would suggest on this device.",
-      "source": "Projects\\simple-bench"
+      "source": "Projects\\simple-bench",
+      "extensions": [], "opens": []
     },
     {
       "id": "browser-storage", "group": "test", "name": "Browser app cache manager", "path": "browser-storage/",
       "short": "See and delete what these tools stored",
       "about": "See and delete what these tools have stored in your browser: books, settings, downloaded voice files.",
-      "source": "Projects\\browser-storage"
+      "source": "Projects\\browser-storage",
+      "extensions": [], "opens": []
+    },
+    {
+      "id": "hyperwave", "group": "archived", "name": "HYPERWAVE Studio", "path": "hyperwave/",
+      "short": "Experimental, no longer worked on",
+      "about": "Sound-reactive visuals: shapes, fractals and 4D forms that react to sound. Experimental and no longer worked on.",
+      "source": "Projects\\hyperwave",
+      "extensions": [], "opens": []
+    },
+    {
+      "id": "kit-demo", "group": "test", "name": "Cloud kit demo", "path": "kit-demo/", "listed": false,
+      "short": "A tiny notepad that tries the cloud kit",
+      "about": "A tiny notepad that tries the cloud kit (file-manager\\kit). For testing only.",
+      "source": "Projects\\file-manager",
+      "folder": "Kit demo", "extensions": [".kit-note"], "opens": []
+    },
+    {
+      "id": "starter", "group": "test", "name": "Starter", "path": "starter/", "listed": false,
+      "short": "The template a new program starts from",
+      "about": "The template a new program starts from: the Apps button, the cloud indicator, New, Open and Save (app-kit\\starter).",
+      "source": "Projects\\app-kit",
+      "folder": "Starter", "extensions": [".starter"], "opens": []
     }
   ]
 }

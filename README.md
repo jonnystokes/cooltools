@@ -1,28 +1,47 @@
 # Cool tools
 
 Browser tools by Jon Stokes. Each one is a single web page: open it and it runs, nothing to install.
-Since 2026-11-08 the site is https://jonnystokes.github.io/cooltools/ (it was https://jonnystokes.github.io/Cool-tools/: the old address forwards here).
+The site is https://jonnystokes.github.io/cooltools/ (the old https://jonnystokes.github.io/Cool-tools/ forwards here).
 
-| Tool | Open it | What it is |
+People keep their files in the **Cloud File Manager** on Jon's PC, reached through **PC Relay**. Every program opens
+and saves through it, and keeps a copy in the browser when the PC is off. Signing in is optional: a first save makes a
+guest, and **Set up user** turns a guest into a user. The Apps button at the top left of every program is the way to
+the other programs and to the account.
+
+| Program | Open it | What it is |
 |---|---|---|
-| HYPERWAVE Studio | https://jonnystokes.github.io/cooltools/hyperwave/ | A studio of sound-reactive visuals: 79 shapes (4D wireframes and solids, fractals, clouds, solid 3D objects, spectrograms and spectrum waterfalls) that react to a microphone, PC audio, an audio file or 18 built-in demo tracks. Floating windows like a music studio: analyzer, mixer with hold-to-learn, mod matrix, scenes. |
-| Select a book | https://jonnystokes.github.io/cooltools/books/ | Not on the front page; the Book reader's shelf lists the same books (from `books/index.json`). Jon's own books (American History; Better Smarter Homes) for the Book reader: pick one and it opens, downloaded once and kept on the device with your place. Adding a book = drop a folder with its zip into `books/` and push (`books/README.md`); a workflow lists the folders in `books/index.json`. |
-| Book reader | https://jonnystokes.github.io/cooltools/reader/ | Reads books and documents aloud with AI voices that run in the browser (Kokoro, Piper, Supertonic, or the device's voices). Open a folder, files or a zip; several books, each with its own place; keeps reading with the screen off. |
-| Simple Bench | https://jonnystokes.github.io/cooltools/simple-bench/ | A 10-second device test: processor and graphics card scores (Jon's PC = 1000) and which voice and settings the Book reader would suggest on this device. Downloads nothing. |
-| Cloud File Manager | https://jonnystokes.github.io/cooltools/file-manager/ | The file manager for the shared folder on Jon's PC (through PC Relay): browse, search and download from any device; with the PC's password, upload (drag and drop), move, copy, rename, delete into a trash you can restore from, and make folders private. `window-kit.js` beside it lets any of these pages open it in a floating window and pick files. |
-| Settings | https://jonnystokes.github.io/cooltools/settings/ | What all these programs share: the PC's sign-in for every page in the browser (one pass), the PC's address (where each program's comes from, what the PC itself says), a live pinger to PC Relay on the PC (its rate changeable) with Restart this PC (signed in, a countdown with Cancel), the devices signed in to the PC with the recent sign-ins and where they came from, and the PC's programs with their switches. Source: `Projects\settings` (`python build.py --publish` writes `settings/index.html` and `settings/version.json` here). |
-| Screen Peek (test) | https://jonnystokes.github.io/cooltools/screen-peek/ | Hello-world test of PC to phone over Tailscale Funnel: a live screenshot of Jon's PC, single or continuous. Password protected; runs through PC Relay on the PC (tray icon: PC Relay, program "Screen Peek" allowed). |
-| Plan Cutter | https://jonnystokes.github.io/cooltools/plan-cutter/ | Draw a crooked room, place sheet material on a ceiling or wall, cut it along the walls and cabinets, and print the numbers to mark on the real board. |
-| Browser app cache manager | https://jonnystokes.github.io/cooltools/browser-storage/ | Shows and deletes what these tools have stored in the browser (local storage, databases, downloaded files), with sizes. |
-| Apps (menu) | https://jonnystokes.github.io/cooltools/apps/ | Not on the front page: the menu every program's Apps button opens in a floating window (every program with its icon, grouped as on the front page). `apps/apps.js` is the button itself, `apps/icons/` the program icons, `apps/programs.json` the list. Built by `Projects\app-kit` (`python build.py --publish` writes `apps/` and the front page's program list). |
+| Book reader | https://jonnystokes.github.io/cooltools/reader/ | Reads books and documents aloud with AI voices that run in the browser. Open from the Cloud File Manager or this device; several books, each with its own place, which follows the person from device to device. |
+| Cloud File Manager | https://jonnystokes.github.io/cooltools/file-manager/ | Your files and the Shared Folder, from anywhere: open, download, upload, move, rename and delete (into a trash). A file of one of these programs opens in that program. |
+| Settings | https://jonnystokes.github.io/cooltools/settings/ | Your name, picture and password (`settings/account.html`, the account page every program opens). For admins: the people, programs, files and activity of the PC. |
+| Plan Cutter | https://jonnystokes.github.io/cooltools/plan-cutter/ | Draw a crooked room, lay sheet material on a ceiling or wall, cut it along the walls and get the numbers to mark on the real board. Saves `.plan-cutter` files. |
+| Screen Peek (test) | https://jonnystokes.github.io/cooltools/screen-peek/ | A live screenshot of Jon's desktop, single or continuous, for those allowed to use it. Works only while sharing is on at the PC. |
+| Simple Bench | https://jonnystokes.github.io/cooltools/simple-bench/ | A 10-second device test: processor and graphics card scores, and which voice and settings the Book reader would suggest on this device. |
+| Browser app cache manager | https://jonnystokes.github.io/cooltools/browser-storage/ | See and delete what these tools have stored in your browser, each thing named for its program. Never shows a sign-in. |
+| HYPERWAVE Studio (archived) | https://jonnystokes.github.io/cooltools/hyperwave/ | Sound-reactive visuals that react to a microphone, PC audio or a file. Experimental and no longer worked on. The sound is analyzed only inside the page. |
+| Apps (menu) | https://jonnystokes.github.io/cooltools/apps/ | Not on the front page: the menu every program's Apps button opens, with the account strip (Sign in, Set up user or Account) above the programs. |
 
-**The front page's list of programs is written from one list**, `Projects\app-kit\programs.json`, by that kit's
-build; never edit the lines between `<!-- programs:` and `<!-- /programs -->` in `index.html` by hand. Each program
-publishes a `version.json` beside its page (`{"app", "version", "built"}`); the front page and the Apps menu show it
-as "Version X · updated <date> · <how long ago>" (`apps/versions.js`). The rules every program follows: `Projects\WEB-APP-CONVENTIONS.md`.
+## How this repository is made
 
-The sound is analyzed only inside the page; nothing is sent anywhere.
+- **It holds only finished pages.** Each folder is written by its program's build (`python build.py --publish` in the
+  program's own folder under Jon's `Projects`); nothing here is edited by hand.
+- **The list of programs is one file**, `Projects\app-kit\programs.json`. The Apps kit's build writes `apps/`, the
+  front page's list in `index.html` (between `<!-- programs:` and `<!-- /programs -->`) and the cloud's hidden copy.
+- **`relay.json`** holds the PC's public address. Every page reads it from here, so a new address is one edit.
+- **Each program has a `version.json`** beside its page (`{"app", "version", "built"}`); the front page and the Apps
+  menu show it.
+- **Publishing:** commit only the folders of the programs you built. Before a commit, run
+  `python C:\Users\jon\Projects\cool-tools-upgrade\switch\check_current.py --live`: it says for each program whether
+  the page here is the newest build and carries the present shared scripts.
+- The rules every program follows: `Projects\WEB-APP-CONVENTIONS.md`.
 
-The source of HYPERWAVE Studio lives in Jon's `Projects\hyperwave` folder (built with `python build.py`);
-the Book reader's lives in `Projects\Walker of Worlds` (its `python build.py` writes `reader/index.html` here); Simple Bench's lives in `Projects\simple-bench`; the Cloud File Manager's lives in `Projects\file-manager` (`python build.py --publish` writes `file-manager/index.html`, `file-manager/window-kit.js` and `file-manager/version.json` here); the Apps menu, the icons and the front page's list come from `Projects\app-kit`.
-This repository holds the finished pages.
+| Folder | Source |
+|---|---|
+| `reader/` | `Projects\Walker of Worlds` |
+| `file-manager/` | `Projects\file-manager` (also `window-kit.js` and `cloud-kit.js`, the shared kits) |
+| `settings/` | `Projects\settings` |
+| `plan-cutter/` | `Projects\plan-cutter` |
+| `screen-peek/` | `Projects\screen-peek` |
+| `simple-bench/` | `Projects\simple-bench` |
+| `browser-storage/` | `Projects\browser-storage` |
+| `hyperwave/` | `Projects\hyperwave` (archived, not rebuilt) |
+| `apps/`, the list in `index.html` | `Projects\app-kit` |
