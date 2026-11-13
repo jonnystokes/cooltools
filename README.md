@@ -41,7 +41,7 @@ the other programs and to the account.
 | `reader/` | `Projects\Walker of Worlds` |
 | `file-manager/` | `Projects\file-manager` (also `window-kit.js` and `cloud-kit.js`, the shared kits) |
 | `settings/` | `Projects\settings` |
-| `text-editor/` | `Projects	ext-editor` |
+| `text-editor/` | `Projects\text-editor` |
 | `plan-cutter/` | `Projects\plan-cutter` |
 | `screen-peek/` | `Projects\screen-peek` |
 | `simple-bench/` | `Projects\simple-bench` |
