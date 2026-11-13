@@ -1,12 +1,12 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
      pastes the Apps kit's tab icons at the ICONS marker, and stamps the version and build time where
-     Book reader V1.0.854 and 2026-11-13 2:53 AM appear. -->
+     Book reader V1.0.856 and 2026-11-13 3:07 AM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Book reader V1.0.854</title>
+<title>Book reader V1.0.856</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
 <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlUlEQVR42p2SzytEURzFz33evBlNtsyCYtRkmrLASqwoKTtlYf4FyQabKSkrZWeNjdmxUrJUlkp+ZNj4tbAgUoyI7/lazLvPw0PN2dzX7X7ePefcrwGA9cn3UVILFLYJ1YgohISIQoQgNfgWqorwRETnptbqi8aHVxkAf8LBysqad0ktVAWLQqgF17ddDQwRtrk2c9+4h7srwcXeO65P5QesUDRmXaQ7PTSkY1iZvoWIGtfenMo4SGUc5PpjeC0ncLn/hs3FJ4gQg2N1aOnwkEgaWFnOsbbDiicNMt1e4CDbG0ciafDYMvP5A59zrVUAGGreCg5sXAwEmaMkoiAVri3MQmHZwqJEvxvXth3pwG872kFEhO8O7Av8FqFSYvC+v99iVXc+60fTUImV2TZLE/dId8bQ2hVHU9aDU/N5i4XODl5wtFPG/nbZxlOzMHJ7LNRseMJitUBzu4cD/2Cupxanu894epDQtCpIlsz88M0oydXQeH4Za0bs+TBIzTtTa/VFoeaFWhKh/gtTlWSJ1PzyYa74AfvjIbDIJi4vAAAAAElFTkSuQmCC">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVR42r2Xe0yVZRzHP+8573u4KxzkvoAkoELkGHkpsGJsbpa0uTabq5htrY3W3Np0mn+53LQ/yjZy+UelXci2LHKzRWtt2Sbr4g0DnRw1EUjwAgocOcA5PL/+OBfe876IOo3vX+/O7z3P53l+1/fRMKl5YzBHRNaLUCciJaLEUAIighJBlPlZiNqUIJbnqXcEEQKixKtEDorQuGF/Rl+EqUUevt8YfFlEdishWayAe4NbbT5R0rCpOaspuoEw/AslaP8zPGITEeq3HMhu0po3BnMQ8c7CyWNtSnxKpEQPx3y24SiRZBHWO8IJN9vwiK1OD2f77MOVICIljvtYancLRwRDt8KT3FBQqXOjX3HpTJDxm/cGj0vUyF/gwp3npOM3P4N9wQgcpQTdevLaN+NJyQy1B1FxXL0wSe+pID0dQS6fD94WjibkFusUVrgoXOgit8RAc4R6TUVtAo2vXY7xgm51ewQOoDkgs8hJZpGTx56PY8Iv9J4O0tMe4EJbgKErk4gIKekOCjwGBQsN8he4iEvUmE7uXD0GrkTQrTGfSa4EjfmVBvMrDaoDwof1gyglrPsgFacxBR1/pwXnUw+hP1NsW8MMF8EcglDCRXS+Y5jBK+OUL3UTn+S0LeQ0tKjbzXCAib1/YIyMoboGQxtftzRqM8OVioZgKtsj2rPDy8nWAXTDwcOL5lJRnY6nKp1Sz1wcznCOhPPhVgrsPx7awCuLw7t22CpBt5ZaRJt3VXD00FXaDg/Q1jpAx87rfLXzHElzdLbuqeSRx1NtYZPhMbQ58baN+F//GoCET1+yliG6tc4jSkkzqFmdS83qXAC6vT7aWgfoPDFESpoRrhKJekD1XOdmTSMJH71oj3v/sC0HYsvQVOcR/fB5N91nfXiq0il/wk1+STL5JcnwqmlhMW16ZBwmFTI8NmMiizUE1iYTUc85Hy37evmxqQeHU6OobA6LngrlQfkyN5pGtMPdjWLLEBxyixA0bHuUfcdreHu3hxVr8hi5McE3u/5hy9ojtLb020Iwk7TURLTUREsZhv6vW1uoWSmpBlUrs6hamQVAf7cf78khKp+eZw/BDEr4eK2lDKc2r1v7d0TbG9roPHGDRdXzqKhy46lOJzs/gez8BJs7b+uBRJcpb8yDSdCtvT2i5c9lM3RtgkMHLvHLt/+iaVBQmoKnOp01bzzIHLcr6k4ArSAN4wUPzsoHomvoiwvsOWCCi8LciGLduXxVNstXZTM2Osnfvw9G+8GBT7pYsCSNZSsyoxkNoCXFEf/e6hhY3NZn7SVpgqupRjRVCX1ng+QU69E/xCc6WVKbwZLaDABGfUESk/UZQ6DNS0bLTLH93tUxFgOfmoamSvhu+xClT4ZGaX65fbJF4OaMtir58FtghOaH36fwHvNz5s9Rjv48EgNXCnQRAiJiRJLR71Oc+MnPsZZRNA1yig0KPS7mV7jIK3VFZ7t5sMS4eFK46A3SeWSEzr9G6To1RjAotpOr0BQO6OEbS9l0HxpqUug+Pc7FU+P8+qXgStQoXOiiyBOHO0+Pvnf22BjXegN4j/jxHvfjH5m0Zfs0cETEq72/5uoOETbf4TecbZ5Pb7sjOCK86xChMXxdmlW4Enwi0ujYsD+jT5Q0hK9LswUXEWnY217W5wDY1JzVJEJ9+Lo0Gyev/6y9rCnmdgywre5SjgjrlUidKCkRwbhP8ICIeEU4KCKNe9vLotfz/wCKU53CYXSQUAAAAABJRU5ErkJggg==">
@@ -15,9 +15,9 @@
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.854";
-  window.APP_BUILT = "2026-11-13 2:53 AM";
-  window.APP_NOTE = "Search the book: the search pop-up (\ud83d\udd0d, Ctrl+F): live results across the whole book, each sentence under its chapter with the words marked; simple pattern (words, \"a phrase\", drag*, -word), Whole words, Match case, This chapter only, recent searches; a result goes there and marks it";
+  window.APP_VERSION = "Book reader V1.0.856";
+  window.APP_BUILT = "2026-11-13 3:07 AM";
+  window.APP_NOTE = "Search the book: rebuilt with the Apps kit 1.29 and the search kit's Replace (the reader does not use it)";
   window.APP_KEY = "br1";
 </script>
 <style>
@@ -6340,7 +6340,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 })(typeof window !== "undefined" ? window : globalThis);
 </script>
 <script>
-/* apps-button.js 1.28: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.30: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
    https://jonnystokes.github.io/cooltools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
@@ -6372,7 +6372,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.28";
+  const VERSION = "1.30";
   // The menu comes from the site the page itself is on, so the menu's account strip reads the same browser memory
   // (one origin) and the same relay.json as the program: the live site. Any other page (a file on this device, a
   // test page) gets the live site's menu too; launcher="..." overrides.
@@ -8700,7 +8700,11 @@ button:disabled{cursor:default;opacity:.55;background:none}
   const STYLE = `
 .sk { display: flex; flex-direction: column; height: 100%; min-height: 0; font-size: var(--ui, 16px); color: var(--fg, CanvasText); }
 .sk-top { padding: 10px 12px 8px; display: flex; flex-direction: column; gap: 8px; border-bottom: 1px solid var(--line, #ccc); background: var(--bar, transparent); }
-.sk-boxrow { display: flex; gap: 6px; align-items: center; }
+.sk-boxrow, .sk-reprow { display: flex; gap: 6px; align-items: center; }
+.sk-reprow[hidden] { display: none; }
+.sk-with { flex: 1; min-width: 0; min-height: var(--tap, 44px); padding: 0 0.7em; font: inherit; color: inherit;
+  border: 2px solid var(--line, #ccc); border-radius: 8px; background: var(--bg, Canvas); }
+.sk-with:focus { outline: none; border-color: var(--accent, Highlight); }
 .sk-box { flex: 1; min-width: 0; position: relative; display: flex; }
 .sk-q { flex: 1; min-width: 0; min-height: var(--tap, 44px); padding: 0 2.6em 0 0.7em; font: inherit; font-size: 1.1em; color: inherit;
   border: 2px solid var(--line, #ccc); border-radius: 8px; background: var(--bg, Canvas); }
@@ -8811,47 +8815,74 @@ button:disabled{cursor:default;opacity:.55;background:none}
     // State of the panel.
     const st = { q: "", wholeWords: false, matchCase: false, scoped: false, results: [], total: 0, secs: 0, done: true, sel: -1, gen: 0, drawn: 0, terms: [], took: 0 };
 
-    // ---- The search, in slices ----
-    async function run() {
-      const gen = ++st.gen;
-      const parsed = parse(st.q);
-      st.results = []; st.total = 0; st.secs = 0; st.sel = -1; st.drawn = 0; st.done = parsed.empty; st.terms = parsed.terms;
-      drawAll();
-      if (parsed.empty) { emit("results", st); return; }
-      let d;
-      try { d = await ensure(); } catch (e) { return; }
-      if (gen !== st.gen) return;
+    // ---- How one search goes: the haystack, the finders, the anchor (the longest plain part: fewest hits), the range ----
+    function plan(d, parsed) {
       const optsF = { wholeWords: st.wholeWords, matchCase: st.matchCase };
       if (st.matchCase && !d.foldCase) d.foldCase = foldQuotes(d.text);
       const hay = st.matchCase ? d.foldCase : d.fold;
       const pos = parsed.terms.filter((t) => !t.neg).map((t) => ({ t, f: finder(t, optsF) }));
       const neg = parsed.terms.filter((t) => t.neg).map((t) => ({ t, f: finder(t, optsF) }));
-      pos.sort((a, b) => b.f.lit - a.f.lit);                // the anchor: the longest plain part (fewest hits)
-      const anchor = pos[0];
+      pos.sort((a, b) => b.f.lit - a.f.lit);
       const scope = st.scoped && o.scope ? o.scope() : null;
-      const from = scope ? d.starts[d.secFirst[scope.s]] : 0;
-      const to = scope ? d.starts[d.secFirst[scope.s + 1]] : d.text.length;
+      return { d, hay, pos, neg, anchor: pos[0], from: scope ? d.starts[d.secFirst[scope.s]] : 0, to: scope ? d.starts[d.secFirst[scope.s + 1]] : d.text.length };
+    }
+    // Unit u's hits ([[start, end]] in the whole text, sorted, overlaps merged) when it holds every word and no left-out
+    // one; else null.
+    function unitHits(P, u) {
+      const { d, hay, pos, neg } = P;
+      const ua = d.starts[u], ub = d.starts[u + 1] - 1;
+      for (const p of pos) if (!p.f.next(hay, ua, ub)) return null;
+      for (const n of neg) if (n.f.next(hay, ua, ub)) return null;
+      const hits = [];
+      for (const p of pos) { let x = ua; for (;;) { const m = p.f.next(hay, x, ub); if (!m || m[1] > ub) break; hits.push(m); x = m[1] > m[0] ? m[1] : m[0] + 1; } }
+      hits.sort((a, b) => a[0] - b[0] || b[1] - a[1]);
+      const merged = [];
+      for (const m of hits) { const l = merged[merged.length - 1]; if (l && m[0] <= l[1]) l[1] = Math.max(l[1], m[1]); else merged.push([m[0], m[1]]); }
+      return merged.length ? merged : null;
+    }
+    // Every hit of the current search, at once (for Replace all): [{ s, u, start, end }], u and offsets as onPick gives them.
+    async function allHits() {
+      const parsed = parse(st.q);
+      if (parsed.empty) return [];
+      const d = await ensure();
+      const P = plan(d, parsed), out = [];
+      let at = P.from;
+      for (;;) {
+        const h = P.anchor.f.next(P.hay, at, P.to);
+        if (!h) break;
+        const u = unitAt(d, h[0]);
+        at = d.starts[u + 1];
+        const m = unitHits(P, u);
+        if (m) { const s = d.unitSec[u], ua = d.starts[u]; for (const x of m) out.push({ s, u: u - d.secFirst[s], start: x[0] - ua, end: x[1] - ua }); }
+      }
+      return out;
+    }
+
+    // ---- The search, in slices ----
+    async function run() {
+      const gen = ++st.gen;
+      const parsed = parse(st.q);
+      st.results = []; st.total = 0; st.secs = 0; st.sel = -1; st.drawn = 0; st.done = parsed.empty; st.terms = parsed.terms; st.note = "";
+      drawAll();
+      if (parsed.empty) { emit("results", st); return; }
+      let d;
+      try { d = await ensure(); } catch (e) { return; }
+      if (gen !== st.gen) return;
+      const P = plan(d, parsed);
       const t0 = performance.now();
-      let at = from, lastUnit = -1, lastSec = -1, sliceStart = performance.now();
+      let at = P.from, lastUnit = -1, lastSec = -1, sliceStart = performance.now();
       const firstShown = { done: false };
       for (;;) {
-        const h = anchor.f.next(hay, at, to);
+        const h = P.anchor.f.next(P.hay, at, P.to);
         if (!h) break;
         const u = unitAt(d, h[0]);
         const ua = d.starts[u], ub = d.starts[u + 1] - 1;
         at = ub + 1;                                        // the next unit
         if (u !== lastUnit) {
           lastUnit = u;
-          let ok = true;
-          for (const p of pos) if (p !== anchor && !p.f.next(hay, ua, ub)) { ok = false; break; }
-          if (ok) for (const n of neg) if (n.f.next(hay, ua, ub)) { ok = false; break; }
-          if (ok) {
-            // Every hit of every word in the unit, then the sentences holding one.
-            const hits = [];
-            for (const p of pos) { let x = ua; for (;;) { const m = p.f.next(hay, x, ub); if (!m || m[1] > ub) break; hits.push(m); x = m[1] > m[0] ? m[1] : m[0] + 1; } }
-            hits.sort((a, b) => a[0] - b[0] || b[1] - a[1]);
-            const merged = [];
-            for (const m of hits) { const l = merged[merged.length - 1]; if (l && m[0] <= l[1]) l[1] = Math.max(l[1], m[1]); else merged.push([m[0], m[1]]); }
+          const merged = unitHits(P, u);
+          if (merged) {
+            // The sentences holding a hit.
             const sents = sentences(d.text, ua, ub);
             let k = 0;
             for (const s of sents) {
@@ -8876,6 +8907,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
       st.took = Math.round(performance.now() - t0);
       if (!firstShown.done) drawAll(); else { drawCount(); drawMore(); }
       emit("results", st);
+      if (st.stepAfter) { st.stepAfter = false; if (st.results.length) step(1); }
     }
 
     // ---- Recent searches ----
@@ -8905,7 +8937,13 @@ button:disabled{cursor:default;opacity:.55;background:none}
     <button class="sk-btn sk-opt sk-ww" type="button" aria-pressed="false" title="Find whole words only: cat finds cat, not catch">Whole words</button>
     <button class="sk-btn sk-opt sk-mc" type="button" aria-pressed="false" title="Capital letters must match: Rose finds Rose, not rose">Match case</button>
     <button class="sk-btn sk-opt sk-sc" type="button" aria-pressed="false" hidden></button>
+    <button class="sk-btn sk-opt sk-rp" type="button" aria-pressed="false" title="Change the words found into other words" hidden>Replace</button>
     <button class="sk-btn sk-opt sk-hl" type="button" aria-pressed="false" title="How to search">How to search</button>
+  </div>
+  <div class="sk-reprow" hidden>
+    <div class="sk-box"><input class="sk-with" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Replace with" placeholder="Replace with"></div>
+    <button class="sk-btn sk-rone" type="button" title="Change this place, then go to the next">Replace</button>
+    <button class="sk-btn sk-rall" type="button" title="Change every place found">Replace all</button>
   </div>
   <div class="sk-count" aria-live="polite"></div>
 </div>
@@ -8914,7 +8952,21 @@ button:disabled{cursor:default;opacity:.55;background:none}
         q: root.querySelector(".sk-q"), clear: root.querySelector(".sk-clear"), prev: root.querySelector(".sk-prev"), next: root.querySelector(".sk-next"),
         ww: root.querySelector(".sk-ww"), mc: root.querySelector(".sk-mc"), sc: root.querySelector(".sk-sc"), hl: root.querySelector(".sk-hl"),
         count: root.querySelector(".sk-count"), list: root.querySelector(".sk-list"),
+        rp: root.querySelector(".sk-rp"), reprow: root.querySelector(".sk-reprow"), with: root.querySelector(".sk-with"),
+        rone: root.querySelector(".sk-rone"), rall: root.querySelector(".sk-rall"),
       };
+      // Replace (a program that changes its text gives o.replace): a chip shows the row; nothing of it otherwise.
+      if (o.replace) {
+        el.rp.hidden = false;
+        el.with.value = st.with || "";
+        const showRow = () => { el.reprow.hidden = !st.replacing; el.rp.setAttribute("aria-pressed", String(!!st.replacing)); };
+        el.rp.addEventListener("click", () => { st.replacing = !st.replacing; showRow(); if (st.replacing) el.with.focus(); });
+        el.with.addEventListener("input", () => { st.with = el.with.value; });
+        el.with.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); replaceOne(); } });
+        el.rone.addEventListener("click", replaceOne);
+        el.rall.addEventListener("click", replaceAll);
+        showRow();
+      }
       el.q.placeholder = o.placeholder || `Search the whole ${W.whole || "text"}`;
       el.q.value = st.q;
       el.q.addEventListener("input", () => { st.q = el.q.value; st.help = false; emit("query", st.q); run(); });
@@ -8946,6 +8998,34 @@ button:disabled{cursor:default;opacity:.55;background:none}
       drawAll();
       if (st.q && !st.done) run();
       else if (st.q && data && data.key !== o.source.key()) run();      // the text changed while closed
+    }
+    // Replace: the first press goes to the next place (when none is chosen), each press after it changes the chosen
+    // place's words and goes on to the next one. The program changes its text (o.replace) and says how many it changed.
+    let replacingNow = false;
+    async function replaceOne() {
+      if (replacingNow || !st.results.length) return;
+      if (st.sel < 0) { step(1); return; }
+      const r = st.results[st.sel];
+      const ua = data.starts[r.u];
+      replacingNow = true;
+      try {
+        await o.replace({ all: false, with: st.with || "", hits: [{ s: r.s, u: r.u - data.secFirst[r.s], start: r.hits[0][0] - ua, end: r.hits[0][1] - ua }] });
+        data = null; st.stepAfter = true;
+        await run();
+      } finally { replacingNow = false; }
+    }
+    async function replaceAll() {
+      if (replacingNow || parse(st.q).empty) return;
+      replacingNow = true;
+      try {
+        const hits = await allHits();
+        if (!hits.length) return;
+        const n = await o.replace({ all: true, with: st.with || "", hits });
+        data = null;
+        await run();
+        st.note = `Changed ${fmt(typeof n === "number" ? n : hits.length)} ${(typeof n === "number" ? n : hits.length) === 1 ? "place" : "places"}.`;
+        drawCount();
+      } finally { replacingNow = false; }
     }
     function scopeLabel() { const s = o.scope ? o.scope() : null; return s ? s.label : ""; }
     function focusResult(i) {
@@ -8993,6 +9073,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
       const busy = !st.done ? ' <span class="sk-busy">· searching…</span>' : "";
       let html = "";
       if (loadNote) html = `<span class="sk-busy">${esch(loadNote)}</span>`;
+      else if (st.note) html = `${esch(st.note)}${st.total ? ` <span class="sk-sub">${fmt(st.total)} still found</span>` : ""}`;
       else if (!st.q.trim() || parse(st.q).empty) html = parse(st.q).terms.length ? `<span class="sk-sub">Add a word to find (a minus word only leaves things out).</span>` : "";
       else if (!st.total && st.done) html = `Nothing found<span class="sk-sub">${st.scoped ? " in " + esch(scopeLabel().replace(/ only$/, "").toLowerCase()) : ""}. Check the spelling, or try fewer words.</span>`;
       else {
