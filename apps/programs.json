@@ -33,7 +33,7 @@
       "id": "text-editor", "group": "now", "name": "Text editor", "path": "text-editor/",
       "short": "Write and change plain text files",
       "about": "Opens, changes and saves any plain text file in the Cloud File Manager or on this device: notes, lists, subtitles, settings files. Search and replace across the whole file.",
-      "source": "Projects\text-editor",
+      "source": "Projects\\text-editor",
       "folder": "Text editor",
       "extensions": [".txt", ".text", ".md", ".markdown", ".csv", ".tsv", ".log", ".ini", ".cfg", ".conf", ".yaml", ".yml", ".toml", ".srt", ".vtt"],
       "opens": [".json", ".xml", ".html", ".htm", ".css", ".js", ".mjs", ".ts", ".py", ".ps1", ".bat", ".cmd", ".sh", ".svg", ".sql", ".env", ".gitignore"]
