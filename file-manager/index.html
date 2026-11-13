@@ -421,7 +421,7 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
   <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8.4" r="3.6"/><path d="M4.8 19.6c.5-3.9 3.4-6 7.2-6s6.7 2.1 7.2 6z"/></symbol>
   <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 11v5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="7.8" r="1.1"/></symbol>
 </svg>
-<div id="app" class="app" data-build="V2.0.57">
+<div id="app" class="app" data-build="V2.0.58">
   <header class="top">
     <div class="top-row">
       <!-- The Apps button (Projectspp-kit, WEB-APP-CONVENTIONS.md): top left, before everything, its separator built in;
@@ -454,7 +454,7 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
 </div>
 <input type="file" id="pick-files" multiple hidden>
 <input type="file" id="pick-folder" webkitdirectory multiple hidden>
-<script>window.FM_BUILD = { version: "V2.0.57", built: "2026-11-12 11:41 AM", note: "a click or tap off an open menu only closes the menu: it never opens, ticks or starts what is under it (a right-click off it too; Escape as before); a tap beside a dialog no longer presses what is behind it; the cloud kit's chooser does the same; no built-in Private folder any more (files 3.1.0)" };</script>
+<script>window.FM_BUILD = { version: "V2.0.58", built: "2026-11-13 5:35 AM", note: "the Apps button now loads live from the site (Apps kit 1.33): no rebuild needed for future button changes" };</script>
 <script>
 // ---- relay-client.js ----
 /* relay-client.js 3: the PC Relay client (ONE source: Projects\pc-relay\client\relay-client.js; each page's build
@@ -1219,7 +1219,30 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
 })(typeof window !== "undefined" ? window : globalThis);
 
 // ---- apps-button.js ----
-/* apps-button.js 1.27: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.33, the loader (Jon, 2026-11-13: "never touch the other apps again"). ONE source:
+   Projects\app-kit\apps-loader.js; app-kit\build.py wraps the button (app-kit\apps-button.js) in it. Never edit a copy.
+
+   A page carries this loader (in app-kit\dist\apps.js or dist\apps-button.js, copied in by its build), but on the live
+   site the button that runs is the LIVE one: https://jonnystokes.github.io/cooltools/apps/button.js, published with the
+   Apps menu. So a change to the Apps button reaches every program when the Apps kit is published, with no program
+   rebuilt (the menu itself, the list, the icons and the versions were already live: the button opens apps/ in a frame).
+   The copy built in below is the fallback: it runs when the page is not on the live site (a file on this device, a
+   test page, PC Relay's own window), when the live file cannot be loaded (offline: an error comes at once), or when it
+   has not come after 4 seconds. Whichever runs first serves; the other sees window.AppsKit and stands aside.
+   While the live button loads, the place of <apps-button> is kept, so the bar does not jump.
+   The live button runs on the page's own window kit (window-kit.js 3, in the page): it must keep working with it. */
+(function (root) {
+  "use strict";
+  if (root.AppsKit || root.__appsKitLoading) return;
+  root.__appsKitLoading = true;
+  const SITE = "https://jonnystokes.github.io/cooltools/";
+  const LIVE = SITE + "apps/button.js";
+  const WAIT_MS = 4000;
+  let ran = false;
+  function builtIn() {
+    if (ran || root.AppsKit) return;
+    ran = true;
+/* apps-button.js 1.33: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
    https://jonnystokes.github.io/cooltools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
@@ -1251,7 +1274,7 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.27";
+  const VERSION = "1.33";
   // The menu comes from the site the page itself is on, so the menu's account strip reads the same browser memory
   // (one origin) and the same relay.json as the program: the live site. Any other page (a file on this device, a
   // test page) gets the live site's menu too; launcher="..." overrides.
@@ -1439,6 +1462,23 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   };
   root.AppsKit = api;
   if (root.customElements && !root.customElements.get("apps-button")) root.customElements.define("apps-button", AppsButton);
+})(typeof window !== "undefined" ? window : globalThis);
+  }
+  let href = "";
+  try { href = root.location.href; } catch (e) {}
+  if (!href.startsWith(SITE) || !root.document || !root.customElements) { builtIn(); return; }
+  try {
+    const keep = root.document.createElement("style");
+    keep.textContent = "apps-button:not(:defined){display:inline-block;flex:none;vertical-align:middle;width:calc(var(--apps-h,36px)*2.9);height:var(--apps-h,36px)}";
+    (root.document.head || root.document.documentElement).appendChild(keep);
+    const s = root.document.createElement("script");
+    s.src = LIVE;
+    s.async = true;
+    const timer = setTimeout(builtIn, WAIT_MS);
+    s.onload = () => { clearTimeout(timer); if (!root.AppsKit) builtIn(); };
+    s.onerror = () => { clearTimeout(timer); builtIn(); };
+    (root.document.head || root.document.documentElement).appendChild(s);
+  } catch (e) { builtIn(); }
 })(typeof window !== "undefined" ? window : globalThis);
 
 // ---- util.js ----

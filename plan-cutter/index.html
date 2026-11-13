@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-build="built" data-version="V1.0.12">
+<html lang="en" data-build="built" data-version="V1.0.13">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -1039,7 +1039,7 @@ textarea.script { font: 12.5px/1.4 var(--mono); min-height: 90px; }
 </script>
 <script>
 // ---- app-kit/dist/apps.js (copied in by build.py; never edit this copy) ----
-/* apps.js 1.24 (built 2026-11-12 7:17 AM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
+/* apps.js 1.33 (built 2026-11-13 5:34 AM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
    app-kit\apps-button.js and file-manager\kit\window-kit.js (one source each; never edit this file). The window kit
    runs only when the page has none of its own. */
 if (!window.WindowKit) {
@@ -1342,7 +1342,30 @@ if (!window.WindowKit) {
   root.WindowKit = { VERSION, open, pick, child, get windows() { return wins.slice(); } };
 })(typeof window !== "undefined" ? window : globalThis);
 }
-/* apps-button.js 1.24: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.33, the loader (Jon, 2026-11-13: "never touch the other apps again"). ONE source:
+   Projects\app-kit\apps-loader.js; app-kit\build.py wraps the button (app-kit\apps-button.js) in it. Never edit a copy.
+
+   A page carries this loader (in app-kit\dist\apps.js or dist\apps-button.js, copied in by its build), but on the live
+   site the button that runs is the LIVE one: https://jonnystokes.github.io/cooltools/apps/button.js, published with the
+   Apps menu. So a change to the Apps button reaches every program when the Apps kit is published, with no program
+   rebuilt (the menu itself, the list, the icons and the versions were already live: the button opens apps/ in a frame).
+   The copy built in below is the fallback: it runs when the page is not on the live site (a file on this device, a
+   test page, PC Relay's own window), when the live file cannot be loaded (offline: an error comes at once), or when it
+   has not come after 4 seconds. Whichever runs first serves; the other sees window.AppsKit and stands aside.
+   While the live button loads, the place of <apps-button> is kept, so the bar does not jump.
+   The live button runs on the page's own window kit (window-kit.js 3, in the page): it must keep working with it. */
+(function (root) {
+  "use strict";
+  if (root.AppsKit || root.__appsKitLoading) return;
+  root.__appsKitLoading = true;
+  const SITE = "https://jonnystokes.github.io/cooltools/";
+  const LIVE = SITE + "apps/button.js";
+  const WAIT_MS = 4000;
+  let ran = false;
+  function builtIn() {
+    if (ran || root.AppsKit) return;
+    ran = true;
+/* apps-button.js 1.33: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
    https://jonnystokes.github.io/cooltools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
@@ -1374,11 +1397,11 @@ if (!window.WindowKit) {
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.24";
+  const VERSION = "1.33";
   // The menu comes from the site the page itself is on, so the menu's account strip reads the same browser memory
-  // (one origin) and the same relay.json as the program: the live site, or the stage (CONTRACT 3). Any other page
-  // (a file on this device, a test page) gets the live site's menu.
-  const SITES = ["https://jonnystokes.github.io/cooltools/", "http://127.0.0.1:28801/", "http://localhost:28801/"];
+  // (one origin) and the same relay.json as the program: the live site. Any other page (a file on this device, a
+  // test page) gets the live site's menu too; launcher="..." overrides.
+  const SITES = ["https://jonnystokes.github.io/cooltools/"];
   const LAUNCHER = (() => {
     let href = "";
     try { href = root.location.href; } catch (e) {}
@@ -1562,6 +1585,23 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   };
   root.AppsKit = api;
   if (root.customElements && !root.customElements.get("apps-button")) root.customElements.define("apps-button", AppsButton);
+})(typeof window !== "undefined" ? window : globalThis);
+  }
+  let href = "";
+  try { href = root.location.href; } catch (e) {}
+  if (!href.startsWith(SITE) || !root.document || !root.customElements) { builtIn(); return; }
+  try {
+    const keep = root.document.createElement("style");
+    keep.textContent = "apps-button:not(:defined){display:inline-block;flex:none;vertical-align:middle;width:calc(var(--apps-h,36px)*2.9);height:var(--apps-h,36px)}";
+    (root.document.head || root.document.documentElement).appendChild(keep);
+    const s = root.document.createElement("script");
+    s.src = LIVE;
+    s.async = true;
+    const timer = setTimeout(builtIn, WAIT_MS);
+    s.onload = () => { clearTimeout(timer); if (!root.AppsKit) builtIn(); };
+    s.onerror = () => { clearTimeout(timer); builtIn(); };
+    (root.document.head || root.document.documentElement).appendChild(s);
+  } catch (e) { builtIn(); }
 })(typeof window !== "undefined" ? window : globalThis);
 </script>
 <script>
@@ -2762,8 +2802,17 @@ button:disabled{cursor:default;opacity:.55;background:none}
 @media (pointer:coarse){button{min-height:50px;font-size:16px}}
 </style><div class="m${isDark() ? " dark" : ""}" role="menu"></div>`;
       const box = sh.querySelector(".m");
-      let done = false;
-      const shut = (v) => {
+      // A click off the menu only closes the menu (the rule for every program, WEB-APP-CONVENTIONS.md "Every page"):
+      // a see-through layer covers the page just under the menu and takes that press, so nothing underneath is
+      // opened or started by it. The layer stays until the press is over: the click that ends it stops here too (a
+      // tap's click goes to whatever is under the finger when it lifts).
+      const veil = document.createElement("div");
+      veil.className = "cloud-kit-veil";
+      veil.style.cssText = "position:fixed;inset:0;z-index:2147481499;margin:0;padding:0;border:0;background:transparent;touch-action:none;-webkit-tap-highlight-color:transparent";
+      let done = false, pressed = false, down = false, veilTimer = 0;
+      const eat = (e) => { e.preventDefault(); e.stopPropagation(); };
+      const unveil = (ms) => { clearTimeout(veilTimer); if (ms === undefined) veil.remove(); else veilTimer = setTimeout(() => veil.remove(), ms); };
+      const shut = (v, keepVeil) => {
         if (done) return;
         done = true;
         document.removeEventListener("pointerdown", outside, true);
@@ -2771,11 +2820,28 @@ button:disabled{cursor:default;opacity:.55;background:none}
         root.removeEventListener("resize", place);
         root.removeEventListener("blur", away);
         host.remove();
+        if (!keepVeil) unveil();
         if (v === null && back && back.focus && document.contains(back)) try { back.focus({ preventScroll: true }); } catch (e) {}
         resolve(v);
       };
+      veil.addEventListener("pointerdown", (e) => {
+        eat(e);
+        if (pressed) return;
+        pressed = down = true;
+        try { veil.setPointerCapture(e.pointerId); } catch (x) {}
+        shut(null, true);
+        unveil(8000); // a lost press never leaves the layer in the way
+      });
+      for (const t of ["pointerup", "pointercancel"]) veil.addEventListener(t, (e) => { eat(e); if (pressed) { down = false; unveil(400); } });
+      for (const t of ["click", "dblclick", "auxclick", "contextmenu"]) veil.addEventListener(t, (e) => {
+        eat(e);
+        if (!pressed || down) return; // a right-click's own-menu event can come at the press (Mac, Linux): wait for the lift
+        if (t === "auxclick" && e.button === 2) return; // its own-menu event may still follow
+        unveil(0);
+      });
       const away = () => shut(null);
-      const outside = (e) => { if (e.composedPath().includes(host)) return; if (anchor && anchor.contains && anchor.contains(e.target)) lastShut = { anchor, at: Date.now() }; shut(null); };
+      // a press on something that lies over the layer (a window of the window kit): the menu closes, as before
+      const outside = (e) => { if (e.target === veil || e.composedPath().includes(host)) return; if (anchor && anchor.contains && anchor.contains(e.target)) lastShut = { anchor, at: Date.now() }; shut(null); };
       const keys = (e) => {
         if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); return shut(null); }
         if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
@@ -2795,6 +2861,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
         b.addEventListener("click", () => { let v; try { v = r.run ? r.run() : r.id; } catch (e) { console.error("cloud-kit:", e); v = null; } shut(v === null || v === undefined ? false : v); });
         box.appendChild(b);
       }
+      document.body.appendChild(veil);
       document.body.appendChild(host);
       const place = () => { // under the button; above it when there is no room below; always inside the window
         const a = anchor && anchor.getBoundingClientRect ? anchor.getBoundingClientRect() : null;
