@@ -1,12 +1,12 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
      pastes the Apps kit's tab icons at the ICONS marker, and stamps the version and build time where
-     Book reader V1.0.845 and 2026-11-12 7:18 AM appear. -->
+     Book reader V1.0.854 and 2026-11-13 2:53 AM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Book reader V1.0.845</title>
+<title>Book reader V1.0.854</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
 <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlUlEQVR42p2SzytEURzFz33evBlNtsyCYtRkmrLASqwoKTtlYf4FyQabKSkrZWeNjdmxUrJUlkp+ZNj4tbAgUoyI7/lazLvPw0PN2dzX7X7ePefcrwGA9cn3UVILFLYJ1YgohISIQoQgNfgWqorwRETnptbqi8aHVxkAf8LBysqad0ktVAWLQqgF17ddDQwRtrk2c9+4h7srwcXeO65P5QesUDRmXaQ7PTSkY1iZvoWIGtfenMo4SGUc5PpjeC0ncLn/hs3FJ4gQg2N1aOnwkEgaWFnOsbbDiicNMt1e4CDbG0ciafDYMvP5A59zrVUAGGreCg5sXAwEmaMkoiAVri3MQmHZwqJEvxvXth3pwG872kFEhO8O7Av8FqFSYvC+v99iVXc+60fTUImV2TZLE/dId8bQ2hVHU9aDU/N5i4XODl5wtFPG/nbZxlOzMHJ7LNRseMJitUBzu4cD/2Cupxanu894epDQtCpIlsz88M0oydXQeH4Za0bs+TBIzTtTa/VFoeaFWhKh/gtTlWSJ1PzyYa74AfvjIbDIJi4vAAAAAElFTkSuQmCC">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVR42r2Xe0yVZRzHP+8573u4KxzkvoAkoELkGHkpsGJsbpa0uTabq5htrY3W3Np0mn+53LQ/yjZy+UelXci2LHKzRWtt2Sbr4g0DnRw1EUjwAgocOcA5PL/+OBfe876IOo3vX+/O7z3P53l+1/fRMKl5YzBHRNaLUCciJaLEUAIighJBlPlZiNqUIJbnqXcEEQKixKtEDorQuGF/Rl+EqUUevt8YfFlEdishWayAe4NbbT5R0rCpOaspuoEw/AslaP8zPGITEeq3HMhu0po3BnMQ8c7CyWNtSnxKpEQPx3y24SiRZBHWO8IJN9vwiK1OD2f77MOVICIljvtYancLRwRDt8KT3FBQqXOjX3HpTJDxm/cGj0vUyF/gwp3npOM3P4N9wQgcpQTdevLaN+NJyQy1B1FxXL0wSe+pID0dQS6fD94WjibkFusUVrgoXOgit8RAc4R6TUVtAo2vXY7xgm51ewQOoDkgs8hJZpGTx56PY8Iv9J4O0tMe4EJbgKErk4gIKekOCjwGBQsN8he4iEvUmE7uXD0GrkTQrTGfSa4EjfmVBvMrDaoDwof1gyglrPsgFacxBR1/pwXnUw+hP1NsW8MMF8EcglDCRXS+Y5jBK+OUL3UTn+S0LeQ0tKjbzXCAib1/YIyMoboGQxtftzRqM8OVioZgKtsj2rPDy8nWAXTDwcOL5lJRnY6nKp1Sz1wcznCOhPPhVgrsPx7awCuLw7t22CpBt5ZaRJt3VXD00FXaDg/Q1jpAx87rfLXzHElzdLbuqeSRx1NtYZPhMbQ58baN+F//GoCET1+yliG6tc4jSkkzqFmdS83qXAC6vT7aWgfoPDFESpoRrhKJekD1XOdmTSMJH71oj3v/sC0HYsvQVOcR/fB5N91nfXiq0il/wk1+STL5JcnwqmlhMW16ZBwmFTI8NmMiizUE1iYTUc85Hy37evmxqQeHU6OobA6LngrlQfkyN5pGtMPdjWLLEBxyixA0bHuUfcdreHu3hxVr8hi5McE3u/5hy9ojtLb020Iwk7TURLTUREsZhv6vW1uoWSmpBlUrs6hamQVAf7cf78khKp+eZw/BDEr4eK2lDKc2r1v7d0TbG9roPHGDRdXzqKhy46lOJzs/gez8BJs7b+uBRJcpb8yDSdCtvT2i5c9lM3RtgkMHLvHLt/+iaVBQmoKnOp01bzzIHLcr6k4ArSAN4wUPzsoHomvoiwvsOWCCi8LciGLduXxVNstXZTM2Osnfvw9G+8GBT7pYsCSNZSsyoxkNoCXFEf/e6hhY3NZn7SVpgqupRjRVCX1ng+QU69E/xCc6WVKbwZLaDABGfUESk/UZQ6DNS0bLTLH93tUxFgOfmoamSvhu+xClT4ZGaX65fbJF4OaMtir58FtghOaH36fwHvNz5s9Rjv48EgNXCnQRAiJiRJLR71Oc+MnPsZZRNA1yig0KPS7mV7jIK3VFZ7t5sMS4eFK46A3SeWSEzr9G6To1RjAotpOr0BQO6OEbS9l0HxpqUug+Pc7FU+P8+qXgStQoXOiiyBOHO0+Pvnf22BjXegN4j/jxHvfjH5m0Zfs0cETEq72/5uoOETbf4TecbZ5Pb7sjOCK86xChMXxdmlW4Enwi0ujYsD+jT5Q0hK9LswUXEWnY217W5wDY1JzVJEJ9+Lo0Gyev/6y9rCnmdgywre5SjgjrlUidKCkRwbhP8ICIeEU4KCKNe9vLotfz/wCKU53CYXSQUAAAAABJRU5ErkJggg==">
@@ -15,9 +15,9 @@
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.845";
-  window.APP_BUILT = "2026-11-12 7:18 AM";
-  window.APP_NOTE = "switch-over: published to the live site with PC Relay 3.1.2 and files 3.0.2";
+  window.APP_VERSION = "Book reader V1.0.854";
+  window.APP_BUILT = "2026-11-13 2:53 AM";
+  window.APP_NOTE = "Search the book: the search pop-up (\ud83d\udd0d, Ctrl+F): live results across the whole book, each sentence under its chapter with the words marked; simple pattern (words, \"a phrase\", drag*, -word), Whole words, Match case, This chapter only, recent searches; a result goes there and marks it";
   window.APP_KEY = "br1";
 </script>
 <style>
@@ -108,9 +108,14 @@ button:disabled { opacity: 0.4; cursor: default; }
 }
 @media (max-width: 350px) {
   .top cloud-status { order: 1; }
-  .top .nav, .top #key, .top #gear { order: 2; }
+  .top .nav, .top #find, .top #key, .top #gear { order: 2; }
 }
 .top .icon { min-width: var(--tap); padding: 0; font-size: 1.1em; }
+/* Search the book (search.js, 2026-11-13): a magnifier, drawn in the text colour like ? and the gear. */
+.top .icon.find svg { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; vertical-align: middle; }
+/* The search's marks in the chapter (CSS Custom Highlight API): every place found faint, the one chosen strong. */
+::highlight(sk-all) { background-color: color-mix(in srgb, var(--accent) 28%, transparent); }
+::highlight(sk-now) { background-color: color-mix(in srgb, var(--accent) 60%, transparent); color: var(--fg); }
 .top .icon.idx { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; line-height: 1; }
 .top .icon.idx .idxt { font-size: 0.62em; margin-top: 2px; }
 /* The chapter's number and name take the room left; shortened with an ellipsis; a tap shows the whole. */
@@ -1043,6 +1048,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     <button id="go" type="button">Go</button>
     <button id="next" class="chgo" type="button" title="Next chapter" aria-label="Next chapter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
   </nav>
+  <button class="icon find" id="find" type="button" title="Search the book (Ctrl+F)" aria-label="Search the book"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></button>
   <button class="icon" id="key" type="button" title="Key: what the colours mean" aria-label="Key">?</button>
   <button class="icon" id="gear" type="button" title="Settings" aria-label="Settings">&#9881;</button>
   <!-- The cloud kit's indicator (file-manager\kit\cloud-kit.js): a dot and a few words, the same in every program. On a
@@ -3609,6 +3615,28 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     while (cache.size > CACHE_MAX) cache.delete(cache.keys().next().value);
     return rec;
   }
+  // The whole open book at once, in reading order (the search, search.js): [{ c, title, text }], the index's names over
+  // the records' as chapter() does. Read with one getAll per generation (a stored book is one or a few), so 25 MB of
+  // text comes in a few calls; a quick read is already in memory. A chapter whose record is missing gives no text.
+  async function all(onProgress) {
+    const list = index.slice(), out = new Array(list.length);
+    const byKey = new Map();
+    if (current && current.temp) { for (const e of list) byKey.set(e.c, (temp && temp.get(e.c)) || null); }
+    else {
+      const gens = Array.from(new Set(list.map((e) => e.g)));
+      let n = 0;
+      for (const gen of gens) {
+        const recs = (await tx(["text"], "readonly", (t) => t.getAll(genRange(gen)))) || [];
+        for (const r of recs) byKey.set(gen + "\u0001" + r.c, r);
+        if (onProgress) onProgress(++n, gens.length);
+      }
+    }
+    list.forEach((e, i) => {
+      const r = current && current.temp ? byKey.get(e.c) : byKey.get(e.g + "\u0001" + e.c);
+      out[i] = { c: e.c, title: e.title || (r && r.title) || "", text: (r && r.text) || [] };
+    });
+    return out;
+  }
   function warm(i) {
     for (const j of [i + 1, i - 1, i + 2]) {
       if (j >= 0 && j < index.length && !cache.has(index[j].c)) chapter(j).catch((e) => log("error", `warming ${label(j)}`, e));
@@ -4173,7 +4201,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     info: (i) => index[i] || null,                 // { c, n, title, paras, g, sec?, short?, era?, heads? } from the index, nothing loaded
     index: () => index,
     indexOf: (c) => (byC.has(c) ? byC.get(c) : -1),
-    label, chapter, warm, load, open: openBook, rename, remove, setAcross, plan, importBook, stopImport, pos, setPos, posOf, readKey, hooks, kept, startAt, chapterOne: (t) => ONE.test(t),
+    label, chapter, all, warm, load, open: openBook, rename, remove, setAcross, plan, importBook, stopImport, pos, setPos, posOf, readKey, hooks, kept, startAt, chapterOne: (t) => ONE.test(t),
     // A quick read (opener.js): read without storing, show what was read, and no book in hand with br1-current untouched.
     readTemp, openTemp, rest, isQuick,
     get quick() { return !!(current && current.temp); },
@@ -6312,7 +6340,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 })(typeof window !== "undefined" ? window : globalThis);
 </script>
 <script>
-/* apps-button.js 1.24: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.28: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
    https://jonnystokes.github.io/cooltools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
@@ -6344,11 +6372,11 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.24";
+  const VERSION = "1.28";
   // The menu comes from the site the page itself is on, so the menu's account strip reads the same browser memory
-  // (one origin) and the same relay.json as the program: the live site, or the stage (CONTRACT 3). Any other page
-  // (a file on this device, a test page) gets the live site's menu.
-  const SITES = ["https://jonnystokes.github.io/cooltools/", "http://127.0.0.1:28801/", "http://localhost:28801/"];
+  // (one origin) and the same relay.json as the program: the live site. Any other page (a file on this device, a
+  // test page) gets the live site's menu too; launcher="..." overrides.
+  const SITES = ["https://jonnystokes.github.io/cooltools/"];
   const LAUNCHER = (() => {
     let href = "";
     try { href = root.location.href; } catch (e) {}
@@ -7731,8 +7759,17 @@ button:disabled{cursor:default;opacity:.55;background:none}
 @media (pointer:coarse){button{min-height:50px;font-size:16px}}
 </style><div class="m${isDark() ? " dark" : ""}" role="menu"></div>`;
       const box = sh.querySelector(".m");
-      let done = false;
-      const shut = (v) => {
+      // A click off the menu only closes the menu (the rule for every program, WEB-APP-CONVENTIONS.md "Every page"):
+      // a see-through layer covers the page just under the menu and takes that press, so nothing underneath is
+      // opened or started by it. The layer stays until the press is over: the click that ends it stops here too (a
+      // tap's click goes to whatever is under the finger when it lifts).
+      const veil = document.createElement("div");
+      veil.className = "cloud-kit-veil";
+      veil.style.cssText = "position:fixed;inset:0;z-index:2147481499;margin:0;padding:0;border:0;background:transparent;touch-action:none;-webkit-tap-highlight-color:transparent";
+      let done = false, pressed = false, down = false, veilTimer = 0;
+      const eat = (e) => { e.preventDefault(); e.stopPropagation(); };
+      const unveil = (ms) => { clearTimeout(veilTimer); if (ms === undefined) veil.remove(); else veilTimer = setTimeout(() => veil.remove(), ms); };
+      const shut = (v, keepVeil) => {
         if (done) return;
         done = true;
         document.removeEventListener("pointerdown", outside, true);
@@ -7740,11 +7777,28 @@ button:disabled{cursor:default;opacity:.55;background:none}
         root.removeEventListener("resize", place);
         root.removeEventListener("blur", away);
         host.remove();
+        if (!keepVeil) unveil();
         if (v === null && back && back.focus && document.contains(back)) try { back.focus({ preventScroll: true }); } catch (e) {}
         resolve(v);
       };
+      veil.addEventListener("pointerdown", (e) => {
+        eat(e);
+        if (pressed) return;
+        pressed = down = true;
+        try { veil.setPointerCapture(e.pointerId); } catch (x) {}
+        shut(null, true);
+        unveil(8000); // a lost press never leaves the layer in the way
+      });
+      for (const t of ["pointerup", "pointercancel"]) veil.addEventListener(t, (e) => { eat(e); if (pressed) { down = false; unveil(400); } });
+      for (const t of ["click", "dblclick", "auxclick", "contextmenu"]) veil.addEventListener(t, (e) => {
+        eat(e);
+        if (!pressed || down) return; // a right-click's own-menu event can come at the press (Mac, Linux): wait for the lift
+        if (t === "auxclick" && e.button === 2) return; // its own-menu event may still follow
+        unveil(0);
+      });
       const away = () => shut(null);
-      const outside = (e) => { if (e.composedPath().includes(host)) return; if (anchor && anchor.contains && anchor.contains(e.target)) lastShut = { anchor, at: Date.now() }; shut(null); };
+      // a press on something that lies over the layer (a window of the window kit): the menu closes, as before
+      const outside = (e) => { if (e.target === veil || e.composedPath().includes(host)) return; if (anchor && anchor.contains && anchor.contains(e.target)) lastShut = { anchor, at: Date.now() }; shut(null); };
       const keys = (e) => {
         if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); return shut(null); }
         if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
@@ -7764,6 +7818,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
         b.addEventListener("click", () => { let v; try { v = r.run ? r.run() : r.id; } catch (e) { console.error("cloud-kit:", e); v = null; } shut(v === null || v === undefined ? false : v); });
         box.appendChild(b);
       }
+      document.body.appendChild(veil);
       document.body.appendChild(host);
       const place = () => { // under the button; above it when there is no room below; always inside the window
         const a = anchor && anchor.getBoundingClientRect ? anchor.getBoundingClientRect() : null;
@@ -8513,6 +8568,711 @@ button:disabled{cursor:default;opacity:.55;background:none}
   }
 
   g.FOLLOW = { start, pass, FOLLOWED, keyOf, nameOf, winner, hash, get state() { return JSON.parse(JSON.stringify(st)); }, hooks };
+})();
+</script>
+<script>
+// search-kit.js: the search pop-up shared by Jon's programs (the Book reader first, the Text editor too).
+// One source: Projects\search-kit\search-kit.js. A program's build copies it into the page; never edit a copy.
+// The how-to is README.md beside this file.
+//
+// The whole text is held in memory as ONE string (sections of units: a book's chapters of paragraphs, a file's
+// lines), joined with a separator no one types, plus one folded copy (lower case, curly quotes made straight; the
+// same length, so every place in one is the same place in the other). The benchmark of 2026-11-13 (README.md):
+// indexOf on the folded string was the fastest for plain words (25 M characters: 4 to 20 ms a word, 81 ms for the
+// single letter "e", 2.5 million hits), so plain words use it and only a wildcard or "Whole words" uses a RegExp.
+// The search runs in slices of about 12 ms, so typing never waits, and a newer keystroke stops the older search.
+//
+// The pattern (README.md "What a person types"): words = all of them in the same paragraph (line); "two words" =
+// exactly that; drag* = words starting with drag (* is any letters); -word = leave out what has it.
+// A result is a SENTENCE holding a match, shown under where it is, the matched words marked.
+(function () {
+  "use strict";
+  const VERSION = 1;
+  const SEP = "\u0001";                 // between units: never typed, so no match runs across two
+  const LIMIT = 1000;                   // results listed (the count goes on past it)
+  const PAGE = 60;                      // results drawn at a time as the list scrolls
+  const SLICE_MS = 12;
+  const RECENT_MAX = 6;
+  const WORD = "\\p{L}\\p{M}\\p{N}";     // the letters of a word, for wildcards and whole words
+  const fmt = (n) => n.toLocaleString("en-US");
+
+  // ---- Folding: same length out as in ------------------------------------------------------------------------
+  const QUOTES = /[‘’‚‛′ʼ]/g, DQUOTES = /[“”„‟″]/g;
+  function foldQuotes(s) { return s.replace(QUOTES, "'").replace(DQUOTES, '"'); }
+  function foldAll(s) {
+    const low = s.toLowerCase();
+    if (low.length === s.length) return foldQuotes(low);
+    // Rare letters whose lower case is longer (İ): fold one character at a time, keeping the length.
+    let out = "";
+    for (let i = 0; i < s.length; i++) { const c = s[i], l = c.toLowerCase(); out += l.length === 1 ? l : c; }
+    return foldQuotes(out);
+  }
+
+  // ---- The pattern ------------------------------------------------------------------------------------------
+  // Gives { terms: [{ text, neg, wild, phrase }], empty }. An unfinished quote (still typing) runs to the end.
+  function parse(q) {
+    const terms = [];
+    const s = String(q || "");
+    let i = 0;
+    while (i < s.length) {
+      while (i < s.length && /\s/.test(s[i])) i++;
+      if (i >= s.length) break;
+      let neg = false;
+      if (s[i] === "-" && i + 1 < s.length && !/\s/.test(s[i + 1])) { neg = true; i++; }
+      let text, phrase = false;
+      if (s[i] === '"' || s[i] === "“" || s[i] === "”") {
+        i++;
+        const end = s.slice(i).search(/["“”]/);
+        text = end < 0 ? s.slice(i) : s.slice(i, i + end);
+        i = end < 0 ? s.length : i + end + 1;
+        phrase = true;
+        text = text.replace(/\s+/g, " ").trim();
+      } else {
+        let j = i;
+        while (j < s.length && !/\s/.test(s[j])) j++;
+        text = s.slice(i, j); i = j;
+      }
+      if (!text || !text.replace(/\*/g, "") || (!phrase && text === "-")) continue;     // "", "*", "-" alone: nothing to find
+      terms.push({ text, neg, phrase, wild: text.includes("*") });
+    }
+    return { terms, empty: !terms.some((t) => !t.neg) };
+  }
+
+  // A term's finder over the haystack: next(hay, from, to) gives [start, end] of the next hit at or after from
+  // that starts before to, or null.
+  const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  function finder(t, opts) {
+    const text = opts.matchCase ? foldQuotes(t.text) : foldAll(t.text);
+    if (!t.wild && !opts.wholeWords) {
+      return { lit: text.length, next(hay, from, to) { const i = hay.indexOf(text, from); return i >= 0 && i < to ? [i, i + text.length] : null; } };
+    }
+    const parts = text.split("*");
+    let body = parts.map(esc).join(`[${WORD}']*`);
+    // A wildcard word is a word: drag* starts at a word's start, *ing ends at a word's end.
+    const lead = opts.wholeWords || (t.wild && !text.startsWith("*")), tail = opts.wholeWords || (t.wild && !text.endsWith("*"));
+    body = (lead ? `(?<![${WORD}])` : "") + body + (tail ? `(?![${WORD}])` : "");
+    let re;
+    try { re = new RegExp(body, "gu"); } catch (e) { re = new RegExp(esc(text), "g"); }
+    const lit = Math.max(...parts.map((p) => p.length));
+    return {
+      lit,
+      next(hay, from, to) {
+        re.lastIndex = from;
+        for (;;) {
+          const m = re.exec(hay);
+          if (!m || m.index >= to) return null;
+          if (m[0].length) return [m.index, m.index + m[0].length];
+          re.lastIndex = m.index + 1;                      // "*" alone matched nothing: step on
+        }
+      },
+    };
+  }
+
+  // ---- Sentences --------------------------------------------------------------------------------------------
+  // The sentences of [a, b) in the text: [[start, end], ...]. A sentence ends at . ! ? or … followed by closing
+  // quotes or brackets and a space (or the unit's end).
+  const ENDS = ".!?…", CLOSE = "\"'”’)]";
+  function sentences(text, a, b) {
+    const out = [];
+    let s = a;
+    while (s < b && /\s/.test(text[s])) s++;
+    let i = s;
+    while (i < b) {
+      if (ENDS.includes(text[i])) {
+        let j = i + 1;
+        while (j < b && (ENDS.includes(text[j]) || CLOSE.includes(text[j]))) j++;
+        if (j >= b || /\s/.test(text[j])) {
+          out.push([s, j]);
+          while (j < b && /\s/.test(text[j])) j++;
+          s = i = j;
+          continue;
+        }
+        i = j;
+        continue;
+      }
+      i++;
+    }
+    if (s < b) out.push([s, b]);
+    return out;
+  }
+
+  // ---- Styles (the host page's colours: --bg --fg --muted --line --bar --accent --ui --tap) -----------------
+  const STYLE = `
+.sk { display: flex; flex-direction: column; height: 100%; min-height: 0; font-size: var(--ui, 16px); color: var(--fg, CanvasText); }
+.sk-top { padding: 10px 12px 8px; display: flex; flex-direction: column; gap: 8px; border-bottom: 1px solid var(--line, #ccc); background: var(--bar, transparent); }
+.sk-boxrow { display: flex; gap: 6px; align-items: center; }
+.sk-box { flex: 1; min-width: 0; position: relative; display: flex; }
+.sk-q { flex: 1; min-width: 0; min-height: var(--tap, 44px); padding: 0 2.6em 0 0.7em; font: inherit; font-size: 1.1em; color: inherit;
+  border: 2px solid var(--line, #ccc); border-radius: 8px; background: var(--bg, Canvas); }
+.sk-q:focus { outline: none; border-color: var(--accent, Highlight); }
+.sk-q::-webkit-search-cancel-button { display: none; }
+.sk-clear { position: absolute; right: 2px; top: 50%; transform: translateY(-50%); min-width: calc(var(--tap, 44px) - 6px); min-height: calc(var(--tap, 44px) - 6px);
+  border: 0; border-radius: 6px; background: transparent; color: var(--muted, GrayText); font: inherit; font-size: 1.1em; cursor: pointer; }
+.sk-clear:hover { color: var(--fg, CanvasText); background: var(--line, #ddd); }
+.sk button.sk-btn { min-height: var(--tap, 44px); min-width: var(--tap, 44px); padding: 0 0.7em; border: 1px solid var(--line, #ccc); border-radius: 8px;
+  background: var(--bg, Canvas); color: inherit; font: inherit; cursor: pointer; line-height: 1; }
+.sk button.sk-btn:not(:disabled):hover { border-color: var(--accent, Highlight); }
+.sk button.sk-btn:disabled { opacity: 0.4; cursor: default; }
+.sk-step svg { width: 1.2em; height: 1.2em; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; vertical-align: middle; }
+.sk-opts { display: flex; flex-wrap: wrap; gap: 6px; }
+.sk button.sk-opt { min-height: calc(var(--tap, 44px) * 0.82); padding: 0 0.8em; border-radius: 999px; font-size: 0.92em; }
+.sk button.sk-opt[aria-pressed="true"] { border-color: var(--accent, Highlight); background: color-mix(in srgb, var(--accent, Highlight) 18%, var(--bg, Canvas)); font-weight: 600; }
+.sk button.sk-opt[aria-pressed="true"]::before { content: "\\2713  "; white-space: pre; }
+.sk-count { min-height: 1.4em; font-weight: 600; }
+.sk-count .sk-sub { font-weight: 400; color: var(--muted, GrayText); }
+.sk-list { flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; }
+.sk-res { display: block; width: 100%; text-align: left; padding: 10px 14px 12px; border: 0; border-bottom: 1px solid var(--line, #ccc);
+  background: transparent; color: inherit; font: inherit; cursor: pointer; line-height: 1.45; }
+.sk-res:hover { background: color-mix(in srgb, var(--accent, Highlight) 8%, transparent); }
+.sk-res.sk-sel { background: color-mix(in srgb, var(--accent, Highlight) 16%, transparent); box-shadow: inset 4px 0 0 var(--accent, Highlight); }
+.sk-res:focus-visible { outline: 2px solid var(--accent, Highlight); outline-offset: -2px; }
+.sk-where { display: block; font-size: 0.85em; color: var(--muted, GrayText); margin-bottom: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sk-where b { color: var(--accent, inherit); font-weight: 600; }
+.sk-text { display: block; overflow-wrap: anywhere; }
+.sk-res mark { background: color-mix(in srgb, var(--accent, Highlight) 38%, transparent); color: inherit; border-radius: 3px; padding: 0 1px; font-weight: 600; }
+.sk-more { padding: 14px; color: var(--muted, GrayText); text-align: center; }
+.sk-help { padding: 12px 14px; line-height: 1.5; }
+.sk-help h3 { margin: 0 0 8px; font-size: 1em; }
+.sk-help table { border-collapse: collapse; width: 100%; }
+.sk-help td { padding: 6px 4px; vertical-align: top; border-top: 1px solid var(--line, #ccc); }
+.sk-help td:first-child { white-space: nowrap; padding-right: 12px; }
+.sk-help code { font: inherit; font-weight: 600; padding: 1px 6px; border: 1px solid var(--line, #ccc); border-radius: 5px; background: var(--bar, transparent); }
+.sk-recent { padding: 12px 14px 4px; }
+.sk-recent h3 { margin: 0 0 8px; font-size: 1em; }
+.sk-recent .sk-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.sk button.sk-chip { min-height: calc(var(--tap, 44px) * 0.82); border-radius: 999px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sk-busy { color: var(--muted, GrayText); font-weight: 400; }
+`;
+  function addStyle() {
+    if (document.getElementById("search-kit-style")) return;
+    const st = document.createElement("style");
+    st.id = "search-kit-style";
+    st.textContent = STYLE;
+    document.head.appendChild(st);
+  }
+  const STEP_PREV = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>';
+  const STEP_NEXT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
+
+  // ---- One search ------------------------------------------------------------------------------------------
+  function create(opts) {
+    const o = Object.assign({ app: "app", words: {}, maxSnippet: 260 }, opts || {});
+    const W = Object.assign({ section: "chapter", sections: "chapters", unit: "paragraph", title: "Search" }, o.words);
+    const recentKey = `search-kit-${o.app}-recent`;
+    const listeners = { query: [], results: [] };
+    const emit = (what, v) => { for (const fn of listeners[what] || []) { try { fn(v); } catch (e) { console.error(e); } } };
+
+    // The text in memory.
+    let data = null;          // { key, text, fold, foldCase, starts: Int32Array (unit start; one more at the end), unitSec: Int32Array, secFirst: Int32Array, labels }
+    let loading = null;
+    let loadNote = "";
+
+    async function ensure() {
+      const key = o.source.key();
+      if (data && data.key === key) return data;
+      if (loading && loading.key === key) return loading.p;
+      const p = (async () => {
+        loadNote = "Getting the text ready…";
+        drawCount();
+        const t0 = performance.now();
+        const secs = await o.source.load((done, total) => { loadNote = total ? `Getting the text ready… ${Math.round((100 * done) / total)}%` : "Getting the text ready…"; drawCount(); });
+        const parts = [], labels = [];
+        let n = 0;
+        for (const s of secs) n += s.units.length;
+        const starts = new Int32Array(n + 1), unitSec = new Int32Array(n), secFirst = new Int32Array(secs.length + 1);
+        let pos = 0, u = 0;
+        secs.forEach((s, si) => {
+          secFirst[si] = u;
+          labels.push(s.label);
+          for (const t of s.units) {
+            const str = String(t == null ? "" : t);
+            starts[u] = pos; unitSec[u] = si; u++;
+            parts.push(str);
+            pos += str.length + 1;
+          }
+        });
+        secFirst[secs.length] = u;
+        starts[n] = pos;
+        const text = parts.join(SEP) + SEP;
+        const d = { key, text, fold: foldAll(text), foldCase: null, starts, unitSec, secFirst, labels, ms: Math.round(performance.now() - t0) };
+        if (loading && loading.key === key) { data = d; loading = null; }
+        loadNote = "";
+        return d;
+      })();
+      loading = { key, p };
+      try { return await p; } catch (e) { if (loading && loading.p === p) loading = null; loadNote = `The text could not be read: ${e && e.message ? e.message : e}`; drawCount(); throw e; }
+    }
+    // The unit holding character pos (binary search).
+    function unitAt(d, pos) {
+      let lo = 0, hi = d.starts.length - 2;
+      while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (d.starts[mid] <= pos) lo = mid; else hi = mid - 1; }
+      return lo;
+    }
+
+    // State of the panel.
+    const st = { q: "", wholeWords: false, matchCase: false, scoped: false, results: [], total: 0, secs: 0, done: true, sel: -1, gen: 0, drawn: 0, terms: [], took: 0 };
+
+    // ---- The search, in slices ----
+    async function run() {
+      const gen = ++st.gen;
+      const parsed = parse(st.q);
+      st.results = []; st.total = 0; st.secs = 0; st.sel = -1; st.drawn = 0; st.done = parsed.empty; st.terms = parsed.terms;
+      drawAll();
+      if (parsed.empty) { emit("results", st); return; }
+      let d;
+      try { d = await ensure(); } catch (e) { return; }
+      if (gen !== st.gen) return;
+      const optsF = { wholeWords: st.wholeWords, matchCase: st.matchCase };
+      if (st.matchCase && !d.foldCase) d.foldCase = foldQuotes(d.text);
+      const hay = st.matchCase ? d.foldCase : d.fold;
+      const pos = parsed.terms.filter((t) => !t.neg).map((t) => ({ t, f: finder(t, optsF) }));
+      const neg = parsed.terms.filter((t) => t.neg).map((t) => ({ t, f: finder(t, optsF) }));
+      pos.sort((a, b) => b.f.lit - a.f.lit);                // the anchor: the longest plain part (fewest hits)
+      const anchor = pos[0];
+      const scope = st.scoped && o.scope ? o.scope() : null;
+      const from = scope ? d.starts[d.secFirst[scope.s]] : 0;
+      const to = scope ? d.starts[d.secFirst[scope.s + 1]] : d.text.length;
+      const t0 = performance.now();
+      let at = from, lastUnit = -1, lastSec = -1, sliceStart = performance.now();
+      const firstShown = { done: false };
+      for (;;) {
+        const h = anchor.f.next(hay, at, to);
+        if (!h) break;
+        const u = unitAt(d, h[0]);
+        const ua = d.starts[u], ub = d.starts[u + 1] - 1;
+        at = ub + 1;                                        // the next unit
+        if (u !== lastUnit) {
+          lastUnit = u;
+          let ok = true;
+          for (const p of pos) if (p !== anchor && !p.f.next(hay, ua, ub)) { ok = false; break; }
+          if (ok) for (const n of neg) if (n.f.next(hay, ua, ub)) { ok = false; break; }
+          if (ok) {
+            // Every hit of every word in the unit, then the sentences holding one.
+            const hits = [];
+            for (const p of pos) { let x = ua; for (;;) { const m = p.f.next(hay, x, ub); if (!m || m[1] > ub) break; hits.push(m); x = m[1] > m[0] ? m[1] : m[0] + 1; } }
+            hits.sort((a, b) => a[0] - b[0] || b[1] - a[1]);
+            const merged = [];
+            for (const m of hits) { const l = merged[merged.length - 1]; if (l && m[0] <= l[1]) l[1] = Math.max(l[1], m[1]); else merged.push([m[0], m[1]]); }
+            const sents = sentences(d.text, ua, ub);
+            let k = 0;
+            for (const s of sents) {
+              const inS = [];
+              while (k < merged.length && merged[k][0] < s[1]) { if (merged[k][0] >= s[0]) inS.push(merged[k]); k++; }
+              if (!inS.length) continue;
+              st.total++;
+              if (st.results.length < LIMIT) st.results.push({ u, s: d.unitSec[u], a: s[0], b: s[1], hits: inS });
+            }
+            const sec = d.unitSec[u];
+            if (sec !== lastSec) { lastSec = sec; st.secs++; }
+          }
+        }
+        if (performance.now() - sliceStart > SLICE_MS) {
+          if (!firstShown.done && st.results.length) { firstShown.done = true; drawAll(); } else { drawCount(); if (firstShown.done && st.drawn < PAGE) drawMore(); }
+          await new Promise((r) => setTimeout(r, 0));
+          if (gen !== st.gen) return;
+          sliceStart = performance.now();
+        }
+      }
+      st.done = true;
+      st.took = Math.round(performance.now() - t0);
+      if (!firstShown.done) drawAll(); else { drawCount(); drawMore(); }
+      emit("results", st);
+    }
+
+    // ---- Recent searches ----
+    function recent() { try { const r = JSON.parse(localStorage.getItem(recentKey)); return Array.isArray(r) ? r.filter((x) => typeof x === "string") : []; } catch (e) { return []; } }
+    function remember(q) {
+      q = String(q || "").trim();
+      if (!q) return;
+      const r = recent().filter((x) => x !== q);
+      r.unshift(q);
+      try { localStorage.setItem(recentKey, JSON.stringify(r.slice(0, RECENT_MAX))); } catch (e) {}
+    }
+
+    // ---- The panel ----
+    let root = null, el = {};
+    function mount(host) {
+      addStyle();
+      root = document.createElement("div");
+      root.className = "sk";
+      root.innerHTML = `
+<div class="sk-top">
+  <div class="sk-boxrow">
+    <div class="sk-box"><input class="sk-q" type="search" enterkeyhint="search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Search for"><button class="sk-clear" type="button" title="Clear" aria-label="Clear the search">✕</button></div>
+    <button class="sk-btn sk-step sk-prev" type="button" title="Previous result" aria-label="Previous result">${STEP_PREV}</button>
+    <button class="sk-btn sk-step sk-next" type="button" title="Next result (Enter)" aria-label="Next result">${STEP_NEXT}</button>
+  </div>
+  <div class="sk-opts">
+    <button class="sk-btn sk-opt sk-ww" type="button" aria-pressed="false" title="Find whole words only: cat finds cat, not catch">Whole words</button>
+    <button class="sk-btn sk-opt sk-mc" type="button" aria-pressed="false" title="Capital letters must match: Rose finds Rose, not rose">Match case</button>
+    <button class="sk-btn sk-opt sk-sc" type="button" aria-pressed="false" hidden></button>
+    <button class="sk-btn sk-opt sk-hl" type="button" aria-pressed="false" title="How to search">How to search</button>
+  </div>
+  <div class="sk-count" aria-live="polite"></div>
+</div>
+<div class="sk-list" role="listbox" aria-label="Results"></div>`;
+      el = {
+        q: root.querySelector(".sk-q"), clear: root.querySelector(".sk-clear"), prev: root.querySelector(".sk-prev"), next: root.querySelector(".sk-next"),
+        ww: root.querySelector(".sk-ww"), mc: root.querySelector(".sk-mc"), sc: root.querySelector(".sk-sc"), hl: root.querySelector(".sk-hl"),
+        count: root.querySelector(".sk-count"), list: root.querySelector(".sk-list"),
+      };
+      el.q.placeholder = o.placeholder || `Search the whole ${W.whole || "text"}`;
+      el.q.value = st.q;
+      el.q.addEventListener("input", () => { st.q = el.q.value; st.help = false; emit("query", st.q); run(); });
+      el.q.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") { e.preventDefault(); remember(st.q); step(e.shiftKey ? -1 : 1); }
+        else if (e.key === "ArrowDown") { e.preventDefault(); focusResult(Math.max(0, st.sel)); }
+      });
+      el.clear.addEventListener("click", () => { setQuery(""); el.q.focus(); });
+      el.prev.addEventListener("click", () => step(-1));
+      el.next.addEventListener("click", () => step(1));
+      const toggle = (key, b) => b.addEventListener("click", () => { st[key] = !st[key]; b.setAttribute("aria-pressed", String(st[key])); run(); });
+      toggle("wholeWords", el.ww); toggle("matchCase", el.mc); toggle("scoped", el.sc);
+      el.hl.addEventListener("click", () => { st.help = !st.help; drawAll(); });
+      el.list.addEventListener("scroll", () => { if (el.list.scrollTop + el.list.clientHeight > el.list.scrollHeight - 400) drawMore(); }, { passive: true });
+      el.list.addEventListener("keydown", (e) => {
+        const b = e.target.closest && e.target.closest(".sk-res");
+        if (!b) return;
+        const i = Number(b.dataset.i);
+        if (e.key === "ArrowDown") { e.preventDefault(); focusResult(i + 1); }
+        else if (e.key === "ArrowUp") { e.preventDefault(); if (i === 0) el.q.focus(); else focusResult(i - 1); }
+      });
+      el.list.addEventListener("click", (e) => {
+        const b = e.target.closest(".sk-res"); if (b) { remember(st.q); choose(Number(b.dataset.i)); return; }
+        const c = e.target.closest(".sk-chip"); if (c) { setQuery(c.dataset.q); el.q.focus(); }
+      });
+      el.ww.setAttribute("aria-pressed", String(st.wholeWords));
+      el.mc.setAttribute("aria-pressed", String(st.matchCase));
+      host.replaceChildren(root);
+      drawAll();
+      if (st.q && !st.done) run();
+      else if (st.q && data && data.key !== o.source.key()) run();      // the text changed while closed
+    }
+    function scopeLabel() { const s = o.scope ? o.scope() : null; return s ? s.label : ""; }
+    function focusResult(i) {
+      if (!st.results.length) return;
+      i = Math.max(0, Math.min(st.results.length - 1, i));
+      while (i >= st.drawn && drawMore()) {}
+      const b = el.list.querySelector(`.sk-res[data-i="${i}"]`);
+      if (b) { b.focus(); b.scrollIntoView({ block: "nearest" }); }
+    }
+    function markSel() {
+      if (!root) return;
+      for (const b of el.list.querySelectorAll(".sk-res.sk-sel")) { b.classList.remove("sk-sel"); b.setAttribute("aria-selected", "false"); }
+      const b = el.list.querySelector(`.sk-res[data-i="${st.sel}"]`);
+      if (b) { b.classList.add("sk-sel"); b.setAttribute("aria-selected", "true"); b.scrollIntoView({ block: "nearest" }); }
+      drawCount();
+    }
+    function choose(i) {
+      const r = st.results[i];
+      if (!r || !data) return;
+      st.sel = i;
+      markSel();
+      const ua = data.starts[r.u];
+      const first = r.hits[0];
+      try { o.onPick && o.onPick({ s: r.s, u: r.u - data.secFirst[r.s], start: first[0] - ua, end: first[1] - ua, hits: r.hits.map((h) => [h[0] - ua, h[1] - ua]), index: i, count: st.results.length }); }
+      catch (e) { console.error(e); }
+    }
+    function step(dir) {
+      if (!st.results.length) return;
+      const n = st.results.length;
+      let i = st.sel < 0 ? (dir > 0 ? (o.after ? firstAfter() : 0) : n - 1) : (st.sel + dir + n) % n;
+      while (i >= st.drawn && drawMore()) {}
+      choose(i);
+    }
+    // With nothing chosen yet, Next goes to the first result after the place the person is at (o.after(): { s, u }).
+    function firstAfter() {
+      const here = o.after();
+      if (!here || !data) return 0;
+      const u0 = data.secFirst[here.s] + (here.u || 0);
+      const i = st.results.findIndex((r) => r.u >= u0);
+      return i < 0 ? 0 : i;
+    }
+
+    function drawCount() {
+      if (!root) return;
+      const busy = !st.done ? ' <span class="sk-busy">· searching…</span>' : "";
+      let html = "";
+      if (loadNote) html = `<span class="sk-busy">${esch(loadNote)}</span>`;
+      else if (!st.q.trim() || parse(st.q).empty) html = parse(st.q).terms.length ? `<span class="sk-sub">Add a word to find (a minus word only leaves things out).</span>` : "";
+      else if (!st.total && st.done) html = `Nothing found<span class="sk-sub">${st.scoped ? " in " + esch(scopeLabel().replace(/ only$/, "").toLowerCase()) : ""}. Check the spelling, or try fewer words.</span>`;
+      else {
+        const where = st.secs > 1 || !W.sections ? ` <span class="sk-sub">in ${fmt(st.secs)} ${st.secs === 1 ? W.section : W.sections}</span>` : "";
+        const pos = st.sel >= 0 ? ` <span class="sk-sub">· showing ${fmt(st.sel + 1)}</span>` : "";
+        html = `${fmt(st.total)} ${st.total === 1 ? "place" : "places"}${W.sections ? where : ""}${pos}${busy}`;
+      }
+      el.count.innerHTML = html;
+      el.prev.disabled = el.next.disabled = !st.results.length;
+      el.clear.hidden = !st.q;
+      const sl = scopeLabel();
+      el.sc.hidden = !sl;
+      if (sl) { el.sc.textContent = sl; el.sc.setAttribute("aria-pressed", String(st.scoped)); el.sc.title = `Search only ${sl.replace(/ only$/, "").toLowerCase()}`; }
+      el.hl.setAttribute("aria-pressed", String(!!st.help));
+    }
+    function drawAll() {
+      if (!root) return;
+      drawCount();
+      el.list.replaceChildren();
+      st.drawn = 0;
+      if (st.help || !st.q.trim()) { el.list.append(helpView(!st.help)); return; }
+      drawMore();
+      el.list.scrollTop = 0;
+      if (st.sel >= 0) markSel();
+    }
+    function drawMore() {
+      if (!root || st.drawn >= st.results.length || !data) {
+        if (root && st.done && st.drawn >= st.results.length && st.total > st.results.length && !el.list.querySelector(".sk-more")) {
+          const m = document.createElement("div");
+          m.className = "sk-more";
+          m.textContent = `Showing the first ${fmt(st.results.length)} of ${fmt(st.total)}. Add a word to narrow it down.`;
+          el.list.append(m);
+        }
+        return false;
+      }
+      const frag = document.createDocumentFragment();
+      const end = Math.min(st.results.length, st.drawn + PAGE);
+      for (let i = st.drawn; i < end; i++) frag.append(row(st.results[i], i));
+      st.drawn = end;
+      el.list.append(frag);
+      if (st.drawn >= st.results.length) drawMore();
+      return true;
+    }
+    function row(r, i) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "sk-res" + (i === st.sel ? " sk-sel" : "");
+      b.dataset.i = i;
+      b.setAttribute("role", "option");
+      b.setAttribute("aria-selected", String(i === st.sel));
+      const where = document.createElement("span");
+      where.className = "sk-where";
+      const w = o.source.where ? o.source.where(r.s, r.u - data.secFirst[r.s]) : data.labels[r.s];
+      const wb = document.createElement("b"); wb.textContent = Array.isArray(w) ? w[0] : w;
+      where.append(wb);
+      if (Array.isArray(w) && w[1]) where.append(document.createTextNode(" · " + w[1]));
+      const tx = document.createElement("span");
+      tx.className = "sk-text";
+      // The sentence, cut around the first hit when it is long.
+      let a = r.a, z = r.b;
+      const max = o.maxSnippet;
+      if (z - a > max) {
+        const h = r.hits[0];
+        a = Math.max(r.a, h[0] - Math.floor(max / 3));
+        z = Math.min(r.b, a + max);
+        if (a > r.a) { const sp = data.text.indexOf(" ", a); if (sp > 0 && sp < h[0]) a = sp + 1; }
+        if (z < r.b) { const sp = data.text.lastIndexOf(" ", z); if (sp > h[1]) z = sp; }
+      }
+      if (a > r.a) tx.append("…");
+      let x = a;
+      for (const h of r.hits) {
+        if (h[1] <= a || h[0] >= z) continue;
+        const ha = Math.max(a, h[0]), hb = Math.min(z, h[1]);
+        if (ha > x) tx.append(data.text.slice(x, ha));
+        const m = document.createElement("mark"); m.textContent = data.text.slice(ha, hb); tx.append(m);
+        x = hb;
+      }
+      if (x < z) tx.append(data.text.slice(x, z));
+      if (z < r.b) tx.append("…");
+      b.append(where, tx);
+      b.setAttribute("aria-label", `${wb.textContent}: ${tx.textContent}`);
+      return b;
+    }
+    function helpView(withRecent) {
+      const box = document.createElement("div");
+      const rec = withRecent ? recent() : [];
+      if (rec.length) {
+        const r = document.createElement("div");
+        r.className = "sk-recent";
+        r.innerHTML = "<h3>Recent searches</h3><div class=\"sk-chips\"></div>";
+        for (const q of rec) {
+          const c = document.createElement("button");
+          c.type = "button"; c.className = "sk-btn sk-chip"; c.dataset.q = q; c.textContent = q; c.title = `Search for ${q}`;
+          r.lastChild.append(c);
+        }
+        box.append(r);
+      }
+      const h = document.createElement("div");
+      h.className = "sk-help";
+      const u = W.unit;
+      h.innerHTML = `<h3>How to search</h3><table>
+<tr><td><code>red door</code></td><td>Both words, in the same ${esch(u)}</td></tr>
+<tr><td><code>"red door"</code></td><td>Exactly those words, together</td></tr>
+<tr><td><code>drag*</code></td><td>Words that start with drag: dragon, dragged</td></tr>
+<tr><td><code>-door</code></td><td>Leave out what has door</td></tr>
+</table>`;
+      box.append(h);
+      return box;
+    }
+    function esch(s) { return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]); }
+
+    function setQuery(q) {
+      st.q = String(q || "");
+      st.help = false;
+      if (root) el.q.value = st.q;
+      emit("query", st.q);
+      run();
+    }
+
+    // Every hit of the current search in one section, unit by unit: [{ u, start, end }] (unit-relative), for marking
+    // the text on screen. Uses only what the last search found when it covers the section; else searches it now.
+    function hitsIn(s) {
+      if (!data || !st.q || parse(st.q).empty || data.key !== o.source.key()) return [];
+      const out = [];
+      const f = data.secFirst[s];
+      for (const r of st.results) if (r.s === s) for (const h of r.hits) out.push({ u: r.u - f, start: h[0] - data.starts[r.u], end: h[1] - data.starts[r.u] });
+      return out;
+    }
+
+    return {
+      mount,
+      focus() { if (root) { el.q.focus(); el.q.select(); } },
+      get query() { return st.q; },
+      set query(q) { setQuery(q); },
+      get results() { return st.results; },
+      get selected() { return st.sel; },
+      next: () => step(1),
+      prev: () => step(-1),
+      hitsIn,
+      // The text changed: forget it. rerun: search again now (the panel is on screen); else the next mount does.
+      invalidate(rerun) { data = null; loading = null; st.gen++; st.results = []; st.total = 0; st.secs = 0; st.sel = -1; st.done = !st.q; if (rerun && st.q) run(); },
+      warm() { return ensure().catch(() => null); },
+      refresh() { drawCount(); },
+      on(what, fn) { (listeners[what] = listeners[what] || []).push(fn); return () => { listeners[what] = listeners[what].filter((x) => x !== fn); }; },
+      get busy() { return !st.done || !!loading; },
+    };
+  }
+
+  // Mark ranges inside an element whose text may be split over several text nodes: ranges [{ start, end }] in the
+  // element's textContent. Gives DOM Range objects (for CSS.highlights).
+  function ranges(elm, list) {
+    const nodes = [];
+    const w = document.createTreeWalker(elm, NodeFilter.SHOW_TEXT);
+    let n, at = 0;
+    while ((n = w.nextNode())) { nodes.push([n, at]); at += n.data.length; }
+    const find = (pos) => {
+      for (let i = nodes.length - 1; i >= 0; i--) if (nodes[i][1] <= pos) return [nodes[i][0], Math.min(pos - nodes[i][1], nodes[i][0].data.length)];
+      return null;
+    };
+    const out = [];
+    for (const x of list) {
+      const a = find(x.start), b = find(x.end);
+      if (!a || !b) continue;
+      const r = document.createRange();
+      try { r.setStart(a[0], a[1]); r.setEnd(b[0], b[1]); out.push(r); } catch (e) {}
+    }
+    return out;
+  }
+  const canMark = () => typeof CSS !== "undefined" && CSS.highlights && typeof Highlight !== "undefined";
+  function mark(name, rs) {
+    if (!canMark()) return false;
+    if (!rs || !rs.length) CSS.highlights.delete(name); else CSS.highlights.set(name, new Highlight(...rs));
+    return true;
+  }
+
+  globalThis.SearchKit = { VERSION, create, parse, sentences, foldAll, ranges, mark, canMark };
+})();
+</script>
+<script>
+// search.js: Search the book (2026-11-13, WORK-QUEUE item 2). The search pop-up is the shared search kit
+// (Projects\search-kit\search-kit.js, copied in by build.py; the editor carries the same one); this file is the
+// reader's use of it: the 🔍 button in the top bar (and Ctrl+F, F3 / Shift+F3 for the next and previous place) opens
+// it in a floating window ("search"); the whole open book is the text (BOOK.all: every chapter's title, then its
+// paragraphs), read once and held in memory until another book is opened. Choosing a result goes there like a
+// chapter picked by hand (READER.pick: with the lock on, a reading in progress goes along), marks the place found
+// in the text, and on a narrow screen closes the window so the book shows (🔍 brings back the same results).
+// While the window is open, every place found in the chapter on screen is marked faintly.
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const btn = $("find");
+  const narrow = () => innerWidth < 700;
+  const title = (s) => { const e = BOOK.info(s); return e ? e.title : ""; };
+
+  const S = SearchKit.create({
+    app: "reader",
+    words: { section: "chapter", sections: "chapters", unit: "paragraph", whole: "book" },
+    placeholder: "Search the whole book",
+    source: {
+      key: () => (BOOK.current ? `${BOOK.current}:${(BOOK.row && BOOK.row.updated) || 0}:${BOOK.count}` : ""),
+      load: async (progress) => {
+        const t0 = Date.now();
+        const recs = await BOOK.all(progress);
+        log("book", `search: the whole book read into memory (${recs.length.toLocaleString("en-US")} chapters) in ${((Date.now() - t0) / 1000).toFixed(1)} s`);
+        return recs.map((r, i) => ({ label: BOOK.label(i), units: [r.title].concat(r.text) }));
+      },
+      where: (s, u) => [BOOK.label(s), title(s) + (u === 0 ? " (the chapter title)" : "")],
+    },
+    scope: () => (READER.chapter >= 0 && BOOK.count > 1 ? { s: READER.chapter, label: "This chapter only" } : null),
+    after: () => (READER.chapter >= 0 ? { s: READER.chapter, u: READER.para + 1 } : null),
+    onPick: pick,
+  });
+
+  let win = null, target = null;      // target: the place chosen, marked strongly until another chapter shows
+  function open() {
+    if (!BOOK.count) { READER.say("No book is open. Tap Open to pick one."); return; }
+    const w = narrow() ? innerWidth - 16 : 520, h = narrow() ? innerHeight - 16 : Math.min(680, innerHeight - 40);
+    const fresh = !FLOAT.get("search");
+    win = FLOAT.open("search", { title: "Search the book", width: w, height: h, onClose: () => { win = null; btn.setAttribute("aria-pressed", "false"); SearchKit.mark("sk-all", null); } });
+    if (fresh) {
+      // The first time on a computer (no place remembered for it yet): at the right edge under the bar, off the text's middle.
+      let kept = null;
+      try { kept = localStorage.getItem((globalThis.APP_KEY || "br1") + "-win-search"); } catch (e) {}
+      if (!kept && !narrow()) win.place({ x: innerWidth - w - 16, y: $("top").getBoundingClientRect().bottom + 8, w, h: Math.min(h, innerHeight - $("top").getBoundingClientRect().bottom - 24) });
+      S.mount(win.body);
+    }
+    btn.setAttribute("aria-pressed", "true");
+    S.focus();
+    S.warm();
+    markChapter();
+  }
+  btn.addEventListener("click", (e) => { if (e.detail > 0) btn.blur(); if (FLOAT.get("search")) FLOAT.close("search"); else open(); });
+  document.addEventListener("keydown", (e) => {
+    const k = e.key;
+    if ((e.ctrlKey || e.metaKey) && !e.altKey && (k === "f" || k === "F")) { e.preventDefault(); if (win) S.focus(); else open(); return; }
+    if (k === "F3" || ((e.ctrlKey || e.metaKey) && (k === "g" || k === "G"))) { if (S.results.length) { e.preventDefault(); if (e.shiftKey) S.prev(); else S.next(); } }
+  });
+
+  // The text element of unit u of the chapter on screen: 0 is the title, then the paragraphs.
+  const unitEl = (u) => (u === 0 ? $("ctitle") : READER.paragraphs()[u - 1] || null);
+  function rangesOf(list) {
+    const by = new Map();
+    for (const h of list) { if (!by.has(h.u)) by.set(h.u, []); by.get(h.u).push(h); }
+    const out = [];
+    for (const [u, hs] of by) { const el = unitEl(u); if (el) out.push(...SearchKit.ranges(el, hs)); }
+    return out;
+  }
+  function markChapter() {
+    if (!win || READER.chapter < 0) { SearchKit.mark("sk-all", null); return; }
+    SearchKit.mark("sk-all", rangesOf(S.hitsIn(READER.chapter)));
+  }
+  function markTarget() {
+    if (!target || READER.chapter !== target.s) { SearchKit.mark("sk-now", null); return null; }
+    const rs = rangesOf([{ u: target.u, start: target.start, end: target.end }]);
+    SearchKit.mark("sk-now", rs);
+    return rs[0] || null;
+  }
+  S.on("results", markChapter);
+  S.on("query", (q) => { if (!q) { target = null; markTarget(); } });
+  READER.onChange((what) => {
+    if (what === "chapter") { markChapter(); markTarget(); }
+    else if (what === "book") { target = null; markTarget(); S.invalidate(!!win && BOOK.count > 0); if (win && !BOOK.count) FLOAT.close("search"); }
+  });
+
+  // A result chosen: go there, mark it, and bring it into view (a long paragraph's place may be far down it).
+  async function pick(r) {
+    target = { s: r.s, u: r.u, start: r.start, end: r.end };
+    if (narrow() && win) FLOAT.close("search");
+    READER.pick(r.s, { p: Math.max(0, r.u - 1) });
+    const t0 = Date.now();
+    while ((READER.chapter !== r.s || !unitEl(r.u)) && Date.now() - t0 < 5000) await new Promise((ok) => requestAnimationFrame(ok));
+    if (READER.chapter !== r.s) return;
+    markChapter();
+    const range = markTarget();
+    if (!range) return;
+    const box = range.getBoundingClientRect(), top = $("top").getBoundingClientRect().bottom, bottom = $("play").getBoundingClientRect().top;
+    if (box.top < top + 8 || box.bottom > bottom - 8) scrollTo(0, Math.max(0, scrollY + box.top - top - (bottom - top) / 3));
+    log("book", `search: went to ${BOOK.label(r.s)} ${r.u ? "¶ " + r.u : "(the title)"}, place ${r.index + 1} of ${r.count} for "${S.query}"`);
+  }
+
+  globalThis.SEARCH = { open, kit: S, get isOpen() { return !!win; } };
 })();
 </script>
 <script>
