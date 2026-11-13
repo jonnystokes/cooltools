@@ -1,4 +1,4 @@
-/* apps.js 1.31 (built 2026-11-13 3:08 AM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
+/* apps.js 1.33 (built 2026-11-13 5:34 AM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
    app-kit\apps-button.js and file-manager\kit\window-kit.js (one source each; never edit this file). The window kit
    runs only when the page has none of its own. */
 if (!window.WindowKit) {
@@ -301,7 +301,30 @@ if (!window.WindowKit) {
   root.WindowKit = { VERSION, open, pick, child, get windows() { return wins.slice(); } };
 })(typeof window !== "undefined" ? window : globalThis);
 }
-/* apps-button.js 1.31: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.33, the loader (Jon, 2026-11-13: "never touch the other apps again"). ONE source:
+   Projects\app-kit\apps-loader.js; app-kit\build.py wraps the button (app-kit\apps-button.js) in it. Never edit a copy.
+
+   A page carries this loader (in app-kit\dist\apps.js or dist\apps-button.js, copied in by its build), but on the live
+   site the button that runs is the LIVE one: https://jonnystokes.github.io/cooltools/apps/button.js, published with the
+   Apps menu. So a change to the Apps button reaches every program when the Apps kit is published, with no program
+   rebuilt (the menu itself, the list, the icons and the versions were already live: the button opens apps/ in a frame).
+   The copy built in below is the fallback: it runs when the page is not on the live site (a file on this device, a
+   test page, PC Relay's own window), when the live file cannot be loaded (offline: an error comes at once), or when it
+   has not come after 4 seconds. Whichever runs first serves; the other sees window.AppsKit and stands aside.
+   While the live button loads, the place of <apps-button> is kept, so the bar does not jump.
+   The live button runs on the page's own window kit (window-kit.js 3, in the page): it must keep working with it. */
+(function (root) {
+  "use strict";
+  if (root.AppsKit || root.__appsKitLoading) return;
+  root.__appsKitLoading = true;
+  const SITE = "https://jonnystokes.github.io/cooltools/";
+  const LIVE = SITE + "apps/button.js";
+  const WAIT_MS = 4000;
+  let ran = false;
+  function builtIn() {
+    if (ran || root.AppsKit) return;
+    ran = true;
+/* apps-button.js 1.33: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
    https://jonnystokes.github.io/cooltools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
@@ -333,7 +356,7 @@ if (!window.WindowKit) {
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.31";
+  const VERSION = "1.33";
   // The menu comes from the site the page itself is on, so the menu's account strip reads the same browser memory
   // (one origin) and the same relay.json as the program: the live site. Any other page (a file on this device, a
   // test page) gets the live site's menu too; launcher="..." overrides.
@@ -521,4 +544,21 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
   };
   root.AppsKit = api;
   if (root.customElements && !root.customElements.get("apps-button")) root.customElements.define("apps-button", AppsButton);
+})(typeof window !== "undefined" ? window : globalThis);
+  }
+  let href = "";
+  try { href = root.location.href; } catch (e) {}
+  if (!href.startsWith(SITE) || !root.document || !root.customElements) { builtIn(); return; }
+  try {
+    const keep = root.document.createElement("style");
+    keep.textContent = "apps-button:not(:defined){display:inline-block;flex:none;vertical-align:middle;width:calc(var(--apps-h,36px)*2.9);height:var(--apps-h,36px)}";
+    (root.document.head || root.document.documentElement).appendChild(keep);
+    const s = root.document.createElement("script");
+    s.src = LIVE;
+    s.async = true;
+    const timer = setTimeout(builtIn, WAIT_MS);
+    s.onload = () => { clearTimeout(timer); if (!root.AppsKit) builtIn(); };
+    s.onerror = () => { clearTimeout(timer); builtIn(); };
+    (root.document.head || root.document.documentElement).appendChild(s);
+  } catch (e) { builtIn(); }
 })(typeof window !== "undefined" ? window : globalThis);
