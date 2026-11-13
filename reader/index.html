@@ -1,12 +1,12 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
      pastes the Apps kit's tab icons at the ICONS marker, and stamps the version and build time where
-     Book reader V1.0.859 and 2026-11-13 5:34 AM appear. -->
+     Book reader V1.0.861 and 2026-11-13 6:19 AM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Book reader V1.0.859</title>
+<title>Book reader V1.0.861</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
 <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlUlEQVR42p2SzytEURzFz33evBlNtsyCYtRkmrLASqwoKTtlYf4FyQabKSkrZWeNjdmxUrJUlkp+ZNj4tbAgUoyI7/lazLvPw0PN2dzX7X7ePefcrwGA9cn3UVILFLYJ1YgohISIQoQgNfgWqorwRETnptbqi8aHVxkAf8LBysqad0ktVAWLQqgF17ddDQwRtrk2c9+4h7srwcXeO65P5QesUDRmXaQ7PTSkY1iZvoWIGtfenMo4SGUc5PpjeC0ncLn/hs3FJ4gQg2N1aOnwkEgaWFnOsbbDiicNMt1e4CDbG0ciafDYMvP5A59zrVUAGGreCg5sXAwEmaMkoiAVri3MQmHZwqJEvxvXth3pwG872kFEhO8O7Av8FqFSYvC+v99iVXc+60fTUImV2TZLE/dId8bQ2hVHU9aDU/N5i4XODl5wtFPG/nbZxlOzMHJ7LNRseMJitUBzu4cD/2Cupxanu894epDQtCpIlsz88M0oydXQeH4Za0bs+TBIzTtTa/VFoeaFWhKh/gtTlWSJ1PzyYa74AfvjIbDIJi4vAAAAAElFTkSuQmCC">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVR42r2Xe0yVZRzHP+8573u4KxzkvoAkoELkGHkpsGJsbpa0uTabq5htrY3W3Np0mn+53LQ/yjZy+UelXci2LHKzRWtt2Sbr4g0DnRw1EUjwAgocOcA5PL/+OBfe876IOo3vX+/O7z3P53l+1/fRMKl5YzBHRNaLUCciJaLEUAIighJBlPlZiNqUIJbnqXcEEQKixKtEDorQuGF/Rl+EqUUevt8YfFlEdishWayAe4NbbT5R0rCpOaspuoEw/AslaP8zPGITEeq3HMhu0po3BnMQ8c7CyWNtSnxKpEQPx3y24SiRZBHWO8IJN9vwiK1OD2f77MOVICIljvtYancLRwRDt8KT3FBQqXOjX3HpTJDxm/cGj0vUyF/gwp3npOM3P4N9wQgcpQTdevLaN+NJyQy1B1FxXL0wSe+pID0dQS6fD94WjibkFusUVrgoXOgit8RAc4R6TUVtAo2vXY7xgm51ewQOoDkgs8hJZpGTx56PY8Iv9J4O0tMe4EJbgKErk4gIKekOCjwGBQsN8he4iEvUmE7uXD0GrkTQrTGfSa4EjfmVBvMrDaoDwof1gyglrPsgFacxBR1/pwXnUw+hP1NsW8MMF8EcglDCRXS+Y5jBK+OUL3UTn+S0LeQ0tKjbzXCAib1/YIyMoboGQxtftzRqM8OVioZgKtsj2rPDy8nWAXTDwcOL5lJRnY6nKp1Sz1wcznCOhPPhVgrsPx7awCuLw7t22CpBt5ZaRJt3VXD00FXaDg/Q1jpAx87rfLXzHElzdLbuqeSRx1NtYZPhMbQ58baN+F//GoCET1+yliG6tc4jSkkzqFmdS83qXAC6vT7aWgfoPDFESpoRrhKJekD1XOdmTSMJH71oj3v/sC0HYsvQVOcR/fB5N91nfXiq0il/wk1+STL5JcnwqmlhMW16ZBwmFTI8NmMiizUE1iYTUc85Hy37evmxqQeHU6OobA6LngrlQfkyN5pGtMPdjWLLEBxyixA0bHuUfcdreHu3hxVr8hi5McE3u/5hy9ojtLb020Iwk7TURLTUREsZhv6vW1uoWSmpBlUrs6hamQVAf7cf78khKp+eZw/BDEr4eK2lDKc2r1v7d0TbG9roPHGDRdXzqKhy46lOJzs/gez8BJs7b+uBRJcpb8yDSdCtvT2i5c9lM3RtgkMHLvHLt/+iaVBQmoKnOp01bzzIHLcr6k4ArSAN4wUPzsoHomvoiwvsOWCCi8LciGLduXxVNstXZTM2Osnfvw9G+8GBT7pYsCSNZSsyoxkNoCXFEf/e6hhY3NZn7SVpgqupRjRVCX1ng+QU69E/xCc6WVKbwZLaDABGfUESk/UZQ6DNS0bLTLH93tUxFgOfmoamSvhu+xClT4ZGaX65fbJF4OaMtir58FtghOaH36fwHvNz5s9Rjv48EgNXCnQRAiJiRJLR71Oc+MnPsZZRNA1yig0KPS7mV7jIK3VFZ7t5sMS4eFK46A3SeWSEzr9G6To1RjAotpOr0BQO6OEbS9l0HxpqUug+Pc7FU+P8+qXgStQoXOiiyBOHO0+Pvnf22BjXegN4j/jxHvfjH5m0Zfs0cETEq72/5uoOETbf4TecbZ5Pb7sjOCK86xChMXxdmlW4Enwi0ujYsD+jT5Q0hK9LswUXEWnY217W5wDY1JzVJEJ9+Lo0Gyev/6y9rCnmdgywre5SjgjrlUidKCkRwbhP8ICIeEU4KCKNe9vLotfz/wCKU53CYXSQUAAAAABJRU5ErkJggg==">
@@ -15,9 +15,9 @@
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.859";
-  window.APP_BUILT = "2026-11-13 5:34 AM";
-  window.APP_NOTE = "the Apps button now loads live from the site; search: a typed space is a word's edge (\"sun \" does not find sundown)";
+  window.APP_VERSION = "Book reader V1.0.861";
+  window.APP_BUILT = "2026-11-13 6:19 AM";
+  window.APP_NOTE = "search: as in Everything, quotes keep every space and the order (\"sun \" in quotes finds sun then a space); outside quotes a space only separates words";
   window.APP_KEY = "br1";
 </script>
 <style>
@@ -8649,40 +8649,33 @@ button:disabled{cursor:default;opacity:.55;background:none}
   }
 
   // ---- The pattern ------------------------------------------------------------------------------------------
-  // Gives { terms: [{ text, neg, wild, phrase, start, end }], empty }. An unfinished quote (still typing) runs to the end.
-  // A space typed before the first word or after the last one is a word's edge, as a space is in the text (Jon,
-  // 2026-11-13: "sun " must not find "sundown"): start / end ask for a word to start / end there, so "sun " finds
-  // "sun", "sun," and "sun." at a line's end too. Inside quotes the same: `" sun"`, `"red door "`.
+  // Gives { terms: [{ text, neg, wild, phrase }], empty }. An unfinished quote (still typing) runs to the end.
+  // As in Everything (voidtools; Jon, 2026-11-13): spaces outside quotes only separate words, each found anywhere in
+  // the paragraph, in any order; inside quotes the text is found exactly as typed, every space kept, so "sun " (with
+  // the quotes) finds sun followed by a space and not sundown.
   function parse(q) {
     const terms = [];
     const s = String(q || "");
-    const white = (x) => x.length > 0 && !/\S/.test(x);
     let i = 0;
     while (i < s.length) {
       while (i < s.length && /\s/.test(s[i])) i++;
       if (i >= s.length) break;
-      const at = i;
       let neg = false;
       if (s[i] === "-" && i + 1 < s.length && !/\s/.test(s[i + 1])) { neg = true; i++; }
-      let text, phrase = false, start = white(s.slice(0, at)), end = false;
+      let text, phrase = false;
       if (s[i] === '"' || s[i] === "“" || s[i] === "”") {
         i++;
         const close = s.slice(i).search(/["“”]/);
         text = close < 0 ? s.slice(i) : s.slice(i, i + close);
         i = close < 0 ? s.length : i + close + 1;
         phrase = true;
-        if (/^\s/.test(text)) start = true;
-        if (/\s$/.test(text)) end = true;
-        if (close >= 0 && white(s.slice(i))) end = true;
-        text = text.replace(/\s+/g, " ").trim();
       } else {
         let j = i;
         while (j < s.length && !/\s/.test(s[j])) j++;
         text = s.slice(i, j); i = j;
-        end = white(s.slice(i));
       }
       if (!text || !text.replace(/\*/g, "") || (!phrase && text === "-")) continue;     // "", "*", "-" alone: nothing to find
-      terms.push({ text, neg, phrase, wild: text.includes("*"), start, end });
+      terms.push({ text, neg, phrase, wild: text.includes("*") });
     }
     return { terms, empty: !terms.some((t) => !t.neg) };
   }
@@ -8692,13 +8685,13 @@ button:disabled{cursor:default;opacity:.55;background:none}
   const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   function finder(t, opts) {
     const text = opts.matchCase ? foldQuotes(t.text) : foldAll(t.text);
-    if (!t.wild && !opts.wholeWords && !t.start && !t.end) {
+    if (!t.wild && !opts.wholeWords) {
       return { lit: text.length, next(hay, from, to) { const i = hay.indexOf(text, from); return i >= 0 && i < to ? [i, i + text.length] : null; } };
     }
     const parts = text.split("*");
     let body = parts.map(esc).join(`[${WORD}']*`);
-    // A wildcard word is a word: drag* starts at a word's start, *ing ends at a word's end. A typed space is an edge too.
-    const lead = opts.wholeWords || t.start || (t.wild && !text.startsWith("*")), tail = opts.wholeWords || t.end || (t.wild && !text.endsWith("*"));
+    // A wildcard word is a word: drag* starts at a word's start, *ing ends at a word's end.
+    const lead = opts.wholeWords || (t.wild && !text.startsWith("*")), tail = opts.wholeWords || (t.wild && !text.endsWith("*"));
     body = (lead ? `(?<![${WORD}])` : "") + body + (tail ? `(?![${WORD}])` : "");
     let re;
     try { re = new RegExp(body, "gu"); } catch (e) { re = new RegExp(esc(text), "g"); }
@@ -9224,11 +9217,11 @@ button:disabled{cursor:default;opacity:.55;background:none}
       h.className = "sk-help";
       const u = W.unit;
       h.innerHTML = `<h3>How to search</h3><table>
-<tr><td><code>red door</code></td><td>Both words, in the same ${esch(u)}</td></tr>
-<tr><td><code>"red door"</code></td><td>Exactly those words, together</td></tr>
+<tr><td><code>red door</code></td><td>Both words in the same ${esch(u)}, in any order</td></tr>
+<tr><td><code>"red door"</code></td><td>Exactly as typed: in this order, spaces and all</td></tr>
 <tr><td><code>drag*</code></td><td>Words that start with drag: dragon, dragged</td></tr>
 <tr><td><code>-door</code></td><td>Leave out what has door</td></tr>
-<tr><td><code>sun&nbsp;</code> (a space)</td><td>A space before or after a word is its edge: sun, not sundown</td></tr>
+<tr><td><code>"sun&nbsp;"</code></td><td>In quotes every space counts: sun then a space, not sundown</td></tr>
 </table>`;
       box.append(h);
       return box;
