@@ -421,7 +421,7 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
   <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8.4" r="3.6"/><path d="M4.8 19.6c.5-3.9 3.4-6 7.2-6s6.7 2.1 7.2 6z"/></symbol>
   <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 11v5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="7.8" r="1.1"/></symbol>
 </svg>
-<div id="app" class="app" data-build="V2.0.58">
+<div id="app" class="app" data-build="V2.0.60">
   <header class="top">
     <div class="top-row">
       <!-- The Apps button (Projectspp-kit, WEB-APP-CONVENTIONS.md): top left, before everything, its separator built in;
@@ -454,7 +454,7 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
 </div>
 <input type="file" id="pick-files" multiple hidden>
 <input type="file" id="pick-folder" webkitdirectory multiple hidden>
-<script>window.FM_BUILD = { version: "V2.0.58", built: "2026-11-13 5:35 AM", note: "the Apps button now loads live from the site (Apps kit 1.33): no rebuild needed for future button changes" };</script>
+<script>window.FM_BUILD = { version: "V2.0.60", built: "2026-11-13 9:37 PM", note: "the chooser shows no recent files: the folder alone (Jon)" };</script>
 <script>
 // ---- relay-client.js ----
 /* relay-client.js 3: the PC Relay client (ONE source: Projects\pc-relay\client\relay-client.js; each page's build
@@ -3551,8 +3551,8 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
 // both (Jon, 2026-11-11): tick it, then press Use selected, which sits in the same row as the other buttons and can
 // be clicked once something that fits is ticked. No hint box. The one heading is the window's title: "Book reader:
 // choose a file or folder". With the program's id (the request's `app`) the chooser starts in that program's folder
-// in the person's own files (the one list's `folder`) and shows that program's recent files on top (GET
-// app/<app>/recent). `start` names another folder to open in ("Shared Folder/Reader files", the Book reader's books).
+// in the person's own files (the one list's `folder`); no recent files are shown (removed 2026-11-13, Jon: "get rid of
+// the recent"; the cloud still keeps app/<app>/recent). `start` names another folder to open in ("Shared Folder/Reader files", the Book reader's books).
 // `keep: { label }` adds one unticked checkbox beside Use selected.
 // The choice is fetched from the PC with progress and handed over as real File objects on the request's own
 // MessagePort: one or more files (with each file's id), a folder as its files (fetched as ONE zip and unpacked here, so
@@ -3625,8 +3625,9 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
   }
   // Where the chooser opens. First the folder the program asked for (`start`), when it is there. Else the program's
   // own folder in this person's files (when the one list names one and it is there). Else the top (their own files;
-  // the Shared Folder for a visitor). That program's recent files come first there (the newest five). A `start` that
-  // is not there is said in one line, never passed over in silence. Called again when the browser's account changes.
+  // the Shared Folder for a visitor). No recent files on top (Jon, 2026-11-13: "get rid of the recent"; the list is the
+  // folder, plain). A `start` that is not there is said in one line, never passed over in silence. Called again when
+  // the browser's account changes.
   async function begin() {
     const my = ++round, p = S.pick;
     if (!p) return;
@@ -3635,7 +3636,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     const prog = p.app ? FM.apps.byId(p.app) : null;
     if (prog) { p.name = prog.name; title(); }
     const own = S.me.account && prog && prog.folder ? prog.folder.toLowerCase() : "";
-    const [top, rec] = await Promise.all([p.start || own ? FM.api.list("root").catch(() => null) : null, S.me.account && p.app ? FM.api.recent(p.app).catch(() => []) : []]);
+    const top = p.start || own ? await FM.api.list("root").catch(() => null) : null;
     if (my !== round || S.pick !== p) return;
     let start = "", missing = "";
     if (top && p.start) {
@@ -3651,7 +3652,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     const r = await FM.app.go(start || "root", { noTrail: true });
     if (my !== round || S.pick !== p) return;
     FM.app.resetTrail(); // Back from here goes up, never to wherever the page was before the request
-    if (r && r.folder) { S.recent = (Array.isArray(rec) ? rec : []).filter((x) => x && x.id && x.name).slice(0, 5); S.pickStart = r.folder.id; }
+    if (r && r.folder) { S.recent = []; S.pickStart = r.folder.id; }
     FM.view.render();
     if (missing && r && r.folder) {
       FM.report("pick", `the folder to start in is not there: ${p.start}`, { what: "the chooser opened somewhere else", host: p.name });
