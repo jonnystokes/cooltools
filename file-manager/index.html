@@ -398,6 +398,7 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
   <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15.5V4.5M7.5 9L12 4.5 16.5 9M4.5 15v2.5A2.5 2.5 0 0 0 7 20h10a2.5 2.5 0 0 0 2.5-2.5V15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4.5v11M7.5 11l4.5 4.5 4.5-4.5M4.5 15v2.5A2.5 2.5 0 0 0 7 20h10a2.5 2.5 0 0 0 2.5-2.5V15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-newfolder" viewBox="0 0 24 24"><path d="M3.75 6.5A1.75 1.75 0 0 1 5.5 4.75h3.6c.4 0 .8.16 1.1.45l1.6 1.55h6.7a1.75 1.75 0 0 1 1.75 1.75v9a1.75 1.75 0 0 1-1.75 1.75h-13a1.75 1.75 0 0 1-1.75-1.75z M12 10.5v5M9.5 13h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-newfile" viewBox="0 0 24 24"><path d="M13.5 3.75H7.25A1.75 1.75 0 0 0 5.5 5.5v13a1.75 1.75 0 0 0 1.75 1.75h9.5a1.75 1.75 0 0 0 1.75-1.75V8.5z M13.5 3.75V8.5h4.75 M12 11.5v5M9.5 14h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-rename" viewBox="0 0 24 24"><path d="M4.5 19.5l1-4.2L15.6 5.2a2 2 0 0 1 2.8 0l.4.4a2 2 0 0 1 0 2.8L8.7 18.5z M13.5 7.3l3.2 3.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
   <symbol id="i-move" viewBox="0 0 24 24"><path d="M3.75 6.5A1.75 1.75 0 0 1 5.5 4.75h3.6c.4 0 .8.16 1.1.45l1.6 1.55h6.7a1.75 1.75 0 0 1 1.75 1.75v9a1.75 1.75 0 0 1-1.75 1.75h-13a1.75 1.75 0 0 1-1.75-1.75z M8.5 13h7M13 10.5l2.5 2.5-2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.75" y="8.75" width="11.5" height="11.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.25 5.5A1.75 1.75 0 0 0 13.5 3.75h-8A1.75 1.75 0 0 0 3.75 5.5v8c0 .97.78 1.75 1.75 1.75" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
@@ -421,7 +422,7 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
   <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8.4" r="3.6"/><path d="M4.8 19.6c.5-3.9 3.4-6 7.2-6s6.7 2.1 7.2 6z"/></symbol>
   <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 11v5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="7.8" r="1.1"/></symbol>
 </svg>
-<div id="app" class="app" data-build="V2.0.60">
+<div id="app" class="app" data-build="V2.0.65">
   <header class="top">
     <div class="top-row">
       <!-- The Apps button (Projectspp-kit, WEB-APP-CONVENTIONS.md): top left, before everything, its separator built in;
@@ -454,7 +455,7 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
 </div>
 <input type="file" id="pick-files" multiple hidden>
 <input type="file" id="pick-folder" webkitdirectory multiple hidden>
-<script>window.FM_BUILD = { version: "V2.0.60", built: "2026-11-13 9:37 PM", note: "the chooser shows no recent files: the folder alone (Jon)" };</script>
+<script>window.FM_BUILD = { version: "V2.0.65", built: "2026-11-13 9:54 PM", note: "New file: an empty file with the name and ending typed, beside New folder, in the right-click menu and in the chooser" };</script>
 <script>
 // ---- relay-client.js ----
 /* relay-client.js 3: the PC Relay client (ONE source: Projects\pc-relay\client\relay-client.js; each page's build
@@ -2788,6 +2789,8 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
           box.addEventListener("change", () => { S.pick.keepOn = box.checked; });
           kids.push(h("label.keep-check", null, box, h("span", { text: S.pick.keep.label })));
         }
+        // New file (2026-11-13): after the checkbox, which stays right beside Use selected
+        if (S.view === "folder" && S.writable && S.pick.files !== false) kids.push(tb("newfile", "newfile", "New file", { title: "A new, empty file here: type its name and ending" }));
         if (!phone) kids.push(...tail());
       }
     } else if (S.view === "trash") {
@@ -2810,7 +2813,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       if (!phone) kids.push(h("span.grow"), countEnd(), refreshBtn());
     } else {
       kids.push(backBtn());
-      if (S.view === "folder" && S.writable) kids.push(tb("upload", "upload", "Upload", { key: "U", title: "Upload files (U); or drop them here" }), tb("newfolder", "newfolder", "New folder", { key: "N" }));
+      if (S.view === "folder" && S.writable) kids.push(tb("upload", "upload", "Upload", { key: "U", title: "Upload files (U); or drop them here" }), tb("newfolder", "newfolder", "New folder", { key: "N" }), tb("newfile", "newfile", "New file", { title: "A new, empty file here: type its name and ending" }));
       kids.push(tb("morebtn", "dots", "More"));
       if (!phone) kids.push(...tail());
     }
@@ -2992,6 +2995,30 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       await reload({ select: [r.item && r.item.id] });
       toast(`Made the folder “${v.trim()}”.`);
     } catch (e) { fail(e, "The folder could not be made", { action: "mkdir", name: v.trim(), parent: S.folder && S.folder.name }); }
+  }
+  // New file (Jon, 2026-11-13): an empty file with the name and ending typed (notes.txt, list.md, run.bat), made in this
+  // folder with an upload of no bytes and no conflict rule (a name already there is refused before it is sent). Also in
+  // the chooser a program opens: the new file is ticked, so Use selected hands it over.
+  async function newFile() {
+    if (!S.writable || S.view !== "folder" || !S.folder || (S.pick && S.pick.files === false)) return;
+    const names = new Set(S.items.map((i) => i.name.toLowerCase()));
+    let name = "New file.txt";
+    for (let n = 2; names.has(name.toLowerCase()); n++) name = `New file (${n}).txt`;
+    const v = await FM.ui.prompt("New file", { value: name, select: [0, name.lastIndexOf(".")], okText: "Make file", label: "Name and ending (notes.txt, list.md, run.bat)",
+      validate: (t) => FM.badName(t.trim()) || (names.has(t.trim().toLowerCase()) ? `“${t.trim()}” is already in this folder.` : "") });
+    if (v == null) return;
+    const nm = v.trim();
+    try {
+      const q = "upload?" + new URLSearchParams({ uid: FM.uid(), to: S.folder.id, path: nm, offset: 0, total: 0, mtime: Date.now() });
+      const r = await FM.api.put(q, new Blob([]));
+      const d = r.data || {};
+      if (!r.ok || !d.done || !d.item) throw new FM.ApiError((d.kind || d.code) === "exists" ? `“${nm}” is already in this folder.` : d.why || d.error || `the PC answered ${r.status}`);
+      await reload({ select: [d.item.id], wait: true });          // an upload joins the PC's list at its next scan
+      if (!S.items.some((i) => i.id === d.item.id)) await reload({ select: [d.item.id], wait: true });
+      // In the chooser the person made it to use it: ticked, so Use selected is ready (elsewhere only a person ticks rows).
+      if (S.pick && S.items.some((i) => i.id === d.item.id)) { S.sel.clear(); S.sel.add(d.item.id); S.anchor = d.item.id; FM.view.render(); }
+      toast(`Made the file “${nm}”.`);
+    } catch (e) { fail(e, "The file could not be made", { action: "upload", name: nm, parent: S.folder && S.folder.name }); }
   }
   async function rename(it) {
     if (!FM.canChange(it)) return;
@@ -3233,7 +3260,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     } catch (e) { fail(e, "The trash was not emptied", { action: "empty-trash" }); }
   }
 
-  FM.ops = { fail, account, newFolder, rename, del, pickUp, paste, moveTo, setPrivate, download, open, openWith, openMany, openTabs, restore, purge, emptyTrash, askConflicts, asking };
+  FM.ops = { fail, account, newFolder, newFile, rename, del, pickUp, paste, moveTo, setPrivate, download, open, openWith, openMany, openTabs, restore, purge, emptyTrash, askConflicts, asking };
 })();
 
 // ---- upload.js ----
@@ -4111,7 +4138,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
   function spaceMenu(at) {
     if (S.view !== "folder" || S.pick) return;
     const items = [];
-    if (S.writable) items.push({ icon: "upload", text: "Upload", key: "U", act: () => FM.upload.choose(false) }, { icon: "newfolder", text: "New folder", key: "N", act: FM.ops.newFolder });
+    if (S.writable) items.push({ icon: "upload", text: "Upload", key: "U", act: () => FM.upload.choose(false) }, { icon: "newfolder", text: "New folder", key: "N", act: FM.ops.newFolder }, { icon: "newfile", text: "New file", act: FM.ops.newFile });
     if (S.clip && S.writable) items.push({ icon: "paste", text: "Paste here", key: "Ctrl+V", act: FM.ops.paste });
     items.push("-", { icon: "refresh", text: "Refresh", key: "R", act: refreshList }, ...moreItems());
     FM.ui.menu(items, at);
@@ -4142,7 +4169,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
   // ---- actions by name (the buttons) ---------------------------------------------------------------------------------------
   const ACTS = {
     up, prev: back, refresh: refreshList, retry: () => (relaunch ? relaunch() : reload()), account: () => FM.ops.account(),
-    newfolder: FM.ops.newFolder, upload: () => FM.upload.choose(false),
+    newfolder: FM.ops.newFolder, newfile: FM.ops.newFile, upload: () => FM.upload.choose(false),
     download: () => FM.ops.download(FM.selected()), open: () => FM.ops.openMany(FM.selected()), delete: () => FM.ops.del(FM.selected()),
     paste: FM.ops.paste, clipcancel: () => { S.clip = null; FM.view.render(); },
     restore: () => FM.ops.restore(FM.selected()), purge: () => FM.ops.purge(FM.selected()), empty: FM.ops.emptyTrash,
