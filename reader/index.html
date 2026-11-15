@@ -1,12 +1,12 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
      pastes the Apps kit's tab icons at the ICONS marker, and stamps the version and build time where
-     Book reader V1.0.891 and 2026-11-14 7:49 PM appear. -->
+     Book reader V1.0.897 and 2026-11-15 12:21 AM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Book reader V1.0.891</title>
+<title>Book reader V1.0.897</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
 <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlUlEQVR42p2SzytEURzFz33evBlNtsyCYtRkmrLASqwoKTtlYf4FyQabKSkrZWeNjdmxUrJUlkp+ZNj4tbAgUoyI7/lazLvPw0PN2dzX7X7ePefcrwGA9cn3UVILFLYJ1YgohISIQoQgNfgWqorwRETnptbqi8aHVxkAf8LBysqad0ktVAWLQqgF17ddDQwRtrk2c9+4h7srwcXeO65P5QesUDRmXaQ7PTSkY1iZvoWIGtfenMo4SGUc5PpjeC0ncLn/hs3FJ4gQg2N1aOnwkEgaWFnOsbbDiicNMt1e4CDbG0ciafDYMvP5A59zrVUAGGreCg5sXAwEmaMkoiAVri3MQmHZwqJEvxvXth3pwG872kFEhO8O7Av8FqFSYvC+v99iVXc+60fTUImV2TZLE/dId8bQ2hVHU9aDU/N5i4XODl5wtFPG/nbZxlOzMHJ7LNRseMJitUBzu4cD/2Cupxanu894epDQtCpIlsz88M0oydXQeH4Za0bs+TBIzTtTa/VFoeaFWhKh/gtTlWSJ1PzyYa74AfvjIbDIJi4vAAAAAElFTkSuQmCC">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVR42r2Xe0yVZRzHP+8573u4KxzkvoAkoELkGHkpsGJsbpa0uTabq5htrY3W3Np0mn+53LQ/yjZy+UelXci2LHKzRWtt2Sbr4g0DnRw1EUjwAgocOcA5PL/+OBfe876IOo3vX+/O7z3P53l+1/fRMKl5YzBHRNaLUCciJaLEUAIighJBlPlZiNqUIJbnqXcEEQKixKtEDorQuGF/Rl+EqUUevt8YfFlEdishWayAe4NbbT5R0rCpOaspuoEw/AslaP8zPGITEeq3HMhu0po3BnMQ8c7CyWNtSnxKpEQPx3y24SiRZBHWO8IJN9vwiK1OD2f77MOVICIljvtYancLRwRDt8KT3FBQqXOjX3HpTJDxm/cGj0vUyF/gwp3npOM3P4N9wQgcpQTdevLaN+NJyQy1B1FxXL0wSe+pID0dQS6fD94WjibkFusUVrgoXOgit8RAc4R6TUVtAo2vXY7xgm51ewQOoDkgs8hJZpGTx56PY8Iv9J4O0tMe4EJbgKErk4gIKekOCjwGBQsN8he4iEvUmE7uXD0GrkTQrTGfSa4EjfmVBvMrDaoDwof1gyglrPsgFacxBR1/pwXnUw+hP1NsW8MMF8EcglDCRXS+Y5jBK+OUL3UTn+S0LeQ0tKjbzXCAib1/YIyMoboGQxtftzRqM8OVioZgKtsj2rPDy8nWAXTDwcOL5lJRnY6nKp1Sz1wcznCOhPPhVgrsPx7awCuLw7t22CpBt5ZaRJt3VXD00FXaDg/Q1jpAx87rfLXzHElzdLbuqeSRx1NtYZPhMbQ58baN+F//GoCET1+yliG6tc4jSkkzqFmdS83qXAC6vT7aWgfoPDFESpoRrhKJekD1XOdmTSMJH71oj3v/sC0HYsvQVOcR/fB5N91nfXiq0il/wk1+STL5JcnwqmlhMW16ZBwmFTI8NmMiizUE1iYTUc85Hy37evmxqQeHU6OobA6LngrlQfkyN5pGtMPdjWLLEBxyixA0bHuUfcdreHu3hxVr8hi5McE3u/5hy9ojtLb020Iwk7TURLTUREsZhv6vW1uoWSmpBlUrs6hamQVAf7cf78khKp+eZw/BDEr4eK2lDKc2r1v7d0TbG9roPHGDRdXzqKhy46lOJzs/gez8BJs7b+uBRJcpb8yDSdCtvT2i5c9lM3RtgkMHLvHLt/+iaVBQmoKnOp01bzzIHLcr6k4ArSAN4wUPzsoHomvoiwvsOWCCi8LciGLduXxVNstXZTM2Osnfvw9G+8GBT7pYsCSNZSsyoxkNoCXFEf/e6hhY3NZn7SVpgqupRjRVCX1ng+QU69E/xCc6WVKbwZLaDABGfUESk/UZQ6DNS0bLTLH93tUxFgOfmoamSvhu+xClT4ZGaX65fbJF4OaMtir58FtghOaH36fwHvNz5s9Rjv48EgNXCnQRAiJiRJLR71Oc+MnPsZZRNA1yig0KPS7mV7jIK3VFZ7t5sMS4eFK46A3SeWSEzr9G6To1RjAotpOr0BQO6OEbS9l0HxpqUug+Pc7FU+P8+qXgStQoXOiiyBOHO0+Pvnf22BjXegN4j/jxHvfjH5m0Zfs0cETEq72/5uoOETbf4TecbZ5Pb7sjOCK86xChMXxdmlW4Enwi0ujYsD+jT5Q0hK9LswUXEWnY217W5wDY1JzVJEJ9+Lo0Gyev/6y9rCnmdgywre5SjgjrlUidKCkRwbhP8ICIeEU4KCKNe9vLotfz/wCKU53CYXSQUAAAAABJRU5ErkJggg==">
@@ -15,9 +15,9 @@
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.891";
-  window.APP_BUILT = "2026-11-14 7:49 PM";
-  window.APP_NOTE = "Jon's answers Q1-Q8: Library with Update and Temporary/Add to Library, places follow by themselves (by chapter title too), nothing of a voice before the first Play, messages under the top bar, Search and the cloud dot on the first row on phones";
+  window.APP_VERSION = "Book reader V1.0.897";
+  window.APP_BUILT = "2026-11-15 12:21 AM";
+  window.APP_NOTE = "bug fixes: BUGS 48/52/54/55/56/57/28 note, external-input-bug-find 1-25 (EPUB notes and labels, Continue off mid-reading, the light check, package Stop, edition scripts)";
   window.APP_KEY = "br1";
 </script>
 <style>
@@ -2049,7 +2049,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
         if (it.type === "application/x-dtbncx+xml" && !out.ncx) out.ncx = it.path;
       } else if (t.tag === "spine") out.tocId = a.toc || "";
       else if (t.tag === "itemref" && a.idref) out.spine.push({ id: a.idref, linear: (a.linear || "yes").toLowerCase() !== "no" });
-      else if (t.tag === "reference" && a.href) out.guide.push({ type: (a.type || "").toLowerCase(), path: resolve(base, a.href).path });
+      else if (t.tag === "reference" && a.href) out.guide.push(Object.assign({ type: (a.type || "").toLowerCase() }, resolve(base, a.href)));
       if (t.self) cap = "";
     }
     if (out.tocId && out.items.has(out.tocId)) out.ncx = out.items.get(out.tocId).path;
@@ -2081,13 +2081,16 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
         continue;
       }
       if (inLand) {
-        if (t.tag === "a" && !t.close) { land = { type: typeOf(a), path: resolve(base, a.href).path }; landmarks.push(land); }
+        if (t.tag === "a" && !t.close) { land = Object.assign({ type: typeOf(a) }, resolve(base, a.href)); landmarks.push(land); }
         continue;
       }
       if (!inToc) continue;
       if (t.tag === "li") { if (t.close) { if (stack.length > 1) { if (!top.label && cap) top.label = norm(cap.text); stack.pop(); } cap = null; } else if (!t.self) { const n = { label: "", path: "", frag: "", children: [] }; top.children.push(n); stack.push(n); } }
-      else if ((t.tag === "a" || t.tag === "span") && !t.close && top !== root && !top.label) { cap = { text: "" }; if (t.tag === "a") Object.assign(top, resolve(base, a.href)); }
-      else if ((t.tag === "a" || t.tag === "span") && t.close && cap && top !== root) { if (!top.label) top.label = norm(cap.text); cap = null; }
+      // The label is the whole text of the <a> (or of a label-only <span>), an inline element inside it included:
+      // a capture runs from the tag that started it to that tag's close (external-input-bug-find 14:
+      // <a href="c1.xhtml"><span>1</span> The Beginning</a> was "1").
+      else if ((t.tag === "a" || t.tag === "span") && !t.close && top !== root && !top.label) { if (!cap) cap = { text: "", tag: t.tag, depth: 0 }; else if (t.tag === cap.tag) cap.depth++; if (t.tag === "a") Object.assign(top, resolve(base, a.href)); }
+      else if ((t.tag === "a" || t.tag === "span") && t.close && cap && top !== root && t.tag === cap.tag) { if (cap.depth) { cap.depth--; continue; } if (!top.label) top.label = norm(cap.text); cap = null; }
     }
     return { toc: root.children, landmarks };
   }
@@ -2100,7 +2103,9 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   const SKIP = new Set(["head", "svg", "math", "script", "style", "title", "img", "video", "audio", "object", "iframe", "canvas", "noscript"]);
   const REF = /^\s*[[(]?\s*(?:\d{1,3}|[a-z]|[ivxl]{1,4}|[*†‡§¶#]{1,3})\s*[\])]?\s*$/i;
   const BACK = /^[\s↩↵←⏎^]+$/;
-  function page(src) {
+  // refIds: the ids of the note references met so far in the book (shared by every file, in reading order): a link
+  // that points back at one of them is a footnote's back-link, never a reference (external-input-bug-find 10).
+  function page(src, refIds = new Set()) {
     const out = { blocks: [], title: "", links: 0, linkChars: 0, textChars: 0, targets: new Set() };
     const stack = [];          // { tag, id, note, front, drop, pre, list }
     const caps = [];           // open <a> / <sup> / <title> captures: { tag, href, type, text, cls }
@@ -2158,11 +2163,19 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
           if (tag === "title") { if (!out.title) out.title = norm(text); continue; }
           if (tag === "a") {
             const frag = c.href.includes("#") ? c.href.slice(c.href.indexOf("#") + 1) : "";
-            const ref = /noteref|doc-noteref/.test(c.type) || (frag && (c.sup || REF.test(text)));
-            if (ref) { if (frag) out.targets.add(frag); continue; }
+            // A numbered link inside a note, or one pointing back at a reference's own id, is the note's way back
+            // (InDesign: <a href="#footnote-000-backlink">1</a>; Google Docs: <a href="#ftnt_ref1">[1]</a>): dropped,
+            // and its target (the reference inside the story paragraph) never makes that paragraph a note.
+            if (frag && !/noteref|doc-noteref/.test(c.type) && (refIds.has(frag) || (nearest("note") && (c.sup || REF.test(text))))) continue;
+            const ref = /noteref|doc-noteref/.test(c.type) || (frag && (c.sup || c.supRef || REF.test(text)));
+            if (ref) { if (frag) out.targets.add(frag); if (c.id) refIds.add(c.id); continue; }
             if (/backlink|doc-backlink/.test(c.type) || (frag && BACK.test(text))) continue;
             if (c.href && !/^\s*$/.test(text)) { out.links++; out.linkChars += text.replace(/\s+/g, "").length; }
-          } else if (tag === "sup") { if (REF.test(text) && !/^\s*[a-z]\s*$/i.test(text)) continue; }
+          } else if (tag === "sup") {
+            // A mark dropped inside a link (<a href="#n1"><sup>1</sup></a>) makes that link a reference all the same,
+            // so its footnote is known (external-input-bug-find 20).
+            if (REF.test(text) && !/^\s*[a-z]\s*$/i.test(text)) { const up = caps[caps.length - 1]; if (up && up.tag === "a") up.supRef = true; continue; }
+          }
           else if (tag === "span" || tag === "b" || tag === "strong" || tag === "i" || tag === "em" || tag === "big" || tag === "font") {
             if (c.drop && /^\s*[A-Za-z]\s*$/.test(text) && !cur.length && !caps.length) dropcap = true;
           }
@@ -2191,7 +2204,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
       if (tag === "ul" || tag === "ol" || tag === "dl") fr.list = ++listN;
       const drop = /drop|initial|lettrine|first-?letter|\bcap\b/.test(cls);
       if (tag === "a" || tag === "sup" || tag === "title" || (drop && /^(span|b|strong|i|em|big|font)$/.test(tag))) {
-        caps.push({ tag, href: a.href || "", type: ty, text: "", sup: tag === "a" && inside("sup"), drop });
+        caps.push({ tag, href: a.href || "", id: a.id || "", type: ty, text: "", sup: tag === "a" && inside("sup"), drop });
         fr.cap = true;
         stack.push(fr);
         continue;
@@ -2254,10 +2267,15 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     // The spine, file by file
     const pages = [];        // { path, blocks, title, why (skipped as front matter) }
     const frontByGuide = new Map();
-    for (const g of pkg.guide.concat(landmarks)) if (/\b(cover|toc|copyright-page|doc-toc|doc-cover)\b/.test(g.type)) frontByGuide.set(g.path, g.type.split(/\s+/).find((x) => /cover|toc|copyright/.test(x)));
+    // Only an entry for a whole file marks the file: one pointing at an anchor inside a file (book.xhtml#toc, a one-file
+    // book with its contents at the top) marks the blocks inside that anchor's element only, never the story with them
+    // (external-input-bug-find 13).
+    const frontAnchors = new Map();          // path -> Set of anchors
+    for (const g of pkg.guide.concat(landmarks)) if (g.frag && /\b(cover|toc|copyright-page|doc-toc|doc-cover)\b/.test(g.type)) { if (!frontAnchors.has(g.path)) frontAnchors.set(g.path, new Set()); frontAnchors.get(g.path).add(g.frag); }
+    for (const g of pkg.guide.concat(landmarks)) if (!g.frag && /\b(cover|toc|copyright-page|doc-toc|doc-cover)\b/.test(g.type)) frontByGuide.set(g.path, g.type.split(/\s+/).find((x) => /cover|toc|copyright/.test(x)));
     const tocNames = new Map();
     (function walk(nodes) { for (const n of nodes) { if (n.path && !n.frag && /^(table of )?contents$|^copyright/i.test(n.label)) tocNames.set(n.path, n.label); walk(n.children); } })(tree);
-    const targets = new Set();
+    const targets = new Set(), refIds = new Set();
     let filesRead = 0, notLinear = 0, notText = 0;
     for (const ref of pkg.spine) {
       const it = pkg.items.get(ref.id);
@@ -2265,7 +2283,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
       if (!ref.linear) { notLinear++; continue; }
       if (!/xhtml|html|xml/.test(it.type) && !/\.x?html?$/i.test(it.path)) { notText++; continue; }
       if (!b.has(it.path)) { info.push(`"${it.path}" is in the spine but not in the zip: skipped`); continue; }
-      const pg = page(await b.text(it.path));
+      const pg = page(await b.text(it.path), refIds);
       pg.path = it.path;
       for (const x of pg.targets) targets.add(x);
       const stem = it.path.split("/").pop().replace(/\.[^.]*$/, "");
@@ -2288,6 +2306,8 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
       for (const bl of pg.blocks) {
         bl.file = pg.path; bl.fileTitle = pg.title;
         if (!bl.note && (bl.ids.some((x) => targets.has(x)) || bl.within.some((x) => targets.has(x)))) bl.note = true;
+        const fa = frontAnchors.get(pg.path);
+        if (fa && (bl.ids.some((x) => fa.has(x)) || bl.within.some((x) => fa.has(x)))) bl.front = true;
         bl.skip = bl.navlist || (o.skipFront && (front || bl.front));   // a landmarks / page-list nav never reads; toc / copyright blocks and pages by the choice
         if (!bl.skip) kept++;
         blocks.push(bl);
@@ -2308,7 +2328,13 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     let missing = 0;
     (function walk(nodes, depth, parent) {
       for (const n of nodes) {
-        const at = find(n);
+        let at = find(n);
+        // A heading-only entry (a label with no link, which the EPUB nav allows) over chapters: a part that starts
+        // where its first chapter does (external-input-bug-find 21).
+        if (at < 0 && !n.path && n.label && n.children.length) {
+          const first = (list) => { for (const x of list) { const i = find(x); if (i >= 0) return i; const j = first(x.children); if (j >= 0) return j; } return -1; };
+          at = first(n.children);
+        }
         if (at < 0) { missing++; if (n.children.length) walk(n.children, depth, parent); continue; }
         const e = { label: n.label || "", at, depth, part: false, kids: n.children.length, parent };
         entries.push(e);
@@ -2701,7 +2727,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     };
     const chars = take("characters", (line) => {
       const r = asRegex(line);
-      if (r) return r;
+      if (r) { new RegExp(r.source, "u"); return r; }   // they are joined under the u flag below: a line that is not valid there (/\-/) is a bad line, not a broken list
       const m = /^([0-9A-Fa-f]{4,6})(?:-([0-9A-Fa-f]{4,6}))?(?:\s|$)/.exec(line);
       if (!m) return null;
       const a = parseInt(m[1], 16), b = m[2] ? parseInt(m[2], 16) : a;
@@ -4714,7 +4740,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   function jump() {
     const raw = num.value.trim();
     const n = /^\d+(?:\.\d+)?$/.test(raw) ? Number(raw) : NaN;     // 12.5 is a chapter number too (an interlude)
-    const i = numbered() ? BOOK.indexOf(n) : n >= 1 && n <= BOOK.count ? n - 1 : -1;
+    const i = numbered() ? BOOK.indexOf(n) : Number.isInteger(n) && n >= 1 && n <= BOOK.count ? n - 1 : -1;   // a part is a whole number (external-input-bug-find 4)
     if (i >= 0) { pick(i); num.blur(); return; }
     const first = BOOK.info(0), last = BOOK.info(BOOK.count - 1);
     say(first ? `${raw ? `There is no ${numbered() ? "chapter" : "part"} ${raw}. ` : ""}${numbered() ? `Chapters run ${first.c} to ${last.c}.` : `Parts run 1 to ${BOOK.count}.`}` : "No book is open. Tap Open to pick one.");
@@ -6226,6 +6252,8 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
    chooser starts in its folder and shows its recent files) and `keep` ({ label }: one checkbox beside Use selected);
    its answer carries `ids` (each file's id in the cloud), `folderId` and `keep`. Nothing about the window changed.
    Version 3 (2026-11-12): pick takes `start`, the folder the chooser opens in ("Shared Folder/Reader files").
+   Version 4 (2026-11-14): pick takes `save` ({ name, fixed }: Save as, a folder and a name instead of files); the
+   answer is then { kind: "save", folderId, folder, path, name, replace }. Without `save` nothing changed.
    The window: drag by its title bar, resize from every edge and corner, maximise (button or double-click the
    title), close (button or Escape); its size and place are remembered per name. On a phone it is a full-screen
    sheet, and the phone's Back button closes it. Every message is checked: it must come from the window's own
@@ -6235,7 +6263,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
    origin, local file pages), and refuses to run inside any other site (location.ancestorOrigins). */
 (function (root) {
   "use strict";
-  const VERSION = 3;
+  const VERSION = 4;
   const MIN_W = 320, MIN_H = 220, MARGIN = 8, HEAD = 40;
   const SHEET = "(max-width: 640px), (max-height: 480px) and (pointer: coarse)";
   const KEY = "wk-win:";
@@ -6436,13 +6464,18 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   // comes before the program's own folder, and when it is not there the chooser says so and opens where it would
   // have without it), title, name, onProgress, signal. In the answer, ids[i] is the cloud id of files[i] for kind
   // "files"; for a folder ("folder", "zip") folderId is the folder's id and ids holds "" for each file.
+  // save ({ name, fixed }, version 4): Save as. The chooser asks for a folder and a name (`name` offered; `fixed`: the
+  // person typed it, so it is not made free in each folder) and the answer is { kind: "save", folderId, folder, path,
+  // name, replace } (replace: a file of that name is there and the person said Replace). Only the Cloud File Manager
+  // reads it; accept, multiple, files, folder and keep are ignored then.
   function pick(url, o) {
     o = o || {};
+    const save = o.save && typeof o.save.name === "string" ? { name: o.save.name.slice(0, 200), fixed: !!o.save.fixed } : null;
     return new Promise((resolve, reject) => {
       let done = false, port = null, win = null;
       const end = (fn, v) => { if (done) return; done = true; clearTimeout(timer); if (port) port.close(); if (win) win.close(); fn(v); };
       const timer = setTimeout(() => end(reject, new Error("The file manager did not open within 30 s (no network, or its page could not load).")), 30000);
-      win = open(url, { name: o.name || "file-manager-pick", title: o.title || heading(o), width: o.width, height: o.height, onClose: () => end(resolve, null) });
+      win = open(url, { name: o.name || "file-manager-pick", title: o.title || heading(o, save), width: o.width, height: o.height, onClose: () => end(resolve, null) });
       win.on("ready", () => {
         clearTimeout(timer);
         if (port) port.close();
@@ -6451,13 +6484,15 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
         port.onmessage = (e) => {
           const d = e.data || {};
           if (d.type === "progress") { if (o.onProgress) try { o.onProgress(d); } catch (x) {} }
-          else if (d.type === "picked") end(resolve, result(d));
+          else if (d.type === "picked") { if (!save || d.kind === "save") end(resolve, save ? saved(d) : result(d)); }
           else if (d.type === "cancel") end(resolve, null);
           else if (d.type === "error") end(reject, new Error(d.why || "The file manager could not give the files."));
         };
-        win.post({ wk: 1, type: "pick", version: VERSION, accept: accepts(o.accept), multiple: !!o.multiple, files: o.files !== false, folder: o.folder || false,
+        const req = { wk: 1, type: "pick", version: VERSION, accept: accepts(o.accept), multiple: !!o.multiple, files: o.files !== false, folder: o.folder || false,
           host: String(o.host || document.title || location.host).slice(0, 80), app: String(o.app || "").slice(0, 60),
-          keep: o.keep && o.keep.label ? { label: String(o.keep.label).slice(0, 80) } : null, start: String(o.start || "").slice(0, 400) }, [ch.port2]);
+          keep: o.keep && o.keep.label ? { label: String(o.keep.label).slice(0, 80) } : null, start: String(o.start || "").slice(0, 400) };
+        if (save) Object.assign(req, { accept: [], multiple: false, files: false, folder: false, keep: null, save });
+        win.post(req, [ch.port2]);
       });
       if (o.signal) o.signal.addEventListener("abort", () => end(resolve, null), { once: true });
     });
@@ -6465,10 +6500,15 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   const accepts = (a) => [].concat(a || []).map((x) => String(x).trim().toLowerCase()).filter(Boolean).map((x) => (x === "*" || x.startsWith(".") ? x : "." + x));
   // The window's first title, one short heading: "Book reader: choose a file or folder" (the file manager sets the
   // same words again once it has the request, with the program's name from the one list).
-  function heading(o) {
+  function heading(o, save) {
     const w = o.files === false ? "a folder" : o.folder ? "a file or folder" : o.multiple ? "files" : "a file";
     const who = String(o.host || "").trim().slice(0, 80);
+    if (save) return who ? `${who}: save as` : "Save as";
     return who ? `${who}: choose ${w}` : `Choose ${w}`;
+  }
+  function saved(d) {
+    const s = (v) => (typeof v === "string" ? v : "");
+    return { kind: "save", folderId: s(d.folderId), folder: s(d.folder), path: s(d.path), name: s(d.name), replace: !!d.replace };
   }
   function result(d) {
     const files = Array.isArray(d.files) ? d.files : [];
@@ -8494,7 +8534,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
   const sig = (k) => `${k.c}:${k.p}:${k.at}`;
   // The book's place as it is now, with when it changed: a change not seen yet is stamped `when` (now for a change
   // that just happened here; the saved record's own time for one found later, made by another tab). First seen: 0.
-  // heading: the page is on its way to a place (take, goThere): until it has got there the stored place is still the
+  // heading: the page is on its way to a place (take): until it has got there the stored place is still the
   // old one, and nothing is read off it (else the old place would count as a change made here, with a time).
   let heading = null;
   const head = (row, v) => { heading = { id: row.id, c: v.c, until: Date.now() + 5000 }; };
@@ -8512,9 +8552,8 @@ button:disabled{cursor:default;opacity:.55;background:none}
   const value = (row, k) => { const p = BOOK.posOf(row.id) || {}; return { c: k.c, p: k.p, top: p.c === k.c ? p.top || 0 : 0, pct: p.c === k.c ? p.pct || 0 : 0, at: k.at, title: row.title, t: chapterTitle(row, k.c) }; };
   const clean = (v) => (v && typeof v === "object" && num(v.c) && num(v.p) && num(v.at) ? { c: v.c, p: Math.max(0, Math.floor(v.p)), top: num(v.top) ? Math.max(0, Math.floor(v.top)) : 0, pct: num(v.pct) ? v.pct : 0, at: Math.max(0, v.at), title: String(v.title || ""), t: String(v.t || "") } : null);
   const where = (v) => BOOK.findPlace(v.c, v.t);           // the chapter on this copy: by its title in a book of files
-  // Whose place stands: "mine", "theirs", "same", or "ask" (the header's rule). theirs: the account's; mine: this
-  // device's, when it is this person's. "ask": the two differ and a place with no time is in it: nobody is moved by
-  // itself, nothing is sent over the account's; the page offers the other place.
+  // Whose place stands: "mine", "theirs" or "same" (the header's rule). theirs: the account's; mine: this device's,
+  // when it is this person's. (Until 2026-11-14 a fourth answer, "ask", offered the other place with Go there; Q4.)
   function winner(theirs, mine) {
     if (!mine) return theirs ? "theirs" : "same";
     if (!theirs) return "mine";
@@ -8560,59 +8599,6 @@ button:disabled{cursor:default;opacity:.55;background:none}
     log("book", `follow: "${row.title}" moved to the place from another device: ${now}${wasAt ? ` (it was at ${wasAt} here)` : ""}`);
     READER.say(`Moved to your place from another device: ${now}${wasAt ? ` (you were at ${wasAt} here)` : ""}.`, 5000);   // about 5 s (Q3)
     return true;
-  }
-  // "ask": the page stays where it is, and one line offers the other place with one button. Said once a page for the
-  // same place (again at the next start, while the two still differ), only for the book on the page, only while
-  // nothing is read and the page is in view.
-  const offered = new Set(), waited = new Set();
-  // A window over the page hides the line for the whole 20 s it stays. The first book added on a device opens "Best
-  // voice for this device" by itself, right over it: on a second device the one tap that brings the place from the
-  // phone was never seen (found by the Cool tools upgrade's final check, 2026-11-12; the tests run with that window
-  // switched off). So the line waits until no window is open (the reader's own, or the window kit's: the Apps menu,
-  // the account page, the Cloud File Manager), then the account's place is looked at afresh. Looking for a window
-  // asks nothing of the PC.
-  const covered = () => !!((g.FLOAT && FLOAT.front()) || document.querySelector(".wk-win"));
-  let clearTimer = 0;
-  function whenClear() {
-    if (clearTimer) return;
-    clearTimer = setInterval(() => {
-      if (covered()) return;
-      clearInterval(clearTimer); clearTimer = 0;
-      const row = BOOK.row;
-      if (row && !row.temp) syncBook(row, "no window covers the page now");
-    }, 700);
-  }
-  function offer(row, v) {
-    if (BOOK.current !== row.id || BOOK.quick) return;
-    if (already(row, v)) return;
-    const once = `${row.id}:${v.c}:${v.p}`;
-    if (!stopped()) { if (!waited.has(once)) { waited.add(once); log("book", `follow: "${row.title}" is at another place on another device (chapter ${v.c}); offered when no reading is under way here`); } return; }
-    if (document.visibilityState === "hidden") return;
-    const i = BOOK.indexOf(v.c);
-    if (i < 0) { lacking(row, v); return; }
-    if (offered.has(once)) return;
-    if (covered()) { if (!clearTimer) log("book", `follow: "${row.title}" is at another place on another device (chapter ${v.c}); offered when the window over the page is closed`); whenClear(); return; }
-    offered.add(once);
-    const there = `${BOOK.label(i)} ¶ ${v.p + 1}`, here = placeNow();
-    log("book", `follow: "${row.title}" is at ${there} on another device${here ? `, at ${here} here` : ""}, and a place with no time is in it (from before this version, or never moved here): this device stays; Go there is offered`);
-    READER.say(`On another device you are at ${there}.`, 20000, { label: "Go there", run: () => goThere(row, v) });
-  }
-  // The person's own tap on Go there: the book goes to the place the line named, as a chapter picked by hand does
-  // (READER.pick: a reading under way goes along when the lock is on). It is an act of this moment, like any move
-  // made here: stamped now and looked at against the account's soon. The account's place is still that very place:
-  // its time is this one's (or, when it had none, this moment's goes up, and the account's place has a time too).
-  // The account's has moved on since the line was shown: this one is the newest, and goes up.
-  function goThere(row, v) {
-    if (BOOK.current !== row.id || BOOK.quick) return;
-    const i = BOOK.indexOf(v.c);
-    if (i < 0) { lacking(row, v); return; }
-    const wasAt = placeNow();
-    st.books[row.id] = { c: v.c, p: v.p, at: Date.now(), who: me(), up: "" };
-    save();
-    head(row, v);
-    log("book", `follow: Go there: "${row.title}" goes to ${BOOK.label(i)} ¶ ${v.p + 1}, the place on another device${wasAt ? ` (it was at ${wasAt} here)` : ""}`);
-    READER.pick(i, { p: v.p, top: v.top });
-    changed();
   }
   // This device's place goes up, when the rule still says so on the PC's own copy at that moment (another device may
   // have written meanwhile): what came of it is then looked at once more.
@@ -9453,7 +9439,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
 </script>
 <script>
 // search.js: Search the book (2026-11-13, WORK-QUEUE item 2). The search pop-up is the shared search kit
-// (Projects\search-kit\search-kit.js, copied in by build.py; the editor carries the same one); this file is the
+// (Projects\search-kit\search-kit.js, copied in by build.py); this file is the
 // reader's use of it: the 🔍 button in the top bar (and Ctrl+F, F3 / Shift+F3 for the next and previous place) opens
 // it in a floating window ("search"); the whole open book is the text (BOOK.all: every chapter's title, then its
 // paragraphs), read once and held in memory until another book is opened. Choosing a result goes there like a
@@ -11615,6 +11601,9 @@ button:disabled{cursor:default;opacity:.55;background:none}
     let m; try { m = JSON.parse(ev.data); } catch (e) { return; }
     if (m.type === "hello") {
       st.hello = m; st.signedWS = !!m.check;
+      // The PC's read-ahead, logged when it is new to this page (BUGS 52: the line at Play can only name the fallback
+      // 6 when the PC had not answered yet).
+      if (Number(m.readAhead) && Number(m.readAhead) !== st.saidDepth) { st.saidDepth = Number(m.readAhead); log("pieces", `${pcName()}'s read-ahead: up to ${st.saidDepth} pieces asked at once`); }
       if (m.check) takeSummary(m.check);
       if (m.checking) hold(m.check && m.check.state === "running" ? { step: m.check.step, of: m.check.of, left_s: m.check.left_s, why: m.check.why } : { why: "" });
       else unhold();
@@ -11782,6 +11771,8 @@ button:disabled{cursor:default;opacity:.55;background:none}
     // Pieces asked at once (player.js inFlightMax): the PC's read-ahead (its hello), so the PC always has the
     // next pieces queued and the network's round trip is hidden behind its work (Jon, 2026-10-25; was 2).
     get depth() { return Math.max(1, Number(st.hello && st.hello.readAhead) || 6); },
+    // false while that is the fallback 6 (no hello yet, or the PC is away): the player's line says so (BUGS 52).
+    get depthKnown() { return !!(st.hello && Number(st.hello.readAhead)); },
     // While the loop tries to (re)connect, or the PC checks its voices, the player's per-piece watchdog waits instead
     // of calling the voice stuck.
     get waiting() { return (loop.running && loop.mode === "connect") || !!st.hold; },
@@ -11864,7 +11855,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     describe() { return { runOn: [], precisions: [], pace: true, steps: false, copies: false, speaker: 0 }; },
   };
   const E = ENGINE.register(SPEC);
-  for (const k of ["depth", "waiting", "checking", "status"]) Object.defineProperty(E, k, Object.assign(Object.getOwnPropertyDescriptor(SPEC, k), { configurable: true }));
+  for (const k of ["depth", "depthKnown", "waiting", "checking", "status"]) Object.defineProperty(E, k, Object.assign(Object.getOwnPropertyDescriptor(SPEC, k), { configurable: true }));
 
   globalThis.CLOUDVOICE = {
     check,
@@ -12415,8 +12406,10 @@ button:disabled{cursor:default;opacity:.55;background:none}
   // What is here: Set of stored file addresses.
   async function storedSet() { return new Set((await MODELS.stored()).map((f) => f.url)); }
   const isStored = (lf, have) => have.has(lf.key);
-  // "What my current settings need": the voice's files, its libraries, the MP3 encoder, the listener's.
-  const needs = (values) => (g.VOICEDATA ? VOICEDATA.needed(values || SETTINGS.all()).map((f) => MODELS.href(f.url)) : []);
+  // "What my current settings need": the voice's files, its libraries, the MP3 encoder, the listener's. This device's
+  // own voice even while the PC makes the voice (useMyPC: false here, BUGS 54): a package is for a device without the
+  // internet, and there the PC's voice cannot be reached.
+  const needs = (values) => (g.VOICEDATA ? VOICEDATA.needed(Object.assign({}, values || SETTINGS.all(), { useMyPC: false })).map((f) => MODELS.href(f.url)) : []);
 
   // ---- Making a package ---------------------------------------------------------------------------------
   const slug = (s) => String(s || "other").toLowerCase().replace(/[^a-z0-9@._-]+/g, "-").replace(/^-+|-+$/g, "") || "other";
@@ -12424,8 +12417,14 @@ button:disabled{cursor:default;opacity:.55;background:none}
   async function fetchInto(cache, lf, progress) {
     const name = MODELS.nameOf(lf.url);
     if (MODELS.offline()) throw fail(`${name} is not stored here and ${MODELS.offlineWhy()}, so it cannot go in the package. Switch Never download off (Settings → Storage) with the internet on, or untick it.`);
+    // Stop ends the download itself, both branches of the tee with it (external-input-bug-find 17: Stop waited for the
+    // whole file, since the cache's branch kept it coming).
+    const ac = new AbortController(), watch = setInterval(() => { if (busy && busy.stop) ac.abort(); }, 200);
+    try { return await fetchOne(cache, lf, progress, name, ac); } finally { clearInterval(watch); }
+  }
+  async function fetchOne(cache, lf, progress, name, ac) {
     let res;
-    try { res = await fetch(lf.url, { cache: "default" }); } catch (e) { throw fail(`${name} could not be downloaded: ${e.message}.`); }
+    try { res = await fetch(lf.url, { cache: "default", signal: ac.signal }); } catch (e) { if (busy && busy.stop) throw stopped(); throw fail(`${name} could not be downloaded: ${e.message}.`); }
     if (!res.ok || !res.body) throw fail(`${name} could not be downloaded (HTTP ${res.status}).`);
     const packed = !!res.headers.get("content-encoding"), said = packed ? 0 : Number(res.headers.get("content-length")) || 0;
     const [a, b] = res.body.tee();
@@ -12434,8 +12433,10 @@ button:disabled{cursor:default;opacity:.55;background:none}
     const reader = b.getReader();
     let got = 0, last = 0;
     for (;;) {
-      if (busy && busy.stop) { reader.cancel().catch(() => {}); try { await put; } catch (e) {} throw stopped(); }
-      const { done, value } = await reader.read();
+      if (busy && busy.stop) { ac.abort(); reader.cancel().catch(() => {}); try { await put; } catch (e) {} throw stopped(); }
+      let r;
+      try { r = await reader.read(); } catch (e) { if (busy && busy.stop) { try { await put; } catch (x) {} throw stopped(); } throw fail(`${name} could not be downloaded: ${e.message}.`); }
+      const { done, value } = r;
       if (done) break;
       got += value.length;
       if (progress && performance.now() - last > 150) { last = performance.now(); progress(name, got, said || lf.size); }
@@ -14128,11 +14129,15 @@ button:disabled{cursor:default;opacity:.55;background:none}
     readyBar.style.width = w.ready == null ? "0" : Math.round(Math.min(1, w.ready / METER_SEC) * 100) + "%";
     readyEl.title = w.ready == null ? "The device speaks the text itself: no sound is made ahead." : `${dur(w.ready)} of sound made ahead of what is being read${w.idle ? " (stopped)" : ""}`;
   }
+  // The reading uses sound at the Speed setting's pace (stream.js: playbackRate, 0.25-4), so the voice keeps ahead
+  // only above that figure, not above 1× (BUGS 56).
+  const pace = () => Math.max(0.25, Math.min(4, Number(SETTINGS.get("speed")) || 1));
   function fillSpeed(v) {
+    const p = pace();
     speedEl.textContent = speedText(v);
     speedEl.classList.toggle("none", !(v && v.x));
-    speedEl.classList.toggle("slow", !!(v && v.x && v.x < 1));
-    speedEl.title = v && v.x ? `The voice's speed over the last ${v.window === 60 ? "minute" : v.window + " s"}: ${v.sound} s of sound made in ${v.busy} s of work (${v.chunks} chunk${v.chunks === 1 ? "" : "s"}); above 1× it keeps ahead of the reading` : "";
+    speedEl.classList.toggle("slow", !!(v && v.x && v.x < p));
+    speedEl.title = v && v.x ? `The voice's speed over the last ${v.window === 60 ? "minute" : v.window + " s"}: ${v.sound} s of sound made in ${v.busy} s of work (${v.chunks} chunk${v.chunks === 1 ? "" : "s"}); above ${x1(p)}× ${p === 1 ? "" : "(the Speed setting) "}it keeps ahead of the reading` : "";
   }
   // Each part drawn only when what it SHOWS changed (job 3, C3). The periodic redraws (the player's 1 s tick, the
   // sheet's timer) skip a hidden page, which is drawn again when it is back; a state change or a message still
@@ -14144,7 +14149,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     try { s = provider.status(); } catch (e) { return; }
     const w = s.work, kl = JSON.stringify(s.bar);
     const kr = [readyText(w.ready), readyClass(w), w.ready == null ? "n" : Math.round(Math.min(1, w.ready / METER_SEC) * 100), w.ready == null ? "" : Math.floor(w.ready), !!w.idle].join("|");
-    const ks = JSON.stringify(w.speed && typeof w.speed === "object" ? [w.speed.x, w.speed.sound, w.speed.busy, w.speed.chunks, w.speed.window] : null);
+    const ks = JSON.stringify(w.speed && typeof w.speed === "object" ? [w.speed.x, w.speed.sound, w.speed.busy, w.speed.chunks, w.speed.window, pace()] : null);
     if (kl !== drawn.line) { drawn.line = kl; drawLine(s.bar || { text: "" }); }
     if (kr !== drawn.ready) { drawn.ready = kr; fillReady(w); }
     if (ks !== drawn.speed) { drawn.speed = ks; fillSpeed(w.speed); }
@@ -15170,7 +15175,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     const known = speeds.get(engineKey);
     let why;
     if (hooks.chunk) { chunkSize = hooks.chunk; why = "pinned by the tests"; }
-    else if (cloudOn()) { chunkSize = Math.max(PIECES.CHUNK, (engine && engine.maxChars) || 300); log("pieces", `whole pieces of up to ${chunkSize} characters, up to ${inFlightMax()} asked at once (the PC voice: its read-ahead)`); return; }
+    else if (cloudOn()) { chunkSize = Math.max(PIECES.CHUNK, (engine && engine.maxChars) || 300); log("pieces", `whole pieces of up to ${chunkSize} characters, up to ${inFlightMax()} asked at once (${engine.depthKnown === false ? "until the PC answers: then the PC's read-ahead" : "the PC voice: its read-ahead"})`); return; }
     else if (!onCard()) { chunkSize = PIECES.CHUNK; why = "the voice runs on the processor"; }
     else if (known) { chunkSize = Math.max(CHUNK_FLOOR, Math.min((engine && engine.maxChars) || 300, Math.round(1000 / known.ms / 10) * 10)); why = `about 1 s of card time each: ${engine.name} measured at ${known.x.toFixed(1)}× real time on the card`; }
     else { chunkSize = PIECES.CHUNK; why = "until the voice's speed on the card is measured"; }
@@ -15748,6 +15753,13 @@ button:disabled{cursor:default;opacity:.55;background:none}
   function follow(entry, at) {
     const t = HIGHLIGHT.timing(entry, live ? liveSrc() : source);
     const { part, word, from } = HIGHLIGHT.at(t, Math.max(0, at - (entry.lead || 0)));
+    // The sound runs on into the next chapter while "Keep reading into the next chapter" is off: it was switched off
+    // after that chapter was already made ahead (a live setting; external-input-bug-find 2). The reading ends here,
+    // at the end of the chapter being heard, as it would have with the setting off from the start.
+    if (playhead && entry.ch > playhead.ch && !SETTINGS.get("continueChapters")) {
+      stop(`The end of ${BOOK.label(playhead.ch).toLowerCase()} (Continue into the next chapter is off).`);
+      return;
+    }
     if (!playhead || playhead.id !== entry.id) {
       const list = lists.get(entry.ch), k = list ? QUEUE.indexOf(list, entry.id) : -1, name = k >= 0 ? nameOf(entry.ch, k) : entry.id;
       startLag(name);
@@ -16315,7 +16327,9 @@ button:disabled{cursor:default;opacity:.55;background:none}
     else if (!head) w.push("nothing more is queued");
     if (LISTENER.why()) w.push(LISTENER.why());
     const n = copiesNow(), speed = cloudOn() ? (busyMs() ? stats.sound / (busyMs() / 1000) : 0) : stats.synthMs ? stats.sound / (stats.synthMs / 1000) * n : 0;   // the copies run side by side: together (Use my PC: the pieces asked at once overlap; their span counts once)
-    if (speed && speed < 1.3) w.push(`the voice is slower than the reading (${speed.toFixed(1)}× real time${n > 1 ? ` with ${n} copies together` : ""} over ${stats.chunks} chunks)`);
+    // The reading uses sound at the Speed setting's pace (stream.js), so "slower" is measured against it (BUGS 56).
+    const pace = Math.max(0.25, Math.min(4, Number(SETTINGS.get("speed")) || 1));
+    if (speed && speed < 1.3 * pace) w.push(`the voice is slower than the reading (${speed.toFixed(1)}× real time${n > 1 ? ` with ${n} copies together` : ""} over ${stats.chunks} chunks${pace !== 1 ? `, read at Speed ${pace}×` : ""})`);
     return w.join("; ") || "no reason found";
   }
   STREAM.on("waiting", () => {
@@ -17255,16 +17269,17 @@ button:disabled{cursor:default;opacity:.55;background:none}
     catch (e) { say(`Not saved: ${firstLine(e.message)}. Your changes are still pending; Settings → Storage shows what is stored.`); refuse(changes, `${firstLine(e.message)}.`); return null; }
     for (const k of Object.keys(changes)) pending.delete(k);
     if (refused && refused.names.some((n) => n in changes)) refused = null;
-    if (names.length) apply(names);
+    // An apply that throws (a setting the page cannot take) is said, never a silent Apply (external-input-bug-find 1).
+    if (names.length) { try { apply(names); } catch (e) { log("error", `settings: applying ${names.join(", ")} failed: ${e.message}`); say(`Saved, but it could not be applied: ${firstLine(e.message)}`); return null; } }
     return names;
   }
-  // The "Applied: …" line after a commit (nothing when the commit failed: it said why). Gives the text.
+  // The "Applied: …" line after a commit (nothing when the commit failed: it said why). Gives the text. The store is
+  // not walked again here (BUGS 55): an Apply itself never changes it; a download after it (fetchNow) does that.
   function finish(names, notes, lead) {
     if (!names) return null;
     const text = `${lead ? lead + " " : ""}Applied: ${names.map((n) => LABELS[n] || n).join(", ") || "nothing had changed"}.${notes.length ? " " + notes.join("; ") + "." : ""}`;
     say(text);
     renderBody();
-    refreshNeed();
     return text;
   }
   // Progress over a list of files, by bytes: (name, loaded, total) per file, any order; after `lead`
@@ -18839,7 +18854,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
 //     1.7× average to the ~1.5× it held once warm (1.7 / 1.5), larger than any device's
 //     over-prediction; it keeps both phones "barely" (the RedMagic 1.2× after it and the warm factor,
 //     1.4× warm), as Jon's log reads: it keeps up with little to spare. fp16 and 8-bit on a card were never
-//     measured: rough guesses (×1.6, ×0.5), never suggested (fp16 broke on the Pixel, BUGS 28; 8-bit is
+//     measured: rough guesses (×1.6, ×0.5), never suggested (fp16 broke on the RedMagic, BUGS 28; 8-bit is
 //     garbled on the GTX 1050 Ti). A phone's alu reading can be high (the RedMagic read 536 in Simple
 //     Bench on 2026-10-16, 279 in the Studio): the full benchmark measures the real speed.
 //   - Supertonic on the card: 1/x = 0.039 + 4.13 × steps / alu (3.3); steps from 30 to 100.
@@ -18862,7 +18877,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
   // The setups, in the voice order. card: needs the graphics card; f16: needs shader-f16; guess: never measured.
   const SETUPS = [
     { id: "kokoro-gpu-fp32", engine: "kokoro", runOn: "gpu", precision: "fp32", label: "Kokoro on the graphics card, fp32", card: true, margin: KOKORO_CARD.margin, suggest: true, timing: true },
-    { id: "kokoro-gpu-fp16", engine: "kokoro", runOn: "gpu", precision: "fp16", label: "Kokoro on the graphics card, fp16", card: true, f16: true, margin: 0.3, guess: 1.6, of: "kokoro-gpu-fp32", note: "faster where it works; some cards give broken sound (the Pixel did)" },
+    { id: "kokoro-gpu-fp16", engine: "kokoro", runOn: "gpu", precision: "fp16", label: "Kokoro on the graphics card, fp16", card: true, f16: true, margin: 0.3, guess: 1.6, of: "kokoro-gpu-fp32", note: "faster where it works; some cards give broken sound (the RedMagic phone did)" },
     { id: "kokoro-gpu-q8", engine: "kokoro", runOn: "gpu", precision: "q8", label: "Kokoro on the graphics card, 8-bit", card: true, margin: 0.3, guess: 0.5, of: "kokoro-gpu-fp32", note: "slow on a card, and garbled on the GTX 1050 Ti" },
     { id: "kokoro-cpu-q8", engine: "kokoro", runOn: "cpu", precision: "q8", label: "Kokoro on the processor, 8-bit", margin: 0.25, suggest: true, timing: true, copies: true },
     { id: "piper-low", engine: "piper", runOn: "cpu", voice: "en_US-amy-low", label: "Piper Amy (low) on the processor", k: 0.435, margin: 0.18, suggest: true },
@@ -18877,7 +18892,8 @@ button:disabled{cursor:default;opacity:.55;background:none}
   const stSteps = (xNeed, alu) => Math.max(0, Math.floor((1 / xNeed - ST_CARD.a) * alu / ST_CARD.b + 1e-9));
 
   // input: { f32, multi, alu (MMAC/s, MMAC/s, G FMA/s), card: { ok, f16, why }, wasm (SIMD + shared
-  // memory), mobile, battery (on battery), threads, ceilingMB (measured, or null), voices: { supported,
+  // memory), mobile, battery (on battery), threads, ceilingMB (measured, or null), ceilingCrashed (that figure is where
+  // a memory check that crashed the page stopped), voices: { supported,
   // total, local, enLocal, enOnline }, measured: { id: { x, steps? } } }
   function predict(input) {
     const inp = input || {};
@@ -18906,10 +18922,13 @@ button:disabled{cursor:default;opacity:.55;background:none}
       if (s.f16 && !inp.card.f16) { blocked("needs a card with 16-bit math (shader-f16)"); continue; }
       // Memory: the peak per copy against the measured ceiling; the processor's copies capped to fit.
       const each = peakOf(s.engine, s.runOn, s.precision);
-      let copies = s.copies ? auto : 1;
+      let copies = s.copies ? auto : 1, memNote = "";
       if (ceiling && each) {
-        if (each > ceiling) { blocked(`needs about ${each} MB of working memory; this device's measured ceiling is ${ceiling} MB`); continue; }
-        if (s.copies) copies = Math.max(1, Math.min(copies, Math.floor(ceiling / each)));
+        // A ceiling from a memory check that crashed the page is where it stopped, not a measured limit: a note, as
+        // Apply gives (models.js fitMemory, D2), never "can't run here" (external-input-bug-find 16).
+        if (each > ceiling && inp.ceilingCrashed) memNote = `may not fit: needs about ${each} MB of working memory; the memory check stopped at ${ceiling} MB (the page crashed there, so that may not be the real limit)`;
+        else if (each > ceiling) { blocked(`needs about ${each} MB of working memory; this device's measured ceiling is ${ceiling} MB`); continue; }
+        else if (s.copies && !inp.ceilingCrashed) copies = Math.max(1, Math.min(copies, Math.floor(ceiling / each)));
       }
       if (s.copies) { p.copies = copies; p.label = `${s.label}, ${copies} cop${copies === 1 ? "y" : "ies"}`; }
       p.memMB = each * copies;
@@ -18944,6 +18963,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
         how = `measured by the full benchmark; predicted ${r1(p.predicted)}×`;
       }
       classify(p, how);
+      if (memNote) { p.why += "; " + memNote; p.memWarn = memNote; }
     }
     return out;
   }
@@ -19053,6 +19073,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
 (function () {
   const KEY = (globalThis.APP_KEY || "br1") + "-device";
   const PROBE_KEY = (globalThis.APP_KEY || "br1") + "-memory-probe";
+  const BEAT_FRESH = 3000;          // ms: a memory-check marker beaten this recently belongs to a check still running
   const CEILING_KEY = (globalThis.APP_KEY || "br1") + "-memory-ceiling";
   const hooks = { measure: null, probeStepMB: 64, probeTopMB: 4096, probeDelay: 0, texts: null };   // for the tests
   const median = (a) => { const s = a.filter((x) => x > 0).sort((x, y) => x - y), m = s.length >> 1; return s.length ? (s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2) : 0; };
@@ -19089,10 +19110,14 @@ button:disabled{cursor:default;opacity:.55;background:none}
   // ---- A memory check that crashed (read once at page open) ----------------------------------------
   // A check cut short because the page was closed, reloaded or hidden (`away`, written by probe()'s
   // pagehide / visibilitychange listeners) is not a crash: no ceiling is taken from it, it runs again.
+  // A marker whose heartbeat (`beat`, written every second while a check runs) is fresh is ANOTHER tab's check under
+  // way, not a crash: left alone (external-input-bug-find 19: a second tab took it for a crash and stored the halfway
+  // point as the ceiling).
   let crashed = null, interrupted = null;
   try {
     const p = JSON.parse(localStorage.getItem(PROBE_KEY));
-    if (p && typeof p.reached === "number" && p.away) {
+    if (p && typeof p.reached === "number" && p.beat && Date.now() - p.beat < BEAT_FRESH) log("device", `another tab is checking this device's working memory (${p.reached} MB so far): left to finish`);
+    else if (p && typeof p.reached === "number" && p.away) {
       localStorage.removeItem(PROBE_KEY);
       interrupted = { mb: p.reached, next: p.next, started: p.started, away: p.away };
       log("device", `the memory check did not finish last time: the page was ${p.away} at ${p.reached} MB (not a crash), so nothing is taken as this device's working-memory ceiling; the check runs again`);
@@ -19248,7 +19273,8 @@ button:disabled{cursor:default;opacity:.55;background:none}
     let reached = 0, why = "", next = 0, away = "";
     // The page going away or hidden mid-check is marked in the record, so the next start can tell it
     // from a crash (Android discards hidden tabs; a reload or a closed tab fires pagehide).
-    const mark = () => { try { localStorage.setItem(PROBE_KEY, JSON.stringify({ reached, next, top, started, away })); } catch (e) {} };
+    const mark = () => { try { localStorage.setItem(PROBE_KEY, JSON.stringify({ reached, next, top, started, away, beat: away ? 0 : Date.now() })); } catch (e) {} };
+    const beat = setInterval(() => { if (next && !away) mark(); }, 1000);     // the heartbeat another tab reads
     const onAway = (e) => {
       if (away === "closed or reloaded") return;           // pagehide comes before the last visibilitychange
       away = e.type === "pagehide" ? "closed or reloaded" : e.type === "freeze" ? "frozen in the background" : document.visibilityState === "hidden" ? "hidden" : "";
@@ -19260,7 +19286,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
       while (reached < top) {
         stopped(ctl);
         next = Math.min(top, reached + step);
-        localStorage.setItem(PROBE_KEY, JSON.stringify({ reached, next, top, started, away }));     // BEFORE the step: a crash leaves it
+        localStorage.setItem(PROBE_KEY, JSON.stringify({ reached, next, top, started, away, beat: away ? 0 : Date.now() }));     // BEFORE the step: a crash leaves it
         const r = await stepped(`memory check to ${next} MB`, `growing from ${reached} MB by ${next - reached} MB, every page touched`,
           () => w.ask({ pages: (next - reached) * 16, from: reached * 1048576 }, 30000),
           (x) => (x.refused ? `the browser gave no more: ${x.refused}` : `reached ${Math.round(x.mb)} MB`));
@@ -19270,12 +19296,24 @@ button:disabled{cursor:default;opacity:.55;background:none}
         if (hooks.probeDelay) await sleep(hooks.probeDelay);
       }
     } catch (e) { if (e.stopped || (ctl && ctl.cancelled)) { localStorage.removeItem(PROBE_KEY); w.kill(); throw e; } why = e.message; }
-    finally { w.kill(); for (const ev of EVENTS) (ev === "visibilitychange" ? document : window).removeEventListener(ev, onAway); }
+    finally { clearInterval(beat); w.kill(); for (const ev of EVENTS) (ev === "visibilitychange" ? document : window).removeEventListener(ev, onAway); }
     localStorage.removeItem(PROBE_KEY);
     const c = { mb: reached, when: Date.now(), top: reached >= top, why: reached >= top ? `the check's top, ${top} MB, was reached` : why };
     if (reached > 0) localStorage.setItem(CEILING_KEY, JSON.stringify(c.top ? { mb: reached, when: c.when, top: true } : { mb: reached, when: c.when }));
     log("device", `working-memory ceiling: ${c.top ? "at least " : ""}${reached} MB (${c.why}; ${((c.when - started) / 1000).toFixed(1)} s)`);
     return c;
+  }
+
+  // Android lists the browser's voices only once its speech engine is awake: with none listed, wake it as the
+  // browser-voice engine's own init does (a silent empty utterance) and wait up to 4 s for the list, so the count is
+  // not 0 on a device that has them (external-input-bug-find 12).
+  async function wakeVoices() {
+    const ss = globalThis.speechSynthesis;
+    if (!ss || typeof SpeechSynthesisUtterance === "undefined" || DEVICE.voices().total) return;
+    log("device", "no browser voices listed yet: waking the speech engine with a silent empty utterance, then up to 4 s for the list");
+    try { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; ss.speak(u); } catch (e) {}
+    const t0 = performance.now();
+    while (performance.now() - t0 < 4000 && !DEVICE.voices().total) await new Promise((r) => setTimeout(r, 200));
   }
 
   // ---- The light benchmark ---------------------------------------------------------------------------
@@ -19307,9 +19345,10 @@ button:disabled{cursor:default;opacity:.55;background:none}
     let ceiling = null;
     if (opts.probe === false) { const c = ceilingNow(); ceiling = c ? { mb: c.mb, when: c.when, top: !!c.top, crashed: !!c.crashed, why: c.crashed ? "from the check that crashed" : "measured before" } : null; }
     else { say("Measuring the working memory…", 0.75); ceiling = await probe((mb, top) => say(`Measuring the working memory: ${r0(mb)} MB…`, 0.75 + 0.23 * mb / top), ctl); }
+    await wakeVoices();
     const voices = DEVICE.voices();
     const input = { f32: s.f32 || 0, multi: s.multi || 0, alu: s.alu || 0, card: { ok: !!s.cardOk, f16: !!(gates.card && gates.card.f16), why: s.cardWhy || (gates.card && gates.card.why) || "" },
-      wasm: gates.wasm.ok, mobile: gates.mobile, battery: gates.onBattery, threads: gates.threads, ceilingMB: ceiling && ceiling.mb > 0 && !ceiling.top ? ceiling.mb : null, voices };
+      wasm: gates.wasm.ok, mobile: gates.mobile, battery: gates.onBattery, threads: gates.threads, ceilingMB: ceiling && ceiling.mb > 0 && !ceiling.top ? ceiling.mb : null, ceilingCrashed: !!(ceiling && ceiling.crashed), voices };
     const predictions = RULES.predict(input), suggestion = RULES.suggest(predictions, input);
     const old = record();
     const rec = save({ version: globalThis.APP_VERSION || "", when: Date.now(), seconds: +((performance.now() - t0) / 1000).toFixed(1), gates: { browser: gates.browser, mobile: gates.mobile, onBattery: gates.onBattery, threads: gates.threads, memoryGB: gates.memoryGB, card: gates.card, wasm: gates.wasm, mediaSource: gates.mediaSource, elementTiming: gates.elementTiming, storage: gates.storage, voices },
@@ -19607,6 +19646,13 @@ button:disabled{cursor:default;opacity:.55;background:none}
 
   // ---- The runs -----------------------------------------------------------------------------------
   async function runLight() {
+    // Check this phone again during a reading: the scores and the memory ceiling would be measured beside the voice
+    // at work, and saved as this device's (external-input-bug-find 18). The full test's rule: stop the reading first.
+    if (reason === "recheck" && globalThis.PLAYER && PLAYER.state !== "stopped") {
+      rec = BENCH.record(); phase = "ready"; render();
+      say("Stop the reading first: the check needs the processor and the memory to itself. Then Check now again.");
+      return;
+    }
     if (ctl) ctl.cancel();
     const my = ctl = BENCH.control();
     phase = "light"; fullNote = ""; armedAt = 0;

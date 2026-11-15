@@ -655,7 +655,7 @@ ul.facts b { font-weight: 600; }
     <div id="reader"></div>
     <p class="foot">Scores: Jon's PC (Ryzen 7 2700X, GTX 1050 Ti, Chrome 155) = 1000; higher is faster. The suggestion uses the Book reader's own rules (its rules.js, copied in by build.py), so it matches the reader's first-run check. "Runs well" = 1.3x real time after the model's margin; "barely" = keeps up with little to spare; phones, tablets and laptops on battery count 0.8 of their speed for warming up. The reader's full check also measures memory, which this short test does not.</p>
   </div>
-  <p class="ver" id="sb-ver">Simple Bench V1.0.8 · built 2026-11-13 5:35 AM</p>
+  <p class="ver" id="sb-ver">Simple Bench V1.0.9 · built 2026-11-14 11:30 PM</p>
 </main>
 
 <script>
@@ -766,7 +766,7 @@ self.onmessage = function (ev) {
 </script>
 
 <script id="sb-rules">
-// Copied by build.py from the Book reader (Walker of Worlds/src/rules.js), reader version 646. Do not edit here: change the reader's file and run python build.py.
+// Copied by build.py from the Book reader (Walker of Worlds/src/rules.js), reader version 891. Do not edit here: change the reader's file and run python build.py.
 // rules.js: the benchmark's rules, pure (no page, no device: test/rules.mjs runs this file in Node).
 // RULES.predict(input) turns the light benchmark's scores into a prediction for every voice setup, in
 // the PLAN.md voice order (best-sounding first), each marked "runs well" / "barely" / "too slow" /
@@ -912,19 +912,10 @@ self.onmessage = function (ev) {
   // time (C.aboveBar after the warm factor, no model margin), given its fastest such setup, even when
   // its label is "barely" (the highlight then goes off: the card matters more than the highlight).
   // No model voice above it: the browser's voices; none listed: the best model voice that keeps up.
+  // This device's own voice only: the PC keeps a voice of its own (Jon's plan 2026-11-08, 3.3), so the suggestion no
+  // longer follows Use my PC (it did from 2026-10-26, when one voice setting served both).
   function suggest(list, input) {
     const inp = input || {};
-    // Use my PC on (2026-10-26, external-input.md §5): the PC makes the voice, so this device's speed is beside the
-    // point; the best-sounding voice the PC runs is Kokoro fp32 on its graphics card (about 6× real time through
-    // CUDA, 3.6× through WebGPU). The device's own benchmark only ever decided browser voice against model voice.
-    if (inp.useMyPC) {
-      const k = list.find((p) => p.id === "kokoro-gpu-fp32") || {};
-      const setup = { id: "pc-kokoro-fp32", engine: "kokoro", runOn: "gpu", precision: "fp32", voice: null, label: "Kokoro on your PC's graphics card, fp32 (Use my PC is on)", status: "runs well", level: "runs well",
-        x: 0, keep: 0, margin: 0, warm: 1, suggest: true, timing: true, guess: false, steps: null, copies: null, note: "", pc: true, why: "the PC makes the voice; this device's speed does not matter" };
-      const here = k.status ? ` (on this device itself Kokoro would ${{ "runs well": "run well", barely: "barely keep up", "too slow": "be too slow" }[k.status] || "be unable to run"})` : "";
-      return { id: setup.id, setup, level: "runs well", settings: { voice: "kokoro:af_heart", runOn: "gpu", precision: "fp32", numbersToWords: false },
-        reason: `Use my PC is on: your PC makes the voice, so this device's own speed does not matter${here}. Kokoro fp32 on the PC's graphics card is the best-sounding voice the PC runs.` };
-    }
     let pick = null;
     for (const e of ENGINES) {
       const c = list.filter((p) => p.engine === e && p.suggest && p.status !== "can't run here" && p.keep >= C.aboveBar);
@@ -953,10 +944,10 @@ self.onmessage = function (ev) {
     if (pick.runOn) v.runOn = pick.runOn;
     if (pick.precision) v.precision = pick.precision;
     if (pick.engine === "supertonic") v.steps = pick.steps;
-    if (pick.copies) v.copies = pick.copies < autoCopies(inp.threads) ? pick.copies : null;
     v.numbersToWords = pick.engine === "supertonic";      // Jon, 2026-10-23: on for Supertonic only, off for every other voice
     // The word highlight is never part of the suggestion (Jon, 2026-10-20): it is Off by default and only
-    // a choice in Settings → Word highlight turns it on. (BUGS 31's rule, Off under 2.5× on a card, is
+    // a choice in Settings → Reading turns it on. Copies are automatic (2026-11-09: no setting; VOICEWORK.copies
+    // caps them by the measured memory the same way). (BUGS 31's rule, Off under 2.5× on a card, is
     // moot while it is Off anyway.)
     return { id: pick.id, setup: pick, level, settings: v, reason };
   }
@@ -1123,7 +1114,7 @@ self.onmessage = function (ev) {
   // each warmed 150 ms, all starting one shared moment; two windows (0.3 s fast, 0.6 s medium, 1 s slow
   // device class from f32); the total of the workers, averaged over the two windows.
   async function testMulti(f32) {
-    var hc = navigator.hardwareConcurrency || 2, k = Math.max(1, Math.min(64, hc));
+    var hc = navigator.hardwareConcurrency || 2, k = Math.max(1, Math.min(32, hc));   // at most 32, as the reader's bench.js
     var cls = !(f32 > 0) ? "medium" : f32 >= 9800 ? "fast" : f32 >= 1400 ? "medium" : "slow";
     var win = cls === "slow" ? 1000 : cls === "medium" ? 600 : 300, pool = [], short = "";
     try {
@@ -1243,7 +1234,7 @@ self.onmessage = function (ev) {
     if (!navigator.gpu || !GBU) { out.why = "no WebGPU in this browser"; return out; }
     var a = null;
     try { a = await withTimeout(navigator.gpu.requestAdapter({ powerPreference: "high-performance" }), 8000, "requestAdapter"); } catch (e) {}
-    if (!a) try { a = await withTimeout(navigator.gpu.requestAdapter({ featureLevel: "compatibility" }), 8000, "requestAdapter (compatibility)"); } catch (e) {}
+    // No "compatibility" fallback: the reader asks only for a normal adapter, so a compatibility-only card is one it cannot use.
     if (!a) { out.why = "WebGPU gave no adapter (no graphics driver, or the browser blocks WebGPU on this card)"; return out; }
     var info = a.info || null;
     if (!info && a.requestAdapterInfo) { try { info = await a.requestAdapterInfo(); } catch (e) {} }
@@ -1277,7 +1268,7 @@ self.onmessage = function (ev) {
   }
 
   // ---------- Browser voices: read the list properly (voiceschanged plus polling, up to about 5 s; Android
-  // lists nothing until its engine is awake, so a silent empty utterance nudges it, as the reader does).
+  // lists nothing until its engine is awake, so a silent empty utterance nudges it, as the reader does, then up to 6 s more).
   var VL = { list: [] };
   function readVoices() { try { var v = window.speechSynthesis.getVoices() || []; if (v.length >= VL.list.length) VL.list = Array.prototype.slice.call(v); } catch (e) {} }
   if (window.speechSynthesis) {
@@ -1288,11 +1279,11 @@ self.onmessage = function (ev) {
   async function testVoices() {
     var ss = window.speechSynthesis;
     if (!ss || typeof SpeechSynthesisUtterance === "undefined") return { supported: false };
-    var t0 = now(), nudged = false;
+    var t0 = now(), nudged = false, until = 5000;
     readVoices();
-    while (now() - t0 < 5000 && !hasLocal(VL.list)) {
+    while (now() - t0 < until && !hasLocal(VL.list)) {
       if (!VL.list.length && !nudged && now() - t0 > 800) {
-        nudged = true;
+        nudged = true; until = now() - t0 + 6000;   // after the nudge, wait 6 s as the reader does (webspeech.js)
         try { var u = new SpeechSynthesisUtterance(" "); u.volume = 0; ss.speak(u); } catch (e) {}
       }
       await sleep(200);
@@ -1372,8 +1363,22 @@ self.onmessage = function (ev) {
   function pickText(s) {
     var p = s.setup;
     if (p.engine === "webspeech") return "The browser's own voices";
-    var t = p.engine === "kokoro" ? "Kokoro af_heart on the " + (p.runOn === "gpu" ? "graphics card" : "processor") + ", " + (p.precision === "fp32" ? "fp32" : "8-bit") + (s.settings.copies ? ", " + s.settings.copies + " copies" : "") : p.label;
+    var t = p.engine === "kokoro" ? "Kokoro af_heart on the " + (p.runOn === "gpu" ? "graphics card" : "processor") + ", " + (p.precision === "fp32" ? "fp32" : "8-bit") : p.label;
     return t + " (" + s.level + ", about " + fx(p.x, 1) + "x real time)";
+  }
+  // Why nothing was suggested: a test that did not finish, no speech synthesis, or no voice fast enough and none listed.
+  function nothingWhy(res) {
+    if (!res.f32.median || !res.multi.total) return "A processor test did not finish, so the model voices were not measured. Run the test again (keep the screen on and this page in front).";
+    if (!res.voices.supported) return "No model voice keeps up, and this browser has no speech synthesis for its own voices. Try Chrome or another browser.";
+    return "No model voice keeps up and this device listed no browser voices. Install a text-to-speech voice (Android: Settings, Accessibility, Text-to-speech output), then run the test again.";
+  }
+  // The time for people: local, 12-hour with AM/PM (Jon's rule), with the time zone.
+  function whenText(iso) {
+    var d = new Date(iso);
+    if (isNaN(d)) return iso;
+    var p = function (n) { return (n < 10 ? "0" : "") + n; }, h = d.getHours() % 12 || 12, tz = "";
+    try { tz = (d.toLocaleTimeString("en-US", { timeZoneName: "short" }).match(/\s([A-Z][A-Z0-9+:-]*)$/) || [])[1] || ""; } catch (e) {}
+    return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + " " + h + ":" + p(d.getMinutes()) + ":" + p(d.getSeconds()) + " " + (d.getHours() < 12 ? "AM" : "PM") + (tz ? " " + tz : "");
   }
   function render(res) {
     var e = res.env, d = res.decision || {}, sc = d.scores || {}, cards = [], gp = res.gpu, v = res.voices;
@@ -1398,7 +1403,7 @@ self.onmessage = function (ev) {
     if (res.decisionError) r = '<div class="line"><div class="pick">The rules failed: ' + esc(res.decisionError) + "</div></div>";
     else {
       var s = d.suggestion;
-      r += '<div class="line"><div class="tag">The reader would suggest</div>' + (s ? '<div class="pick">' + esc(pickText(s)) + '</div><p>' + esc(s.reason) + "</p>" : '<div class="pick">Nothing: no voice can run here</div><p>No model voice keeps up and this device listed no browser voices. Install a text-to-speech voice (Android: Settings, Accessibility, Text-to-speech output), then run the test again.</p>') +
+      r += '<div class="line"><div class="tag">The reader would suggest</div>' + (s ? '<div class="pick">' + esc(pickText(s)) + '</div><p>' + esc(s.reason) + "</p>" : '<div class="pick">Nothing: no voice can run here</div><p>' + esc(nothingWhy(res)) + '</p>') +
         '<div class="note">' + esc(OPTIONAL) + "</div></div>";
       r += '<div class="card"><h3>Every voice setup on this device (best-sounding first)</h3><ul class="facts">' + d.list.map(function (p) {
         return '<li><b>' + esc(p.label) + ':</b> <span class="' + STCLASS[p.status] + '">' + esc(p.status) + "</span>" + (p.x > 0 ? ", about " + esc(fx(p.x, 1)) + "x real time" : "") +
@@ -1412,7 +1417,7 @@ self.onmessage = function (ev) {
   function report(res) {
     var e = res.env, d = res.decision || {}, sc = d.scores || {}, gp = res.gpu, v = res.voices, o = [];
     o.push("Simple Bench results");
-    o.push(res.when.replace("T", " ").slice(0, 19) + " UTC | test took " + res.seconds + " s | opened from " + res.page);
+    o.push(whenText(res.when) + " | test took " + res.seconds + " s | opened from " + res.page);
     o.push("Device: " + deviceText(e));
     o.push("");
     o.push("Scores (Jon's PC = 1000)");
@@ -1454,7 +1459,10 @@ self.onmessage = function (ev) {
   }
   function save() {
     var e = state.results.env, b = (e.browser && e.browser.name || "browser").toLowerCase().replace(/[^a-z0-9]+/g, "-");
-    var name = "simple-bench-" + e.os.toLowerCase() + "-" + b + "-" + state.results.when.slice(0, 16).replace(/[^0-9]+/g, "-") + ".txt";
+    // Local date and time to the second, plus the thread count, so two devices saving at once get different names.
+    var d = new Date(state.results.when), p = function (n) { return (n < 10 ? "0" : "") + n; };
+    var stamp = isNaN(d) ? state.results.when.replace(/[^0-9]+/g, "-") : d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + "-" + p(d.getHours()) + "-" + p(d.getMinutes()) + "-" + p(d.getSeconds());
+    var name = "simple-bench-" + e.os.toLowerCase() + "-" + b + (e.threads ? "-" + e.threads + "t" : "") + "-" + stamp + ".txt";
     try {
       var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([state.text], { type: "text/plain" })); a.download = name;
       document.body.appendChild(a); a.click();

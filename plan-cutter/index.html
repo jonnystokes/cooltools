@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-build="built" data-version="V1.0.13">
+<html lang="en" data-build="built" data-version="V1.0.14">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -219,8 +219,13 @@ input.ws-name:focus { border-color: var(--accent); background: var(--canvas); ou
   .side-close { position: absolute; right: 6px; top: 4px; }
   .snapbar { bottom: 36px; max-width: calc(100% - 70px); }
   .viewbar { bottom: 36px; }
-  .status .st-input { width: 140px; }
-  .status .st-input:focus { width: 180px; }
+  /* the status row wraps on a phone, so the ft / in pair, the value box and the solver's words never push the page
+     wider than the screen: the hint has a row of its own, the value box takes what is left, the solver state wraps */
+  .status { flex-wrap: wrap; gap: 3px 6px; padding: 3px 6px; }
+  .st-hint { flex: 1 0 100%; }
+  .st-hint:empty { display: none; }
+  .status input.st-input, .status input.st-input:focus { flex: 1 1 80px; width: 80px; min-width: 64px; }
+  .st-solve { white-space: normal; min-width: 0; }
   .st-pos { display: none; }
 }
 @media (min-width: 760px) { .side-close { display: none; } }
@@ -426,7 +431,12 @@ textarea.script { font: 12.5px/1.4 var(--mono); min-height: 90px; }
 .screen-main .pane { background: var(--panel); border-left: 1px solid var(--line); overflow-y: auto; padding: 10px 12px 20px; zoom: var(--ui); }
 .screen-main .draw { position: relative; min-width: 0; min-height: 0; overflow: hidden; background: var(--canvas); }
 .screen-main .draw canvas { position: absolute; inset: 0; touch-action: none; display: block; }
-.d-pts { display: grid; grid-template-columns: auto 1fr 1fr auto; gap: 4px 6px; align-items: center; font-size: 12.5px; }
+/* the Library: list | drawing | the piece's fields (a phone stacks them, below) */
+.screen-main.lib-main { grid-template-columns: 240px minmax(0, 1fr) 320px; }
+.lib-main .pane.lib { border-left: 0; border-right: 1px solid var(--line); }
+.field .inline.wrap { flex-wrap: wrap; row-gap: 4px; }
+.d-pts { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 4px 6px; align-items: center; font-size: 12.5px; }
+.d-xy { display: flex; flex-wrap: wrap; gap: 2px 6px; min-width: 0; }
 .d-pts input { min-height: 28px; padding: 3px 6px; }
 .d-pts .i { color: var(--muted); text-align: right; }
 .cs-list { font-size: 13px; }
@@ -439,6 +449,10 @@ textarea.script { font: 12.5px/1.4 var(--mono); min-height: 90px; }
 @media (max-width: 759px) {
   .screen-main { grid-template-columns: 1fr; grid-template-rows: 1fr auto; }
   .screen-main .pane { border-left: 0; border-top: 1px solid var(--line); max-height: 42vh; }
+  /* the Library on a phone: the list a short strip on top, the drawing, then the fields */
+  .screen-main.lib-main { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(160px, 1fr) auto; }
+  .lib-main .pane.lib { border-right: 0; border-top: 0; border-bottom: 1px solid var(--line); max-height: 24vh; }
+  .lib-main > .pane:last-child { max-height: 36vh; }
 }
 
 /* Measure pieces: list | drawing | measurements */
@@ -478,7 +492,8 @@ textarea.script { font: 12.5px/1.4 var(--mono); min-height: 90px; }
 @media (max-width: 759px) {
   .ms { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; }
   .ms-list { display: flex; gap: 6px; overflow-x: auto; overflow-y: hidden; border-right: 0; border-bottom: 1px solid var(--line); padding: 6px; }
-  .ms-head, .ms-group, .ms-list .btn-row { display: none; }
+  .ms-head, .ms-group { display: none; }
+  .ms-list .btn-row { flex: none; align-self: center; margin: 0; }   /* Print all measured: at the end of the strip */
   .ms-item { flex: none; }
   .ms-meta .sub { display: none; }
   .ms-pane { border-left: 0; border-top: 1px solid var(--line); max-height: 40vh; }
@@ -494,7 +509,8 @@ textarea.script { font: 12.5px/1.4 var(--mono); min-height: 90px; }
   .cs-page:last-child { page-break-after: auto; }
   .cs-page h1 { font-size: 20pt; margin: 0 0 4pt; }
   .cs-page .meta { color: #333; margin-bottom: 8pt; }
-  .cs-page svg { width: 100%; height: auto; max-height: 150mm; }
+  /* the drawing: as wide as the page, at most 150 mm tall, never stretched (cutsheet.js makes it) */
+  .cs-page img { display: block; width: auto; height: auto; max-width: 100%; max-height: 150mm; margin: 0 auto; }
   .cs-page table { width: 100%; border-collapse: collapse; margin-top: 8pt; }
   .cs-page th, .cs-page td { border: 1px solid #999; padding: 3pt 5pt; text-align: left; font-variant-numeric: tabular-nums; }
   .cs-page th { background: #eee; }
@@ -3652,12 +3668,16 @@ button:disabled{cursor:default;opacity:.55;background:none}
     var cuts = segs.map(function () { return [0, 1]; });
     for (var i = 0; i < segs.length; i++) {
       for (var j = i + 1; j < segs.length; j++) {
-        var x = G.segSeg(segs[i].a, segs[i].b, segs[j].a, segs[j].b);
+        // Parallel is judged relative to the lengths: a wall that runs along a board edge to within floating-point
+        // noise (as the solver leaves it after pinning the board's corners onto the wall) is collinear with it, not
+        // an ill-conditioned crossing that split the two at different points and lost a piece.
+        var r = G.sub(segs[i].b, segs[i].a), s = G.sub(segs[j].b, segs[j].a);
+        var parallel = Math.abs(G.cross(r, s)) <= 1e-9 * G.len(r) * G.len(s);
+        var x = parallel ? null : G.segSeg(segs[i].a, segs[i].b, segs[j].a, segs[j].b);
         if (x) { cuts[i].push(x.t); cuts[j].push(x.u); }
         else {
           // collinear overlap: split each at the other's endpoints that lie on it
-          var r = G.sub(segs[i].b, segs[i].a), s = G.sub(segs[j].b, segs[j].a);
-          if (Math.abs(G.cross(r, s)) < 1e-12 && Math.abs(G.distToLine(segs[j].a, segs[i].a, segs[i].b)) < EPS) {
+          if ((parallel || Math.abs(G.cross(r, s)) < 1e-12) && Math.abs(G.distToLine(segs[j].a, segs[i].a, segs[i].b)) < EPS && Math.abs(G.distToLine(segs[j].b, segs[i].a, segs[i].b)) < EPS) {
             [segs[j].a, segs[j].b].forEach(function (p) { var t = G.projectT(p, segs[i].a, segs[i].b); if (t > 0 && t < 1) cuts[i].push(t); });
             [segs[i].a, segs[i].b].forEach(function (p) { var t = G.projectT(p, segs[j].a, segs[j].b); if (t > 0 && t < 1) cuts[j].push(t); });
           }
@@ -4697,8 +4717,12 @@ button:disabled{cursor:default;opacity:.55;background:none}
     // opts.hold: nodes locked for this solve only (a node drag holds the side already placed)
     var holdIds = {}; (opts.hold || []).forEach(function (id) { holdIds[id] = true; });
     surface.nodes.forEach(function (n) { saved[n.id] = n.lock; var l = holdIds[n.id] ? "xy" : lockOf(surface, n.id); if (l) n.lock = l; else delete n.lock; });
+    var report;
+    // the stored locks are put back however the solve ends: a solve that threw used to leave a held node's
+    // temporary lock behind for good
+    try {
     var sys = build(surface, ws, opts);
-    var extra = [], report = { ok: true, iterations: 0, conflicts: [], redundant: [], errors: sys.errors, status: {}, floating: false, params: 0, equations: 0 };
+    var extra = []; report = { ok: true, iterations: 0, conflicts: [], redundant: [], errors: sys.errors, status: {}, floating: false, params: 0, equations: 0 };
     var x0 = null;   // the starting vector is taken after the drag terms, which may add parameters
 
     // drag: one {ref, target, grab?, rotate?} or a list of them (a line: both ends).
@@ -4791,9 +4815,11 @@ button:disabled{cursor:default;opacity:.55;background:none}
     var anchored = surface.nodes.some(function (n) { return n.lock; }) || surface.pieces.some(function (p) { return p.fixed; }) ||
       surface.constraints.some(function (k) { return k.enabled !== false && k.refs.indexOf(M.ORIGIN) >= 0; }) || surface.dims.some(function (d) { return d.driving && d.refs.indexOf(M.ORIGIN) >= 0; });
     report.floating = !anchored && surface.lines.length > 0;
-    // restore the stored locks (effective locks were temporary)
-    surface.nodes.forEach(function (n) { if (saved[n.id]) n.lock = saved[n.id]; else delete n.lock; });
-    M.touch(surface);
+    } finally {
+      // restore the stored locks (effective locks were temporary)
+      surface.nodes.forEach(function (n) { if (saved[n.id]) n.lock = saved[n.id]; else delete n.lock; });
+      M.touch(surface);
+    }
     S.last = report;
     return report;
   };
@@ -4944,9 +4970,10 @@ button:disabled{cursor:default;opacity:.55;background:none}
     PC.model.touch(s);
   }
   function applyChanges(changes, direction) {
-    // deletions of surfaces last on undo-insert, first on delete; order by key length keeps parents first
+    // parents first in both directions (shorter keys first): a surface that comes back is there before its nodes,
+    // lines and pieces are put into it; a surface that goes takes its contents with it, so the order of those
+    // deletions does not matter. (Undo used to go longest first, and a removed surface came back empty.)
     var list = changes.slice().sort(function (a, b) { return a.k.length - b.k.length; });
-    if (direction === "before") list.reverse();
     list.forEach(function (c) { applyEntry(c.k, direction === "before" ? c.before : c.after); });
   }
 
@@ -5020,6 +5047,8 @@ button:disabled{cursor:default;opacity:.55;background:none}
     else steps.unshift({ name: "Start", at: Date.now(), changes: [], checkpoint: name || "Checkpoint" }), cursor++;
     H.emit();
   };
+  // the keys the next undo (or redo) would change: lets the Library undo only its own steps
+  H.nextKeys = function (redo) { var st = redo ? steps[cursor] : steps[cursor - 1]; return st ? st.changes.map(function (c) { return c.k; }) : []; };
   H.canUndo = function () { return cursor > 0; };
   H.canRedo = function () { return cursor < steps.length; };
   H.list = function () { return steps.map(function (s, i) { return { index: i + 1, name: s.name, at: s.at, checkpoint: s.checkpoint || null, current: i + 1 === cursor, changes: s.changes.length }; }); };
@@ -5418,10 +5447,18 @@ button:disabled{cursor:default;opacity:.55;background:none}
     return levels;
   };
   // The ruler's tick step: the finest level with at least ~60 px between labelled ticks.
+  // Never a step finer than the labels can show (a 1/16" step with labels rounded to 1/8" read "1/8", "1/8", "1/4"…).
+  V.labelStep = function () {
+    var u = ST.get("units"), unit = U.get(u);
+    if (unit.ftin || unit.id === "infrac") return 1 / (Number(ST.get("fraction")) || 16);
+    if (unit.family === "metric") return 0.01 / 25.4;
+    return U.toInches(0.01, u);   // decimal labels have two places
+  };
   V.rulerStep = function () {
-    var ladder = U.gridLadder(ST.units());
+    var ladder = U.gridLadder(ST.units()), finest = V.labelStep() * (1 - 1e-9);
     for (var i = 0; i < ladder.length; i++) {
       var px = ladder[i].step * V.cam.zoom;
+      if (ladder[i].step < finest) continue;
       if (px >= 44) return { step: ladder[i].step, px: px, minor: i > 0 ? ladder[i - 1].step : ladder[i].step / 4, label: ladder[i].label };
     }
     var last = ladder[ladder.length - 1];
@@ -5441,10 +5478,11 @@ button:disabled{cursor:default;opacity:.55;background:none}
       return U.format(inches, "infrac", { fraction: ST.get("fraction") });
     }
     if (unit.family === "metric") {
-      var mm = inches * 25.4;
-      if (Math.abs(mm) >= 1000 && PC.near(mm % 1000, 0, 1e-6)) return (mm / 1000) + " m";
-      if (Math.abs(mm) >= 10 && PC.near(mm % 10, 0, 1e-6)) return (mm / 10) + " cm";
-      return Math.round(mm * 100) / 100 + " mm";
+      // whole metres and centimetres are found with a tolerance on both sides (4.999… is 5 m), and printed rounded
+      var mm = inches * 25.4, m = Math.round(mm / 1000), cm = Math.round(mm / 10);
+      if (m !== 0 && Math.abs(mm - m * 1000) < 1e-6) return m + " m";
+      if (cm !== 0 && Math.abs(mm - cm * 10) < 1e-6) return cm + " cm";
+      return (Math.round(mm * 100) / 100 || 0) + " mm";
     }
     return U.format(inches, u, { fraction: ST.get("fraction"), precision: 2 });
   };
@@ -5979,7 +6017,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     for (var x = Math.floor(vis.minX / minor) * minor; x <= vis.maxX; x += minor) {
       var sx = Math.round(V.toScreen([x, 0])[0]) + 0.5, isMajor = PC.near(x / rs.step, Math.round(x / rs.step), 1e-6);
       ctxT.moveTo(sx, RW); ctxT.lineTo(sx, isMajor ? 6 : RW - 5);
-      if (isMajor) ctxT.fillText(V.tickLabel(x), sx + 3, 2);
+      if (isMajor) ctxT.fillText(V.tickLabel(Math.round(x / rs.step) * rs.step), sx + 3, 2);   // the tick's exact value, not the sum of many small steps
     }
     ctxT.stroke();
     // left: y (up is positive)
@@ -5987,7 +6025,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     for (var y = Math.floor(vis.minY / minor) * minor; y <= vis.maxY; y += minor) {
       var sy = Math.round(V.toScreen([0, y])[1]) + 0.5, maj = PC.near(y / rs.step, Math.round(y / rs.step), 1e-6);
       ctxL.moveTo(RW, sy); ctxL.lineTo(maj ? 6 : RW - 5, sy);
-      if (maj) { ctxL.save(); ctxL.translate(3, sy - 3); ctxL.rotate(-Math.PI / 2); ctxL.textAlign = "left"; ctxL.fillText(V.tickLabel(y), 0, 0); ctxL.restore(); }
+      if (maj) { ctxL.save(); ctxL.translate(3, sy - 3); ctxL.rotate(-Math.PI / 2); ctxL.textAlign = "left"; ctxL.fillText(V.tickLabel(Math.round(y / rs.step) * rs.step), 0, 0); ctxL.restore(); }
     }
     ctxL.stroke();
     if (cursor) {
@@ -6159,7 +6197,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
         var d = G.distToSegment(world, pts[j], pts[(j + 1) % pts.length]);
         if (d <= tol) take({ id: pc.id, kind: "piece", ref: pc.id + "/" + j, edge: j, p: world }, 3, d);
       }
-      if (G.pointInPolygon(world, pts) && !(pc.holes || []).some(function (h) { return G.pointInPolygon(world, M.pieceHolesWorld(s, pc, ws)[0] || []); })) take({ id: pc.id, kind: "piece", p: world, inside: true }, 4, 0);
+      if (G.pointInPolygon(world, pts) && !(pc.holes && pc.holes.length ? M.pieceHolesWorld(s, pc, ws) : []).some(function (h) { return G.pointInPolygon(world, h); })) take({ id: pc.id, kind: "piece", p: world, inside: true }, 4, 0);
     });
     s.shapes.forEach(function (sh) { if (G.pointInPolygon(world, M.shapeWorld(s, sh))) take({ id: sh.id, kind: "shape", p: world, inside: true }, 5, 0); });
     s.rooms.forEach(function (r) {
@@ -7203,6 +7241,10 @@ button:disabled{cursor:default;opacity:.55;background:none}
     var faces = cutAll(allSegs, false);
     var divided = function (fs) { return fs.length >= 2 || (fs[0].holes && fs[0].holes.length); };
     if (!divided(faces)) throw new Error(PC.cutWhyNot(s, pc, outline, cutterIds));
+    // the pieces must add up to the board: a cut that lost a piece is refused, never kept quietly
+    var net = function (o, hs) { return Math.abs(G.area(o)) - (hs || []).reduce(function (t, h) { return t + Math.abs(G.area(h)); }, 0); };
+    var before = startFaces.reduce(function (t, f) { return t + net(f.outline, f.holes); }, 0), after = faces.reduce(function (t, f) { return t + net(f.outline, f.holes); }, 0);
+    if (Math.abs(before - after) > 1e-6 * Math.max(1, before)) throw new Error("That cut did not come out right: the pieces do not add up to " + pc.name + ", so nothing was cut. Move one of the walls a hair and cut again.");
     var names = M.childNames(s, pc, faces.length), children = [];
     faces.forEach(function (f, i) {
       var local = f.outline.map(pl.toLocal);
@@ -7412,14 +7454,14 @@ button:disabled{cursor:default;opacity:.55;background:none}
     // the ft / in pair: Enter in either box sends the combined length (as inches) where the value box would
     var ftB = PC.$("#st-ft"), inB = PC.$("#st-in");
     function sendPair() {
-      var ftText = ftB.value.trim(), inText = inB.value.trim();
-      if (!ftText && !inText) return;
-      var sign = /^-/.test(ftText) ? -1 : 1, f = Number(ftText.replace(/[^0-9.]/g, "")) || 0, i = inText ? PC.units.parse(inText, "in") : 0;
-      if (i === null) { UI.toast("Could not read \u201c" + inText + "\u201d as inches", "warn"); return; }
-      var ok = app().typed(String(sign * (f * 12 + Math.abs(i))));
+      var r = UI.pairValue(ftB.value, inB.value);
+      if (r.bad) { UI.toast(r.why, "warn"); return; }
+      if (r.value === null) return;
+      var ok = app().typed(String(r.value));
       if (ok !== false) { ftB.value = ""; inB.value = ""; }
       // the cursor stays in the box it was in, ready for the next value (Esc goes back to the drawing)
     }
+    UI.sendPair = sendPair;
     [ftB, inB].forEach(function (b) {
       b.addEventListener("keydown", function (e) {
         if (e.key === "Enter") { sendPair(); e.preventDefault(); }
@@ -7427,7 +7469,11 @@ button:disabled{cursor:default;opacity:.55;background:none}
       });
       b.addEventListener("focus", function () { UI.status.hint(); if (PC.isTouch() && ST.get("keypad")) UI.keypad(true); });
     });
-    box.addEventListener("blur", function () { setTimeout(function () { if (document.activeElement !== box) UI.keypad(false); }, 150); });
+    // the keypad types into whichever of the three boxes was tapped last, and closes when the focus leaves all three
+    [box, ftB, inB].forEach(function (b) {
+      b.addEventListener("focus", function () { UI.keypadTarget = b; });
+      b.addEventListener("blur", function () { setTimeout(function () { var f = document.activeElement; if (f !== box && f !== ftB && f !== inB) UI.keypad(false); }, 150); });
+    });
     PC.events.on("history", function () { PC.$$("[data-cmd=undo]").forEach(function (b) { b.disabled = !H.canUndo(); }); PC.$$("[data-cmd=redo]").forEach(function (b) { b.disabled = !H.canRedo(); }); if (panel === "history") UI.refreshPanels(); });
     // the workspace's name at the top: click it to rename (Enter keeps the new name, Escape puts the old one back)
     var nameEl = PC.$("#ws-name");
@@ -7687,7 +7733,8 @@ button:disabled{cursor:default;opacity:.55;background:none}
     zoom: function () { var e = PC.$("#ruler-corner"); if (e) e.textContent = PC.units.get(ST.units()).abbr; },
     solve: function (rep) {
       var e = PC.$("#st-solve"); if (!rep) { e.textContent = ""; return; }
-      e.className = "st-solve" + (rep.conflicts.length ? " bad" : rep.floating ? " floating" : "");
+      // classList, not className: other classes on it (the tutorial's highlight) stay
+      e.classList.toggle("bad", !!rep.conflicts.length); e.classList.toggle("floating", !rep.conflicts.length && !!rep.floating);
       e.textContent = rep.conflicts.length ? rep.conflicts.length + " conflict" + (rep.conflicts.length > 1 ? "s" : "") : rep.floating ? "drawing is floating: lock a node" : rep.params ? rep.freedom + " free" : "";
       e.title = rep.floating ? "Nothing is fixed yet, so the whole drawing can slide. Select a node and Lock in place (Ctrl+K)." : rep.conflicts.length ? "Constraints shown in red cannot all be true." : "Degrees of freedom left in the constrained geometry";
     },
@@ -7697,15 +7744,18 @@ button:disabled{cursor:default;opacity:.55;background:none}
     var pad = PC.$("#keypad");
     if (!show) { if (pad) pad.remove(); return; }
     if (pad) return;
-    var box = PC.$("#st-input");
     pad = el("div.keypad#keypad");
     [["7", "8", "9", "'"], ["4", "5", "6", "\""], ["1", "2", "3", "/"], ["0", ".", " ", "⌫"], ["1/2", "1/4", "1/8", "1/16"], ["ft", "in", "mm", "cm"], ["@", "-", "Enter"]].forEach(function (row) {
       var r = el("div.kp-row");
       row.forEach(function (k) {
         r.appendChild(el("button", { text: k === " " ? "space" : k, onpointerdown: function (e) { e.preventDefault(); },
           onclick: function () {
+            // the box that was tapped last: the value box, or the ft or in box of the pair
+            var act = document.activeElement, ok = function (b) { return b && /^st-(input|ft|in)$/.test(b.id) && !b.closest("[hidden]"); };
+            var box = ok(act) ? act : ok(UI.keypadTarget) ? UI.keypadTarget : PC.$("#st-input");
+            var pairBox = box.id === "st-ft" || box.id === "st-in";
             if (k === "⌫") box.value = box.value.slice(0, -1);
-            else if (k === "Enter") { var ok = app().typed(box.value); if (ok !== false) box.value = ""; }
+            else if (k === "Enter") { if (pairBox) UI.sendPair(); else { var ok = app().typed(box.value); if (ok !== false) box.value = ""; } }
             else box.value += (k === "ft" || k === "in" || k === "mm" || k === "cm" || /^1\//.test(k)) ? (box.value && !/\s$/.test(box.value) ? " " : "") + k : k;
             box.focus();
           } }));
@@ -7735,13 +7785,10 @@ button:disabled{cursor:default;opacity:.55;background:none}
       inBox.value = PC.units.format(rem, "infrac", { fraction: den }).replace(/"$/, "");
     }
     function commit() {
-      var ftText = ftBox.value.trim(), inText = inBox.value.trim();
-      var sign = /^-/.test(ftText) ? -1 : 1;
-      var f = Number(ftText.replace(/[^0-9.]/g, "")) || 0;
-      var i = inText ? PC.units.parse(inText, "in") : 0;
-      if (i === null) { inBox.classList.add("bad"); UI.toast("Could not read \u201c" + inText + "\u201d as inches", "warn"); return; }
-      inBox.classList.remove("bad");
-      var v = sign * (f * 12 + Math.abs(i));
+      var r = UI.pairValue(ftBox.value, inBox.value);
+      ftBox.classList.toggle("bad", r.bad === "ft"); inBox.classList.toggle("bad", r.bad === "in");
+      if (r.bad) { UI.toast(r.why, "warn"); return; }
+      var v = r.value === null ? 0 : r.value;
       if (Math.abs(v - last) > 1e-9) { show(v); onChange(v); }
     }
     [ftBox, inBox].forEach(function (b) {
@@ -7757,7 +7804,21 @@ button:disabled{cursor:default;opacity:.55;background:none}
     wrap.addEventListener("focusout", function (e) { if (wrap.contains(e.relatedTarget)) return; setTimeout(commit, 0); });
     wrap.setValue = show;
     wrap.focus = function () { inBox.focus(); };
+    wrap.commit = commit;
     return wrap;
+  };
+  // The ft / in pair's two texts -> {value: inches (null when both are blank)} or {bad: "ft"|"in", why}.
+  // The feet box reads like any length in feet ("7'6", "7 6" and "7ft 6" are 7' 6"); the sign comes from
+  // whichever box has it, so 0 ft, -2 in is -2".
+  UI.pairValue = function (ftText, inText) {
+    ftText = String(ftText || "").trim(); inText = String(inText || "").trim();
+    if (!ftText && !inText) return { value: null };
+    var f = ftText ? PC.units.parse(ftText, "ft") : 0;
+    if (f === null) return { bad: "ft", why: "Could not read “" + ftText + "” as feet" };
+    var i = inText ? PC.units.parse(inText, "in") : 0;
+    if (i === null) return { bad: "in", why: "Could not read “" + inText + "” as inches" };
+    var neg = f < 0 || /^-/.test(ftText) || (!f && i < 0);
+    return { value: (neg ? -1 : 1) * (Math.abs(f) + Math.abs(i)) };
   };
   // A prompt for one length: cb(inches) or cb(null).
   UI.promptLength = function (title, inches, cb, note) {
@@ -7765,7 +7826,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     var ctl = UI.lengthInput(inches, function (v) { cur = v; });
     var fin = function (v) { if (done) return; done = true; PC.windows.close("prompt"); cb(v); };
     var body = el("div.dialog", null, [ctl, note ? el("div.note", { text: note }) : null]);
-    PC.windows.open({ id: "prompt", title: title, body: body, width: 380, height: 170, noResize: true, onClose: function () { if (!done) { done = true; cb(null); } }, buttons: [{ label: "Cancel", onclick: function () { fin(null); return false; } }, { label: "OK", primary: true, onclick: function () { PC.$$("input", body).forEach(function (i) { i.dispatchEvent(new Event("change")); }); fin(cur); return false; } }] });
+    PC.windows.open({ id: "prompt", title: title, body: body, width: 380, height: 170, noResize: true, onClose: function () { if (!done) { done = true; cb(null); } }, buttons: [{ label: "Cancel", onclick: function () { fin(null); return false; } }, { label: "OK", primary: true, onclick: function () { PC.$$("input", body).forEach(function (i) { i.dispatchEvent(new Event("change")); }); if (ctl.commit) ctl.commit(); fin(cur); return false; } }] });
     body.addEventListener("keydown", function (e) { if (e.key === "Enter") { setTimeout(function () { fin(cur); }, 0); } if (e.key === "Escape") fin(null); });
     setTimeout(function () { ctl.focus(); }, 30);
   };
@@ -7982,7 +8043,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
       var angDim = s.dims.filter(function (d) { return d.type === "angle" && d.refs[0] === id; })[0];
       var g2 = el("div.prop-grid");
       g2.appendChild(el("label", { text: "Length" + (lenDim && lenDim.driving ? " 🔒" : "") }));
-      g2.appendChild(UI.lengthInput(len, function (v) { if (lenDim) a.cmd("dim.set", { id: lenDim.id, value: String(v), driving: true }); else { var d = a.cmd("dim.add", { type: "length", refs: [id], driving: false }); if (d) a.cmd("dim.set", { id: d.id, value: String(v), driving: true }); } }));
+      g2.appendChild(UI.lengthInput(len, function (v) { if (lenDim) a.cmd("dim.set", { id: lenDim.id, value: v, driving: true }); else { var d = a.cmd("dim.add", { type: "length", refs: [id], driving: false }); if (d) a.cmd("dim.set", { id: d.id, value: v, driving: true }); } }));
       g2.appendChild(el("label", { text: "Angle" + (angDim && angDim.driving ? " 🔒" : "") }));
       g2.appendChild(valueInput(ST.fmtAngle(ang), function (v) { if (angDim) a.cmd("dim.set", { id: angDim.id, value: v, driving: true }); else { var d = a.cmd("dim.add", { type: "angle", refs: [id], driving: false }); if (d) a.cmd("dim.set", { id: d.id, value: v, driving: true }); } }));
       g2.appendChild(el("label", { text: "Type" }));
@@ -8073,7 +8134,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
       var isExpr = e.driving && typeof e.value === "string";
       var valueCtl = isAng || isExpr
         ? valueInput(e.driving ? String(typeof e.value === "number" ? ST.fmtAngle(e.value) : e.value) : ST.fmtAngle(measured), function (v) { a.cmd("dim.set", { id: id, value: v, driving: true }); })
-        : UI.lengthInput(e.driving ? Number(e.value) : measured, function (v) { a.cmd("dim.set", { id: id, value: String(v), driving: true }); });
+        : UI.lengthInput(e.driving ? Number(e.value) : measured, function (v) { a.cmd("dim.set", { id: id, value: v, driving: true }); });
       root.appendChild(field("Value", valueCtl, e.driving ? "Locked: the geometry follows this value." + (isAng ? "" : " For an expression (96 - 1/8, =wallA/2) use the value box at the bottom.") : "Reads " + (isAng ? ST.fmtAngle(measured) : fmt(measured)) + ". Type a value to lock it."));
       if (e.type === "pp" || e.type === "px" || e.type === "py") {
         var ts = el("select", { onchange: function () { a.cmd("dim.type", { id: id, type: ts.value }); } }, [["pp", "Aligned (straight between the points)"], ["px", "Horizontal distance"], ["py", "Vertical distance"]].map(function (o) { return el("option", { value: o[0], text: o[1], selected: e.type === o[0] }); }));
@@ -8107,11 +8168,12 @@ button:disabled{cursor:default;opacity:.55;background:none}
     var body = el("tbody");
     ws.surfaces.forEach(function (s) {
       s.pieces.forEach(function (p) {
+        // sheets used: every board placed, cut or not (a cut board is hidden behind its pieces)
+        if (!p.parent && (!p.removed || p.status === "cut")) { var wb = M.wholeOf(ws, p); if (wb) totals.sheets[wb.name] = (totals.sheets[wb.name] || 0) + 1; }
         if (p.removed) return;
         var whole = M.wholeOf(ws, p), room = M.roomOf(s, p, ws), bb = G.bbox(p.outline), waste = s.rooms.length && !room;
         var area = Math.abs(G.area(p.outline));
         totals.count++; totals.area += area; if (waste) totals.waste += area;
-        if (whole) totals.sheets[whole.name] = (totals.sheets[whole.name] || 0) + (p.parent ? 0 : 1);
         var tr = el("tr", { className: (a.isSelected(p.id) ? "sel " : "") + (waste ? "waste" : ""), onclick: function () { if (s !== a.surface) a.cmd("surface.select", { id: s.id }); a.select([p.id], "set"); } }, [
           el("td", null, [el("span.name", { text: p.name }), el("span.sub", { text: (room ? room.name + " · " : "") + (ws.surfaces.length > 1 ? s.name + " · " : "") + (whole ? whole.faces[p.faceUp] : "") })]),
           el("td.num", { text: fmt(bb.w) + " × " + fmt(bb.h) }),
@@ -8271,13 +8333,18 @@ button:disabled{cursor:default;opacity:.55;background:none}
   W.any = function () { return W.list.length > 0; };
   W.setTitle = function (id, title) { var r = W.get(id); if (r) r.el.querySelector(".win-title").textContent = title; };
 
+  // The window layer is zoomed by the Interface size (layout.css: .windows { zoom: var(--ui) }), so a window's
+  // left, top, width and height are in that layer's px: the screen is innerWidth / ui of them wide, and a mouse
+  // move of d screen px is d / ui of them.
+  function uiZoom() { return Number(ST.get("uiScale")) || 1; }
   function place(rec) {
     var el = rec.el, o = rec.opts, m = memory[rec.id];
     if (PC.isNarrow()) { el.classList.add("sheet"); return; }
+    var ui = uiZoom(), vw = window.innerWidth / ui, vh = window.innerHeight / ui;
     var w = (m && m.w) || o.width || 560, h = (m && m.h) || o.height || 480;
-    w = Math.min(w, window.innerWidth - 20); h = Math.min(h, window.innerHeight - 20);
-    var x = m ? m.x : (window.innerWidth - w) / 2, y = m ? m.y : Math.max(50, (window.innerHeight - h) / 2 - 20);
-    x = PC.clamp(x, 0, Math.max(0, window.innerWidth - w)); y = PC.clamp(y, 0, Math.max(0, window.innerHeight - h));
+    w = Math.min(w, vw - 20); h = Math.min(h, vh - 20);
+    var x = m ? m.x : (vw - w) / 2, y = m ? m.y : Math.max(50 / ui, (vh - h) / 2 - 20);
+    x = PC.clamp(x, 0, Math.max(0, vw - w)); y = PC.clamp(y, 0, Math.max(0, vh - h));
     el.style.left = x + "px"; el.style.top = y + "px"; el.style.width = w + "px"; el.style.height = h + "px";
   }
   function wire(rec) {
@@ -8286,10 +8353,10 @@ button:disabled{cursor:default;opacity:.55;background:none}
     // move: title drag, or middle button anywhere (when the setting allows)
     function startMove(e) {
       if (PC.isNarrow()) return;
-      var sx = e.clientX - el.offsetLeft, sy = e.clientY - el.offsetTop;
+      var ui = uiZoom(), sx = e.clientX / ui - el.offsetLeft, sy = e.clientY / ui - el.offsetTop;
       el.setPointerCapture(e.pointerId);
       el.classList.add("moving");
-      function mv(ev) { el.style.left = PC.clamp(ev.clientX - sx, -el.offsetWidth + 60, window.innerWidth - 60) + "px"; el.style.top = PC.clamp(ev.clientY - sy, 0, window.innerHeight - 40) + "px"; }
+      function mv(ev) { el.style.left = PC.clamp(ev.clientX / ui - sx, -el.offsetWidth + 60, window.innerWidth / ui - 60) + "px"; el.style.top = PC.clamp(ev.clientY / ui - sy, 0, window.innerHeight / ui - 40) + "px"; }
       function up(ev) { el.removeEventListener("pointermove", mv); el.removeEventListener("pointerup", up); el.classList.remove("moving"); try { el.releasePointerCapture(ev.pointerId); } catch (x) {} }
       el.addEventListener("pointermove", mv); el.addEventListener("pointerup", up);
       e.preventDefault();
@@ -8306,7 +8373,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
         var dir = edge.dataset.dir, x0 = e.clientX, y0 = e.clientY, r = { x: el.offsetLeft, y: el.offsetTop, w: el.offsetWidth, h: el.offsetHeight };
         edge.setPointerCapture(e.pointerId);
         function mv(ev) {
-          var dx = ev.clientX - x0, dy = ev.clientY - y0, n = PC.assign({}, r);
+          var ui = uiZoom(), dx = (ev.clientX - x0) / ui, dy = (ev.clientY - y0) / ui, n = PC.assign({}, r);
           if (dir.indexOf("e") >= 0) n.w = Math.max(280, r.w + dx);
           if (dir.indexOf("s") >= 0) n.h = Math.max(160, r.h + dy);
           if (dir.indexOf("w") >= 0) { n.w = Math.max(280, r.w - dx); n.x = r.x + (r.w - n.w); }
@@ -8453,8 +8520,28 @@ button:disabled{cursor:default;opacity:.55;background:none}
   D.show = function (id) {
     root = PC.$("#designer");
     if (!root.children.length) build();
+    resize();   // the canvas has its size before a piece is fitted to it
     if (id) select(id); else if (!cur) select(app().ws.library[0] && app().ws.library[0].id);
-    renderList(); resize(); draw();
+    renderList(); draw();
+  };
+  // Keys on this screen (input.js sends them here first). Edits to the piece on screen are a draft outside the
+  // history, so Ctrl+Z / Ctrl+Y here undo and redo only the Library's own steps (add, save, delete); a step made
+  // on the Layout is left alone, and a toast says where to undo it.
+  D.onKey = function (e) {
+    if (!(e.ctrlKey || e.metaKey) || e.altKey) return false;
+    var k = e.key.toLowerCase(), redo = k === "y" || (k === "z" && e.shiftKey);
+    if (k !== "z" && k !== "y") return false;
+    var H = PC.history, keys = H.nextKeys(redo);
+    if (!keys.length) return true;
+    if (!keys.every(function (key) { return /^lib\//.test(key); })) { PC.ui.toast("The last change is on the Layout: " + (redo ? "redo" : "undo") + " it there.", "info"); return true; }
+    if (dirty && cur && !confirm("Discard the unsaved changes to " + cur.name + "?")) return true;
+    dirty = false;
+    app().cmd(redo ? "redo" : "undo");
+    var id = cur ? cur.id : null;
+    cur = id ? app().ws.library.filter(function (p) { return p.id === id; })[0] || null : null;
+    draft = cur ? PC.clone(cur) : null;
+    renderList(); renderPane(); draw();
+    return true;
   };
   D.fromPiece = function (pieceId) {
     var a = app(), p = M.piece(a.surface, pieceId), whole = M.wholeOf(a.ws, p), bb = G.bbox(p.outline);
@@ -8472,8 +8559,8 @@ button:disabled{cursor:default;opacity:.55;background:none}
       el("button", { text: "New L-shape", onclick: function () { newPiece([[0, 0], [48, 0], [48, 12], [24, 12], [24, 24], [0, 24]]); } }),
       el("button", { text: "Import…", title: "A shape from an SVG drawing (its first polygon or straight-line path)", onclick: function () { PC.store.pickFiles(".svg,image/svg+xml", true).then(function (files) { files.forEach(importFile); }); } }),
     ]);
-    var main = el("div.screen-main");
-    var left = el("div.pane.lib", { style: { borderLeft: 0, borderRight: "1px solid var(--line)" } });
+    var main = el("div.screen-main.lib-main");   // its columns are in screens.css, with a phone layout of their own
+    var left = el("div.pane.lib");
     listEl = el("div");
     left.appendChild(el("input.search", { type: "search", placeholder: "Search the library", oninput: function (e) { filter = e.target.value; renderList(); } }));
     left.appendChild(listEl);
@@ -8481,11 +8568,11 @@ button:disabled{cursor:default;opacity:.55;background:none}
     canvas = el("canvas", { tabindex: 0 });
     drawBox.appendChild(canvas);
     pane = el("div.pane");
-    main.style.gridTemplateColumns = "240px 1fr 320px";
     main.appendChild(left); main.appendChild(drawBox); main.appendChild(pane);
     root.appendChild(head); root.appendChild(main);
     ctx = canvas.getContext("2d");
-    new ResizeObserver(function () { resize(); draw(); }).observe(drawBox);
+    // a fit made before the canvas had a size is made again once it has one
+    new ResizeObserver(function () { resize(); if (fitLater && draft) fitView(); draw(); }).observe(drawBox);
     wireCanvas();
   }
   function importFile(f) {
@@ -8528,9 +8615,13 @@ button:disabled{cursor:default;opacity:.55;background:none}
     if (draft) fitView();
     renderPane(); renderList(); draw();
   }
+  var fitLater = false;
   function fitView() {
     var bb = G.bbox(draft.outline), r = canvas.getBoundingClientRect();
-    cam.zoom = Math.min((r.width - 80) / Math.max(bb.w, 1), (r.height - 80) / Math.max(bb.h, 1));
+    fitLater = r.width < 2 || r.height < 2;
+    // the margin is a share of the canvas on a small one, so the piece never shrinks to a dot
+    var mw = Math.min(80, r.width * 0.25), mh = Math.min(80, r.height * 0.25);
+    cam.zoom = Math.max(0.01, Math.min((r.width - mw) / Math.max(bb.w, 1), (r.height - mh) / Math.max(bb.h, 1)));
     cam.x = (bb.minX + bb.maxX) / 2; cam.y = (bb.minY + bb.maxY) / 2;
   }
   function renderList() {
@@ -8542,8 +8633,9 @@ button:disabled{cursor:default;opacity:.55;background:none}
       listEl.appendChild(el("h3", { text: c }));
       var grid = el("div.lib-grid");
       cats[c].forEach(function (p) {
-        var bb = G.bbox(p.outline), s = 100 / Math.max(bb.w, bb.h, 1);
-        var svg = '<svg viewBox="-4 -4 108 60" preserveAspectRatio="xMidYMid meet"><polygon points="' + p.outline.map(function (q) { return (q[0] - bb.minX) * s + "," + (52 - (q[1] - bb.minY) * s * 0.5); }).join(" ") + '" fill="' + (p.color || "#d8d2c4") + '" stroke="currentColor" stroke-width="1"/></svg>';
+        // fitted into the 100 x 52 card, the same scale both ways (it used to be squeezed to half its height)
+        var bb = G.bbox(p.outline), s = Math.min(100 / Math.max(bb.w, 1e-9), 52 / Math.max(bb.h, 1e-9)), ox = (100 - bb.w * s) / 2, oy = (52 - bb.h * s) / 2;
+        var svg = '<svg viewBox="-4 -4 108 60" preserveAspectRatio="xMidYMid meet"><polygon points="' + p.outline.map(function (q) { return (ox + (q[0] - bb.minX) * s).toFixed(2) + "," + (52 - oy - (q[1] - bb.minY) * s).toFixed(2); }).join(" ") + '" fill="' + (p.color || "#d8d2c4") + '" stroke="currentColor" stroke-width="1"/></svg>';
         grid.appendChild(el("div.lib-card" + (cur && cur.id === p.id ? ".sel" : ""), { onclick: function () { select(p.id); }, html: svg + '<div class="nm">' + PC.esc(p.name) + '</div><div class="sz">' + PC.esc(PC.ui.sizeText(p.outline)) + "</div>" }));
       });
       listEl.appendChild(grid);
@@ -8581,7 +8673,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     var cat = el("select", { onchange: function () { draft.category = cat.value; mark(); } }, ["sheet", "furniture", "cabinet", "appliance", "fixture", "other"].map(function (c) { return el("option", { value: c, text: c, selected: draft.category === c }); }));
     pane.appendChild(field("Category", cat));
     pane.appendChild(field("Faces", el("div.inline", null, [el("input", { type: "text", value: draft.faces[0], onchange: function (e) { draft.faces[0] = e.target.value || "Front"; mark(); } }), el("input", { type: "text", value: draft.faces[1], onchange: function (e) { draft.faces[1] = e.target.value || "Back"; mark(); } })]), "The two sides. The first is up when placed; Flip face shows the other."));
-    pane.appendChild(field("Size (bounding box)", el("div.inline", null, [
+    pane.appendChild(field("Size (bounding box)", el("div.inline.wrap", null, [
       PC.ui.lengthInput(bb.w, function (v) { if (v > 0) scaleTo(v / bb.w, 1); }), el("span", { text: "×" }),
       PC.ui.lengthInput(bb.h, function (v) { if (v > 0) scaleTo(1, v / bb.h); }),
     ]), "Typing a size scales the outline to it."));
@@ -8600,7 +8692,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
       grid.appendChild(el("span.i", { text: String(i + 1) }));
       var x = PC.ui.lengthInput(p[0], function (v) { p[0] = v; mark(); });
       var y = PC.ui.lengthInput(p[1], function (v) { p[1] = v; mark(); });
-      grid.appendChild(x); grid.appendChild(y);
+      grid.appendChild(el("span.d-xy", null, [x, y]));   // X and Y wrap onto two lines when the pane is narrow
       grid.appendChild(el("button.icon-btn.small", { text: "✕", title: "Remove this corner", disabled: draft.outline.length <= 3, onclick: function () { draft.outline.splice(i, 1); mark(); } }));
     });
     pane.appendChild(grid);
@@ -8671,13 +8763,22 @@ button:disabled{cursor:default;opacity:.55;background:none}
     var o = toS([0, 0]); ctx.strokeStyle = PC.render.withAlpha(t.accent, 0.5); ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(o[0] - 10, o[1]); ctx.lineTo(o[0] + 10, o[1]); ctx.moveTo(o[0], o[1] - 10); ctx.lineTo(o[0], o[1] + 10); ctx.stroke();
     PC.render.label(draft.faces[0] + " up", 60, 16, { align: "left", color: t.muted, scale: 0.9 });
   }
+  // the corner (or else the edge) under screen point s; a finger gets a wider reach than a mouse
+  function hitTest(s, touch) {
+    var rc = touch ? 18 : 9, re = touch ? 12 : 6, best = rc;
+    hoverPt = -1; hoverEdge = -1;
+    draft.outline.forEach(function (p, i) { var d = G.dist(toS(p), s); if (d < best) { best = d; hoverPt = i; } });
+    if (hoverPt < 0) draft.outline.forEach(function (p, i) { var q = draft.outline[(i + 1) % draft.outline.length]; if (G.distToSegment(s, toS(p), toS(q)) < re) hoverEdge = i; });
+  }
   function wireCanvas() {
     var pan = null;
     canvas.addEventListener("pointerdown", function (e) {
-      canvas.setPointerCapture(e.pointerId); canvas.focus();
+      try { canvas.setPointerCapture(e.pointerId); } catch (x) { /* synthetic or already-gone pointer */ }
+      canvas.focus();
       var r = canvas.getBoundingClientRect(), s = [e.clientX - r.left, e.clientY - r.top];
       if (e.button === 1 || (e.button === 0 && PC.input.keys[" "])) { pan = { x: e.clientX, y: e.clientY }; e.preventDefault(); return; }
       if (e.button !== 0 || !draft) return;
+      hitTest(s, e.pointerType === "touch");   // a finger has no hover: what is under it is found here, not from the last pointermove
       if (hoverPt >= 0) { dragPt = hoverPt; return; }
       if (hoverEdge >= 0) { var w = toW(s), a = draft.outline[hoverEdge], b = draft.outline[(hoverEdge + 1) % draft.outline.length]; var p = G.closestOnSegment(w, a, b); draft.outline.splice(hoverEdge + 1, 0, p); dragPt = hoverEdge + 1; hoverPt = dragPt; hoverEdge = -1; mark(); }
     });
@@ -8690,9 +8791,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
         if (!e.altKey) { var step = e.shiftKey ? 1 : 1 / Number(ST.get("fraction")); p = [Math.round(w[0] / step) * step, Math.round(w[1] / step) * step]; }
         draft.outline[dragPt] = p; dirty = true; draw(); return;
       }
-      hoverPt = -1; hoverEdge = -1;
-      draft.outline.forEach(function (p, i) { if (G.dist(toS(p), s) < 9) hoverPt = i; });
-      if (hoverPt < 0) draft.outline.forEach(function (p, i) { var q = draft.outline[(i + 1) % draft.outline.length]; if (G.distToSegment(s, toS(p), toS(q)) < 6) hoverEdge = i; });
+      hitTest(s);
       canvas.style.cursor = hoverPt >= 0 ? "grab" : hoverEdge >= 0 ? "copy" : "default";
       draw();
     });
@@ -8948,21 +9047,23 @@ button:disabled{cursor:default;opacity:.55;background:none}
     };
   }
   function resize() { if (!canvas) return; var r = canvas.parentElement.getBoundingClientRect(), dpr = PC.dpr(); canvas.width = Math.max(1, r.width * dpr); canvas.height = Math.max(1, r.height * dpr); canvas.style.width = r.width + "px"; canvas.style.height = r.height + "px"; }
-  function fit() { var p = piece(); if (!p || !canvas) return; moved = false; var b = G.bbox(shapes(p).orig || shapes(p).pts), r = canvas.getBoundingClientRect(); cam.zoom = Math.max(0.05, Math.min((r.width - 120) / Math.max(b.w, 1), (r.height - 120) / Math.max(b.h, 1))); cam.x = (b.minX + b.maxX) / 2; cam.y = (b.minY + b.maxY) / 2; }
+  // the margin is a share of a small canvas (a phone held sideways is about 100 px tall), never all of it
+  function fit() { var p = piece(); if (!p || !canvas) return; moved = false; var b = G.bbox(shapes(p).orig || shapes(p).pts), r = canvas.getBoundingClientRect(), mw = Math.min(120, r.width * 0.25), mh = Math.min(120, r.height * 0.25); cam.zoom = Math.max(0.05, Math.min((r.width - mw) / Math.max(b.w, 1), (r.height - mh) / Math.max(b.h, 1))); cam.x = (b.minX + b.maxX) / 2; cam.y = (b.minY + b.maxY) / 2; }
   function toS(q) { var r = canvas.getBoundingClientRect(); return [r.width / 2 + (q[0] - cam.x) * cam.zoom, r.height / 2 - (q[1] - cam.y) * cam.zoom]; }
   function toW(q) { var r = canvas.getBoundingClientRect(); return [cam.x + (q[0] - r.width / 2) / cam.zoom, cam.y - (q[1] - r.height / 2) / cam.zoom]; }
 
   // What the cursor is on: a corner, an edge midpoint, a point on an edge, or a free point.
   function snapAt(w) {
     var sh = shapes(), tol = 12 / cam.zoom, best = null;
-    var corners = sh.pts.concat.apply(sh.pts.slice(), sh.holes).concat(sh.orig || []);
+    var orig = ST.get("csOriginal") ? sh.orig : null;   // the original outline catches snaps only while it is shown
+    var corners = sh.pts.concat.apply(sh.pts.slice(), sh.holes).concat(orig || []);
     corners.forEach(function (q) { var d = G.dist(q, w); if (d <= tol && (!best || d < best.d)) best = { kind: "corner", p: q, d: d }; });
     if (best) return best;
     var edges = G.edges(sh.pts);
     sh.holes.forEach(function (h) { edges = edges.concat(G.edges(h)); });
     edges.forEach(function (e) { var q = G.mid(e[0], e[1]), d = G.dist(q, w); if (d <= tol * 0.6 && (!best || d < best.d)) best = { kind: "mid", p: q, d: d, e: e }; });
     if (best) return best;
-    if (sh.orig) edges = edges.concat(G.edges(sh.orig));
+    if (orig) edges = edges.concat(G.edges(orig));
     edges.forEach(function (e) { var q = G.closestOnSegment(w, e[0], e[1]), d = G.dist(q, w); if (d <= tol * 0.85 && (!best || d < best.d)) best = { kind: "edge", p: q, d: d, e: e }; });
     if (best) return best;
     var step = 1 / Number(ST.get("fraction") || 16);
@@ -8980,6 +9081,9 @@ button:disabled{cursor:default;opacity:.55;background:none}
       if (type === "h" && Math.abs(d[1]) > 1e-9) q = G.lineLine(p, [p[0] + 1, p[1]], ed[0], ed[1]);
       else if (type === "v" && Math.abs(d[0]) > 1e-9) q = G.lineLine(p, [p[0], p[1] + 1], ed[0], ed[1]);
       else if (type === "d" && want === "auto") q = G.closestOnLine(p, ed[0], ed[1]);   // square to a slanted side
+      // only where that line meets the edge itself: past its ends it would measure to the edge's extension, off
+      // the board, so it measures to the point dropped on instead
+      if (q) { var len2 = G.dot(d, d), t = len2 > 1e-12 ? G.dot(G.sub(q, ed[0]), d) / len2 : -1; if (t < -1e-6 || t > 1 + 1e-6) q = null; }
       if (!q) q = edgeEnd.p;
       if (edgeEnd === e) B = q; else A = q;
     } else if (type === "auto") {
@@ -9104,10 +9208,30 @@ button:disabled{cursor:default;opacity:.55;background:none}
     return best;
   }
   function wire() {
-    var pan = null;
+    var pan = null, touches = {}, pinch = null;
+    // two fingers pan and pinch, as on the Layout (input.js); the second finger cancels the first's measuring
+    function pinchStart() {
+      var ids = Object.keys(touches), p1 = touches[ids[0]], p2 = touches[ids[1]];
+      pinch = { dist: Math.hypot(p1[0] - p2[0], p1[1] - p2[1]) || 1, mid: [(p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2], cam: PC.clone(cam) };
+    }
+    function pinchMove() {
+      var ids = Object.keys(touches); if (ids.length < 2) return;
+      var p1 = touches[ids[0]], p2 = touches[ids[1]], r = canvas.getBoundingClientRect();
+      var mid = [(p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2], c0 = pinch.cam;
+      var z = PC.clamp(c0.zoom * Math.hypot(p1[0] - p2[0], p1[1] - p2[1]) / pinch.dist, 0.05, 2000);
+      // the board point that was under the fingers' middle stays under it
+      var wx = c0.x + (pinch.mid[0] - r.left - r.width / 2) / c0.zoom, wy = c0.y - (pinch.mid[1] - r.top - r.height / 2) / c0.zoom;
+      cam.zoom = z; cam.x = wx - (mid[0] - r.left - r.width / 2) / z; cam.y = wy + (mid[1] - r.top - r.height / 2) / z;
+      moved = true; draw();
+    }
     canvas.addEventListener("pointerdown", function (e) {
       try { canvas.setPointerCapture(e.pointerId); } catch (x) {}
       canvas.focus({ preventScroll: true });
+      if (e.pointerType === "touch") {
+        touches[e.pointerId] = [e.clientX, e.clientY];
+        if (Object.keys(touches).length >= 2) { drag = null; pending = null; pan = null; if (!pinch) pinchStart(); draw(); return; }
+      }
+      if (pinch) return;
       var r = canvas.getBoundingClientRect(), s = [e.clientX - r.left, e.clientY - r.top];
       if (e.button === 1 || (e.button === 0 && PC.input.keys[" "])) { pan = { x: e.clientX, y: e.clientY }; e.preventDefault(); return; }
       if (e.button !== 0 || !piece()) return;
@@ -9118,6 +9242,8 @@ button:disabled{cursor:default;opacity:.55;background:none}
       draw();
     });
     canvas.addEventListener("pointermove", function (e) {
+      if (touches[e.pointerId]) touches[e.pointerId] = [e.clientX, e.clientY];
+      if (pinch) { pinchMove(); return; }
       var r = canvas.getBoundingClientRect(), s = [e.clientX - r.left, e.clientY - r.top];
       if (pan) { moved = true; cam.x -= (e.clientX - pan.x) / cam.zoom; cam.y += (e.clientY - pan.y) / cam.zoom; pan = { x: e.clientX, y: e.clientY }; draw(); return; }
       if (!piece()) return;
@@ -9137,6 +9263,8 @@ button:disabled{cursor:default;opacity:.55;background:none}
       draw();
     });
     function up(e) {
+      delete touches[e.pointerId];
+      if (pinch) { if (!Object.keys(touches).length) pinch = null; return; }
       if (pan) { pan = null; return; }
       var d = drag; drag = null;
       if (!d) return;
@@ -9178,6 +9306,11 @@ button:disabled{cursor:default;opacity:.55;background:none}
   };
 
   // ---- printing --------------------------------------------------------------------------------------------------
+  // The pages are built for one Print. A print that the Print button did not start (Ctrl+P, the browser's menu)
+  // finds them taken away, so it never prints old pages with old numbers on them. (beforeprint, not afterprint:
+  // a phone's print can return before its preview has read the page.)
+  var printPending = false;
+  window.addEventListener("beforeprint", function () { if (!printPending) { var h = PC.$("#cs-print"); if (h) h.innerHTML = ""; } printPending = false; });
   CS.printSelected = function (ids) {
     var a = app();
     ids = ids || a.selection.filter(function (x) { return M.kindOf(a.surface, x) === "piece"; });
@@ -9189,16 +9322,23 @@ button:disabled{cursor:default;opacity:.55;background:none}
     selected = null;
     items.forEach(function (it) {
       cur.piece = it.p.id; cur.surface = it.s.id;
-      if (saved.piece !== it.p.id) face = it.p.faceUp === 1 ? 1 : 0;
-      var sh = shapes(it.p), b = G.bbox(sh.orig || sh.pts), W = 900, pad = 80, Hh = Math.round((W - 2 * pad) * Math.max(b.h, 1) / Math.max(b.w, 1)) + 2 * pad;
+      // the piece on screen prints on the face chosen for it; the others on the face that is up
+      face = saved.piece === it.p.id ? saved.face : it.p.faceUp === 1 ? 1 : 0;
+      // the drawing is at most 1200 px tall, so a board taller than wide fits on its page (and a thin upright
+      // strip never passes the browser's canvas limit); the zoom below fits the board in both directions
+      var sh = shapes(it.p), b = G.bbox(sh.orig || sh.pts), W = 900, pad = 80, Hh = Math.min(1200, Math.round((W - 2 * pad) * Math.max(b.h, 1) / Math.max(b.w, 1)) + 2 * pad);
+      // the text size is in points on paper: the image prints at most about 500 pt wide (Letter, A4) and 425 pt
+      // (150 mm, print.css) tall, so one canvas px is ptPerPx points
+      var ptPerPx = Math.min(500 / W, 425 / Hh), fontPx = ST.get("csFont") / ptPerPx;
       var off = document.createElement("canvas"); off.width = W * 2; off.height = Hh * 2;
       var c = off.getContext("2d"); c.setTransform(2, 0, 0, 2, 0, 0); c.fillStyle = "#fff"; c.fillRect(0, 0, W, Hh);
       var zoom = Math.min((W - 2 * pad) / Math.max(b.w, 1), (Hh - 2 * pad) / Math.max(b.h, 1));
       var toSp = function (q) { return [pad + (q[0] - b.minX) * zoom, Hh - pad - (q[1] - b.minY) * zoom]; };
       var label = function (text, x, y, opts, cc) {
-        cc.font = (opts.bold ? "700 " : "") + Math.round(ST.get("csFont") * (opts.scale || 1)) + "px sans-serif"; cc.textAlign = opts.align || "center"; cc.textBaseline = "middle";
+        var px = Math.round(fontPx * (opts.scale || 1)), bh = Math.round(px * 1.4);
+        cc.font = (opts.bold ? "700 " : "") + px + "px sans-serif"; cc.textAlign = opts.align || "center"; cc.textBaseline = "middle";
         var w = cc.measureText(text).width;
-        if (opts.pill !== false) { cc.fillStyle = "rgba(255,255,255,0.9)"; cc.fillRect((opts.align === "left" ? x : opts.align === "right" ? x - w : x - w / 2) - 3, y - 10, w + 6, 20); }
+        if (opts.pill !== false) { cc.fillStyle = "rgba(255,255,255,0.9)"; cc.fillRect((opts.align === "left" ? x : opts.align === "right" ? x - w : x - w / 2) - 3, y - bh / 2, w + 6, bh); }
         cc.fillStyle = opts.color || "#000"; cc.fillText(text, x, y); return w;
       };
       paint(c, { toS: toSp, zoom: zoom, theme: { ink: "#000", muted: "#555", seam: "#c0272d" }, label: label, boxes: null, interactive: false, p: it.p });
@@ -9206,16 +9346,19 @@ button:disabled{cursor:default;opacity:.55;background:none}
       var page = el("div.cs-page");
       page.appendChild(el("h1", { text: it.p.name + (room ? " · " + room.name : "") }));
       page.appendChild(el("div.meta", { text: (w ? w.name + " · " : "") + "marking on the " + ((w ? w.faces : ["Front", "Back"])[face]) + " side · piece " + fmt(pb.w) + " × " + fmt(pb.h) + " · " + a.ws.name + " / " + it.s.name + " · " + new Date().toLocaleDateString() }));
-      page.appendChild(el("img", { src: off.toDataURL("image/png"), style: { width: "100%" } }));
+      page.appendChild(el("img", { src: off.toDataURL("image/png") }));   // its size on paper: print.css
       if (list.length) {
         var table = el("table", null, el("tr", null, [el("th", { text: "#" }), el("th", { text: "Measurement" }), el("th", { text: "Direction" }), el("th", { text: "Note" })]));
         list.forEach(function (m, i) { table.appendChild(el("tr", null, [el("td.pt", { text: String(i + 1) }), el("td", { text: fmt(CS.value(m)) }), el("td", { text: TYPES[m.type] }), el("td", { text: m.note || "" })])); });
         page.appendChild(table);
       } else page.appendChild(el("p", { text: "No measurements on this piece yet." }));
       holder.appendChild(page);
-      it.p.status = "printed";
     });
     cur.piece = saved.piece; cur.surface = saved.surface; face = saved.face; selected = saved.sel;
+    // "printed" is a change like any other: its own history step, saved by the autosave
+    var fresh = items.filter(function (it) { return it.p.status !== "printed"; }).map(function (it) { return it.p.id; });
+    if (fresh.length) a.record("Print " + (fresh.length === 1 ? CS.find(fresh[0]).p.name : fresh.length + " pieces"), function () { fresh.forEach(function (id) { var f = CS.find(id); if (f) f.p.status = "printed"; }); });
+    printPending = true;
     setTimeout(function () { window.print(); }, 200);
   };
   // for the tests and the API
@@ -9358,9 +9501,33 @@ button:disabled{cursor:default;opacity:.55;background:none}
     });
   });
   C.register("dim.type", function (args) { var a = app(); return a.record("Dimension type", function () { var d = need(a.surface, args.id, "dim"); if (["pp", "px", "py"].indexOf(args.type) < 0 || ["pp", "px", "py"].indexOf(d.type) < 0) throw new Error("Only point-to-point dimensions switch between aligned, horizontal and vertical"); d.type = args.type; if (!d.driving) d.value = S.measure(a.surface, a.ws, d); M.touch(a.surface); a.solve(); return { type: d.type }; }); });
+  // A copied surface gets new ids for everything in it, and every reference inside it follows ("n3", "pc2:0",
+  // "sh1/2"), so its pieces are its own: Measure pieces finds pieces by id across surfaces, and with the ids
+  // shared, measuring the copy's piece edited the original's.
+  function freshIds(copy) {
+    var map = {};
+    ["nodes", "lines", "shapes", "rooms", "pieces", "dims", "constraints"].forEach(function (coll) {
+      (copy[coll] || []).forEach(function (e) { var pre = (/^[a-z]+/i.exec(e.id) || ["x"])[0]; map[e.id] = PC.uid(pre); });
+    });
+    var SKIP = { name: 1, note: 1, notes: 1, label: 1, value: 1 };
+    function ref(v) {
+      if (map[v]) return map[v];
+      var m = /^(.+?)([:\/]\d+)$/.exec(v);
+      return m && map[m[1]] ? map[m[1]] + m[2] : v;
+    }
+    function walk(o) {
+      if (Array.isArray(o)) { for (var i = 0; i < o.length; i++) { if (typeof o[i] === "string") o[i] = ref(o[i]); else if (o[i] && typeof o[i] === "object") walk(o[i]); } return; }
+      Object.keys(o).forEach(function (k) {
+        if (k === "def" || k === "photo" || SKIP[k]) return;
+        if (typeof o[k] === "string") o[k] = ref(o[k]); else if (o[k] && typeof o[k] === "object") walk(o[k]);
+      });
+    }
+    ["nodes", "lines", "shapes", "rooms", "pieces", "dims", "constraints"].forEach(function (coll) { (copy[coll] || []).forEach(walk); });
+    return copy;
+  }
   C.register("surface.duplicate", function (args) {
     var a = app();
-    return a.record("Duplicate surface", function () { var src = a.surfaceById(args.id || a.surface.id), copy = PC.clone(src); copy.id = PC.uid("s"); copy.name = src.name + " copy"; a.ws.surfaces.push(copy); a.setSurface(copy.id); return { id: copy.id }; });
+    return a.record("Duplicate surface", function () { var src = a.surfaceById(args.id || a.surface.id), copy = freshIds(PC.clone(src)); copy.id = PC.uid("s"); copy.name = src.name + " copy"; a.ws.surfaces.push(copy); a.setSurface(copy.id); return { id: copy.id }; });
   });
   C.register("surface.move", function (args) { var a = app(); return a.record("Reorder surfaces", function () { var i = a.ws.surfaces.findIndex(function (s) { return s.id === args.id; }), j = PC.clamp(i + (args.dir || 1), 0, a.ws.surfaces.length - 1); var s = a.ws.surfaces.splice(i, 1)[0]; a.ws.surfaces.splice(j, 0, s); PC.ui.refreshTabs(); return { index: j }; }); });
   C.register("surface.fromWall", function (args) {
@@ -9560,7 +9727,12 @@ button:disabled{cursor:default;opacity:.55;background:none}
       var d = need(s, args.id, "dim");
       var text = String(args.value).trim();
       var isAngle = d.type === "angle" || d.type === "angle2" || d.type === "pangle";
-      var v = isAngle ? (PC.units.parseAngle(text) !== null ? PC.units.parseAngle(text) : text) : (PC.expr.isExpression(text) ? text : ST.parse(text));
+      // a length given as a number is inches already (the Properties boxes send that); typed text is read as a
+      // plain length, and a dash right after a feet mark is carpenters' notation ("7'-3"" is 7' 3", not 7' minus
+      // 3"); anything else that is not a plain number is kept as an expression
+      var ftDash = /['′’]\s*-\s*\d/.test(text);
+      var len = !isAngle && typeof args.value === "number" && isFinite(args.value) ? args.value : !isAngle && (!PC.expr.isExpression(text) || ftDash) ? ST.parse(text) : null;
+      var v = isAngle ? (PC.units.parseAngle(text) !== null ? PC.units.parseAngle(text) : text) : (len !== null ? len : PC.expr.isExpression(text) ? text : null);
       if ((d.type === "angle" || d.type === "pangle") && typeof v === "number") v = PC.units.normAngle(v);   // a typed -90 is stored as 270
       if (v === null || v === undefined) throw new Error("Could not read “" + text + "” as a " + (isAngle ? "angle" : "length"));
       if (typeof v === "string") PC.expr.evaluate(v, { unit: "in", lookup: function (n) { return (s.variables && s.variables[n]) || a.ws.variables[n]; } });   // check it reads
@@ -9655,7 +9827,11 @@ button:disabled{cursor:default;opacity:.55;background:none}
     return a.record("Undo cut", function () {
       var p = need(s, args.id, "piece"), parent = p.parent && M.piece(s, p.parent);
       if (!parent) throw new Error("That piece was not cut from another");
-      s.pieces = s.pieces.filter(function (q) { return q.parent !== parent.id; });
+      // every piece cut from it, at any depth, goes, and with them the pins and dimensions that name them
+      // (a pin left naming a piece that is gone broke every later solve)
+      var gone = {}, grew = true;
+      while (grew) { grew = false; s.pieces.forEach(function (q) { if (!gone[q.id] && (q.parent === parent.id || gone[q.parent])) { gone[q.id] = true; grew = true; } }); }
+      M.removeIds(s, Object.keys(gone));
       parent.removed = false; parent.status = "placed";
       M.touch(s); a.solve(); a.select([parent.id], "set"); return { id: parent.id };
     });
@@ -9684,14 +9860,19 @@ button:disabled{cursor:default;opacity:.55;background:none}
   C.register("piece.rename", function (args) { return C.run("rename", args); });
   C.register("piece.origin", function (args) { var a = app(); return a.record("Set cut origin", function () { need(a.surface, args.id, "piece").origin = Number(args.corner) || 0; return { ok: true }; }); });
   C.register("library.add", function (args) { var a = app(); return a.record("Add to library", function () { var p = M.newWholePiece(args.piece); a.ws.library.push(p); PC.store.libPut(p); return { id: p.id }; }); });
-  C.register("library.update", function (args) { var a = app(); return a.record("Edit library piece", function () { var i = a.ws.library.findIndex(function (p) { return p.id === args.piece.id; }); if (i < 0) throw new Error("Not in the library"); a.ws.library[i] = PC.assign(a.ws.library[i], args.piece); PC.store.libPut(a.ws.library[i]); return { id: args.piece.id }; }); });
-  C.register("library.remove", function (args) { var a = app(); return a.record("Remove from library", function () { a.ws.library = a.ws.library.filter(function (p) { return p.id !== args.id; }); PC.store.libDel(args.id); return { ok: true }; }); });
+  // Placed pieces point at their library entry, and a face-down piece is mirrored across that entry's width. Before
+  // the entry goes, or its width changes, each placed piece that uses it gets its own copy (def), so it stays put.
+  function keepCopies(ws, entry) {
+    ws.surfaces.forEach(function (s) { s.pieces.forEach(function (p) { if (p.whole === entry.id && !p.def) { p.def = PC.clone(entry); M.touch(s); } }); });
+  }
+  C.register("library.update", function (args) { var a = app(); return a.record("Edit library piece", function () { var i = a.ws.library.findIndex(function (p) { return p.id === args.piece.id; }); if (i < 0) throw new Error("Not in the library"); if (args.piece.outline && Math.abs(G.bbox(args.piece.outline).maxX - G.bbox(a.ws.library[i].outline).maxX) > 1e-9) keepCopies(a.ws, a.ws.library[i]); a.ws.library[i] = PC.assign(a.ws.library[i], args.piece); PC.store.libPut(a.ws.library[i]); return { id: args.piece.id }; }); });
+  C.register("library.remove", function (args) { var a = app(); return a.record("Remove from library", function () { a.ws.library.forEach(function (p) { if (p.id === args.id) keepCopies(a.ws, p); }); a.ws.library =a.ws.library.filter(function (p) { return p.id !== args.id; }); PC.store.libDel(args.id); return { ok: true }; }); });
 
   // ---- selection & editing ------------------------------------------------------------------------------
   C.register("select", function (args) { app().select(args.ids || [], args.mode || "set"); return { selection: app().selection.slice() }; });
   C.register("select.all", function () { var a = app(), s = a.surface; a.select(s.lines.map(function (l) { return l.id; }).concat(s.shapes.map(function (x) { return x.id; }), s.pieces.filter(function (p) { return !p.removed; }).map(function (p) { return p.id; }), s.rooms.map(function (r) { return r.id; }), s.dims.map(function (d) { return d.id; })), "set"); return { count: a.selection.length }; });
   C.register("select.none", function () { app().select([], "set"); return { ok: true }; });
-  C.register("select.invert", function () { var a = app(); var all = C.run("select.all") && a.selection.slice(); return { ok: true }; });
+  C.register("select.invert", function () { var a = app(), before = a.selection.slice(); C.run("select.all"); a.select(a.selection.filter(function (id) { return before.indexOf(id) < 0; }), "set"); return { count: a.selection.length }; });
   C.register("select.chain", function (args) { var a = app(), id = args.id || a.selection.filter(function (i) { return M.kindOf(a.surface, i) === "line"; })[0]; if (!id) throw new Error("Select a line first"); a.select(PC.snap.chain(a.surface, id), "set"); return { count: a.selection.length }; });
   C.register("select.byKind", function (args) { var a = app(), s = a.surface, kind = args.kind; var list = kind === "line" ? s.lines : kind === "shape" ? s.shapes : kind === "piece" ? s.pieces.filter(function (p) { return !p.removed; }) : kind === "room" ? s.rooms : kind === "dim" ? s.dims : []; a.select(list.map(function (e) { return e.id; }), "set"); return { count: a.selection.length }; });
   C.register("delete", function (args) {
@@ -9814,7 +9995,35 @@ button:disabled{cursor:default;opacity:.55;background:none}
   var PC = window.PC, el = PC.el;
   var T = PC.tutorial = { list: {} };
   var box, steps = null, i = 0, unsub = null, highlighted = null;
+  var tutSurface = null, prevSurface = null, marks = [];   // the surface this run made, the one an earlier run made, history cursor at each step
   function app() { return PC.app; }
+
+  // The steps name what they made by order on the tutorial's own surface: "@n2" is its second node, "@l1" its
+  // first line, "__lastpiece__" its newest piece. Resolved just before each command runs, so a workspace that
+  // has a drawing already (whose ids have counted on) works the same as a new one.
+  function surfaceNow() { var a = app(); return (tutSurface && a.ws.surfaces.filter(function (s) { return s.id === tutSurface; })[0]) || a.surface; }
+  function resolve(v) {
+    if (Array.isArray(v)) return v.map(resolve);
+    if (typeof v !== "string") return v;
+    var s = surfaceNow(), m = /^@([nl])(\d+)$/.exec(v);
+    if (m) { var e = (m[1] === "n" ? s.nodes : s.lines)[Number(m[2]) - 1]; return e ? e.id : v; }
+    if (v === "__lastpiece__") { var p = s.pieces.filter(function (q) { return !q.removed; }).pop(); return p ? p.id : v; }
+    return v;
+  }
+  function runStep(list) {
+    list.forEach(function (it) {
+      var item = {};
+      Object.keys(it).forEach(function (k) { item[k] = resolve(it[k]); });
+      try { window.PlanCutter.cmd(item.cmd, item); } catch (e) { PC.warn("tutorial step failed: " + item.cmd + ": " + e.message); }
+      if (item.cmd === "surface.add") {
+        tutSurface = app().surface.id;
+        // a second run replaces the surface the first run made (in one step with the new one; Back brings it back)
+        if (prevSurface && prevSurface !== tutSurface && app().ws.surfaces.some(function (x) { return x.id === prevSurface; })) {
+          try { window.PlanCutter.cmd("surface.remove", { id: prevSurface }); } catch (e) { PC.warn("tutorial: " + e.message); }
+        }
+      }
+    });
+  }
 
   T.register = function (name, def) { T.list[name] = def; };
   T.offer = function () {
@@ -9823,6 +10032,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
   T.start = function (name) {
     var def = T.list[name || "basics"]; if (!def) return;
     T.stop();
+    prevSurface = tutSurface; tutSurface = null; marks = [];
     steps = def.steps; i = -1;
     box = el("div.tutorial-box");
     PC.$("#tutorial").hidden = false; PC.$("#tutorial").innerHTML = ""; PC.$("#tutorial").appendChild(box);
@@ -9840,7 +10050,8 @@ button:disabled{cursor:default;opacity:.55;background:none}
     i++;
     if (i >= steps.length) { T.stop(); PC.ui.toast("That is the whole loop. The Help tab has the shortcuts.", "ok"); return; }
     var st = steps[i];
-    try { if (st.run) window.PlanCutter.run(st.run, { continueOnError: true }); } catch (e) { PC.warn("tutorial step failed: " + e.message); }
+    marks[i] = PC.history.cursor();
+    if (st.run) runStep(st.run);   // before the highlight, so nothing the commands redraw takes it away
     if (st.highlight) highlight(st.highlight);
     render(st);
     if (st.waitEvent) { unsub = PC.events.on(st.waitEvent, function (ev) { if (!st.when || st.when(ev)) T.next(); }); }
@@ -9849,7 +10060,16 @@ button:disabled{cursor:default;opacity:.55;background:none}
     box.innerHTML = "";
     box.appendChild(el("div.tut-head", null, [el("b", { text: "Tutorial " + (i + 1) + " / " + steps.length }), el("span.spacer"), el("button.icon-btn.small", { text: "✕", title: "Stop", onclick: T.stop })]));
     box.appendChild(el("div.tut-text", { html: st.say }));
-    box.appendChild(el("div.tut-foot", null, [i > 0 ? el("button", { text: "Back", onclick: function () { i -= 2; T.next(); } }) : null, el("span.spacer"), el("button.primary", { text: i === steps.length - 1 ? "Done" : (st.waitEvent ? "Skip" : "Next"), onclick: T.next })]));
+    box.appendChild(el("div.tut-foot", null, [i > 0 ? el("button", { text: "Back", onclick: back }) : null, el("span.spacer"), el("button.primary", { text: i === steps.length - 1 ? "Done" : (st.waitEvent ? "Skip" : "Next"), onclick: T.next })]));
+  }
+  // Back undoes this step and the one before it (to where that one started), then shows that one again, so its
+  // commands run once on the drawing as it was (they used to run a second time on top: three more dimensions)
+  function back() {
+    if (!steps || i < 1) return;
+    var to = marks[i - 1];
+    if (to !== undefined && PC.history.cursor() > to) window.PlanCutter.cmd("history.goto", { index: to });
+    if (app().screen !== "layout") app().showScreen("layout");
+    i -= 2; T.next();
   }
   function highlight(sel) {
     var target = PC.$(sel); if (!target) return;
@@ -9865,13 +10085,13 @@ button:disabled{cursor:default;opacity:.55;background:none}
 
   T.register("basics", { steps: [
     { say: "<b>Welcome.</b> This walk draws a small room, pins it down with tape measurements, places a 4×8 board, cuts it along the walls and measures a piece. Nothing here touches your own work: it runs in a new surface.", run: [{ cmd: "surface.add", name: "Tutorial", kind: "ceiling" }, { cmd: "tool", name: "select" }] },
-    { say: "Walls are chains of lines. These three were drawn with the <b>Wall</b> tool (L): click, click, click, Esc. Blue means <i>free</i>: nothing holds them yet.", run: [{ cmd: "line.add", a: [0, 0], b: [150, 2], kind: "wall" }, { cmd: "line.add", a: "n2", b: [152, 96], kind: "wall" }, { cmd: "line.add", a: "n3", b: [-3, 94], kind: "wall" }, { cmd: "view.fit" }], highlight: '[data-tool="line"]' },
-    { say: "Something has to be the anchor, or the whole drawing can slide. The first corner is now <b>locked</b> (Ctrl+K) and the first wall is <b>horizontal</b>. The status bar stops saying “floating”.", run: [{ cmd: "lock", ids: ["n1"], lock: "xy" }, { cmd: "constrain", type: "horizontal", refs: ["l1"] }], highlight: "#st-solve" },
-    { say: "Now the tape. Each wall gets its measured length: <b>Measure</b> (D) a wall, type the number, Enter. A locked dimension <i>drives</i> the drawing. Watch the walls turn green as they get pinned.", run: [{ cmd: "dim.add", type: "length", refs: ["l1"], driving: true, value: 144.5 }, { cmd: "dim.add", type: "length", refs: ["l2"], driving: true, value: 97 }, { cmd: "dim.add", type: "length", refs: ["l3"], driving: true, value: 146 }] },
-    { say: "A corner that is not square needs one more number: the <b>diagonal</b>. Distance from corner 1 to corner 3, measured on site, typed in. The far wall now sits at its true angle.", run: [{ cmd: "dim.add", type: "pp", refs: ["n1", "n3"], driving: true, value: 175.5 }, { cmd: "view.fit" }] },
+    { say: "Walls are chains of lines. These three were drawn with the <b>Wall</b> tool (L): click, click for one wall; hold Shift as you click to carry on from its end into the next. Blue means <i>free</i>: nothing holds them yet.", run: [{ cmd: "line.add", a: [0, 0], b: [150, 2], kind: "wall" }, { cmd: "line.add", a: "@n2", b: [152, 96], kind: "wall" }, { cmd: "line.add", a: "@n3", b: [-3, 94], kind: "wall" }, { cmd: "view.fit" }], highlight: '[data-tool="line"]' },
+    { say: "Something has to be the anchor, or the whole drawing can slide. The first corner is now <b>locked</b> (Ctrl+K) and the first wall is <b>horizontal</b>. The status bar stops saying “floating”.", run: [{ cmd: "lock", ids: ["@n1"], lock: "xy" }, { cmd: "constrain", type: "horizontal", refs: ["@l1"] }], highlight: "#st-solve" },
+    { say: "Now the tape. Each wall gets its measured length: <b>Measure</b> (D) a wall, type the number, Enter. A locked dimension <i>drives</i> the drawing. Watch the walls turn green as they get pinned.", run: [{ cmd: "dim.add", type: "length", refs: ["@l1"], driving: true, value: 144.5 }, { cmd: "dim.add", type: "length", refs: ["@l2"], driving: true, value: 97 }, { cmd: "dim.add", type: "length", refs: ["@l3"], driving: true, value: 146 }] },
+    { say: "A corner that is not square needs one more number: the <b>diagonal</b>. Distance from corner 1 to corner 3, measured on site, typed in. The far wall now sits at its true angle.", run: [{ cmd: "dim.add", type: "pp", refs: ["@n1", "@n3"], driving: true, value: 175.5 }, { cmd: "view.fit" }] },
     { say: "Name the <b>room</b> (O: drag a box). Pieces placed inside get the room as their sublabel, and after a cut the parts outside are dimmed as waste.", run: [{ cmd: "room.add", outline: [[0, 0], [152, 0], [152, 96], [0, 96]], name: "Kitchen" }] },
-    { say: "A <b>board</b> from the library, placed and moved by its corner onto the room's corner. On your own drawing: drag a corner near a node and it snaps and pins.", run: [{ cmd: "piece.place", whole: "Foam 4x8", at: [60, 60], angle: 0 }, { cmd: "view.fit" }], highlight: '[data-panel="pieces"]' },
-    { say: "<b>Cut</b> (X): the board and the walls that cross it. The red seams show where it was cut; A-1 is inside the room, the rest is waste. Delete those, or keep them as offcuts.", run: [{ cmd: "select", ids: [] }, { cmd: "piece.cut", id: "__lastpiece__", by: ["l2", "l3"] }] },
+    { say: "A <b>board</b> from the library, placed in the room so that two walls cross it. On your own drawing: drag a board by a corner near a node and it snaps and pins there.", run: [{ cmd: "piece.place", whole: "Foam 4x8", at: [60, 60], angle: 0 }, { cmd: "view.fit" }], highlight: '[data-panel="pieces"]' },
+    { say: "<b>Cut</b> (X): the board and the walls that cross it. The red seams show where it was cut; A-1 is inside the room, the rest is waste. Delete those, or keep them as offcuts.", run: [{ cmd: "select", ids: [] }, { cmd: "piece.cut", id: "__lastpiece__", by: ["@l2", "@l3"] }] },
     { say: "<b>Measure pieces</b> (the orange mode at the top, or Enter on a selected piece): pick a piece on the left, then drag from a corner to a corner, or onto an edge, for each number you want on the board. Horizontal, vertical or diagonal comes from the direction, or pick it with A H V D. Print when done. That is the whole loop.", run: [{ cmd: "screen", name: "cutsheet" }] },
   ] });
   // "__lastpiece__" is filled at run time

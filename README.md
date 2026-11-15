@@ -24,8 +24,9 @@ the other programs and to the account.
 
 ## How this repository is made
 
-- **It holds only finished pages.** Each folder is written by its program's build (`python build.py --publish` in the
-  program's own folder under Jon's `Projects`); nothing here is edited by hand.
+- **It holds only finished pages.** Each folder is written by its program's build (`python build.py "what changed"
+  --publish` in the program's own folder under Jon's `Projects`; Simple Bench uses `publish.py` and Screen Peek
+  `build_page.py` the same way); nothing here is edited by hand.
 - **The list of programs is one file**, `Projects\app-kit\programs.json`. The Apps kit's build writes `apps/`, the
   front page's list in `index.html` (between `<!-- programs:` and `<!-- /programs -->`) and the cloud's hidden copy.
 - **`relay.json`** holds the PC's public address. Every page reads it from here, so a new address is one edit.
@@ -46,6 +47,6 @@ the other programs and to the account.
 | `screen-peek/` | `Projects\screen-peek` |
 | `simple-bench/` | `Projects\simple-bench` |
 | `browser-storage/` | `Projects\browser-storage` |
-| `hyperwave/` | `Projects\hyperwave` (archived, not rebuilt) |
+| `hyperwave/` | `Projects\hyperwave` (archived; rebuilt only for site-wide changes, last 2.0.4 on 2026-11-08) |
 | `thaw/` | `Projects\thaw` |
 | `apps/`, the list in `index.html` | `Projects\app-kit` |

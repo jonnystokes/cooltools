@@ -1165,7 +1165,7 @@ button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff
 "use strict";
 // The version (WEB-APP-CONVENTIONS.md 3): stamped here by build_page.py on every build (version.txt, CHANGES.md); shown
 // at the bottom of Settings and in the first log line; version.json beside the published page says the same.
-const APP_VERSION = "V1.0.13", APP_BUILT = "2026-11-13 5:35 AM";
+const APP_VERSION = "V1.0.14", APP_BUILT = "2026-11-14 11:36 PM";
 // Jon's PC through PC Relay 3: Screen Peek is the relay's "screen" program, under /svc/screen/. The relay starts it
 // on demand. Who may use it is the relay's program access (the "screen" right; by default the main admin only): the
 // page asks the PC (R.me(), R.canUse("screen")) and, without the right, shows one plain line and a Sign in button that
@@ -1480,11 +1480,17 @@ function setState(kind, text) {
 const sentence = (s) => { s = String(s || "").trim(); return s ? s.charAt(0).toUpperCase() + s.slice(1) + (/[.!?]$/.test(s) ? "" : ".") : ""; };
 const backoff = (n) => Math.round(Math.min(2500, 250 * 2 ** (n - 1)) * (0.8 + Math.random() * 0.4));
 function httpWhy(status) {
-  if (status === 502) return "the PC is reachable but sharing is off (502)";
-  if (status === 503 || status === 504) return `the Funnel or the PC did not answer in time (${status})`;
+  if (status === 502) return "PC Relay or Screen Peek on the PC did not answer (502)";
+  if (status === 503 || status === 504) return `the PC said Screen Peek is busy, switched off or could not start (${status})`;
   if (status === 409) return "the PC already has a newer data path for this page (409)";
   if (status === 410) return "the PC does not know this page's control session (410)";
   return `HTTP ${status}`;
+}
+async function httpWhyOf(r) {                         // the relay's own reason (its JSON "why" / "error") when it gave one
+  let j = null;
+  try { j = await r.json(); } catch (e) {}
+  const why = j && typeof j === "object" && (j.why || j.error);
+  return why ? `${String(why).slice(0, 200)} (${r.status})` : httpWhy(r.status);
 }
 function setCont(on) {
   conn.want = on;
@@ -1707,7 +1713,7 @@ const TRANSPORTS = {
       try { r = await fetch(`${BASE}stream?sid=${encodeURIComponent(C.sid)}&gen=${gen}&${qs()}`, { headers: auth(), cache: "no-store", signal: ac.signal }); }
       catch (e) { return t.fail("the stream could not connect: sharing off, or no network"); }
       if (r.status === 401 || r.status === 403) return t.fail("the PC refused this account", "auth");
-      if (!r.ok) return t.fail(httpWhy(r.status), r.status === 410 ? "session" : undefined);
+      if (!r.ok) { const why = await httpWhyOf(r); return t.fail(why, r.status === 410 ? "session" : undefined); }
       const reader = r.body.getReader();
       let buf = new Uint8Array(1 << 20), len = 0;
       try {
@@ -1723,7 +1729,7 @@ const TRANSPORTS = {
             const dv = new DataView(buf.buffer, off, 8), hl = dv.getUint32(0), pl = dv.getUint32(4);
             if (len - off < 8 + hl + pl) break;
             const hdr = JSON.parse(dec.decode(buf.subarray(off + 8, off + 8 + hl)));
-            if (pl) {
+            if (pl || hdr.seq != null) {                // a frame (an unchanged forced one has no payload)
               const body = buf.slice(off + 8 + hl, off + 8 + hl + pl);
               verify(hdr, body);
               show(hdr, new Blob([body], { type: "image/" + hdr.fmt }), ackTcp(gen, hdr));
@@ -1766,7 +1772,7 @@ function pullers(gen, n, kind) {                     // n requests in flight; ea
         const r = await fetch(`${BASE}frame?sid=${encodeURIComponent(C.sid)}&gen=${gen}&kind=${kind}&${qs()}&wait=2${extra}`, { headers: auth(), cache: "no-store", signal: ac.signal });
         if (dead) return;
         if (r.status === 401 || r.status === 403) return t.fail("the PC refused this account", "auth");
-        if (r.status !== 200 && r.status !== 204) return t.fail(httpWhy(r.status), r.status === 410 ? "session" : undefined);
+        if (r.status !== 200 && r.status !== 204) { const why = await httpWhyOf(r); return t.fail(why, r.status === 410 ? "session" : undefined); }
         if (!t.ready) { clearTimeout(startTimer); t.ready = true; onUp(gen, kind === "pipe" ? `${n} requests in flight` : "one request per frame"); }
         conn.lastData = now();
         if (r.status === 204) { W.idle++; T.idle++; continue; }
@@ -1946,7 +1952,7 @@ $("one").onclick = async () => {
   try {
     const r = await fetch(`${BASE}frame?once=1&${qs()}`, { headers: auth(), cache: "no-store", signal: ac.signal });
     if (r.status === 401 || r.status === 403) { log("single picture: the PC refused this account"); return access("the PC refused a picture"); }
-    if (!r.ok) throw new Error(httpWhy(r.status));
+    if (!r.ok) throw new Error(await httpWhyOf(r));
     if (r.status === 204) throw new Error("the PC had no picture within 2 s");
     const hdr = JSON.parse(r.headers.get("X-Frame"));
     show(hdr, await r.blob(), null);
