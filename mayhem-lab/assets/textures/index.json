@@ -1,0 +1,170 @@
+{
+ "asphalt": {
+  "polyhaven": "asphalt_02",
+  "title": "Asphalt 02",
+  "use": "roads",
+  "maps": {
+   "color": "color-2k.webp",
+   "normal": "normal-2k.webp",
+   "rough": "rough-2k.webp"
+  },
+  "page": "https://polyhaven.com/a/asphalt_02",
+  "authors": [
+   "Rob Tuytel"
+  ],
+  "meters": 3.000000238418579
+ },
+ "asphalt-worn": {
+  "polyhaven": "asphalt_04",
+  "title": "Asphalt 04",
+  "use": "older roads, parking lots",
+  "maps": {
+   "color": "color-2k.webp",
+   "normal": "normal-2k.webp",
+   "rough": "rough-2k.webp"
+  },
+  "page": "https://polyhaven.com/a/asphalt_04",
+  "authors": [
+   "Jenelle van Heerden",
+   "Sergej Majboroda"
+  ],
+  "meters": 4.039999961853027
+ },
+ "concrete": {
+  "polyhaven": "concrete_floor_worn_001",
+  "title": "Concrete Floor Worn 001",
+  "use": "sidewalks, curbs, bridges, freeway concrete",
+  "maps": {
+   "color": "color-2k.webp",
+   "normal": "normal-2k.webp",
+   "rough": "rough-2k.webp"
+  },
+  "page": "https://polyhaven.com/a/concrete_floor_worn_001",
+  "authors": [
+   "Dimitrios Savva",
+   "Rico Cilliers"
+  ],
+  "meters": 3.0
+ },
+ "gravel": {
+  "polyhaven": "gravel_road",
+  "title": "Gravel Road",
+  "use": "shoulders, gravel roads",
+  "maps": {
+   "color": "color-2k.webp",
+   "normal": "normal-2k.webp",
+   "rough": "rough-2k.webp"
+  },
+  "page": "https://polyhaven.com/a/gravel_road",
+  "authors": [
+   "Amal Kumar"
+  ],
+  "meters": 2.0
+ },
+ "grass": {
+  "polyhaven": "leafy_grass",
+  "title": "Leafy Grass",
+  "use": "lawns, green fields, roadside grass",
+  "maps": {
+   "color": "color-2k.webp",
+   "normal": "normal-2k.webp",
+   "rough": "rough-2k.webp"
+  },
+  "page": "https://polyhaven.com/a/leafy_grass",
+  "authors": [
+   "Charlotte Baglioni"
+  ],
+  "meters": 2.0
+ },
+ "grass-dry": {
+  "polyhaven": "sparse_grass",
+  "title": "Sparse Grass",
+  "use": "summer's dry grass, high desert, rural roadsides",
+  "maps": {
+   "color": "color-2k.webp",
+   "normal": "normal-2k.webp",
+   "rough": "rough-2k.webp"
+  },
+  "page": "https://polyhaven.com/a/sparse_grass",
+  "authors": [
+   "Amal Kumar"
+  ],
+  "meters": 2.0
+ },
+ "dirt": {
+  "polyhaven": "brown_mud_dry",
+  "title": "Brown Mud Dry",
+  "use": "dirt, ditches, bare fields",
+  "maps": {
+   "color": "color-2k.webp",
+   "normal": "normal-2k.webp",
+   "rough": "rough-2k.webp"
+  },
+  "page": "https://polyhaven.com/a/brown_mud_dry",
+  "authors": [
+   "Rob Tuytel"
+  ],
+  "meters": 1.299996018409729
+ },
+ "forest-floor": {
+  "polyhaven": "forest_leaves_02",
+  "title": "Forest Leaves 02",
+  "use": "the forest floor under firs and maples",
+  "maps": {
+   "color": "color-2k.webp",
+   "normal": "normal-2k.webp",
+   "rough": "rough-2k.webp"
+  },
+  "page": "https://polyhaven.com/a/forest_leaves_02",
+  "authors": [
+   "Rob Tuytel"
+  ],
+  "meters": 3.0009725093841553
+ },
+ "rock": {
+  "polyhaven": "rock_face_03",
+  "title": "Rock Face 03",
+  "use": "cuts, cliffs, mountain rock",
+  "maps": {
+   "color": "color-2k.webp",
+   "normal": "normal-2k.webp",
+   "rough": "rough-2k.webp"
+  },
+  "page": "https://polyhaven.com/a/rock_face_03",
+  "authors": [
+   "Dario Barresi",
+   "Rico Cilliers"
+  ],
+  "meters": 2.6999995708465576
+ },
+ "sand": {
+  "polyhaven": "coast_sand_01",
+  "title": "Coast Sand 01",
+  "use": "beaches, the coast",
+  "maps": {
+   "color": "color-2k.webp",
+   "normal": "normal-2k.webp",
+   "rough": "rough-2k.webp"
+  },
+  "page": "https://polyhaven.com/a/coast_sand_01",
+  "authors": [
+   "Rob Tuytel"
+  ],
+  "meters": 15.0
+ },
+ "snow": {
+  "polyhaven": "snow_02",
+  "title": "Snow 02",
+  "use": "snow on the ground",
+  "maps": {
+   "color": "color-2k.webp",
+   "normal": "normal-2k.webp",
+   "rough": "rough-2k.webp"
+  },
+  "page": "https://polyhaven.com/a/snow_02",
+  "authors": [
+   "Rob Tuytel"
+  ],
+  "meters": 2.0
+ }
+}

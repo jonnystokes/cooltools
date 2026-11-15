@@ -1,0 +1,498 @@
+{
+ "_": "Every ad in the game (src/world/scenery/ads/ads.json); the Cool tools ones also as full-size files.",
+ "ads": [
+  {
+   "id": "ct-cooltools",
+   "shape": "billboard",
+   "kind": "cooltools",
+   "file": "ct-cooltools.webp",
+   "name": "Cool tools",
+   "tagline": "Little programs with big hearts."
+  },
+  {
+   "id": "ct-cooltools-2",
+   "shape": "billboard",
+   "kind": "cooltools",
+   "file": "ct-cooltools-2.webp",
+   "name": "Cool tools",
+   "tagline": "Handmade software. Lovingly over-engineered."
+  },
+  {
+   "id": "ct-reader",
+   "shape": "billboard",
+   "kind": "cooltools",
+   "file": "ct-reader.webp",
+   "name": "Book reader",
+   "tagline": "Your books, read aloud. Even the boring chapters."
+  },
+  {
+   "id": "ct-file-manager",
+   "shape": "billboard",
+   "kind": "cooltools",
+   "file": "ct-file-manager.webp",
+   "name": "Cloud File Manager",
+   "tagline": "Your files, everywhere. (While Jon's PC is on.)"
+  },
+  {
+   "id": "ct-settings",
+   "shape": "billboard",
+   "kind": "cooltools",
+   "file": "ct-settings.webp",
+   "name": "Settings",
+   "tagline": "Change your picture. Change your life. Mostly your picture."
+  },
+  {
+   "id": "ct-text-editor",
+   "shape": "billboard",
+   "kind": "cooltools",
+   "file": "ct-text-editor.webp",
+   "name": "Text editor",
+   "tagline": "Words go in. Words come out. No ads. (Except this one.)"
+  },
+  {
+   "id": "ct-plan-cutter",
+   "shape": "billboard",
+   "kind": "cooltools",
+   "file": "ct-plan-cutter.webp",
+   "name": "Plan Cutter",
+   "tagline": "Crooked room? Straight cuts. Measure twice, cut once."
+  },
+  {
+   "id": "ct-screen-peek",
+   "shape": "billboard",
+   "kind": "cooltools",
+   "file": "ct-screen-peek.webp",
+   "name": "Screen Peek",
+   "tagline": "See Jon's desktop. Please don't judge the tabs."
+  },
+  {
+   "id": "ct-simple-bench",
+   "shape": "billboard",
+   "kind": "cooltools",
+   "file": "ct-simple-bench.webp",
+   "name": "Simple Bench",
+   "tagline": "How fast is your computer? Ten seconds. No pressure."
+  },
+  {
+   "id": "ct-browser-storage",
+   "shape": "billboard",
+   "kind": "cooltools",
+   "file": "ct-browser-storage.webp",
+   "name": "App cache manager",
+   "tagline": "Clean out your browser's junk drawer."
+  },
+  {
+   "id": "ct-thaw",
+   "shape": "billboard",
+   "kind": "cooltools",
+   "file": "ct-thaw.webp",
+   "name": "Thaw",
+   "tagline": "Bring a dead planet back to life. Then drive home carefully."
+  },
+  {
+   "id": "ct-mayhem",
+   "shape": "billboard",
+   "kind": "cooltools",
+   "file": "ct-mayhem.webp",
+   "name": "Mirror, Signal, Mayhem",
+   "tagline": "You're playing it. Signal 100 feet before you turn."
+  },
+  {
+   "id": "ct-mayhem-lab",
+   "shape": "billboard",
+   "kind": "cooltools",
+   "file": "ct-mayhem-lab.webp",
+   "name": "Mayhem Lab",
+   "tagline": "Honk responsibly."
+  },
+  {
+   "id": "ct-hyperwave",
+   "shape": "billboard",
+   "kind": "cooltools",
+   "file": "ct-hyperwave.webp",
+   "name": "HYPERWAVE Studio",
+   "tagline": "Sound you can see. Retired, but still groovy."
+  },
+  {
+   "id": "pc-cooltools",
+   "shape": "poster",
+   "kind": "cooltools",
+   "file": "pc-cooltools.webp",
+   "name": "Cool tools",
+   "tagline": "Little programs with big hearts."
+  },
+  {
+   "id": "pc-reader",
+   "shape": "poster",
+   "kind": "cooltools",
+   "file": "pc-reader.webp",
+   "name": "Book reader",
+   "tagline": "Books, out loud. Bus rides, sorted."
+  },
+  {
+   "id": "pc-thaw",
+   "shape": "poster",
+   "kind": "cooltools",
+   "file": "pc-thaw.webp",
+   "name": "Thaw",
+   "tagline": "Waiting for the bus? Thaw a planet."
+  },
+  {
+   "id": "pc-mayhem",
+   "shape": "poster",
+   "kind": "cooltools",
+   "file": "pc-mayhem.webp",
+   "name": "Mirror, Signal, Mayhem",
+   "tagline": "Look both ways. Then look again."
+  },
+  {
+   "id": "pc-mayhem-lab",
+   "shape": "poster",
+   "kind": "cooltools",
+   "file": "pc-mayhem-lab.webp",
+   "name": "Mayhem Lab",
+   "tagline": "Honk responsibly."
+  },
+  {
+   "id": "pc-file-manager",
+   "shape": "poster",
+   "kind": "cooltools",
+   "file": "pc-file-manager.webp",
+   "name": "Cloud File Manager",
+   "tagline": "Your files ride along."
+  },
+  {
+   "id": "pc-plan-cutter",
+   "shape": "poster",
+   "kind": "cooltools",
+   "file": "pc-plan-cutter.webp",
+   "name": "Plan Cutter",
+   "tagline": "No room is that crooked."
+  },
+  {
+   "id": "pp-buckle",
+   "shape": "poster",
+   "kind": "psa"
+  },
+  {
+   "id": "pp-look",
+   "shape": "poster",
+   "kind": "psa"
+  },
+  {
+   "id": "roof-cooltools",
+   "shape": "roof",
+   "kind": "cooltools",
+   "file": "roof-cooltools.webp",
+   "name": "COOL TOOLS"
+  },
+  {
+   "id": "band-cooltools",
+   "shape": "band",
+   "kind": "cooltools",
+   "file": "band-cooltools.webp",
+   "name": "COOL TOOLS"
+  },
+  {
+   "id": "band-mayhem",
+   "shape": "band",
+   "kind": "cooltools",
+   "file": "band-mayhem.webp",
+   "name": "MIRROR, SIGNAL, MAYHEM"
+  },
+  {
+   "id": "screen-mayhem",
+   "shape": "screen",
+   "kind": "cooltools",
+   "file": "screen-mayhem.webp",
+   "name": "Mirror, Signal, Mayhem",
+   "tagline": "NOW SHOWING: YOU."
+  },
+  {
+   "id": "screen-thaw",
+   "shape": "screen",
+   "kind": "cooltools",
+   "file": "screen-thaw.webp",
+   "name": "Thaw",
+   "tagline": "TONIGHT: A PLANET WAKES UP."
+  },
+  {
+   "id": "pole-coolfuel",
+   "shape": "pole",
+   "kind": "cooltools",
+   "file": "pole-coolfuel.webp",
+   "name": "COOL FUEL"
+  },
+  {
+   "id": "sticker-cooltools",
+   "shape": "sticker",
+   "kind": "cooltools",
+   "file": "sticker-cooltools.webp",
+   "name": ""
+  },
+  {
+   "id": "sticker-mayhem",
+   "shape": "sticker",
+   "kind": "cooltools",
+   "file": "sticker-mayhem.webp",
+   "name": ""
+  },
+  {
+   "id": "sticker-thaw",
+   "shape": "sticker",
+   "kind": "cooltools",
+   "file": "sticker-thaw.webp",
+   "name": ""
+  },
+  {
+   "id": "bigfoot-burgers",
+   "shape": "billboard",
+   "kind": "silly"
+  },
+  {
+   "id": "rain-or-shine",
+   "shape": "billboard",
+   "kind": "silly"
+  },
+  {
+   "id": "marionberry",
+   "shape": "billboard",
+   "kind": "silly"
+  },
+  {
+   "id": "slug-racing",
+   "shape": "billboard",
+   "kind": "silly"
+  },
+  {
+   "id": "moss-removal",
+   "shape": "billboard",
+   "kind": "silly"
+  },
+  {
+   "id": "lumberjack",
+   "shape": "billboard",
+   "kind": "silly"
+  },
+  {
+   "id": "yarn-ball",
+   "shape": "billboard",
+   "kind": "silly"
+  },
+  {
+   "id": "drizzle-coffee",
+   "shape": "billboard",
+   "kind": "silly"
+  },
+  {
+   "id": "daves-ducks",
+   "shape": "billboard",
+   "kind": "silly"
+  },
+  {
+   "id": "hazelnut",
+   "shape": "billboard",
+   "kind": "silly"
+  },
+  {
+   "id": "fog-tours",
+   "shape": "billboard",
+   "kind": "silly"
+  },
+  {
+   "id": "goose-daycare",
+   "shape": "billboard",
+   "kind": "silly"
+  },
+  {
+   "id": "tims-tires",
+   "shape": "billboard",
+   "kind": "silly"
+  },
+  {
+   "id": "psa-buckle",
+   "shape": "billboard",
+   "kind": "psa"
+  },
+  {
+   "id": "psa-phone",
+   "shape": "billboard",
+   "kind": "psa"
+  },
+  {
+   "id": "psa-signal",
+   "shape": "billboard",
+   "kind": "psa"
+  },
+  {
+   "id": "psa-sober",
+   "shape": "billboard",
+   "kind": "psa"
+  },
+  {
+   "id": "psa-slow",
+   "shape": "billboard",
+   "kind": "psa"
+  },
+  {
+   "id": "shop-bakery",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-books",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-pizza",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-coffee",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-tacos",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-bikes",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-hardware",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-diner",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-barber",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-flowers",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-thrift",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-games",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-donuts",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-laundry",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-pharmacy",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-grocery",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-burger",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-tea",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-cooltools",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "shop-arcade",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "sign-dmv",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "sign-fire",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "sign-school",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "sign-church",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "sign-gas",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "sign-espresso",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "sign-fruit",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "sign-mart",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "sign-big-box",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "sign-motel",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "sign-office",
+   "shape": "shop",
+   "kind": "shop"
+  },
+  {
+   "id": "sign-warehouse",
+   "shape": "shop",
+   "kind": "shop"
+  }
+ ]
+}
