@@ -1,4 +1,4 @@
-/* apps.js 1.33 (built 2026-11-13 5:34 AM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
+/* apps.js 1.35 (built 2026-11-15 3:06 AM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
    app-kit\apps-button.js and file-manager\kit\window-kit.js (one source each; never edit this file). The window kit
    runs only when the page has none of its own. */
 if (!window.WindowKit) {
@@ -13,6 +13,8 @@ if (!window.WindowKit) {
    chooser starts in its folder and shows its recent files) and `keep` ({ label }: one checkbox beside Use selected);
    its answer carries `ids` (each file's id in the cloud), `folderId` and `keep`. Nothing about the window changed.
    Version 3 (2026-11-12): pick takes `start`, the folder the chooser opens in ("Shared Folder/Reader files").
+   Version 4 (2026-11-14): pick takes `save` ({ name, fixed }: Save as, a folder and a name instead of files); the
+   answer is then { kind: "save", folderId, folder, path, name, replace }. Without `save` nothing changed.
    The window: drag by its title bar, resize from every edge and corner, maximise (button or double-click the
    title), close (button or Escape); its size and place are remembered per name. On a phone it is a full-screen
    sheet, and the phone's Back button closes it. Every message is checked: it must come from the window's own
@@ -22,7 +24,7 @@ if (!window.WindowKit) {
    origin, local file pages), and refuses to run inside any other site (location.ancestorOrigins). */
 (function (root) {
   "use strict";
-  const VERSION = 3;
+  const VERSION = 4;
   const MIN_W = 320, MIN_H = 220, MARGIN = 8, HEAD = 40;
   const SHEET = "(max-width: 640px), (max-height: 480px) and (pointer: coarse)";
   const KEY = "wk-win:";
@@ -223,13 +225,18 @@ if (!window.WindowKit) {
   // comes before the program's own folder, and when it is not there the chooser says so and opens where it would
   // have without it), title, name, onProgress, signal. In the answer, ids[i] is the cloud id of files[i] for kind
   // "files"; for a folder ("folder", "zip") folderId is the folder's id and ids holds "" for each file.
+  // save ({ name, fixed }, version 4): Save as. The chooser asks for a folder and a name (`name` offered; `fixed`: the
+  // person typed it, so it is not made free in each folder) and the answer is { kind: "save", folderId, folder, path,
+  // name, replace } (replace: a file of that name is there and the person said Replace). Only the Cloud File Manager
+  // reads it; accept, multiple, files, folder and keep are ignored then.
   function pick(url, o) {
     o = o || {};
+    const save = o.save && typeof o.save.name === "string" ? { name: o.save.name.slice(0, 200), fixed: !!o.save.fixed } : null;
     return new Promise((resolve, reject) => {
       let done = false, port = null, win = null;
       const end = (fn, v) => { if (done) return; done = true; clearTimeout(timer); if (port) port.close(); if (win) win.close(); fn(v); };
       const timer = setTimeout(() => end(reject, new Error("The file manager did not open within 30 s (no network, or its page could not load).")), 30000);
-      win = open(url, { name: o.name || "file-manager-pick", title: o.title || heading(o), width: o.width, height: o.height, onClose: () => end(resolve, null) });
+      win = open(url, { name: o.name || "file-manager-pick", title: o.title || heading(o, save), width: o.width, height: o.height, onClose: () => end(resolve, null) });
       win.on("ready", () => {
         clearTimeout(timer);
         if (port) port.close();
@@ -238,13 +245,15 @@ if (!window.WindowKit) {
         port.onmessage = (e) => {
           const d = e.data || {};
           if (d.type === "progress") { if (o.onProgress) try { o.onProgress(d); } catch (x) {} }
-          else if (d.type === "picked") end(resolve, result(d));
+          else if (d.type === "picked") { if (!save || d.kind === "save") end(resolve, save ? saved(d) : result(d)); }
           else if (d.type === "cancel") end(resolve, null);
           else if (d.type === "error") end(reject, new Error(d.why || "The file manager could not give the files."));
         };
-        win.post({ wk: 1, type: "pick", version: VERSION, accept: accepts(o.accept), multiple: !!o.multiple, files: o.files !== false, folder: o.folder || false,
+        const req = { wk: 1, type: "pick", version: VERSION, accept: accepts(o.accept), multiple: !!o.multiple, files: o.files !== false, folder: o.folder || false,
           host: String(o.host || document.title || location.host).slice(0, 80), app: String(o.app || "").slice(0, 60),
-          keep: o.keep && o.keep.label ? { label: String(o.keep.label).slice(0, 80) } : null, start: String(o.start || "").slice(0, 400) }, [ch.port2]);
+          keep: o.keep && o.keep.label ? { label: String(o.keep.label).slice(0, 80) } : null, start: String(o.start || "").slice(0, 400) };
+        if (save) Object.assign(req, { accept: [], multiple: false, files: false, folder: false, keep: null, save });
+        win.post(req, [ch.port2]);
       });
       if (o.signal) o.signal.addEventListener("abort", () => end(resolve, null), { once: true });
     });
@@ -252,10 +261,15 @@ if (!window.WindowKit) {
   const accepts = (a) => [].concat(a || []).map((x) => String(x).trim().toLowerCase()).filter(Boolean).map((x) => (x === "*" || x.startsWith(".") ? x : "." + x));
   // The window's first title, one short heading: "Book reader: choose a file or folder" (the file manager sets the
   // same words again once it has the request, with the program's name from the one list).
-  function heading(o) {
+  function heading(o, save) {
     const w = o.files === false ? "a folder" : o.folder ? "a file or folder" : o.multiple ? "files" : "a file";
     const who = String(o.host || "").trim().slice(0, 80);
+    if (save) return who ? `${who}: save as` : "Save as";
     return who ? `${who}: choose ${w}` : `Choose ${w}`;
+  }
+  function saved(d) {
+    const s = (v) => (typeof v === "string" ? v : "");
+    return { kind: "save", folderId: s(d.folderId), folder: s(d.folder), path: s(d.path), name: s(d.name), replace: !!d.replace };
   }
   function result(d) {
     const files = Array.isArray(d.files) ? d.files : [];
@@ -301,7 +315,7 @@ if (!window.WindowKit) {
   root.WindowKit = { VERSION, open, pick, child, get windows() { return wins.slice(); } };
 })(typeof window !== "undefined" ? window : globalThis);
 }
-/* apps-button.js 1.33, the loader (Jon, 2026-11-13: "never touch the other apps again"). ONE source:
+/* apps-button.js 1.35, the loader (Jon, 2026-11-13: "never touch the other apps again"). ONE source:
    Projects\app-kit\apps-loader.js; app-kit\build.py wraps the button (app-kit\apps-button.js) in it. Never edit a copy.
 
    A page carries this loader (in app-kit\dist\apps.js or dist\apps-button.js, copied in by its build), but on the live
@@ -324,7 +338,7 @@ if (!window.WindowKit) {
   function builtIn() {
     if (ran || root.AppsKit) return;
     ran = true;
-/* apps-button.js 1.33: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.35: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
    https://jonnystokes.github.io/cooltools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
@@ -356,7 +370,7 @@ if (!window.WindowKit) {
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.33";
+  const VERSION = "1.35";
   // The menu comes from the site the page itself is on, so the menu's account strip reads the same browser memory
   // (one origin) and the same relay.json as the program: the live site. Any other page (a file on this device, a
   // test page) gets the live site's menu too; launcher="..." overrides.

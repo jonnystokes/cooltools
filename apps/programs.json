@@ -74,6 +74,20 @@
       "extensions": [], "opens": []
     },
     {
+      "id": "mayhem", "group": "games", "name": "Mirror, Signal, Mayhem", "path": "mayhem/", "listed": false,
+      "short": "Learn to drive in Oregon. Then cause mayhem.",
+      "about": "A 3D driving game that teaches the 2026-2027 Oregon Driver Manual: signs, lanes, turns, parking, weather and defensive driving, with cops when you speed. Silly, true and fun.",
+      "source": "Projects\\mayhem",
+      "extensions": [], "opens": []
+    },
+    {
+      "id": "mayhem-lab", "group": "test", "name": "Mayhem Lab", "path": "mayhem-lab/",
+      "short": "Test the driving game's horns, voices and sounds",
+      "about": "The test bench for Mirror, Signal, Mayhem: horns made in code next to recordings, voices through every kind of speaker, engines, sounds, music, signs and car physics.",
+      "source": "Projects\\mayhem",
+      "extensions": [], "opens": []
+    },
+    {
       "id": "hyperwave", "group": "archived", "name": "HYPERWAVE Studio", "path": "hyperwave/",
       "short": "Experimental, no longer worked on",
       "about": "Sound-reactive visuals: shapes, fractals and 4D forms that react to sound. Experimental and no longer worked on.",
