@@ -1,12 +1,12 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
      pastes the Apps kit's tab icons at the ICONS marker, and stamps the version and build time where
-     Book reader V1.0.865 and 2026-11-14 6:45 PM appear. -->
+     Book reader V1.0.891 and 2026-11-14 7:49 PM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Book reader V1.0.865</title>
+<title>Book reader V1.0.891</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
 <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlUlEQVR42p2SzytEURzFz33evBlNtsyCYtRkmrLASqwoKTtlYf4FyQabKSkrZWeNjdmxUrJUlkp+ZNj4tbAgUoyI7/lazLvPw0PN2dzX7X7ePefcrwGA9cn3UVILFLYJ1YgohISIQoQgNfgWqorwRETnptbqi8aHVxkAf8LBysqad0ktVAWLQqgF17ddDQwRtrk2c9+4h7srwcXeO65P5QesUDRmXaQ7PTSkY1iZvoWIGtfenMo4SGUc5PpjeC0ncLn/hs3FJ4gQg2N1aOnwkEgaWFnOsbbDiicNMt1e4CDbG0ciafDYMvP5A59zrVUAGGreCg5sXAwEmaMkoiAVri3MQmHZwqJEvxvXth3pwG872kFEhO8O7Av8FqFSYvC+v99iVXc+60fTUImV2TZLE/dId8bQ2hVHU9aDU/N5i4XODl5wtFPG/nbZxlOzMHJ7LNRseMJitUBzu4cD/2Cupxanu894epDQtCpIlsz88M0oydXQeH4Za0bs+TBIzTtTa/VFoeaFWhKh/gtTlWSJ1PzyYa74AfvjIbDIJi4vAAAAAElFTkSuQmCC">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVR42r2Xe0yVZRzHP+8573u4KxzkvoAkoELkGHkpsGJsbpa0uTabq5htrY3W3Np0mn+53LQ/yjZy+UelXci2LHKzRWtt2Sbr4g0DnRw1EUjwAgocOcA5PL/+OBfe876IOo3vX+/O7z3P53l+1/fRMKl5YzBHRNaLUCciJaLEUAIighJBlPlZiNqUIJbnqXcEEQKixKtEDorQuGF/Rl+EqUUevt8YfFlEdishWayAe4NbbT5R0rCpOaspuoEw/AslaP8zPGITEeq3HMhu0po3BnMQ8c7CyWNtSnxKpEQPx3y24SiRZBHWO8IJN9vwiK1OD2f77MOVICIljvtYancLRwRDt8KT3FBQqXOjX3HpTJDxm/cGj0vUyF/gwp3npOM3P4N9wQgcpQTdevLaN+NJyQy1B1FxXL0wSe+pID0dQS6fD94WjibkFusUVrgoXOgit8RAc4R6TUVtAo2vXY7xgm51ewQOoDkgs8hJZpGTx56PY8Iv9J4O0tMe4EJbgKErk4gIKekOCjwGBQsN8he4iEvUmE7uXD0GrkTQrTGfSa4EjfmVBvMrDaoDwof1gyglrPsgFacxBR1/pwXnUw+hP1NsW8MMF8EcglDCRXS+Y5jBK+OUL3UTn+S0LeQ0tKjbzXCAib1/YIyMoboGQxtftzRqM8OVioZgKtsj2rPDy8nWAXTDwcOL5lJRnY6nKp1Sz1wcznCOhPPhVgrsPx7awCuLw7t22CpBt5ZaRJt3VXD00FXaDg/Q1jpAx87rfLXzHElzdLbuqeSRx1NtYZPhMbQ58baN+F//GoCET1+yliG6tc4jSkkzqFmdS83qXAC6vT7aWgfoPDFESpoRrhKJekD1XOdmTSMJH71oj3v/sC0HYsvQVOcR/fB5N91nfXiq0il/wk1+STL5JcnwqmlhMW16ZBwmFTI8NmMiizUE1iYTUc85Hy37evmxqQeHU6OobA6LngrlQfkyN5pGtMPdjWLLEBxyixA0bHuUfcdreHu3hxVr8hi5McE3u/5hy9ojtLb020Iwk7TURLTUREsZhv6vW1uoWSmpBlUrs6hamQVAf7cf78khKp+eZw/BDEr4eK2lDKc2r1v7d0TbG9roPHGDRdXzqKhy46lOJzs/gez8BJs7b+uBRJcpb8yDSdCtvT2i5c9lM3RtgkMHLvHLt/+iaVBQmoKnOp01bzzIHLcr6k4ArSAN4wUPzsoHomvoiwvsOWCCi8LciGLduXxVNstXZTM2Osnfvw9G+8GBT7pYsCSNZSsyoxkNoCXFEf/e6hhY3NZn7SVpgqupRjRVCX1ng+QU69E/xCc6WVKbwZLaDABGfUESk/UZQ6DNS0bLTLH93tUxFgOfmoamSvhu+xClT4ZGaX65fbJF4OaMtir58FtghOaH36fwHvNz5s9Rjv48EgNXCnQRAiJiRJLR71Oc+MnPsZZRNA1yig0KPS7mV7jIK3VFZ7t5sMS4eFK46A3SeWSEzr9G6To1RjAotpOr0BQO6OEbS9l0HxpqUug+Pc7FU+P8+qXgStQoXOiiyBOHO0+Pvnf22BjXegN4j/jxHvfjH5m0Zfs0cETEq72/5uoOETbf4TecbZ5Pb7sjOCK86xChMXxdmlW4Enwi0ujYsD+jT5Q0hK9LswUXEWnY217W5wDY1JzVJEJ9+Lo0Gyev/6y9rCnmdgywre5SjgjrlUidKCkRwbhP8ICIeEU4KCKNe9vLotfz/wCKU53CYXSQUAAAAABJRU5ErkJggg==">
@@ -15,9 +15,9 @@
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.865";
-  window.APP_BUILT = "2026-11-14 6:45 PM";
-  window.APP_NOTE = "big files: a plain file over 50 MB is read in pieces and cut into parts (a 572 MB file: 12 s, 11,122 parts); search keeps no copy of the text (half the memory, no size limit)";
+  window.APP_VERSION = "Book reader V1.0.891";
+  window.APP_BUILT = "2026-11-14 7:49 PM";
+  window.APP_NOTE = "Jon's answers Q1-Q8: Library with Update and Temporary/Add to Library, places follow by themselves (by chapter title too), nothing of a voice before the first Play, messages under the top bar, Search and the cloud dot on the first row on phones";
   window.APP_KEY = "br1";
 </script>
 <style>
@@ -100,15 +100,19 @@ button:disabled { opacity: 0.4; cursor: default; }
 /* The cloud kit's indicator (<cloud-status>, file-manager\kit\cloud-kit.js: a dot and a few words, the same in every
    program; its look is the kit's alone, in a shadow root), last in the bar. With little room its sentences stack, inside
    the bar's own height. On a phone (640 px and narrower) only its dot shows, so the bar keeps its two rows and the text
-   keeps its room: the words are said once on the message line when they change (cloud.js). Where the second row has no
-   room even for the dot (350 px and narrower) it sits at the end of the first row. */
+   keeps its room (its words are in its tip and the log, never on the message line: Q5, 2026-11-14). The dot sits at the
+   end of the first row on every phone, and the Search button just before it: with both on the second row (the Search
+   button joined the bar on 2026-11-13) that row had no room at 390 px and less, and they made a third row. */
 .top cloud-status { flex: 0 1 auto; max-width: 15em; }
 @media (max-width: 640px) {
-  .top cloud-status { max-width: 1.7em; overflow: hidden; white-space: nowrap; }
+  .top cloud-status { max-width: 1.7em; overflow: hidden; white-space: nowrap; order: 1; }
+  .top #find { order: 1; }
+  .top .nav, .top #key, .top #gear { order: 2; }
 }
+/* 350 px and narrower (a 320 px phone): the first row has room for the dot only, and the second row cannot hold the
+   chapter controls, Search, ? and the gear together: the gear (and ? when needed) wraps to a short third row. */
 @media (max-width: 350px) {
-  .top cloud-status { order: 1; }
-  .top .nav, .top #find, .top #key, .top #gear { order: 2; }
+  .top #find { order: 2; }
 }
 .top .icon { min-width: var(--tap); padding: 0; font-size: 1.1em; }
 /* Search the book (search.js, 2026-11-13): a magnifier, drawn in the text colour like ? and the gear. */
@@ -272,8 +276,12 @@ button:disabled { opacity: 0.4; cursor: default; }
 .libfm img { width: 1.6em; height: 1.6em; flex: none; }
 .libmsg { padding: 0.4em 0.6em; border-radius: 8px; background: var(--bar); white-space: pre-line; }
 .libmsg.bad, .libfit.bad, .libleft { color: var(--err); font-weight: 600; }
-/* A quick read on the page (a file opened without "Keep in my books"): one line, apart from the kept books */
-.libquick { padding: 0.5em 0.7em; border: 1px dashed var(--muted); border-radius: 8px; }
+/* A quick read on the page (opened from the Cloud File Manager without Add to Library): first in the Library, its border
+   dashed, marked Temporary, with Add to Library (2026-11-14) */
+.librow.libtemp { border-style: dashed; }
+.librow.libtemp .libopen { cursor: default; }
+.libtemp1 { font-size: 0.8em; font-weight: 700; padding: 0.1em 0.55em; border: 1px dashed var(--muted); border-radius: 999px; color: var(--muted); white-space: nowrap; }
+.libaddlib { border-color: var(--accent) !important; color: var(--accent); font-weight: 650; }
 /* The cloud kit's small chooser and its notice in the reader's colours (the kit reads these three; else it would go
    by the device's theme alone) */
 :root { --cloud-bg: var(--bar); --cloud-fg: var(--fg); --cloud-line: var(--line); }
@@ -3667,6 +3675,8 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
       for (const gen of row.gens || []) t.delete(genRange(gen));
     });
     books = books.filter((b) => b.id !== id);
+    const was = ls.get(posKey(id));
+    if (was) { ls.set(goneKey(row.title), was); if (row.from && row.from !== row.title) ls.set(goneKey(row.from), was); }   // Q7: kept by its name
     ls.set(posKey(id), null); ls.set(readKey(id), null);
     if (current && current.id === id) use(null, []);
     keep();
@@ -4150,6 +4160,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     const gen = "g" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
     const replacing = books.find((b) => b.id === spec.existing) || null;
     const id = replacing ? replacing.id : "b" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+    const oldList = replacing ? (((await tx(["index"], "readonly", (s) => s.get(id))) || {}).list || []) : null;
     await tx(["imports"], "readwrite", (s) => { s.put({ g: gen, book: id, title, started: Date.now() }); });
     const total = spec.sources.length;
     log("book", `adding "${title}": ${total} file${total === 1 ? "" : "s"} (${spec.kind}${spec.join ? ", wrapped lines joined" : ""}${spec.parts ? ", parts by size" : ""})${replacing ? `, replacing "${replacing.title}"` : ""}`);
@@ -4177,6 +4188,22 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
       });
       books = books.filter((b) => b.id !== id).concat([row]);
       sortBooks();
+      // The place in it, by the chapter's identity (bug 59): a replaced book keeps its reader on the same chapter even
+      // when the new files come in another order; a book of a name deleted before gets that book's place back (Q7).
+      const numberedNow = row.kind === "numbered";
+      let pl = ls.get(posKey(id)), from = "";
+      if (!pl && !replacing) { for (const n of [title, row.from]) { const g = n && ls.get(goneKey(n)); if (g) { pl = g; from = n; break; } } }
+      if (pl && typeof pl.c === "number") {
+        const t = pl.t || (oldList && (oldList.find((e) => e.c === pl.c) || {}).title) || "";
+        const k = findIn(r.list, pl.c, t, numberedNow);
+        if (k >= 0) {
+          const moved = r.list[k].c !== pl.c;
+          ls.set(posKey(id), Object.assign({}, pl, { c: r.list[k].c, t: r.list[k].title || t }));
+          if (moved) log("book", `"${title}": the place moved with its chapter "${t}" (chapter ${pl.c} is now ${r.list[k].c})`);
+          if (from) log("book", `"${title}": the place kept from when a book of that name was deleted`);
+        } else if (replacing) log("book", `"${title}": the chapter of the place ("${t}") is not in the new files: the place goes to the start`);
+        if (from) { ls.set(goneKey(title), null); if (row.from) ls.set(goneKey(row.from), null); }
+      }
       if (current && current.id === id) use(row, r.list);
       keep();
     } catch (e) {
@@ -4257,9 +4284,31 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     if (!p) { if (current.temp) ss.set(QPOS, null); else ls.set(posKey(current.id), null); return; }
     const i = byC.has(p.c) ? byC.get(p.c) : 0, paras = (index[i] && index[i].paras) || 1;
     const pct = index.length ? Math.min(100, Math.round(100 * (i + Math.min(1, (p.p || 0) / paras)) / index.length)) : 0;
-    const rec = { c: p.c, p: p.p || 0, top: p.top || 0, at: Date.now(), pct };
+    const rec = { c: p.c, p: p.p || 0, top: p.top || 0, at: Date.now(), pct, t: (index[i] && index[i].title) || "" };
     if (current.temp) ss.set(QPOS, Object.assign({ key: current.key }, rec)); else ls.set(posKey(current.id), rec);
   }
+  // A chapter by its identity (bugs 59 and 61, 2026-11-14): a numbered book's chapter number is its identity; any other
+  // book's `c` is only its place in the import order, which changes when files are added or renamed, so its title is
+  // what finds it again (the one chapter of that title; with several, the nearest to the old place). No title (a place
+  // from before this version): the number, as before. A title the list lacks: -1 (said, never guessed).
+  function findIn(list, c, t, isNumbered) {
+    const at = list.findIndex((e) => e.c === c);
+    if (isNumbered || !t) return at;
+    const hits = [];
+    list.forEach((e, i) => { if ((e.title || "") === t) hits.push(i); });
+    if (!hits.length) return -1;
+    if (hits.length === 1 || at < 0) return hits[0];
+    return hits.reduce((best, i) => (Math.abs(i - at) < Math.abs(best - at) ? i : best), hits[0]);
+  }
+  const findPlace = (c, t) => findIn(index, c, t, numbered());
+  // A place written for a book that may not be the open one (Add to Library: the place reached in the quick read).
+  function putPos(id, p) {
+    if (!id || !p) return;
+    ls.set(posKey(id), { c: p.c, p: p.p || 0, top: p.top || 0, at: Date.now(), pct: 0, t: p.t || "" });
+  }
+  // The name a book is known by when it is deleted and added again (Jon, 2026-11-13, Q7: the place is remembered for a
+  // book of the same exact name).
+  const goneKey = (name) => `${KEY}-gone-${String(name || "").trim().toLowerCase()}`;
 
   // Where a book with no stored place starts (Jon, 2026-10-22): the first chapter, in reading order, whose
   // name starts with a chapter-one marker ("1", "1.", "Chapter 1", "Chapter One", "Ch. 1", "Part 1"), so
@@ -4290,7 +4339,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     info: (i) => index[i] || null,                 // { c, n, title, paras, g, sec?, short?, era?, heads? } from the index, nothing loaded
     index: () => index,
     indexOf: (c) => (byC.has(c) ? byC.get(c) : -1),
-    label, chapter, all, warm, load, open: openBook, rename, remove, setAcross, plan, importBook, stopImport, pos, setPos, posOf, readKey, hooks, kept, startAt, chapterOne: (t) => ONE.test(t),
+    label, chapter, all, warm, load, findPlace, putPos, open: openBook, rename, remove, setAcross, plan, importBook, stopImport, pos, setPos, posOf, readKey, hooks, kept, startAt, chapterOne: (t) => ONE.test(t),
     // A quick read (opener.js): read without storing, show what was read, and no book in hand with br1-current untouched.
     readTemp, openTemp, rest, isQuick,
     get quick() { return !!(current && current.temp); },
@@ -4476,9 +4525,9 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     msg.hidden = !s;
     if (s) msgTimer = setTimeout(() => { msg.hidden = true; }, ms);
   }
-  // With its button the line sits just under the top bar, whatever the bar's height (on a phone the bar has two rows,
-  // and the plain line's place, left as it ever was, lies on the second: BUGS 60), so the chapter arrows stay free.
-  function placeMsg() { msg.style.top = msg.classList.contains("act") ? `${Math.round($("top").getBoundingClientRect().bottom + 8)}px` : ""; }
+  // Every message sits just under the top bar, whatever the bar's height (BUGS 60; Jon, 2026-11-13, Q8): a line that
+  // floats over the page, so the bar never gets taller or shorter as messages come and go, on the skinniest phone too.
+  function placeMsg() { msg.style.top = `${Math.round($("top").getBoundingClientRect().bottom + 6)}px`; }
   addEventListener("resize", () => { if (!msg.hidden) placeMsg(); });
 
   // ---- The chapter on screen ---------------------------------------------------------------------
@@ -4498,7 +4547,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   addEventListener("resize", fitName);
   function render(rec) {
     // A quick read (a file opened without "Keep in my books": opener.js) says so on this one quiet line.
-    chno.textContent = (BOOK.quick ? "Not in my books · " : "") + (numbered() ? `Chapter ${rec.c} · ${fmt(cur + 1)} of ${fmt(BOOK.count)}` : `${fmt(cur + 1)} of ${fmt(BOOK.count)}`);
+    chno.textContent = (BOOK.quick ? "Temporary · " : "") + (numbered() ? `Chapter ${rec.c} · ${fmt(cur + 1)} of ${fmt(BOOK.count)}` : `${fmt(cur + 1)} of ${fmt(BOOK.count)}`);
     chname.textContent = shortName(cur);
     chfull.hidden = true;
     fitName();
@@ -4760,7 +4809,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     showBook();
     emit("book", id);
     const saved = BOOK.pos();
-    const i = saved ? BOOK.indexOf(saved.c) : -1;
+    const i = saved ? BOOK.findPlace(saved.c, saved.t) : -1;      // by the chapter's identity (bugs 59, 61)
     await show(i >= 0 ? i : firstChapter(saved), i >= 0 ? saved : null);
     if (!o.quiet) log("book", `opened "${row.title}" (${fmt(row.chapters)} chapters)${row.temp ? ", not kept in the books" : ""}${from && from.id !== id ? ` from "${from.title}"` : ""}${saved && i >= 0 ? ` at ${BOOK.label(i)} ¶ ${(saved.p || 0) + 1}` : ""}`);
   }
@@ -4801,7 +4850,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     }
     showBook();
     const saved = BOOK.pos();
-    const i = saved ? BOOK.indexOf(saved.c) : -1;
+    const i = saved ? BOOK.findPlace(saved.c, saved.t) : -1;
     await show(i >= 0 ? i : firstChapter(saved), i >= 0 ? saved : null);
     const m = BOOK.migrated;
     if (m) say(`Your book is now "${m.title}" in the Open window (${fmt(m.chapters)} chapters moved to the new storage in ${m.seconds.toFixed(1)} s).`, 12000);
@@ -5322,9 +5371,10 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     box.appendChild(bar);
     const msg = h("div", "libmsg", st.status); msg.setAttribute("aria-live", "polite"); msg.hidden = !st.status;
     box.appendChild(msg);
-    // A quick read on the page (opener.js: a file opened without "Keep in my books"): said here, where the books are.
-    if (BOOK.quick) box.appendChild(h("div", "libquick", `Reading now: "${BOOK.title}". It is not in my books.`));
-    box.appendChild(h("div", "libh", "My books"));
+    box.appendChild(h("div", "libh", "Library"));
+    // The book on the page when it was opened from the Cloud File Manager without being added (a quick read, opener.js):
+    // first in the list, marked Temporary, with Add to Library (Jon, 2026-11-13, Q2).
+    if (BOOK.quick && BOOK.row) box.appendChild(tempRow());
     const books = BOOK.books;
     if (!books.length) {
       box.appendChild(h("div", "libempty", "No books yet."));
@@ -5337,6 +5387,27 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     box.appendChild(foot);
     if (navigator.storage && navigator.storage.estimate) navigator.storage.estimate().then((e) => { foot.textContent = `Browser storage: ${MB(e.usage || 0)} used of ${MB(e.quota || 0)}.`; }, () => {});
     body.replaceChildren(box);
+  }
+  function tempRow() {
+    const r = h("div", "librow current libtemp");
+    const head = h("div", "libhead");
+    head.append(h("span", "libtitle", BOOK.title), h("span", "libnow", "open now"), h("span", "libtemp1", "Temporary"));
+    const info = h("div", "libopen");
+    info.append(head, h("div", "libsub", `${fmt(BOOK.count)} chapter${BOOK.count === 1 ? "" : "s"} · opened from the Cloud File Manager, not in your Library`));
+    r.appendChild(info);
+    const acts = h("div", "libacts");
+    acts.append(btn("libact libaddlib", "Add to Library", () => addQuick(), "Keep this book in your Library, at the place you are"));
+    r.appendChild(acts);
+    return r;
+  }
+  // Add to Library: the quick read's own files are imported as a kept book, at the place reached in it.
+  async function addQuick() {
+    const q = OPENER.lastQuick;
+    if (!q) { say("Open it again from the Cloud File Manager with Add to Library ticked to keep it.", true); return; }
+    const was = BOOK.pos();
+    const place = was ? { c: was.c, p: was.p || 0, top: was.top || 0, t: was.t || "" } : null;
+    log("book", `Add to Library: "${BOOK.title}" (the quick read on the page)`);
+    await pick(q.files, { direct: true, place });
   }
   function row(b) {
     const cur = BOOK.current === b.id;
@@ -5368,7 +5439,8 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     r.appendChild(open);
     const acts = h("div", "libacts");
     const armed = st.armed === b.id && Date.now() - st.armedAt < 8000;
-    acts.append(btn("libact", "Rename", () => { st.renaming = b.id; st.armed = ""; render(); }),
+    const upd = btn("libact", "Update", () => OPENER.open(upd, { replace: b.id }), `Replace "${b.title}" with new files (your place in it is kept)`);
+    acts.append(btn("libact", "Rename", () => { st.renaming = b.id; st.armed = ""; render(); }), upd,
       btn("libact libdel" + (armed ? " armed" : ""), armed ? "Delete now?" : "Delete", () => del(b)));
     // Per-book options, changeable any time (Jon: never locked): a grid book's Read across time. Join /
     // Split are import-time transforms; they have no row here (add the book again to change them).
@@ -5440,11 +5512,24 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     catch (e) { say(e.message, true); log("book", `nothing to add: ${e.message}`); st.mode = "list"; render(); return null; }
     plan.files = files;
     plan.note = (opts && opts.note) || "";
-    const direct = !!(opts && opts.direct) && plan.books.length === 1 && !plan.loose && !plan.books[0].existing && (await room(plan.books));
+    plan.place = (opts && opts.place) || null;
+    // Update (the Library's button): the first book of the choice replaces that book, under its own title.
+    if (opts && opts.replace) {
+      const old = BOOK.books.find((b) => b.id === opts.replace);
+      if (old && plan.books.length) {
+        if (plan.books.length > 1) plan.note = [plan.note, `the choice holds ${plan.books.length} books: the first one updates "${old.title}"`].filter(Boolean).join("; ");
+        plan.books = [Object.assign(plan.books[0], { existing: old.id, existingTitle: old.title, title: old.title })];
+        plan.loose = false;
+      }
+    }
+    // A book whose name is already in the Library updates it, said and done at once when the person said "keep" already
+    // (Jon, 2026-11-13, Q1: the message says it updates the book; no preview to answer).
+    const direct = !!(opts && opts.direct) && plan.books.length === 1 && !plan.loose && (await room(plan.books));
+    if (direct && plan.books[0].existing) say(`Updating "${plan.books[0].existingTitle}" in your Library (your place in it is kept)…`);
     if (st.busy) return null;                  // (another import began while the room was asked for)
     st.plan = plan;
     st.mode = "preview";
-    say("");
+    if (!direct) say("");
     if (test() || direct) { add(); return null; }
     render();
     return null;
@@ -5492,7 +5577,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
         : s.grid ? `${fmt(s.files)} files in ${fmt(s.sections)} sections (topics × eras: a chapter per era), in folder order`
         : s.sections ? `${fmt(s.files)} files in ${fmt(s.sections)} sections, a chapter each, in folder order` : `${fmt(s.files)} files, a chapter each, in name order`;
       r.appendChild(h("div", "libsub", what));
-      if (s.existing) r.appendChild(h("div", "libsub librepl", `Replaces the stored "${s.existingTitle}" (your place in it is kept).`));
+      if (s.existing) r.appendChild(h("div", "libsub librepl", `This updates "${s.existingTitle}" in your Library (your place in it is kept).`));
       // Advanced (Jon, 2026-10-21): the extra switches for this book behind one button, the preview
       // itself staying plain. Join wrapped lines (plain documents), Split into parts (a long single file
       // with no headings), Read across time (a grid book). A numbered book has none, so no button.
@@ -5580,7 +5665,8 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
         if (s.kind === "split" || s.kind === "epub") notes.push(`"${r.title}": ${r.how}`);
         if (s.kind === "epub" && r.info && r.info.length) notes.push(more(r.info, 3));
         if (r.join) notes.push(`"${r.title}": wrapped lines joined`);
-        if (r.replaced) notes.push(`"${r.title}" replaced the stored book; your place in it is kept`);
+        if (r.replaced) notes.push(`"${r.title}" was updated in your Library; your place in it is kept`);
+        if (p.place && !r.replaced) BOOK.putPos(r.id, p.place);    // Add to Library: the place reached in the quick read
         if (r.gridNote) notes.push(r.gridNote);
         if (BOOK.current && BOOK.current === r.id) await READER.openBook(r.id, { quiet: true });   // the open book's chapters changed: show them again
       } catch (e) {
@@ -8112,12 +8198,9 @@ button:disabled{cursor:default;opacity:.55;background:none}
   const quiet = () => (kit.state.words || []).every((w) => QUIET.has(w));
   let logged = "", told = "", ready = false;
   // Said only on a free message line (never over another message), once per wording, once the page has started.
-  function tell() {
-    const words = wordsNow(), line = document.getElementById("msg");
-    if (!ready || noSite || words === told || kit.state.cloud === "checking") return;
-    if (!quiet() && narrow() && !(line && !line.hidden)) { told = words; READER.say(words, 6000); }
-    else if (quiet()) told = words;
-  }
+  // CHANGED 2026-11-14 (Jon's answer Q5: "just the dot and the connected status, no message"): nothing is said on the
+  // message line any more; the words stay in the indicator's tip and the log.
+  function tell() { told = wordsNow(); }
   kit.on("state", (s) => {
     const el = document.getElementById("cloudstat");
     if (el && el.dataset.tone !== s.tone) el.dataset.tone = s.tone;
@@ -8171,7 +8254,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
 // itself, which then shows no book at all rather than another one) and in the log. Nothing is asked of the cloud
 // until the button is pressed or the address asks for a file.
 (function () {
-  const KEEP = "Keep in my books";                 // the chooser's checkbox (unticked: a quick read)
+  const KEEP = "Add to Library";                   // the chooser's checkbox (unticked: a quick read; "My books" is the Library since 2026-11-14)
   const START = "Shared Folder/Reader files";      // where the cloud chooser opens, as a signed-in person sees the path
   const ACCEPT = [".txt", ".text", ".md", ".html", ".htm", ".epub", ".zip", ".gz"];
   const CANT = "That file could not be opened.";
@@ -8180,6 +8263,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
   const stop = (s) => String(s || "").trim().replace(/\.?$/, ".");
   let taking = false;                    // a file is being read (one at a time)
   let linkKey = "";                      // the file this page was opened for, while it is the one shown
+  let lastQuick = null;                  // the files of the quick read on the page ({ files, key, id }): Add to Library imports them
 
   function tell(text, bad) {
     if (!LIBRARY.isOpen) LIBRARY.open();
@@ -8224,6 +8308,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
       const spec = plan.books[0];
       const t = await BOOK.readTemp(spec, show, plan.zips, { key: info.key });
       await READER.openBook(t.row.id, { temp: t });
+      lastQuick = { files, key: info.key, id: t.row.id };      // kept for the Library's Add to Library
       settleLink();
       const notes = [];
       if (plan.books.length > 1) notes.push(`${info.what} holds ${plan.books.length} books: "${t.row.title}" is open. Open it again with "${KEEP}" ticked to have them all`);
@@ -8244,7 +8329,9 @@ button:disabled{cursor:default;opacity:.55;background:none}
   }
 
   // ---- What the chooser gave ------------------------------------------------------------------------------------
-  async function take(doc) {
+  // opts.replace (the Library's Update on a book, 2026-11-14): whatever is chosen replaces that book, kept at once.
+  async function take(doc, opts) {
+    const replace = (opts && opts.replace) || "";
     const folder = doc.kind === "folder", cloud = doc.source === "cloud";
     let files = folder ? Array.from(doc.files || []) : doc.file ? [doc.file] : [];
     const what = folder ? `the folder "${doc.name}"` : `"${(files[0] && files[0].name) || doc.name}"`;
@@ -8254,19 +8341,19 @@ button:disabled{cursor:default;opacity:.55;background:none}
     try { if (!folder) files = [await asText(files[0])]; }
     catch (e) { tell(stop(e.message), true); return false; }
     const note = folder && cloud ? leftOut(doc.missing, doc.name) : "";
-    const keep = !cloud || !!doc.keep;
+    const keep = !cloud || !!doc.keep || !!replace;
     log("book", `open: ${what} from ${cloud ? "the Cloud File Manager" : "this device"} (${folder ? `${files.length} file${files.length === 1 ? "" : "s"}` : MB(files[0].size)}): ${keep ? (cloud ? `"${KEEP}" ticked` : "kept: the preview asks") : "a quick read"}${note ? "; " + note : ""}`);
-    if (keep) { await LIBRARY.pick(files, Object.assign(cloud ? { direct: true } : {}, note ? { note } : {})); return true; }   // an import as ever; the cloud's ticked box is not asked a second time
+    if (keep) { await LIBRARY.pick(files, Object.assign(cloud || replace ? { direct: true } : {}, replace ? { replace } : {}, note ? { note } : {})); return true; }   // an import as ever; the cloud's ticked box is not asked a second time
     return quick(files, { key, what, note }, "window");
   }
   // The Open window's one button. Resolves when the chooser closed, or what was chosen is on its way.
-  async function open(anchor) {
+  async function open(anchor, opts) {
     if (!globalThis.CLOUD) { tell("This build has no cloud kit, so nothing can be opened from here.", true); return false; }
     let doc = null;
-    try { doc = await kit().open({ anchor, accept: ACCEPT, folder: true, keep: { label: KEEP }, start: START }); }
+    try { doc = await kit().open({ anchor, accept: ACCEPT, folder: true, keep: opts && opts.replace ? undefined : { label: KEEP }, start: START }); }
     catch (e) { tell(stop(String((e && e.message) || e)), true); return false; }
     if (!doc) return false;                        // the chooser was closed: nothing to say
-    return take(doc);
+    return take(doc, opts);
   }
 
   // ---- "#open=<id>": a file the Cloud File Manager sent ("Open with Book reader") --------------------------------
@@ -8316,7 +8403,8 @@ button:disabled{cursor:default;opacity:.55;background:none}
     return true;
   }
 
-  globalThis.OPENER = { open, link, linked, take, quick, asText, leftOut, oldLink, KEEP, START, ACCEPT, get busy() { return taking; } };
+  globalThis.OPENER = { open, link, linked, take, quick, asText, leftOut, oldLink, KEEP, START, ACCEPT, get busy() { return taking; },
+    get lastQuick() { return lastQuick && BOOK.quick && BOOK.row && BOOK.row.id === lastQuick.id ? lastQuick : null; } };
 })();
 </script>
 <script>
@@ -8361,9 +8449,15 @@ button:disabled{cursor:default;opacity:.55;background:none}
 // screen, the theme, the volume, the PC's voice, what it stores, the debug switches. A change from the cloud is
 // applied only while nothing is read (the text rules stop a reading). Deleting the settings on a device (Settings →
 // Storage) clears its times: the person's own come back from the cloud.
+// CHANGED 2026-11-14 (Jon's answers of 2026-11-13, Q3 and Q4): only the place follows; every setting, the voice's
+// included, stays with the device (FOLLOWED is empty, the settings are never asked for). The newest place is taken by
+// itself, with one short line under the top bar for about 5 seconds and a line in the log: no "Go there", nothing to
+// answer. A place this device never moved (no time: a book just added, or opened here for the first time) gives way to
+// the account's, so a book opened on a new device goes where it is open on another; with none anywhere it starts at the
+// beginning. A place carries its chapter's title (t), and a book of files finds the chapter by it (bugs 59 and 61).
 (function () {
   const g = globalThis, KEY = (g.APP_KEY || "br1") + "-follow";
-  const FOLLOWED = ["speed", "readTitle", "continueChapters", "skipWatermarks", "watermarkRules", "spelling", "capsAsWords", "joinShort"];
+  const FOLLOWED = [];
   const SET_KEY = "settings";
   // A changed place goes up `soon` after a change, at most every `gap` (the tests shorten them: BR1_TEST.follow).
   const hooks = Object.assign({ gap: 30000, soon: 3000 }, (g.BR1_TEST && g.BR1_TEST.follow) || {});
@@ -8414,18 +8508,20 @@ button:disabled{cursor:default;opacity:.55;background:none}
     else if (k.c !== p.c || k.p !== pp) { k = st.books[row.id] = { c: p.c, p: pp, at: when || p.at || Date.now(), who: me() }; dirty = true; }
     return k;
   }
-  const value = (row, k) => { const p = BOOK.posOf(row.id) || {}; return { c: k.c, p: k.p, top: p.c === k.c ? p.top || 0 : 0, pct: p.c === k.c ? p.pct || 0 : 0, at: k.at, title: row.title }; };
-  const clean = (v) => (v && typeof v === "object" && num(v.c) && num(v.p) && num(v.at) ? { c: v.c, p: Math.max(0, Math.floor(v.p)), top: num(v.top) ? Math.max(0, Math.floor(v.top)) : 0, pct: num(v.pct) ? v.pct : 0, at: Math.max(0, v.at), title: String(v.title || "") } : null);
+  const chapterTitle = (row, c) => { const p = BOOK.posOf(row.id); if (p && p.c === c && p.t) return p.t; const i = BOOK.current === row.id ? BOOK.indexOf(c) : -1; return i >= 0 ? (BOOK.info(i) || {}).title || "" : ""; };
+  const value = (row, k) => { const p = BOOK.posOf(row.id) || {}; return { c: k.c, p: k.p, top: p.c === k.c ? p.top || 0 : 0, pct: p.c === k.c ? p.pct || 0 : 0, at: k.at, title: row.title, t: chapterTitle(row, k.c) }; };
+  const clean = (v) => (v && typeof v === "object" && num(v.c) && num(v.p) && num(v.at) ? { c: v.c, p: Math.max(0, Math.floor(v.p)), top: num(v.top) ? Math.max(0, Math.floor(v.top)) : 0, pct: num(v.pct) ? v.pct : 0, at: Math.max(0, v.at), title: String(v.title || ""), t: String(v.t || "") } : null);
+  const where = (v) => BOOK.findPlace(v.c, v.t);           // the chapter on this copy: by its title in a book of files
   // Whose place stands: "mine", "theirs", "same", or "ask" (the header's rule). theirs: the account's; mine: this
   // device's, when it is this person's. "ask": the two differ and a place with no time is in it: nobody is moved by
   // itself, nothing is sent over the account's; the page offers the other place.
   function winner(theirs, mine) {
-    if (!mine) return !theirs ? "same" : theirs.at ? "theirs" : "ask";
+    if (!mine) return theirs ? "theirs" : "same";
     if (!theirs) return "mine";
     if (theirs.c === mine.c && theirs.p === mine.p) return "same";
-    if (mine.at && theirs.at) return mine.at > theirs.at ? "mine" : mine.at < theirs.at ? "theirs" : "ask";   // (the same moment, two places: asked too)
+    if (mine.at && theirs.at) return mine.at >= theirs.at ? "mine" : "theirs";
     if (mine.at) return "mine";            // the account's has no time (from before this version): a change made here since stands
-    return "ask";                          // this device's has no time: not moved by itself, and it does not overrule
+    return "theirs";                       // this device never moved in it: the place from the other device (Q4)
   }
   // A chapter this copy of the book does not have: said once, and nothing moves.
   const lacked = new Set();
@@ -8434,7 +8530,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     if (lacked.has(once)) return;
     lacked.add(once);
     log("book", `follow: the place of "${row.title}" on another device is chapter ${v.c}, which this copy does not have: nothing moved`);
-    READER.say(`Your place on another device is ${BOOK.numbered ? `chapter ${v.c}` : "further along"}, which this copy of "${row.title}" does not have.`, 12000);
+    READER.say(`Your place on another device is ${BOOK.numbered ? `chapter ${v.c}` : v.t ? `"${v.t}"` : "further along"}, which this copy of "${row.title}" does not have.`, 6000);
   }
   const placeNow = () => { const was = BOOK.pos(); return was && BOOK.indexOf(was.c) >= 0 ? `${BOOK.label(BOOK.indexOf(was.c))} ¶ ${(was.p || 0) + 1}` : ""; };
   // The page is at that very place already (this browser's place was another person's, and happens to be the same):
@@ -8452,16 +8548,17 @@ button:disabled{cursor:default;opacity:.55;background:none}
     if (BOOK.current !== row.id || BOOK.quick) return false;
     if (already(row, v)) return false;
     if (!stopped()) { log("book", `follow: "${row.title}" has a newer place on another device (chapter ${v.c}); not moved while a reading is under way here`); return false; }
-    const i = BOOK.indexOf(v.c);
+    const i = where(v);
     if (i < 0) { lacking(row, v); return false; }
+    const c = BOOK.info(i).c;                               // this copy's number for that chapter
     const wasAt = placeNow();
-    st.books[row.id] = { c: v.c, p: v.p, at: v.at, who: me(), up: sig(v) };
+    st.books[row.id] = { c, p: v.p, at: v.at, who: me(), up: sig(v) };
     save();
-    head(row, v);
+    head(row, { c });
     READER.go(i, { p: v.p, top: v.top });
     const now = `${BOOK.label(i)} ¶ ${v.p + 1}`;
     log("book", `follow: "${row.title}" moved to the place from another device: ${now}${wasAt ? ` (it was at ${wasAt} here)` : ""}`);
-    READER.say(`Moved to your place from another device: ${now}${wasAt ? ` (you were at ${wasAt} here)` : ""}.`, 12000);
+    READER.say(`Moved to your place from another device: ${now}${wasAt ? ` (you were at ${wasAt} here)` : ""}.`, 5000);   // about 5 s (Q3)
     return true;
   }
   // "ask": the page stays where it is, and one line offers the other place with one button. Said once a page for the
@@ -8538,7 +8635,6 @@ button:disabled{cursor:default;opacity:.55;background:none}
     const w = winner(theirs, mine);
     if (w === "mine" || (w === "same" && mine && theirs && mine.at && !theirs.at)) return give(row, key, second);   // (the same place, and only this one has a time: the account's gets it)
     if (w === "theirs") { take(row, theirs); return; }
-    if (w === "ask") { offer(row, theirs); return; }
     if (theirs && mine && k.up !== sig(theirs)) { if (theirs.at) { k.at = theirs.at; k.who = who; } k.up = sig(theirs); dirty = true; }   // the same place: the account's time is this one's
   }
   const busy = new Set(), again = new Set();
@@ -8670,8 +8766,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
       all = true;
       log("book", `follow: signed in as ${(kit().state.account || {}).name || who}: the places and settings of this browser and the account's are compared (${why})`);
     }
-    syncSettings(why);
-    const open = BOOK.row && !BOOK.row.temp ? BOOK.row : null;
+    const open = BOOK.row && !BOOK.row.temp ? BOOK.row : null;      // (the settings no longer follow: Q3)
     for (const row of all ? BOOK.books : open ? [open] : []) await syncBook(row, why);
   }
   function start() {
@@ -8685,7 +8780,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     });
     SETTINGS.onChange(settingsChanged);
     kit().on("account", () => pass("the account changed"));
-    kit().on("data", (key) => { if (key === SET_KEY) syncSettings("changed elsewhere"); else if (String(key).startsWith("place.")) { const row = rowOf(key); if (row) syncBook(row, "changed elsewhere"); } });
+    kit().on("data", (key) => { if (key === SET_KEY) return; else if (String(key).startsWith("place.")) { const row = rowOf(key); if (row) syncBook(row, "changed elsewhere"); } });
     let wasOn = kit().state.cloud === "on";
     kit().on("state", (s) => { const on = s.cloud === "on"; if (on && !wasOn) pass("the cloud is back"); wasOn = on; });
     document.addEventListener("visibilitychange", () => {
@@ -11800,7 +11895,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
       if (!SETTINGS.get("useMyPC")) return "";
       const t = retryText();
       if (t) return `Using ${pcName()}: ${lowerFirst(t)}`;
-      return st.check ? `Using ${pcName()}: ${st.check}` : `Using ${pcName()} (checked when a book opens)`;
+      return st.check ? `Using ${pcName()}: ${st.check}` : `Using ${pcName()} (reached at Play)`;
     },
     // A failed Play, while the PC is on.
     get failed() { return st.failed && !!SETTINGS.get("useMyPC"); },
@@ -11816,11 +11911,8 @@ button:disabled{cursor:default;opacity:.55;background:none}
 
   // The light check when a book opens, only while the PC makes the voice; tried again until it answers, while the PC
   // stays on and a book is open.
-  const bookKeep = () => !!SETTINGS.get("useMyPC") && globalThis.READER && READER.state === "book";
-  if (globalThis.READER && READER.onChange) READER.onChange((what) => { if (what === "book" && SETTINGS.get("useMyPC")) check("book open", bookKeep); });
-  // ... and the book the page opens with (it opens before any change is announced).
-  const startCheck = () => { if (!(globalThis.APP && APP.ready)) { setTimeout(startCheck, 200); return; } if (SETTINGS.get("useMyPC") && READER.state === "book" && !st.checkAt && !loop.running) check("book open", bookKeep); };
-  setTimeout(startCheck, 200);
+  // (The light check when a book opened went on 2026-11-14, Jon's answer Q6: opening a book to read contacts nothing of
+  // the PC's voice; the first Play does, and the relay's own connection is the cloud kit's.)
 })();
 </script>
 <script>
@@ -16043,9 +16135,46 @@ button:disabled{cursor:default;opacity:.55;background:none}
     if (state === "paused") { resume(); return; }
     if (READER.chapter < 0 || !BOOK.count) { READER.say("No book to read: import one first."); return; }
     if (hooks.hold) { status(hooks.hold); return; }
+    if (!voiceDecided()) { firstVoice(); return; }
     const myGen = ++gen;
     setup = myGen; wanted = null;
     return start(myGen).finally(() => { if (setup === myGen) setup = -1; });
+  }
+  // The first Play on this device decides what makes the voice (Jon's answer Q6, 2026-11-13): nothing of a voice is
+  // loaded or tested before it. With the PC's voice open to this person (signed in, allowed, the PC reachable): the PC
+  // makes it, at once, no test. Otherwise the one window allowed here opens (firstrun.js, "Best voice for this device")
+  // with the light check, and the reading starts when it is closed (Use it, or Not now). Decided once per device
+  // (br1-voice-decided); a device that already chose (a check done, or the PC's voice on) counts as decided.
+  const DECIDED = (globalThis.APP_KEY || "br1") + "-voice-decided";
+  function voiceDecided() {
+    try { if (localStorage.getItem(DECIDED)) return true; } catch (e) { return true; }
+    if (globalThis.BR1_TEST && BR1_TEST.firstRun === false) return true;      // the test pages: as before
+    const r = globalThis.BENCH ? BENCH.record() : null;
+    return !!(r && r.choice) || !!SETTINGS.get("useMyPC");
+  }
+  const decide = (how) => { try { localStorage.setItem(DECIDED, JSON.stringify({ how, at: Date.now() })); } catch (e) {} };
+  let deciding = false;
+  async function firstVoice() {
+    if (deciding) return;
+    deciding = true;
+    try {
+      status("Getting the voice ready…");
+      if (globalThis.CLOUD) await Promise.race([CLOUD.start(), new Promise((r) => setTimeout(r, 6000))]);
+      const pc = globalThis.CLOUD && CLOUD.on && CLOUD.canUse("voice") && ENGINE.get("cloud");
+      if (pc) {
+        try { SETTINGS.update({ useMyPC: true }); } catch (e) { log("voice", `the first Play: the PC's voice could not be switched on: ${e.message}`); }
+        settingsChanged(["useMyPC"]);
+        decide("pc");
+        log("voice", `the first Play on this device: ${globalThis.CLOUDVOICE ? CLOUDVOICE.pcName() : "the PC"} makes the voice (this person may use it; nothing tested)`);
+        deciding = false;
+        play();
+        return;
+      }
+      log("voice", `the first Play on this device: ${globalThis.CLOUD && CLOUD.on ? "this person may not use the PC's voice" : "the PC cannot be reached"}, so this device's voice is checked first (the light check)`);
+      status("");
+      if (!globalThis.FIRSTRUN) { decide("device"); deciding = false; play(); return; }
+      FIRSTRUN.open({ reason: globalThis.BENCH && BENCH.crashed ? "crashed" : globalThis.BENCH && BENCH.interrupted ? "interrupted" : "play", then: () => { decide("device"); deciding = false; play(); } });
+    } catch (e) { log("error", "deciding the voice at the first Play", e); decide("device"); deciding = false; }
   }
   async function start(myGen) {
     fresh();
@@ -19533,18 +19662,21 @@ button:disabled{cursor:default;opacity:.55;background:none}
     const v = values();
     if (!v) return;
     const w = plain(v, rec.suggestion.setup);
+    const after = then; then = null;               // the first Play waiting for the choice: it plays once the voice is set
     choose("suggested");
     close(true);
-    return SETTINGSWIN.choose(v, `The best voice for this ${device()}: ${w.name}.`);
+    return Promise.resolve(SETTINGSWIN.choose(v, `The best voice for this ${device()}: ${w.name}.`)).then((r) => { if (after) after(); return r; }, (e) => { if (after) after(); throw e; });
   }
+  let then = null;             // opts.then: run once the window is closed (the first Play: it plays then)
 
   function open(opts = {}) {
     reason = opts.reason || "recheck";
+    if (opts.then) then = opts.then;
     if (win) { FLOAT.open("firstrun"); return win; }
     rec = null; phase = ""; fullNote = ""; armedAt = 0; moreOpen = false;
-    win = FLOAT.open("firstrun", { title: `Best voice for this ${device()}`, width: 600, height: 680, onClose: () => { if (ctl) ctl.cancel(); ctl = null; if (!quiet && reason !== "recheck" && !(BENCH.record() || {}).choice) choose("skip"); win = null; el = null; quiet = false; } });
+    win = FLOAT.open("firstrun", { title: `Best voice for this ${device()}`, width: 600, height: 680, onClose: () => { if (ctl) ctl.cancel(); ctl = null; if (!quiet && reason !== "recheck" && !(BENCH.record() || {}).choice) choose("skip"); win = null; el = null; quiet = false; const after = then; then = null; if (after) setTimeout(after, 0); } });
     build();
-    log("device", `first-run window opened (${reason === "import" ? "after the first import" : reason === "crashed" ? "to finish the check that crashed" : reason === "interrupted" ? "to run the check that was cut short again" : "Check this device again"})`);
+    log("device", `first-run window opened (${reason === "play" ? "at the first Play on this device" : reason === "import" ? "after the first import" : reason === "crashed" ? "to finish the check that crashed" : reason === "interrupted" ? "to run the check that was cut short again" : "Check this device again"})`);
     runLight();
     return win;
   }
@@ -19555,8 +19687,9 @@ button:disabled{cursor:default;opacity:.55;background:none}
   // browser marks every page BR1_TEST.firstRun = false (test/_chrome.mjs) so other tests' imports do not
   // start a benchmark; the first-run test sets it true.
   const allowed = () => !(globalThis.BR1_TEST && BR1_TEST.firstRun === false);
-  READER.onChange((what) => { if (what === "added" && !BENCH.record() && !win && allowed()) open({ reason: "import" }); });   // after books are added, not on a switch
-  if (BENCH.crashed || BENCH.interrupted) {
+  // (It no longer opens after the first import or at the start: Jon's answer Q6, 2026-11-13. The first Play opens it,
+  // player.js firstVoice, when the PC's voice is not this person's to use.)
+  if (false && (BENCH.crashed || BENCH.interrupted)) {
     const t0 = Date.now(), t = setInterval(() => {
       if (Date.now() - t0 > 15000) { clearInterval(t); return; }
       if (window.APP && APP.ready && allowed()) { clearInterval(t); if (READER.state === "book" && !win) open({ reason: BENCH.crashed ? "crashed" : "interrupted" }); }
