@@ -74,9 +74,9 @@
       "extensions": [], "opens": []
     },
     {
-      "id": "mayhem", "group": "games", "name": "Mirror, Signal, Mayhem", "path": "mayhem/", "listed": false,
-      "short": "Learn to drive in Oregon. Then cause mayhem.",
-      "about": "A 3D driving game that teaches the 2026-2027 Oregon Driver Manual: signs, lanes, turns, parking, weather and defensive driving, with cops when you speed. Silly, true and fun.",
+      "id": "mayhem", "group": "games", "name": "Mirror, Signal, Mayhem (prototype)", "path": "mayhem/",
+      "short": "Learn to drive in Oregon. Then cause mayhem. (Prototype)",
+      "about": "A 3D driving game that teaches the 2026-2027 Oregon Driver Manual: signs, lanes, turns, parking, weather and defensive driving, with cops when you speed. Silly, true and fun. Prototype: one town to drive freely for now; the roads, lessons and voices are still being built.",
       "source": "Projects\\mayhem",
       "extensions": [], "opens": []
     },

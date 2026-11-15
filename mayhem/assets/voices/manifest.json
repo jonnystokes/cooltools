@@ -1,0 +1,9 @@
+{
+ "version": 1,
+ "model": "none yet: node tools/bake-voices.mjs makes the clips",
+ "rate": 24000,
+ "codec": "opus",
+ "kbps": 72,
+ "made": "",
+ "lines": {}
+}
