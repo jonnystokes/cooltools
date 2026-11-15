@@ -1,12 +1,12 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
      pastes the Apps kit's tab icons at the ICONS marker, and stamps the version and build time where
-     Book reader V1.0.861 and 2026-11-13 6:19 AM appear. -->
+     Book reader V1.0.865 and 2026-11-14 6:45 PM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Book reader V1.0.861</title>
+<title>Book reader V1.0.865</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
 <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlUlEQVR42p2SzytEURzFz33evBlNtsyCYtRkmrLASqwoKTtlYf4FyQabKSkrZWeNjdmxUrJUlkp+ZNj4tbAgUoyI7/lazLvPw0PN2dzX7X7ePefcrwGA9cn3UVILFLYJ1YgohISIQoQgNfgWqorwRETnptbqi8aHVxkAf8LBysqad0ktVAWLQqgF17ddDQwRtrk2c9+4h7srwcXeO65P5QesUDRmXaQ7PTSkY1iZvoWIGtfenMo4SGUc5PpjeC0ncLn/hs3FJ4gQg2N1aOnwkEgaWFnOsbbDiicNMt1e4CDbG0ciafDYMvP5A59zrVUAGGreCg5sXAwEmaMkoiAVri3MQmHZwqJEvxvXth3pwG872kFEhO8O7Av8FqFSYvC+v99iVXc+60fTUImV2TZLE/dId8bQ2hVHU9aDU/N5i4XODl5wtFPG/nbZxlOzMHJ7LNRseMJitUBzu4cD/2Cupxanu894epDQtCpIlsz88M0oydXQeH4Za0bs+TBIzTtTa/VFoeaFWhKh/gtTlWSJ1PzyYa74AfvjIbDIJi4vAAAAAElFTkSuQmCC">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVR42r2Xe0yVZRzHP+8573u4KxzkvoAkoELkGHkpsGJsbpa0uTabq5htrY3W3Np0mn+53LQ/yjZy+UelXci2LHKzRWtt2Sbr4g0DnRw1EUjwAgocOcA5PL/+OBfe876IOo3vX+/O7z3P53l+1/fRMKl5YzBHRNaLUCciJaLEUAIighJBlPlZiNqUIJbnqXcEEQKixKtEDorQuGF/Rl+EqUUevt8YfFlEdishWayAe4NbbT5R0rCpOaspuoEw/AslaP8zPGITEeq3HMhu0po3BnMQ8c7CyWNtSnxKpEQPx3y24SiRZBHWO8IJN9vwiK1OD2f77MOVICIljvtYancLRwRDt8KT3FBQqXOjX3HpTJDxm/cGj0vUyF/gwp3npOM3P4N9wQgcpQTdevLaN+NJyQy1B1FxXL0wSe+pID0dQS6fD94WjibkFusUVrgoXOgit8RAc4R6TUVtAo2vXY7xgm51ewQOoDkgs8hJZpGTx56PY8Iv9J4O0tMe4EJbgKErk4gIKekOCjwGBQsN8he4iEvUmE7uXD0GrkTQrTGfSa4EjfmVBvMrDaoDwof1gyglrPsgFacxBR1/pwXnUw+hP1NsW8MMF8EcglDCRXS+Y5jBK+OUL3UTn+S0LeQ0tKjbzXCAib1/YIyMoboGQxtftzRqM8OVioZgKtsj2rPDy8nWAXTDwcOL5lJRnY6nKp1Sz1wcznCOhPPhVgrsPx7awCuLw7t22CpBt5ZaRJt3VXD00FXaDg/Q1jpAx87rfLXzHElzdLbuqeSRx1NtYZPhMbQ58baN+F//GoCET1+yliG6tc4jSkkzqFmdS83qXAC6vT7aWgfoPDFESpoRrhKJekD1XOdmTSMJH71oj3v/sC0HYsvQVOcR/fB5N91nfXiq0il/wk1+STL5JcnwqmlhMW16ZBwmFTI8NmMiizUE1iYTUc85Hy37evmxqQeHU6OobA6LngrlQfkyN5pGtMPdjWLLEBxyixA0bHuUfcdreHu3hxVr8hi5McE3u/5hy9ojtLb020Iwk7TURLTUREsZhv6vW1uoWSmpBlUrs6hamQVAf7cf78khKp+eZw/BDEr4eK2lDKc2r1v7d0TbG9roPHGDRdXzqKhy46lOJzs/gez8BJs7b+uBRJcpb8yDSdCtvT2i5c9lM3RtgkMHLvHLt/+iaVBQmoKnOp01bzzIHLcr6k4ArSAN4wUPzsoHomvoiwvsOWCCi8LciGLduXxVNstXZTM2Osnfvw9G+8GBT7pYsCSNZSsyoxkNoCXFEf/e6hhY3NZn7SVpgqupRjRVCX1ng+QU69E/xCc6WVKbwZLaDABGfUESk/UZQ6DNS0bLTLH93tUxFgOfmoamSvhu+xClT4ZGaX65fbJF4OaMtir58FtghOaH36fwHvNz5s9Rjv48EgNXCnQRAiJiRJLR71Oc+MnPsZZRNA1yig0KPS7mV7jIK3VFZ7t5sMS4eFK46A3SeWSEzr9G6To1RjAotpOr0BQO6OEbS9l0HxpqUug+Pc7FU+P8+qXgStQoXOiiyBOHO0+Pvnf22BjXegN4j/jxHvfjH5m0Zfs0cETEq72/5uoOETbf4TecbZ5Pb7sjOCK86xChMXxdmlW4Enwi0ujYsD+jT5Q0hK9LswUXEWnY217W5wDY1JzVJEJ9+Lo0Gyev/6y9rCnmdgywre5SjgjrlUidKCkRwbhP8ICIeEU4KCKNe9vLotfz/wCKU53CYXSQUAAAAABJRU5ErkJggg==">
@@ -15,9 +15,9 @@
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.861";
-  window.APP_BUILT = "2026-11-13 6:19 AM";
-  window.APP_NOTE = "search: as in Everything, quotes keep every space and the order (\"sun \" in quotes finds sun then a space); outside quotes a space only separates words";
+  window.APP_VERSION = "Book reader V1.0.865";
+  window.APP_BUILT = "2026-11-14 6:45 PM";
+  window.APP_NOTE = "big files: a plain file over 50 MB is read in pieces and cut into parts (a 572 MB file: 12 s, 11,122 parts); search keeps no copy of the text (half the memory, no size limit)";
   window.APP_KEY = "br1";
 </script>
 <style>
@@ -3706,7 +3706,91 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     });
     const recoded = [], dupNames = [], bad = [], info = [];     // info: plain lines for the log (an EPUB's skipped pages, notes)
     const bytes = (s) => (s.kind === "zip" ? ZIP.bytes(job.zips[s.zip], s.entry) : s.kind === "gz" ? ZIP.gunzipBytes(s.file) : s.file.arrayBuffer());
-    const text = async (s) => { const d = ZIP.decode(await bytes(s)); if (d.enc !== "UTF-8") recoded.push(`"${s.name}" was read as ${d.enc} (${d.why})`); return d.text; };
+    const text = async (s) => {
+      const b = await bytes(s);
+      const d = ZIP.decode(b);
+      // A browser holds one string of at most about 536 million characters; past that Chrome gives back "" (a 600 MB file,
+      // Jon 2026-11-14): said, never read as an empty chapter.
+      if (!d.text && (b.byteLength || b.length) > 1000) throw new Error("it is too big to read in one piece");
+      if (d.enc !== "UTF-8") recoded.push(`"${s.name}" was read as ${d.enc} (${d.why})`);
+      return d.text;
+    };
+    // A big plain file of the "split" kind (over STREAM_FROM): read in pieces, decoded as it comes and cut as it goes, so
+    // no one huge string is ever made (the Text editor's way, 2026-11-14): at heading lines when it has them (a chapter
+    // that runs past 50,000 words is cut into parts), else into parts of about CHAPTER.PART_WORDS words. The records go
+    // into the store (or the quick read's memory) a batch at a time. Gives the number of chapters made.
+    const STREAM_FROM = 50e6, BIG_CHAPTER = 50000, STREAM = {};
+    const streamable = (s) => job.kind === "split" && s.kind !== "zip" && s.kind !== "gz" && s.file && s.file.size > STREAM_FROM;
+    async function streamSplit(s, enc) {
+      const rd = s.file.stream().getReader();
+      let dec = null, rest = "", prevBlank = true, heads = 0, made = 0, words = 0;
+      const memFrom = mem ? mem.length : 0, madeC = [];       // undone when the file turns out not to be UTF-8 and is read again
+      let cur = { lines: [], title: job.title, n: null, heading: false, parts: 0 }, batch = [], allWords = 0, bytesIn = 0, lastPost = 0;
+      const partWords = () => (heads ? BIG_CHAPTER : CHAPTER.PART_WORDS);
+      const flush = async (force) => {
+        const paras = CHAPTER.paragraphs(cur.lines.join("\n"), job.join);
+        cur.lines = []; words = 0;
+        if (!paras.length && !force) return;
+        if (!paras.length) return;
+        made++;
+        const title = heads ? (cur.parts ? `${cur.title} (part ${cur.parts + 1})` : cur.title) : `Part ${made}`;
+        batch.push(add(made, null, title, paras, s.name, heads ? cur.heading : false));
+        madeC.push(made);
+        if (batch.length >= job.batch) { await put(batch); batch = []; }
+      };
+      const line = async (l) => {
+        const blank = !l.trim();
+        if (prevBlank && !blank) {
+          const h = CHAPTER.heading(l);
+          if (h) {
+            if (cur.lines.some((x) => x.trim())) await flush();
+            heads++;
+            cur = { lines: [], title: l.trim(), n: h.n, heading: true, parts: 0 };
+            prevBlank = false;
+            return;
+          }
+        }
+        cur.lines.push(l);
+        if (!blank) { const w = (l.match(/\S+/g) || []).length; words += w; allWords += w; }
+        if (blank && words >= partWords()) { const t = cur.title, hd = cur.heading, p = cur.parts; await flush(); cur = { lines: [], title: t, n: null, heading: hd, parts: p + 1 }; }
+        prevBlank = blank;
+      };
+      for (;;) {
+        const { value, done } = await rd.read();
+        if (done) break;
+        let b = value;
+        if (!dec) {
+          if (!enc && b[0] === 0xEF && b[1] === 0xBB && b[2] === 0xBF) b = b.subarray(3);
+          dec = new TextDecoder(enc === "Windows-1252" ? "windows-1252" : "utf-8", { fatal: !enc });
+        }
+        let t;
+        try { t = dec.decode(b, { stream: true }); }
+        catch (e) {
+          if (enc) throw e;
+          rd.cancel().catch(() => {});
+          if (mem) mem.length = memFrom;
+          for (const c of madeC) seen.delete(c);
+          size = 0;
+          return streamSplit(s, "Windows-1252");
+        }
+        bytesIn += value.length;
+        t = (rest + t).replace(/\r\n?/g, "\n");
+        let i = 0, j;
+        while ((j = t.indexOf("\n", i)) >= 0) { await line(t.slice(i, j)); i = j + 1; }
+        rest = t.slice(i);
+        if (performance.now() - lastPost > 250) { lastPost = performance.now(); post({ done: 0, chapters: made, bytes: bytesIn, total: s.file.size }); }
+        await breathe();
+      }
+      const tail = (rest + (dec ? dec.decode() : "")).replace(/\r\n?/g, "\n");
+      for (const l of tail.split("\n")) await line(l);
+      await flush();
+      if (batch.length) await put(batch);
+      if (enc) recoded.push(`"${s.name}" was read as ${enc || encName} (it is not valid UTF-8)`);
+      how = heads >= 2 ? `read in pieces (${(s.file.size / 1e6).toFixed(0)} MB): split at ${heads} heading lines, long chapters in parts` : `read in pieces (${(s.file.size / 1e6).toFixed(0)} MB): no heading lines; ${allWords.toLocaleString("en-US")} words cut into ${made} parts of about ${CHAPTER.PART_WORDS.toLocaleString("en-US")} words`;
+      // Parts made without headings are named "Part k of N" now that N is known (the index entry's title is the one shown).
+      if (heads < 2) for (const e of seen.values()) if (/^Part \d+$/.test(e.title)) e.title = `${e.title} of ${made}`;
+      return made;
+    }
     const seen = new Map(), names = new Map();
     let unreadable = 0, duplicates = 0, size = 0, lastYield = performance.now(), how = "", numbered = job.kind === "numbered";
     const breathe = async () => { if (job.slice && performance.now() - lastYield > job.slice) { await new Promise((r) => setTimeout(r, 0)); lastYield = performance.now(); } };
@@ -3765,13 +3849,18 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
         if (slice.some((s) => s.kind === "zip")) {
           for (const s of slice) { try { texts.push(await text(s)); } catch (e) { texts.push(null); bad.push(`"${s.name}" could not be read: ${e.message}`); } await breathe(); }
         } else {
-          texts.push(...(await Promise.all(slice.map((s) => text(s).catch((e) => { bad.push(`"${s.name}" could not be read: ${e.message}`); return null; })))));
+          texts.push(...(await Promise.all(slice.map((s) => (streamable(s) ? STREAM : text(s).catch((e) => { bad.push(`"${s.name}" could not be read: ${e.message}`); return null; }))))));
         }
         const recs = [];
         for (let k = 0; k < slice.length; k++) {
           const s = slice[k];
           let t = texts[k];
           if (t === null) { unreadable++; continue; }
+          if (t === STREAM) {
+            try { await streamSplit(s); numbered = false; }
+            catch (e) { unreadable++; bad.push(`"${s.name}" could not be read: ${e.message}`); }
+            continue;
+          }
           const raw = t;
           if (/\.md$/i.test(s.name)) t = CHAPTER.softenMd(t);           // Markdown marks (and editor's notes) are not read aloud
           if (job.kind === "split") {
@@ -8611,24 +8700,22 @@ button:disabled{cursor:default;opacity:.55;background:none}
 })();
 </script>
 <script>
-// search-kit.js: the search pop-up shared by Jon's programs (the Book reader first, the Text editor too).
-// One source: Projects\search-kit\search-kit.js. A program's build copies it into the page; never edit a copy.
-// The how-to is README.md beside this file.
+// search-kit.js: the Book reader's search pop-up. One source: Projects\search-kit\search-kit.js. A program's build
+// copies it into the page; never edit a copy. The how-to is README.md beside this file.
 //
-// The whole text is held in memory as ONE string (sections of units: a book's chapters of paragraphs, a file's
-// lines), joined with a separator no one types, plus one folded copy (lower case, curly quotes made straight; the
-// same length, so every place in one is the same place in the other). The benchmark of 2026-11-13 (README.md):
-// indexOf on the folded string was the fastest for plain words (25 M characters: 4 to 20 ms a word, 81 ms for the
-// single letter "e", 2.5 million hits), so plain words use it and only a wildcard or "Whole words" uses a RegExp.
-// The search runs in slices of about 12 ms, so typing never waits, and a newer keystroke stops the older search.
+// Version 2 (2026-11-14): the text is searched where it is, unit by unit (a book's paragraphs), with a RegExp per word
+// (case-insensitive by its flag, curly and straight quotes alike by a character class): no joined copy and no folded
+// copy of the text, so a book is held in memory once and a book of any size can be searched (version 1 joined the
+// whole text into one string plus a folded copy: about three times the memory, and one string stops at about 536
+// million characters, Jon's 600 MB file). The word with the longest plain part is tried first in each unit, so most
+// units fail at once. The search runs in slices of about 12 ms, so typing never waits; a newer keystroke stops it.
 //
 // The pattern (README.md "What a person types"): words = all of them in the same paragraph (line); "two words" =
 // exactly that; drag* = words starting with drag (* is any letters); -word = leave out what has it.
 // A result is a SENTENCE holding a match, shown under where it is, the matched words marked.
 (function () {
   "use strict";
-  const VERSION = 1;
-  const SEP = "\u0001";                 // between units: never typed, so no match runs across two
+  const VERSION = 2;
   const LIMIT = 1000;                   // results listed (the count goes on past it)
   const PAGE = 60;                      // results drawn at a time as the list scrolls
   const SLICE_MS = 12;
@@ -8680,21 +8767,21 @@ button:disabled{cursor:default;opacity:.55;background:none}
     return { terms, empty: !terms.some((t) => !t.neg) };
   }
 
-  // A term's finder over the haystack: next(hay, from, to) gives [start, end] of the next hit at or after from
-  // that starts before to, or null.
+  // A term's finder over one paragraph (or line): next(hay, from, to) gives [start, end] of the next hit at or after
+  // from that starts before to, or null. Always a RegExp now (2026-11-14): case-insensitive by its flag, curly and
+  // straight quotes alike by a character class, so the text is searched where it is, with no folded copy of it.
   const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const Q1 = "['‘’‚‛′ʼ]", Q2 = "[\"“”„‟″]";
+  const quoted = (s) => esc(s).replace(/['‘’‚‛′ʼ]/g, Q1).replace(/["“”„‟″]/g, Q2);
   function finder(t, opts) {
-    const text = opts.matchCase ? foldQuotes(t.text) : foldAll(t.text);
-    if (!t.wild && !opts.wholeWords) {
-      return { lit: text.length, next(hay, from, to) { const i = hay.indexOf(text, from); return i >= 0 && i < to ? [i, i + text.length] : null; } };
-    }
+    const text = t.text;
     const parts = text.split("*");
-    let body = parts.map(esc).join(`[${WORD}']*`);
+    let body = parts.map(quoted).join(`[${WORD}'’]*`);
     // A wildcard word is a word: drag* starts at a word's start, *ing ends at a word's end.
     const lead = opts.wholeWords || (t.wild && !text.startsWith("*")), tail = opts.wholeWords || (t.wild && !text.endsWith("*"));
     body = (lead ? `(?<![${WORD}])` : "") + body + (tail ? `(?![${WORD}])` : "");
     let re;
-    try { re = new RegExp(body, "gu"); } catch (e) { re = new RegExp(esc(text), "g"); }
+    try { re = new RegExp(body, opts.matchCase ? "gu" : "giu"); } catch (e) { re = new RegExp(esc(text), opts.matchCase ? "g" : "gi"); }
     const lit = Math.max(...parts.map((p) => p.length));
     return {
       lit,
@@ -8807,8 +8894,10 @@ button:disabled{cursor:default;opacity:.55;background:none}
     const listeners = { query: [], results: [] };
     const emit = (what, v) => { for (const fn of listeners[what] || []) { try { fn(v); } catch (e) { console.error(e); } } };
 
-    // The text in memory.
-    let data = null;          // { key, text, fold, foldCase, starts: Int32Array (unit start; one more at the end), unitSec: Int32Array, secFirst: Int32Array, labels }
+    // The text in memory: the units as they are (2026-11-14): no joined copy and no folded copy, so a book is held once
+    // (the strings are the program's own, not copied) and a book of any size can be searched (one joined string stops
+    // at about 536 million characters: Jon's 600 MB file).
+    let data = null;          // { key, units: [string], unitSec: Int32Array, secFirst: Int32Array (one more at the end), labels }
     let loading = null;
     let loadNote = "";
 
@@ -8821,25 +8910,18 @@ button:disabled{cursor:default;opacity:.55;background:none}
         drawCount();
         const t0 = performance.now();
         const secs = await o.source.load((done, total) => { loadNote = total ? `Getting the text ready… ${Math.round((100 * done) / total)}%` : "Getting the text ready…"; drawCount(); });
-        const parts = [], labels = [];
+        const labels = [];
         let n = 0;
         for (const s of secs) n += s.units.length;
-        const starts = new Int32Array(n + 1), unitSec = new Int32Array(n), secFirst = new Int32Array(secs.length + 1);
-        let pos = 0, u = 0;
+        const units = new Array(n), unitSec = new Int32Array(n), secFirst = new Int32Array(secs.length + 1);
+        let u = 0;
         secs.forEach((s, si) => {
           secFirst[si] = u;
           labels.push(s.label);
-          for (const t of s.units) {
-            const str = String(t == null ? "" : t);
-            starts[u] = pos; unitSec[u] = si; u++;
-            parts.push(str);
-            pos += str.length + 1;
-          }
+          for (const t of s.units) { units[u] = typeof t === "string" ? t : String(t == null ? "" : t); unitSec[u] = si; u++; }
         });
         secFirst[secs.length] = u;
-        starts[n] = pos;
-        const text = parts.join(SEP) + SEP;
-        const d = { key, text, fold: foldAll(text), foldCase: null, starts, unitSec, secFirst, labels, ms: Math.round(performance.now() - t0) };
+        const d = { key, units, unitSec, secFirst, labels, ms: Math.round(performance.now() - t0) };
         if (loading && loading.key === key) { data = d; loading = null; }
         loadNote = "";
         return d;
@@ -8847,36 +8929,28 @@ button:disabled{cursor:default;opacity:.55;background:none}
       loading = { key, p };
       try { return await p; } catch (e) { if (loading && loading.p === p) loading = null; loadNote = `The text could not be read: ${e && e.message ? e.message : e}`; drawCount(); throw e; }
     }
-    // The unit holding character pos (binary search).
-    function unitAt(d, pos) {
-      let lo = 0, hi = d.starts.length - 2;
-      while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (d.starts[mid] <= pos) lo = mid; else hi = mid - 1; }
-      return lo;
-    }
 
     // State of the panel.
     const st = { q: "", wholeWords: false, matchCase: false, scoped: false, results: [], total: 0, secs: 0, done: true, sel: -1, gen: 0, drawn: 0, terms: [], took: 0 };
 
-    // ---- How one search goes: the haystack, the finders, the anchor (the longest plain part: fewest hits), the range ----
+    // ---- How one search goes: the finders (the anchor first: the longest plain part, the fewest hits), the units ----
     function plan(d, parsed) {
       const optsF = { wholeWords: st.wholeWords, matchCase: st.matchCase };
-      if (st.matchCase && !d.foldCase) d.foldCase = foldQuotes(d.text);
-      const hay = st.matchCase ? d.foldCase : d.fold;
       const pos = parsed.terms.filter((t) => !t.neg).map((t) => ({ t, f: finder(t, optsF) }));
       const neg = parsed.terms.filter((t) => t.neg).map((t) => ({ t, f: finder(t, optsF) }));
       pos.sort((a, b) => b.f.lit - a.f.lit);
       const scope = st.scoped && o.scope ? o.scope() : null;
-      return { d, hay, pos, neg, anchor: pos[0], from: scope ? d.starts[d.secFirst[scope.s]] : 0, to: scope ? d.starts[d.secFirst[scope.s + 1]] : d.text.length };
+      return { d, pos, neg, anchor: pos[0], from: scope ? d.secFirst[scope.s] : 0, to: scope ? d.secFirst[scope.s + 1] : d.units.length };
     }
-    // Unit u's hits ([[start, end]] in the whole text, sorted, overlaps merged) when it holds every word and no left-out
-    // one; else null.
+    // Unit u's hits ([[start, end]] in the unit, sorted, overlaps merged) when it holds every word and no left-out one;
+    // else null. The anchor is tried first: most units fail there at once.
     function unitHits(P, u) {
-      const { d, hay, pos, neg } = P;
-      const ua = d.starts[u], ub = d.starts[u + 1] - 1;
-      for (const p of pos) if (!p.f.next(hay, ua, ub)) return null;
-      for (const n of neg) if (n.f.next(hay, ua, ub)) return null;
+      const hay = P.d.units[u], len = hay.length;
+      if (!P.anchor.f.next(hay, 0, len)) return null;
+      for (const p of P.pos) if (p !== P.anchor && !p.f.next(hay, 0, len)) return null;
+      for (const n of P.neg) if (n.f.next(hay, 0, len)) return null;
       const hits = [];
-      for (const p of pos) { let x = ua; for (;;) { const m = p.f.next(hay, x, ub); if (!m || m[1] > ub) break; hits.push(m); x = m[1] > m[0] ? m[1] : m[0] + 1; } }
+      for (const p of P.pos) { let x = 0; for (;;) { const m = p.f.next(hay, x, len); if (!m) break; hits.push(m); x = m[1] > m[0] ? m[1] : m[0] + 1; } }
       hits.sort((a, b) => a[0] - b[0] || b[1] - a[1]);
       const merged = [];
       for (const m of hits) { const l = merged[merged.length - 1]; if (l && m[0] <= l[1]) l[1] = Math.max(l[1], m[1]); else merged.push([m[0], m[1]]); }
@@ -8888,14 +8962,9 @@ button:disabled{cursor:default;opacity:.55;background:none}
       if (parsed.empty) return [];
       const d = await ensure();
       const P = plan(d, parsed), out = [];
-      let at = P.from;
-      for (;;) {
-        const h = P.anchor.f.next(P.hay, at, P.to);
-        if (!h) break;
-        const u = unitAt(d, h[0]);
-        at = d.starts[u + 1];
+      for (let u = P.from; u < P.to; u++) {
         const m = unitHits(P, u);
-        if (m) { const s = d.unitSec[u], ua = d.starts[u]; for (const x of m) out.push({ s, u: u - d.secFirst[s], start: x[0] - ua, end: x[1] - ua }); }
+        if (m) { const s = d.unitSec[u]; for (const x of m) out.push({ s, u: u - d.secFirst[s], start: x[0], end: x[1] }); }
       }
       return out;
     }
@@ -8912,33 +8981,25 @@ button:disabled{cursor:default;opacity:.55;background:none}
       if (gen !== st.gen) return;
       const P = plan(d, parsed);
       const t0 = performance.now();
-      let at = P.from, lastUnit = -1, lastSec = -1, sliceStart = performance.now();
+      let lastSec = -1, sliceStart = performance.now();
       const firstShown = { done: false };
-      for (;;) {
-        const h = P.anchor.f.next(P.hay, at, P.to);
-        if (!h) break;
-        const u = unitAt(d, h[0]);
-        const ua = d.starts[u], ub = d.starts[u + 1] - 1;
-        at = ub + 1;                                        // the next unit
-        if (u !== lastUnit) {
-          lastUnit = u;
-          const merged = unitHits(P, u);
-          if (merged) {
-            // The sentences holding a hit.
-            const sents = sentences(d.text, ua, ub);
-            let k = 0;
-            for (const s of sents) {
-              const inS = [];
-              while (k < merged.length && merged[k][0] < s[1]) { if (merged[k][0] >= s[0]) inS.push(merged[k]); k++; }
-              if (!inS.length) continue;
-              st.total++;
-              if (st.results.length < LIMIT) st.results.push({ u, s: d.unitSec[u], a: s[0], b: s[1], hits: inS });
-            }
-            const sec = d.unitSec[u];
-            if (sec !== lastSec) { lastSec = sec; st.secs++; }
+      for (let u = P.from; u < P.to; u++) {
+        const merged = unitHits(P, u);
+        if (merged) {
+          // The sentences holding a hit.
+          const text = d.units[u];
+          let k = 0;
+          for (const s of sentences(text, 0, text.length)) {
+            const inS = [];
+            while (k < merged.length && merged[k][0] < s[1]) { if (merged[k][0] >= s[0]) inS.push(merged[k]); k++; }
+            if (!inS.length) continue;
+            st.total++;
+            if (st.results.length < LIMIT) st.results.push({ u, s: d.unitSec[u], a: s[0], b: s[1], hits: inS });
           }
+          const sec = d.unitSec[u];
+          if (sec !== lastSec) { lastSec = sec; st.secs++; }
         }
-        if (performance.now() - sliceStart > SLICE_MS) {
+        if ((u & 255) === 0 && performance.now() - sliceStart > SLICE_MS) {
           if (!firstShown.done && st.results.length) { firstShown.done = true; drawAll(); } else { drawCount(); if (firstShown.done && st.drawn < PAGE) drawMore(); }
           await new Promise((r) => setTimeout(r, 0));
           if (gen !== st.gen) return;
@@ -9048,7 +9109,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
       if (replacingNow || !st.results.length) return;
       if (st.sel < 0) { step(1); return; }
       const r = st.results[st.sel];
-      const ua = data.starts[r.u];
+      const ua = 0;                                    // the hits are in the unit already
       replacingNow = true;
       try {
         await o.replace({ all: false, with: st.with || "", hits: [{ s: r.s, u: r.u - data.secFirst[r.s], start: r.hits[0][0] - ua, end: r.hits[0][1] - ua }] });
@@ -9089,7 +9150,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
       if (!r || !data) return;
       st.sel = i;
       markSel();
-      const ua = data.starts[r.u];
+      const ua = 0;                                    // the hits are in the unit already
       const first = r.hits[0];
       try { o.onPick && o.onPick({ s: r.s, u: r.u - data.secFirst[r.s], start: first[0] - ua, end: first[1] - ua, hits: r.hits.map((h) => [h[0] - ua, h[1] - ua]), index: i, count: st.results.length }); }
       catch (e) { console.error(e); }
@@ -9181,19 +9242,19 @@ button:disabled{cursor:default;opacity:.55;background:none}
         const h = r.hits[0];
         a = Math.max(r.a, h[0] - Math.floor(max / 3));
         z = Math.min(r.b, a + max);
-        if (a > r.a) { const sp = data.text.indexOf(" ", a); if (sp > 0 && sp < h[0]) a = sp + 1; }
-        if (z < r.b) { const sp = data.text.lastIndexOf(" ", z); if (sp > h[1]) z = sp; }
+        if (a > r.a) { const sp = data.units[r.u].indexOf(" ", a); if (sp > 0 && sp < h[0]) a = sp + 1; }
+        if (z < r.b) { const sp = data.units[r.u].lastIndexOf(" ", z); if (sp > h[1]) z = sp; }
       }
       if (a > r.a) tx.append("…");
       let x = a;
       for (const h of r.hits) {
         if (h[1] <= a || h[0] >= z) continue;
         const ha = Math.max(a, h[0]), hb = Math.min(z, h[1]);
-        if (ha > x) tx.append(data.text.slice(x, ha));
-        const m = document.createElement("mark"); m.textContent = data.text.slice(ha, hb); tx.append(m);
+        if (ha > x) tx.append(data.units[r.u].slice(x, ha));
+        const m = document.createElement("mark"); m.textContent = data.units[r.u].slice(ha, hb); tx.append(m);
         x = hb;
       }
-      if (x < z) tx.append(data.text.slice(x, z));
+      if (x < z) tx.append(data.units[r.u].slice(x, z));
       if (z < r.b) tx.append("…");
       b.append(where, tx);
       b.setAttribute("aria-label", `${wb.textContent}: ${tx.textContent}`);
@@ -9242,7 +9303,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
       if (!data || !st.q || parse(st.q).empty || data.key !== o.source.key()) return [];
       const out = [];
       const f = data.secFirst[s];
-      for (const r of st.results) if (r.s === s) for (const h of r.hits) out.push({ u: r.u - f, start: h[0] - data.starts[r.u], end: h[1] - data.starts[r.u] });
+      for (const r of st.results) if (r.s === s) for (const h of r.hits) out.push({ u: r.u - f, start: h[0], end: h[1] });
       return out;
     }
 
