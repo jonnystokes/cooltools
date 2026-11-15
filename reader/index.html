@@ -1,12 +1,12 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
      pastes the Apps kit's tab icons at the ICONS marker, and stamps the version and build time where
-     Book reader V1.0.918 and 2026-11-15 2:21 AM appear. -->
+     Book reader V1.0.926 and 2026-11-15 2:43 AM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Book reader V1.0.918</title>
+<title>Book reader V1.0.926</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
 <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlUlEQVR42p2SzytEURzFz33evBlNtsyCYtRkmrLASqwoKTtlYf4FyQabKSkrZWeNjdmxUrJUlkp+ZNj4tbAgUoyI7/lazLvPw0PN2dzX7X7ePefcrwGA9cn3UVILFLYJ1YgohISIQoQgNfgWqorwRETnptbqi8aHVxkAf8LBysqad0ktVAWLQqgF17ddDQwRtrk2c9+4h7srwcXeO65P5QesUDRmXaQ7PTSkY1iZvoWIGtfenMo4SGUc5PpjeC0ncLn/hs3FJ4gQg2N1aOnwkEgaWFnOsbbDiicNMt1e4CDbG0ciafDYMvP5A59zrVUAGGreCg5sXAwEmaMkoiAVri3MQmHZwqJEvxvXth3pwG872kFEhO8O7Av8FqFSYvC+v99iVXc+60fTUImV2TZLE/dId8bQ2hVHU9aDU/N5i4XODl5wtFPG/nbZxlOzMHJ7LNRseMJitUBzu4cD/2Cupxanu894epDQtCpIlsz88M0oydXQeH4Za0bs+TBIzTtTa/VFoeaFWhKh/gtTlWSJ1PzyYa74AfvjIbDIJi4vAAAAAElFTkSuQmCC">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVR42r2Xe0yVZRzHP+8573u4KxzkvoAkoELkGHkpsGJsbpa0uTabq5htrY3W3Np0mn+53LQ/yjZy+UelXci2LHKzRWtt2Sbr4g0DnRw1EUjwAgocOcA5PL/+OBfe876IOo3vX+/O7z3P53l+1/fRMKl5YzBHRNaLUCciJaLEUAIighJBlPlZiNqUIJbnqXcEEQKixKtEDorQuGF/Rl+EqUUevt8YfFlEdishWayAe4NbbT5R0rCpOaspuoEw/AslaP8zPGITEeq3HMhu0po3BnMQ8c7CyWNtSnxKpEQPx3y24SiRZBHWO8IJN9vwiK1OD2f77MOVICIljvtYancLRwRDt8KT3FBQqXOjX3HpTJDxm/cGj0vUyF/gwp3npOM3P4N9wQgcpQTdevLaN+NJyQy1B1FxXL0wSe+pID0dQS6fD94WjibkFusUVrgoXOgit8RAc4R6TUVtAo2vXY7xgm51ewQOoDkgs8hJZpGTx56PY8Iv9J4O0tMe4EJbgKErk4gIKekOCjwGBQsN8he4iEvUmE7uXD0GrkTQrTGfSa4EjfmVBvMrDaoDwof1gyglrPsgFacxBR1/pwXnUw+hP1NsW8MMF8EcglDCRXS+Y5jBK+OUL3UTn+S0LeQ0tKjbzXCAib1/YIyMoboGQxtftzRqM8OVioZgKtsj2rPDy8nWAXTDwcOL5lJRnY6nKp1Sz1wcznCOhPPhVgrsPx7awCuLw7t22CpBt5ZaRJt3VXD00FXaDg/Q1jpAx87rfLXzHElzdLbuqeSRx1NtYZPhMbQ58baN+F//GoCET1+yliG6tc4jSkkzqFmdS83qXAC6vT7aWgfoPDFESpoRrhKJekD1XOdmTSMJH71oj3v/sC0HYsvQVOcR/fB5N91nfXiq0il/wk1+STL5JcnwqmlhMW16ZBwmFTI8NmMiizUE1iYTUc85Hy37evmxqQeHU6OobA6LngrlQfkyN5pGtMPdjWLLEBxyixA0bHuUfcdreHu3hxVr8hi5McE3u/5hy9ojtLb020Iwk7TURLTUREsZhv6vW1uoWSmpBlUrs6hamQVAf7cf78khKp+eZw/BDEr4eK2lDKc2r1v7d0TbG9roPHGDRdXzqKhy46lOJzs/gez8BJs7b+uBRJcpb8yDSdCtvT2i5c9lM3RtgkMHLvHLt/+iaVBQmoKnOp01bzzIHLcr6k4ArSAN4wUPzsoHomvoiwvsOWCCi8LciGLduXxVNstXZTM2Osnfvw9G+8GBT7pYsCSNZSsyoxkNoCXFEf/e6hhY3NZn7SVpgqupRjRVCX1ng+QU69E/xCc6WVKbwZLaDABGfUESk/UZQ6DNS0bLTLH93tUxFgOfmoamSvhu+xClT4ZGaX65fbJF4OaMtir58FtghOaH36fwHvNz5s9Rjv48EgNXCnQRAiJiRJLR71Oc+MnPsZZRNA1yig0KPS7mV7jIK3VFZ7t5sMS4eFK46A3SeWSEzr9G6To1RjAotpOr0BQO6OEbS9l0HxpqUug+Pc7FU+P8+qXgStQoXOiiyBOHO0+Pvnf22BjXegN4j/jxHvfjH5m0Zfs0cETEq72/5uoOETbf4TecbZ5Pb7sjOCK86xChMXxdmlW4Enwi0ujYsD+jT5Q0hK9LswUXEWnY217W5wDY1JzVJEJ9+Lo0Gyev/6y9rCnmdgywre5SjgjrlUidKCkRwbhP8ICIeEU4KCKNe9vLotfz/wCKU53CYXSQUAAAAABJRU5ErkJggg==">
@@ -15,9 +15,9 @@
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.918";
-  window.APP_BUILT = "2026-11-15 2:21 AM";
-  window.APP_NOTE = "Opening a file shows its progress (Jon, 2026-11-15): name and size, a bar with MB and percent, the speed and the time left, the reading stage; Cancel aborts cleanly and goes back (closes a tab the file manager opened, else Back)";
+  window.APP_VERSION = "Book reader V1.0.926";
+  window.APP_BUILT = "2026-11-15 2:43 AM";
+  window.APP_NOTE = "Talking speed and Playback speed side by side in the Voice tab (Speed moved from Reading, Speech rate out of More voice settings; Talking speed applies at once, browser voices too)";
   window.APP_KEY = "br1";
 </script>
 <style>
@@ -810,6 +810,16 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   .srow { grid-template-columns: minmax(0, 1fr); }
   .sctl { justify-content: flex-start; }
 }
+/* Talking speed and Playback speed side by side (Voice tab), one above the other on a narrow window */
+.spair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; border-bottom: 1px solid var(--line); }
+.spair > .srow { grid-template-columns: minmax(0, 1fr); border-bottom: 0; align-content: start; }
+.spair .sctl { justify-content: flex-start; }
+.spair .srange { width: 100%; }
+.spair .srange input[type="range"] { flex: 1 1 auto; width: auto; min-width: 0; max-width: none; }
+@container (max-width: 480px) {
+  .spair { grid-template-columns: minmax(0, 1fr); }
+  .spair > .srow + .srow { border-top: 1px solid var(--line); }
+}
 .snote, .slater { padding: 0.9em 0; color: var(--muted); line-height: 1.4; }
 .slater { font-style: italic; }
 .sbtn { min-height: var(--tap); padding: 0 1em; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); cursor: pointer; }
@@ -1377,7 +1387,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     skipWatermarks: true,
     watermarkRules: null,          // null = the built-in lists (step 3 defines them); else the edited lists
     // Reading
-    speed: 1,                      // playback speed, 1 = real time
+    speed: 1,                      // Playback speed (Voice tab): the finished sound faster or slower, pitch kept; 1 = real time
     volume: 1,                     // 0..1 (shown as a percentage)
     readTitle: true,               // say the chapter title first
     continueChapters: true,        // keep reading into the next chapter
@@ -1402,7 +1412,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     runOn: "gpu",                  // "gpu" or "cpu": the card and its speed first (Jon, 2026-10-17); a device without WebGPU fails at Play with the reason (no fallbacks)
     precision: "fp32",             // Kokoro only; fp32 on every card (fp16 gave broken sound on the Pixel's Adreno: BUGS 28)
     brokenPrecisions: [],          // "kokoro gpu fp16"...: precisions that gave broken sound (NaN, all zero) on this device: information for the Settings window only (greyed with the reason); the reading itself fails with the reason (BUGS 29)
-    pace: 1,                       // Kokoro and Piper: the model's own speaking speed
+    pace: 1,                       // Talking speed (Voice tab): the voice's own speaking speed (Kokoro, Piper, Supertonic, the PC's voice, a browser voice's rate)
     steps: null,                   // Supertonic only; null = from the benchmark
     // Read ahead (Jon, 2026-11-08: "don't limit me ... Default: 300 seconds. Have a number field and a unit field"): how much
     // sound is made ahead of the reading, on this device and with the PC alike, in seconds; no upper limit. The unit is only
@@ -11346,8 +11356,8 @@ button:disabled{cursor:default;opacity:.55;background:none}
       this.maxChars = v.localService ? 0 : ONLINE_MAX;
       log("voice", `browser voice: ${v.name} (${v.lang}, ${v.localService ? "local: whole pieces" : `online: pieces cut at ${ONLINE_MAX} characters`})${want ? "" : " (the device's default English voice)"}; no silent-piece check for a browser voice (the device speaks the text itself and the reader never gets its sound)`);
     },
-    // For the Settings window: the device speaks; none of the model knobs apply (Speed covers the rate).
-    describe() { return { runOn: [], precisions: [], pace: false, steps: false, copies: false, speaker: 0 }; },
+    // For the Settings window: the device speaks; none of the model knobs apply but Talking speed (its rate, times Playback speed).
+    describe() { return { runOn: [], precisions: [], pace: true, steps: false, copies: false, speaker: 0 }; },
     hasBoundaries() {
       const k = this.voice ? this.known.get(idOf(this.voice)) : undefined;
       return k === undefined ? null : k;
@@ -14386,7 +14396,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     readyBar.style.width = w.ready == null ? "0" : Math.round(Math.min(1, w.ready / METER_SEC) * 100) + "%";
     readyEl.title = w.ready == null ? "The device speaks the text itself: no sound is made ahead." : `${dur(w.ready)} of sound made ahead of what is being read${w.idle ? " (stopped)" : ""}`;
   }
-  // The reading uses sound at the Speed setting's pace (stream.js: playbackRate, 0.25-4), so the voice keeps ahead
+  // The reading uses sound at the Playback speed setting (stream.js: playbackRate, 0.25-4; Talking speed is already in the sound made), so the voice keeps ahead
   // only above that figure, not above 1× (BUGS 56).
   const pace = () => Math.max(0.25, Math.min(4, Number(SETTINGS.get("speed")) || 1));
   function fillSpeed(v) {
@@ -14394,7 +14404,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     speedEl.textContent = speedText(v);
     speedEl.classList.toggle("none", !(v && v.x));
     speedEl.classList.toggle("slow", !!(v && v.x && v.x < p));
-    speedEl.title = v && v.x ? `The voice's speed over the last ${v.window === 60 ? "minute" : v.window + " s"}: ${v.sound} s of sound made in ${v.busy} s of work (${v.chunks} chunk${v.chunks === 1 ? "" : "s"}); above ${x1(p)}× ${p === 1 ? "" : "(the Speed setting) "}it keeps ahead of the reading` : "";
+    speedEl.title = v && v.x ? `The voice's speed over the last ${v.window === 60 ? "minute" : v.window + " s"}: ${v.sound} s of sound made in ${v.busy} s of work (${v.chunks} chunk${v.chunks === 1 ? "" : "s"}); above ${x1(p)}× ${p === 1 ? "" : "(the Playback speed) "}it keeps ahead of the reading` : "";
   }
   // Each part drawn only when what it SHOWS changed (job 3, C3). The periodic redraws (the player's 1 s tick, the
   // sheet's timer) skip a hidden page, which is drawn again when it is back; a state change or a message still
@@ -16587,9 +16597,9 @@ button:disabled{cursor:default;opacity:.55;background:none}
     else if (!head) w.push("nothing more is queued");
     if (LISTENER.why()) w.push(LISTENER.why());
     const n = copiesNow(), speed = cloudOn() ? (busyMs() ? stats.sound / (busyMs() / 1000) : 0) : stats.synthMs ? stats.sound / (stats.synthMs / 1000) * n : 0;   // the copies run side by side: together (Use my PC: the pieces asked at once overlap; their span counts once)
-    // The reading uses sound at the Speed setting's pace (stream.js), so "slower" is measured against it (BUGS 56).
+    // The reading uses sound at the Playback speed setting (stream.js; Talking speed is already in the sound made), so "slower" is measured against it (BUGS 56).
     const pace = Math.max(0.25, Math.min(4, Number(SETTINGS.get("speed")) || 1));
-    if (speed && speed < 1.3 * pace) w.push(`the voice is slower than the reading (${speed.toFixed(1)}× real time${n > 1 ? ` with ${n} copies together` : ""} over ${stats.chunks} chunks${pace !== 1 ? `, read at Speed ${pace}×` : ""})`);
+    if (speed && speed < 1.3 * pace) w.push(`the voice is slower than the reading (${speed.toFixed(1)}× real time${n > 1 ? ` with ${n} copies together` : ""} over ${stats.chunks} chunks${pace !== 1 ? `, played at ${pace}×` : ""})`);
     return w.join("; ") || "no reason found";
   }
   STREAM.on("waiting", () => {
@@ -16791,11 +16801,11 @@ button:disabled{cursor:default;opacity:.55;background:none}
 // note said once beside it. Plain words everywhere but Debug (Natural / Light / Experimental voices, graphics chip or
 // card, Quality for the precision; ENGINE.voiceLabel and friends); the family names, fp32 and the like only under the
 // More ▸ folds and in Debug. Descriptions cut to one short statement at most, except in Debug.
-//   Reading: Speed, Volume, Text size, Button size, Theme (Light · Dark · Automatic), Read chapter titles, Keep reading
+//   Reading: Volume, Text size, Button size, Theme (Light · Dark · Automatic), Read chapter titles, Keep reading
 //     into the next chapter, Highlight the word being read (on / off: its timing picks itself, HIGHLIGHT.source), Keep
 //     the screen on, Keep reading with the screen off, the quiet tone, also while stopped or paused.
 //   Voice (this device's own): Voice on this phone (grouped by kind, best first, "✓ Runs well on this phone") with its Demo
-//     (the voice as chosen, before Apply; on the PC when its voice is on), Read ahead, Check this phone again; More voice settings ▸ Runs on (graphics chip / processor), Quality, Speech rate,
+//     (the voice as chosen, before Apply; on the PC when its voice is on), Talking speed and Playback speed side by side, Read ahead, Check this phone again; More voice settings ▸ Runs on (graphics chip / processor), Quality,
 //     Steps (Experimental), Pause making sound while I scroll, the Mistake check (the listener: an Experimental voice
 //     only, Jon's plan 16).
 //   Text: Skip website junk (More ▸ the watermark rules), Say these words differently, CAPITALS, short lines, numbers.
@@ -16832,17 +16842,17 @@ button:disabled{cursor:default;opacity:.55;background:none}
   const ALIASES = { Cloud: "Voice", Book: "Text", "Word highlight": "Reading", Listener: "Debug", "Voice data": "Storage", "Offline package": "Storage", Background: "Reading", Sound: "Voice", System: "Storage" };
   const LISTEN_KEYS = ["listenerOn", "listener", "listenMode", "reroll"];
   const OWNS = {
-    Reading: ["speed", "volume", "textSize", "uiSize", "theme", "readTitle", "continueChapters", "wordHighlight", "screenAwake", "backgroundPlay", "keepAlive", "keepAliveIdle"],
-    Voice: ["useMyPC", "pcVoice", "pcChip", "pcSteps", "pcPickedAt", "voice", "runOn", "precision", "pace", "steps", "readAhead", "readAheadUnit", "holdOnScroll"].concat(LISTEN_KEYS),
+    Reading: ["volume", "textSize", "uiSize", "theme", "readTitle", "continueChapters", "wordHighlight", "screenAwake", "backgroundPlay", "keepAlive", "keepAliveIdle"],
+    Voice: ["useMyPC", "pcVoice", "pcChip", "pcSteps", "pcPickedAt", "voice", "pace", "speed", "runOn", "precision", "steps", "readAhead", "readAheadUnit", "holdOnScroll"].concat(LISTEN_KEYS),
     Text: ["skipWatermarks", "watermarkRules", "spelling", "capsAsWords", "numbersToWords", "joinShort"],
     Storage: ["offline"],
     Debug: ["detailedMarks", "logTypesOff"].concat(LISTEN_KEYS),
   };
   const LABELS = {
-    skipWatermarks: "Skip website junk", watermarkRules: "Watermark rules", speed: "Speed", volume: "Volume", readTitle: "Read chapter titles",
+    skipWatermarks: "Skip website junk", watermarkRules: "Watermark rules", speed: "Playback speed", volume: "Volume", readTitle: "Read chapter titles",
     continueChapters: "Keep reading into the next chapter", theme: "Theme", textSize: "Text size", uiSize: "Button size", spelling: "Say these words differently",
     capsAsWords: "Read CAPITALS as normal words", numbersToWords: "Say numbers as words", joinShort: "Read short lines together", voice: "Voice", runOn: "Runs on",
-    precision: "Quality", pace: "Speech rate", steps: "Steps", readAhead: "Read ahead", readAheadUnit: "Read ahead", wordHighlight: "Highlight the word being read",
+    precision: "Quality", pace: "Talking speed", steps: "Steps", readAhead: "Read ahead", readAheadUnit: "Read ahead", wordHighlight: "Highlight the word being read",
     backgroundPlay: "Keep reading with the screen off", keepAlive: "Quiet tone that keeps the sound open", keepAliveIdle: "Quiet tone while stopped or paused", screenAwake: "Keep the screen on while reading",
     offline: "Never download", holdOnScroll: "Pause making sound while I scroll",
     listenerOn: "Mistake check", listener: "Listener model", listenMode: "When to check", reroll: "Re-roll faulty chunks",
@@ -16852,7 +16862,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
   // Saved and applied the moment they change (Jon, 2026-10-20). Everything else a tab owns waits for Apply. The PC's
   // own voice (pcVoice, pcChip, pcSteps) too: nothing is checked or downloaded on this device for it, and a row of the
   // speed check is used the moment it is tapped (plan 5: "Tap a row to use it").
-  const LIVE = ["theme", "textSize", "uiSize", "speed", "volume", "readTitle", "continueChapters", "wordHighlight", "holdOnScroll", "keepAlive", "keepAliveIdle", "screenAwake", "detailedMarks", "logTypesOff", "readAhead", "readAheadUnit", "pcVoice", "pcChip", "pcSteps", "pcPickedAt"];
+  const LIVE = ["theme", "textSize", "uiSize", "speed", "pace", "volume", "readTitle", "continueChapters", "wordHighlight", "holdOnScroll", "keepAlive", "keepAliveIdle", "screenAwake", "detailedMarks", "logTypesOff", "readAhead", "readAheadUnit", "pcVoice", "pcChip", "pcSteps", "pcPickedAt"];
   const HEAVY = new Set(Object.values(OWNS).flat().filter((n) => !LIVE.includes(n)));
   const APPLY_NOTE = "The marked changes apply when you press Apply.";
   const FILE_KEYS = ["voice", "runOn", "precision", "offline", "listenerOn", "listener", "useMyPC"];   // a change here may need model files (Use my PC off again: the device runs the voice)
@@ -16977,14 +16987,15 @@ button:disabled{cursor:default;opacity:.55;background:none}
     return r;
   }
   // A range with its value shown. show(v) formats; toValue / fromValue map the slider's number to the setting's.
-  function slider(name, label, help, { min, max, step, show, toValue = (x) => x, fromValue = (x) => x }) {
+  // onRelease: the value changes only when the slider is let go (Talking speed: each change makes the sound again).
+  function slider(name, label, help, { min, max, step, show, toValue = (x) => x, fromValue = (x) => x, onRelease = false }) {
     const box = h("div", "srange");
     const inp = h("input");
     inp.type = "range"; inp.min = min; inp.max = max; inp.step = step; inp.value = fromValue(value(name));
     inp.setAttribute("aria-label", label);
     const out = h("span", "val", show(value(name)));
-    inp.addEventListener("input", () => { const v = toValue(Number(inp.value)); out.textContent = show(v); change(name, v, { drag: true }); });
-    inp.addEventListener("change", () => dragEnd(name));
+    inp.addEventListener("input", () => { const v = toValue(Number(inp.value)); out.textContent = show(v); if (!onRelease) change(name, v, { drag: true }); });
+    inp.addEventListener("change", () => { if (onRelease) change(name, toValue(Number(inp.value))); else dragEnd(name); });
     if (name === "uiSize") {
       // Jon, 2026-10-20: while the UI size slider is held, this window keeps its size (the rest of the app
       // follows live), so the slider doesn't jump under the finger; it takes the new size on release.
@@ -17051,7 +17062,6 @@ button:disabled{cursor:default;opacity:.55;background:none}
 
   // ---- Reading ------------------------------------------------------------------------------------
   function readingTab(body) {
-    body.appendChild(slider("speed", "Speed", "The voice keeps its pitch.", { min: 0.5, max: 3, step: 0.05, show: (v) => `${Number(v).toFixed(2).replace(/0$/, "")}×` }));
     body.appendChild(slider("volume", "Volume", "", { min: 0, max: 100, step: 5, show: (v) => `${Math.round(v * 100)}%`, toValue: (x) => x / 100, fromValue: (v) => Math.round(v * 100) }));
     body.appendChild(slider("textSize", "Text size", "The book's text.", { min: 50, max: 250, step: 5, show: (v) => `${v}%` }));
     body.appendChild(slider("uiSize", "Button size", "Buttons, bars and menus.", { min: 50, max: 250, step: 5, show: (v) => `${v}%` }));
@@ -17161,6 +17171,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     if (pcOn) {
       const part = PC().status(body);
       if (part.signed) body.appendChild(PC().voiceRow(demoPick));
+      body.appendChild(speedPair(ENGINE.get("cloud"), "pc"));
       body.appendChild(readAheadRow());
       PC().fold(body, part);
       return;
@@ -17169,14 +17180,35 @@ button:disabled{cursor:default;opacity:.55;background:none}
     const { engine: eid, voice: vid } = ENGINE.parse(value("voice"));
     const E = ENGINE.get(eid);
     if (E && E.id === "webspeech") body.appendChild(h("div", "snote", "Nothing to download; it stops when the screen goes off."));
+    body.appendChild(speedPair(E, vid));
     body.appendChild(readAheadRow());
     if (globalThis.BENCH && globalThis.FIRSTRUN) body.appendChild(row(`Check this ${device()} again`, "Finds the best voice here in about 10 seconds.", button("sbtn", "Check now", () => FIRSTRUN.open({ reason: "recheck" }))));
     if (E && E.id !== "webspeech") voiceMore(body, E, vid);
     if (!pcVisible()) pcLine(body);
   }
+  // The two speeds side by side under the voice list (Jon, 2026-11-15: "split into pace and post speed adjust").
+  // Talking speed (pace): the voice itself speaks faster or slower, made that way, so it sounds natural (Kokoro, Piper,
+  // Supertonic, the PC's voice, a browser voice's own rate); changed when let go, and a reading goes on at once with its
+  // pieces made again (PLAYER.settingsChanged). Playback speed (speed): the finished sound played faster or slower, pitch
+  // kept, nothing made again (a browser voice speaks for itself, so there it is its rate too). A voice with no speed of
+  // its own (describe().pace false) shows Talking speed greyed with the reason.
+  const times = (v) => `${Number(v).toFixed(2).replace(/0$/, "")}×`;
+  function speedPair(E, vid) {
+    const d = E && E.describe ? E.describe(caps, value("runOn"), vid) : {};
+    const box = h("div", "spair");
+    const t = slider("pace", "Talking speed", "The voice speaks faster or slower (sounds natural).", { min: 0.5, max: 2, step: 0.05, show: times, onRelease: true });
+    if (!d.pace) {
+      t.classList.add("off");
+      t.querySelector("input").disabled = true;
+      t.querySelector(".slab").appendChild(h("div", "swhy", "This voice has no speed of its own; use Playback speed."));
+    }
+    const web = E && E.id === "webspeech";
+    box.append(t, slider("speed", "Playback speed", web ? "A browser voice speaks for itself: this sets its speed too." : "Plays the sound faster or slower afterwards.", { min: 0.5, max: 3, step: 0.05, show: times }));
+    return box;
+  }
   // More voice settings ▸: the knobs of the voice chosen, in plain words first (the family and file names in grey).
   function voiceMore(body, E, vid) {
-    const box = more(body, "voice", "More voice settings", "Graphics chip or processor, quality, speech rate");
+    const box = more(body, "voice", "More voice settings", "Graphics chip or processor, quality");
     const runOn = value("runOn");
     const d = E.describe ? E.describe(caps, runOn, vid) : { runOn: [], precisions: [], pace: false, steps: false };
     const needsCaps = (d.runOn || []).some((o) => o.id === "gpu") && !caps;
@@ -17197,7 +17229,6 @@ button:disabled{cursor:default;opacity:.55;background:none}
       if ((d.precisions || []).length) box.appendChild(choice("precision", "Quality", "Full is the best sound; the smaller files are faster where they work.",
         d.precisions.map((p) => ({ id: p.id, label: (ENGINE.QUALITY && ENGINE.QUALITY[p.id]) || p.id, help: String(p.label), off: off(p), mark: off(p) ? null : mark(Object.assign(after(), { precision: p.id })) }))));
     }
-    if (d.pace) box.appendChild(slider("pace", "Speech rate", "The voice's own speed (Speed in Reading plays it faster).", { min: 0.5, max: 2, step: 0.05, show: (v) => Number(v).toFixed(2) }));
     if (d.steps) box.appendChild(select("steps", "Steps", "More steps: better sound, slower.",
       [{ id: "", label: `Automatic (${runOn === "cpu" ? 30 : 50} here)` }].concat([10, 15, 20, 25, 30, 40, 50, 60, 70, 85, 100, 120, 150, 200].map((n) => ({ id: String(n), label: String(n) }))),
       { toValue: (v) => (v === "" ? null : Number(v)), fromValue: (v) => (v == null ? "" : String(v)) }));
