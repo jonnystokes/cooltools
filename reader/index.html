@@ -1,12 +1,12 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
      pastes the Apps kit's tab icons at the ICONS marker, and stamps the version and build time where
-     Book reader V1.0.897 and 2026-11-15 12:21 AM appear. -->
+     Book reader V1.0.911 and 2026-11-15 1:03 AM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Book reader V1.0.897</title>
+<title>Book reader V1.0.911</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
 <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlUlEQVR42p2SzytEURzFz33evBlNtsyCYtRkmrLASqwoKTtlYf4FyQabKSkrZWeNjdmxUrJUlkp+ZNj4tbAgUoyI7/lazLvPw0PN2dzX7X7ePefcrwGA9cn3UVILFLYJ1YgohISIQoQgNfgWqorwRETnptbqi8aHVxkAf8LBysqad0ktVAWLQqgF17ddDQwRtrk2c9+4h7srwcXeO65P5QesUDRmXaQ7PTSkY1iZvoWIGtfenMo4SGUc5PpjeC0ncLn/hs3FJ4gQg2N1aOnwkEgaWFnOsbbDiicNMt1e4CDbG0ciafDYMvP5A59zrVUAGGreCg5sXAwEmaMkoiAVri3MQmHZwqJEvxvXth3pwG872kFEhO8O7Av8FqFSYvC+v99iVXc+60fTUImV2TZLE/dId8bQ2hVHU9aDU/N5i4XODl5wtFPG/nbZxlOzMHJ7LNRseMJitUBzu4cD/2Cupxanu894epDQtCpIlsz88M0oydXQeH4Za0bs+TBIzTtTa/VFoeaFWhKh/gtTlWSJ1PzyYa74AfvjIbDIJi4vAAAAAElFTkSuQmCC">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVR42r2Xe0yVZRzHP+8573u4KxzkvoAkoELkGHkpsGJsbpa0uTabq5htrY3W3Np0mn+53LQ/yjZy+UelXci2LHKzRWtt2Sbr4g0DnRw1EUjwAgocOcA5PL/+OBfe876IOo3vX+/O7z3P53l+1/fRMKl5YzBHRNaLUCciJaLEUAIighJBlPlZiNqUIJbnqXcEEQKixKtEDorQuGF/Rl+EqUUevt8YfFlEdishWayAe4NbbT5R0rCpOaspuoEw/AslaP8zPGITEeq3HMhu0po3BnMQ8c7CyWNtSnxKpEQPx3y24SiRZBHWO8IJN9vwiK1OD2f77MOVICIljvtYancLRwRDt8KT3FBQqXOjX3HpTJDxm/cGj0vUyF/gwp3npOM3P4N9wQgcpQTdevLaN+NJyQy1B1FxXL0wSe+pID0dQS6fD94WjibkFusUVrgoXOgit8RAc4R6TUVtAo2vXY7xgm51ewQOoDkgs8hJZpGTx56PY8Iv9J4O0tMe4EJbgKErk4gIKekOCjwGBQsN8he4iEvUmE7uXD0GrkTQrTGfSa4EjfmVBvMrDaoDwof1gyglrPsgFacxBR1/pwXnUw+hP1NsW8MMF8EcglDCRXS+Y5jBK+OUL3UTn+S0LeQ0tKjbzXCAib1/YIyMoboGQxtftzRqM8OVioZgKtsj2rPDy8nWAXTDwcOL5lJRnY6nKp1Sz1wcznCOhPPhVgrsPx7awCuLw7t22CpBt5ZaRJt3VXD00FXaDg/Q1jpAx87rfLXzHElzdLbuqeSRx1NtYZPhMbQ58baN+F//GoCET1+yliG6tc4jSkkzqFmdS83qXAC6vT7aWgfoPDFESpoRrhKJekD1XOdmTSMJH71oj3v/sC0HYsvQVOcR/fB5N91nfXiq0il/wk1+STL5JcnwqmlhMW16ZBwmFTI8NmMiizUE1iYTUc85Hy37evmxqQeHU6OobA6LngrlQfkyN5pGtMPdjWLLEBxyixA0bHuUfcdreHu3hxVr8hi5McE3u/5hy9ojtLb020Iwk7TURLTUREsZhv6vW1uoWSmpBlUrs6hamQVAf7cf78khKp+eZw/BDEr4eK2lDKc2r1v7d0TbG9roPHGDRdXzqKhy46lOJzs/gez8BJs7b+uBRJcpb8yDSdCtvT2i5c9lM3RtgkMHLvHLt/+iaVBQmoKnOp01bzzIHLcr6k4ArSAN4wUPzsoHomvoiwvsOWCCi8LciGLduXxVNstXZTM2Osnfvw9G+8GBT7pYsCSNZSsyoxkNoCXFEf/e6hhY3NZn7SVpgqupRjRVCX1ng+QU69E/xCc6WVKbwZLaDABGfUESk/UZQ6DNS0bLTLH93tUxFgOfmoamSvhu+xClT4ZGaX65fbJF4OaMtir58FtghOaH36fwHvNz5s9Rjv48EgNXCnQRAiJiRJLR71Oc+MnPsZZRNA1yig0KPS7mV7jIK3VFZ7t5sMS4eFK46A3SeWSEzr9G6To1RjAotpOr0BQO6OEbS9l0HxpqUug+Pc7FU+P8+qXgStQoXOiiyBOHO0+Pvnf22BjXegN4j/jxHvfjH5m0Zfs0cETEq72/5uoOETbf4TecbZ5Pb7sjOCK86xChMXxdmlW4Enwi0ujYsD+jT5Q0hK9LswUXEWnY217W5wDY1JzVJEJ9+Lo0Gyev/6y9rCnmdgywre5SjgjrlUidKCkRwbhP8ICIeEU4KCKNe9vLotfz/wCKU53CYXSQUAAAAABJRU5ErkJggg==">
@@ -15,9 +15,9 @@
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.897";
-  window.APP_BUILT = "2026-11-15 12:21 AM";
-  window.APP_NOTE = "bug fixes: BUGS 48/52/54/55/56/57/28 note, external-input-bug-find 1-25 (EPUB notes and labels, Continue off mid-reading, the light check, package Stop, edition scripts)";
+  window.APP_VERSION = "Book reader V1.0.911";
+  window.APP_BUILT = "2026-11-15 1:03 AM";
+  window.APP_NOTE = "One Voice tab (Jon, 2026-11-15): where the voice is made (this device or the PC) then that place's voices with Demo; a voice change while reading goes on at once; Piper sizes";
   window.APP_KEY = "br1";
 </script>
 <style>
@@ -1039,6 +1039,12 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 .smoreinner .srow:last-child { border-bottom: 0; }
 .sfamily { padding: 8px 0 2px; color: var(--muted); font-size: 0.8em; }
 .srow.heavy.pending .sname::after { content: " ●"; color: var(--accent); }
+
+/* Voice → the voice list with its Demo button (2026-11-15) and the demo's line under them */
+.svoicepick { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.srow.block .sctl > .svoicepick > select { flex: 1 1 12em; min-width: 0; width: auto; }
+.svoicepick .sdemobtn { flex: none; min-width: 5.5em; }
+.svoicepick .sdemoline { flex: 1 1 100%; }
 </style>
 
 </head>
@@ -10782,13 +10788,13 @@ button:disabled{cursor:default;opacity:.55;background:none}
   // only a low copy (Danny, Kathleen, Southern English female) is not a copy and stays.
   const LIST = [
     ["en_US-amy-low", 63104526, 4164], ["en_US-amy-medium", 63201294, 4882], ["en_US-lessac-medium", 63201294, 4885],
-    ["en_GB-alan-medium", 63201294, 4888], ["en_GB-alba-medium", 63201294, 4888], ["en_US-bryce-medium", 63531379, 4966],
-    ["en_GB-cori-medium", 63531379, 4966], ["en_US-danny-low", 63104526, 4166], ["en_US-hfc_female-medium", 63201294, 5033],
-    ["en_US-hfc_male-medium", 63201294, 5033], ["en_GB-jenny_dioco-medium", 63201294, 4895], ["en_US-joe-medium", 63201294, 4794],
+    ["en_GB-alan-medium", 63201294, 4888], ["en_GB-alba-medium", 63221984, 4888], ["en_US-bryce-medium", 63531379, 4966],
+    ["en_GB-cori-medium", 63221984, 4966], ["en_US-danny-low", 63104526, 4166], ["en_US-hfc_female-medium", 63221984, 5033],
+    ["en_US-hfc_male-medium", 63201294, 5033], ["en_GB-jenny_dioco-medium", 63221984, 4895], ["en_US-joe-medium", 63221984, 4794],
     ["en_US-john-medium", 63531379, 4965], ["en_US-kathleen-low", 63104526, 4169], ["en_US-kristin-medium", 63531379, 4968],
     ["en_US-kusal-medium", 63201294, 4884], ["en_US-ljspeech-medium", 63531379, 4972], ["en_US-mike-medium", 63221984, 5439],
     ["en_US-norman-medium", 63531379, 4968], ["en_GB-northern_english_male-medium", 63201294, 4847], ["en_US-reza_ibrahim-medium", 63511038, 4976],
-    ["en_US-ryan-medium", 63201294, 4883], ["en_US-sam-medium", 62950044, 5040], ["en_GB-southern_english_female-low", 63104526, 4189],
+    ["en_US-ryan-medium", 63221984, 4883], ["en_US-sam-medium", 62950044, 5040], ["en_GB-southern_english_female-low", 63104526, 4189],
   ];
   // The voices that went: their files, where a store still holds them, are offered for Delete as no longer used, and
   // an offline package that holds them leaves them out (package.js); a saved one moves to the nearest kept voice
@@ -11857,6 +11863,45 @@ button:disabled{cursor:default;opacity:.55;background:none}
   const E = ENGINE.register(SPEC);
   for (const k of ["depth", "depthKnown", "waiting", "checking", "status"]) Object.defineProperty(E, k, Object.assign(Object.getOwnPropertyDescriptor(SPEC, k), { configurable: true }));
 
+  // One short sample made on the PC, on a connection of its own (the reading's is never touched): the PC's tab's Hear a
+  // sample and the Voice tab's Demo. req: { text, engine, voice (its id: "af_heart"), runOn, steps, pace }; say(text)
+  // gets the progress in words. Gives a promise of { head, pcm (Int16Array), ms (asking to hearing), bytes }; its
+  // cancel() stops the asking (the promise fails with { stopped: true }).
+  function sample(req, say = () => {}) {
+    let ws = null, cancelled = false, fail = null;
+    const stopped = () => err("stopped", { stopped: true });
+    const p = (async () => {
+      const name = pcName();
+      const o = await R().open("voice", (q) => { if (q.text && !cancelled) say(q.text); });
+      if (cancelled) throw stopped();
+      if (!o.ok) throw new Error(o.why);
+      ws = R().ws("voice", "ws"); ws.binaryType = "arraybuffer";
+      const t0 = performance.now();
+      return await new Promise((resolve, reject) => {
+        fail = reject;
+        const t = setTimeout(() => { reject(new Error("no answer within 90 s")); ws.close(); }, 90000);
+        ws.onmessage = (ev) => {
+          if (typeof ev.data === "string") {
+            const m = JSON.parse(ev.data);
+            if (m.type === "hello") { if (m.checking) say(`${Cap(name)} is checking its voices' speed: the sample waits for it…`); ws.send(JSON.stringify({ type: "synth", id: "test", text: req.text, engine: req.engine, voice: req.voice, runOn: req.runOn, precision: "fp32", pace: req.pace, steps: req.steps })); }
+            else if (m.type === "loading") say(m.text);
+            else if (m.type === "state") say(m.checking ? `${Cap(name)} is checking its voices' speed: the sample waits for it…` : m.state === "queued" ? `Queued on ${name} (place ${m.pos})…` : `Making it on ${name}…`);
+            else if (m.type === "error") { clearTimeout(t); reject(new Error(m.error)); ws.close(); }
+            return;
+          }
+          clearTimeout(t);
+          const n = new DataView(ev.data).getUint32(0, true);
+          const head = JSON.parse(new TextDecoder().decode(new Uint8Array(ev.data, 4, n)));
+          resolve({ head, pcm: new Int16Array(ev.data.slice(4 + n)), ms: performance.now() - t0, bytes: ev.data.byteLength });
+          ws.close();
+        };
+        ws.onclose = (ev) => { clearTimeout(t); if (ev.code !== 1000 && ev.code !== 1005) reject(cancelled ? stopped() : new Error(ev.reason || `closed (${ev.code})`)); };
+      });
+    })();
+    p.cancel = () => { cancelled = true; if (fail) fail(stopped()); if (ws) { try { ws.close(); } catch (e) {} } };
+    return p;
+  }
+
   globalThis.CLOUDVOICE = {
     check,
     tryNow,
@@ -11892,7 +11937,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     get failed() { return st.failed && !!SETTINGS.get("useMyPC"); },
     // The PC's own voice (Settings → <the PC's name>): the kinds, their voices, the resolution, the check.
     KINDS, KIND_NAME, RUN_ONS, TIMED, DEFAULT, kindOf, voicesOf, voiceLabel, chipWord, viaWord, choice,
-    fetchCheck, runCheck,
+    fetchCheck, runCheck, sample,
     // The check as this page knows it: { sum (the best and the date), full (GET's answer: every row), hold (while the PC
     // checks: { step, of, label, left }), rows, best, when }.
     get speed() { return { sum: st.sum, full: st.full, hold: st.hold ? Object.assign({}, st.hold, { left: holdLeft() }) : null, rows: rows(), best: best(), when: checkWhen(), fresh: fullFresh() }; },
@@ -14171,6 +14216,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
   // Use this phone's voice: the PC off at once, the next Play uses this device's own voice (as it is set: the PC keeps
   // its own, 2026-11-08). Never taken by itself.
   function useDevice() {
+    if (PLAYER.state !== "stopped") PLAYER.stop();             // the waiting ends here; Play starts this device's voice
     try { SETTINGS.update({ useMyPC: false }); } catch (e) { PLAYER.say(`Not saved: ${e.message}`); return; }
     PLAYER.settingsChanged(["useMyPC"]);
     log("voice", `Use my PC switched off from the Now reading sheet: this ${deviceKind()}'s voice from the next Play`);
@@ -16192,7 +16238,9 @@ button:disabled{cursor:default;opacity:.55;background:none}
     fresh();
     trouble.clear(); speedLog = []; appendFails = 0; endMsg = ""; cut = null; hiddenPause = false; mediaCh = -1; room = null; lag = null; lastPiecesLog = performance.now();
     setState("playing");
-    status("");                          // line 1 says "Loading voice…" until the voice is in
+    status(switchNote);                  // line 1 says "Loading voice…" until the voice is in (or "Switching to …" after a change)
+    if (switchNote) log("playback", switchNote);
+    switchNote = "";
     // The resume rule: back to the chapter where the reading stopped, unless Jon moved by hand since.
     let ch = READER.chapter, para = READER.para;
     const back = last || savedReading();          // after a reload: the spot saved while reading (P10)
@@ -16369,6 +16417,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
   const VOICE_KEYS = DEVICE_VOICE.concat(PC_VOICE, ["pace", "useMyPC"]);
   const TEXT_KEYS = ["joinShort", "skipWatermarks", "watermarkRules", "spelling", "capsAsWords", "numbersToWords"];
   const LISTEN_KEYS = ["listenerOn", "listener", "listenMode", "reroll"];
+  let switchNote = "";                       // said while the reading starts again with new settings
   function settingsChanged(names) {
     const has = (keys) => keys.some((k) => names.includes(k));
     const voiceChanged = has(["pace", "useMyPC"]) || has(SETTINGS.get("useMyPC") ? PC_VOICE : DEVICE_VOICE), textChanged = has(TEXT_KEYS), listenChanged = has(LISTEN_KEYS);
@@ -16377,12 +16426,23 @@ button:disabled{cursor:default;opacity:.55;background:none}
       LISTENER.settingsChanged();
     }
     if (voiceChanged || textChanged) {
-      if (state !== "stopped") stop(`Stopped: the ${voiceChanged && textChanged ? "voice and text" : voiceChanged ? "voice" : "text"} settings changed. Press Play to continue with the new settings.`);
+      // While reading (Jon, 2026-11-15: "it just kept using the old voice"): the reading goes on at once with the new
+      // settings from the paragraph being heard; everything made the old way goes (the PC's queue is cancelled by the
+      // engine's stop). Paused: stopped, its place kept for Play.
+      const what = voiceChanged && textChanged ? "voice and text" : voiceChanged ? "voice" : "text", wasPlaying = state === "playing";
+      if (state !== "stopped") stop(wasPlaying ? "" : `Stopped: the ${what} settings changed. Press Play to continue with the new settings.`);
       else if (lastError) status("");                        // an error about the old settings does not outlive them (2026-10-26)
       reset();
       if (textChanged) READER.rebuildPieces();
       HIGHLIGHT.refresh(READER.pieces, () => null);
       if (voiceChanged) { if (engine) { try { engine.stop(); } catch (e) {} } engineReady = null; engineLoaded = false; engineKey = ""; }
+      if (wasPlaying) {
+        const pc = SETTINGS.get("useMyPC") && globalThis.CLOUDVOICE;
+        const label = pc ? `${CLOUDVOICE.voiceLabel(CLOUDVOICE.choice().voice)} on ${CLOUDVOICE.pcName()}` : ENGINE.voiceLabel ? ENGINE.voiceLabel(SETTINGS.get("voice")) : SETTINGS.get("voice");
+        switchNote = voiceChanged ? `Switching to ${label}…` : "Going on with the new text settings…";
+        log("playback", `the ${what} settings changed while reading: going on with them at once${last ? ` from ${BOOK.label(last.ch).toLowerCase()}, paragraph ${last.para + 1}` : ""}`);
+        play();
+      }
     }
     if (names.includes("wordHighlight") && state !== "stopped") {
       source = timingSource();
@@ -16513,8 +16573,8 @@ button:disabled{cursor:default;opacity:.55;background:none}
 <script>
 // settingswin.js: the Settings window (SETTINGS.md), opened by the gear in the top bar. A floating window (float.js:
 // move, resize, a scroll bar when needed, kept on screen, its size and place remembered) titled "Settings" with its ✕.
-// LAYOUT (Jon's plan 2026-11-08, PLAN-SIMPLER-SETTINGS.md 4 and the Decided list; built 2026-11-09): ONE row of six tabs,
-// Reading · Voice · <the PC's name> · Text · Storage · Debug (the PC's tab is "Cloud" here, cloudtab.js; hidden from a
+// LAYOUT (Jon's plan 2026-11-08, PLAN-SIMPLER-SETTINGS.md 4 and the Decided list; built 2026-11-09): ONE row of tabs (five since 2026-11-15),
+// Reading · Voice · Text · Storage · Debug (the PC's own tab went into Voice on 2026-11-15, Jon's "combine tabs": cloudtab.js; hidden from a
 // device not signed in to the PC: I1). No groups, no button row: Apply shows only while a change waits for it (C1), its
 // note said once beside it. Plain words everywhere but Debug (Natural / Light / Experimental voices, graphics chip or
 // card, Quality for the precision; ENGINE.voiceLabel and friends); the family names, fp32 and the like only under the
@@ -16522,8 +16582,8 @@ button:disabled{cursor:default;opacity:.55;background:none}
 //   Reading: Speed, Volume, Text size, Button size, Theme (Light · Dark · Automatic), Read chapter titles, Keep reading
 //     into the next chapter, Highlight the word being read (on / off: its timing picks itself, HIGHLIGHT.source), Keep
 //     the screen on, Keep reading with the screen off, the quiet tone, also while stopped or paused.
-//   Voice (this device's own): Voice on this phone (grouped by kind, best first, "✓ Runs well on this phone"), Read
-//     ahead, Check this phone again; More voice settings ▸ Runs on (graphics chip / processor), Quality, Speech rate,
+//   Voice (this device's own): Voice on this phone (grouped by kind, best first, "✓ Runs well on this phone") with its Demo
+//     (the voice as chosen, before Apply; on the PC when its voice is on), Read ahead, Check this phone again; More voice settings ▸ Runs on (graphics chip / processor), Quality, Speech rate,
 //     Steps (Experimental), Pause making sound while I scroll, the Mistake check (the listener: an Experimental voice
 //     only, Jon's plan 16).
 //   Text: Skip website junk (More ▸ the watermark rules), Say these words differently, CAPITALS, short lines, numbers.
@@ -16555,14 +16615,13 @@ button:disabled{cursor:default;opacity:.55;background:none}
 // SETTINGSWIN.open / close / show(tab) / save / clearData / choose / pending / tab, for the tests.
 (function () {
   const S = globalThis.SETTINGS;
-  const TAB_ORDER = ["Reading", "Voice", "Cloud", "Text", "Storage", "Debug"];
+  const TAB_ORDER = ["Reading", "Voice", "Text", "Storage", "Debug"];
   // Old tab and group names (the code and tests of earlier layouts, and the places a message points to) to the new tabs.
-  const ALIASES = { Book: "Text", "Word highlight": "Reading", Listener: "Debug", "Voice data": "Storage", "Offline package": "Storage", Background: "Reading", Sound: "Voice", System: "Storage" };
+  const ALIASES = { Cloud: "Voice", Book: "Text", "Word highlight": "Reading", Listener: "Debug", "Voice data": "Storage", "Offline package": "Storage", Background: "Reading", Sound: "Voice", System: "Storage" };
   const LISTEN_KEYS = ["listenerOn", "listener", "listenMode", "reroll"];
   const OWNS = {
     Reading: ["speed", "volume", "textSize", "uiSize", "theme", "readTitle", "continueChapters", "wordHighlight", "screenAwake", "backgroundPlay", "keepAlive", "keepAliveIdle"],
-    Voice: ["voice", "runOn", "precision", "pace", "steps", "readAhead", "readAheadUnit", "holdOnScroll"].concat(LISTEN_KEYS),
-    Cloud: ["useMyPC", "pcVoice", "pcChip", "pcSteps", "pcPickedAt"],
+    Voice: ["useMyPC", "pcVoice", "pcChip", "pcSteps", "pcPickedAt", "voice", "runOn", "precision", "pace", "steps", "readAhead", "readAheadUnit", "holdOnScroll"].concat(LISTEN_KEYS),
     Text: ["skipWatermarks", "watermarkRules", "spelling", "capsAsWords", "numbersToWords", "joinShort"],
     Storage: ["offline"],
     Debug: ["detailedMarks", "logTypesOff"].concat(LISTEN_KEYS),
@@ -16870,8 +16929,30 @@ button:disabled{cursor:default;opacity:.55;background:none}
   // ---- Voice --------------------------------------------------------------------------------------
   // THIS device's own voice (the PC keeps its own in its tab since 2026-11-08: Jon's plan 3.3). With the PC on, one line
   // says so at the top; a device not signed in to the PC finds one line at the end to sign in (I1).
+  // Jon, 2026-11-15 ("combine tabs"): ONE Voice tab. First where the voice is made, This <device> or <the PC's name>
+  // (useMyPC, Apply; only for a person who may use the PC's voice, or while it is on), then that place's voice list
+  // with its Demo: the PC's voices (Automatic = the speed check's best, Heart on the card) with its status and a
+  // fold of its details (cloudtab.js: SETTINGSWIN.pc), or this device's own as before. Each place keeps its own
+  // voice (pcVoice / voice), so switching back brings it back.
+  const PC = () => globalThis.SETTINGSWIN.pc;
+  const pcVisible = () => !!(PC() && PC().visible());
+  function placeRow() {
+    const name = pcName(), Name = name.replace(/^./, (c) => c.toUpperCase());
+    const r = choice("useMyPC", "Where the voice is made", `${Name}: this ${device()} plays it, ${name} does the work.`,
+      [{ id: false, label: `This ${device()}` }, { id: true, label: Name }], { segment: true });
+    r.classList.add("block");                                  // the switch under its words (the PC's name can be long)
+    return r;
+  }
   function voiceTab(body) {
-    if (after().useMyPC) body.appendChild(h("div", "snote spcnote", `${pcName().replace(/^./, (c) => c.toUpperCase())} makes the voice now. This is this ${device()}'s own voice, used when that is off.`));
+    const pcOn = pcVisible() && !!after().useMyPC;
+    if (pcVisible()) body.appendChild(placeRow());
+    if (pcOn) {
+      const part = PC().status(body);
+      if (part.signed) body.appendChild(PC().voiceRow(demoPick));
+      body.appendChild(readAheadRow());
+      PC().fold(body, part);
+      return;
+    }
     body.appendChild(voiceRow());
     const { engine: eid, voice: vid } = ENGINE.parse(value("voice"));
     const E = ENGINE.get(eid);
@@ -16879,7 +16960,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     body.appendChild(readAheadRow());
     if (globalThis.BENCH && globalThis.FIRSTRUN) body.appendChild(row(`Check this ${device()} again`, "Finds the best voice here in about 10 seconds.", button("sbtn", "Check now", () => FIRSTRUN.open({ reason: "recheck" }))));
     if (E && E.id !== "webspeech") voiceMore(body, E, vid);
-    pcLine(body);
+    if (!pcVisible()) pcLine(body);
   }
   // More voice settings ▸: the knobs of the voice chosen, in plain words first (the family and file names in grey).
   function voiceMore(body, E, vid) {
@@ -16915,7 +16996,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
   }
   // A person who may not use the PC's voice (nobody signed in, or an account without that right): its tab is hidden
   // (I1), and one plain line says so here, with nothing else (cloudtab.js builds it: SETTINGSWIN.pcLine).
-  function pcLine(body) { if (tabHidden("Cloud") && typeof globalThis.SETTINGSWIN.pcLine === "function") body.appendChild(globalThis.SETTINGSWIN.pcLine()); }
+  function pcLine(body) { if (typeof globalThis.SETTINGSWIN.pcLine === "function") body.appendChild(globalThis.SETTINGSWIN.pcLine()); }
   // Read ahead (Jon, 2026-11-08: "don't limit me. If I want it to be 5,000 minutes, then let me. Default: 300 seconds.
   // Have a number field and a unit field"): how much sound is made ahead, on this device and with the PC. Applies at
   // once. A new unit keeps the number as typed (300 seconds → 300 minutes). No upper limit; when the device had no
@@ -16965,14 +17046,110 @@ button:disabled{cursor:default;opacity:.55;background:none}
       sel.appendChild(og);
     }
     if (!found) { const o = h("option", null, `${cur} (not in the list)`); o.value = cur; o.selected = true; o.disabled = true; sel.insertBefore(o, sel.firstChild); }
-    sel.addEventListener("change", () => { change("voice", sel.value); rerender(); });
-    const r = row(`Voice on this ${device()}`, "Best-sounding first.", sel, { name: "voice", block: true });
+    sel.addEventListener("change", () => { change("voice", sel.value); if (!demo) demoSaid = ""; rerender(); });
+    const r = row(`Voice on this ${device()}`, "Best-sounding first.", demoPick(sel), { name: "voice", block: true });
     if (!found) warn(r, `"${cur}" is not offered in this build. Play will stop with that reason; choose a voice from the list.`);
     // How this voice does on this device, from the stored benchmark (step 7), in plain words.
     const m = mark(after());
     if (m) r.querySelector(".slab").appendChild(h("div", "sdev " + m.cls, m.plain));
     else if (!(benchRec && benchRec.predictions) && globalThis.BENCH) r.querySelector(".slab").appendChild(h("div", "sdev", `Not checked on this ${device()} yet.`));
     return r;
+  }
+  // ---- Demo (Jon, 2026-11-15): a short sample of the voice as chosen in the tab, Apply or not ---------------------
+  // Nothing is saved and nothing pending changes. With "Make the voice on <the PC>" on in the tab (saved or pending) and
+  // a voice the PC runs (Natural, Light, Experimental), the PC makes it on a connection of its own (CLOUDVOICE.sample,
+  // as the PC tab's Hear a sample); otherwise this device's engine, with the tab's knobs. A reading in progress stops
+  // first (its place kept: Play goes on from there), and the player loads its own voice again at the next Play when the
+  // demo used its engine. A Demo is not the first Play (Q6): it decides nothing and opens no first-run window. Demo
+  // again while it loads or plays stops it.
+  // The voice list with its Demo button (Jon, 2026-11-15: hear the voice as chosen, before Apply) and the demo's line.
+  function demoPick(sel) {
+    const pick = h("div", "svoicepick");
+    pick.append(sel, button("sbtn sdemobtn", "Demo", () => demoClick()), h("div", "shelp sdemoline"));
+    return pick;
+  }
+  const DEMO_TEXT = "Hello. This is how this voice sounds when it reads your book.";
+  let demo = null, demoSaid = "";                          // demo: { cancelled, end() } while it is made or played
+  function demoDraw() {
+    if (!el) return;
+    const b = el.body.querySelector(".sdemobtn"), l = el.body.querySelector(".sdemoline");
+    if (b) { b.textContent = demo ? "Stop" : "Demo"; b.setAttribute("aria-pressed", demo ? "true" : "false"); }
+    if (l) { l.textContent = demoSaid; l.hidden = !demoSaid; l.classList.toggle("swarn", /^The demo failed/.test(demoSaid)); }
+  }
+  const demoSay = (t) => { demoSaid = t || ""; demoDraw(); };
+  function demoStop(why) {
+    const d = demo;
+    if (!d) return;
+    demo = null; d.cancelled = true;
+    try { d.end(); } catch (e) {}
+    demoSay(why || "");
+  }
+  async function demoClick() {
+    if (demo) { demoStop("Demo stopped."); log("voice", "demo stopped by hand"); return; }
+    const a = after(), C = globalThis.CLOUDVOICE, onPC = !!(a.useMyPC && pcVisible() && ENGINE.get("cloud") && C && C.sample);
+    const voice = String(a.voice || ""), E = engineOf(voice), vid = ENGINE.parse(voice).voice;
+    const d = demo = { cancelled: false, end() {} };
+    let lead = "";
+    if (globalThis.PLAYER && PLAYER.state !== "stopped") { PLAYER.stop("Stopped for the voice demo. Press Play to go on from here."); lead = "The reading stopped for the demo (Play goes on from there). "; }
+    demoSay(lead + "Getting the voice ready…");
+    const t0 = performance.now();
+    try {
+      let audio = null, rate = 24000;
+      if (onPC) {
+        const c = C.choice({ pcVoice: a.pcVoice, pcChip: a.pcChip, pcSteps: a.pcSteps });
+        const p = C.sample({ text: DEMO_TEXT, engine: c.engine, voice: c.id, runOn: c.runOn, pace: a.pace, steps: c.steps }, (t) => { if (demo === d) demoSay(lead + t); });
+        d.end = () => p.cancel();
+        const got = await p;
+        rate = got.head.sampleRate; audio = new Float32Array(got.pcm.length);
+        for (let i = 0; i < got.pcm.length; i++) audio[i] = got.pcm[i] / 32768;
+        log("voice", `demo: ${c.voice} made on ${pcName()} (${c.runOn}) in ${Math.round(got.ms)} ms`);
+      } else {
+        if (!E) throw new Error(`the voice "${voice}" is not in this build`);
+        const opts = { voice: vid, runOn: a.runOn, precision: a.precision, pace: a.pace, steps: a.steps };
+        if (globalThis.PLAYER && PLAYER.engine === E) PLAYER.forget();     // it may hold the demo's voice after this: the next Play loads its own
+        d.end = () => { try { E.stop(); } catch (e) {} };
+        const prog = setInterval(() => { if (demo === d && E.status) demoSay(lead + `Getting the voice ready: ${E.status}`); }, 300);   // a download's progress
+        try { await E.init(opts); } finally { clearInterval(prog); }
+        if (d.cancelled) return;
+        if (typeof E.speak === "function") {                 // a browser voice says it itself
+          demoSay(lead + "Playing the demo…");
+          const r = await E.speak({ id: "demo", speech: DEMO_TEXT }, { speed: S.get("speed"), volume: S.get("volume"), pace: a.pace }, {});
+          if (r && r.stuck && !d.cancelled) throw new Error("the browser voice did not speak");
+        } else {
+          const r = await E.synth({ id: "demo", speech: DEMO_TEXT }, opts);
+          audio = r.audio; rate = r.sampleRate || E.sampleRate || 24000;
+        }
+        log("voice", `demo: ${voice} made here in ${Math.round(performance.now() - t0)} ms`);
+      }
+      if (d.cancelled) return;
+      if (audio) {
+        demoSay(lead + "Playing the demo…");
+        const ac = new AudioContext(), buf = ac.createBuffer(1, audio.length, rate);
+        buf.getChannelData(0).set(audio);
+        const src = ac.createBufferSource(), gain = ac.createGain();
+        gain.gain.value = Math.max(0, Math.min(1, Number(S.get("volume")) || 0));
+        src.buffer = buf; src.connect(gain); gain.connect(ac.destination);
+        const ended = new Promise((r) => { src.onended = r; });
+        d.end = () => { try { src.stop(); } catch (e) {} ac.close().catch(() => {}); };
+        src.start();
+        ac.resume().catch(() => {});
+        await ended;
+        ac.close().catch(() => {});
+      }
+      if (demo === d) { demo = null; demoSay(""); }
+    } catch (e) {
+      if (d.cancelled || e.stopped) return;
+      if (demo === d) demo = null;
+      demoSay(`The demo failed: ${firstLine(e.message).replace(/\.$/, "")}.`);
+      log("voice", `demo failed (${onPC ? `${a.pcVoice || "Automatic"} on ${pcName()}` : `${voice} here`}): ${firstLine(e.message)}`);
+    } finally {
+      // A model voice the saved settings do not use gives its workers back (a phone's memory); Play loads its own.
+      if (!demo && !onPC && E && E.pool && typeof E.pool.close === "function" && (S.get("useMyPC") || ENGINE.parse(S.get("voice")).engine !== E.id)) {
+        try { E.pool.close(); } catch (e) {}
+        E.pool = null;
+        log("voice", `${E.name}'s workers closed after the demo (the saved voice does not use them)`);
+      }
+    }
   }
   // How a voice setting does on this device, from the stored benchmark; null without one: { cls, p, text (with the
   // numbers: "runs well (predicted 2.9× real time)", for the More fold), plain ("✓ Runs well on this phone") }.
@@ -17140,7 +17317,6 @@ button:disabled{cursor:default;opacity:.55;background:none}
     if (t === "Offline package") folds.package = true;
     t = ALIASES[t] || t;
     const list = shownTabs();
-    if (t === "Cloud" && !list.includes(t)) t = "Voice";       // the PC's tab hidden (its voice is not this person's to use): the Voice tab, where one line says so
     tab = list.includes(t) ? t : list.includes(tab) && !a ? tab : list[0];
     el.tabs.replaceChildren(...list.map(tabButton));
     renderBody(true);
@@ -17166,6 +17342,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     benchRec = globalThis.BENCH ? BENCH.record() : null;
     if (TABS[tab]) TABS[tab](el.body);
     marks();
+    demoDraw();
     refreshClear(!!walk);
   }
   // The same tab again (a choice changed what applies), keeping the scroll place.
@@ -17368,7 +17545,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
 
   function open() {
     if (win) { FLOAT.open("settings"); return win; }
-    win = FLOAT.open("settings", { title: "Settings", width: 620, height: 680, onClose: () => { win = null; el = null; if (tabView) { tabView.close(); tabView = null; } } });
+    win = FLOAT.open("settings", { title: "Settings", width: 620, height: 680, onClose: () => { demoStop(); win = null; el = null; if (tabView) { tabView.close(); tabView = null; } } });
     build(win.body);
     return win;
   }
@@ -17414,6 +17591,9 @@ button:disabled{cursor:default;opacity:.55;background:none}
     addSection: (tabName, key, fn) => { (SECTIONS[tabName] = SECTIONS[tabName] || []).push({ key, fn }); },
     // cloudtab.js: the one line a device not signed in to the PC sees at the end of the Voice tab (I1), to sign in.
     pcLine: null,
+    // The Voice tab's Demo (the tests): demo() is the button; demoState { on, text }.
+    demo: () => demoClick(),
+    get demoState() { return { on: !!demo, text: demoSaid }; },
     // The tab's name as shown, and whether it is shown (the tests, the next layout).
     tabLabel, tabHidden,
     ui: { h, button, row, toggle, choice, warn, value, after, change, pend, say, voiceName, pcName, pcSigned, tabsChanged, liveMany, more, device, clearLabel, clearData, save: (opts) => (working ? Promise.resolve(false) : doSave(opts)), progress, busy, overall, rerender, refreshNeed, refreshClear, count, FILE_KEYS, LIVE, apply, folds, get working() { return working; }, get refused() { return refused; } },
@@ -18314,9 +18494,10 @@ button:disabled{cursor:default;opacity:.55;background:none}
 })();
 </script>
 <script>
-// cloudtab.js: Settings → <the PC's name> (Jon's plan 2026-11-08, PLAN-SIMPLER-SETTINGS.md 2.2, 3.3, 3.4; it was
-// Settings → Sound → Cloud and keeps that id in the window: "Cloud"). The tab is called by the PC's name (B1: PC Relay
-// keeps it, relay-client's R.pcName() reads it: "Jon's desktop"; "Your PC" until the PC has answered).
+// cloudtab.js: the PC's part of Settings → Voice (SETTINGSWIN.pc). It was a tab of its own, called by the PC's name,
+// from 2026-11-08 (PLAN-SIMPLER-SETTINGS.md 2.2, 3.3, 3.4) until Jon's "combine tabs" of 2026-11-15: now the Voice
+// tab asks where the voice is made (This device or the PC, by its name: B1, relay-client's R.pcName(), "Your PC"
+// until the PC has answered), and with the PC chosen it shows the parts below in place of this device's voice list.
 // WHO SEES IT (the Cool tools upgrade, 2026-11-12): only a person who may use the PC's voice, R.canUse("voice")
 // (program access on the PC: the main admin by default, and whoever he allows), or a device where the PC already
 // makes the voice (the switch must stay reachable). Everyone else finds one plain line at the end of the Voice tab
@@ -18424,19 +18605,20 @@ button:disabled{cursor:default;opacity:.55;background:none}
       }
       details.appendChild(h("div", "shelp cloudsigned", signedText(i)));
       // The PC's name or this person's right changed with this answer: the tab and its button again.
-      if (pcName() !== drawnAs.name || pcSigned() !== drawnAs.signed) { tabsChanged(); if (box.isConnected && W.tab.tab === "Cloud") W.ui.rerender(); }
+      if (pcName() !== drawnAs.name || pcSigned() !== drawnAs.signed) { tabsChanged(); if (box.isConnected && W.tab.tab === "Voice") W.ui.rerender(); }
     };
     const drawnAt = Date.now();
     // Kept trying while the head is on screen (a head not yet attached counts for its first second).
     const keep = () => box.isConnected || Date.now() - drawnAt < 1000;
-    (C() ? C().check("Cloud tab", keep) : R().ping(8000)).then(draw, (e) => draw({ ok: false, why: e.message }));
+    (C() ? C().check("Voice tab", keep) : R().ping(8000)).then(draw, (e) => draw({ ok: false, why: e.message }));
     return box;
   }
 
   // ---- The voice on the PC ----------------------------------------------------------------------------------
   // Automatic (the check's best) or a voice of the kinds the PC runs, in plain words, best-sounding first. A voice
   // picked runs on the check's fastest chip for its kind (its chip goes back to Automatic); Automatic resets both.
-  function voiceRow() {
+  // wrap(sel): the Voice tab's list with its Demo button.
+  function voiceRow(wrap = (x) => x) {
     const V = C(), name = pcName(), cur = value("pcVoice");
     const autoText = () => `Automatic: ${V.voiceLabel(V.choice({ pcVoice: null, pcChip: null }).voice)}`;
     const sel = h("select");
@@ -18461,7 +18643,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
       if (!sel.value) liveMany({ pcVoice: null, pcChip: null }, `Voice on ${name}: Automatic`);
       else liveMany({ pcVoice: sel.value, pcChip: null, pcPickedAt: Date.now() }, `Voice on ${name}: ${V.voiceLabel(sel.value)}`);
     });
-    const r = row(`Voice on ${name}`, "Automatic: the best one the speed check found.", sel, { name: "pcVoice", block: true });
+    const r = row(`Voice on ${name}`, "Automatic: the best one the speed check found.", wrap(sel), { name: "pcVoice", block: true });
     const c = V.choice();
     if (c.note) r.querySelector(".slab").appendChild(h("div", "swarn", Cap(c.note) + "."));
     return r;
@@ -18606,51 +18788,6 @@ button:disabled{cursor:default;opacity:.55;background:none}
   }
 
   // ---- More ▸ ------------------------------------------------------------------------------------------------
-  // Hear a sample: one short sentence made on the PC with its voice (as Automatic or the pick says) and played here.
-  function sampleRow() {
-    const out = h("div", "shelp", "");
-    const b = button("sbtn", "Hear a sample", async () => {
-      const name = pcName(), c = C().choice();
-      b.disabled = true; out.textContent = `Starting the voice on ${name}…`;
-      try {
-        const o = await R().open("voice", (p) => { if (p.text) out.textContent = p.text; });
-        if (!o.ok) throw new Error(o.why);
-        const ws = R().ws("voice", "ws"); ws.binaryType = "arraybuffer";
-        const t0 = performance.now();
-        const got = await new Promise((resolve, reject) => {
-          const t = setTimeout(() => { reject(new Error("no answer within 90 s")); ws.close(); }, 90000);
-          ws.onmessage = (ev) => {
-            if (typeof ev.data === "string") {
-              const m = JSON.parse(ev.data);
-              if (m.type === "hello") { if (m.checking) out.textContent = `${Cap(name)} is checking its voices' speed: the sample waits for it…`; ws.send(JSON.stringify({ type: "synth", id: "test", text: `This is ${name} speaking.`, engine: c.engine, voice: c.id, runOn: c.runOn, precision: "fp32", pace: SETTINGS.get("pace"), steps: c.steps })); }
-              else if (m.type === "loading") out.textContent = m.text;
-              else if (m.type === "state") out.textContent = m.checking ? `${Cap(name)} is checking its voices' speed: the sample waits for it…` : m.state === "queued" ? `Queued on ${name} (place ${m.pos})…` : `Making it on ${name}…`;
-              else if (m.type === "error") { clearTimeout(t); reject(new Error(m.error)); ws.close(); }
-              return;
-            }
-            clearTimeout(t);
-            const n = new DataView(ev.data).getUint32(0, true);
-            const head = JSON.parse(new TextDecoder().decode(new Uint8Array(ev.data, 4, n)));
-            resolve({ head, pcm: new Int16Array(ev.data.slice(4 + n)), ms: performance.now() - t0, bytes: ev.data.byteLength });
-            ws.close();
-          };
-          ws.onclose = (ev) => { if (ev.code !== 1000 && ev.code !== 1005) reject(new Error(ev.reason || `closed (${ev.code})`)); };
-        });
-        const sec = got.pcm.length / got.head.sampleRate;
-        out.textContent = `Made ${sec.toFixed(1)} s of sound on ${name} in ${(got.head.ms / 1000).toFixed(1)} s (${got.head.x}× real time); ${Math.round(got.ms)} ms here from asking to hearing, ${MB(got.bytes)}. Playing it…`;
-        const ac = new AudioContext();
-        const buf = ac.createBuffer(1, got.pcm.length, got.head.sampleRate);
-        const ch = buf.getChannelData(0);
-        for (let i = 0; i < got.pcm.length; i++) ch[i] = got.pcm[i] / 32768;
-        const src = ac.createBufferSource(); src.buffer = buf; src.connect(ac.destination); src.start();
-        src.onended = () => { ac.close(); };
-        log("voice", `${Cap(name)} tab sample: ${c.voice} on ${c.runOn}: ${sec.toFixed(1)} s in ${(got.head.ms / 1000).toFixed(1)} s there (${got.head.x}×), ${Math.round(got.ms)} ms round trip`);
-      } catch (e) { out.textContent = `The sample failed: ${e.message}`; log("voice", `${Cap(name)} tab sample failed: ${e.message}`); }
-      finally { b.disabled = false; }
-    });
-    const box = h("div", "sstack"); box.append(b, out);
-    return row("Hear a sample", "", box, { block: true });
-  }
   // Every row of the check with the graphics card's way (CUDA / WebGPU), its load and first-sound times; a tap uses it.
   function allRows() {
     const V = C(), s = V.speed, results = s.full && s.full.check && Array.isArray(s.full.check.results) ? s.full.check.results : [];
@@ -18700,7 +18837,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     allowedSeen = now;
     log("voice", `${Cap(pcName())}: its voice is ${now ? "this person's to use" : "not this person's to use"} now`);
     tabsChanged();
-    if (W.isOpen && (W.tab.tab === "Cloud" || W.tab.tab === "Voice")) W.ui.rerender();
+    if (W.isOpen && W.tab.tab === "Voice") W.ui.rerender();
     if (globalThis.PLAYBAR) PLAYBAR.refresh();
   }
   if (globalThis.CLOUD) { CLOUD.kit.on("state", allowedChanged); CLOUD.kit.on("account", allowedChanged); }
@@ -18711,7 +18848,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
   function more(body, parts) {
     const det = h("details", "sdet pcmore");
     det.open = moreOpen;
-    det.appendChild(h("summary", null, "More"));
+    det.appendChild(h("summary", null, `More about ${pcName()}`));
     det.addEventListener("toggle", () => { moreOpen = det.open; });
     const inner = h("div", "pcinner");
     for (const p of parts) if (p) inner.appendChild(p);
@@ -18719,24 +18856,27 @@ button:disabled{cursor:default;opacity:.55;background:none}
     body.appendChild(det);
   }
 
-  function cloudTab(body) {
-    const name = pcName(), signed = pcSigned();
-    drawnAs = { signed, name };
-    const details = h("div", "cloudstat");
-    body.appendChild(head(details));
-    body.appendChild(toggle("useMyPC", `Make the voice on ${name}`, `This ${device()} plays it; ${name} does the work.`));
-    if (!signed) {
-      // The switch is on but the right is gone (signed out at this browser, or no longer allowed on the PC): the tab
-      // stays for the switch, with the one plain line.
-      body.appendChild(h("div", "snote spcnot", NOT_ALLOWED));
-      more(body, [row("Connection", "", details, { block: true })]);
-      return;
-    }
-    body.appendChild(voiceRow());
-    body.appendChild(checkBox());
-    more(body, [sampleRow(), allRows(), stepsRow(), dataRow(), row("Connection", "", details, { block: true })]);
-  }
-  W.addTab("Cloud", cloudTab, { label: () => Cap(pcName()), hidden: () => !visible() });
+  // SETTINGSWIN.pc: what the Voice tab draws while the PC makes the voice. status(body): the PC's name and its link,
+  // or, when the right is gone (signed out, or no longer allowed) with the switch still on, the one plain line; gives
+  // { details, signed }. voiceRow(wrap): Voice on <name>. fold(body, part): More about <name> (the speed check, every
+  // way it runs, Steps, data used, the connection). visible(): the place switch shows at all.
+  W.pc = {
+    visible,
+    status(body) {
+      const name = pcName(), signed = pcSigned();
+      drawnAs = { signed, name };
+      const details = h("div", "cloudstat");
+      body.appendChild(head(details));
+      if (!signed) body.appendChild(h("div", "snote spcnot", NOT_ALLOWED));
+      return { details, signed };
+    },
+    voiceRow,
+    fold(body, part) {
+      const conn = row("Connection", "", part.details, { block: true });
+      if (part.signed) body.appendChild(checkBox());           // "Tap a row to use it" (plan 5): in view, not folded
+      more(body, part.signed ? [allRows(), stepsRow(), dataRow(), conn] : [conn]);
+    },
+  };
   // The one plain line everyone else sees, at the end of the Voice tab (I1), and nothing else: no name of the PC, no
   // button. (Signing in is the account page: the Apps menu, or the cloud indicator in the top bar.)
   W.pcLine = () => h("div", "snote spcline", NOT_ALLOWED);
