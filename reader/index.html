@@ -1,12 +1,12 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
      pastes the Apps kit's tab icons at the ICONS marker, and stamps the version and build time where
-     Book reader V1.0.911 and 2026-11-15 1:03 AM appear. -->
+     Book reader V1.0.918 and 2026-11-15 2:21 AM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Book reader V1.0.911</title>
+<title>Book reader V1.0.918</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
 <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlUlEQVR42p2SzytEURzFz33evBlNtsyCYtRkmrLASqwoKTtlYf4FyQabKSkrZWeNjdmxUrJUlkp+ZNj4tbAgUoyI7/lazLvPw0PN2dzX7X7ePefcrwGA9cn3UVILFLYJ1YgohISIQoQgNfgWqorwRETnptbqi8aHVxkAf8LBysqad0ktVAWLQqgF17ddDQwRtrk2c9+4h7srwcXeO65P5QesUDRmXaQ7PTSkY1iZvoWIGtfenMo4SGUc5PpjeC0ncLn/hs3FJ4gQg2N1aOnwkEgaWFnOsbbDiicNMt1e4CDbG0ciafDYMvP5A59zrVUAGGreCg5sXAwEmaMkoiAVri3MQmHZwqJEvxvXth3pwG872kFEhO8O7Av8FqFSYvC+v99iVXc+60fTUImV2TZLE/dId8bQ2hVHU9aDU/N5i4XODl5wtFPG/nbZxlOzMHJ7LNRseMJitUBzu4cD/2Cupxanu894epDQtCpIlsz88M0oydXQeH4Za0bs+TBIzTtTa/VFoeaFWhKh/gtTlWSJ1PzyYa74AfvjIbDIJi4vAAAAAElFTkSuQmCC">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVR42r2Xe0yVZRzHP+8573u4KxzkvoAkoELkGHkpsGJsbpa0uTabq5htrY3W3Np0mn+53LQ/yjZy+UelXci2LHKzRWtt2Sbr4g0DnRw1EUjwAgocOcA5PL/+OBfe876IOo3vX+/O7z3P53l+1/fRMKl5YzBHRNaLUCciJaLEUAIighJBlPlZiNqUIJbnqXcEEQKixKtEDorQuGF/Rl+EqUUevt8YfFlEdishWayAe4NbbT5R0rCpOaspuoEw/AslaP8zPGITEeq3HMhu0po3BnMQ8c7CyWNtSnxKpEQPx3y24SiRZBHWO8IJN9vwiK1OD2f77MOVICIljvtYancLRwRDt8KT3FBQqXOjX3HpTJDxm/cGj0vUyF/gwp3npOM3P4N9wQgcpQTdevLaN+NJyQy1B1FxXL0wSe+pID0dQS6fD94WjibkFusUVrgoXOgit8RAc4R6TUVtAo2vXY7xgm51ewQOoDkgs8hJZpGTx56PY8Iv9J4O0tMe4EJbgKErk4gIKekOCjwGBQsN8he4iEvUmE7uXD0GrkTQrTGfSa4EjfmVBvMrDaoDwof1gyglrPsgFacxBR1/pwXnUw+hP1NsW8MMF8EcglDCRXS+Y5jBK+OUL3UTn+S0LeQ0tKjbzXCAib1/YIyMoboGQxtftzRqM8OVioZgKtsj2rPDy8nWAXTDwcOL5lJRnY6nKp1Sz1wcznCOhPPhVgrsPx7awCuLw7t22CpBt5ZaRJt3VXD00FXaDg/Q1jpAx87rfLXzHElzdLbuqeSRx1NtYZPhMbQ58baN+F//GoCET1+yliG6tc4jSkkzqFmdS83qXAC6vT7aWgfoPDFESpoRrhKJekD1XOdmTSMJH71oj3v/sC0HYsvQVOcR/fB5N91nfXiq0il/wk1+STL5JcnwqmlhMW16ZBwmFTI8NmMiizUE1iYTUc85Hy37evmxqQeHU6OobA6LngrlQfkyN5pGtMPdjWLLEBxyixA0bHuUfcdreHu3hxVr8hi5McE3u/5hy9ojtLb020Iwk7TURLTUREsZhv6vW1uoWSmpBlUrs6hamQVAf7cf78khKp+eZw/BDEr4eK2lDKc2r1v7d0TbG9roPHGDRdXzqKhy46lOJzs/gez8BJs7b+uBRJcpb8yDSdCtvT2i5c9lM3RtgkMHLvHLt/+iaVBQmoKnOp01bzzIHLcr6k4ArSAN4wUPzsoHomvoiwvsOWCCi8LciGLduXxVNstXZTM2Osnfvw9G+8GBT7pYsCSNZSsyoxkNoCXFEf/e6hhY3NZn7SVpgqupRjRVCX1ng+QU69E/xCc6WVKbwZLaDABGfUESk/UZQ6DNS0bLTLH93tUxFgOfmoamSvhu+xClT4ZGaX65fbJF4OaMtir58FtghOaH36fwHvNz5s9Rjv48EgNXCnQRAiJiRJLR71Oc+MnPsZZRNA1yig0KPS7mV7jIK3VFZ7t5sMS4eFK46A3SeWSEzr9G6To1RjAotpOr0BQO6OEbS9l0HxpqUug+Pc7FU+P8+qXgStQoXOiiyBOHO0+Pvnf22BjXegN4j/jxHvfjH5m0Zfs0cETEq72/5uoOETbf4TecbZ5Pb7sjOCK86xChMXxdmlW4Enwi0ujYsD+jT5Q0hK9LswUXEWnY217W5wDY1JzVJEJ9+Lo0Gyev/6y9rCnmdgywre5SjgjrlUidKCkRwbhP8ICIeEU4KCKNe9vLotfz/wCKU53CYXSQUAAAAABJRU5ErkJggg==">
@@ -15,9 +15,9 @@
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.911";
-  window.APP_BUILT = "2026-11-15 1:03 AM";
-  window.APP_NOTE = "One Voice tab (Jon, 2026-11-15): where the voice is made (this device or the PC) then that place's voices with Demo; a voice change while reading goes on at once; Piper sizes";
+  window.APP_VERSION = "Book reader V1.0.918";
+  window.APP_BUILT = "2026-11-15 2:21 AM";
+  window.APP_NOTE = "Opening a file shows its progress (Jon, 2026-11-15): name and size, a bar with MB and percent, the speed and the time left, the reading stage; Cancel aborts cleanly and goes back (closes a tab the file manager opened, else Back)";
   window.APP_KEY = "br1";
 </script>
 <style>
@@ -262,6 +262,18 @@ button:disabled { opacity: 0.4; cursor: default; }
 .emptybook p { margin: 0.6em 0; }
 .emptybook .note { font-weight: 600; color: var(--accent); }
 .emptybook .note:empty { display: none; }
+/* Opening one file (opener.js): under "Opening…", the file, the bar, the line of how far and how long, Cancel. */
+.openprog { display: flex; flex-direction: column; gap: 10px; max-width: 30em; margin: 0 auto 2em; padding: 0 var(--gutter); text-align: center; }
+.openprog[hidden] { display: none; }
+.openprog p { margin: 0; }
+.openprog .opname { font-weight: 600; overflow-wrap: anywhere; }
+.openprog .opname:empty { display: none; }
+.openprog .bar { height: 10px; border-radius: 5px; background: var(--line); overflow: hidden; }
+.openprog .bar > div { height: 100%; width: 0; background: var(--accent); transition: width 0.15s; }
+.openprog .bar.unknown > div { width: 30%; transition: none; animation: opslide 1.1s ease-in-out infinite alternate; }
+@keyframes opslide { from { margin-left: 0; } to { margin-left: 70%; } }
+.openprog .opline { color: var(--muted); font-variant-numeric: tabular-nums; min-height: 1.4em; }
+.openprog .opcancel { align-self: center; min-width: 8em; }
 
 /* The Open window (library.js): the one Open button, a message, "My books" with a row per book, the preview, the progress. */
 .lib { display: flex; flex-direction: column; gap: 10px; padding: 10px 12px 14px; }
@@ -1096,6 +1108,13 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   <h2>No book here yet.</h2>
   <p class="how">Tap <b>Open</b> (top left) to choose one, from the Cloud File Manager or this device.</p>
   <p class="note"></p>
+</section>
+<!-- Opening one file (#open=<id>, opener.js): its name and size, the bar, how far and how long, and Cancel. -->
+<section class="openprog" id="openprog" hidden aria-live="polite">
+  <p class="opname"></p>
+  <div class="bar"><div></div></div>
+  <p class="opline"></p>
+  <button class="libbtn opcancel" id="opcancel" type="button">Cancel</button>
 </section>
 <footer class="play" id="play">
   <button id="prevpiece" type="button" title="Previous piece (↑)" aria-label="Previous piece">⏮</button>
@@ -4138,7 +4157,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
 
   // The job's progress in words and as a fraction ("Adding Walker: 1,200 of 4,060 files"; verb: Adding / Opening).
   const progressOf = (verb, title, spec, total) => (m) => [m.chapters ? `${verb} ${title}: ${m.chapters.toLocaleString("en-US")} chapters found` : m.files ? `${verb} ${title}: ${m.files.toLocaleString("en-US")} of ${(spec.spine || 0).toLocaleString("en-US")} files read` : `${verb} ${title}: ${m.done.toLocaleString("en-US")} of ${total.toLocaleString("en-US")} file${total === 1 ? "" : "s"}`,
-    m.files && spec.spine ? m.files / spec.spine : total ? m.done / total : 0];
+    m.bytes && m.total ? Math.min(1, m.bytes / m.total) : m.files && spec.spine ? m.files / spec.spine : total ? m.done / total : 0];   // (a big plain file read in pieces: by its bytes)
   // Read one planned book WITHOUT storing it: a quick read (opener.js: a file from the Cloud File Manager opened
   // without "Keep in my books", or sent by its "Open with"). The same job as an import, its chapters handed back in
   // memory; nothing is written, so no stored book, reading place or br1-current changes. info.key names the file (its
@@ -4794,10 +4813,12 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   // The empty page: "No book here yet." and one line of how; with opts.head another heading and no how (a file this
   // page was opened for is on its way, or could not be opened: the note says why).
   const emptyHead = empty.querySelector("h2"), emptyHow = empty.querySelector(".how"), NO_BOOK = emptyHead.textContent;
+  const openProg = document.getElementById("openprog");
   let opening = false;        // waiting for the one file this page was opened for (#open=<id>): READER.state "opening"
   function showEmpty(note, opts) {
     const o = opts || {};
     opening = !!o.opening;
+    if (!opening) openProg.hidden = true;               // the progress of opening one file (opener.js) shows only while it opens
     emptyHead.textContent = o.head || NO_BOOK;
     emptyHow.hidden = !!o.head;
     cur = -1; curRec = null; pieces = [];
@@ -4813,6 +4834,7 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
   }
   function showBook() {
     opening = false;
+    openProg.hidden = true;
     empty.hidden = true;
     book.hidden = false;
     for (const b of [prev, next, goBtn, num]) b.disabled = false;
@@ -5750,7 +5772,9 @@ html[data-marks="detailed"] .book p.issue.slight, html[data-marks="detailed"] .b
     box.appendChild(h("div", "libptext", ""));
     const bar = h("div", "bar"); bar.appendChild(h("div"));
     box.appendChild(bar);
-    box.appendChild(btn("libbtn", "Stop", () => { BOOK.stopImport(); }, "Stops the import; nothing half-added stays"));
+    // A quick read being opened (opener.js): Cancel, which nothing follows (no failure said); an import: Stop, as ever.
+    if (st.prog.head && globalThis.OPENER && OPENER.opening) box.appendChild(btn("libbtn", "Cancel", () => { OPENER.cancel(); }, "Stops opening it; nothing is kept"));
+    else box.appendChild(btn("libbtn", "Stop", () => { BOOK.stopImport(); }, "Stops the import; nothing half-added stays"));
     body.replaceChildren(box);
     progress();
   }
@@ -8343,16 +8367,24 @@ button:disabled{cursor:default;opacity:.55;background:none}
   // files: the Files (one file, or a folder's with their paths); info: { key (names the file: its place in this tab is
   // kept under it), what (for the messages), note (files left out) }; where: "window" (asked from the Open window: the
   // progress and a failure show there) or "page" (#open=<id>: on the page itself). True when it is on the page.
-  async function quick(files, info, where) {
-    if (taking || LIBRARY.busy) { tell(`Another book is being added or opened, so ${info.what} was not: choose it again when that is done.`, true); return false; }
+  // held: the job of a #open=<id> already under way (link(): its download and its progress on the page).
+  async function quick(files, info, where, held) {
+    if (taking || LIBRARY.busy) { if (held && job === held) job = null; tell(`Another book is being added or opened, so ${info.what} was not: choose it again when that is done.`, true); return false; }
     taking = true;
     const page = where === "page";
-    const show = (text, frac) => { if (page) READER.showEmpty(text, { head: "Opening…", opening: true }); else LIBRARY.working(text, frac); };
+    const j = held || begin(page ? "page" : "window");
+    j.stage = "reading";
+    const left = eta();
+    const show = page ? (text, frac) => j.meter.reading(frac)
+      : (text, frac) => { const e = frac > 0 ? left(frac) : ""; LIBRARY.working(text + (e ? " · " + e : ""), frac); };
     try {
       show("Looking at the file…", 0);
       const plan = await BOOK.plan(files, { sections: true });
+      if (j.cancelled) throw new Error("cancelled");
       const spec = plan.books[0];
       const t = await BOOK.readTemp(spec, show, plan.zips, { key: info.key });
+      if (j.cancelled) throw new Error("cancelled");          // (Cancel while the last of it was read: nothing is shown)
+      j.stage = "showing";
       await READER.openBook(t.row.id, { temp: t });
       lastQuick = { files, key: info.key, id: t.row.id };      // kept for the Library's Add to Library
       settleLink();
@@ -8366,12 +8398,122 @@ button:disabled{cursor:default;opacity:.55;background:none}
       else { LIBRARY.working(null); if (notes.length) LIBRARY.say(stop(notes.join("; "))); else { LIBRARY.say(""); FLOAT.close("library"); } }
       return true;
     } catch (e) {
+      if (j.cancelled) {                                      // Cancel: nothing kept, nothing said as a failure
+        log("book", `open: ${info.what} was not opened: cancelled`);
+        if (page) leave(); else { LIBRARY.working(null); LIBRARY.say(""); }
+        return false;
+      }
       const text = stop(String((e && e.message) || e));
       log("book", `open: ${info.what} was not opened: ${text}`);
       if (page) READER.showEmpty(text, { head: CANT });
       else { LIBRARY.working(null); LIBRARY.say(text, true); }
       return false;
-    } finally { taking = false; }
+    } finally { taking = false; if (job === j) job = null; }
+  }
+
+  // ---- Opening one file: the progress, the estimate, Cancel --------------------------------------------------------
+  // job: what is being opened now ({ ac: the download's AbortController, cancelled, stage, meter }). Cancel (the page's
+  // button, or the Open window's while a quick read is read) aborts the download or stops the reading job
+  // (BOOK.stopImport): nothing is kept (a quick read is never stored), no failure is said, and the page goes back where
+  // the person came from (leave()).
+  let job = null;
+  function begin(where) {
+    job = { ac: new AbortController(), cancelled: false, stage: "asking", where, meter: where === "page" ? meter() : null };
+    return job;
+  }
+  function cancel() {
+    const j = job;
+    if (!j || j.cancelled || j.stage === "showing") return false;
+    j.cancelled = true;
+    log("book", `open: Cancel pressed (${j.stage === "asking" ? "while asking for the file" : j.stage === "downloading" ? "while it downloaded" : "while it was read"})`);
+    try { j.ac.abort(); } catch (e) {}
+    if (j.stage === "reading") BOOK.stopImport();
+    if (j.meter) j.meter.cancelling();
+    return true;
+  }
+  // Time left from the measured speed: the progress (0 to 1) over the last 8 seconds. Words, or "" until it is known
+  // (the first second, or no progress yet).
+  function eta() {
+    const pts = [];
+    let t0 = 0, last = "";
+    return (frac) => {
+      const now = performance.now();
+      if (!t0) t0 = now;
+      pts.push([now, frac]);
+      while (pts.length > 2 && now - pts[0][0] > 8000) pts.shift();
+      const [ta, fa] = pts[0];
+      if (frac >= 1) return "";
+      if (now - t0 < 1000 || frac <= fa) return last;
+      const s = (1 - frac) / ((frac - fa) / (now - ta)) / 1000;
+      last = s < 5 ? "a few seconds left" : s < 60 ? `about ${s < 20 ? Math.round(s) : Math.round(s / 5) * 5} s left` : s < 5400 ? `about ${Math.round(s / 60)} min left` : `about ${Math.round(s / 3600)} h left`;
+      return last;
+    };
+  }
+  // The page's progress (#openprog under "Opening…"): the file's name and size, the bar, the line, Cancel.
+  function meter() {
+    const box = document.getElementById("openprog");
+    const q = (sel) => box.querySelector(sel);
+    const bar = q(".bar"), fill = q(".bar > div"), name = q(".opname"), line = q(".opline"), btn = q(".opcancel");
+    let left = eta(), stage = "", shown = 0;
+    btn.disabled = false;
+    btn.onclick = () => cancel();
+    name.textContent = "";
+    const set = (frac, text, force) => {
+      const now = performance.now();
+      if (!force && now - shown < 150) return;          // (a few times a second is enough to read)
+      shown = now;
+      bar.classList.toggle("unknown", frac == null);
+      fill.style.width = frac == null ? "" : `${Math.round(Math.min(1, frac) * 100)}%`;
+      line.textContent = text;
+    };
+    const phase = (s) => { if (stage !== s) { stage = s; left = eta(); shown = 0; } };
+    READER.showEmpty("", { head: "Opening…", opening: true });
+    box.hidden = false;
+    set(null, "Asking the Cloud File Manager for the file…", true);
+    return {
+      file(n, size) { name.textContent = size ? `${n} · ${MB(size)}` : n; },
+      // bytes have come: got of total (0: not known), at speed bytes a second (0: not known yet)
+      download(got, total, speed, force) {
+        phase("download");
+        const sp = speed > 0 ? ` · ${MB(speed)}/s` : "";
+        if (total && got <= total) { const f = got / total, e = left(f); set(f, `Downloading: ${MB(got)} of ${MB(total)} · ${Math.floor(f * 100)}%${sp}${e ? " · " + e : ""}`, force); }
+        else set(null, `Downloading: ${MB(got)} so far${sp}`, force);
+      },
+      reading(frac) {
+        phase("read");
+        if (frac > 0) { const e = left(frac); set(frac, `Reading the file: ${Math.floor(frac * 100)}%${e ? " · " + e : ""}`); }
+        else set(null, "Reading the file…", true);
+      },
+      cancelling() { btn.disabled = true; set(null, "Cancelling…", true); },
+    };
+  }
+  // After Cancel on the page: back where the person came from. A tab the Cloud File Manager opened for this file (it
+  // has an opener, or nothing before it in its history) is closed; else Back (to the file manager); where neither works
+  // (the browser keeps the tab open, or Back goes nowhere), the empty page and the Library.
+  function leave() {
+    linkKey = "";
+    try { history.replaceState(history.state, "", location.pathname + location.search); } catch (e) {}   // (a reload does not fetch it again)
+    READER.showEmpty("Going back…", { head: "Cancelled." });
+    let gone = false;
+    addEventListener("pagehide", () => { gone = true; }, { once: true });
+    let opener = false;
+    try { opener = !!window.opener; } catch (e) { opener = true; }
+    const stay = () => {
+      if (gone) return;
+      log("book", "open: cancelled, and this page stays: the empty page and the Library");
+      READER.showEmpty(BOOK.books.length ? "No book is open." : "No book here yet.");
+      LIBRARY.open();
+    };
+    const back = () => {
+      if (gone) return;
+      if (history.length > 1) { log("book", "open: cancelled: back to the page before"); history.back(); setTimeout(stay, 1500); }
+      else stay();
+    };
+    if (opener || history.length <= 1) {
+      log("book", `open: cancelled: this tab is closed (${opener ? "the Cloud File Manager opened it" : "nothing before it"})`);
+      try { window.close(); } catch (e) {}
+      setTimeout(back, 500);                                   // (still here: the browser would not close it)
+    } else back();
   }
 
   // ---- What the chooser gave ------------------------------------------------------------------------------------
@@ -8412,25 +8554,95 @@ button:disabled{cursor:default;opacity:.55;background:none}
     const id = linked();
     if (!id) return false;
     log("book", `open: this page was opened for one file of the Cloud File Manager (#open=${id})`);
-    let why = "";
-    const off = kit().on("notice", (t) => { if (t) why = t; });
-    let doc = null;
-    try { doc = await kit().openById(id); }
-    catch (e) { why = String((e && e.message) || e); }
-    off();
+    const j = begin("page");
+    const done = () => { if (job === j) job = null; };
+    let got;
+    try { got = await download(id, j); }
+    catch (e) {
+      done();
+      if (!j.cancelled) throw e;
+      log("book", `open: #open=${id} was not opened: cancelled`);
+      leave();
+      return false;
+    }
+    const doc = got.doc;
     if (!doc || !doc.file) {
-      const text = stop(why || "The Cloud File Manager did not give the file");
+      done();
+      const text = stop(got.why || "The Cloud File Manager did not give the file");
       log("book", `open: #open=${id} was not opened: ${text}`);
       READER.showEmpty(text, { head: CANT });
       return false;
     }
     let file;
     try { file = await asText(doc.file); }
-    catch (e) { READER.showEmpty(stop(e.message), { head: CANT }); log("book", `open: #open=${id} was not opened: ${e.message}`); return false; }
+    catch (e) { done(); READER.showEmpty(stop(e.message), { head: CANT }); log("book", `open: #open=${id} was not opened: ${e.message}`); return false; }
+    if (j.cancelled) { done(); leave(); return false; }
     linkKey = doc.id || id;
-    const ok = await quick([file], { key: linkKey, what: `"${doc.file.name}"`, note: "" }, "page");
+    const ok = await quick([file], { key: linkKey, what: `"${doc.file.name}"`, note: "" }, "page", j);
     if (!ok) linkKey = "";
     return ok;
+  }
+  // A file's name from the answer's Content-Disposition (filename*=UTF-8''..., else filename="...").
+  function nameIn(cd) {
+    const s = String(cd || "");
+    let m = /filename\*\s*=\s*UTF-8''([^;]+)/i.exec(s);
+    if (m) { try { return decodeURIComponent(m[1].trim()); } catch (e) {} }
+    m = /filename\s*=\s*"([^"]*)"/i.exec(s) || /filename\s*=\s*([^;]+)/i.exec(s);
+    return m ? m[1].trim() : "";
+  }
+  // The file by its id, downloaded here so its progress shows (the files service streams it with its Content-Length).
+  // Anything but a good answer goes to the kit's own openById, which says why in the kit's words (and marks the cloud
+  // off when the PC cannot be reached). Gives { doc, why }; throws only when cancelled.
+  const STALL_MS = 60000;
+  async function download(id, j) {
+    const k = kit(), R = CLOUD.relay;
+    const viaKit = async () => {
+      let why = "";
+      const off = k.on("notice", (t) => { if (t) why = t; });
+      let doc = null;
+      try { doc = await k.openById(id); } catch (e) { why = String((e && e.message) || e); }
+      off();
+      if (j.cancelled) throw new Error("cancelled");
+      return { doc, why };
+    };
+    try { await k.start(); } catch (e) {}
+    if (j.cancelled) throw new Error("cancelled");
+    const fid = String(id).replace(/^#?open=/, "").split("/")[0];
+    if (!/^[0-9a-f]{20}$/.test(fid) || k.state.cloud !== "on" || !R || typeof R.fetch !== "function") return viaKit();
+    let res;
+    try { res = await R.fetch("files", "file/" + fid, { cache: "no-store", signal: j.ac.signal }); }
+    catch (e) { if (j.cancelled) throw e; return viaKit(); }
+    if (!res.ok || !res.body) { try { if (res.body) res.body.cancel(); } catch (e) {} return viaKit(); }
+    const name = nameIn(res.headers.get("Content-Disposition")) || "Untitled";
+    const total = Number(res.headers.get("Content-Length")) || 0;
+    j.stage = "downloading";
+    j.meter.file(name, total);
+    log("book", `open: downloading "${name}" (${total ? MB(total) : "its size not given"})`);
+    const rd = res.body.getReader(), parts = [], t0 = performance.now(), pts = [];
+    let got = 0, stalled = false, dog = 0;
+    const watch = () => { clearTimeout(dog); dog = setTimeout(() => { stalled = true; try { j.ac.abort(); } catch (e) {} }, STALL_MS); };
+    const speed = () => { const now = performance.now(); pts.push([now, got]); while (pts.length > 2 && now - pts[0][0] > 5000) pts.shift(); return now - pts[0][0] > 500 ? ((got - pts[0][1]) / (now - pts[0][0])) * 1000 : 0; };
+    try {
+      watch();
+      j.meter.download(0, total, 0, true);
+      for (;;) {
+        const { value, done } = await rd.read();
+        if (done) break;
+        parts.push(value);
+        got += value.length;
+        watch();
+        j.meter.download(got, total, speed());
+      }
+    } catch (e) {
+      if (j.cancelled) throw e;
+      return { doc: null, why: stalled ? `the download stopped: nothing came for ${STALL_MS / 1000} s (${MB(got)} of ${total ? MB(total) : "it"} had come)` : `the download was cut off after ${MB(got)}: try again` };
+    } finally { clearTimeout(dog); }
+    if (j.cancelled) throw new Error("cancelled");
+    if (total && got < total) return { doc: null, why: `the download was cut off after ${MB(got)} of ${MB(total)}: try again` };
+    j.meter.download(got, total || got, 0, true);
+    log("book", `open: "${name}" downloaded: ${MB(got)} in ${((performance.now() - t0) / 1000).toFixed(1)} s`);
+    if (typeof k._recent === "function") { try { k._recent(fid, name); } catch (e) {} }   // the reader's recent files, as openById keeps them
+    return { doc: { file: new File(parts, name, { type: res.headers.get("Content-Type") || "" }), id: fid }, why: "" };
   }
   // The person opened something else in a tab that came for one file: the address lets go of that file, so a reload
   // (or the phone bringing the tab back) shows what they chose, not the file again.
@@ -8449,7 +8661,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     return true;
   }
 
-  globalThis.OPENER = { open, link, linked, take, quick, asText, leftOut, oldLink, KEEP, START, ACCEPT, get busy() { return taking; },
+  globalThis.OPENER = { open, link, linked, take, quick, asText, leftOut, oldLink, cancel, nameIn, KEEP, START, ACCEPT, get busy() { return taking; }, get opening() { return job ? job.stage : ""; },
     get lastQuick() { return lastQuick && BOOK.quick && BOOK.row && BOOK.row.id === lastQuick.id ? lastQuick : null; } };
 })();
 </script>
