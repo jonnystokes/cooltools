@@ -151,6 +151,9 @@ apps-button { --apps-sep: var(--line); --apps-h: 40px; }  /* the Apps button's p
 .conn.wait::before { background: #f59e0b; }   /* amber: on its way */
 .conn.off::before { background: var(--faint); }   /* grey: off */
 .conn.bad::before { background: var(--danger); }  /* red: a fault */
+/* Save as (pick.js, a program's Save): the name box between Back and Save here */
+.toolbar .save-name { flex: 1 1 16em; min-width: 9em; height: 40px; padding: 0 12px; border: 1.5px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--text); font: inherit; font-size: 15px; }
+.toolbar .save-name:focus { outline: none; border-color: var(--accent); }
 
 /* ---- list.css ---- */
 /* list.css: the file list (a grid of rows), its header, the ways in (Shared Folder, Users, Guests: drawn differently
@@ -422,7 +425,7 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
   <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8.4" r="3.6"/><path d="M4.8 19.6c.5-3.9 3.4-6 7.2-6s6.7 2.1 7.2 6z"/></symbol>
   <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 11v5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="7.8" r="1.1"/></symbol>
 </svg>
-<div id="app" class="app" data-build="V2.0.65">
+<div id="app" class="app" data-build="V2.0.69">
   <header class="top">
     <div class="top-row">
       <!-- The Apps button (Projectspp-kit, WEB-APP-CONVENTIONS.md): top left, before everything, its separator built in;
@@ -455,7 +458,7 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
 </div>
 <input type="file" id="pick-files" multiple hidden>
 <input type="file" id="pick-folder" webkitdirectory multiple hidden>
-<script>window.FM_BUILD = { version: "V2.0.65", built: "2026-11-13 9:54 PM", note: "New file: an empty file with the name and ending typed, beside New folder, in the right-click menu and in the chooser" };</script>
+<script>window.FM_BUILD = { version: "V2.0.69", built: "2026-11-14 6:14 PM", note: "Save as: the chooser's save mode (a folder and a name, made free per folder until typed), for the Text editor's Save" };</script>
 <script>
 // ---- relay-client.js ----
 /* relay-client.js 3: the PC Relay client (ONE source: Projects\pc-relay\client\relay-client.js; each page's build
@@ -2487,6 +2490,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
   function fits(it) {
     const p = S.pick;
     if (!p || it.dir) return true;
+    if (p.save) return !it.locked;            // saving: the files there are shown as they are (a click takes the name)
     if (!p.files || it.locked) return false;
     if (!p.accept || !p.accept.length) return true;
     const n = it.name.toLowerCase();
@@ -2765,6 +2769,14 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     };
   }
   FM.allow = allow;
+  let saveEl = null;
+  function saveBox() {
+    if (saveEl) return saveEl;
+    saveEl = h("input.save-name", { type: "text", autocomplete: "off", spellcheck: false, "aria-label": "File name", title: "The file's name and ending" });
+    saveEl.addEventListener("input", () => FM.pick.typed(saveEl.value));
+    saveEl.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); FM.pick.saveHere(); } e.stopPropagation(); });
+    return saveEl;
+  }
   function renderToolbar() {
     const bar = $(".toolbar"), phone = FM.isPhone();
     const sel = FM.selected(), n = sel.length, a = allow(sel);
@@ -2781,6 +2793,13 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
       // A program is choosing: one flow for a file or a folder. Tick it, then Use selected.
       if (S.picking) {
         kids.push(tb("pickstop", "close", "Stop"), h("span.bar-text", { text: S.picking.text || "" }));
+      } else if (S.pick.save) {
+        // Save as: Back, the name, Save here, New folder. The box is kept between drawings, so typing is never lost.
+        const box = saveBox();
+        if (document.activeElement !== box) box.value = FM.pick.saveName();
+        kids.push(backBtn(), box, tb("savehere", "check", "Save here", { primary: true, disabled: S.view !== "folder" || !S.writable, title: S.writable ? "Save with this name in this folder (Enter)" : "You may not save in this folder" }));
+        if (S.view === "folder" && S.writable) kids.push(tb("newfolder", "newfolder", "New folder", { key: "N" }));
+        if (!phone) kids.push(...tail());
       } else {
         const ch = FM.pickChoice();
         kids.push(backBtn(), tb("use", "check", "Use selected", { primary: true, disabled: !ch.ok, title: ch.ok ? ch.label : ch.why }));
@@ -2984,7 +3003,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
 
   // ---- folders and names --------------------------------------------------------------------------------------
   async function newFolder() {
-    if (!S.writable || S.view !== "folder" || S.pick) return;
+    if (!S.writable || S.view !== "folder" || (S.pick && !S.pick.save)) return;   // also while saving (a folder to save into)
     const names = new Set(S.items.map((i) => i.name.toLowerCase()));
     let name = "New folder";
     for (let n = 2; names.has(name.toLowerCase()); n++) name = `New folder (${n})`;
@@ -3592,7 +3611,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
   let port = null, ac = null, lastSent = 0, round = 0;
 
   const what = (p) => (!p.files ? "a folder" : p.folder ? "a file or folder" : p.multiple ? "files" : "a file");
-  const heading = (p) => `${p.name}: choose ${what(p)}`;
+  const heading = (p) => (p.save ? `${p.name}: save as` : `${p.name}: choose ${what(p)}`);
   function title() { if (!S.pick) return; const t = heading(S.pick); document.title = t; if (FM.embedded) WindowKit.child.title(t); }
 
   // What Use selected would hand over right now (the ticked rows, or `list`): { ok, label, folder | items } or
@@ -3621,9 +3640,12 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     port = p;
     const app = typeof m.app === "string" ? m.app.toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 60) : "";
     const label = m.keep && typeof m.keep.label === "string" ? m.keep.label.trim().slice(0, 80) : "";
-    S.pick = { app, name: String(m.host || "A program").slice(0, 80), accept: Array.isArray(m.accept) ? m.accept.map(String) : [], multiple: !!m.multiple, files: m.files !== false,
-      folder: m.folder === "files" || m.folder === "zip" ? m.folder : false, keep: label ? { label } : null, keepOn: false,
-      start: typeof m.start === "string" ? m.start.trim().slice(0, 400) : "", from };
+    // save: { name, fixed } (2026-11-13, the Text editor's Save): the chooser picks a folder and a name instead of files.
+    const save = m.save && typeof m.save.name === "string" ? { base: m.save.name.trim().slice(0, 200) || "New file.txt", fixed: !!m.save.fixed } : null;
+    if (save) { save.name = save.base; save.edited = save.fixed; }
+    S.pick = { app, name: String(m.host || "A program").slice(0, 80), accept: Array.isArray(m.accept) ? m.accept.map(String) : [], multiple: !!m.multiple, files: save ? false : m.files !== false,
+      folder: save ? false : m.folder === "files" || m.folder === "zip" ? m.folder : false, keep: !save && label ? { label } : null, keepOn: false,
+      start: typeof m.start === "string" ? m.start.trim().slice(0, 400) : "", save, from };
     S.picking = null; S.recent = []; S.pickStart = ""; S.clip = null;
     S.sel.clear();
     title();
@@ -3662,7 +3684,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     if (my !== round || S.pick !== p) return;
     const prog = p.app ? FM.apps.byId(p.app) : null;
     if (prog) { p.name = prog.name; title(); }
-    const own = S.me.account && prog && prog.folder ? prog.folder.toLowerCase() : "";
+    const own = S.me.account && prog && prog.folder && !p.save ? prog.folder.toLowerCase() : "";   // saving starts at the top (Jon, 2026-11-13)
     const top = p.start || own ? await FM.api.list("root").catch(() => null) : null;
     if (my !== round || S.pick !== p) return;
     let start = "", missing = "";
@@ -3751,7 +3773,49 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     } finally { ac = null; }
   }
   function stop() { if (ac) ac.abort(); S.picking = null; FM.view.render(); }
-  FM.pick = { onRequest, begin, use, stop, title };
+
+  // ---- Save as (the request's `save`): a folder and a name, handed back as { kind: "save", folderId, name, replace } ----
+  // Until the person changes the name, it is the asked-for name made free in the folder shown: "New file.txt", else
+  // "New file (2).txt", "New file (3).txt" (Jon, 2026-11-13). A click on a file puts its name in the box.
+  function freeName(base, items) {
+    const names = new Set(items.filter((i) => !i.locked).map((i) => i.name.toLowerCase()));
+    if (!names.has(base.toLowerCase())) return base;
+    const dot = base.lastIndexOf("."), ext = dot > 0 ? base.slice(dot) : "", stem = (dot > 0 ? base.slice(0, dot) : base).replace(/ \(\d+\)$/, "");
+    for (let n = 2; ; n++) { const c = `${stem} (${n})${ext}`; if (!names.has(c.toLowerCase())) return c; }
+  }
+  function saveName() {          // the name the box shows now
+    const s = S.pick && S.pick.save;
+    if (!s) return "";
+    if (!s.edited && S.view === "folder") s.name = freeName(s.base, S.items);
+    return s.name;
+  }
+  function typed(v) { const s = S.pick && S.pick.save; if (s) { s.name = v; s.edited = true; } }
+  function nameFrom(it) {
+    if (!S.pick || !S.pick.save || it.dir) return;
+    typed(it.name);
+    FM.view.renderToolbar();
+    const box = document.querySelector(".save-name");
+    if (box) { box.focus(); const d = it.name.lastIndexOf("."); box.setSelectionRange(0, d > 0 ? d : it.name.length); }
+  }
+  async function saveHere() {
+    const p = S.pick, s = p && p.save;
+    if (!s || S.picking || S.view !== "folder" || !S.folder) return;
+    const name = String(saveName()).trim();
+    const bad = FM.badName(name);
+    if (bad) return FM.ui.toast(bad, { bad: true, ms: 6000 });
+    if (!S.writable) return FM.ui.toast(S.me.account ? "You may not save in this folder. Choose another." : "Sign in to save here, or choose a folder you may change.", { bad: true, ms: 6000 });
+    const same = S.items.find((i) => i.name.toLowerCase() === name.toLowerCase());
+    if (same && same.dir) return FM.ui.toast(`“${name}” is a folder here. Type another name.`, { bad: true, ms: 6000 });
+    let replace = false;
+    if (same) {
+      if (!(await FM.ui.confirm(`Replace “${same.name}”?`, ["The one there now goes into the trash, where Restore brings it back."], "Replace"))) return;
+      replace = true;
+    }
+    send({ type: "picked", kind: "save", folderId: S.folder.id, folder: S.folder.name, path: S.folder.path || "", name, replace }, true);
+    S.picking = { text: `Saving in “${S.folder.name}”…`, frac: 1 };
+    FM.view.render();
+  }
+  FM.pick = { onRequest, begin, use, stop, title, saveName, typed, nameFrom, saveHere, freeName };
 })();
 
 // ---- app.js ----
@@ -4055,6 +4119,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     if (S.view === "trash") return FM.ops.restore([it]);
     if (it.locked) return sayPrivate(it.name);
     if (it.dir) return go(it.id);
+    if (S.pick && S.pick.save) return FM.pick.nameFrom(it); // saving: a file's name goes into the name box
     if (S.pick) { // a program is choosing: a click ticks the file, and Use selected hands it over
       if (FM.tickable(it)) return tick(it.id);
       return FM.ui.toast(`${S.pick.name} cannot open that kind of file.`, { ms: 4000 });
@@ -4065,6 +4130,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
   // a click on it does. While a program is choosing: Use selected, once something is ticked.
   function openAll(list) {
     if (!list.length) return;
+    if (S.pick && S.pick.save) return list.length === 1 ? activate(list[0]) : undefined;
     if (S.pick && FM.selected().length) { const ch = FM.pickChoice(); return ch.ok ? FM.pick.use() : FM.ui.toast(ch.why, { bad: true, ms: 6000 }); }
     if (list.length === 1) return activate(list[0]);
     if (S.view === "trash") return FM.ops.restore(list);
@@ -4174,7 +4240,7 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     paste: FM.ops.paste, clipcancel: () => { S.clip = null; FM.view.render(); },
     restore: () => FM.ops.restore(FM.selected()), purge: () => FM.ops.purge(FM.selected()), empty: FM.ops.emptyTrash,
     morebtn: (b) => moreMenu(b), search: openSearch, selectall: selectAll, unselect: () => { S.sel.clear(); FM.view.render(); },
-    use: () => FM.pick.use(), pickstop: () => FM.pick.stop(),
+    use: () => FM.pick.use(), pickstop: () => FM.pick.stop(), savehere: () => FM.pick.saveHere(),
   };
 
   // ---- the pointer on the list ----------------------------------------------------------------------------------------------
