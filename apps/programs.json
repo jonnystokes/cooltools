@@ -88,6 +88,13 @@
       "extensions": [], "opens": []
     },
     {
+      "id": "mayhem-keytest", "group": "test", "name": "Mayhem Key Tester", "path": "mayhem-keytest/",
+      "short": "See which keys the driving game can really use",
+      "about": "Logs every key press and focus change through the driving game's own key handling, on a drawn keyboard, so you can see which keys a web page can catch and keep.",
+      "source": "Projects\\mayhem",
+      "extensions": [], "opens": []
+    },
+    {
       "id": "hyperwave", "group": "archived", "name": "HYPERWAVE Studio", "path": "hyperwave/",
       "short": "Experimental, no longer worked on",
       "about": "Sound-reactive visuals: shapes, fractals and 4D forms that react to sound. Experimental and no longer worked on.",
