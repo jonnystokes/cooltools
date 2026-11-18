@@ -1,12 +1,12 @@
 <!-- page.html: the page shell. build.py inlines the CSS at the CSS marker and the JS at the JS marker,
      pastes the Apps kit's tab icons at the ICONS marker, and stamps the version and build time where
-     Book reader V1.0.937 and 2026-11-15 3:24 AM appear. -->
+     Book reader V1.0.950 and 2026-11-17 5:33 PM appear. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Book reader V1.0.937</title>
+<title>Book reader V1.0.950</title>
 <!-- Built by build.py from the files in src/. Edit those, not this file. -->
 <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlUlEQVR42p2SzytEURzFz33evBlNtsyCYtRkmrLASqwoKTtlYf4FyQabKSkrZWeNjdmxUrJUlkp+ZNj4tbAgUoyI7/lazLvPw0PN2dzX7X7ePefcrwGA9cn3UVILFLYJ1YgohISIQoQgNfgWqorwRETnptbqi8aHVxkAf8LBysqad0ktVAWLQqgF17ddDQwRtrk2c9+4h7srwcXeO65P5QesUDRmXaQ7PTSkY1iZvoWIGtfenMo4SGUc5PpjeC0ncLn/hs3FJ4gQg2N1aOnwkEgaWFnOsbbDiicNMt1e4CDbG0ciafDYMvP5A59zrVUAGGreCg5sXAwEmaMkoiAVri3MQmHZwqJEvxvXth3pwG872kFEhO8O7Av8FqFSYvC+v99iVXc+60fTUImV2TZLE/dId8bQ2hVHU9aDU/N5i4XODl5wtFPG/nbZxlOzMHJ7LNRseMJitUBzu4cD/2Cupxanu894epDQtCpIlsz88M0oydXQeH4Za0bs+TBIzTtTa/VFoeaFWhKh/gtTlWSJ1PzyYa74AfvjIbDIJi4vAAAAAElFTkSuQmCC">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFDklEQVR42r2Xe0yVZRzHP+8573u4KxzkvoAkoELkGHkpsGJsbpa0uTabq5htrY3W3Np0mn+53LQ/yjZy+UelXci2LHKzRWtt2Sbr4g0DnRw1EUjwAgocOcA5PL/+OBfe876IOo3vX+/O7z3P53l+1/fRMKl5YzBHRNaLUCciJaLEUAIighJBlPlZiNqUIJbnqXcEEQKixKtEDorQuGF/Rl+EqUUevt8YfFlEdishWayAe4NbbT5R0rCpOaspuoEw/AslaP8zPGITEeq3HMhu0po3BnMQ8c7CyWNtSnxKpEQPx3y24SiRZBHWO8IJN9vwiK1OD2f77MOVICIljvtYancLRwRDt8KT3FBQqXOjX3HpTJDxm/cGj0vUyF/gwp3npOM3P4N9wQgcpQTdevLaN+NJyQy1B1FxXL0wSe+pID0dQS6fD94WjibkFusUVrgoXOgit8RAc4R6TUVtAo2vXY7xgm51ewQOoDkgs8hJZpGTx56PY8Iv9J4O0tMe4EJbgKErk4gIKekOCjwGBQsN8he4iEvUmE7uXD0GrkTQrTGfSa4EjfmVBvMrDaoDwof1gyglrPsgFacxBR1/pwXnUw+hP1NsW8MMF8EcglDCRXS+Y5jBK+OUL3UTn+S0LeQ0tKjbzXCAib1/YIyMoboGQxtftzRqM8OVioZgKtsj2rPDy8nWAXTDwcOL5lJRnY6nKp1Sz1wcznCOhPPhVgrsPx7awCuLw7t22CpBt5ZaRJt3VXD00FXaDg/Q1jpAx87rfLXzHElzdLbuqeSRx1NtYZPhMbQ58baN+F//GoCET1+yliG6tc4jSkkzqFmdS83qXAC6vT7aWgfoPDFESpoRrhKJekD1XOdmTSMJH71oj3v/sC0HYsvQVOcR/fB5N91nfXiq0il/wk1+STL5JcnwqmlhMW16ZBwmFTI8NmMiizUE1iYTUc85Hy37evmxqQeHU6OobA6LngrlQfkyN5pGtMPdjWLLEBxyixA0bHuUfcdreHu3hxVr8hi5McE3u/5hy9ojtLb020Iwk7TURLTUREsZhv6vW1uoWSmpBlUrs6hamQVAf7cf78khKp+eZw/BDEr4eK2lDKc2r1v7d0TbG9roPHGDRdXzqKhy46lOJzs/gez8BJs7b+uBRJcpb8yDSdCtvT2i5c9lM3RtgkMHLvHLt/+iaVBQmoKnOp01bzzIHLcr6k4ArSAN4wUPzsoHomvoiwvsOWCCi8LciGLduXxVNstXZTM2Osnfvw9G+8GBT7pYsCSNZSsyoxkNoCXFEf/e6hhY3NZn7SVpgqupRjRVCX1ng+QU69E/xCc6WVKbwZLaDABGfUESk/UZQ6DNS0bLTLH93tUxFgOfmoamSvhu+xClT4ZGaX65fbJF4OaMtir58FtghOaH36fwHvNz5s9Rjv48EgNXCnQRAiJiRJLR71Oc+MnPsZZRNA1yig0KPS7mV7jIK3VFZ7t5sMS4eFK46A3SeWSEzr9G6To1RjAotpOr0BQO6OEbS9l0HxpqUug+Pc7FU+P8+qXgStQoXOiiyBOHO0+Pvnf22BjXegN4j/jxHvfjH5m0Zfs0cETEq72/5uoOETbf4TecbZ5Pb7sjOCK86xChMXxdmlW4Enwi0ujYsD+jT5Q0hK9LswUXEWnY217W5wDY1JzVJEJ9+Lo0Gyev/6y9rCnmdgywre5SjgjrlUidKCkRwbhP8ICIeEU4KCKNe9vLotfz/wCKU53CYXSQUAAAAABJRU5ErkJggg==">
@@ -15,9 +15,9 @@
   // Stamped by the build. APP_KEY prefixes everything the page stores (br1-settings, br1-book,
   // br1-logs, br1-pos, br1-win-*): every file:// page shares one storage origin, so v1 has a key of
   // its own and nothing of the old app's.
-  window.APP_VERSION = "Book reader V1.0.937";
-  window.APP_BUILT = "2026-11-15 3:24 AM";
-  window.APP_NOTE = "Markdown read with the Markdown kit: chapters at # / ## (parts), spoken from kit.speech (tables as sentences, link text, alt text, code in one line, footnotes at the chapter's end), shown as sanitized Markdown with the highlight lined up, pictures from the Cloud File Manager; quick read, Add to Library, zip/folder, big files";
+  window.APP_VERSION = "Book reader V1.0.950";
+  window.APP_BUILT = "2026-11-17 5:33 PM";
+  window.APP_NOTE = "The sound store: sound made (PC or this device) is kept by voice, book, piece and text and never asked again; a tap, Previous/Next or Play after Stop plays it at once, offline too; joined pieces with sound on hand are not split; ready counts stored sound; PC making time from its last asking";
   window.APP_KEY = "br1";
 </script>
 <style>
@@ -7578,7 +7578,7 @@ globalThis.MDKIT_SOURCE = "(" + mdKit.toString() + ")();";
 })(typeof window !== "undefined" ? window : globalThis);
 </script>
 <script>
-/* apps-button.js 1.35, the loader (Jon, 2026-11-13: "never touch the other apps again"). ONE source:
+/* apps-button.js 1.37, the loader (Jon, 2026-11-13: "never touch the other apps again"). ONE source:
    Projects\app-kit\apps-loader.js; app-kit\build.py wraps the button (app-kit\apps-button.js) in it. Never edit a copy.
 
    A page carries this loader (in app-kit\dist\apps.js or dist\apps-button.js, copied in by its build), but on the live
@@ -7601,7 +7601,7 @@ globalThis.MDKIT_SOURCE = "(" + mdKit.toString() + ")();";
   function builtIn() {
     if (ran || root.AppsKit) return;
     ran = true;
-/* apps-button.js 1.35: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.37: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
    https://jonnystokes.github.io/cooltools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
@@ -7633,7 +7633,7 @@ globalThis.MDKIT_SOURCE = "(" + mdKit.toString() + ")();";
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.35";
+  const VERSION = "1.37";
   // The menu comes from the site the page itself is on, so the menu's account strip reads the same browser memory
   // (one origin) and the same relay.json as the program: the live site. Any other page (a file on this device, a
   // test page) gets the live site's menu too; launcher="..." overrides.
@@ -13988,7 +13988,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
   const LEAD = 1105;
   const audio = document.getElementById("audio");
   try { audio.preservesPitch = true; } catch (e) {}
-  const S = { mode: "", open: false, ms: null, sb: null, url: null, entries: [], run: 0, parked: false, cur: null, last: null,
+  const S = { mode: "", open: false, ms: null, sb: null, url: null, entries: [], run: 0, parked: false, parkAt: null, cur: null, last: null,
     playing: false, started: false, finished: false, appended: 0, busy: "", opens: 0, openTimer: 0 };
   const hooks = { openMs: 0, keepBehind: 0 };       // the tests: a shorter open timeout, a shorter clips keep-behind
   const firstLine = (s) => String(s || "").split("\n")[0];
@@ -14110,7 +14110,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
         return e;
       }
       S.appended += e.end - e.start;
-      if (S.parked) { S.parked = false; S.cur = e; try { audio.currentTime = start + 0.02; } catch (x) {} if (S.playing) play(); }
+      if (S.parked) { const off = parkOff(item.id); S.parked = false; S.cur = e; try { audio.currentTime = off ? start + e.lead + off : start + 0.02; } catch (x) {} if (S.playing) play(); }
       return e;
     }
     if (!item.url) {
@@ -14128,7 +14128,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     const e = entryOf(item, start, start + item.dur, run);
     S.entries.push(e);
     S.appended += item.dur;
-    if (run === S.run && S.parked) load(e);
+    if (run === S.run && S.parked) load(e, parkOff(item.id));
     return e;
   }
 
@@ -14144,13 +14144,16 @@ button:disabled{cursor:default;opacity:.55;background:none}
 
   // Clips: play this entry's blob. Entries ended more than KEEP_BEHIND_SEC before it go, as the stream
   // trims its buffer: "dropped" tells the player, which owns the blob URLs, to let their sound go (P3).
-  function load(e) {
+  // The offset (s) the park was for, when this piece is the one it waits for (a part of a joined piece: 2026-11-17).
+  function parkOff(id) { const a = S.parkAt; S.parkAt = null; return a && a.id === id ? Number(a.off) || 0 : 0; }
+  function load(e, off) {
     const keep = hooks.keepBehind || KEEP_BEHIND_SEC;
     const gone = S.entries.filter((x) => x !== e && x.end < e.start - keep);
     if (gone.length) { S.entries = S.entries.filter((x) => !gone.includes(x)); for (const x of gone) emit("dropped", x); }
     S.cur = e; S.last = e; S.parked = false;
     audio.src = e.url;
     apply();
+    if (off > 0) audio.addEventListener("loadedmetadata", () => { try { if (S.cur === e) audio.currentTime = off; } catch (x) {} }, { once: true });
     if (S.playing) audio.play().then(() => { S.started = true; }, blocked);
   }
   function blocked(e) {
@@ -14171,24 +14174,28 @@ button:disabled{cursor:default;opacity:.55;background:none}
   // The player let a piece's sound go (its blob URL revoked): its entries can no longer be played (P3).
   function forget(id) { S.entries = S.entries.filter((x) => x.id !== id || x === S.cur); }
 
-  // Jump to a piece already in the current run. True when it could be played from.
-  function seek(id) {
+  // Jump to a piece already in the current run, `off` seconds into its sound (0: its start). True when it could be
+  // played from.
+  function seek(id, off = 0) {
     const e = S.entries.find((x) => x.id === id && x.run === S.run);
     if (!e) return false;
     if (S.mode === "stream") {
-      if (!isBuffered(e.start + 0.05)) return false;
-      S.parked = false; S.cur = e;
-      try { audio.currentTime = e.start + 0.02; } catch (x) { return false; }
+      const t = off > 0 ? e.start + (e.lead || 0) + off : e.start + 0.02;
+      if (off > 0 && t >= e.end - 0.05) return false;
+      if (!isBuffered(e.start + 0.05) || !isBuffered(t)) return false;
+      S.parked = false; S.parkAt = null; S.cur = e;
+      try { audio.currentTime = t; } catch (x) { return false; }
       if (S.playing) play();
-    } else load(e);
+    } else load(e, off);
     return true;
   }
 
   // Jump to a piece not in the stream: a new run; wait at the end of the buffer for its first piece
   // (a finished stream opens again when that piece is appended: more is coming).
-  function park() {
+  function park(at) {
     S.run++;
     S.parked = true;
+    S.parkAt = at && at.off > 0 ? { id: at.id, off: at.off } : null;   // where in that piece to start (a part of a joined piece)
     S.finished = false;
     S.cur = null;
     if (S.mode === "stream") { try { audio.currentTime = Math.max(audio.currentTime, bufferedEnd()); } catch (x) {} }
@@ -14217,7 +14224,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     S.ms = null; S.sb = null;
     if (S.url) { URL.revokeObjectURL(S.url); S.url = null; }
     if (audio.getAttribute("src")) { audio.removeAttribute("src"); audio.load(); }
-    S.entries = []; S.cur = null; S.last = null;
+    S.entries = []; S.cur = null; S.last = null; S.parkAt = null;
     S.open = false; S.parked = false; S.started = false; S.finished = false; S.appended = 0; S.mode = "";
   }
 
@@ -14362,6 +14369,197 @@ button:disabled{cursor:default;opacity:.55;background:none}
 })();
 </script>
 <script>
+// soundstore.js: the sound already made, kept while it can still be used (Jon, 2026-11-17: "this kind of thing needs
+// to be processed locally and not be internet dependent"). Every piece whose sound was made (on the PC or on this
+// device) and went into the stream is kept here as its MP3 chunks (or, in clips mode, its WAV blob URL), keyed by
+// what makes the sound: the voice key (player.js soundKey(): the engine, the voice, its place, Talking speed / pace,
+// the PC's resolved voice), the book, the piece's id (chapter, paragraphs, spans) and its spoken text (a hash): a text
+// rule that changes one paragraph's speech misses only that paragraph's record. Playback speed is not in the key.
+// Memory first, with a cap that fits the device (CAP: phones modest); the record farthest from the reading place goes
+// first (another book or voice before anything of this one). Nothing here is dropped because a connection failed.
+// IndexedDB `br1-sound` keeps the stream records of the chapters around the reading place (the current chapter, one
+// before, two after; this voice and book only) so a reload (a tab Android discarded) can still play them offline;
+// warm(sk, book, ch) reads one chapter's records into memory (the player waits for it at most WARM_MS).
+// The player owns the reading; the store only says what it has: get(sk, book, piece), has(...), put(...), the made
+// marks (flags), and inUse (a clip URL the player still plays is never revoked here).
+(function () {
+  const PHONE = /Android|iPhone|iPad|Mobile/i.test(navigator.userAgent) || (Number(navigator.deviceMemory) > 0 && Number(navigator.deviceMemory) <= 4);
+  const CAP = (PHONE ? 48 : 192) * 1024 * 1024;          // bytes in memory (64 kbps MP3: 48 MB is about 100 minutes)
+  const DB_CAP = (PHONE ? 40 : 160) * 1024 * 1024;       // bytes in IndexedDB
+  const WARM_MS = 1500;
+  const DB = (globalThis.APP_KEY || "br1") + "-sound";
+  const hooks = { cap: 0, noDb: false };                // the tests: a smaller cap, no IndexedDB
+  const mem = new Map();                                  // key -> rec
+  let bytes = 0, near = null, inUse = () => false;        // near(rec) -> distance from the reading place (player.js)
+  const warmed = new Set();                               // "sk|book|ch" read from IndexedDB this page life
+  // The test pages keep nothing on disk unless a test asks (BR1_TEST.soundDb): one test's sound is never another's.
+  const noDb = () => hooks.noDb || !!(globalThis.BR1_TEST && !BR1_TEST.soundDb);
+  const stats = { hits: 0, puts: 0, evicted: 0, dbPuts: 0, dbLoaded: 0 };
+
+  // A short hash of the spoken text (FNV-1a, 32 bits, plus the length).
+  function hash(s) {
+    s = String(s || "");
+    let h = 0x811c9dc5;
+    for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+    return h.toString(36) + "." + s.length;
+  }
+  const keyOf = (sk, book, id) => `${sk}|${book}|${id}`;
+  const group = (sk, book, ch) => `${sk}|${book}|${ch}`;
+  const persistable = (book) => !!book && !String(book).startsWith("quick");
+
+  function get(sk, book, piece) {
+    const r = mem.get(keyOf(sk, book, piece.id));
+    if (!r) return null;
+    if (r.h !== hash(piece.speech)) return null;          // the text changed (a text rule): not this piece's sound
+    r.at = Date.now();
+    stats.hits++;
+    return r;
+  }
+  const peek = (sk, book, piece) => { const r = mem.get(keyOf(sk, book, piece.id)); return r && r.h === hash(piece.speech) ? r : null; };
+  const has = (sk, book, piece) => { const r = mem.get(keyOf(sk, book, piece.id)); return !!r && r.h === hash(piece.speech); };
+  const hasId = (sk, book, id) => mem.has(keyOf(sk, book, id));
+  // rec: { ch, piece, chunks: [{ text, chars, mp3?, dur, words, sampleRate, peak, seed }], dur, url?, offs?, spans }
+  function put(sk, book, rec) {
+    const k = keyOf(sk, book, rec.piece.id), old = mem.get(k);
+    if (old) { bytes -= old.bytes; if (old.url && old.url !== rec.url && !inUse(old.url)) URL.revokeObjectURL(old.url); }
+    const r = { k, sk, book, ch: rec.ch, id: rec.piece.id, h: hash(rec.piece.speech), chunks: rec.chunks, dur: rec.dur, url: rec.url || null, offs: rec.offs || null, spans: rec.spans || null, at: Date.now(), bytes: 0 };
+    r.bytes = r.chunks.reduce((s, c) => s + (c.mp3 ? c.mp3.byteLength : 0), 0) + (r.url ? Math.round(r.dur * 48000) : 0) + 200;
+    mem.set(k, r);
+    bytes += r.bytes;
+    stats.puts++;
+    trim();
+    if (!r.url && persistable(book) && !noDb() && r.chunks.every((c) => c.mp3)) dbQueue(r);
+    return r;
+  }
+  // Over the cap: the farthest from the reading place first (near() is the player's), then the oldest.
+  function trim() {
+    const cap = hooks.cap || CAP;
+    if (bytes <= cap) return;
+    const all = Array.from(mem.values()).map((r) => ({ r, d: near ? near(r) : 0 }));
+    all.sort((a, b) => b.d - a.d || a.r.at - b.r.at);
+    for (const { r, d } of all) {
+      if (bytes <= cap * 0.9) break;
+      if (d <= 0) continue;                               // ahead of the reading, or in the stream now: never
+      if (r.url && inUse(r.url)) continue;
+      drop(r);
+    }
+  }
+  function drop(r) {
+    mem.delete(r.k); bytes -= r.bytes; stats.evicted++;
+    if (r.url && !inUse(r.url)) URL.revokeObjectURL(r.url);
+  }
+  // One piece's record out (the tests: PLAYER.unmake).
+  const forget = (sk, book, id) => { const r = mem.get(keyOf(sk, book, id)); if (r) drop(r); };
+  // A clip URL this store still keeps (the player then leaves it alone).
+  const holds = (url) => { if (!url) return false; for (const r of mem.values()) if (r.url === url) return true; return false; };
+  // Everything of another voice key or book goes from memory (not needed: they age out), so nothing here.
+  function clear() { for (const r of Array.from(mem.values())) drop(r); warmed.clear(); }
+
+  // ---- IndexedDB: the chapters around the reading place ---------------------------------------------------
+  let dbp = null;
+  function db() {
+    if (noDb() || typeof indexedDB === "undefined") return Promise.reject(new Error("no IndexedDB"));
+    if (dbp) return dbp;
+    dbp = new Promise((res, rej) => {
+      const q = indexedDB.open(DB, 1);
+      q.onupgradeneeded = () => { const s = q.result.createObjectStore("pieces", { keyPath: "k" }); s.createIndex("g", "g"); };
+      q.onsuccess = () => res(q.result);
+      q.onerror = () => rej(q.error);
+      q.onblocked = () => rej(new Error("the sound store is blocked by another tab"));
+    });
+    dbp.catch(() => { dbp = null; });
+    return dbp;
+  }
+  const pending = new Map();
+  let dbTimer = 0, place = null;                          // place: { sk, book, ch } the reading's chapter
+  function dbQueue(r) {
+    pending.set(r.k, r);
+    if (!dbTimer) dbTimer = setTimeout(dbFlush, 1000);
+  }
+  async function dbFlush() {
+    dbTimer = 0;
+    const rs = Array.from(pending.values()); pending.clear();
+    if (!rs.length) return;
+    try {
+      const d = await db();
+      await new Promise((res, rej) => {
+        const tx = d.transaction("pieces", "readwrite"), s = tx.objectStore("pieces");
+        for (const r of rs) {
+          if (place && (r.sk !== place.sk || r.book !== place.book || r.ch < place.ch - 1 || r.ch > place.ch + 2)) continue;
+          s.put({ k: r.k, g: group(r.sk, r.book, r.ch), sk: r.sk, book: r.book, ch: r.ch, id: r.id, h: r.h, dur: r.dur, spans: r.spans, at: r.at, bytes: r.bytes,
+            chunks: r.chunks.map((c) => ({ text: c.text, chars: c.chars, mp3: c.mp3, dur: c.dur, words: c.words || null, sampleRate: c.sampleRate, peak: c.peak, seed: c.seed })) });
+          stats.dbPuts++;
+        }
+        tx.oncomplete = res; tx.onerror = () => rej(tx.error); tx.onabort = () => rej(tx.error || new Error("aborted"));
+      });
+    } catch (e) { if (globalThis.log) log("pieces", `the sound store could not keep pieces on this device: ${(e && e.message) || e}`); }
+  }
+  // The chapters kept on disk follow the reading: another book, voice or a chapter out of [ch-1, ch+2] goes, and the
+  // oldest go past DB_CAP.
+  async function dbPrune() {
+    if (!place) return;
+    try {
+      const d = await db();
+      await new Promise((res, rej) => {
+        const tx = d.transaction("pieces", "readwrite"), s = tx.objectStore("pieces"), keep = [];
+        const q = s.openCursor();
+        q.onsuccess = () => {
+          const c = q.result;
+          if (!c) {
+            let total = keep.reduce((n, x) => n + x.bytes, 0);
+            keep.sort((a, b) => a.at - b.at);
+            for (const x of keep) { if (total <= DB_CAP) break; s.delete(x.k); total -= x.bytes; }
+            return;
+          }
+          const v = c.value;
+          if (v.sk !== place.sk || v.book !== place.book || v.ch < place.ch - 1 || v.ch > place.ch + 2) c.delete();
+          else keep.push({ k: v.k, bytes: v.bytes || 0, at: v.at || 0 });
+          c.continue();
+        };
+        tx.oncomplete = res; tx.onerror = () => rej(tx.error);
+      });
+    } catch (e) {}
+  }
+  // One chapter's records from disk into memory (once per page life per chapter and voice), at most WARM_MS.
+  function warm(sk, book, ch) {
+    const g = group(sk, book, ch);
+    if (!persistable(book) || warmed.has(g) || noDb()) return Promise.resolve(0);
+    warmed.add(g);
+    const p = db().then((d) => new Promise((res) => {
+      const out = [];
+      const tx = d.transaction("pieces", "readonly"), q = tx.objectStore("pieces").index("g").getAll(g);
+      q.onsuccess = () => { for (const v of q.result || []) out.push(v); };
+      tx.oncomplete = () => res(out); tx.onerror = () => res(out);
+    })).then((vs) => {
+      let n = 0;
+      for (const v of vs) {
+        if (mem.has(v.k)) continue;
+        const r = { k: v.k, sk: v.sk, book: v.book, ch: v.ch, id: v.id, h: v.h, chunks: v.chunks, dur: v.dur, url: null, offs: null, spans: v.spans, at: v.at, bytes: v.bytes || 0 };
+        mem.set(v.k, r); bytes += r.bytes; n++;
+      }
+      stats.dbLoaded += n;
+      if (n && globalThis.log) log("pieces", `${n} piece${n === 1 ? "" : "s"} of sound made earlier read back from this device's store (${BOOK && BOOK.label ? BOOK.label(ch) : "chapter " + ch})`);
+      trim();
+      return n;
+    }, () => 0);
+    return Promise.race([p, new Promise((r) => setTimeout(() => r(0), WARM_MS))]);
+  }
+  // The reading's chapter (the disk keeps the chapters around it).
+  function at(sk, book, ch) {
+    const was = place;
+    place = { sk, book, ch };
+    if (!was || was.sk !== sk || was.book !== book || was.ch !== ch) setTimeout(dbPrune, 2000);
+  }
+
+  globalThis.SOUNDSTORE = {
+    hooks, stats, hash, get, peek, has, hasId, holds, put, forget, clear, warm, at,
+    set near(f) { near = f; }, set inUse(f) { inUse = f; },
+    get bytes() { return bytes; }, get keys() { return Array.from(mem.keys()); }, get count() { return mem.size; }, get cap() { return hooks.cap || CAP; },
+    flush: dbFlush,
+  };
+})();
+</script>
+<script>
 // queue.js: the reading order inside a chapter's piece list (pieces.js), as pure functions on the
 // list, for the player (Node runs them in the tests). QUEUE.indexOf(list, id); QUEUE.locate(list,
 // para) gives { k, part } for the piece and part holding paragraph para (or the next piece after it);
@@ -14424,6 +14622,44 @@ button:disabled{cursor:default;opacity:.55;background:none}
     return single(list, k, d < 0 ? Infinity : 0);
   }
 
+  // The same moves when some pieces are better left whole (2026-11-17): keep(piece) true = its sound is already made
+  // (player.js: the sound store), so splitting it would throw that sound away (new pieces, new ids, asked of the voice
+  // again: Jon's log of 2026-11-17, offline). A kept joined piece is moved through part by part instead; the player
+  // starts its sound at that part. Each gives { k, part } (k -1 / list.length: past the edge, for the caller).
+  const kept = (list, k, keep) => !!(keep && list[k] && list[k].parts.length > 1 && keep(list[k]));
+  function at2(list, k, part, keep) {
+    if (kept(list, k, keep)) return { k, part: Math.max(0, Math.min(list[k].parts.length - 1, part)) };
+    return { k: single(list, k, part), part: 0 };
+  }
+  function move(list, k, part, d, keep) {
+    if (!list.length) return { k: d > 0 ? list.length : -1, part: 0 };
+    const here = at2(list, k, part, keep);
+    k = here.k;
+    if (kept(list, k, keep) && here.part + d >= 0 && here.part + d < list[k].parts.length) return { k, part: here.part + d };
+    let to = k + d;
+    while (to >= 0 && to < list.length && list[to].pause) to += d;
+    if (to < 0 || to >= list.length) return { k: to < 0 ? -1 : list.length, part: 0 };
+    return at2(list, to, d < 0 ? Infinity : 0, keep);
+  }
+  function edge2(list, d, keep) {
+    let k = d > 0 ? 0 : list.length - 1;
+    while (k >= 0 && k < list.length && list[k].pause) k += d;
+    if (k < 0 || k >= list.length) return { k: -1, part: 0 };
+    return at2(list, k, d < 0 ? Infinity : 0, keep);
+  }
+  function start2(list, para, keep) {
+    if (!list.length) return { k: -1, part: 0 };
+    if (para <= 0 && list[0].title) return { k: 0, part: 0 };
+    const a = locate(list, para);
+    if (!a) return { k: -1, part: 0 };
+    return at2(list, a.k, a.part, keep);
+  }
+  // A tap on a paragraph: { k, part } of it, the piece split only when its sound is not kept.
+  function place(list, para, keep) {
+    const a = locate(list, para);
+    return a ? at2(list, a.k, a.part, keep) : null;
+  }
+
   // Generous until three pieces have shown how fast the voice is; then ten times its usual time for
   // this many characters, never under 12 s. stats: { pieces, chars, synthMs }.
   function watchdogLimit(stats, chars) {
@@ -14431,7 +14667,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     return Math.max(12000, Math.round((stats.synthMs / stats.chars) * chars * 10) + 6000);
   }
 
-  globalThis.QUEUE = { indexOf, locate, splitAt, start, step, edge, watchdogLimit };
+  globalThis.QUEUE = { indexOf, locate, splitAt, start, step, edge, move, edge2, start2, place, watchdogLimit };
 })();
 </script>
 <script>
@@ -16320,6 +16556,13 @@ button:disabled{cursor:default;opacity:.55;background:none}
 // Read ahead (Jon, 2026-11-08): the voice makes sound steadily up to the Read ahead setting (seconds, no upper limit),
 // on this device and with the PC; Make sound in bursts (rest at 5 minutes, start again under 2) is gone. A browser with
 // no room for more sound holds the read-ahead where it was and says so (room), never a quiet cap.
+// The sound store (Jon, 2026-11-17, offline: "this kind of thing needs to be processed locally"): every piece's sound
+// that went into the stream is kept in SOUNDSTORE (soundstore.js) under soundKey (what changes the sound) + the book +
+// the piece + its text, and a piece found there is never asked of the voice again (restore()): a tap, ⏮ ⏭, a resume
+// after Stop, all play it at once, offline too; a joined piece whose sound is kept is never split (QUEUE.move / place:
+// the reading starts inside it, at the part). Play from stopped with the start piece stored starts before the voice is
+// in (the PC unreachable: the stored sound plays, the PC is asked for the missing pieces when it is back). "Ready" counts
+// the stream plus the stored pieces after it (readyNow). A voice, place, Talking speed or text change is another key.
 (function () {
   const MIN_ROOM_SEC = 10;           // the stream refusing sound with less than this ready is a failure, not a full buffer
   const BACKLOG_SEC = 60;            // made pieces waiting to go into the stream: a voice faster than the MP3 encoder waits at this much (memory), never a cap on Read ahead
@@ -16342,6 +16585,8 @@ button:disabled{cursor:default;opacity:.55;background:none}
   let playhead = null;               // { ch, id, part, word }: what is being spoken
   let last = null;                   // { ch, para }: where the reading stopped, for Play from stopped
   let engine = null, engineKey = "", engineOpts = null, engineReady = null, engineLoaded = false, copies = 1;
+  let soundKey = "";                 // the sound store's key for the voice: engineKey, plus the PC's voice as resolved (Automatic)
+  let early = false;                 // this reading plays stored sound while its voice is still loading (start())
   let live = false;                  // the voice speaks for itself (engine.speak): no pump, no stream
   let saying = null, cut = null, liveEntry = null, hiddenPause = false;
   const trouble = new Map();         // "piece id#chunk" -> { n: failures in a row, at }
@@ -16394,17 +16639,35 @@ button:disabled{cursor:default;opacity:.55;background:none}
       log("voice", `${engine.name} unloaded: the voice changed to ${pick.engine.name}`);
     }
     engine = pick.engine; engineKey = key; engineOpts = opts; engineLoaded = false;
+    soundKey = soundKeyFor(key, opts, false);
     live = typeof engine.speak === "function";
     const t0 = performance.now();
     const p = Promise.resolve().then(() => engine.init(opts)).then(() => {
       if (engineReady !== p) return;
       engineLoaded = true;
+      // The PC's Automatic as the PC resolved it now: another voice than the one remembered = other sound.
+      const sk = soundKeyFor(key, opts, true);
+      if (sk !== soundKey) { log("pieces", `the sound store: ${pcName()} makes another voice than the one remembered for these settings; the sound made with that one is not used`); for (const [id, m] of made) if (!making.has(id)) made.delete(id); soundKey = sk; }
       copies = copiesNow();
       log("voice", `${engine.name} (${opts.voice}) ready in ${sec(performance.now() - t0)} s${copies > 1 ? `, ${copies} copies` : ""}`);
     });
     engineReady = p;
     p.catch(() => { if (engineReady === p) engineReady = null; });
     return p;
+  }
+  // The sound store's key for a voice: the engine and its options (voice, place, precision, Talking speed / pace,
+  // steps); with the PC's voice also the voice the PC really makes for Automatic (CLOUDVOICE.choice: its speed check),
+  // remembered in this browser per setting (resolved: true, once the PC said) so a page opened offline knows it.
+  function soundKeyFor(key, opts, resolved) {
+    if (!(globalThis.CLOUDVOICE && String(key).startsWith("cloud "))) return key;
+    const mem = (globalThis.APP_KEY || "br1") + "-sound-pc-" + SOUNDSTORE.hash(key);
+    let v = "";
+    try {
+      if (resolved) { const c = CLOUDVOICE.info.chosen || CLOUDVOICE.choice(opts); v = `${c.voice}${c.steps ? " " + c.steps : ""}`; localStorage.setItem(mem, v); }
+      else v = localStorage.getItem(mem) || "";
+      if (!v) { const c = CLOUDVOICE.choice(opts); v = `${c.voice}${c.steps ? " " + c.steps : ""}`; }
+    } catch (e) {}
+    return `${key} → ${v}`;
   }
   const engineUp = () => !!(engine && engineLoaded && !recovering);
   // Chunks at a time: the copies RUNNING, read live (the pool loads the others one at a time in the
@@ -16463,6 +16726,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
         log("pieces", `${BOOK.label(ch)}: ${pieces.length} pieces prepared for reading ahead${opts.maxChars !== 600 ? ` (cut at ${opts.maxChars} characters for this voice)` : ""}`);
       }
       if (!lists.has(ch)) lists.set(ch, pieces);
+      if (soundKey && !live) await SOUNDSTORE.warm(soundKey, BOOK.current, ch);   // the sound made earlier, from this device's store (a reload)
       return lists.get(ch);
     };
     const p = build().finally(() => loading.delete(ch));
@@ -16477,16 +16741,74 @@ button:disabled{cursor:default;opacity:.55;background:none}
   // A made piece's sound goes (too many kept, or clips mode left it behind): a clip's blob URL is
   // revoked and the stream forgets its entries, so a jump back makes it again instead of playing a
   // dead address (P3).
+  // The sound store keeps a clip's URL: then it is not revoked here, and its marks stay (restore() brings it back).
   function letGo(id, m) {
-    if (m.url) { STREAM.forget(id); URL.revokeObjectURL(m.url); }
+    if (m.url) { STREAM.forget(id); if (!SOUNDSTORE.holds(m.url)) URL.revokeObjectURL(m.url); }
     made.delete(id);
-    HIGHLIGHT.unmade(m.piece);
+    if (!(soundKey && SOUNDSTORE.has(soundKey, BOOK.current, m.piece))) HIGHLIGHT.unmade(m.piece);
   }
   function reset() {
     lists.clear(); loading.clear();
     LISTENER.reset();
-    for (const m of made.values()) if (m.url) URL.revokeObjectURL(m.url);
+    for (const m of made.values()) if (m.url && !SOUNDSTORE.holds(m.url)) URL.revokeObjectURL(m.url);
     made.clear();
+  }
+  // ---- The sound store (soundstore.js) ---------------------------------------------------------------
+  // A piece's sound from the store, as a made record (complete, its MP3 chunks or its clip), or null.
+  function restore(p) {
+    if (!soundKey || live || !p || p.pause) return null;
+    const r = SOUNDSTORE.get(soundKey, BOOK.current, p);
+    if (!r) return null;
+    const clips = STREAM.mode && STREAM.mode !== "stream";
+    if (clips ? !r.url : !r.chunks.every((c) => c.mp3)) return null;
+    const m = { piece: p, chunks: r.chunks.map((c) => Object.assign({}, c)), spans: r.spans, done: r.chunks.length, dur: r.dur, chars: p.speech.length, ms: 0, t0: performance.now(),
+      complete: true, appended: 0, want: STREAM.run, stored: true };
+    if (clips) { m.url = r.url; m.offs = r.offs; }
+    made.set(p.id, m);
+    HIGHLIGHT.made(p, m.chunks.map(() => true), m.spans);
+    return m;
+  }
+  const madeOrStored = (p) => made.get(p.id) || restore(p);
+  // Its sound is on hand (made, or in the store): such a joined piece is never split (QUEUE.move, place, start2).
+  const keepWhole = (p) => { const m = made.get(p.id); return !!(m && m.complete) || (!!soundKey && !live && SOUNDSTORE.has(soundKey, BOOK.current, p)); };
+  // A piece all in the stream (its MP3 chunks, or its clip) goes into the store.
+  function storeIt(m, ch) {
+    if (m.stored || !soundKey || live || m.piece.pause || !m.complete) return;
+    const clips = STREAM.mode !== "stream";
+    if (clips ? !m.url : !m.chunks.every((c) => c.mp3)) return;
+    SOUNDSTORE.put(soundKey, BOOK.current, { ch, piece: m.piece, dur: m.dur, url: clips ? m.url : null, offs: clips ? m.offs : null, spans: m.spans,
+      chunks: m.chunks.map((c) => ({ text: c.text, chars: c.chars, mp3: c.mp3, dur: c.dur, words: c.words || null, sampleRate: c.sampleRate, peak: c.peak, seed: c.seed })) });
+    m.stored = true;
+  }
+  // What the store lets go first: another voice or book, then the farthest from the reading place (the pieces just
+  // ahead of it, up to 80, never).
+  SOUNDSTORE.near = (r) => {
+    if (r.sk !== soundKey || r.book !== BOOK.current) return 1e9;
+    const at = playhead || head || last;
+    if (!at) return 1e6;
+    if (r.ch !== at.ch) return (r.ch > at.ch ? r.ch - at.ch : (at.ch - r.ch) * 2) * 1000;
+    const list = lists.get(at.ch), k = list ? QUEUE.indexOf(list, r.id) : -1;
+    const pk = list && playhead ? QUEUE.indexOf(list, playhead.id) : head ? head.k : 0;
+    if (k < 0) return 500;
+    return k >= pk ? (k - pk <= 80 ? 0 : k - pk) : (pk - k) * 2;
+  };
+  SOUNDSTORE.inUse = (url) => STREAM.entries.some((e) => e.url === url);
+  // Seconds of sound ready from the playhead: the stream's, then the pieces after it already made or stored, in
+  // order, up to the first one missing (a tap into stored sound counts it at once, while it goes into the stream).
+  function readyNow() {
+    if (live) return null;
+    let s = STREAM.ahead();
+    if (!head || !STREAM.isOpen) return s;
+    let { ch, k } = head, list = lists.get(ch), n = 0;
+    while (list && n < 400) {
+      if (k >= list.length) { if (!SETTINGS.get("continueChapters") || ch + 1 >= BOOK.count) break; ch++; k = 0; list = lists.get(ch); continue; }
+      const p = list[k], m = made.get(p.id);
+      if (p.pause) s += PAUSE_SEC;
+      else if (m && m.complete) s += m.run === STREAM.run ? m.chunks.slice(Math.min(m.appended, m.chunks.length)).reduce((a, c) => a + (c.dur || 0), 0) : m.dur;
+      else { const r = soundKey ? SOUNDSTORE.peek(soundKey, BOOK.current, p) : null; if (!r) break; s += r.dur; }
+      k++; n++;
+    }
+    return s;
   }
 
   // ---- Making pieces: the pump -------------------------------------------------------------------
@@ -16534,7 +16856,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
         if (!list) { loadList(ch).then(() => { pump(); feed(); }, (e) => log("error", "the next chapter could not be prepared", e)); return null; }
         continue;
       }
-      const p = list[k], m = made.get(p.id);
+      const p = list[k], m = madeOrStored(p);         // a stored piece is never asked again
       if (m) m.want = STREAM.run;
       if (m && m.complete) { ahead += m.dur; waiting += m.dur; }
       else if (making.has(p.id)) ahead += (m ? m.dur : 0) + estimateSec(p) * (m ? 1 - m.done / m.chunks.length : 1);
@@ -16718,7 +17040,11 @@ button:disabled{cursor:default;opacity:.55;background:none}
     settle(rec || { piece: m.piece, name: m.piece.id, m }, i);
   }
   function fill(m, i, job, r) {
-    const c = m.chunks[i], ms = performance.now() - job.t0, dur = r.audio.length / r.sampleRate;
+    // The making time: from when it was asked; with the PC from its LAST asking (a piece asked again after a drop: the
+    // time offline is not making time, so the speed figure and the made line measure only the making; 2026-11-17).
+    const now = performance.now(), ms = r.pc && r.pc.total > 0 ? Math.min(now - job.t0, r.pc.total) : now - job.t0;
+    const c = m.chunks[i], dur = r.audio.length / r.sampleRate;
+    job.t0 = now - ms;
     Object.assign(c, { audio: r.audio, sampleRate: r.sampleRate, dur, words: r.words || null, ms, peak: r.peak, seed: r.seed });
     m.done++; m.dur += dur; m.ms += ms;
     if (r.peak != null && !(m.peak >= r.peak)) m.peak = r.peak;
@@ -16883,7 +17209,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
           head = null;
           break;
         }
-        const piece = list[h.k], m = made.get(piece.id);
+        const piece = list[h.k], m = madeOrStored(piece);
         if (!m) { pump(); break; }                               // settle() feeds again when a chunk lands
         const clips = STREAM.mode !== "stream", n = m.chunks.length;
         if (m.run !== STREAM.run) { m.run = STREAM.run; m.appended = 0; }   // a new run (a jump, a new reading): the piece goes in whole again, from its first chunk
@@ -16908,6 +17234,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
           appendFails = 0;
           if (clips) { m.url = item.url; m.offs = item.offs; m.appended = n; for (const x of m.chunks) delete x.audio; }
           else { if (item.mp3) c.mp3 = item.mp3; if (c.mp3) delete c.audio; m.appended = i + 1; }   // the encoded copy is enough from here
+          if (m.appended >= n) storeIt(m, h.ch);          // all of it in: kept in the sound store
         } catch (e) {
           if (gen !== myGen) break;
           if (!clips && item.mp3 && !c.mp3) c.mp3 = item.mp3;  // the encoded copy is kept for the next try
@@ -17115,6 +17442,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
   function moved(piece, part) {
     const para = piece.parts[part].para;
     saveReading(playhead.ch, para);
+    if (soundKey && !live) SOUNDSTORE.at(soundKey, BOOK.current, playhead.ch);
     HIGHLIGHT.speak(piece, part);
     if (playhead.ch !== mediaCh) { mediaCh = playhead.ch; MEDIA.update(); }
     if (picked) return;                          // a chapter picked by hand is on its way: the screen stays there
@@ -17134,16 +17462,36 @@ button:disabled{cursor:default;opacity:.55;background:none}
   }
 
   // ---- Moving the reading --------------------------------------------------------------------------
-  function jump(ch, k, why) {
+  // Where part `part` of a made piece starts in its sound (s; 0 for the first part): the highlight's own timing.
+  function partOffset(m, part) {
+    if (!part || !m || !m.complete) return 0;
+    const words = [];
+    let t = 0;
+    for (const c of m.chunks) { if (c.words) for (const w of c.words) words.push([w[0], t + w[1], t + w[2]]); t += c.dur || 0; }
+    const tm = HIGHLIGHT.timing({ piece: m.piece, dur: m.dur, words: words.length ? words : null, cover: 1 }, source === "voice" && words.length ? "voice" : "off");
+    const p = tm.parts[Math.min(part, tm.parts.length - 1)];
+    return p ? Math.max(0, Math.min(m.dur - 0.05, p.from)) : 0;
+  }
+  // The pieces of a chapter split while moving (QUEUE): head keeps pointing at its own piece.
+  function keepHead(ch, fn) {
+    const list = lists.get(ch), id = head && head.ch === ch && list && list[head.k] ? list[head.k].id : null;
+    const r = fn();
+    if (id) { const k = QUEUE.indexOf(list, id); if (k >= 0) head.k = k; }
+    return r;
+  }
+  function jump(ch, k, why, part = 0) {
     const list = lists.get(ch), piece = list[k];
-    log("playback", `${why}: piece ${nameOf(ch, k)} (${piece.title ? "the title" : "paragraph " + (piece.parts[0].para + 1)})`);
-    playhead = { ch, id: piece.id, part: 0, word: -1 };
+    const m = part ? madeOrStored(piece) : null, off = m ? partOffset(m, part) : 0;
+    if (!off) part = 0;
+    const where = piece.title ? "the title" : "paragraph " + (piece.parts[part].para + 1);
+    log("playback", `${why}: piece ${nameOf(ch, k)} (${where}${part ? `, ${off.toFixed(1)} s into its sound` : ""})`);
+    playhead = { ch, id: piece.id, part, word: -1 };
     HIGHLIGHT.word(null, 0, -1);
-    moved(piece, 0);
+    moved(piece, part);
     startLag(nameOf(ch, k));
     if (live) { hush(false); head = { ch, k }; status(""); say(); return; }
-    if (STREAM.seek(piece.id)) return;
-    STREAM.park();
+    if (STREAM.seek(piece.id, off)) return;
+    STREAM.park({ id: piece.id, off });
     // Use my PC: the pieces asked for the old place are dropped on the PC at once, so the new place's
     // piece does not wait behind a deep queue (each is asked again if the reading gets back to it).
     if (cloudOn() && making.size) {
@@ -17164,9 +17512,8 @@ button:disabled{cursor:default;opacity:.55;background:none}
     if (state === "stopped") return;
     const at = QUEUE.locate(list, para);
     if (!at) { log("playback", `${why}: nothing to read at or after paragraph ${para + 1}; the reading stays where it is`); status("Nothing to read from that paragraph on: the reading stays where it is."); return; }
-    let k = at.k;
-    if (list[k].parts.length > 1) { splitAt(ch, list, k); k += at.part; }
-    jump(ch, k, why);
+    const to = keepHead(ch, () => QUEUE.place(list, para, keepWhole));   // a joined piece with its sound on hand stays whole
+    jump(ch, to.k, why, to.part);
   }
   async function step(d) {
     if (state === "stopped") { if (READER.chapter >= 0) READER.setPara(READER.para + d, true); return; }
@@ -17175,17 +17522,18 @@ button:disabled{cursor:default;opacity:.55;background:none}
     let { ch } = playhead;
     const list = lists.get(ch), k = list ? QUEUE.indexOf(list, playhead.id) : -1;
     if (k < 0) return;
-    let to = QUEUE.step(list, k, playhead.part, d);
-    if (to < 0 || to >= list.length) {
+    // A joined piece whose sound is on hand is stepped through part by part, never split (its sound would be lost).
+    let to = keepHead(ch, () => QUEUE.move(list, k, playhead.part, d, keepWhole));
+    if (to.k < 0 || to.k >= list.length) {
       ch += d;
       if (ch < 0 || ch >= BOOK.count) { READER.say(d < 0 ? "This is the start of the book." : "This is the end of the book."); return; }
       let other;
       try { other = await loadList(ch); } catch (e) { log("error", "the chapter could not be read", e); return; }
       if (state === "stopped") return;
-      to = QUEUE.edge(other, d);
-      if (to < 0) return;
+      to = keepHead(ch, () => QUEUE.edge2(other, d, keepWhole));
+      if (to.k < 0) return;
     }
-    jump(ch, to, d < 0 ? "previous piece" : "next piece");
+    jump(ch, to.k, d < 0 ? "previous piece" : "next piece", to.part);
   }
 
   // ---- Play, pause, stop ---------------------------------------------------------------------------
@@ -17279,7 +17627,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     }
     if (pcWanted() && C && C.retry.running && C.retry.why) {
       const r = C.retry, when = r.busy || !r.next ? "Trying again now" : `Trying again in ${Math.max(1, Math.ceil((r.next - Date.now()) / 1000))} s`;
-      const keeps = state !== "stopped" && STREAM.ahead() > 0.5 ? " The sound already here keeps playing." : "";
+      const keeps = state !== "stopped" && readyNow() > 0.5 ? " The sound already here keeps playing." : "";
       return { kind: "warn", short: `Can't reach ${name}`, title: `Can't reach ${name}`, text: `${Cap(r.why)}. ${when} (try ${r.attempt}).${keeps}`, acts: ["tryNow", "useDevice"] };
     }
     // The PC answered, but its voice is not this person's to use (nobody signed in, or no right to it): said before Play refuses.
@@ -17300,7 +17648,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     if (p) return { text: p.short, kind: p.kind, suffix: " · tap" };
     const where = whereNow(), notice = noticeNow();
     const word = state === "playing" ? "Playing" : state === "paused" ? "Paused" : "Stopped";
-    if (state !== "stopped" && (!engine || !engineLoaded || recovering)) {
+    if (state !== "stopped" && (!engine || !engineLoaded || recovering) && !(early && !recovering)) {   // (early: stored sound plays meanwhile)
       if (recovering) return { text: "Restarting the voice…", kind: "", suffix: "" };
       // The PC checks its voices' speed (once per new system, or Check again): the reading waits (plan 3.2, E1).
       if (engine && engine.id === "cloud" && engine.checking != null) return { text: `Checking ${where.name}…`, kind: "", suffix: engine.checking ? ` ${engine.checking} s` : "" };
@@ -17333,7 +17681,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     const ck = LISTENER.jobs().map((j) => label(j.name, j.i, j.chunks));
     return {
       verb: live ? "saying" : "making", making: group(mk, 6), checking: group(ck, 6), counts: { making: mk.length, checking: ck.length },
-      ready: state === "stopped" ? 0 : live ? null : STREAM.ahead(), idle: state === "stopped",
+      ready: state === "stopped" ? 0 : live ? null : readyNow(), idle: state === "stopped",
       speed: state === "stopped" || live || !engineLoaded ? null : speedNow(),
     };
   }
@@ -17371,7 +17719,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     return Object.assign(statusNow(), {
       error: lastErr ? { text: lastErr.text, when: LOG.clock(new Date(lastErr.when)) } : null,
       voice: engine ? { short: voiceShort(), loaded: engineLoaded, status: engine.status || "", live, x, now: state === "stopped" || live ? null : speedNow(), window: SPEED_WINDOW_S, chunks: stats.chunks, pieces: stats.pieces, sound: stats.sound, chunkSize, copies: copiesNow(), copiesAsked: copiesAsked(), runsOn: engine.runsOn || "", failures: stats.failures, timeouts: stats.timeouts } : null,
-      buffer: { ready: state === "stopped" ? 0 : live ? null : STREAM.ahead(), mode: STREAM.mode, high: aheadMax(), setting: readAheadSec(), room, stalls: stats.stalls, held: !!held },
+      buffer: { ready: state === "stopped" ? 0 : live ? null : readyNow(), stream: state === "stopped" || live ? null : STREAM.ahead(), store: { pieces: SOUNDSTORE.count, bytes: SOUNDSTORE.bytes, cap: SOUNDSTORE.cap }, mode: STREAM.mode, high: aheadMax(), setting: readAheadSec(), room, stalls: stats.stalls, held: !!held },
       listener: L.on || L.why ? { name: L.name, runOn: L.runOn, loaded: L.loaded, mode: L.mode, why: L.why, stats: L.stats, queue: L.queue + (L.busy ? 1 : 0), shared: LISTENER.shared, gate: L.gate } : null,
       lag: lastLag,
       activity: state === "stopped" ? "" : activity(),
@@ -17472,15 +17820,25 @@ button:disabled{cursor:default;opacity:.55;background:none}
     try { voice = loadEngine(); } catch (e) { stop(firstLine(e.message), true); return; }
     const wantMp3 = () => SETTINGS.get("backgroundPlay") && STREAM.supported();
     const mp3 = !live && wantMp3() ? MP3.load().catch((e) => e) : null;
-    try { await voice; }
-    catch (e) {
-      if (gen !== myGen) return;
-      stop(settingFailed(e) ? firstLine(e.message) : `The voice could not be loaded: ${firstLine(e.message)}`, true);
-      return;
+    const voiceFailed = (e) => stop(settingFailed(e) ? firstLine(e.message) : `The voice could not be loaded: ${firstLine(e.message)}`, true);
+    // The sound store (2026-11-17): the voice not in yet (the PC to be reached, or out of reach) and the piece Play starts
+    // at already made: the reading starts from the store now, and the voice comes in behind it for what is missing.
+    early = false;
+    if (!live && !engineLoaded) {
+      try {
+        const l0 = await loadList(ch);
+        if (gen !== myGen) return;
+        const s0 = keepHead(ch, () => QUEUE.start2(l0, para, keepWhole));
+        early = s0.k >= 0 && keepWhole(l0[s0.k]);
+      } catch (e) { early = false; }
     }
-    if (gen !== myGen) return;
-    if (!live) chooseChunk();
-    LISTENER.begin();
+    if (!early) {
+      try { await voice; }
+      catch (e) { if (gen !== myGen) return; voiceFailed(e); return; }
+      if (gen !== myGen) return;
+      if (!live) chooseChunk();
+      LISTENER.begin();
+    }
     if (!live) {
       // Background playback on: the encoder must load, or the reading stops with the reason (no
       // fallbacks, P5): an offline `cannot` says which file; any other failure says how to switch.
@@ -17495,17 +17853,24 @@ button:disabled{cursor:default;opacity:.55;background:none}
     if (gen !== myGen) return;
     if (wanted && lists.has(wanted.ch)) { ch = wanted.ch; para = wanted.para; list = lists.get(ch); }   // moved while loading (P8)
     else if (wanted) { try { list = await loadList(wanted.ch); ch = wanted.ch; para = wanted.para; } catch (e) {} if (gen !== myGen) return; }
-    const k = QUEUE.start(list, para);
+    const s1 = keepHead(ch, () => QUEUE.start2(list, para, keepWhole)), k = s1.k;   // a joined piece with its sound on hand: not split
     if (k < 0) { stop("Nothing to read in this chapter.", true); return; }
+    const part = s1.part, off = part ? partOffset(madeOrStored(list[k]), part) : 0;
     source = timingSource();
     if (!live) STREAM.wantFrames(source !== "off");        // job 3, C1: no frame loop when no word tint can show
     log("timing", `word times: ${source === "off" ? "off (the highlight is off)" : source === "voice" ? (live ? "the voice's word boundaries where it gives them, else estimated" : "from the voice") : source === "listener" ? "from the listener (each chunk's heard words; estimated until a chunk is heard)" : `estimated from the piece length (${engine.name} gives no word times)`}`);
-    log("playback", `play: ${BOOK.label(ch).toLowerCase()} from ${list[k].title ? "the title" : "paragraph " + (list[k].parts[0].para + 1)}, ${live ? "the device speaks" : mode === "stream" ? "one stream" : "clips"}, ${engine.name}${live ? "" : `, ${copiesAsked() > 1 ? copiesAsked() + " chunks at a time" : "one chunk at a time"}${copiesNow() < copiesAsked() ? ` (${copiesNow()} running, the others loading)` : ""}`}`);
+    log("playback", `play: ${BOOK.label(ch).toLowerCase()} from ${list[k].title ? "the title" : "paragraph " + (list[k].parts[off ? part : 0].para + 1)}, ${live ? "the device speaks" : mode === "stream" ? "one stream" : "clips"}, ${engine.name}${live ? "" : `, ${copiesAsked() > 1 ? copiesAsked() + " chunks at a time" : "one chunk at a time"}${copiesNow() < copiesAsked() ? ` (${copiesNow()} running, the others loading)` : ""}`}${early ? " · from the sound already made, while the voice gets ready" : ""}`);
     head = { ch, k };
-    playhead = { ch, id: list[k].id, part: 0, word: -1 };
-    moved(list[k], 0);
+    playhead = { ch, id: list[k].id, part: off ? part : 0, word: -1 };
+    moved(list[k], off ? part : 0);
     startLag(nameOf(ch, k));
+    if (off && !live) STREAM.park({ id: list[k].id, off });
     setup = -1;
+    if (early) {
+      // The voice behind the stored sound: once it is in, the pump makes what is missing; its failure stops as before.
+      voice.then(() => { if (gen !== myGen) return; early = false; chooseChunk(); LISTENER.begin(); log("playback", "the voice is in: the pieces not on hand are made from here"); pump(); feed(); PLAYBAR.refresh(); },
+        (e) => { if (gen !== myGen) return; early = false; voiceFailed(e); });
+    }
     if (state === "paused") { if (!live) { pump(); feed(); } return; }   // paused while loading: set up, waiting for ▶ (P1)
     status("");
     if (hiddenHold()) return;
@@ -17625,7 +17990,7 @@ button:disabled{cursor:default;opacity:.55;background:none}
     }
     else if (what === "play" && state === "paused") { setState("playing"); log("playback", "the sound was started from outside the page"); pump(); feed(); }
   });
-  const madeState = (id) => { const m = made.get(id); return m && m.done ? { flags: flagsOf(m), spans: m.spans } : null; };
+  const madeState = (id) => { const m = made.get(id); return m && m.done ? { flags: flagsOf(m), spans: m.spans } : soundKey && SOUNDSTORE.hasId(soundKey, BOOK.current, id) ? { flags: [true], spans: null } : null; };
   // The Settings window saved these settings (names): the voice or the text rules change what the
   // pieces are and sound like, so a reading in progress stops (saying so) and everything made goes;
   // the word timing source and the sound settings change in place; Background playback takes effect
@@ -17765,9 +18130,11 @@ button:disabled{cursor:default;opacity:.55;background:none}
       const m = (r && r.m) || made.get(pid);
       if (m && m.chunks) HIGHLIGHT.made(m.piece, flagsOf(m), m.spans);
     },
-    rebuild: () => { stop(); reset(); },           // everything made goes (the tests; Settings goes through settingsChanged)
+    rebuild: () => { stop(); reset(); SOUNDSTORE.clear(); },
+    // The tests: a chapter's sound as if never made (its made records and its sound store records go).
+    unmake(ch) { const l = lists.get(ch); if (!l) return 0; let n = 0; for (const p of l) { SOUNDSTORE.forget(soundKey, BOOK.current, p.id); const m = made.get(p.id); if (m && !making.has(p.id)) { letGo(p.id, m); n++; } } return n; },           // everything made goes (the tests; Settings goes through settingsChanged)
     // The voice's workers were used by someone else (the full benchmark): load it afresh at the next Play.
-    forget: () => { if (state !== "stopped") stop(); reset(); engineReady = null; engineLoaded = false; engineKey = ""; },
+    forget: () => { if (state !== "stopped") stop(); reset(); SOUNDSTORE.clear(); engineReady = null; engineLoaded = false; engineKey = ""; },
     get chunkSize() { return chunkSize; },
     get state() { return state; },
     get playhead() { return playhead; },
@@ -17779,6 +18146,9 @@ button:disabled{cursor:default;opacity:.55;background:none}
     get cut() { return cut; },
     pieces: (ch) => lists.get(ch) || null,
     isMade: (id) => { const m = made.get(id); return !!(m && m.complete); },
+    get soundKey() { return soundKey; },
+    get early() { return early; },
+    ready: () => readyNow(),                         // seconds ready from the playhead: the stream and the stored pieces after it
     made: (id) => made.get(id) || null,            // the chunk record (the tests look at it)
     get making() { return Array.from(making.keys()); },
     get jobs() { return jobsInFlight(); },
