@@ -95,6 +95,13 @@
       "extensions": [], "opens": []
     },
     {
+      "id": "feel-o-meter", "group": "test", "name": "Feel-o-Meter", "path": "feel-o-meter/",
+      "short": "Slide from bad to good: show how you feel",
+      "about": "One slider from bad to good, and a face that fills the screen: from a skull, through every kind of sick, up to star-struck.",
+      "source": "Projects\\feel-o-meter",
+      "extensions": [], "opens": []
+    },
+    {
       "id": "hyperwave", "group": "archived", "name": "HYPERWAVE Studio", "path": "hyperwave/",
       "short": "Experimental, no longer worked on",
       "about": "Sound-reactive visuals: shapes, fractals and 4D forms that react to sound. Experimental and no longer worked on.",
