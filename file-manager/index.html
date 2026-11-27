@@ -425,7 +425,7 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
   <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8.4" r="3.6"/><path d="M4.8 19.6c.5-3.9 3.4-6 7.2-6s6.7 2.1 7.2 6z"/></symbol>
   <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 11v5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="7.8" r="1.1"/></symbol>
 </svg>
-<div id="app" class="app" data-build="V2.0.78">
+<div id="app" class="app" data-build="V2.0.82">
   <header class="top">
     <div class="top-row">
       <!-- The Apps button (Projectspp-kit, WEB-APP-CONVENTIONS.md): top left, before everything, its separator built in;
@@ -458,7 +458,7 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
 </div>
 <input type="file" id="pick-files" multiple hidden>
 <input type="file" id="pick-folder" webkitdirectory multiple hidden>
-<script>window.FM_BUILD = { version: "V2.0.78", built: "2026-11-14 11:39 PM", note: "WindowKit.pick passes save (window kit 4); tests for Save as and New file" };</script>
+<script>window.FM_BUILD = { version: "V2.0.82", built: "2026-11-26 9:01 PM", note: "Chooser: start \"/\" opens at the top (Your files)" };</script>
 <script>
 // ---- relay-client.js ----
 /* relay-client.js 3: the PC Relay client (ONE source: Projects\pc-relay\client\relay-client.js; each page's build
@@ -1237,7 +1237,7 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
 })(typeof window !== "undefined" ? window : globalThis);
 
 // ---- apps-button.js ----
-/* apps-button.js 1.33, the loader (Jon, 2026-11-13: "never touch the other apps again"). ONE source:
+/* apps-button.js 1.42, the loader (Jon, 2026-11-13: "never touch the other apps again"). ONE source:
    Projects\app-kit\apps-loader.js; app-kit\build.py wraps the button (app-kit\apps-button.js) in it. Never edit a copy.
 
    A page carries this loader (in app-kit\dist\apps.js or dist\apps-button.js, copied in by its build), but on the live
@@ -1260,7 +1260,7 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
   function builtIn() {
     if (ran || root.AppsKit) return;
     ran = true;
-/* apps-button.js 1.33: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+/* apps-button.js 1.42: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
    Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
    page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
    https://jonnystokes.github.io/cooltools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
@@ -1292,7 +1292,7 @@ a.row { color: inherit; text-decoration: none; -webkit-touch-callout: none; }  /
 (function (root) {
   "use strict";
   if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
-  const VERSION = "1.33";
+  const VERSION = "1.42";
   // The menu comes from the site the page itself is on, so the menu's account strip reads the same browser memory
   // (one origin) and the same relay.json as the program: the live site. Any other page (a file on this device, a
   // test page) gets the live site's menu too; launcher="..." overrides.
@@ -3698,8 +3698,9 @@ FM.sentence = (s) => { s = FM.capital(String(s || "").trim()); return s && !/[.!
     if (my !== round || S.pick !== p) return;
     const prog = p.app ? FM.apps.byId(p.app) : null;
     if (prog) { p.name = prog.name; title(); }
-    const own = S.me.account && prog && prog.folder && !p.save ? prog.folder.toLowerCase() : "";   // saving starts at the top (Jon, 2026-11-13)
-    const top = p.start || own ? await FM.api.list("root").catch(() => null) : null;
+    const atTop = p.start === "/";   // start "/": the top (Your files), not the program's own folder (Jon, 2026-11-26)
+    const own = S.me.account && prog && prog.folder && !p.save && !atTop ? prog.folder.toLowerCase() : "";   // saving starts at the top (Jon, 2026-11-13)
+    const top = (p.start && !atTop) || own ? await FM.api.list("root").catch(() => null) : null;
     if (my !== round || S.pick !== p) return;
     let start = "", missing = "";
     if (top && p.start) {
