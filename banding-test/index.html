@@ -16,6 +16,10 @@ canvas#gl { position: fixed; inset: 0; width: 100vw; height: 100vh; display: blo
 #panel { position: fixed; top: 10px; left: 10px; width: 290px; max-width: calc(100vw - 20px); max-height: calc(100vh - 20px); overflow: auto; box-sizing: border-box;
   background: rgba(20,20,24,.88); border: 1px solid #444; border-radius: 10px; padding: 10px 12px; }
 #panel.off { display: none; }
+#panel .bar { cursor: move; touch-action: none; user-select: none; }
+#show { position: fixed; top: 8px; left: 50%; transform: translateX(-50%); z-index: 10; display: none; padding: 6px 14px; border-radius: 8px;
+  border: 1px solid #555; background: rgba(20,20,20,.85); color: #ddd; font: 13px system-ui, sans-serif; cursor: pointer; }
+#show.on { display: block; }
 .bar { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
 .bar button { margin-left: auto; }
 button { font: inherit; padding: 6px 12px; border-radius: 6px; border: 1px solid #666; background: #2c2c34; color: #eee; cursor: pointer; }
@@ -33,17 +37,18 @@ output { text-align: right; font-variant-numeric: tabular-nums; }
 </head>
 <body>
 <canvas id="gl"></canvas>
+<button id="show" title="Show the panel (H)">Show panel</button>
 <div id="panel">
   <div class="bar"><apps-button app="banding-test"></apps-button><button id="hide">Hide panel</button></div>
   <fieldset><legend>Top-left corner</legend>
-    <label class="s">Level <input id="a0" type="range" min="0" max="255" step="0.05" value="0"><output id="a0o"></output></label>
+    <label class="s">Level <input id="a0" type="range" min="0" max="64" step="0.01" value="0"><output id="a0o"></output></label>
     <label class="s">Speed <input id="a1" type="range" min="0" max="2" step="0.01" value="0.2"><output id="a1o"></output></label>
-    <label class="s">Depth <input id="a2" type="range" min="0" max="32" step="0.05" value="0"><output id="a2o"></output></label>
+    <label class="s">Depth <input id="a2" type="range" min="0" max="16" step="0.01" value="0"><output id="a2o"></output></label>
   </fieldset>
   <fieldset><legend>Bottom-right corner</legend>
-    <label class="s">Level <input id="b0" type="range" min="0" max="255" step="0.05" value="24"><output id="b0o"></output></label>
+    <label class="s">Level <input id="b0" type="range" min="0" max="64" step="0.01" value="24"><output id="b0o"></output></label>
     <label class="s">Speed <input id="b1" type="range" min="0" max="2" step="0.01" value="0.2"><output id="b1o"></output></label>
-    <label class="s">Depth <input id="b2" type="range" min="0" max="32" step="0.05" value="4"><output id="b2o"></output></label>
+    <label class="s">Depth <input id="b2" type="range" min="0" max="16" step="0.01" value="4"><output id="b2o"></output></label>
   </fieldset>
   <div class="row"><input id="dither" type="checkbox"><label for="dither">Dither (off to see banding)</label></div>
   <div class="stat" id="stat"></div>
@@ -51,7 +56,7 @@ output { text-align: right; font-variant-numeric: tabular-nums; }
   <div id="ver"></div>
 </div>
 <script>
-const VERSION = "1.0.2", BUILT = "2026-11-26 8:10 PM";   // written by build.py (version.txt)
+const VERSION = "1.0.3", BUILT = "2026-11-26 8:18 PM";   // written by build.py (version.txt)
 const $ = (id) => document.getElementById(id);
 $("ver").textContent = "Version " + VERSION + (BUILT ? ", built " + BUILT : "");
 
@@ -101,8 +106,24 @@ function labels() {
 }
 ids.forEach(i => el[i].addEventListener("input", labels)); labels();
 
-function toggle() { $("panel").classList.toggle("off"); }
+function toggle() { const off = $("panel").classList.toggle("off"); $("show").classList.toggle("on", off); }
 $("hide").onclick = toggle;
+$("show").onclick = toggle;
+// The panel floats: drag it by its top bar (not by its buttons); it stays inside the window.
+(() => {
+  const p = $("panel"), bar = p.querySelector(".bar");
+  let sx = 0, sy = 0, ox = 0, oy = 0, on = false;
+  bar.addEventListener("pointerdown", (e) => {
+    if (e.target.closest("button, apps-button")) return;
+    const r = p.getBoundingClientRect(); on = true; sx = e.clientX; sy = e.clientY; ox = r.left; oy = r.top; bar.setPointerCapture(e.pointerId);
+  });
+  bar.addEventListener("pointermove", (e) => {
+    if (!on) return;
+    const x = Math.min(Math.max(0, ox + e.clientX - sx), innerWidth - p.offsetWidth), y = Math.min(Math.max(0, oy + e.clientY - sy), innerHeight - 40);
+    p.style.left = x + "px"; p.style.top = y + "px";
+  });
+  bar.addEventListener("pointerup", () => { on = false; });
+})();
 addEventListener("keydown", (e) => { if ((e.key === "h" || e.key === "H") && !e.ctrlKey && !e.metaKey && !e.altKey) toggle(); });
 
 let frames = 0, last = performance.now(), A = 0, B = 0;
