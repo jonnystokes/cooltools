@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Gradient Banding Test</title>
+<!-- app-kit icon: written by build.py from ..\app-kit\favicons\banding-test.html (the family icon); do not edit -->
+<link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB/UlEQVR42oWST0uUURTGf++dN50Zzf5ZuohcWDZj0WeohYENVhQV6AfITdCiyGCWfY6ihUIQ1K5dRUTWtj84YoGmwkSTG2No5D3PafHODCmpd3Mul+d3n3OeeyOAkdLkuFxlyQoyiyRDMmRptfY+QTKXWcVkD+Y+vpqJRkqT4+4+bUrawP/gXLYDyVhfX/9XMxHkKu8ERzhTd2/y5uUT3r5+Svn+LcAxM0xWDs22t3UujZ7l2tULhBAIIXDj+kUujZ1vaQtht5mLhUEA3s2+59jACR4+esyp4aGWNgq7BMbnL/MA1H7WqFarrKysUqv9anacEHaCZcaz5y/4+m2RsbESS0sLTN27w59GI9WYEW8Hx5kMxdNDuMTqapV6vU5f32EajQ1cQmmIxNs5Z7tyXLk8irvI57OYGZJwHHeljIx4K3xgfw+Fk4NkOztwF+4OODQLDu7eNoq3OudyWY4PDpDJhBR2xx0cp7XkaucWt+D+I7309/eyt7sLuQhOE04vodUJpBk0RwjNv00cZ8jnc3R2duASrhR293TuNr5pBI9lVpGsuLa2RpJsEMcZvi8vEwFzlXkksa+nmyiK6OrOsyeOmZ39gCxBUiUqnjk37rJps80fqvXOpq3nhizBZLj7RKb2Y/HTwUNHFyQbllmvZNHOsLmkirvfrv+uzfwFjpJkaVdUTbgAAAAASUVORK5CYII=">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADvklEQVR42r2XT2wbVRDGv6yf18aO0qY2xFbTVAjkgkIRnLkRQhsUkBKgSKUgEBTVEKJckXrkwqGXVBECRIQQx/bUlltBSIgr1IkpilS1rtoaKL7V68Zb5uOwf/Le7qZNsdMn2d633p3fzsw38/YNQBuT09UyyXlSXiZZIZmmCEgBSfNXgvnGOSHhXR/7z6VwjZQzJBfrF843A+aABj8C8nOSgxLc2B+4dj1Byi1SqhdXfvoOAFIa/FuSmW2Gg6Qt5EyhOHapdfNqbWByuloGudYvz5VKYc9oGaSg0biGbrdr2BFKcP0tUiqK5Dz6AM9mbRw7ehizMweRzz0EAGg7HZw6fQ4nl5bhOB0dDlIGSc4PTLz0wSrJ8V7hXyx9iqfG9yFp1FYu4p33FtBuO1HbdctXe09hP3b08KZwAHh6/5P4+MN3k2xXrF5LTakUZmcO4l7j0OuvQKlU1Hba6lXte0bLYc6D0Ww2MfvqG9j3xH7MzS1gfX0d+XwOe8d2x2yrfpRadHw0t4CzZ78HAHz51dcolUZw/PgnvsjN+61e4Y3GNbSdjvEA9frvERGugiQuX2nE7rd6bTLdbhenTp8zgJMvTBjzqakDcN076K53Y+lW/ehwJ5eWMfH8cxjdXQYAnDjxGUqlEdRWVjE1dQBvv/UmHKcT15oEGuixvTpOB7/+toqMbaNQGEYmkwlz7rp34PgpisKFhOpDb4dQIP8Krt/4EzeafyFj28jnc9i5cyhMA4EYXKuC+4MXCsM49No0AIIkAKBY3OWBRNC5fRvptDLgwbU63NfA/XuuUhbKpYc9wyQIQinlH/uw8Ej7jsD9Kvh/Ydfh/sSAReEgYvAwBfeC53JZ2HY6PDc0NGjAGUKpJTwy1zUQMIRQW/H82WfG8fhje0HfqG2nTbinsBBGLQrGYQTupWBLYWcID+YGPEBGo0GzRUfhkVZ895yHcO3XzL3pORNWxCTbKgleqTzq5dj/7Bga1KDUvNsQYyTWiUtykmMqyfORR4pGuLPZTAg30qFVQsjcBB4XYaQM9afT4brnZCTYkVQEcG7yIPGV11sN3cQ6D8VmwvXzBjyp9u8WAU/8ruXvWDaFMwJHAtyQRYL6obdi482Ya8rfLo3rC8sPP/68pbekpN6eVGoJnkMoAHnGIrnobZcYfW/fVri3MeGiVb9wvklKVSh8gHCCrDrtVjMFAP/83agVimOXSL5Iir3dnoN832m3NjanANC6ebW2qzj6DUmXlGEKh0lJ9QnukvwD5DLII0679UvA/Q+xdD8F3JIHfQAAAABJRU5ErkJggg==">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<!-- /app-kit icon -->
+<style>
+html { touch-action: manipulation; }
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; font: 14px system-ui, sans-serif; color: #ddd; }
+canvas#gl { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; }
+#panel { position: fixed; top: 10px; left: 10px; width: 290px; max-width: calc(100vw - 20px); max-height: calc(100vh - 20px); overflow: auto; box-sizing: border-box;
+  background: rgba(20,20,24,.88); border: 1px solid #444; border-radius: 10px; padding: 10px 12px; }
+#panel.off { display: none; }
+.bar { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.bar button { margin-left: auto; }
+button { font: inherit; padding: 6px 12px; border-radius: 6px; border: 1px solid #666; background: #2c2c34; color: #eee; cursor: pointer; }
+fieldset { border: 1px solid #444; border-radius: 8px; margin: 0 0 8px; padding: 6px 8px 8px; }
+legend { padding: 0 4px; font-weight: 600; }
+label.s { display: grid; grid-template-columns: 50px 1fr 62px; align-items: center; gap: 6px; margin-top: 4px; }
+input[type=range] { width: 100%; margin: 0; }
+output { text-align: right; font-variant-numeric: tabular-nums; }
+.row { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+.stat { font-size: 12px; color: #aaa; font-variant-numeric: tabular-nums; line-height: 1.5; }
+#hint { font-size: 12px; color: #999; margin-top: 4px; }
+#ver { font-size: 11px; color: #777; margin-top: 4px; }
+#err { color: #f66; padding: 20px; position: relative; }
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div id="panel">
+  <div class="bar"><apps-button app="banding-test"></apps-button><button id="hide">Hide panel</button></div>
+  <fieldset><legend>Top-left corner</legend>
+    <label class="s">Level <input id="a0" type="range" min="0" max="255" step="0.05" value="0"><output id="a0o"></output></label>
+    <label class="s">Speed <input id="a1" type="range" min="0" max="2" step="0.01" value="0.2"><output id="a1o"></output></label>
+    <label class="s">Depth <input id="a2" type="range" min="0" max="32" step="0.05" value="0"><output id="a2o"></output></label>
+  </fieldset>
+  <fieldset><legend>Bottom-right corner</legend>
+    <label class="s">Level <input id="b0" type="range" min="0" max="255" step="0.05" value="24"><output id="b0o"></output></label>
+    <label class="s">Speed <input id="b1" type="range" min="0" max="2" step="0.01" value="0.2"><output id="b1o"></output></label>
+    <label class="s">Depth <input id="b2" type="range" min="0" max="32" step="0.05" value="4"><output id="b2o"></output></label>
+  </fieldset>
+  <div class="row"><input id="dither" type="checkbox"><label for="dither">Dither (off to see banding)</label></div>
+  <div class="stat" id="stat"></div>
+  <div id="hint">Press H to hide or show this panel. Speed is in cycles per second, depth in levels.</div>
+  <div id="ver"></div>
+</div>
+<script>
+const VERSION = "1.0.2", BUILT = "2026-11-26 8:10 PM";   // written by build.py (version.txt)
+const $ = (id) => document.getElementById(id);
+$("ver").textContent = "Version " + VERSION + (BUILT ? ", built " + BUILT : "");
+
+const cv = $("gl");
+const gl = cv.getContext("webgl", { antialias: false, alpha: false, depth: false, powerPreference: "high-performance" });
+if (!gl) { document.body.insertAdjacentHTML("beforeend", '<div id="err">This browser has no WebGL.</div>'); throw new Error("no webgl"); }
+
+const vs = "attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }";
+const fs = `
+precision highp float;
+uniform vec2 res;      // canvas size in pixels
+uniform vec2 lv;       // corner levels (0..255): x top-left, y bottom-right
+uniform float dither;
+float hash(vec2 q){ vec3 p3 = fract(vec3(q.xyx) * 0.1031); p3 += dot(p3, p3.yzx + 33.33); return fract((p3.x + p3.y) * p3.z); }
+void main(){
+  vec2 uv = vec2(gl_FragCoord.x, res.y - gl_FragCoord.y) / res;   // 0,0 top-left
+  float t = (uv.x + uv.y) * 0.5;                                  // 0 at top-left corner, 1 at bottom-right
+  float v = mix(lv.x, lv.y, t);                                   // linear, in 8-bit levels
+  if (dither > 0.5) v += hash(gl_FragCoord.xy) - hash(gl_FragCoord.xy + 17.0);   // triangular noise, +-1 level
+  gl_FragColor = vec4(vec3(v / 255.0), 1.0);
+}`;
+function sh(type, src) { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }
+const prog = gl.createProgram();
+gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs));
+gl.linkProgram(prog); gl.useProgram(prog);
+gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+const loc = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+const uRes = gl.getUniformLocation(prog, "res"), uLv = gl.getUniformLocation(prog, "lv"), uDi = gl.getUniformLocation(prog, "dither");
+
+function resize() {
+  const dpr = window.devicePixelRatio || 1;
+  const w = Math.max(1, Math.round(innerWidth * dpr)), h = Math.max(1, Math.round(innerHeight * dpr));
+  if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; gl.viewport(0, 0, w, h); }
+}
+addEventListener("resize", resize); resize();
+
+const ids = ["a0", "a1", "a2", "b0", "b1", "b2"];
+const el = {}; ids.forEach(i => el[i] = $(i));
+const v = {};
+function labels() {
+  ids.forEach(i => {
+    v[i] = parseFloat(el[i].value);
+    $(i + "o").textContent = i[1] === "1" ? v[i].toFixed(2) + " Hz" : v[i].toFixed(2);
+  });
+}
+ids.forEach(i => el[i].addEventListener("input", labels)); labels();
+
+function toggle() { $("panel").classList.toggle("off"); }
+$("hide").onclick = toggle;
+addEventListener("keydown", (e) => { if ((e.key === "h" || e.key === "H") && !e.ctrlKey && !e.metaKey && !e.altKey) toggle(); });
+
+let frames = 0, last = performance.now(), A = 0, B = 0;
+function frame(now) {
+  const t = now / 1000;
+  A = Math.min(255, Math.max(0, v.a0 + v.a2 * Math.sin(2 * Math.PI * v.a1 * t)));
+  B = Math.min(255, Math.max(0, v.b0 + v.b2 * Math.sin(2 * Math.PI * v.b1 * t)));
+  resize();
+  gl.uniform2f(uRes, cv.width, cv.height); gl.uniform2f(uLv, A, B); gl.uniform1f(uDi, $("dither").checked ? 1 : 0);
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  frames++;
+  if (now - last >= 500) {
+    const fps = frames * 1000 / (now - last); frames = 0; last = now;
+    if (!$("panel").classList.contains("off"))
+      $("stat").textContent = `Top-left ${A.toFixed(2)} (8-bit ${Math.round(A)}), bottom-right ${B.toFixed(2)} (8-bit ${Math.round(B)}), ${fps.toFixed(0)} fps, ${cv.width}x${cv.height}`;
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script>
+<!-- app-kit apps.js: written by build.py from ..\app-kit\dist\apps.js (the Apps button and the window kit it needs); do not edit -->
+<script>
+/* apps.js 1.42 (built 2026-11-26 8:10 PM): the Apps button and the window kit it needs, built by Projects\app-kit\build.py from
+   app-kit\apps-button.js and file-manager\kit\window-kit.js (one source each; never edit this file). The window kit
+   runs only when the page has none of its own. */
+if (!window.WindowKit) {
+/* window-kit.js: open one of Jon's pages in a floating window inside another page, and pick files from the file
+   manager through it. ONE source: Projects\file-manager\kit\window-kit.js (pages copy it in at build time, or load
+   https://jonnystokes.github.io/cooltools/file-manager/window-kit.js). The protocol and an example: kit\README.md.
+
+   Host side (the page that opens the window):
+     const win = WindowKit.open(url, { title, name, width, height, onClose });   // a floating window with the page
+     const got = await WindowKit.pick(fileManagerUrl, { app: "reader", accept: [".zip"], folder: "files" });  // null = cancelled
+   Version 2 (2026-11-11, the Cool tools upgrade): pick takes `app` (the asking program's id from the one list: the
+   chooser starts in its folder and shows its recent files) and `keep` ({ label }: one checkbox beside Use selected);
+   its answer carries `ids` (each file's id in the cloud), `folderId` and `keep`. Nothing about the window changed.
+   Version 3 (2026-11-12): pick takes `start`, the folder the chooser opens in ("Shared Folder/Reader files").
+   Version 4 (2026-11-14): pick takes `save` ({ name, fixed }: Save as, a folder and a name instead of files); the
+   answer is then { kind: "save", folderId, folder, path, name, replace }. Without `save` nothing changed.
+   The window: drag by its title bar, resize from every edge and corner, maximise (button or double-click the
+   title), close (button or Escape); its size and place are remembered per name. On a phone it is a full-screen
+   sheet, and the phone's Back button closes it. Every message is checked: it must come from the window's own
+   frame and from the origin of the address it opened.
+   Child side (the page inside): WindowKit.child.ready(), .title(text), .close(), .busy(why), .onPick(handler); it accepts
+   requests only from its parent frame, from an allowed origin (Jon's pages on jonnystokes.github.io, its own
+   origin, local file pages), and refuses to run inside any other site (location.ancestorOrigins). */
+(function (root) {
+  "use strict";
+  const VERSION = 4;
+  const MIN_W = 320, MIN_H = 220, MARGIN = 8, HEAD = 40;
+  const SHEET = "(max-width: 640px), (max-height: 480px) and (pointer: coarse)";
+  const KEY = "wk-win:";
+  const wins = [];
+  let z = 2147482000, styled = false, seq = 0;
+
+  function css() {
+    if (styled) return;
+    styled = true;
+    const s = document.createElement("style");
+    s.textContent = `
+.wk-win{position:fixed;z-index:2147482000;display:flex;flex-direction:column;box-sizing:border-box;background:#fff;color:#171c28;border:1px solid rgba(15,23,42,.14);border-radius:12px;box-shadow:0 18px 50px rgba(15,23,42,.3),0 2px 8px rgba(15,23,42,.16);overflow:visible;font:14px/1.3 "Segoe UI",system-ui,-apple-system,sans-serif;margin:0;padding:0}
+@media (prefers-color-scheme:dark){.wk-win{background:#131826;color:#e8ecf6;border-color:rgba(255,255,255,.14);box-shadow:0 18px 50px rgba(0,0,0,.6)}}
+.wk-head{flex:none;height:${HEAD}px;display:flex;align-items:center;gap:2px;padding:0 4px 0 14px;background:rgba(127,127,127,.09);border-bottom:1px solid rgba(127,127,127,.2);border-radius:11px 11px 0 0;cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none;box-sizing:border-box}
+.wk-win.wk-dragging .wk-head{cursor:grabbing}
+.wk-title{flex:1;min-width:0;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}
+.wk-btn{all:unset;box-sizing:border-box;width:36px;height:30px;border-radius:7px;display:grid;place-items:center;cursor:pointer;color:inherit}
+.wk-btn:hover{background:rgba(127,127,127,.2)}.wk-btn:focus-visible{outline:2px solid #2563eb;outline-offset:1px}
+.wk-btn.wk-x:hover{background:#e5484d;color:#fff}
+.wk-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.wk-frame{flex:1;display:block;width:100%;min-height:0;border:0;margin:0;padding:0;background:transparent;border-radius:0 0 11px 11px}
+.wk-win.wk-sheet .wk-head,.wk-win.wk-sheet .wk-frame{border-radius:0}
+.wk-shield{position:absolute;left:0;right:0;bottom:0;top:${HEAD}px;display:none;z-index:3}
+.wk-win.wk-dragging .wk-shield{display:block}
+.wk-grip{position:absolute;z-index:4}
+.wk-g-n{top:-4px;left:12px;right:12px;height:8px;cursor:ns-resize}.wk-g-s{bottom:-4px;left:12px;right:12px;height:8px;cursor:ns-resize}
+.wk-g-e{right:-4px;top:12px;bottom:12px;width:8px;cursor:ew-resize}.wk-g-w{left:-4px;top:12px;bottom:12px;width:8px;cursor:ew-resize}
+.wk-g-ne{right:-4px;top:-4px;width:16px;height:16px;cursor:nesw-resize}.wk-g-sw{left:-4px;bottom:-4px;width:16px;height:16px;cursor:nesw-resize}
+.wk-g-nw{left:-4px;top:-4px;width:16px;height:16px;cursor:nwse-resize}.wk-g-se{right:-4px;bottom:-4px;width:16px;height:16px;cursor:nwse-resize}
+.wk-win.wk-maxed .wk-grip{display:none}.wk-win.wk-maxed .wk-head{cursor:default}
+.wk-win.wk-sheet{left:0!important;top:0!important;width:100%!important;height:100%!important;border:0;border-radius:0;animation:wk-rise .2s ease-out}
+.wk-win.wk-sheet .wk-grip,.wk-win.wk-sheet .wk-max{display:none}
+.wk-win.wk-sheet .wk-head{height:calc(48px + env(safe-area-inset-top));padding-top:env(safe-area-inset-top);cursor:default}
+.wk-win.wk-sheet .wk-btn{width:44px;height:40px}.wk-win.wk-sheet .wk-shield{top:48px}
+@keyframes wk-rise{from{transform:translateY(24px);opacity:.5}}`;
+    document.head.appendChild(s);
+  }
+  const svg = (d) => `<svg viewBox="0 0 16 16" aria-hidden="true">${d}</svg>`;
+  const ICON = { max: svg('<rect x="3" y="3" width="10" height="10" rx="1.5"/>'), restore: svg('<rect x="3" y="5.5" width="7.5" height="7.5" rx="1.3"/><path d="M5.5 5.5V4.3c0-.7.6-1.3 1.3-1.3h4.9c.7 0 1.3.6 1.3 1.3v4.9c0 .7-.6 1.3-1.3 1.3h-1.2"/>'), close: svg('<path d="M4 4l8 8M12 4l-8 8"/>') };
+
+  function load(name) { try { const g = JSON.parse(localStorage.getItem(KEY + name)); return g && typeof g.w === "number" ? g : null; } catch (e) { return null; } }
+  function save(name, g) { try { localStorage.setItem(KEY + name, JSON.stringify(g)); } catch (e) {} }
+  function fit(g) {
+    const W = innerWidth, H = innerHeight;
+    const w = Math.round(Math.min(Math.max(g.w, MIN_W), W - 2 * MARGIN)), h = Math.round(Math.min(Math.max(g.h, MIN_H), H - 2 * MARGIN));
+    return { x: Math.round(Math.max(MARGIN, Math.min(g.x, W - w - MARGIN))), y: Math.round(Math.max(MARGIN, Math.min(g.y, H - h - MARGIN))), w, h };
+  }
+  const isSheet = () => root.matchMedia(SHEET).matches;
+  const top = () => (wins.length ? wins.reduce((a, b) => (+a.el.style.zIndex > +b.el.style.zIndex ? a : b)) : null);
+
+  // open(url, opts) -> the window: { el, frame, url, origin, name, ready, closed, close, maximize, restore, toggleMax,
+  // front, focus, post(msg, transfer), on(type, fn), title(text) }
+  function open(url, opts) {
+    opts = opts || {};
+    css();
+    const abs = new URL(url, location.href).href;
+    const origin = new URL(abs).origin; // "null" for a file: address (then postMessage needs "*", and the reply's origin is "null")
+    const name = opts.name || new URL(abs).pathname;
+    const id = ++seq;
+    const back = document.activeElement;
+    const el = document.createElement("div");
+    el.className = "wk-win";
+    el.setAttribute("role", "dialog");
+    el.setAttribute("aria-label", opts.title || "Window");
+    el.innerHTML = `<div class="wk-head"><span class="wk-title"></span><button class="wk-btn wk-max" type="button" aria-label="Maximise" title="Maximise">${ICON.max}</button><button class="wk-btn wk-x" type="button" aria-label="Close" title="Close (Escape)">${ICON.close}</button></div><iframe class="wk-frame" allow="clipboard-read; clipboard-write; fullscreen"></iframe><div class="wk-shield"></div>`
+      + ["n", "s", "e", "w", "ne", "nw", "se", "sw"].map((d) => `<div class="wk-grip wk-g-${d}" data-dir="${d}"></div>`).join("");
+    const head = el.querySelector(".wk-head"), titleEl = el.querySelector(".wk-title"), maxBtn = el.querySelector(".wk-max"), frame = el.querySelector(".wk-frame");
+    titleEl.textContent = opts.title || "";
+    const handlers = {};
+    let readyRes, closedRes, closedNow = false;
+    const saved = load(name);
+    const w0 = opts.width || Math.min(980, Math.round(innerWidth * 0.8)), h0 = opts.height || Math.min(700, Math.round(innerHeight * 0.8));
+    let g = fit(saved || { x: (innerWidth - w0) / 2, y: Math.max(MARGIN, (innerHeight - h0) / 3), w: w0, h: h0 });
+    let maxed = !!(saved && saved.max), before = null;
+    const win = {
+      id, el, frame, url: abs, origin, name, pushed: false,
+      ready: new Promise((r) => { readyRes = r; }), closed: new Promise((r) => { closedRes = r; }),
+      on(type, fn) { (handlers[type] = handlers[type] || []).push(fn); return win; },
+      title(t) { titleEl.textContent = t; el.setAttribute("aria-label", t); },
+      post(msg, transfer) { if (frame.contentWindow) frame.contentWindow.postMessage(msg, origin === "null" ? "*" : origin, transfer || []); },
+      front() { el.style.zIndex = String(++z); },
+      focus() { try { frame.focus(); } catch (e) {} },
+      maximize() { if (maxed) return; before = g; maxed = true; layout(); remember(); },
+      restore() { if (!maxed) return; maxed = false; if (before) g = before; layout(); remember(); },
+      toggleMax() { maxed ? win.restore() : win.maximize(); },
+      busy: "", // what the page inside says is still running (uploads): a person closing the window is asked first
+      ask() { return !win.busy || root.confirm(`${win.busy} in this window. Close it anyway (they stop)?`); },
+      close(fromPop) {
+        if (closedNow) return;
+        closedNow = true;
+        wins.splice(wins.indexOf(win), 1);
+        el.remove();
+        if (win.pushed && !fromPop && history.state && history.state.wkSheet === id) history.back();
+        if (back && back.focus && document.contains(back)) try { back.focus({ preventScroll: true }); } catch (e) {}
+        closedRes();
+        if (opts.onClose) try { opts.onClose(); } catch (e) {}
+      },
+      _emit(type, m) { for (const fn of handlers[type] || []) try { fn(m); } catch (e) {} },
+      _ready(m) { readyRes(m); },
+    };
+    function layout() {
+      const sheet = isSheet();
+      el.classList.toggle("wk-sheet", sheet);
+      el.classList.toggle("wk-maxed", maxed && !sheet);
+      maxBtn.innerHTML = maxed ? ICON.restore : ICON.max;
+      maxBtn.title = maxed ? "Restore" : "Maximise";
+      maxBtn.setAttribute("aria-label", maxBtn.title);
+      if (sheet) {
+        if (!win.pushed && opts.back !== false) { try { history.pushState(Object.assign({}, history.state, { wkSheet: id }), ""); win.pushed = true; } catch (e) {} }
+        return;
+      }
+      const r = maxed ? { x: MARGIN, y: MARGIN, w: innerWidth - 2 * MARGIN, h: innerHeight - 2 * MARGIN } : (g = fit(g));
+      el.style.left = r.x + "px"; el.style.top = r.y + "px"; el.style.width = r.w + "px"; el.style.height = r.h + "px";
+    }
+    function remember() { save(name, Object.assign({}, maxed && before ? before : g, { max: maxed })); }
+    win._layout = layout;
+
+    // Drag by the title bar; resize from the edges and corners. A shield over the frame keeps the pointer's moves
+    // coming while it passes over the page inside.
+    function grab(handle, apply) {
+      handle.addEventListener("pointerdown", (e) => {
+        if (e.button !== 0 || e.target.closest(".wk-btn") || isSheet() || maxed) return;
+        e.preventDefault();
+        win.front();
+        const start = { x: e.clientX, y: e.clientY, g: Object.assign({}, g) };
+        el.classList.add("wk-dragging");
+        try { handle.setPointerCapture(e.pointerId); } catch (x) {}
+        const move = (ev) => { g = fit(apply(start, ev.clientX - start.x, ev.clientY - start.y)); layout(); };
+        const end = () => { handle.removeEventListener("pointermove", move); handle.removeEventListener("pointerup", end); handle.removeEventListener("pointercancel", end); el.classList.remove("wk-dragging"); remember(); };
+        handle.addEventListener("pointermove", move);
+        handle.addEventListener("pointerup", end);
+        handle.addEventListener("pointercancel", end);
+      });
+    }
+    grab(head, (s, dx, dy) => ({ x: s.g.x + dx, y: s.g.y + dy, w: s.g.w, h: s.g.h }));
+    for (const grip of el.querySelectorAll(".wk-grip")) {
+      const d = grip.dataset.dir;
+      grab(grip, (s, dx, dy) => {
+        let { x, y, w, h } = s.g;
+        if (d.includes("e")) w = Math.max(MIN_W, s.g.w + dx);
+        if (d.includes("s")) h = Math.max(MIN_H, s.g.h + dy);
+        if (d.includes("w")) { w = Math.max(MIN_W, s.g.w - dx); x = s.g.x + s.g.w - w; }
+        if (d.includes("n")) { h = Math.max(MIN_H, s.g.h - dy); y = s.g.y + s.g.h - h; }
+        return { x, y, w, h };
+      });
+    }
+    head.addEventListener("dblclick", (e) => { if (!e.target.closest(".wk-btn") && !isSheet()) win.toggleMax(); });
+    maxBtn.addEventListener("click", () => win.toggleMax());
+    el.querySelector(".wk-x").addEventListener("click", () => { if (win.ask()) win.close(); });
+    el.addEventListener("pointerdown", () => win.front(), true);
+    // A same-origin page inside: its own Escape, when it did not use it, closes the window too.
+    frame.addEventListener("load", () => {
+      try {
+        frame.contentWindow.addEventListener("keydown", (e) => { if (e.key === "Escape" && !e.defaultPrevented && win.ask()) win.close(); });
+      } catch (e) { /* another origin: it says "escape" by message (WindowKit.child) */ }
+    });
+    wins.push(win);
+    document.body.appendChild(el);
+    win.front();
+    layout();
+    frame.src = abs;
+    setTimeout(() => win.focus(), 50);
+    return win;
+  }
+
+  // Messages from the pages inside: only from a window's own frame and from the origin it was opened at.
+  root.addEventListener("message", (e) => {
+    const win = wins.find((w) => w.frame.contentWindow === e.source);
+    if (!win) return;
+    if (win.origin === "null" ? e.origin !== "null" : e.origin !== win.origin) return;
+    const m = e.data;
+    if (!m || m.wk !== 1 || typeof m.type !== "string") return;
+    if (m.type === "ready") win._ready(m);
+    else if (m.type === "escape") { if (win.ask()) win.close(); }
+    else if (m.type === "close") win.close();
+    else if (m.type === "title" && typeof m.text === "string") win.title(m.text.slice(0, 200));
+    else if (m.type === "busy") win.busy = typeof m.why === "string" ? m.why.slice(0, 200) : "";
+    win._emit(m.type, m);
+  });
+  // Escape on the page itself closes the top window (it sits above everything, so it goes first).
+  root.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape" || e.defaultPrevented || !wins.length) return;
+    e.preventDefault();
+    const w = top();
+    if (w.ask()) w.close();
+  }, true);
+  root.addEventListener("resize", () => { for (const w of wins) w._layout(); });
+  root.addEventListener("popstate", () => {
+    for (const w of wins.slice()) if (w.pushed && !(history.state && history.state.wkSheet === w.id)) w.close(true);
+  });
+
+  // pick(url, opts): open the file manager, ask it for files, give back { kind, files, paths, ids, folder, folderId,
+  // missing, keep } or null when the person closes the window. opts: accept [".zip"], multiple, files (default true),
+  // folder (false | "files" | "zip"), host (the name shown: "Book reader"), app (the asking program's id from the one
+  // list: the chooser starts in that program's folder, with its recent files on top, and shows its name),
+  // keep ({ label }: one unticked checkbox beside Use selected; the answer's `keep` says whether it was ticked),
+  // start (the folder the chooser opens in, as a signed-in person sees its path: "Shared Folder/Reader files"; it
+  // comes before the program's own folder, and when it is not there the chooser says so and opens where it would
+  // have without it), title, name, onProgress, signal. In the answer, ids[i] is the cloud id of files[i] for kind
+  // "files"; for a folder ("folder", "zip") folderId is the folder's id and ids holds "" for each file.
+  // save ({ name, fixed }, version 4): Save as. The chooser asks for a folder and a name (`name` offered; `fixed`: the
+  // person typed it, so it is not made free in each folder) and the answer is { kind: "save", folderId, folder, path,
+  // name, replace } (replace: a file of that name is there and the person said Replace). Only the Cloud File Manager
+  // reads it; accept, multiple, files, folder and keep are ignored then.
+  function pick(url, o) {
+    o = o || {};
+    const save = o.save && typeof o.save.name === "string" ? { name: o.save.name.slice(0, 200), fixed: !!o.save.fixed } : null;
+    return new Promise((resolve, reject) => {
+      let done = false, port = null, win = null;
+      const end = (fn, v) => { if (done) return; done = true; clearTimeout(timer); if (port) port.close(); if (win) win.close(); fn(v); };
+      const timer = setTimeout(() => end(reject, new Error("The file manager did not open within 30 s (no network, or its page could not load).")), 30000);
+      win = open(url, { name: o.name || "file-manager-pick", title: o.title || heading(o, save), width: o.width, height: o.height, onClose: () => end(resolve, null) });
+      win.on("ready", () => {
+        clearTimeout(timer);
+        if (port) port.close();
+        const ch = new MessageChannel();
+        port = ch.port1;
+        port.onmessage = (e) => {
+          const d = e.data || {};
+          if (d.type === "progress") { if (o.onProgress) try { o.onProgress(d); } catch (x) {} }
+          else if (d.type === "picked") { if (!save || d.kind === "save") end(resolve, save ? saved(d) : result(d)); }
+          else if (d.type === "cancel") end(resolve, null);
+          else if (d.type === "error") end(reject, new Error(d.why || "The file manager could not give the files."));
+        };
+        const req = { wk: 1, type: "pick", version: VERSION, accept: accepts(o.accept), multiple: !!o.multiple, files: o.files !== false, folder: o.folder || false,
+          host: String(o.host || document.title || location.host).slice(0, 80), app: String(o.app || "").slice(0, 60),
+          keep: o.keep && o.keep.label ? { label: String(o.keep.label).slice(0, 80) } : null, start: String(o.start || "").slice(0, 400) };
+        if (save) Object.assign(req, { accept: [], multiple: false, files: false, folder: false, keep: null, save });
+        win.post(req, [ch.port2]);
+      });
+      if (o.signal) o.signal.addEventListener("abort", () => end(resolve, null), { once: true });
+    });
+  }
+  const accepts = (a) => [].concat(a || []).map((x) => String(x).trim().toLowerCase()).filter(Boolean).map((x) => (x === "*" || x.startsWith(".") ? x : "." + x));
+  // The window's first title, one short heading: "Book reader: choose a file or folder" (the file manager sets the
+  // same words again once it has the request, with the program's name from the one list).
+  function heading(o, save) {
+    const w = o.files === false ? "a folder" : o.folder ? "a file or folder" : o.multiple ? "files" : "a file";
+    const who = String(o.host || "").trim().slice(0, 80);
+    if (save) return who ? `${who}: save as` : "Save as";
+    return who ? `${who}: choose ${w}` : `Choose ${w}`;
+  }
+  function saved(d) {
+    const s = (v) => (typeof v === "string" ? v : "");
+    return { kind: "save", folderId: s(d.folderId), folder: s(d.folder), path: s(d.path), name: s(d.name), replace: !!d.replace };
+  }
+  function result(d) {
+    const files = Array.isArray(d.files) ? d.files : [];
+    const paths = Array.isArray(d.paths) ? d.paths : files.map((f) => f.name);
+    const ids = files.map((f, i) => (Array.isArray(d.ids) && typeof d.ids[i] === "string" ? d.ids[i] : ""));
+    files.forEach((f, i) => { try { Object.defineProperty(f, "webkitRelativePath", { value: paths[i] || f.name, configurable: true }); } catch (e) {} });
+    return { kind: d.kind || "files", files, paths, ids, folder: d.folder || "", folderId: typeof d.folderId === "string" ? d.folderId : "", missing: d.missing || "", keep: !!d.keep };
+  }
+
+  // ---- the child side: a page inside a window --------------------------------------------------------------------
+  const ALLOW = ["https://jonnystokes.github.io", "null", "file://"];
+  const inWindow = root.parent !== root;
+  let pickHandler = null, autoEscape = false, refused = "";
+  function allowed(o) { return o === location.origin || ALLOW.includes(o) || child.allow.includes(o); }
+  // Inside a frame: every frame above must be one of the allowed origins (Chrome and Safari list them), so a
+  // stranger's site cannot wrap this page (clickjacking) or ask it for files.
+  function ancestors() {
+    if (!inWindow) return "";
+    const list = location.ancestorOrigins ? Array.from(location.ancestorOrigins) : [];
+    for (const o of list) if (!allowed(o)) return o;
+    return "";
+  }
+  const child = {
+    inWindow, allow: [],
+    get refusedBy() { return ancestors(); },
+    ready(info) { autoEscape = true; if (inWindow && !ancestors()) root.parent.postMessage(Object.assign({ wk: 1, type: "ready", version: VERSION }, info || {}), "*"); },
+    title(text) { if (inWindow) root.parent.postMessage({ wk: 1, type: "title", text: String(text) }, "*"); },
+    close() { if (inWindow) root.parent.postMessage({ wk: 1, type: "close" }, "*"); },
+    escape() { if (inWindow) root.parent.postMessage({ wk: 1, type: "escape" }, "*"); },
+    busy(why) { if (inWindow) root.parent.postMessage({ wk: 1, type: "busy", why: why || "" }, "*"); }, // "" = nothing running
+    onPick(fn) { pickHandler = fn; },
+  };
+  root.addEventListener("message", (e) => {
+    if (!inWindow || e.source !== root.parent || !allowed(e.origin) || ancestors()) return;
+    const m = e.data;
+    if (!m || m.wk !== 1 || m.type !== "pick" || !e.ports || !e.ports[0]) return;
+    if (pickHandler) pickHandler(m, e.ports[0], e.origin);
+    else e.ports[0].postMessage({ type: "error", why: "This page does not pick files." });
+  });
+  // Escape the page inside did not use: the window closes (the page's own listeners run first, on document).
+  root.addEventListener("keydown", (e) => { if (e.key === "Escape" && !e.defaultPrevented && autoEscape && inWindow) child.escape(); });
+
+  root.WindowKit = { VERSION, open, pick, child, get windows() { return wins.slice(); } };
+})(typeof window !== "undefined" ? window : globalThis);
+}
+/* apps-button.js 1.42, the loader (Jon, 2026-11-13: "never touch the other apps again"). ONE source:
+   Projects\app-kit\apps-loader.js; app-kit\build.py wraps the button (app-kit\apps-button.js) in it. Never edit a copy.
+
+   A page carries this loader (in app-kit\dist\apps.js or dist\apps-button.js, copied in by its build), but on the live
+   site the button that runs is the LIVE one: https://jonnystokes.github.io/cooltools/apps/button.js, published with the
+   Apps menu. So a change to the Apps button reaches every program when the Apps kit is published, with no program
+   rebuilt (the menu itself, the list, the icons and the versions were already live: the button opens apps/ in a frame).
+   The copy built in below is the fallback: it runs when the page is not on the live site (a file on this device, a
+   test page, PC Relay's own window), when the live file cannot be loaded (offline: an error comes at once), or when it
+   has not come after 4 seconds. Whichever runs first serves; the other sees window.AppsKit and stands aside.
+   While the live button loads, the place of <apps-button> is kept, so the bar does not jump.
+   The live button runs on the page's own window kit (window-kit.js 3, in the page): it must keep working with it. */
+(function (root) {
+  "use strict";
+  if (root.AppsKit || root.__appsKitLoading) return;
+  root.__appsKitLoading = true;
+  const SITE = "https://jonnystokes.github.io/cooltools/";
+  const LIVE = SITE + "apps/button.js";
+  const WAIT_MS = 4000;
+  let ran = false;
+  function builtIn() {
+    if (ran || root.AppsKit) return;
+    ran = true;
+/* apps-button.js 1.42: the Apps button of Jon's web programs. ONE source: Projects\app-kit\apps-button.js.
+   Pages never copy this file: they take app-kit\dist\apps.js (this button plus the window kit it needs) or, when the
+   page already carries window-kit.js, app-kit\dist\apps-button.js; or they load the published
+   https://jonnystokes.github.io/cooltools/apps/apps.js. The rules: Projects\WEB-APP-CONVENTIONS.md.
+
+     <apps-button app="file-manager"></apps-button>     the first thing in the page's top bar, top left
+
+   Three thick bars (magenta, yellow, cyan) and the word "Apps" on black with a neon edge: one look in every program,
+   made to clash with any page, because it is the way out of this program into another. Then a plain divider (Jon,
+   2026-11-07: only the button stands out): 1 px in the bar's own text colour, faint, so it blends with each app's bar.
+   A click opens the Apps menu (the launcher, cool-tools/apps/) in a floating window (the window kit; a full-screen
+   sheet on a phone); a second click closes it. The menu marks the program named by app="...". When the menu cannot
+   load (this device offline, the site down), the window says so in plain words, with Try again.
+
+   Attributes:
+     app="<id>"         this program's id in app-kit\programs.json: the menu marks it "You are here"
+     stack              bars above the word (for a tight bar); stack="720": only while the page is 720 px wide or less
+     launcher="<url>"   another menu address (tests)
+     in-frame           show the button inside a frame too. Hidden there by default: inside another page's window a
+                        program chosen from the menu would take that page's whole tab
+   Size: CSS --apps-h on the element is the button's height (default 36px; the bars, the word and the divider scale
+   with it):  apps-button { --apps-h: 40px; }
+   The divider takes the bar's text colour by itself; --apps-sep sets it to the app's own line colour instead (a
+   light-dark() pair works: the button takes the page's light or dark color-scheme):
+     apps-button { --apps-sep: var(--line); }
+   Focus: when the menu closes, the focus goes back to the page, not to the button, so the page's own keys work at
+   once (Space would press the button again); the button stays in the Tab order.
+   Script: AppsKit.open({ app }), AppsKit.close(), AppsKit.window (the open menu's window, or null),
+   AppsKit.launcher (the menu's address), AppsKit.VERSION. */
+(function (root) {
+  "use strict";
+  if (root.AppsKit) return; // two copies on one page (a built-in one and the published one): the first serves
+  const VERSION = "1.42";
+  // The menu comes from the site the page itself is on, so the menu's account strip reads the same browser memory
+  // (one origin) and the same relay.json as the program: the live site. Any other page (a file on this device, a
+  // test page) gets the live site's menu too; launcher="..." overrides.
+  const SITES = ["https://jonnystokes.github.io/cooltools/"];
+  const LAUNCHER = (() => {
+    let href = "";
+    try { href = root.location.href; } catch (e) {}
+    const site = SITES.find((s) => href.startsWith(s)) || SITES[0];
+    return site + "apps/";
+  })();
+  const W = 460, H = 780;        // the menu window's first size (less on a short screen); the window kit remembers
+                                 // what the person makes it
+  const NAME = "apps";           // its key in the window kit (localStorage wk-win:apps); the same in every program
+  let current = null;            // { win, href } while the menu is open
+
+  const BARS = ["#ff3df2", "#ffd23d", "#3dfcff"];
+  const CSS = `
+:host{all:initial;color:inherit;color-scheme:inherit;display:inline-flex;align-items:center;flex:none;vertical-align:middle;--h:var(--apps-h,36px)}
+.b{all:unset;box-sizing:border-box;position:relative;display:inline-flex;flex-direction:row;align-items:center;justify-content:center;
+  gap:calc(var(--h)*.2);height:var(--h);padding:0 calc(var(--h)*.3) 0 calc(var(--h)*.26);border:2px solid transparent;border-radius:calc(var(--h)*.28);
+  background:linear-gradient(#0b0816,#0b0816) padding-box,linear-gradient(120deg,${BARS[0]},${BARS[1]} 52%,${BARS[2]}) border-box;
+  color:#fff;font:800 calc(var(--h)*.42)/1 "Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;letter-spacing:.015em;
+  white-space:nowrap;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;touch-action:manipulation;
+  box-shadow:0 0 0 1px rgba(0,0,0,.65),0 0 calc(var(--h)*.3) rgba(255,61,242,.55),0 0 calc(var(--h)*.55) rgba(61,252,255,.3);
+  transition:box-shadow .15s,filter .15s,transform .08s}
+.b:hover{filter:brightness(1.15) saturate(1.1);box-shadow:0 0 0 1px rgba(0,0,0,.65),0 0 calc(var(--h)*.42) rgba(255,61,242,.85),0 0 calc(var(--h)*.8) rgba(61,252,255,.5)}
+.b:active{transform:translateY(1px) scale(.97)}
+.b:focus-visible{outline:2px solid #000;outline-offset:2px;box-shadow:0 0 0 6px #fff,0 0 calc(var(--h)*.5) rgba(255,61,242,.9)}
+.b[aria-expanded=true]{box-shadow:0 0 0 1px rgba(0,0,0,.65),0 0 0 calc(var(--h)*.09) rgba(255,210,61,.55),0 0 calc(var(--h)*.5) rgba(255,61,242,.8)}
+.bars{display:flex;flex-direction:column;justify-content:center;gap:calc(var(--h)*.085);width:calc(var(--h)*.5);flex:none}
+.bars i{display:block;height:calc(var(--h)*.12);height:round(calc(var(--h)*.12),1px);border-radius:99px}
+.bars i:nth-child(1){background:${BARS[0]};box-shadow:0 0 calc(var(--h)*.14) rgba(255,61,242,.8)}
+.bars i:nth-child(2){background:${BARS[1]};box-shadow:0 0 calc(var(--h)*.14) rgba(255,210,61,.7)}
+.bars i:nth-child(3){background:${BARS[2]};box-shadow:0 0 calc(var(--h)*.14) rgba(61,252,255,.7)}
+.w{display:block;text-shadow:0 0 calc(var(--h)*.22) rgba(255,255,255,.4)}
+.sep{display:block;flex:none;width:1px;height:calc(var(--h)*.72);margin:0 calc(var(--h)*.2) 0 calc(var(--h)*.3);background:var(--apps-sep,rgba(127,127,127,.4))}
+@supports (color:color-mix(in srgb,red,blue)){.sep{background:var(--apps-sep,color-mix(in srgb,currentColor 22%,transparent))}}`;
+  // The stacked form (bars above the word), for a tight bar: the same parts, arranged in a column.
+  const STACK = `
+.b{flex-direction:column;gap:calc(var(--h)*.07);padding:0 calc(var(--h)*.17);border-radius:calc(var(--h)*.24);font-size:calc(var(--h)*.27);letter-spacing:.04em}
+.bars{width:calc(var(--h)*.52);gap:calc(var(--h)*.075)}
+.bars i{height:calc(var(--h)*.1);height:round(calc(var(--h)*.1),1px)}
+.sep{margin:0 calc(var(--h)*.16) 0 calc(var(--h)*.22)}`;
+  function stackCss(v) {
+    if (v === null) return "";
+    const px = parseInt(v, 10);
+    return px > 0 ? `@media (max-width:${px}px){${STACK}}` : STACK;
+  }
+  const inFrame = () => { try { return root.self !== root.top; } catch (e) { return true; } };
+
+  // ---- the menu window --------------------------------------------------------------------------------------------
+  // Its first place is just under the button (the window kit has no place option, so its remembered place is set
+  // before it opens); once the person moves or resizes it, the window kit keeps their place and this leaves it be.
+  function place(anchor) {
+    try {
+      const key = "wk-win:" + NAME, seeded = localStorage.getItem("apps-place");
+      const saved = localStorage.getItem(key);
+      if (saved && saved !== seeded) return;   // the person's own place
+      const r = anchor && anchor.getBoundingClientRect ? anchor.getBoundingClientRect() : { left: 8, bottom: 8 };
+      const y = Math.round(r.bottom + 8);
+      const g = JSON.stringify({ x: Math.max(8, Math.round(r.left)), y, w: Math.min(W, innerWidth - 16), h: Math.max(320, Math.min(H, innerHeight - y - 8)), max: false });
+      localStorage.setItem(key, g);
+      localStorage.setItem("apps-place", g);
+    } catch (e) { /* no storage: the window kit centres it */ }
+  }
+
+  function open(o) {
+    o = o || {};
+    if (current) { current.win.front(); current.win.focus(); return current.win; }
+    const u = new URL(o.launcher || api.launcher, location.href);
+    if (o.app) u.searchParams.set("app", String(o.app).slice(0, 60));
+    const href = u.href;
+    if (!root.WindowKit) { location.href = href; return null; } // no window kit on this page: the menu as a page
+    place(o.anchor);
+    const btn = o.anchor || null;
+    const win = root.WindowKit.open(href, {
+      title: "Apps", name: NAME, width: W, height: H,
+      onClose: () => {
+        if (current && current.win === win) { current.stop(); current = null; }
+        if (btn) { btn.setAttribute("aria-expanded", "false"); letGo(btn); }
+      },
+    });
+    if (btn) btn.setAttribute("aria-expanded", "true");
+    current = watch(win, href);
+    current.arm();
+    return win;
+  }
+  function close() { if (current) current.win.close(); }
+  // The window kit gives the focus back to what had it when the menu opened, which is this button (the click put it
+  // there). Left there, the page's own keys would press it: Space or Enter opens the menu again (HYPERWAVE's Space).
+  // So the focus goes back to the page. The button stays in the Tab order: the keyboard still reaches it with Tab.
+  function letGo(btn) {
+    const sr = btn.getRootNode();
+    if (sr && sr.activeElement === btn) btn.blur();
+  }
+
+  // ---- when the menu cannot load ------------------------------------------------------------------------------------
+  // The menu page says "ready" (the window kit's protocol) as soon as it runs. Offline when the window opens, or its
+  // frame loaded something that never said ready (the browser's own error page), or nothing at all within 20 s:
+  // the window shows a plain message instead, with Try again (and tries again by itself when the device is back
+  // online). A late "ready" still wins: the message goes and the menu shows.
+  function watch(win, href) {
+    let ok = false, loadT = 0, slowT = 0, box = null;
+    const st = { win, href };
+    const why = () => (navigator.onLine === false ? "offline" : "noload");
+    const fail = (kind) => { if (!ok && current === st) show(kind); };
+    const arm = () => {
+      clearTimeout(slowT);
+      slowT = setTimeout(() => fail(why()), 20000);
+      if (navigator.onLine === false) fail("offline");
+    };
+    const onLoad = () => { clearTimeout(loadT); loadT = setTimeout(() => fail(why()), 2500); };
+    const onOnline = () => { if (box && box.isConnected && !ok) retry(); };
+    function show(kind) {
+      if (!box) {
+        box = document.createElement("div");
+        box.className = "apps-fail";
+        box.style.cssText = "flex:1 1 auto;min-height:0;overflow:auto;display:block;margin:0;padding:0;border:0";
+        const sr = box.attachShadow({ mode: "open" });
+        sr.innerHTML = `<style>${FAIL_CSS}</style><div class="m" role="alert"><div class="bars" aria-hidden="true"><i></i><i></i><i></i></div><h2></h2><p class="t"></p><p class="f"></p><button type="button">Try again</button></div>`;
+        sr.querySelector("button").addEventListener("click", retry);
+        win.frame.after(box);
+      }
+      const sr = box.shadowRoot;
+      sr.querySelector("h2").textContent = kind === "offline" ? "No internet" : "The Apps menu did not load";
+      sr.querySelector(".t").textContent = kind === "offline"
+        ? "The Apps menu comes from the Cool tools site, and this device is offline. Connect it to the internet, then try again."
+        : "The Cool tools site (jonnystokes.github.io) could not be reached: no internet here, or the site is down.";
+      sr.querySelector(".f").textContent = location.protocol === "file:"
+        ? "This page is a file on this device; the menu of programs still comes from the web."
+        : "";
+      box.hidden = false;
+      box.style.display = "block";
+      win.frame.style.display = "none";
+    }
+    function hide() { if (box) box.style.display = "none"; win.frame.style.display = ""; }
+    function retry() { hide(); win.frame.src = href; arm(); }
+    win.frame.addEventListener("load", onLoad);
+    root.addEventListener("online", onOnline);
+    win.ready.then(() => { ok = true; clearTimeout(loadT); clearTimeout(slowT); hide(); });
+    st.stop = () => { clearTimeout(loadT); clearTimeout(slowT); root.removeEventListener("online", onOnline); };
+    st.retry = retry;
+    st.arm = arm;   // open() calls it once this is the current menu
+    return st;
+  }
+  const FAIL_CSS = `
+:host{all:initial;display:block}
+.m{box-sizing:border-box;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:28px 24px;text-align:center;
+  background:#05060c;color:#eaf1ff;font:15px/1.45 "Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif}
+.bars{display:flex;flex-direction:column;gap:5px;width:34px;margin-bottom:6px;opacity:.55}
+.bars i{display:block;height:6px;border-radius:9px}.bars i:nth-child(1){background:${BARS[0]}}.bars i:nth-child(2){background:${BARS[1]}}.bars i:nth-child(3){background:${BARS[2]}}
+h2{margin:0;font-size:19px;font-weight:700}
+p{margin:0;max-width:30em;color:#b8c4dc}p:empty{display:none}.f{font-size:13.5px;color:#8d9ab6}
+button{all:unset;box-sizing:border-box;margin-top:8px;padding:10px 20px;border-radius:10px;background:#ffd23d;color:#05060c;font-weight:700;cursor:pointer}
+button:hover{filter:brightness(1.08)}button:focus-visible{outline:2px solid #fff;outline-offset:2px}`;
+
+  // ---- the element ------------------------------------------------------------------------------------------------
+  class AppsButton extends HTMLElement {
+    static get observedAttributes() { return ["stack"]; }
+    constructor() {
+      super();
+      const sr = this.attachShadow({ mode: "open" });
+      sr.innerHTML = `<style></style><button class="b" type="button" aria-haspopup="dialog" aria-expanded="false" title="Apps: open another of Jon's programs"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span class="w">Apps</span></button><span class="sep" aria-hidden="true"></span>`;
+      this._style = sr.querySelector("style");
+      this._btn = sr.querySelector("button");
+      this._btn.addEventListener("click", () => {
+        if (current) close();
+        else open({ app: this.getAttribute("app") || "", launcher: this.getAttribute("launcher") || "", anchor: this._btn });
+      });
+      // Enter and Space belong to the button. A page's own shortcuts on document see this element (not the button
+      // inside it), so a page that presses focused buttons itself, or opens its list's row on Enter, would take them.
+      for (const t of ["keydown", "keypress", "keyup"]) this._btn.addEventListener(t, (e) => { if (e.key === "Enter" || e.key === " ") e.stopPropagation(); });
+      this._paint();
+    }
+    connectedCallback() { if (inFrame() && !this.hasAttribute("in-frame")) this.style.display = "none"; }
+    attributeChangedCallback() { this._paint(); }
+    _paint() { this._style.textContent = CSS + stackCss(this.getAttribute("stack")); }
+    focus(o) { this._btn.focus(o); }
+    click() { this._btn.click(); }
+  }
+
+  const api = {
+    VERSION, launcher: LAUNCHER, open, close,
+    get window() { return current ? current.win : null; },
+  };
+  root.AppsKit = api;
+  if (root.customElements && !root.customElements.get("apps-button")) root.customElements.define("apps-button", AppsButton);
+})(typeof window !== "undefined" ? window : globalThis);
+  }
+  let href = "";
+  try { href = root.location.href; } catch (e) {}
+  if (!href.startsWith(SITE) || !root.document || !root.customElements) { builtIn(); return; }
+  try {
+    const keep = root.document.createElement("style");
+    keep.textContent = "apps-button:not(:defined){display:inline-block;flex:none;vertical-align:middle;width:calc(var(--apps-h,36px)*2.9);height:var(--apps-h,36px)}";
+    (root.document.head || root.document.documentElement).appendChild(keep);
+    const s = root.document.createElement("script");
+    s.src = LIVE;
+    s.async = true;
+    const timer = setTimeout(builtIn, WAIT_MS);
+    s.onload = () => { clearTimeout(timer); if (!root.AppsKit) builtIn(); };
+    s.onerror = () => { clearTimeout(timer); builtIn(); };
+    (root.document.head || root.document.documentElement).appendChild(s);
+  } catch (e) { builtIn(); }
+})(typeof window !== "undefined" ? window : globalThis);
+</script>
+<!-- /app-kit apps.js -->
+</body>
+</html>

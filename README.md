@@ -20,6 +20,7 @@ the other programs and to the account.
 | Simple Bench | https://jonnystokes.github.io/cooltools/simple-bench/ | A 10-second device test: processor and graphics card scores, and which voice and settings the Book reader would suggest on this device. |
 | Browser app cache manager | https://jonnystokes.github.io/cooltools/browser-storage/ | See and delete what these tools have stored in your browser, each thing named for its program. Never shows a sign-in. |
 | Feel-o-Meter | https://jonnystokes.github.io/cooltools/feel-o-meter/ | One slider from bad to good, and a face that fills the screen: from a skull, through every kind of sick, up to star-struck. |
+| Gradient Banding Test | https://jonnystokes.github.io/cooltools/banding-test/ | A full-screen gradient from pitch black to deep shadow, to record and see how a video codec bands the dark. |
 | Mayhem Lab | https://jonnystokes.github.io/cooltools/mayhem-lab/ | The test bench for the driving game Mirror, Signal, Mayhem: horns made in code next to recordings, voices through every kind of speaker, engines, sounds, music, road signs and car physics. |
 | HYPERWAVE Studio (archived) | https://jonnystokes.github.io/cooltools/hyperwave/ | Sound-reactive visuals that react to a microphone, PC audio or a file. Experimental and no longer worked on. The sound is analyzed only inside the page. |
 | Apps (menu) | https://jonnystokes.github.io/cooltools/apps/ | Not on the front page: the menu every program's Apps button opens, with the account strip (Sign in, Set up user or Account) above the programs. |
@@ -52,5 +53,6 @@ the other programs and to the account.
 | `hyperwave/` | `Projects\hyperwave` (archived; rebuilt only for site-wide changes, last 2.0.4 on 2026-11-08) |
 | `thaw/` | `Projects\thaw` |
 | `feel-o-meter/` | `Projects\feel-o-meter` |
+| `banding-test/` | `Projectsanding-test` |
 | `mayhem-lab/` | `Projects\mayhem` (the game itself, `mayhem/`, comes from the same project once it is published) |
 | `apps/`, the list in `index.html` | `Projects\app-kit` |

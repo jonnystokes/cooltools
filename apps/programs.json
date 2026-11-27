@@ -102,6 +102,13 @@
       "extensions": [], "opens": []
     },
     {
+      "id": "banding-test", "group": "test", "name": "Gradient Banding Test", "path": "banding-test/",
+      "short": "A moving dark gradient to test video codecs",
+      "about": "A full-screen gradient from pitch black to deep shadow, to record and see how a video codec bands the dark.",
+      "source": "Projects\\banding-test",
+      "extensions": [], "opens": []
+    },
+    {
       "id": "hyperwave", "group": "archived", "name": "HYPERWAVE Studio", "path": "hyperwave/",
       "short": "Experimental, no longer worked on",
       "about": "Sound-reactive visuals: shapes, fractals and 4D forms that react to sound. Experimental and no longer worked on.",
