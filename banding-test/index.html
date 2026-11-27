@@ -31,6 +31,10 @@ label.s { display: grid; grid-template-columns: 50px 1fr 62px; align-items: cent
 input[type=range] { width: 100%; margin: 0; }
 output { text-align: right; font-variant-numeric: tabular-nums; }
 .row { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+.dirs { display: grid; grid-template-columns: repeat(3, 34px); grid-template-rows: repeat(3, 34px); gap: 4px; justify-content: center; margin: 4px 0; }
+.dirs button { font-size: 17px; padding: 0; border-radius: 50%; border: 1px solid #555; background: #222; color: #ddd; cursor: pointer; }
+.dirs button.on { background: #3a5a8a; border-color: #8ab; }
+.dirs span { display: flex; align-items: center; justify-content: center; font-size: 11px; color: #888; }
 .stat { font-size: 12px; color: #aaa; font-variant-numeric: tabular-nums; line-height: 1.5; }
 #hint { font-size: 12px; color: #999; margin-top: 4px; }
 #ver { font-size: 11px; color: #777; margin-top: 4px; }
@@ -42,15 +46,23 @@ output { text-align: right; font-variant-numeric: tabular-nums; }
 <button id="show" title="Show the panel (H)">Show panel</button>
 <div id="panel">
   <div class="bar"><apps-button app="banding-test"></apps-button><button id="hide">Hide panel</button></div>
-  <fieldset><legend>Top-left corner</legend>
+  <fieldset><legend>Start (dark end)</legend>
     <label class="s">Level <input id="a0" type="range" min="0" max="64" step="0.01" value="0"><output id="a0o"></output></label>
     <label class="s">Speed <input id="a1" type="range" min="0" max="2" step="0.01" value="0.2"><output id="a1o"></output></label>
     <label class="s">Depth <input id="a2" type="range" min="0" max="16" step="0.01" value="0"><output id="a2o"></output></label>
   </fieldset>
-  <fieldset><legend>Bottom-right corner</legend>
+  <fieldset><legend>End</legend>
     <label class="s">Level <input id="b0" type="range" min="0" max="64" step="0.01" value="24"><output id="b0o"></output></label>
     <label class="s">Speed <input id="b1" type="range" min="0" max="2" step="0.01" value="0.2"><output id="b1o"></output></label>
     <label class="s">Depth <input id="b2" type="range" min="0" max="16" step="0.01" value="4"><output id="b2o"></output></label>
+  </fieldset>
+  <fieldset><legend>Direction</legend>
+    <div class="dirs" id="dirs">
+      <button data-d="nw" title="To the top-left corner">&#8598;</button><button data-d="n" title="To the top">&#8593;</button><button data-d="ne" title="To the top-right corner">&#8599;</button>
+      <button data-d="w" title="To the left">&#8592;</button><span>dir</span><button data-d="e" title="To the right">&#8594;</button>
+      <button data-d="sw" title="To the bottom-left corner">&#8601;</button><button data-d="s" title="To the bottom">&#8595;</button><button data-d="se" title="To the bottom-right corner">&#8600;</button>
+    </div>
+    <label class="s">Angle <input id="ang" type="range" min="0" max="359.9" step="0.1" value="0"><output id="ango"></output></label>
   </fieldset>
   <div class="row"><input id="dither" type="checkbox"><label for="dither">Dither (off to see banding)</label></div>
   <div class="row"><input id="hdr" type="checkbox"><label for="hdr">HDR (16-bit float output)</label></div>
@@ -60,7 +72,7 @@ output { text-align: right; font-variant-numeric: tabular-nums; }
   <div id="ver"></div>
 </div>
 <script>
-const VERSION = "1.0.4", BUILT = "2026-11-26 8:32 PM";   // written by build.py (version.txt)
+const VERSION = "1.0.5", BUILT = "2026-11-26 8:36 PM";   // written by build.py (version.txt)
 const $ = (id) => document.getElementById(id);
 $("ver").textContent = "Version " + VERSION + (BUILT ? ", built " + BUILT : "");
 
@@ -74,10 +86,12 @@ precision highp float;
 uniform vec2 res;      // canvas size in pixels
 uniform vec2 lv;       // corner levels (0..255): x top-left, y bottom-right
 uniform float dither;
+uniform vec4 dir;      // x,y: unit direction in pixels (y down); z: projection at start; w: projection range
 float hash(vec2 q){ vec3 p3 = fract(vec3(q.xyx) * 0.1031); p3 += dot(p3, p3.yzx + 33.33); return fract((p3.x + p3.y) * p3.z); }
 void main(){
   vec2 uv = vec2(gl_FragCoord.x, res.y - gl_FragCoord.y) / res;   // 0,0 top-left
-  float t = (uv.x + uv.y) * 0.5;                                  // 0 at top-left corner, 1 at bottom-right
+  vec2 px = vec2(gl_FragCoord.x, res.y - gl_FragCoord.y);
+  float t = clamp((dot(px, dir.xy) - dir.z) / dir.w, 0.0, 1.0);   // 0 where the gradient starts, 1 where it ends
   float v = mix(lv.x, lv.y, t);                                   // linear, in 8-bit levels
   if (dither > 0.5) v += hash(gl_FragCoord.xy) - hash(gl_FragCoord.xy + 17.0);   // triangular noise, +-1 level
   gl_FragColor = vec4(vec3(v / 255.0), 1.0);
@@ -90,7 +104,7 @@ gl.linkProgram(prog); gl.useProgram(prog);
 gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
 gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
 const loc = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-const uRes = gl.getUniformLocation(prog, "res"), uLv = gl.getUniformLocation(prog, "lv"), uDi = gl.getUniformLocation(prog, "dither");
+const uRes = gl.getUniformLocation(prog, "res"), uLv = gl.getUniformLocation(prog, "lv"), uDi = gl.getUniformLocation(prog, "dither"), uDir = gl.getUniformLocation(prog, "dir");
 
 function resize() {
   const dpr = window.devicePixelRatio || 1;
@@ -103,13 +117,13 @@ addEventListener("resize", resize); resize();
 // than 8 bits per channel when the phone, the browser and the display run in HDR (Chrome 129+). Same math as WebGL.
 const gc = $("gpu"); let G = null;
 const WGSL = `
-struct U { a: vec4f, b: vec4f };
+struct U { a: vec4f, b: vec4f, c: vec4f };
 @group(0) @binding(0) var<uniform> u: U;
 @vertex fn vs(@builtin(vertex_index) i: u32) -> @builtin(position) vec4f {
   var p = array<vec2f, 3>(vec2f(-1.0, -3.0), vec2f(-1.0, 1.0), vec2f(3.0, 1.0)); return vec4f(p[i], 0.0, 1.0); }
 fn hash(q: vec2f) -> f32 { var p3 = fract(vec3f(q.x, q.y, q.x) * 0.1031); p3 += dot(p3, p3.yzx + 33.33); return fract((p3.x + p3.y) * p3.z); }
 @fragment fn fs(@builtin(position) c: vec4f) -> @location(0) vec4f {
-  let uv = c.xy / u.a.xy; let t = (uv.x + uv.y) * 0.5;
+  let t = clamp((dot(c.xy, u.c.xy) - u.c.z) / u.c.w, 0.0, 1.0);
   var v = mix(u.a.z, u.a.w, t);
   if (u.b.x > 0.5) { v += (hash(c.xy) - hash(c.xy + 17.0)) / u.b.y; }
   return vec4f(vec3f(v / 255.0), 1.0); }`;
@@ -122,7 +136,7 @@ async function startHDR() {
   const mod = dev.createShaderModule({ code: WGSL });
   const pipe = dev.createRenderPipeline({ layout: "auto", vertex: { module: mod, entryPoint: "vs" },
     fragment: { module: mod, entryPoint: "fs", targets: [{ format: "rgba16float" }] }, primitive: { topology: "triangle-list" } });
-  const ubuf = dev.createBuffer({ size: 32, usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST });
+  const ubuf = dev.createBuffer({ size: 48, usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST });
   const bind = dev.createBindGroup({ layout: pipe.getBindGroupLayout(0), entries: [{ binding: 0, resource: { buffer: ubuf } }] });
   const extended = !cfg || !cfg.toneMapping || cfg.toneMapping.mode === "extended";
   G = { dev, ctx, pipe, ubuf, bind, extended };
@@ -131,7 +145,7 @@ function drawHDR(A, B) {
   const dpr = window.devicePixelRatio || 1, w = Math.max(1, Math.round(innerWidth * dpr)), h = Math.max(1, Math.round(innerHeight * dpr));
   if (gc.width !== w || gc.height !== h) { gc.width = w; gc.height = h; }
   // dither in HDR: +-1 step of 10-bit (a quarter of an 8-bit level)
-  G.dev.queue.writeBuffer(G.ubuf, 0, new Float32Array([w, h, A, B, $("dither").checked ? 1 : 0, 4, 0, 0]));
+  G.dev.queue.writeBuffer(G.ubuf, 0, new Float32Array([w, h, A, B, $("dither").checked ? 1 : 0, 4, 0, 0, ...dirU(w, h)]));
   const enc = G.dev.createCommandEncoder();
   const pass = enc.beginRenderPass({ colorAttachments: [{ view: G.ctx.getCurrentTexture().createView(), loadOp: "clear", storeOp: "store", clearValue: [0, 0, 0, 1] }] });
   pass.setPipeline(G.pipe); pass.setBindGroup(0, G.bind); pass.draw(3); pass.end();
@@ -157,6 +171,29 @@ function labels() {
   });
 }
 ids.forEach(i => el[i].addEventListener("input", labels)); labels();
+
+// Direction: an angle in degrees, 0 = to the right, 90 = down (clockwise on screen). A button picks an edge or a
+// corner; a corner follows this screen's shape (on resize too). Moving the slider makes it a custom angle.
+let dirKey = "se";
+function keyAngle(k, w, h) {
+  const a = Math.atan2(h, w) * 180 / Math.PI;
+  return { e: 0, se: a, s: 90, sw: 180 - a, w: 180, nw: 180 + a, n: 270, ne: 360 - a }[k];
+}
+function curAngle(w, h) { return dirKey ? keyAngle(dirKey, w, h) : parseFloat($("ang").value); }
+function dirU(w, h) {
+  const r = curAngle(w, h) * Math.PI / 180, dx = Math.cos(r), dy = Math.sin(r);
+  const ps = [0, w * dx, h * dy, w * dx + h * dy], mn = Math.min(...ps), mx = Math.max(...ps);
+  return [dx, dy, mn, Math.max(1e-6, mx - mn)];
+}
+function showDir() {
+  const dpr = window.devicePixelRatio || 1, a = curAngle(innerWidth * dpr, innerHeight * dpr);
+  if (dirKey) $("ang").value = a.toFixed(1);
+  $("ango").textContent = a.toFixed(1) + "\u00B0";
+  document.querySelectorAll("#dirs button").forEach(b => b.classList.toggle("on", b.dataset.d === dirKey));
+}
+document.querySelectorAll("#dirs button").forEach(b => b.onclick = () => { dirKey = b.dataset.d; showDir(); });
+$("ang").addEventListener("input", () => { dirKey = null; showDir(); });
+addEventListener("resize", showDir); showDir();
 
 function toggle() { const off = $("panel").classList.toggle("off"); $("show").classList.toggle("on", off); }
 $("hide").onclick = toggle;
@@ -186,7 +223,7 @@ function frame(now) {
   if (G && document.body.classList.contains("hdr")) drawHDR(A, B);
   else {
     resize();
-    gl.uniform2f(uRes, cv.width, cv.height); gl.uniform2f(uLv, A, B); gl.uniform1f(uDi, $("dither").checked ? 1 : 0);
+    gl.uniform2f(uRes, cv.width, cv.height); gl.uniform2f(uLv, A, B); gl.uniform1f(uDi, $("dither").checked ? 1 : 0); gl.uniform4f(uDir, ...dirU(cv.width, cv.height));
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
   }
   frames++;
